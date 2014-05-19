@@ -1,0 +1,6 @@
+.page-header
+  h2 = t('.create_account')
+
+= render 'form'
+
+= link_to (fa_icon "reply", text: t('.back')), user_accounts_path, class: "btn btn-primary"

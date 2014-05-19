@@ -1,0 +1,34 @@
+h1 = t('.listing_transactions', current_account: @current_account.name)
+p.text-muted = t('.sum_checked', sum_checked: number_to_currency(@sum_checked))
+
+h3 = link_to (fa_icon "plus-circle", text: t('.new_transaction')), \
+                        new_user_account_transaction_path, class: "btn btn-primary"
+
+table.table.table-striped.table-hover
+  thead
+    tr
+      th
+      th = t('.date')
+      th = t('.category')
+      th = t('.debit')
+      th = t('.credit')
+      th = t('.balance')
+      th = t('.comment')
+      th colspan="3"
+
+  tbody
+    - @transactions.each do |transaction|
+      tr class=("danger" if transaction.balance < 0) style=("color: gray;" if transaction.date > Date.today)
+        td = transaction.checked ? fa_icon("check-square-o") : fa_icon("square-o")
+        td = l(transaction.date)
+        td = transaction.category.name
+        td = number_to_currency(transaction.amount) if transaction.amount < 0
+        td = number_to_currency(transaction.amount) if transaction.amount >= 0
+        td = number_to_currency(transaction.balance)
+        td = truncate(transaction.comment, length: 30)
+
+        td = link_to (fa_icon "edit", text: t('.edit')), \
+              edit_user_account_transaction_path(@current_user, @current_account, transaction)
+        td = link_to (fa_icon "trash-o", text: t('.destroy')), \
+              user_account_transaction_path(@current_user, @current_account, transaction), \
+              method: :delete, data: { confirm: t('.are_you_sure') }

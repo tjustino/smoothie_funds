@@ -1,0 +1,43 @@
+= form_for([@current_user, @current_account, @transaction], html: { class: "form-horizontal" }) do |f|
+  - if @transaction.errors.any?
+    .alert.alert-danger.alert-dismissable
+      button.close type="button" data-dismiss="alert" aria-hidden="true"
+        = fa_icon "times"
+      h3 = t('errors.template.header', count: @transaction.errors.count)
+      ul
+        - @transaction.errors.full_messages.each do |msg|
+          li = msg
+
+  .form-group
+    = f.label :category_id, t('.category'), class: "col-sm-2 control-label"
+    .col-sm-4
+      = f.select :category_id, @current_account.categories.collect { |category| \
+                    [ category.name, category.id ] }, {}, { class: "form-control" }
+
+  .form-group
+    = f.label :date, t('.date'), class: "col-sm-2 control-label"
+    .col-sm-4
+      = f.text_field :date, class: "form-control datepicker", placeholder: t('.date'), \
+            value: @transaction.date.nil? ? l(Date.today) : l(@transaction.date)
+
+  .form-group
+    = f.label :amount, t('.amount'), class: "col-sm-2 control-label"
+    .col-sm-4
+      = f.text_field :amount, class: "form-control", placeholder: t('.amount')
+        span.glyphicon.glyphicon-euro.form-control-feedback
+
+  .form-group
+    = f.label :comment, t('.comment'), class: "col-sm-2 control-label"
+    .col-sm-4
+      = f.text_area :comment, class: "form-control", placeholder: t('.comment'), rows: 5
+
+  .form-group
+    .col-sm-offset-2.col-sm-2
+      .checkbox
+        = f.label :checked do
+          = f.check_box :checked
+          = t('.checked')
+
+  .form-group
+    .col-sm-offset-2.col-sm-8
+      = f.submit class: "btn btn-default"

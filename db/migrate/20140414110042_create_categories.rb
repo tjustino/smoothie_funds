@@ -1,0 +1,14 @@
+class CreateCategories < ActiveRecord::Migration
+  def change
+    create_table :categories do |t|
+      t.belongs_to  :account,   null: false, index: true
+      t.string      :name,      null: false
+      t.integer     :created_by
+      t.integer     :updated_by
+
+      t.timestamps
+    end
+
+    add_index :categories, [:account_id, :name], unique: true
+  end
+end

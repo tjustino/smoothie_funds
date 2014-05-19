@@ -1,0 +1,22 @@
+.page-header
+  h2 = t('.please_login')
+
+= form_tag('login', { class: 'form-horizontal' }) do
+  .form-group
+    = label_tag :email, t('.email'), class: "col-sm-2 control-label"
+    .col-sm-4
+      = email_field_tag :email, params[:email], class: "form-control", \
+                                                        placeholder: t('.email')
+
+  .form-group
+    = label_tag :password, t('.password'), class: "col-sm-2 control-label"
+    .col-sm-4
+      = password_field_tag :password, params[:password], class: "form-control", \
+                                                      placeholder: t('.password')
+
+  .form-group
+    .col-sm-offset-2.col-sm-4
+      = submit_tag t('.login'), class: "btn btn-default"
+
+list-group
+  = link_to t('.create_user'), new_user_path, class: "list-group-item list-group-item-info pull-right"

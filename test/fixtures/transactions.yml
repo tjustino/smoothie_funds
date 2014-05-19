@@ -1,0 +1,321 @@
+# == Schema Information
+#
+# Table name: transactions
+#
+#  id          :integer          not null, primary key
+#  account_id  :integer          not null
+#  category_id :integer          not null
+#  date        :date             not null
+#  amount      :decimal(8, 2)    not null
+#  checked     :boolean
+#  comment     :text
+#  created_by  :integer
+#  updated_by  :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
+###########################
+# thomas / courant_thomas #
+###########################
+## pret
+pret_1:
+  account: courant_thomas
+  category: pret
+  date: <%= 2.months.ago.at_beginning_of_month %>
+  amount: -711
+  checked: true
+  comment: 
+  created_by: thomas.id
+  updated_by: thomas.id
+
+pret_2:
+  account: courant_thomas
+  category: pret
+  date: <%= 1.month.ago.beginning_of_month %>
+  amount: -711
+  checked: true
+  comment: 
+  created_by: thomas.id
+  updated_by: thomas.id
+
+pret_3:
+  account: courant_thomas
+  category: pret
+  date: <%= DateTime.now.at_beginning_of_month %>
+  amount: -711
+  checked: false
+  comment: 
+  created_by: thomas.id
+  updated_by: thomas.id
+
+pret_4:
+  account: courant_thomas
+  category: pret
+  date: <%= DateTime.now.at_beginning_of_month + 1.month %>
+  amount: -711
+  checked: false
+  comment: 
+  created_by: thomas.id
+  updated_by: thomas.id
+
+## coiffeur_courant_thomas
+coiffeur_courant_thomas_1:
+  account: courant_thomas
+  category: coiffeur_courant_thomas
+  date: <%= 1.month.ago.beginning_of_month + 10.days %>
+  amount: -19.90
+  checked: true
+  comment: CoupTif
+  created_by: thomas.id
+  updated_by: thomas.id
+
+coiffeur_courant_thomas_2:
+  account: courant_thomas
+  category: coiffeur_courant_thomas
+  date: <%= DateTime.now - 5.days %>
+  amount: -19.90
+  checked: false
+  comment: TifTouf
+  created_by: thomas.id
+  updated_by: thomas.id
+
+## vetements_courant_thomas
+vetements_courant_thomas_1:
+  account: courant_thomas
+  category: vetements_courant_thomas
+  date: <%= DateTime.now %>
+  amount: -45.96
+  checked: false
+  comment: Somewhere
+  created_by: thomas.id
+  updated_by: thomas.id
+
+## cantine
+cantine_1:
+  account: courant_thomas
+  category: cantine
+  date: <%= DateTime.now - 5.days %>
+  amount: -50
+  checked: false
+  comment: 
+  created_by: thomas.id
+  updated_by: thomas.id
+
+## essence_courant_thomas
+essence_courant_thomas_1:
+  account: courant_thomas
+  category: essence_courant_thomas
+  date: <%= DateTime.now - 24.days %>
+  amount: -36.43
+  checked: true
+  comment: Carrefour
+  created_by: thomas.id
+  updated_by: thomas.id
+
+#####################
+# thomas / livret_a #
+#####################
+## prime
+prime_1:
+  account: livret_a
+  category: prime
+  date: <%= 3.months.ago %>
+  amount: 5000
+  checked: true
+  comment: Yeappy !!
+  created_by: thomas.id
+  updated_by: thomas.id
+
+## epargne_livret_a
+epargne_livret_a_1:
+  account: livret_a
+  category: epargne_livret_a
+  date: <%= DateTime.now - 50.days %>
+  amount: 250
+  checked: true
+  comment: 
+  created_by: thomas.id
+  updated_by: thomas.id
+
+epargne_livret_a_2:
+  account: livret_a
+  category: epargne_livret_a
+  date: <%= DateTime.now %>
+  amount: 45.99
+  checked: false
+  comment: Smoothie Funds
+  created_by: thomas.id
+  updated_by: thomas.id
+
+#######################
+# thomas / ldd_thomas #
+#######################
+## epargne_ldd_thomas
+epargne_ldd_thomas_1:
+  account: ldd_thomas
+  category: epargne_ldd_thomas
+  date: <%= DateTime.now - 42.days %>
+  amount: 5000
+  checked: true
+  comment: ê@ UTF-8 T€st ¤§
+  created_by: thomas.id
+  updated_by: thomas.id
+
+###########################
+# emilie / courant_emilie #
+###########################
+## vetements_courant_emilie
+vetements_courant_emilie_1:
+  account: courant_emilie
+  category: vetements_courant_emilie
+  date: <%= DateTime.now - 25.days %>
+  amount: -89.99
+  checked: true
+  comment: 
+  created_by: emilie.id
+  updated_by: emilie.id
+
+vetements_courant_emilie_2:
+  account: courant_emilie
+  category: vetements_courant_emilie
+  date: <%= DateTime.now - 14.days %>
+  amount: -23.57
+  checked: false
+  comment: 
+  created_by: emilie.id
+  updated_by: emilie.id
+
+vetements_courant_emilie_3:
+  account: courant_emilie
+  category: vetements_courant_emilie
+  date: <%= DateTime.now - 1.days %>
+  amount: -57.68
+  checked: false
+  comment: So Sweety
+  created_by: emilie.id
+  updated_by: emilie.id
+
+## coiffeur_courant_emilie
+coiffeur_courant_emilie_1:
+  account: courant_emilie
+  category: coiffeur_courant_emilie
+  date: <%= DateTime.now - 14.days %>
+  amount: -50
+  checked: true
+  comment: 
+  created_by: emilie.id
+  updated_by: emilie.id
+
+## assurance
+assurance_1:
+  account: courant_emilie
+  category: assurance
+  date: <%= 1.month.ago.beginning_of_month %>
+  amount: -76.5
+  checked: true
+  comment: 
+  created_by: emilie.id
+  updated_by: emilie.id
+
+assurance_2:
+  account: courant_emilie
+  category: assurance
+  date: <%= DateTime.now.at_beginning_of_month + 1.month %>
+  amount: -76.5
+  checked: false
+  comment: 
+  created_by: emilie.id
+  updated_by: emilie.id
+
+## essence_courant_emilie
+essence_courant_emilie_1:
+  account: courant_emilie
+  category: essence_courant_emilie
+  date: <%= DateTime.now - 10.days %>
+  amount: -76.34
+  checked: true
+  comment: this car...
+  created_by: emilie.id
+  updated_by: emilie.id
+
+#######################
+# emilie / ldd_emilie #
+#######################
+## epargne_ldd_emilie
+epargne_ldd_emilie_1:
+  account: ldd_emilie
+  category: epargne_ldd_emilie
+  date: <%= DateTime.now - 3.days %>
+  amount: 456.78
+  checked: false
+  comment: 
+  created_by: emilie.id
+  updated_by: emilie.id
+
+###################################
+# thomas & emilie / compte_commun #
+###################################
+## courses
+courses_1:
+  account: compte_commun
+  category: courses
+  date: <%= DateTime.now - 25.days %>
+  amount: -62.35
+  checked: true
+  comment: Auchan
+  created_by: thomas.id
+  updated_by: emilie.id
+
+courses_2:
+  account: compte_commun
+  category: courses
+  date: <%= DateTime.now - 2.days %>
+  amount: -23.56
+  checked: false
+  comment: Carrefour
+  created_by: emilie.id
+  updated_by: thomas.id
+
+## garderie
+garderie_1:
+  account: compte_commun
+  category: garderie
+  date: <%= DateTime.now - 22.days %>
+  amount: -39
+  checked: true
+  comment: 
+  created_by: emilie.id
+  updated_by: emilie.id
+
+## internet
+internet_1:
+  account: compte_commun
+  category: internet
+  date: <%= DateTime.now.at_beginning_of_month %>
+  amount: -29.99
+  checked: true
+  comment: 
+  created_by: thomas.id
+  updated_by: thomas.id
+
+internet_2:
+  account: compte_commun
+  category: internet
+  date: <%= DateTime.now.at_beginning_of_month + 1.month %>
+  amount: -29.99
+  checked: false
+  comment: 
+  created_by: thomas.id
+  updated_by: thomas.id
+
+## electricite
+electricite_1:
+  account: compte_commun
+  category: electricite
+  date: <%= DateTime.now - 33.days %>
+  amount: -128.59
+  checked: true
+  comment: 
+  created_by: emilie.id
+  updated_by: thomas.id

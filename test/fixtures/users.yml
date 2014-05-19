@@ -1,0 +1,23 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  email           :string(255)      not null
+#  name            :string(255)      not null
+#  password_digest :string(255)
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+
+thomas:
+  email: thomas@email.com
+  name: Thomas
+  password_digest: <%= BCrypt::Password.create('secret') %>
+  accounts: courant_thomas, livret_a, ldd_thomas, compte_commun
+
+emilie:
+  email: emilie@email.com
+  name: Emilie
+  password_digest: <%= BCrypt::Password.create('secret') %>
+  accounts: courant_emilie, ldd_emilie, compte_commun

@@ -1,0 +1,129 @@
+# == Schema Information
+#
+# Table name: categories
+#
+#  id         :integer          not null, primary key
+#  account_id :integer          not null
+#  name       :string(255)      not null
+#  created_by :integer
+#  updated_by :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
+##########
+# thomas #
+##########
+## courant_thomas
+pret:
+  name: Prêt
+  account: courant_thomas
+  created_by: thomas.id
+  updated_by: thomas.id
+
+coiffeur_courant_thomas:
+  name: Coiffeur
+  account: courant_thomas
+  created_by: thomas.id
+  updated_by: thomas.id
+
+vetements_courant_thomas:
+  name: Vêtements
+  account: courant_thomas
+  created_by: thomas.id
+  updated_by: thomas.id
+
+cantine:
+  name: Cantine
+  account: courant_thomas
+  created_by: thomas.id
+  updated_by: thomas.id
+
+essence_courant_thomas:
+  name: Essence
+  account: courant_thomas
+  created_by: thomas.id
+  updated_by: thomas.id
+
+## livret_a
+prime:
+  name: Prime
+  account: livret_a
+  created_by: thomas.id
+  updated_by: thomas.id
+
+epargne_livret_a:
+  name: Epargne
+  account: livret_a
+  created_by: thomas.id
+  updated_by: thomas.id
+
+## ldd_thomas
+epargne_ldd_thomas:
+  name: Epargne
+  account: ldd_thomas
+  created_by: thomas.id
+  updated_by: thomas.id
+
+##########
+# emilie #
+##########
+## courant_emilie
+vetements_courant_emilie:
+  name: Vêtements
+  account: courant_emilie
+  created_by: emilie.id
+  updated_by: emilie.id
+
+coiffeur_courant_emilie:
+  name: Coiffeur
+  account: courant_emilie
+  created_by: emilie.id
+  updated_by: emilie.id
+
+assurance:
+  name: Assurance
+  account: courant_emilie
+  created_by: emilie.id
+  updated_by: emilie.id
+
+essence_courant_emilie:
+  name: Essence
+  account: courant_emilie
+  created_by: emilie.id
+  updated_by: emilie.id
+
+## ldd_emilie
+epargne_ldd_emilie:
+  name: Epargne
+  account: ldd_emilie
+  created_by: emilie.id
+  updated_by: emilie.id
+
+###################
+# thomas & emilie #
+###################
+## compte_commun
+courses:
+  name: Courses
+  account: compte_commun
+  created_by: thomas.id
+  updated_by: emilie.id
+
+garderie:
+  name: Garderie
+  account: compte_commun
+  created_by: thomas.id
+  updated_by: thomas.id
+
+internet:
+  name: Internet
+  account: compte_commun
+  created_by: emilie.id
+  updated_by: emilie.id
+
+electricite:
+  name: Electricité
+  account: compte_commun
+  created_by: thomas.id
+  updated_by: thomas.id

@@ -1,0 +1,54 @@
+# == Schema Information
+#
+# Table name: accounts
+#
+#  id              :integer          not null, primary key
+#  name            :string(255)      not null
+#  initial_balance :decimal(8, 2)    not null
+#  created_by      :integer
+#  updated_by      :integer
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+
+courant_thomas:
+  name: Compte courant
+  initial_balance: 30.11
+  created_by: thomas.id
+  updated_by: thomas.id
+  users: thomas
+
+livret_a:
+  name: Livret A
+  initial_balance: 10
+  created_by: thomas.id
+  updated_by: thomas.id
+  users: thomas
+
+ldd_thomas:
+  name: Livret de Développement Durable
+  initial_balance: 15
+  created_by: thomas.id
+  updated_by: thomas.id
+  users: thomas
+
+courant_emilie:
+  name: Compte courant
+  initial_balance: 9.02
+  created_by: emilie.id
+  updated_by: emilie.id
+  users: emilie
+
+ldd_emilie:
+  name: Livret de Développement Durable
+  initial_balance: 15
+  created_by: emilie.id
+  updated_by: emilie.id
+  users: emilie
+
+compte_commun:
+  name: Compte Commun
+  initial_balance: 0
+  created_by: thomas.id
+  updated_by: emilie.id
+  users: thomas, emilie

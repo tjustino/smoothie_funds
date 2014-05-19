@@ -1,0 +1,74 @@
+DOCTYPE html
+html
+  head
+    title Smoothie Funds
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+
+  body
+    .container
+      / Static navbar
+      .navbar.navbar-default role="navigation"
+        .container-fluid
+          .navbar-header
+            button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-collapse"
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            = link_to "Smoothie Funds", dashboard_path, class: "navbar-brand"
+
+          - if @current_user
+            .navbar-collapse.collapse
+              ul.nav.navbar-nav
+                / dropdown transactions
+                li.dropdown class=("active" if params[:controller] == "transactions")
+                  a.dropdown-toggle href="#" data-toggle="dropdown"
+                    = fa_icon "credit-card", text: t('.transactions').html_safe
+                  ul.dropdown-menu
+                    - @current_accounts.each do |account|
+                      li = link_to account.name, \
+                              user_account_transactions_path(@current_user, account)
+
+                / dropdown categories
+                li.dropdown class=("active" if params[:controller] == "categories")
+                  a.dropdown-toggle href="#" data-toggle="dropdown"
+                    = fa_icon "tags", text: t('.categories').html_safe
+                  ul.dropdown-menu
+                    - @current_accounts.each do |account|
+                      li = link_to account.name, \
+                              user_account_categories_path(@current_user, account)
+
+                / link accounts
+                = nav_link t('.accounts'), user_accounts_path(@current_user), "book"
+
+              ul.nav.navbar-nav.navbar-right
+                = nav_link @current_user.name, edit_user_path(@current_user), "user"
+                li = link_to t('.logout'), logout_path, method: :delete
+
+      / alerts
+      - if flash[:alert]
+        .alert.alert-danger.alert-dismissable
+          button.close type="button" data-dismiss="alert" aria-hidden="true"
+            = fa_icon "times"
+          = flash[:alert]
+      - elsif flash[:warning]
+        .alert.alert-warning.alert-dismissable
+          button.close type="button" data-dismiss="alert" aria-hidden="true"
+            = fa_icon "times"
+          = flash[:warning]
+      - elsif flash[:notice]
+        .alert.alert-success.alert-dismissable
+          button.close type="button" data-dismiss="alert" aria-hidden="true"
+            = fa_icon "times"
+          = flash[:notice]
+
+      / content
+      = yield
+
+    / debugger
+    - if Rails.env.development?
+      .container
+        = debug(params)
