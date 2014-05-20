@@ -270,8 +270,48 @@ courses_1:
 courses_2:
   account: compte_commun
   category: courses
-  date: <%= DateTime.now - 2.days %>
+  date: <%= DateTime.now - 18.days %>
   amount: -23.56
+  checked: false
+  comment: Carrefour
+  created_by: emilie.id
+  updated_by: thomas.id
+
+courses_3:
+  account: compte_commun
+  category: courses
+  date: <%= DateTime.now - 11.days %>
+  amount: -45
+  checked: true
+  comment: Auchan
+  created_by: thomas.id
+  updated_by: emilie.id
+
+courses_4:
+  account: compte_commun
+  category: courses
+  date: <%= DateTime.now - 4.days %>
+  amount: -89.75
+  checked: true
+  comment:
+  created_by: emilie.id
+  updated_by: thomas.id
+
+courses_5:
+  account: compte_commun
+  category: courses
+  date: <%= DateTime.now - 2.days %>
+  amount: -34.04
+  checked: false
+  comment:
+  created_by: emilie.id
+  updated_by: thomas.id
+
+courses_6:
+  account: compte_commun
+  category: courses
+  date: <%= DateTime.now %>
+  amount: -8.56
   checked: false
   comment: Carrefour
   created_by: emilie.id
@@ -284,6 +324,26 @@ garderie_1:
   date: <%= DateTime.now - 22.days %>
   amount: -39
   checked: true
+  comment: 
+  created_by: emilie.id
+  updated_by: emilie.id
+
+garderie_2:
+  account: compte_commun
+  category: garderie
+  date: <%= DateTime.now - 4.days %>
+  amount: -79.89
+  checked: false
+  comment: 
+  created_by: emilie.id
+  updated_by: emilie.id
+
+garderie_3:
+  account: compte_commun
+  category: garderie
+  date: <%= DateTime.now + 10.days %>
+  amount: -104.12
+  checked: false
   comment: 
   created_by: emilie.id
   updated_by: emilie.id
@@ -319,3 +379,106 @@ electricite_1:
   comment: 
   created_by: emilie.id
   updated_by: thomas.id
+
+electricite_2:
+  account: compte_commun
+  category: electricite
+  date: <%= DateTime.now + 23.days %>
+  amount: -64.54
+  checked: false
+  comment: 
+  created_by: emilie.id
+  updated_by: thomas.id
+
+## virement
+virement_1:
+  account: compte_commun
+  category: virement
+  date: <%= DateTime.now.at_beginning_of_month %>
+  amount: 500
+  checked: true
+  comment: Thomas
+  created_by: emilie.id
+  updated_by: thomas.id
+
+virement_2:
+  account: compte_commun
+  category: virement
+  date: <%= DateTime.now.at_beginning_of_month %>
+  amount: 500
+  checked: true
+  comment: Emilie
+  created_by: emilie.id
+  updated_by: thomas.id
+
+virement_3:
+  account: compte_commun
+  category: virement
+  date: <%= DateTime.now.at_beginning_of_month + 1.month %>
+  amount: 500
+  checked: false
+  comment: Thomas
+  created_by: emilie.id
+  updated_by: thomas.id
+
+virement_4:
+  account: compte_commun
+  category: virement
+  date: <%= DateTime.now.at_beginning_of_month + 1.month %>
+  amount: 500
+  checked: false
+  comment: Emilie
+  created_by: emilie.id
+  updated_by: thomas.id
+
+## cinema
+cinema_1:
+  account: compte_commun
+  category: cinema
+  date: <%= DateTime.now - 24.days %>
+  amount: -21
+  checked: true
+  comment: 
+  created_by: emilie.id
+  updated_by: emilie.id
+
+## eau
+eau_1:
+  account: compte_commun
+  category: eau
+  date: <%= DateTime.now.at_beginning_of_month - 2.months  %>
+  amount: -48.25
+  checked: true
+  comment: 
+  created_by: emilie.id
+  updated_by: emilie.id
+
+eau_2:
+  account: compte_commun
+  category: eau
+  date: <%= DateTime.now.at_beginning_of_month - 1.month %>
+  amount: -30.54
+  checked: true
+  comment: 
+  created_by: emilie.id
+  updated_by: emilie.id
+
+eau_3:
+  account: compte_commun
+  category: eau
+  date: <%= DateTime.now.at_beginning_of_month %>
+  amount: -22.12
+  checked: true
+  comment: 
+  created_by: emilie.id
+  updated_by: emilie.id
+
+eau_4:
+  account: compte_commun
+  category: eau
+  date: <%= DateTime.now.at_beginning_of_month + 1.month %>
+  amount: -45.45
+  checked: false
+  comment: 
+  created_by: emilie.id
+  updated_by: emilie.id

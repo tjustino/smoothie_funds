@@ -32,3 +32,5 @@ table.table.table-striped.table-hover
         td = link_to (fa_icon "trash-o", text: t('.destroy')), \
               user_account_transaction_path(@current_user, @current_account, transaction), \
               method: :delete, data: { confirm: t('.are_you_sure') }
+
+= paginate @transactions

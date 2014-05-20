@@ -9,16 +9,16 @@
           li = msg
 
   .form-group
-    = f.label :category_id, t('.category'), class: "col-sm-2 control-label"
-    .col-sm-4
-      = f.select :category_id, @current_account.categories.collect { |category| \
-                    [ category.name, category.id ] }, {}, { class: "form-control" }
-
-  .form-group
     = f.label :date, t('.date'), class: "col-sm-2 control-label"
     .col-sm-4
       = f.text_field :date, class: "form-control datepicker", placeholder: t('.date'), \
             value: @transaction.date.nil? ? l(Date.today) : l(@transaction.date)
+
+  .form-group
+    = f.label :category_id, t('.category'), class: "col-sm-2 control-label"
+    .col-sm-4
+      = f.select :category_id, @current_account.categories.collect { |category| \
+                    [ category.name, category.id ] }, {}, { class: "form-control" }
 
   .form-group
     = f.label :amount, t('.amount'), class: "col-sm-2 control-label"

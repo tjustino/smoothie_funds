@@ -127,3 +127,21 @@ electricite:
   account: compte_commun
   created_by: thomas.id
   updated_by: thomas.id
+
+virement:
+  name: Virement
+  account: compte_commun
+  created_by: thomas.id
+  updated_by: thomas.id
+
+cinema:
+  name: Cinéma
+  account: compte_commun
+  created_by: thomas.id
+  updated_by: emilie.id
+
+eau:
+  name: Eau
+  account: compte_commun
+  created_by: thomas.id
+  updated_by: thomas.id

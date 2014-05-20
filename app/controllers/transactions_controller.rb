@@ -14,8 +14,10 @@ class TransactionsController < ApplicationController
       end
     end
 
-    @sum_checked = @current_account.transactions.where(checked: true).sum(:amount)
-    @transactions = twb.reverse!
+    @sum_checked = @current_account.initial_balance + 
+                    @current_account.transactions.where(checked: true).sum(:amount)
+    #@transactions = twb.reverse!
+    @transactions = Kaminari.paginate_array(twb.reverse!).page(params[:page]).per(20)
   end
 
   # GET /users/1/accounts/1/transactions/new

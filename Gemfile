@@ -47,6 +47,7 @@ gem 'bootstrap-sass'
 gem 'font-awesome-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-turbolinks'
+gem 'kaminari'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
