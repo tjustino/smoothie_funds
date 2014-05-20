@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
 
   # GET /users/1/accounts/1/categories
   def index
-    @categories = @current_account.categories.order(:name)
+    @categories = @current_account.categories.order(:name).page(params[:page]).per(20)
   end
 
   # GET /users/1/accounts/1/categories/new

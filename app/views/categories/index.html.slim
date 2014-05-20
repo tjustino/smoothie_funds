@@ -18,3 +18,5 @@ table.table.table-striped.table-hover
         td = link_to (fa_icon "trash-o", text: t('.destroy')), \
               user_account_category_path(@current_user, @current_account, category), \
               method: :delete, data: { confirm: t('.are_you_sure', category: category.name) }
+
+= paginate @categories
