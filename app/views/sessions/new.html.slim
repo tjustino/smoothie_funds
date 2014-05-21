@@ -6,7 +6,7 @@
     = label_tag :email, t('.email'), class: "col-sm-2 control-label"
     .col-sm-4
       = email_field_tag :email, params[:email], class: "form-control", \
-                                                        placeholder: t('.email')
+                                      placeholder: t('.email'), autofocus: true
 
   .form-group
     = label_tag :password, t('.password'), class: "col-sm-2 control-label"

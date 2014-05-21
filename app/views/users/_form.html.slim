@@ -11,7 +11,7 @@
   .form-group
     = f.label :email, t('.email'), class: "col-sm-2 control-label"
     .col-sm-4
-      = f.email_field :email, class: "form-control", placeholder: t('.email')
+      = f.email_field :email, class: "form-control", placeholder: t('.email'), autofocus: true
 
   .form-group
     = f.label :name, t('.name'), class: "col-sm-2 control-label"

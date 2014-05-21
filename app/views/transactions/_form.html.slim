@@ -19,7 +19,7 @@
         /   label.btn.btn-default
         /     = radio_button_tag "order", "plus"
         /     span +
-        = f.text_field :amount, class: "form-control", placeholder: t('.amount')
+        = f.text_field :amount, class: "form-control", placeholder: t('.amount'), autofocus: true
         span.input-group-addon = t('number.currency.format.unit')
 
   .form-group
