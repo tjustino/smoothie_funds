@@ -12,13 +12,13 @@
     = f.label :amount, t('.amount'), class: "col-sm-2 control-label"
     .col-sm-4
       .input-group
-        span.input-group-btn data-toggle="buttons"
-          label.btn.btn-default.active
-            = radio_button_tag "order", "minus"
-            span -
-          label.btn.btn-default
-            = radio_button_tag "order", "plus"
-            span +
+        / span.input-group-btn data-toggle="buttons"
+        /   label.btn.btn-default.active
+        /     = radio_button_tag "order", "minus"
+        /     span -
+        /   label.btn.btn-default
+        /     = radio_button_tag "order", "plus"
+        /     span +
         = f.text_field :amount, class: "form-control", placeholder: t('.amount')
         span.input-group-addon = t('number.currency.format.unit')
 
@@ -31,7 +31,7 @@
   .form-group
     = f.label :category_id, t('.category'), class: "col-sm-2 control-label"
     .col-sm-4
-      = f.select :category_id, @current_account.categories.collect { |category| \
+      = f.select :category_id, @current_account.categories.order(:name ).collect { |category| \
                     [ category.name, category.id ] }, {}, { class: "form-control" }
 
   .form-group

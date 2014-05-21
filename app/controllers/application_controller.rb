@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
     end
 
     def current_accounts
-      current_user.accounts
+      current_user.accounts.order(:name)
     end
 
     def set_current_accounts
