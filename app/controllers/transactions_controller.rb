@@ -1,5 +1,5 @@
 class TransactionsController < ApplicationController
-  before_action :set_transaction, only: [:show, :edit, :update, :destroy]
+  before_action :set_transaction, only: [:edit, :update, :destroy]
   before_action :set_current_account
 
   # GET /users/1/accounts/1/transactions
@@ -23,16 +23,20 @@ class TransactionsController < ApplicationController
   # GET /users/1/accounts/1/transactions/new
   def new
     @transaction = Transaction.new
+    @sign = :negative
   end
 
   # GET /users/1/accounts/1/transactions/1/edit
   def edit
+    @transaction.amount >= 0 ? @sign = :positive : @sign = :negative
+    @transaction.amount = @transaction.amount.abs
   end
 
   # POST /users/1/accounts/1/transactions
   def create
     @transaction = Transaction.new(transaction_params)
-    @transaction.account     = @current_account
+    @transaction.account = @current_account
+
     @transaction.created_by  = @current_user.id
     @transaction.updated_by  = @current_user.id
 
@@ -48,6 +52,12 @@ class TransactionsController < ApplicationController
   # PATCH/PUT /users/1/accounts/1/transactions/1
   def update
     @transaction.updated_by = @current_user.id
+
+    if params[:sign] = "plus"
+      params[:amount] = params[:amount].abs
+    else
+      params[:amount] = -1 * params[:amount].abs
+    end
 
     respond_to do |format|
       if @transaction.update(transaction_params)
