@@ -93,6 +93,9 @@ fr:
       successfully_destroyed: "La transaction a bien été supprimée"
     # views
     form:
+      debit:            "Débit"
+      credit:           "Crédit"
+      transfer:         "Virement"
       category:         "Catégorie"
       date:             "Date"
       amount:           "Montant"

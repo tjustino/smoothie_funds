@@ -10,15 +10,12 @@
 
   .form-group
     = f.label :amount, t('.amount'), class: "col-sm-2 control-label"
-    .col-sm-4
+    .col-sm-2
+      = select_tag :sign, options_for_select( [ \
+          [t('.debit'), "debit"], [t('.credit'), "credit"] ], @sign), \
+          { class: "form-control" }
+    .col-sm-2
       .input-group
-        span.input-group-btn data-toggle="buttons"
-          label.sign.btn.btn-default class=("active" if @sign == :negative)
-            = radio_button_tag :sign, "minus"
-            span -
-          label.sign.btn.btn-default class=("active" if @sign == :positive)
-            = radio_button_tag :sign, "plus"
-            span +
         = f.text_field :amount, class: "form-control", placeholder: t('.amount'), autofocus: true
         span.input-group-addon = t('number.currency.format.unit')
 

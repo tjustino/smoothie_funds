@@ -23,12 +23,12 @@ class TransactionsController < ApplicationController
   # GET /users/1/accounts/1/transactions/new
   def new
     @transaction = Transaction.new
-    @sign = :negative
+    @sign = "debit"
   end
 
   # GET /users/1/accounts/1/transactions/1/edit
   def edit
-    @transaction.amount >= 0 ? @sign = :positive : @sign = :negative
+    @transaction.amount < 0 ? @sign = "debit" : @sign = "credit"
     @transaction.amount = @transaction.amount.abs
   end
 
@@ -36,6 +36,12 @@ class TransactionsController < ApplicationController
   def create
     @transaction = Transaction.new(transaction_params)
     @transaction.account = @current_account
+
+    if params[:sign] == "credit"
+      @transaction.amount = @transaction.amount.abs if not @transaction.amount.blank?
+    else
+      @transaction.amount = -1 * @transaction.amount.abs if not @transaction.amount.blank?
+    end
 
     @transaction.created_by  = @current_user.id
     @transaction.updated_by  = @current_user.id
@@ -51,16 +57,16 @@ class TransactionsController < ApplicationController
 
   # PATCH/PUT /users/1/accounts/1/transactions/1
   def update
-    @transaction.updated_by = @current_user.id
+    t_params = transaction_params
 
-    if params[:sign] = "plus"
-      params[:amount] = params[:amount].abs
+    if params[:sign] == "credit"
+      t_params[:amount] = t_params[:amount].to_f.abs if not t_params[:amount].blank?
     else
-      params[:amount] = -1 * params[:amount].abs
+      t_params[:amount] = -1 * t_params[:amount].to_f.abs if not t_params[:amount].blank?
     end
 
     respond_to do |format|
-      if @transaction.update(transaction_params)
+      if @transaction.update(t_params)
         format.html { redirect_to user_account_transactions_url, notice: t('.successfully_updated') }
       else
         format.html { render :edit }
