@@ -11,9 +11,9 @@ table.table.table-striped.table-hover
       th
       th = t('.date')
       th = t('.category')
-      th = t('.debit')
-      th = t('.credit')
-      th = t('.balance')
+      th.text-right = t('.debit')
+      th.text-right = t('.credit')
+      th.text-right = t('.balance')
       th = t('.comment')
       th colspan="3"
 
@@ -23,9 +23,9 @@ table.table.table-striped.table-hover
         td = transaction.checked ? fa_icon("check-square-o") : fa_icon("square-o")
         td = l(transaction.date)
         td = transaction.category.name
-        td = number_to_currency(transaction.amount) if transaction.amount < 0
-        td = number_to_currency(transaction.amount) if transaction.amount >= 0
-        td = number_to_currency(transaction.balance)
+        td.text-right = number_to_currency(transaction.amount) if transaction.amount < 0
+        td.text-right = number_to_currency(transaction.amount) if transaction.amount >= 0
+        td.text-right = number_to_currency(transaction.balance)
         td = truncate(transaction.comment, length: 30)
 
         td = link_to (fa_icon "edit", text: t('.edit')), \
