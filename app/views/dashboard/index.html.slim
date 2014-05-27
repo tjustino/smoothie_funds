@@ -6,18 +6,19 @@
     .panel-heading
       h3.panel-title = account.name
     .panel-body
-      p = t('.gain', number: number_to_currency(@credits[account.id]))
-      p = t('.expenditure', number: number_to_currency(@debits[account.id]))
+      p = t('.gain', number: number_to_currency(@sum_credits[account.id]))
+      p = t('.expenditure', number: number_to_currency(@sum_debits[account.id]))
       .progress.progress-striped
-        - if @credits[account.id] == 0 && @debits[account.id] == 0
+        - if @sum_credits[account.id] == 0 && @sum_debits[account.id] == 0
           .progress-bar.progress-bar-success style="width: 0%;"
-        - elsif @credits[account.id] == 0 || @credits[account.id] < @debits[account.id].abs
+        - elsif @sum_credits[account.id] == 0 || \
+                @sum_credits[account.id] < @sum_debits[account.id].abs
           .progress-bar.progress-bar-danger style="width: 100%;"
             span = t('.more_expenditure_than_gain')
-        - elsif @debits[account.id] == 0
+        - elsif @sum_debits[account.id] == 0
           .progress-bar.progress-bar-success style="width: 100%;"
             span = t('.more_gain_than_expenditure')
-        - elsif @credits[account.id] >= @debits[account.id].abs
+        - elsif @sum_credits[account.id] >= @sum_debits[account.id].abs
           .progress-bar.progress-bar-danger style="width: #{debit_percent(account)}%;"
             span = t('.expenditure', number: number_to_percentage(debit_percent(account), precision: 0))
           .progress-bar.progress-bar-success style="width: #{credit_percent(account)}%;"
