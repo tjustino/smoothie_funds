@@ -60,6 +60,11 @@ fr:
 
   dashboard:
     index:
+      dashboard:    "Tableaux de bord <small>sur les 30 derniers jours</small>"
+      gain:         "Gains : %{number}"
+      expenditure:  "Dépenses : %{number}"
+      more_expenditure_than_gain: "Plus de dépenses que de gains !"
+      more_gain_than_expenditure: "Que du gain, nickel !"
 
   layouts:
     # views

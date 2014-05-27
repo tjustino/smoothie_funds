@@ -1,2 +1,23 @@
-h1 Dashboard
-p Ici, bientôt des graphiques incroyables !!
+.page-header
+  h1 = t('.dashboard').html_safe
+
+- @current_accounts.each do |account|
+  .panel.panel-info
+    .panel-heading
+      h3.panel-title = account.name
+    .panel-body
+      p = t('.gain', number: number_to_currency(@credits[account.id]))
+      p = t('.expenditure', number: number_to_currency(@debits[account.id]))
+      .progress.progress-striped
+        - if @credits[account.id] == 0 && @debits[account.id] == 0
+          .progress-bar.progress-bar-success style="width: 0%;"
+        - elsif @credits[account.id] == 0 || @credits[account.id] < @debits[account.id].abs
+          .progress-bar.progress-bar-danger style="width: 100%;"
+            span = t('.more_expenditure_than_gain')
+        - elsif @debits[account.id] == 0
+          .progress-bar.progress-bar-success style="width: 100%;"
+            span = t('.more_gain_than_expenditure')
+        - elsif @credits[account.id] >= @debits[account.id].abs
+          .progress-bar.progress-bar-danger style="width: #{debit_percent(account)}%;"
+            span = t('.expenditure', number: number_to_percentage(debit_percent(account), precision: 0))
+          .progress-bar.progress-bar-success style="width: #{credit_percent(account)}%;"
