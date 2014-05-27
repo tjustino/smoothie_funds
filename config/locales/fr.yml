@@ -220,8 +220,6 @@ fr:
 ################################################################################
   views:
     pagination:
-      first: "&laquo; Premier"
-      last: "Dernier &raquo;"
-      previous: "&lsaquo; Précédent"
-      next: "Suivant &rsaquo;"
+      first: "&laquo;"
+      last: "&raquo;"
       truncate: "&hellip;"
