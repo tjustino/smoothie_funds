@@ -139,6 +139,12 @@ fr:
       password_confirmation:  "Confirmation"
     edit:
       edit_user:  "Edition de l'utilisateur courant"
+      title_bug:  "Support"
+      speech_bug: |-
+        Vous avez trouvé un bug et vous souhaitez le signaler ?<br />
+        Vous pouvez utiliser ce 
+        <a href="https://github.com/tjustino/smoothie_funds/issues" target="_blank">lien</a>
+        (en anglais ou français uniquement, merci !)
     new:
       create_user:  "Créer un nouvel utilisateur"
       back:         "Retour arrière"
