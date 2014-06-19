@@ -1,0 +1,31 @@
+# == Schema Information
+#
+# Table name: schedules
+#
+#  id             :integer          not null, primary key
+#  account_id     :integer          not null
+#  transaction_id :integer          not null
+#  next_time      :date             not null
+#  frequency      :integer          not null
+#  period         :string(255)      not null
+#  created_by     :integer
+#  updated_by     :integer
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  account_id: 
+  transaction_id: 
+  next_time: 2014-06-19
+  frequency: 1
+  period: MyString
+
+two:
+  account_id: 
+  transaction_id: 
+  next_time: 2014-06-19
+  frequency: 1
+  period: MyString

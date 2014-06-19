@@ -70,6 +70,7 @@ fr:
     # views
     application:
       transactions: 'Transactions <b class="caret"></b>'
+      schedules:    'Échéanciés <b class="caret"></b>'
       categories:   'Catégories <b class="caret"></b>'
       accounts:     "Comptes"
       logout:       "Déconnexion"
@@ -123,6 +124,32 @@ fr:
       are_you_sure:     "Etes-vous certain de vouloir supprimer la transaction ?"
     new:
       create_transaction: "Créer la transaction"
+      back:               "Retour arrière"
+
+  schedules:
+    # controllers
+    # views
+    form:
+      next_time:          "Prochaine échéance"
+      frequency:          "Fréquence"
+      all_the:            "Tous les"
+      days:               "jours"
+      weeks:              "semaines"
+      months:             "mois"
+      years:              "ans"
+    edit:
+      edit_schedule:      "Editer l'échéancier"
+      back:               "Retour arrière"
+    index:
+      listing_schedules:  "Liste des échéanciers du %{current_account}"
+      new_schedule:       "Nouvel échéancier"
+      next_time:          "Prochaine échéance"
+      frequency:          "Fréquence"
+      edit:               "Editer"
+      destroy:            "Supprimer"
+      are_you_sure:       "Etes-vous certain de vouloir supprimer cet échéancier ?"
+    new:
+      create_schedule:    "Créer l'échéancier"
       back:               "Retour arrière"
 
   users:
@@ -185,6 +212,7 @@ fr:
       category:     "la catégorie"
       transaction:  "la transaction"
       user:         "l'utilisateur"
+      schedule:     "l'échéancier"
 
     attributes:
       account:
@@ -199,6 +227,9 @@ fr:
         amount:   "Montant"
         checked:  "Rapproché"
         comment:  "Commentaire"
+
+      schedule:
+        frequency:  "Fréquence"
 
       user:
         name:     "Nom"

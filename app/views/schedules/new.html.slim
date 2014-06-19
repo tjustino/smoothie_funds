@@ -1,0 +1,8 @@
+.page-header
+  h2 = t('.create_schedule')
+
+= render 'form'
+
+= link_to (fa_icon "reply", text: t('.back')), \
+              user_account_schedules_path(@current_user, @current_account), \
+              class: "btn btn-primary"

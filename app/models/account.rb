@@ -13,8 +13,9 @@
 
 class Account < ActiveRecord::Base
   has_and_belongs_to_many :users
-  has_many                :categories,   dependent: :restrict_with_error
-  has_many                :transactions, dependent: :restrict_with_error
+  has_many                :categories,    dependent: :restrict_with_error
+  has_many                :transactions,  dependent: :restrict_with_error
+  has_many                :schedules,     dependent: :delete_all
 
   validates_presence_of     :name, :initial_balance
   validates_numericality_of :initial_balance

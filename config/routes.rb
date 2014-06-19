@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :accounts, except: [:show] do
       resources :categories,    except: [:show]
       resources :transactions,  except: [:show]
+      resources :schedules,     except: [:show]
     end
   end
 
