@@ -12,7 +12,7 @@ fr:
       successfully_updated:   "Le compte a bien été mis à jour"
     destroy:
       successfully_destroyed: "Le compte a bien été supprimé"
-      cant_destroy:           "Le compte ne pas être supprimé car des catégories et/ou transactions y sont liées"
+      cant_destroy:           "Le compte ne peut pas être supprimé car des catégories et/ou transactions y sont liées"
     # views
     form:
       name:             "Nom"
@@ -40,7 +40,7 @@ fr:
       successfully_updated:   "La catégorie a bien été mise à jour"
     destroy:
       successfully_destroyed: "La catégorie a bien été supprimée"
-      cant_destroy:           "La catégorie ne pas être supprimée car des transactions y sont liées"
+      cant_destroy:           "La catégorie ne peut pas être supprimée car des transactions y sont liées"
     # views
     form:
       name:             "Nom"
@@ -130,7 +130,7 @@ fr:
     create:
       successfully_created: "L'utilisateur a bien été créé"
     update:
-      successfully_updated: "L'utilisateur a bien été mise à jour"
+      successfully_updated: "L'utilisateur a bien été mis à jour"
     # views
     form:
       email:                  "Courriel"
