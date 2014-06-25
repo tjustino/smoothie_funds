@@ -10,6 +10,8 @@ class SchedulesController < ApplicationController
   # GET /users/1/accounts/1/schedules/new
   def new
     @schedule = Schedule.new
+    @transaction = @schedule.transactions.build
+    #@sign = "debit"
   end
 
   # GET /users/1/accounts/1/schedules/1/edit
@@ -20,9 +22,14 @@ class SchedulesController < ApplicationController
   def create
     @schedule = Schedule.new(schedule_params)
 
+    @schedule.account = @current_account
+
+    @schedule.created_by  = @current_user.id
+    @schedule.updated_by  = @current_user.id
+
     respond_to do |format|
       if @schedule.save
-        format.html { redirect_to @schedule, notice: 'Schedule was successfully created.' }
+        format.html { redirect_to user_account_schedules_url, notice: t('.successfully_created') }
       else
         format.html { render :new }
       end
@@ -33,7 +40,7 @@ class SchedulesController < ApplicationController
   def update
     respond_to do |format|
       if @schedule.update(schedule_params)
-        format.html { redirect_to @schedule, notice: 'Schedule was successfully updated.' }
+        format.html { redirect_to user_account_schedules_url, notice: t('.successfully_updated') }
       else
         format.html { render :edit }
       end
@@ -44,7 +51,7 @@ class SchedulesController < ApplicationController
   def destroy
     @schedule.destroy
     respond_to do |format|
-      format.html { redirect_to schedules_url, notice: 'Schedule was successfully destroyed.' }
+      format.html { redirect_to user_account_schedules_url, notice: t('.successfully_destroyed') }
     end
   end
 
@@ -56,6 +63,10 @@ class SchedulesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def schedule_params
-      params.require(:schedule).permit(:account_id, :transaction_id, :next_time, :frequency, :period)
+      params.require(:schedule).permit( :account_id,
+                                        :next_time,
+                                        :frequency,
+                                        :period,
+                                        :transactions_attributes)
     end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140619114809) do
+ActiveRecord::Schema.define(version: 20140619113426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,11 +47,10 @@ ActiveRecord::Schema.define(version: 20140619114809) do
   add_index "categories", ["account_id"], name: "index_categories_on_account_id", using: :btree
 
   create_table "schedules", force: true do |t|
-    t.integer  "account_id",     null: false
-    t.integer  "transaction_id", null: false
-    t.date     "next_time",      null: false
-    t.integer  "frequency",      null: false
-    t.string   "period",         null: false
+    t.integer  "account_id", null: false
+    t.date     "next_time",  null: false
+    t.integer  "frequency",  null: false
+    t.string   "period",     null: false
     t.integer  "created_by"
     t.integer  "updated_by"
     t.datetime "created_at"
@@ -59,7 +58,6 @@ ActiveRecord::Schema.define(version: 20140619114809) do
   end
 
   add_index "schedules", ["account_id"], name: "index_schedules_on_account_id", using: :btree
-  add_index "schedules", ["transaction_id"], name: "index_schedules_on_transaction_id", using: :btree
 
   create_table "transactions", force: true do |t|
     t.integer  "account_id",                          null: false
@@ -72,11 +70,12 @@ ActiveRecord::Schema.define(version: 20140619114809) do
     t.integer  "updated_by"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "scheduled"
+    t.integer  "schedule_id"
   end
 
   add_index "transactions", ["account_id"], name: "index_transactions_on_account_id", using: :btree
   add_index "transactions", ["category_id"], name: "index_transactions_on_category_id", using: :btree
+  add_index "transactions", ["schedule_id"], name: "index_transactions_on_schedule_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",           null: false

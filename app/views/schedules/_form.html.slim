@@ -8,11 +8,10 @@
         - @schedule.errors.full_messages.each do |msg|
           li = msg
 
-  .form-group
-    = f.label :next_time, t('.next_time'), class: "col-sm-2 control-label"
-    .col-sm-4
-      = f.text_field :next_time, class: "form-control datepicker", placeholder: t('.next_time'), \
-            value: @schedule.next_time.nil? ? l(Date.today) : l(@schedule.next_time)
+  = f.fields_for :transactions do |builder|
+    = render 'transaction_fields', f: builder
+
+  hr
 
   .form-group
     = f.label :frequency, t('.frequency'), class: "col-sm-2 control-label"
@@ -24,6 +23,12 @@
       = f.select :period, [ [t('.days'), :days], [t('.weeks'), :weeks], \
                             [t('.months'), :months], [t('.years'), :years]], \
                           {}, { class: "form-control" }
+
+  .form-group
+    = f.label :next_time, t('.next_time'), class: "col-sm-2 control-label"
+    .col-sm-4
+      = f.text_field :next_time, class: "form-control datepicker", placeholder: t('.next_time'), \
+            value: @schedule.next_time.nil? ? l(Date.today) : l(@schedule.next_time)
 
   .form-group
     .col-sm-offset-2.col-sm-8

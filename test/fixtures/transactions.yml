@@ -13,7 +13,7 @@
 #  updated_by  :integer
 #  created_at  :datetime
 #  updated_at  :datetime
-#  scheduled   :boolean
+#  schedule_id :integer
 #
 
 ###########################

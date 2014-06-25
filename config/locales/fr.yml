@@ -128,6 +128,12 @@ fr:
 
   schedules:
     # controllers
+    create:
+      successfully_created:   "L'échéancier a bien été créé"
+    update:
+      successfully_updated:   "L'échéancier a bien été mis à jour"
+    destroy:
+      successfully_destroyed: "L'échéancier a bien été supprimé"
     # views
     form:
       next_time:          "Prochaine échéance"
@@ -137,6 +143,15 @@ fr:
       weeks:              "semaines"
       months:             "mois"
       years:              "ans"
+    transaction_fields:
+      debit:            "Débit"
+      credit:           "Crédit"
+      transfer:         "Virement"
+      category:         "Catégorie"
+      date:             "Date"
+      amount:           "Montant"
+      checked:          "Rapprochée"
+      comment:          "Commentaire"
     edit:
       edit_schedule:      "Editer l'échéancier"
       back:               "Retour arrière"
@@ -145,6 +160,7 @@ fr:
       new_schedule:       "Nouvel échéancier"
       next_time:          "Prochaine échéance"
       frequency:          "Fréquence"
+      frequency_period:   "Tous les %{frequency} %{period}"
       edit:               "Editer"
       destroy:            "Supprimer"
       are_you_sure:       "Etes-vous certain de vouloir supprimer cet échéancier ?"

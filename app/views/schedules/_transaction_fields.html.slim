@@ -1,0 +1,28 @@
+.form-group
+  = f.label :amount, t('.amount'), class: "col-sm-2 control-label"
+  .col-sm-2
+    = select_tag :sign, options_for_select( [ \
+        [t('.debit'), "debit"], [t('.credit'), "credit"] ], @sign), \
+        { class: "form-control" }
+  .col-sm-2
+    .input-group
+      = f.text_field :amount, class: "form-control", placeholder: t('.amount'), autofocus: true
+      span.input-group-addon = t('number.currency.format.unit')
+
+.form-group
+  = f.label :category_id, t('.category'), class: "col-sm-2 control-label"
+  .col-sm-4
+    = f.select :category_id, @current_account.categories.order(:name ).collect { |category| \
+                  [ category.name, category.id ] }, {}, { class: "form-control" }
+
+.form-group
+  = f.label :comment, t('.comment'), class: "col-sm-2 control-label"
+  .col-sm-4
+    = f.text_area :comment, class: "form-control", placeholder: t('.comment'), rows: 5
+
+.form-group
+  .col-sm-offset-2.col-sm-2
+    .checkbox
+      = f.label :checked do
+        = f.check_box :checked
+        = t('.checked')

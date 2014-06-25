@@ -15,7 +15,8 @@ table.table.table-striped.table-hover
     - @schedules.each do |schedule|
       tr
         td = l(schedule.next_time)
-        td = l(schedule.frequency)
+        td = t('.frequency_period', frequency: schedule.frequency.to_s, \
+                                    period: schedule.period)
         td = link_to (fa_icon "edit", text: t('.edit')), \
               edit_user_account_schedule_path(@current_user, @current_account, schedule), \
               data: {no_turbolink: true}

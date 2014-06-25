@@ -13,16 +13,15 @@
 #  updated_by  :integer
 #  created_at  :datetime
 #  updated_at  :datetime
-#  scheduled   :boolean
+#  schedule_id :integer
 #
 
 class Transaction < ActiveRecord::Base
   attr_accessor :balance
 
-  has_one     :schedule, dependent: :delete
-
   belongs_to  :account
   belongs_to  :category
+  belongs_to  :schedule
 
   validates_presence_of     :account_id, :category_id, :date, :amount
   validates_numericality_of :amount
