@@ -70,7 +70,7 @@ fr:
     # views
     application:
       transactions: 'Transactions <b class="caret"></b>'
-      schedules:    'Échéanciés <b class="caret"></b>'
+      schedules:    'Échéanciers <b class="caret"></b>'
       categories:   'Catégories <b class="caret"></b>'
       accounts:     "Comptes"
       logout:       "Déconnexion"
@@ -161,6 +161,9 @@ fr:
       next_time:          "Prochaine échéance"
       frequency:          "Fréquence"
       frequency_period:   "Tous les %{frequency} %{period}"
+      category:           "Catégorie"
+      amount:             "Montant"
+      comment:            "Commentaire"
       edit:               "Editer"
       destroy:            "Supprimer"
       are_you_sure:       "Etes-vous certain de vouloir supprimer cet échéancier ?"

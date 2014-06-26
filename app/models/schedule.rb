@@ -14,7 +14,7 @@
 #
 
 class Schedule < ActiveRecord::Base
-  has_one :operation, foreign_key: "schedule_id", class_name: "Transaction"
+  has_one :operation, foreign_key: "schedule_id", class_name: "Transaction", dependent: :destroy
   accepts_nested_attributes_for :operation, allow_destroy: true, reject_if: :all_blank
 
   belongs_to  :account

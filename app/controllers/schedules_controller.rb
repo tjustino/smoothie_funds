@@ -31,6 +31,12 @@ class SchedulesController < ApplicationController
     @schedule.operation.date    = @schedule.next_time
     @schedule.operation.account = @current_account
 
+    if params[:sign] == "credit"
+      @schedule.operation.amount = @schedule.operation.amount.abs if not @schedule.operation.amount.blank?
+    else
+      @schedule.operation.amount = -1 * @schedule.operation.amount.abs if not @schedule.operation.amount.blank?
+    end
+
     respond_to do |format|
       if @schedule.save
         format.html { redirect_to user_account_schedules_url, notice: t('.successfully_created') }
