@@ -4,18 +4,19 @@ class SchedulesController < ApplicationController
 
   # GET /users/1/accounts/1/schedules
   def index
-    @schedules = Schedule.all
+    @schedules = @current_account.schedules.order(next_time: :asc, id: :asc)
   end
 
   # GET /users/1/accounts/1/schedules/new
   def new
     @schedule = Schedule.new
-    @transaction = @schedule.transactions.build
-    #@sign = "debit"
+    @transaction = @schedule.build_operation
+    @sign = "debit"
   end
 
   # GET /users/1/accounts/1/schedules/1/edit
   def edit
+
   end
 
   # POST /users/1/accounts/1/schedules
@@ -26,6 +27,9 @@ class SchedulesController < ApplicationController
 
     @schedule.created_by  = @current_user.id
     @schedule.updated_by  = @current_user.id
+
+    @schedule.operation.date    = @schedule.next_time
+    @schedule.operation.account = @current_account
 
     respond_to do |format|
       if @schedule.save
@@ -38,6 +42,9 @@ class SchedulesController < ApplicationController
 
   # PATCH/PUT /users/1/accounts/1/schedules/1
   def update
+    @schedule.operation.date    = @schedule.next_time
+    @schedule.operation.account = @current_account
+
     respond_to do |format|
       if @schedule.update(schedule_params)
         format.html { redirect_to user_account_schedules_url, notice: t('.successfully_updated') }
@@ -67,6 +74,9 @@ class SchedulesController < ApplicationController
                                         :next_time,
                                         :frequency,
                                         :period,
-                                        :transactions_attributes)
+                                        operation_attributes: [ :amount,
+                                                                :category_id,
+                                                                :comment,
+                                                                :checked ])
     end
 end

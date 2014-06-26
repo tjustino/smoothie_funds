@@ -14,12 +14,8 @@
 #
 
 class Schedule < ActiveRecord::Base
-  #PERIODS = [ :day, :weeks, :months, :years]
-
-  #has_one :operation, foreign_key: "schedule_id", class_name: "Transaction"
-  #accepts_nested_attributes_for :operation, allow_destroy: true
-  has_many :transactions, dependent: :delete_all
-  accepts_nested_attributes_for :transactions, allow_destroy: true
+  has_one :operation, foreign_key: "schedule_id", class_name: "Transaction"
+  accepts_nested_attributes_for :operation, allow_destroy: true, reject_if: :all_blank
 
   belongs_to  :account
 

@@ -8,7 +8,7 @@
         - @schedule.errors.full_messages.each do |msg|
           li = msg
 
-  = f.fields_for :transactions do |builder|
+  = f.fields_for :operation do |builder|
     = render 'transaction_fields', f: builder
 
   hr

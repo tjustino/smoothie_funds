@@ -4,7 +4,7 @@ class TransactionsController < ApplicationController
 
   # GET /users/1/accounts/1/transactions
   def index
-    twb = @current_account.transactions.order(date: :asc, id: :asc).to_a
+    twb = @current_account.transactions.where(schedule_id: nil).order(date: :asc, id: :asc).to_a
 
     twb.each_index do |index|
       if index == 0
