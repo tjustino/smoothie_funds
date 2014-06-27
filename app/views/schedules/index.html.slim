@@ -18,7 +18,9 @@ table.table.table-striped.table-hover
   tbody
     - @schedules.each do |schedule|
       tr
-        td = fa_icon("magic")
+        td = link_to fa_icon("magic"), \
+                insert_user_account_schedule_path(@current_user, @current_account, schedule), \
+                method: :insert
         td = l(schedule.next_time)
         td = t('.frequency_period', frequency: schedule.frequency.to_s, \
                                     period: schedule.period)

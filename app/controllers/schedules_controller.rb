@@ -10,26 +10,28 @@ class SchedulesController < ApplicationController
   # GET /users/1/accounts/1/schedules/new
   def new
     @schedule = Schedule.new
-    @transaction = @schedule.build_operation
+    @schedule.build_operation
     @sign = "debit"
   end
 
   # GET /users/1/accounts/1/schedules/1/edit
   def edit
-
+    @schedule.operation.amount < 0 ? @sign = "debit" : @sign = "credit"
+    @schedule.operation.amount = @schedule.operation.amount.abs
   end
 
   # POST /users/1/accounts/1/schedules
   def create
     @schedule = Schedule.new(schedule_params)
 
-    @schedule.account = @current_account
-
+    @schedule.account     = @current_account
     @schedule.created_by  = @current_user.id
     @schedule.updated_by  = @current_user.id
 
-    @schedule.operation.date    = @schedule.next_time
-    @schedule.operation.account = @current_account
+    @schedule.operation.date        = @schedule.next_time
+    @schedule.operation.account     = @current_account
+    #@schedule.operation.created_by  = @current_user.id
+    #@schedule.operation.updated_by  = @current_user.id
 
     if params[:sign] == "credit"
       @schedule.operation.amount = @schedule.operation.amount.abs if not @schedule.operation.amount.blank?
@@ -48,11 +50,19 @@ class SchedulesController < ApplicationController
 
   # PATCH/PUT /users/1/accounts/1/schedules/1
   def update
-    @schedule.operation.date    = @schedule.next_time
-    @schedule.operation.account = @current_account
+    t_params = schedule_params
+
+    if params[:sign] == "credit"
+      t_params[:operation_attributes][:amount] = t_params[:operation_attributes][:amount].to_f.abs if not t_params[:operation_attributes][:amount].blank?
+    else
+      t_params[:operation_attributes][:amount] = -1 * t_params[:operation_attributes][:amount].to_f.abs if not t_params[:operation_attributes][:amount].blank?
+    end
+
+    t_params[:operation_attributes][:date]    = t_params[:next_time]
+    t_params[:operation_attributes][:account] = @current_account
 
     respond_to do |format|
-      if @schedule.update(schedule_params)
+      if @schedule.update(t_params)
         format.html { redirect_to user_account_schedules_url, notice: t('.successfully_updated') }
       else
         format.html { render :edit }
@@ -65,6 +75,17 @@ class SchedulesController < ApplicationController
     @schedule.destroy
     respond_to do |format|
       format.html { redirect_to user_account_schedules_url, notice: t('.successfully_destroyed') }
+    end
+  end
+
+  # POST /users/1/accounts/1/schedules/1/insert
+  def insert
+    puts "@@@@@@@@@@@@@@@@@@@@@@"
+    puts "INSERT !!"
+    puts "@@@@@@@@@@@@@@@@@@@@@@"
+
+    respond_to do |format|
+      format.html { redirect_to user_account_schedules_url, notice: t('.successfully_inserted') }
     end
   end
 

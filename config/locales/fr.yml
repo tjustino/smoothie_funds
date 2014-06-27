@@ -134,6 +134,8 @@ fr:
       successfully_updated:   "L'échéancier a bien été mis à jour"
     destroy:
       successfully_destroyed: "L'échéancier a bien été supprimé"
+    insert:
+      successfully_inserted:  "La transaction a bien été insérée, l'échéancier a été mis à jour"
     # views
     form:
       next_time:          "Prochaine échéance"
