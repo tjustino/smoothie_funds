@@ -1,5 +1,5 @@
 class SchedulesController < ApplicationController
-  before_action :set_schedule, only: [:edit, :update, :destroy]
+  before_action :set_schedule, only: [:edit, :update, :destroy, :insert]
   before_action :set_current_account
 
   # GET /users/1/accounts/1/schedules
@@ -28,10 +28,7 @@ class SchedulesController < ApplicationController
     @schedule.created_by  = @current_user.id
     @schedule.updated_by  = @current_user.id
 
-    @schedule.operation.date        = @schedule.next_time
     @schedule.operation.account     = @current_account
-    #@schedule.operation.created_by  = @current_user.id
-    #@schedule.operation.updated_by  = @current_user.id
 
     if params[:sign] == "credit"
       @schedule.operation.amount = @schedule.operation.amount.abs if not @schedule.operation.amount.blank?
@@ -80,9 +77,16 @@ class SchedulesController < ApplicationController
 
   # POST /users/1/accounts/1/schedules/1/insert
   def insert
-    puts "@@@@@@@@@@@@@@@@@@@@@@"
-    puts "INSERT !!"
-    puts "@@@@@@@@@@@@@@@@@@@@@@"
+    transaction = @schedule.operation.dup
+    transaction.created_by  = @current_user.id
+    transaction.updated_by  = @current_user.id
+    transaction.schedule_id = nil
+
+    @schedule.next_time  = @schedule.next_time.advance(@schedule.period.to_sym => @schedule.frequency)
+    @schedule.updated_by = @current_user.id
+
+    transaction.save
+    @schedule.save
 
     respond_to do |format|
       format.html { redirect_to user_account_schedules_url, notice: t('.successfully_inserted') }

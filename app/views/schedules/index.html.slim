@@ -20,10 +20,10 @@ table.table.table-striped.table-hover
       tr
         td = link_to fa_icon("magic"), \
                 insert_user_account_schedule_path(@current_user, @current_account, schedule), \
-                method: :insert
+                method: :insert, title: t('.insert_schedule')
         td = l(schedule.next_time)
         td = t('.frequency_period', frequency: schedule.frequency.to_s, \
-                                    period: schedule.period)
+                                    period: easy_t(schedule.period) )
         td = schedule.operation.category.name
         td.text-right = number_to_currency(schedule.operation.amount)
         td = truncate(schedule.operation.comment, length: 30)

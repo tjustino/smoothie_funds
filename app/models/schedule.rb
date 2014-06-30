@@ -21,4 +21,13 @@ class Schedule < ActiveRecord::Base
 
   validates_presence_of     :account_id, :next_time, :frequency, :period
   validates_numericality_of :frequency
+
+  before_validation :populate_date
+
+  private
+
+  def populate_date
+    self.operation.date = self.next_time
+    self.operation.save
+  end
 end
