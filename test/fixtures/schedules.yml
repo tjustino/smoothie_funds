@@ -15,16 +15,26 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  account_id: 
-  transaction_id: 
-  next_time: 2014-06-19
+schedule_electricite:
+  account: compte_commun
+  next_time: <%= DateTime.now.at_beginning_of_month + 1.month %>
   frequency: 1
-  period: MyString
+  period: months
+  created_by: emilie.id
+  updated_by: thomas.id
 
-two:
-  account_id: 
-  transaction_id: 
-  next_time: 2014-06-19
-  frequency: 1
-  period: MyString
+schedule_eau:
+  account: compte_commun
+  next_time: <%= DateTime.now.at_beginning_of_month + 2.weeks %>
+  frequency: 2
+  period: weeks
+  created_by: thomas.id
+  updated_by: thomas.id
+
+schedule_virement:
+  account: compte_commun
+  next_time: <%= DateTime.now.at_beginning_of_month + 30.days %>
+  frequency: 30
+  period: days
+  created_by: thomas.id
+  updated_by: emilie.id

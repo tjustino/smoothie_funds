@@ -1,49 +1,78 @@
 require 'test_helper'
 
 class SchedulesControllerTest < ActionController::TestCase
-  setup do
-    @schedule = schedules(:one)
-  end
+  # # GET /users/1/accounts/1/transactions
+  # test "should get index" do
+  #   @accounts.each do |account|
+  #     get :index, user_id: @user, account_id: account
+  #     assert_response :success
+  #     assert_not_nil assigns(:transactions)
+  #   end
+  # end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:schedules)
-  end
+  # # GET /users/1/accounts/1/transactions/new
+  # test "should get new" do
+  #   @accounts.each do |account|
+  #     get :new, user_id: @user, account_id: account
+  #     assert_response :success
+  #   end
+  # end
 
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
+  # # GET /users/1/accounts/1/transactions/1/edit
+  # test "should get edit" do
+  #   @accounts.each do |account|
+  #     account.transactions.each do |transaction|
+  #       get :edit, user_id: @user, account_id: account, id: transaction
+  #       assert_response :success
+  #     end
+  #   end
+  # end
 
-  test "should create schedule" do
-    assert_difference('Schedule.count') do
-      post :create, schedule: { account_id: @schedule.account_id, frequency: @schedule.frequency, next_time: @schedule.next_time, period: @schedule.period, transaction_id: @schedule.transaction_id }
-    end
+  # # POST /users/1/accounts/1/transactions
+  # test "should create transaction" do
+  #   @accounts.each do |account|
+  #     assert_difference('Transaction.count') do
+  #       post :create, user_id:    @user, 
+  #                     account_id: account,
+  #                     transaction: {  category_id:  account.categories.sample,
+  #                                     date:         DateTime.now,
+  #                                     amount:       rand(-500.00..500.00),
+  #                                     checked:      rand(0..1) == 1 ? true : false,
+  #                                     comment:      SecureRandom.hex }
 
-    assert_redirected_to schedule_path(assigns(:schedule))
-  end
+  #       assert_redirected_to user_account_transactions_path
+  #     end
+  #   end
+  # end
 
-  test "should show schedule" do
-    get :show, id: @schedule
-    assert_response :success
-  end
+  # # PATCH/PUT /users/1/accounts/1/transactions/1
+  # test "should update transaction" do
+  #   @accounts.each do |account|
+  #     account.transactions.each do |transaction|
+  #       patch :update,  user_id:    @user,
+  #                       account_id: account,
+  #                       id:         transaction,
+  #                       transaction: {  category_id:  account.categories.sample,
+  #                                       date:         DateTime.now + rand(1..9).days,
+  #                                       amount:       rand(-500.00..500.00),
+  #                                       checked:      rand(0..1) == 1 ? true : false,
+  #                                       comment:      SecureRandom.hex }
 
-  test "should get edit" do
-    get :edit, id: @schedule
-    assert_response :success
-  end
+  #       assert_redirected_to user_account_transactions_path
+  #     end
+  #   end
+  # end
 
-  test "should update schedule" do
-    patch :update, id: @schedule, schedule: { account_id: @schedule.account_id, frequency: @schedule.frequency, next_time: @schedule.next_time, period: @schedule.period, transaction_id: @schedule.transaction_id }
-    assert_redirected_to schedule_path(assigns(:schedule))
-  end
+  # # DELETE /users/1/accounts/1/transactions/1
+  # test "should destroy transaction" do
+  #   @accounts.each do |account|
+  #     account.transactions.each do |transaction|
+  #       assert_difference('Transaction.count', -1) do
+  #         delete :destroy, user_id: @user, account_id: account, id: transaction
+  #       end
 
-  test "should destroy schedule" do
-    assert_difference('Schedule.count', -1) do
-      delete :destroy, id: @schedule
-    end
-
-    assert_redirected_to schedules_path
-  end
+  #       assert_redirected_to user_account_transactions_path
+  #     end
+  #   end
+  # end
 end

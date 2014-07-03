@@ -3,7 +3,7 @@ Reminder
 [Linux] sudo systemctl start postgresql  
 [Mac] postgres -D /usr/local/var/postgres
 
-rake db:drop ; rake db:create ; rake db:migrate ; rake db:fixtures:load FIXTURES=users,accounts,categories,transactions
+rake db:drop ; rake db:create ; rake db:migrate ; rake db:fixtures:load FIXTURES=users,accounts,categories,transactions,schedules
 
 bundle exec annotate  
 rake erd

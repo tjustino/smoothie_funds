@@ -29,6 +29,7 @@ pret_1:
   comment: 
   created_by: thomas.id
   updated_by: thomas.id
+  schedule_id:
 
 pret_2:
   account: courant_thomas
@@ -39,6 +40,7 @@ pret_2:
   comment: 
   created_by: thomas.id
   updated_by: thomas.id
+  schedule_id:
 
 pret_3:
   account: courant_thomas
@@ -49,6 +51,7 @@ pret_3:
   comment: 
   created_by: thomas.id
   updated_by: thomas.id
+  schedule_id:
 
 pret_4:
   account: courant_thomas
@@ -59,6 +62,7 @@ pret_4:
   comment: 
   created_by: thomas.id
   updated_by: thomas.id
+  schedule_id:
 
 ## coiffeur_courant_thomas
 coiffeur_courant_thomas_1:
@@ -70,6 +74,7 @@ coiffeur_courant_thomas_1:
   comment: CoupTif
   created_by: thomas.id
   updated_by: thomas.id
+  schedule_id:
 
 coiffeur_courant_thomas_2:
   account: courant_thomas
@@ -80,6 +85,7 @@ coiffeur_courant_thomas_2:
   comment: TifTouf
   created_by: thomas.id
   updated_by: thomas.id
+  schedule_id:
 
 ## vetements_courant_thomas
 vetements_courant_thomas_1:
@@ -91,6 +97,7 @@ vetements_courant_thomas_1:
   comment: Somewhere
   created_by: thomas.id
   updated_by: thomas.id
+  schedule_id:
 
 ## cantine
 cantine_1:
@@ -102,6 +109,7 @@ cantine_1:
   comment: 
   created_by: thomas.id
   updated_by: thomas.id
+  schedule_id:
 
 ## essence_courant_thomas
 essence_courant_thomas_1:
@@ -113,6 +121,7 @@ essence_courant_thomas_1:
   comment: Carrefour
   created_by: thomas.id
   updated_by: thomas.id
+  schedule_id:
 
 #####################
 # thomas / livret_a #
@@ -127,6 +136,7 @@ prime_1:
   comment: Yeappy !!
   created_by: thomas.id
   updated_by: thomas.id
+  schedule_id:
 
 ## epargne_livret_a
 epargne_livret_a_1:
@@ -138,6 +148,7 @@ epargne_livret_a_1:
   comment: 
   created_by: thomas.id
   updated_by: thomas.id
+  schedule_id:
 
 epargne_livret_a_2:
   account: livret_a
@@ -148,6 +159,7 @@ epargne_livret_a_2:
   comment: Smoothie Funds
   created_by: thomas.id
   updated_by: thomas.id
+  schedule_id:
 
 #######################
 # thomas / ldd_thomas #
@@ -162,6 +174,7 @@ epargne_ldd_thomas_1:
   comment: ê@ UTF-8 T€st ¤§
   created_by: thomas.id
   updated_by: thomas.id
+  schedule_id:
 
 ###########################
 # emilie / courant_emilie #
@@ -176,6 +189,7 @@ vetements_courant_emilie_1:
   comment: 
   created_by: emilie.id
   updated_by: emilie.id
+  schedule_id:
 
 vetements_courant_emilie_2:
   account: courant_emilie
@@ -186,6 +200,7 @@ vetements_courant_emilie_2:
   comment: 
   created_by: emilie.id
   updated_by: emilie.id
+  schedule_id:
 
 vetements_courant_emilie_3:
   account: courant_emilie
@@ -196,6 +211,7 @@ vetements_courant_emilie_3:
   comment: So Sweety
   created_by: emilie.id
   updated_by: emilie.id
+  schedule_id:
 
 ## coiffeur_courant_emilie
 coiffeur_courant_emilie_1:
@@ -207,6 +223,7 @@ coiffeur_courant_emilie_1:
   comment: 
   created_by: emilie.id
   updated_by: emilie.id
+  schedule_id:
 
 ## assurance
 assurance_1:
@@ -218,6 +235,7 @@ assurance_1:
   comment: 
   created_by: emilie.id
   updated_by: emilie.id
+  schedule_id:
 
 assurance_2:
   account: courant_emilie
@@ -228,6 +246,7 @@ assurance_2:
   comment: 
   created_by: emilie.id
   updated_by: emilie.id
+  schedule_id:
 
 ## essence_courant_emilie
 essence_courant_emilie_1:
@@ -239,6 +258,7 @@ essence_courant_emilie_1:
   comment: this car...
   created_by: emilie.id
   updated_by: emilie.id
+  schedule_id:
 
 #######################
 # emilie / ldd_emilie #
@@ -253,6 +273,7 @@ epargne_ldd_emilie_1:
   comment: 
   created_by: emilie.id
   updated_by: emilie.id
+  schedule_id:
 
 ###################################
 # thomas & emilie / compte_commun #
@@ -267,6 +288,7 @@ courses_1:
   comment: Auchan
   created_by: thomas.id
   updated_by: emilie.id
+  schedule_id:
 
 courses_2:
   account: compte_commun
@@ -277,6 +299,7 @@ courses_2:
   comment: Carrefour
   created_by: emilie.id
   updated_by: thomas.id
+  schedule_id:
 
 courses_3:
   account: compte_commun
@@ -287,6 +310,7 @@ courses_3:
   comment: Auchan
   created_by: thomas.id
   updated_by: emilie.id
+  schedule_id:
 
 courses_4:
   account: compte_commun
@@ -297,6 +321,7 @@ courses_4:
   comment:
   created_by: emilie.id
   updated_by: thomas.id
+  schedule_id:
 
 courses_5:
   account: compte_commun
@@ -307,6 +332,7 @@ courses_5:
   comment:
   created_by: emilie.id
   updated_by: thomas.id
+  schedule_id:
 
 courses_6:
   account: compte_commun
@@ -317,6 +343,7 @@ courses_6:
   comment: Carrefour
   created_by: emilie.id
   updated_by: thomas.id
+  schedule_id:
 
 ## garderie
 garderie_1:
@@ -328,6 +355,7 @@ garderie_1:
   comment: 
   created_by: emilie.id
   updated_by: emilie.id
+  schedule_id:
 
 garderie_2:
   account: compte_commun
@@ -338,6 +366,7 @@ garderie_2:
   comment: 
   created_by: emilie.id
   updated_by: emilie.id
+  schedule_id:
 
 garderie_3:
   account: compte_commun
@@ -348,6 +377,7 @@ garderie_3:
   comment: 
   created_by: emilie.id
   updated_by: emilie.id
+  schedule_id:
 
 ## internet
 internet_1:
@@ -359,6 +389,7 @@ internet_1:
   comment: 
   created_by: thomas.id
   updated_by: thomas.id
+  schedule_id:
 
 internet_2:
   account: compte_commun
@@ -369,6 +400,7 @@ internet_2:
   comment: 
   created_by: thomas.id
   updated_by: thomas.id
+  schedule_id:
 
 ## electricite
 electricite_1:
@@ -380,6 +412,7 @@ electricite_1:
   comment: 
   created_by: emilie.id
   updated_by: thomas.id
+  schedule_id:
 
 electricite_2:
   account: compte_commun
@@ -390,6 +423,7 @@ electricite_2:
   comment: 
   created_by: emilie.id
   updated_by: thomas.id
+  schedule_id:
 
 ## virement
 virement_1:
@@ -401,6 +435,7 @@ virement_1:
   comment: Thomas
   created_by: emilie.id
   updated_by: thomas.id
+  schedule_id:
 
 virement_2:
   account: compte_commun
@@ -411,6 +446,7 @@ virement_2:
   comment: Emilie
   created_by: emilie.id
   updated_by: thomas.id
+  schedule_id:
 
 virement_3:
   account: compte_commun
@@ -421,6 +457,7 @@ virement_3:
   comment: Thomas
   created_by: emilie.id
   updated_by: thomas.id
+  schedule_id:
 
 virement_4:
   account: compte_commun
@@ -431,6 +468,7 @@ virement_4:
   comment: Emilie
   created_by: emilie.id
   updated_by: thomas.id
+  schedule_id:
 
 ## cinema
 cinema_1:
@@ -442,6 +480,7 @@ cinema_1:
   comment: 
   created_by: emilie.id
   updated_by: emilie.id
+  schedule_id:
 
 ## eau
 eau_1:
@@ -453,6 +492,7 @@ eau_1:
   comment: 
   created_by: emilie.id
   updated_by: emilie.id
+  schedule_id:
 
 eau_2:
   account: compte_commun
@@ -463,6 +503,7 @@ eau_2:
   comment: 
   created_by: emilie.id
   updated_by: emilie.id
+  schedule_id:
 
 eau_3:
   account: compte_commun
@@ -473,6 +514,7 @@ eau_3:
   comment: 
   created_by: emilie.id
   updated_by: emilie.id
+  schedule_id:
 
 eau_4:
   account: compte_commun
@@ -483,3 +525,38 @@ eau_4:
   comment: 
   created_by: emilie.id
   updated_by: emilie.id
+  schedule_id:
+
+## schedule
+schedule_1:
+  account: compte_commun
+  category: electricite
+  date: <%= DateTime.now.at_beginning_of_month + 1.month %>
+  amount: -68.35
+  checked: false
+  comment: EDF
+  created_by: 
+  updated_by: 
+  schedule: schedule_electricite
+
+schedule_2:
+  account: compte_commun
+  category: eau
+  date: <%= DateTime.now.at_beginning_of_month + 2.weeks %>
+  amount: -25
+  checked: false
+  comment: SAUR
+  created_by: 
+  updated_by: 
+  schedule: schedule_eau
+
+schedule_3:
+  account: compte_commun
+  category: virement
+  date: <%= DateTime.now.at_beginning_of_month + 30.days %>
+  amount: 1200
+  checked: false
+  comment: 
+  created_by: 
+  updated_by: 
+  schedule: schedule_virement
