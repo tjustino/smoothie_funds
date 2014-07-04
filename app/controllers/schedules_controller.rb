@@ -28,7 +28,7 @@ class SchedulesController < ApplicationController
     @schedule.created_by  = @current_user.id
     @schedule.updated_by  = @current_user.id
 
-    @schedule.operation.account     = @current_account
+    @schedule.operation.account = @current_account
 
     if params[:sign] == "credit"
       @schedule.operation.amount = @schedule.operation.amount.abs if not @schedule.operation.amount.blank?

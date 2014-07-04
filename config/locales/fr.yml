@@ -145,7 +145,7 @@ fr:
       weeks:              "semaines"
       months:             "mois"
       years:              "ans"
-    transaction_fields:
+    operation_form:
       debit:            "Débit"
       credit:           "Crédit"
       transfer:         "Virement"
@@ -256,6 +256,12 @@ fr:
 
       schedule:
         frequency:  "Fréquence"
+        next_time:  "Prochaine échéance"
+        period:     "Période"
+
+      operation:
+        amount:     "Montant"
+        #date:       "Date" -> en doublon avec "Prochaine échéance"
 
       user:
         name:     "Nom"
