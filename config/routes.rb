@@ -10,10 +10,8 @@ Rails.application.routes.draw do
   resources :users, except: [:index, :show] do
     resources :accounts, except: [:show] do
       resources :categories,    except: [:show]
-      resources :transactions,  except: [:show]
-      resources :schedules,     except: [:show] do
-        post 'insert', on: :member
-      end
+      resources :transactions,  except: [:show] { post 'easycheck', on: :member }
+      resources :schedules,     except: [:show] { post 'insert', on: :member }
     end
   end
 

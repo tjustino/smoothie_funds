@@ -97,6 +97,8 @@ fr:
       successfully_updated:   "La transaction a bien été mise à jour"
     destroy:
       successfully_destroyed: "La transaction a bien été supprimée"
+    easycheck:
+      successfully_checked:   "La transaction a bien été rapprochée"
     # views
     form:
       debit:            "Débit"
@@ -122,6 +124,7 @@ fr:
       edit:             "Editer"
       destroy:          "Supprimer"
       are_you_sure:     "Etes-vous certain de vouloir supprimer la transaction ?"
+      check_transaction: "Rapprocher la transaction"
     new:
       create_transaction: "Créer la transaction"
       back:               "Retour arrière"

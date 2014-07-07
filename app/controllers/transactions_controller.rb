@@ -1,5 +1,5 @@
 class TransactionsController < ApplicationController
-  before_action :set_transaction, only: [:edit, :update, :destroy]
+  before_action :set_transaction, only: [:edit, :update, :destroy, :easycheck]
   before_action :set_current_account
 
   # GET /users/1/accounts/1/transactions
@@ -79,6 +79,15 @@ class TransactionsController < ApplicationController
     @transaction.destroy
     respond_to do |format|
       format.html { redirect_to user_account_transactions_url, notice: t('.successfully_destroyed') }
+    end
+  end
+
+  # POST /users/1/accounts/1/transactions/1/easycheck
+  def easycheck
+    @transaction.toggle! :checked
+
+    respond_to do |format|
+      format.html { redirect_to user_account_transactions_url, notice: t('.successfully_checked') }
     end
   end
 

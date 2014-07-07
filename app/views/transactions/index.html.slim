@@ -20,7 +20,10 @@ table.table.table-striped.table-hover
   tbody
     - @transactions.each do |transaction|
       tr class=("danger" if transaction.balance < 0) style=("color: gray;" if transaction.date > Date.today)
-        td = transaction.checked ? fa_icon("check-square-o") : fa_icon("square-o")
+        td = link_to \
+                transaction.checked ? fa_icon("check-square-o") : fa_icon("square-o"), \
+                easycheck_user_account_transaction_path(@current_user, @current_account, transaction), \
+                method: :insert, title: t('.check_transaction')
         td = l(transaction.date)
         td = transaction.category.name
         td.text-right = number_to_currency(transaction.amount) if transaction.amount < 0

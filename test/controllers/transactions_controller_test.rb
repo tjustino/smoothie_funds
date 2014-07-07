@@ -75,4 +75,17 @@ class TransactionsControllerTest < ActionController::TestCase
       end
     end
   end
+
+  # POST /users/1/accounts/1/transactions/1/easycheck
+  test "should check easily transaction" do
+    @accounts.each do |account|
+      account.transactions.each do |transaction|
+        before = transaction.checked
+        post :easycheck, user_id: @user, account_id: account, id: transaction
+        after = transaction.reload.checked
+
+        assert_not_equal before, after
+      end
+    end
+  end
 end
