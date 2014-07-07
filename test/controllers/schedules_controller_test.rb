@@ -79,4 +79,19 @@ class SchedulesControllerTest < ActionController::TestCase
       end
     end
   end
+
+  # POST /users/1/accounts/1/schedules/1/insert
+  test "should insert transaction" do
+    @accounts.each do |account|
+      account.schedules.each do |schedule|
+        assert_difference 'Transaction.count' do
+          post :insert, user_id: @user, account_id: account, id: schedule
+        end
+
+        assert_redirected_to user_account_schedules_path
+      end
+    end
+  end
 end
+
+# TODO check why account.schedules.each is KO
