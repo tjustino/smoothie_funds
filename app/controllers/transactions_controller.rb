@@ -65,6 +65,8 @@ class TransactionsController < ApplicationController
       t_params[:amount] = -1 * t_params[:amount].to_f.abs if not t_params[:amount].blank?
     end
 
+    @transaction.updated_by = @current_user.id
+
     respond_to do |format|
       if @transaction.update(t_params)
         format.html { redirect_to user_account_transactions_url, notice: t('.successfully_updated') }
@@ -84,10 +86,13 @@ class TransactionsController < ApplicationController
 
   # POST /users/1/accounts/1/transactions/1/easycheck
   def easycheck
-    @transaction.toggle! :checked
+    @transaction.toggle :checked
+    @transaction.updated_by = @current_user.id
 
     respond_to do |format|
-      format.html { redirect_to user_account_transactions_url, notice: t('.successfully_checked') }
+      if @transaction.save
+        format.html { redirect_to user_account_transactions_url, notice: t('.successfully_checked') }
+      end
     end
   end
 
