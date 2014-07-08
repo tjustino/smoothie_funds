@@ -17,6 +17,8 @@
 #
 
 class Transaction < ActiveRecord::Base
+  # TODO created_by and updated_by should be supported by the model
+
   attr_accessor :balance
 
   belongs_to  :account
