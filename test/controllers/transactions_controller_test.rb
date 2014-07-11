@@ -80,11 +80,15 @@ class TransactionsControllerTest < ActionController::TestCase
   test "should check easily transaction" do
     @accounts.each do |account|
       account.transactions.each do |transaction|
+        request.env['HTTP_REFERER'] = "/previous_link_url"
+
         before = transaction.checked
         post :easycheck, user_id: @user, account_id: account, id: transaction
         after = transaction.reload.checked
 
         assert_not_equal before, after
+
+        assert_redirected_to request.env['HTTP_REFERER']
       end
     end
   end

@@ -91,7 +91,7 @@ class TransactionsController < ApplicationController
 
     respond_to do |format|
       if @transaction.save
-        format.html { redirect_to user_account_transactions_url, notice: t('.successfully_checked') }
+        format.html { redirect_to :back, notice: t('.successfully_checked') }
       end
     end
   end
