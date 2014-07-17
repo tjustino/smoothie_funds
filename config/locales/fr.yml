@@ -53,6 +53,8 @@ fr:
       total:            "Total : %{total}"
       new_category:     "Nouvelle catégorie"
       name:             "Nom"
+      use:              "Utilisation"
+      time:             "%{total} fois"
       edit:             "Editer"
       destroy:          "Supprimer"
       are_you_sure:     "Etes-vous certain de vouloir supprimer la catégorie « %{category} » ?"
