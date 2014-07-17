@@ -1,4 +1,5 @@
 h1 = t('.listing_categories', current_account: @current_account.name)
+p.pull-right.label.label-info = t('.total', total: @categories.count)
 
 h3 = link_to (fa_icon "plus-circle", text: t('.new_category')), \
                         new_user_account_category_path, class: "btn btn-primary"

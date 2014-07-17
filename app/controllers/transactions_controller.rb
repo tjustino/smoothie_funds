@@ -4,20 +4,21 @@ class TransactionsController < ApplicationController
 
   # GET /users/1/accounts/1/transactions
   def index
-    twb = @current_account.transactions.where(schedule_id: nil).order(date: :asc, id: :asc).to_a
+    # @twb <=> transactions without balances
+    @twb = @current_account.transactions.where(schedule_id: nil).order(date: :asc, id: :asc).to_a
 
-    twb.each_index do |index|
+    @twb.each_index do |index|
       if index == 0
-        twb[index].balance = @current_account.initial_balance + twb[index].amount
+        @twb[index].balance = @current_account.initial_balance + @twb[index].amount
       else
-        twb[index].balance = twb[index-1].balance + twb[index].amount
+        @twb[index].balance = @twb[index-1].balance + @twb[index].amount
       end
     end
 
     @sum_checked = @current_account.initial_balance + 
                     @current_account.transactions.where(checked: true).sum(:amount)
-    #@transactions = twb.reverse!
-    @transactions = Kaminari.paginate_array(twb.reverse!).page(params[:page]).per(20)
+    #@transactions = @twb.reverse!
+    @transactions = Kaminari.paginate_array(@twb.reverse!).page(params[:page]).per(20)
   end
 
   # GET /users/1/accounts/1/transactions/new
