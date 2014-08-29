@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: accounts
+#
+#  id              :integer          not null, primary key
+#  name            :string(255)      not null
+#  initial_balance :decimal(8, 2)    not null
+#  created_by      :integer
+#  updated_by      :integer
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+
 require 'test_helper'
 
 class AccountTest < ActiveSupport::TestCase

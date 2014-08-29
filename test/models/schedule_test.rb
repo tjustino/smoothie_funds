@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: schedules
+#
+#  id         :integer          not null, primary key
+#  account_id :integer          not null
+#  next_time  :date             not null
+#  frequency  :integer          not null
+#  period     :string(255)      not null
+#  created_by :integer
+#  updated_by :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 require 'test_helper'
 
 class ScheduleTest < ActiveSupport::TestCase
