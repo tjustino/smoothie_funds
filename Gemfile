@@ -1,58 +1,36 @@
 source 'https://rubygems.org'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+## from http://bundler.io/gemfile.html
+# ~> 2.0.3 is identical to >= 2.0.3 and < 2.1
+# ~> 2.1 is identical to >= 2.1 and < 3.0
+# ~> 2.2.beta will match prerelease versions like 2.2.beta.12
+
 gem 'rails', '4.1.5'
 
-# Use postgresql as the database for Active Record
-gem 'pg'
+gem 'pg'                        # Use postgresql as the database for Active Record
+gem 'sass-rails',   '~> 4.0.3'  # Use SCSS for stylesheets
+gem 'uglifier'                  # Use Uglifier as compressor for JavaScript assets
+gem 'coffee-rails', '~> 4.0.1'  # Use CoffeeScript for .js.coffee assets and views
+gem 'jquery-rails'              # Use jquery as the JavaScript library
+gem 'turbolinks'                # Make following links in web application faster
+gem 'jbuilder',     '~> 2.0'    # Build JSON APIs with ease
+gem 'bcrypt',       '~> 3.1.7'  # Use ActiveModel has_secure_password
 
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.3'
-
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
-
-# Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer',  platforms: :ruby
-
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
-
-# Turbolinks makes following links in your web application faster
-# Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
-
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
-
-# bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0',          group: :doc
-
-# Use ActiveModel has_secure_password
-gem 'bcrypt', '~> 3.1.7'
+gem 'thin'                      # A thin and fast web server
+gem 'slim'                      # Template language
+gem 'bootstrap-sass'            # Twitter's Bootstrap, converted to Sass
+gem 'font-awesome-rails'        # Iconic font and CSS toolkit
+gem 'jquery-ui-rails'           # jQuery UI's JavaScript, CSS, and image files packaged for Rails asset pipeline
+gem 'kaminari'                  # Paginator
 
 group :development do
-  # Spring speeds up development by keeping your application running in the background
-  # Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'annotate'
-  gem 'rails-erd'
+  gem 'spring'                  # Keep application running in the background
+  gem 'annotate'                # Annotates ActiveRecord Models, routes, fixtures, and others based on the database schema
+  gem 'rails-erd'               # Automatically generate an entity-relationship diagram (ERD) for Rails models
+
+  # Use Capistrano for deployment
+  gem 'capistrano',         '~> 3.2'
+  gem 'capistrano-rails',   '~> 1.1'
+  gem 'capistrano-bundler', '~> 1.1'
+  gem 'capistrano-rbenv',   '~> 2.0'
 end
-
-gem 'thin'
-gem 'slim'
-gem 'bootstrap-sass'
-gem 'font-awesome-rails'
-gem 'jquery-ui-rails'
-gem 'kaminari'
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-
-# Use Capistrano for deployment
-gem 'capistrano',         '~> 3.2'
-gem 'capistrano-rails',   '~> 1.1'
-gem 'capistrano-bundler', '~> 1.1'
-gem 'capistrano-rbenv',   '~> 2.0'
