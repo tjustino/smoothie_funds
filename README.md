@@ -18,3 +18,7 @@ Convention d'indexation
 4. les colonnes dotées de contraintes de validité
 5. les colonnes fréquemment mises en relation, indépendamment des jointures naturelles
 6. les colonnes les plus sollicitées par les recherches
+
+---
+
+MMEX : 3786 opérations du 01/01/2000 au 25/05/2014
