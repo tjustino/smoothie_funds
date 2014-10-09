@@ -23,6 +23,11 @@ class ApplicationController < ActionController::Base
       @current_account = Account.find(params[:account_id])
     end
 
+    def userstamp(obj)
+      obj.update_attribute(:created_by, @current_user.id) if params[:action] == "create"
+      obj.update_attribute(:updated_by, @current_user.id)
+    end
+
     def authorize
       unless  current_user ||
               ( params[:controller] == "users" && params[:action] == "new" ) ||
