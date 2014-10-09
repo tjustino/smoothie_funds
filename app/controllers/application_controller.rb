@@ -4,9 +4,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :authorize, :set_current_user, :set_current_accounts
-  helper_method :current_user, :current_accounts
+  #account OK
 
-  protected
+  private
     def current_user
       User.find_by(id: session[:user_id])
     end
@@ -15,12 +15,8 @@ class ApplicationController < ActionController::Base
       @current_user = current_user
     end
 
-    def current_accounts
-      current_user.accounts.order(:name)
-    end
-
     def set_current_accounts
-      @current_accounts = current_accounts
+      @current_accounts = current_user.accounts.order_by_name
     end
 
     def set_current_account

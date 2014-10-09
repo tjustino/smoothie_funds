@@ -20,4 +20,7 @@ class Account < ActiveRecord::Base
   validates_presence_of     :name, :initial_balance
   validates_numericality_of :initial_balance
   #validates_uniqueness_of   :name, scope: :user_id
+
+  #scope :active,       -> { where(active: true) }
+  scope :order_by_name, -> { order(name: :asc) }
 end

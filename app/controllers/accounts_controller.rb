@@ -1,70 +1,97 @@
 class AccountsController < ApplicationController
-  before_action :set_account, only: [:edit, :update, :destroy]
+  before_action :set_current_user, :set_current_accounts
 
   # GET /users/1/accounts
   def index
-    @accounts = @current_user.accounts.order(:name)
+    load_accounts
   end
 
   # GET /users/1/accounts/new
   def new
-    @account = Account.new
+    build_account
   end
 
   # GET /users/1/accounts/1/edit
   def edit
-    @current_user
+    load_account
   end
 
   # POST /users/1/accounts
   def create
-    @account = Account.new(account_params)
-    @account.created_by = @current_user.id
-    @account.updated_by = @current_user.id
+    build_account
+    save_account( t('.successfully_created') ) or render 'new'
 
-    respond_to do |format|
-      if @account.save
-        @account.users << @current_user
-        format.html { redirect_to user_accounts_url, notice: t('.successfully_created') }
-      else
-        format.html { render action: 'new' }
-      end
-    end
+    # @account = Account.new(account_params)
+    # @account.created_by = @current_user.id
+    # @account.updated_by = @current_user.id
+
+    # respond_to do |format|
+    #   if @account.save
+    #     @account.users << @current_user
+    #     format.html { redirect_to user_accounts_url, notice: t('.successfully_created') }
+    #   else
+    #     format.html { render action: 'new' }
+    #   end
+    # end
   end
 
   # PATCH/PUT /users/1/accounts/1
   def update
-    @account.updated_by = @current_user.id
+    load_account
+    build_account
+    save_account( t('.successfully_updated') ) or render 'edit'
 
-    respond_to do |format|
-      if @account.update(account_params)
-        format.html { redirect_to user_accounts_url, notice: t('.successfully_updated') }
-      else
-        format.html { render action: 'edit' }
-      end
-    end
+    # @account.updated_by = @current_user.id
+
+    # respond_to do |format|
+    #   if @account.update(account_params)
+    #     format.html { redirect_to user_accounts_url, notice: t('.successfully_updated') }
+    #   else
+    #     format.html { render action: 'edit' }
+    #   end
+    # end
   end
 
   # DELETE /users/1/accounts/1
   def destroy
-    respond_to do |format|
-      if @account.destroy
-        format.html { redirect_to user_accounts_url, notice: t('.successfully_destroyed') }
-      else
-        flash[:warning] = t('.cant_destroy')
-        format.html { redirect_to user_accounts_url  }
-      end
+    load_account
+    if @account.destroy
+      redirect_to user_accounts_url, notice: t('.successfully_destroyed')
+    else
+      flash[:warning] = t('.cant_destroy')
+      redirect_to user_accounts_url
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_account
-      @account = Account.find(params[:id])
+
+  private ######################################################################
+
+    def load_accounts
+      @accounts ||= current_accounts.order_by_name
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    def load_account
+      @account ||= current_accounts.find(params[:id])
+    end
+
+    def build_account
+      @account ||= current_accounts.build
+      @account.attributes = account_params
+    end
+
     def account_params
-      params.require(:account).permit(:name, :initial_balance)
+      account_params = params[:account]
+      account_params ? account_params.permit(:name, :initial_balance) : {}
+    end
+
+    def save_account(notice)
+      if @account.save
+        @account.users << @current_user if params[:action] == "create"
+        redirect_to user_accounts_url, notice: notice
+      end
+    end
+
+    def current_accounts
+      @current_user.accounts
     end
 end
