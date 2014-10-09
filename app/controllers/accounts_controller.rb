@@ -20,19 +20,6 @@ class AccountsController < ApplicationController
   def create
     build_account
     save_account( t('.successfully_created') ) or render 'new'
-
-    # @account = Account.new(account_params)
-    # @account.created_by = @current_user.id
-    # @account.updated_by = @current_user.id
-
-    # respond_to do |format|
-    #   if @account.save
-    #     @account.users << @current_user
-    #     format.html { redirect_to user_accounts_url, notice: t('.successfully_created') }
-    #   else
-    #     format.html { render action: 'new' }
-    #   end
-    # end
   end
 
   # PATCH/PUT /users/1/accounts/1
@@ -40,16 +27,6 @@ class AccountsController < ApplicationController
     load_account
     build_account
     save_account( t('.successfully_updated') ) or render 'edit'
-
-    # @account.updated_by = @current_user.id
-
-    # respond_to do |format|
-    #   if @account.update(account_params)
-    #     format.html { redirect_to user_accounts_url, notice: t('.successfully_updated') }
-    #   else
-    #     format.html { render action: 'edit' }
-    #   end
-    # end
   end
 
   # DELETE /users/1/accounts/1
@@ -87,6 +64,7 @@ class AccountsController < ApplicationController
     def save_account(notice)
       if @account.save
         @account.users << @current_user if params[:action] == "create"
+        userstamp(@account)
         redirect_to user_accounts_url, notice: notice
       end
     end
