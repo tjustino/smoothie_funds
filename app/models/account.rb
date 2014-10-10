@@ -21,13 +21,15 @@ class Account < ActiveRecord::Base
 
   validates_presence_of     :name, :initial_balance
   validates_numericality_of :initial_balance
-  #validates_uniqueness_of   :name, scope: user_id
+  #TODO validates_uniqueness_of   :name, scope: user_id
 
   scope :order_by_name, -> { order(name: :asc) }
   #scope :active,       -> { where(active: true) }
 
-  private
+
+  private ######################################################################
+
     def format_initial_balance
-      self.initial_balance = initial_balance_before_type_cast.gsub(',', '.')
+      self.initial_balance = initial_balance_before_type_cast.gsub(' ', '').gsub(',', '.')
     end
 end
