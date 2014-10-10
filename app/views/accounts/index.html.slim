@@ -13,7 +13,7 @@ table.table.table-striped.table-hover
 
   tbody
     - @accounts.each do |account|
-      tr
+      tr style=("color: gray;" if account.hidden == true)
         td = account.name
         td = number_to_currency(account.initial_balance)
         td = link_to (fa_icon "edit", text: t('.edit')), \

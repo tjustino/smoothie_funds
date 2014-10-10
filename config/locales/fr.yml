@@ -17,6 +17,7 @@ fr:
     form:
       name:             "Nom"
       initial_balance:  "Balance initiale"
+      hidden:           "Masqué"
     edit:
       edit_account:     "Editer le compte"
       back:             "Retour arrière"

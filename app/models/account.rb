@@ -9,22 +9,23 @@
 #  updated_by      :integer
 #  created_at      :datetime
 #  updated_at      :datetime
+#  hidden          :boolean          default(FALSE)
 #
 
 class Account < ActiveRecord::Base
-  has_and_belongs_to_many :users, uniq: true
-  has_many                :categories,    dependent: :restrict_with_error
-  has_many                :transactions,  dependent: :restrict_with_error
-  has_many                :schedules,     dependent: :delete_all
+  has_and_belongs_to_many   :users, uniq: true
+  has_many                  :categories,    dependent: :restrict_with_error
+  has_many                  :transactions,  dependent: :restrict_with_error
+  has_many                  :schedules,     dependent: :delete_all
 
-  before_validation :format_initial_balance
+  before_validation         :format_initial_balance
 
   validates_presence_of     :name, :initial_balance
   validates_numericality_of :initial_balance
   #TODO validates_uniqueness_of   :name, scope: user_id
 
   scope :order_by_name, -> { order(name: :asc) }
-  #scope :active,       -> { where(active: true) }
+  scope :active,        -> { where(hidden: false) }
 
 
   private ######################################################################

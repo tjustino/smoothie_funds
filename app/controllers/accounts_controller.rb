@@ -58,7 +58,7 @@ class AccountsController < ApplicationController
 
     def account_params
       account_params = params[:account]
-      account_params ? account_params.permit(:name, :initial_balance) : {}
+      account_params ? account_params.permit(:name, :initial_balance, :hidden) : {}
     end
 
     def save_account(notice)
