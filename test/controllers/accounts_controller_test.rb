@@ -25,8 +25,9 @@ class AccountsControllerTest < ActionController::TestCase
   # POST /users/1/accounts
   test "should create account" do
     assert_difference('Account.count') do
-      post :create, user_id: @user, account: {  name: "Another Account",
-                                                initial_balance: 12.34 }
+      post :create, user_id: @user, account: {  name:             "My Account",
+                                                initial_balance:  12.34,
+                                                hidden:           false }
     end
     assert_redirected_to user_accounts_path
   end
@@ -34,8 +35,9 @@ class AccountsControllerTest < ActionController::TestCase
   # PATCH/PUT /users/1/accounts/1
   test "should update account" do
     patch :update, user_id: @user, id: @accounts.first,
-                            account: {  name: "Account updated",
-                                        initial_balance: -15 }
+                            account: {  name:             "Account updated",
+                                        initial_balance:  -15,
+                                        hidden:           false }
     assert_redirected_to user_accounts_path
   end
 

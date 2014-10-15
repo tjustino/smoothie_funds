@@ -65,6 +65,13 @@ epargne_ldd_thomas:
   created_by: thomas.id
   updated_by: thomas.id
 
+## hidden_thomas
+foo_hidden_thomas:
+  name: bar
+  account: hidden_thomas
+  created_by: thomas.id
+  updated_by: thomas.id
+
 ##########
 # emilie #
 ##########

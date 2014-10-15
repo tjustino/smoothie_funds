@@ -17,6 +17,7 @@ courant_thomas:
   initial_balance: 30.11
   created_by: thomas.id
   updated_by: thomas.id
+  hidden: false
   users: thomas
 
 livret_a:
@@ -24,6 +25,7 @@ livret_a:
   initial_balance: 10
   created_by: thomas.id
   updated_by: thomas.id
+  hidden: false
   users: thomas
 
 ldd_thomas:
@@ -31,6 +33,15 @@ ldd_thomas:
   initial_balance: 15
   created_by: thomas.id
   updated_by: thomas.id
+  hidden: false
+  users: thomas
+
+hidden_thomas:
+  name: Livret has-been
+  initial_balance: 100000
+  created_by: thomas.id
+  updated_by: thomas.id
+  hidden: true
   users: thomas
 
 courant_emilie:
@@ -38,6 +49,7 @@ courant_emilie:
   initial_balance: 9.02
   created_by: emilie.id
   updated_by: emilie.id
+  hidden: false
   users: emilie
 
 ldd_emilie:
@@ -45,6 +57,7 @@ ldd_emilie:
   initial_balance: 15
   created_by: emilie.id
   updated_by: emilie.id
+  hidden: false
   users: emilie
 
 compte_commun:
@@ -52,4 +65,5 @@ compte_commun:
   initial_balance: 0
   created_by: thomas.id
   updated_by: emilie.id
+  hidden: false
   users: thomas, emilie

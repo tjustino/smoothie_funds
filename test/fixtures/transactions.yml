@@ -176,6 +176,21 @@ epargne_ldd_thomas_1:
   updated_by: thomas.id
   schedule_id:
 
+##########################
+# thomas / hidden_thomas #
+##########################
+## foo_hidden_thomas
+foo_hidden_thomas_1:
+  account: hidden_thomas
+  category: foo_hidden_thomas
+  date: <%= DateTime.now %>
+  amount: -1
+  checked: true
+  comment: ouch!
+  created_by: thomas.id
+  updated_by: thomas.id
+  schedule_id:
+
 ###########################
 # emilie / courant_emilie #
 ###########################

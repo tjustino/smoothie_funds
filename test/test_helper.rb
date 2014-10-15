@@ -13,7 +13,7 @@ class ActiveSupport::TestCase
   def setup
     session[:user_id] = users(:thomas).id if defined? session
     @user = users(:thomas)
-    @accounts   = @user.accounts
+    @accounts = @user.accounts
   end
 
   def logout
