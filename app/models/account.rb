@@ -18,19 +18,21 @@ class Account < ActiveRecord::Base
   has_many                  :transactions,  dependent: :restrict_with_error
   has_many                  :schedules,     dependent: :delete_all
 
+  scope :order_by_name, -> { order(name: :asc) }
+  scope :active,        -> { where(hidden: false) }
+
   before_validation         :format_initial_balance
 
   validates_presence_of     :name, :initial_balance
   validates_numericality_of :initial_balance
   #TODO validates_uniqueness_of   :name, scope: user_id
 
-  scope :order_by_name, -> { order(name: :asc) }
-  scope :active,        -> { where(hidden: false) }
-
 
   private ######################################################################
 
     def format_initial_balance
-      self.initial_balance = initial_balance_before_type_cast.gsub(' ', '').gsub(',', '.')
+      if self.initial_balance?
+        self.initial_balance = initial_balance_before_type_cast.to_s.gsub(' ', '').gsub(',', '.')
+      end
     end
 end
