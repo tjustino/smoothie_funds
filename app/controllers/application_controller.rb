@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :authorize, :set_current_user, :set_current_accounts
-  #account OK
 
   private
     def current_user
