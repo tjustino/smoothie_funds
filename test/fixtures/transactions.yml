@@ -126,10 +126,10 @@ essence_courant_thomas_1:
 #####################
 # thomas / livret_a #
 #####################
-## prime
-prime_1:
+## prime_livret_a
+prime_livret_a_1:
   account: livret_a
-  category: prime
+  category: prime_livret_a
   date: <%= 3.months.ago %>
   amount: 5000
   checked: true

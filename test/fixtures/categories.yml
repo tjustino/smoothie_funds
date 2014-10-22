@@ -46,7 +46,7 @@ essence_courant_thomas:
   updated_by: thomas.id
 
 ## livret_a
-prime:
+prime_livret_a:
   name: Prime
   account: livret_a
   created_by: thomas.id
