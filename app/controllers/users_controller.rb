@@ -1,63 +1,61 @@
 class UsersController < ApplicationController
   skip_before_action :authorize, :set_current_user, :set_current_accounts, only: [:new, :create]
-  before_action :check_good_user_id, only: [:edit, :update, :destroy]
-  before_action :set_user, only: [:edit, :update, :destroy]
 
   # GET /users/new
   def new
-    @user = User.new
+    build_user
   end
 
   # GET /users/1/edit
   def edit
+    load_user
+    #build_user
   end
 
   # POST /users
   def create
-    @user = User.new(user_params)
-
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to login_url, notice: t('.successfully_created') }
-      else
-        format.html { render action: 'new' }
-      end
-    end
+    build_user
+    save_created_user t('.successfully_created')
   end
 
   # PATCH/PUT /users/1
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to edit_user_url, notice: t('.successfully_updated') }
-      else
-        format.html { render action: 'edit' }
-      end
-    end
+    load_user
+    build_user
+    save_updated_user t('.successfully_updated')
   end
 
   # DELETE /users/1
   def destroy
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url }
-    end
+    #TODO how to delete an account?
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:email, :name, :password, :password_confirmation)
-    end
+  private ######################################################################
 
-    def check_good_user_id
+    def load_user
       unless session[:user_id].to_i == params[:id].to_i
         redirect_to edit_user_url(session[:user_id])
+      else
+        @user ||= User.find(params[:id])
       end
+    end
+
+    def build_user
+      @user ||= User.new
+      @user.attributes = user_params
+    end
+
+    def user_params
+      user_params = params[:user]
+      user_params ? user_params.permit(:email, :name, :password, :password_confirmation) : {}
+    end
+
+    def save_created_user(notice)
+      @user.save ? redirect_to(login_url, notice: notice) : render('new')
+    end
+
+    def save_updated_user(notice)
+      @user.save ? redirect_to(edit_user_url, notice: notice) : render('edit')
     end
 end
