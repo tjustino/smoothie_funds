@@ -13,6 +13,7 @@ class AccountsController < ApplicationController
   # GET /users/1/accounts/1/edit
   def edit
     load_account
+    #build_account
   end
 
   # POST /users/1/accounts

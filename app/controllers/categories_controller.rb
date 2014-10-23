@@ -14,6 +14,7 @@ class CategoriesController < ApplicationController
   # GET /users/1/accounts/1/categories/1/edit
   def edit
     load_category
+    #build_category
   end
 
   # POST /users/1/accounts/1/categories
