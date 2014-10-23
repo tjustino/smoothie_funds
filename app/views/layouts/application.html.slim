@@ -56,7 +56,7 @@ html
                 = nav_link t('.accounts'), user_accounts_path(@current_user), "book"
 
               ul.nav.navbar-nav.navbar-right
-                = nav_link @current_user.name, edit_user_path(@current_user), "user"
+                = nav_link name_or_email, edit_user_path(@current_user), "user"
                 li = link_to t('.logout'), logout_path, method: :delete
 
       / alerts
