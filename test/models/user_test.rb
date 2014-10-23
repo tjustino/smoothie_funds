@@ -25,7 +25,6 @@ class UserTest < ActiveSupport::TestCase
     user = User.new
     assert user.invalid?
     assert_equal [I18n.translate('activerecord.errors.messages.blank')], user.errors[:email]
-    assert_equal [I18n.translate('activerecord.errors.messages.blank')], user.errors[:name]
   end
 
   test "email must be unique" do
