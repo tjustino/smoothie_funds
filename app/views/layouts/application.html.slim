@@ -20,6 +20,7 @@ html
                 span.icon-bar
                 span.icon-bar
                 span.icon-bar
+            / = link_to image_tag("icon.svg", height: '20', alt: "Smoothie Funds"), dashboard_path, class: "navbar-brand"
             = link_to "Smoothie Funds", dashboard_path, class: "navbar-brand"
 
           - if @current_user
