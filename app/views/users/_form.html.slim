@@ -14,11 +14,6 @@
       = f.email_field :email, class: "form-control", placeholder: t('.email'), autofocus: true
 
   .form-group
-    = f.label :name, t('.name'), class: "col-sm-2 control-label"
-    .col-sm-4
-      = f.text_field :name, class: "form-control", placeholder: t('.name')
-
-  .form-group
     = f.label :password, t('.password'), class: "col-sm-2 control-label"
     .col-sm-4
       = f.password_field :password, class: "form-control", placeholder: t('.password')
@@ -32,4 +27,4 @@
 
   .form-group
     .col-sm-offset-2.col-sm-4
-      = f.submit class: "btn btn-default"
+      = f.submit class: "btn btn-success"
