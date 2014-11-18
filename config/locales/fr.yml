@@ -18,9 +18,9 @@ fr:
       name:             "Nom"
       initial_balance:  "Balance initiale"
       hidden:           "Masqué"
+      back:             "Retour arrière"
     edit:
       edit_account:     "Editer le compte"
-      back:             "Retour arrière"
     index:
       listing_accounts: "Liste des comptes"
       total:            "Total : %{total}"
@@ -32,7 +32,6 @@ fr:
       are_you_sure:     "Etes-vous certain de vouloir supprimer le compte « %{account} » ?"
     new:
       create_account:   "Créer un compte"
-      back:             "Retour arrière"
 
   categories:
     # controllers
@@ -46,9 +45,9 @@ fr:
     # views
     form:
       name:             "Nom"
+      back:             "Retour arrière"
     edit:
       edit_category:    "Editer la catégorie"
-      back:             "Retour arrière"
     index:
       listing_categories: "Liste des catégories du %{current_account}"
       total:            "Total : %{total}"
@@ -61,7 +60,6 @@ fr:
       are_you_sure:     "Etes-vous certain de vouloir supprimer la catégorie « %{category} » ?"
     new:
       create_category:  "Créer la catégorie"
-      back:             "Retour arrière"
 
   dashboard:
     index:
@@ -114,9 +112,9 @@ fr:
       amount:           "Montant"
       checked:          "Rapprochée"
       comment:          "Commentaire"
+      back:             "Retour arrière"
     edit:
       edit_transaction: "Editer la transaction"
-      back:             "Retour arrière"
     index:
       listing_transactions: "Liste des transactions du %{current_account}"
       total:            "Total : %{total}"
@@ -133,7 +131,6 @@ fr:
       check_transaction: "Rapprocher la transaction"
     new:
       create_transaction: "Créer la transaction"
-      back:               "Retour arrière"
 
   schedules:
     # controllers
@@ -154,6 +151,7 @@ fr:
       weeks:              "semaines"
       months:             "mois"
       years:              "ans"
+      back:               "Retour arrière"
     operation_form:
       debit:            "Débit"
       credit:           "Crédit"
@@ -165,7 +163,6 @@ fr:
       comment:          "Commentaire"
     edit:
       edit_schedule:      "Editer l'échéancier"
-      back:               "Retour arrière"
     index:
       listing_schedules:  "Liste des échéanciers du %{current_account}"
       total:              "Total : %{total}"
@@ -186,7 +183,6 @@ fr:
       are_you_sure:       "Etes-vous certain de vouloir supprimer cet échéancier ?"
     new:
       create_schedule:    "Créer l'échéancier"
-      back:               "Retour arrière"
 
   users:
     # controllers
@@ -199,6 +195,7 @@ fr:
       email:                  "Courriel"
       password:               "Mot de passe"
       password_confirmation:  "Confirmation"
+      back:                   "Retour arrière"
     edit:
       edit_user:  "Edition de l'utilisateur courant"
       title_bug:  "Support"
@@ -209,7 +206,6 @@ fr:
         (en anglais ou français uniquement, merci !)
     new:
       create_user:  "Créer un nouvel utilisateur"
-      back:         "Retour arrière"
 
   helpers:
     submit:

@@ -32,4 +32,13 @@
 
   .form-group
     .col-sm-offset-2.col-sm-8
-      = f.submit class: "btn btn-success"
+      .btn-toolbar
+        = f.submit class: "btn btn-primary"
+        - if params[:action] == "new"
+          = link_to (fa_icon "reply", text: t('.back')), \
+                    user_account_schedules_path(@current_user, @current_account), \
+                    class: "btn btn-default"
+        - elsif params[:action] == "edit"
+          = link_to (fa_icon "reply", text: t('.back')), \
+                    user_account_schedules_path, \
+                    class: "btn btn-default"

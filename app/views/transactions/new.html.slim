@@ -2,7 +2,3 @@
   h2 = t('.create_transaction')
 
 = render 'form'
-
-= link_to (fa_icon "reply", text: t('.back')), \
-              user_account_transactions_path(@current_user, @current_account), \
-              class: "btn btn-primary"
