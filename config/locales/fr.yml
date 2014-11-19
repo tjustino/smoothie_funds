@@ -193,6 +193,7 @@ fr:
     # views
     form:
       email:                  "Courriel"
+      name:                   "Nom"
       password:               "Mot de passe"
       password_confirmation:  "Confirmation"
       back:                   "Retour arrière"
