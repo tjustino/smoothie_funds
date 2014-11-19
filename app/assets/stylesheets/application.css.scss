@@ -21,6 +21,10 @@
 //  background-color: #FBF7EF;
 //}
 
+td {
+  white-space: nowrap;
+}
+
 .debug_dump {
   position: fixed;
   bottom: 0;
