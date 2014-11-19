@@ -118,7 +118,7 @@ fr:
     index:
       listing_transactions: "Liste des transactions du %{current_account}"
       total:            "Total : %{total}"
-      sum_checked:      "Somme des montants rappochés : %{sum_checked}"
+      sum_checked:      "Somme des montants rappochés : "
       new_transaction:  "Nouvelle transaction"
       date:             "Date"
       category:         "Catégorie"

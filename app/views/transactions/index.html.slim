@@ -1,7 +1,9 @@
 h1 = t('.listing_transactions', current_account: @current_account.name)
 p.pull-right.label.label-info = t('.total', total: @twb.count)
 
-p.text-muted = t('.sum_checked', sum_checked: number_to_currency(@sum_checked))
+p
+  span.text-muted = t('.sum_checked', sum_checked: number_to_currency(@sum_checked))
+  span.text-muted.nowrap = number_to_currency(@sum_checked)
 
 h3 = link_to (fa_icon "plus-circle", text: t('.new_transaction')), \
                 new_user_account_transaction_path, class: "btn btn-primary", \
