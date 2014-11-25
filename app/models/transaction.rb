@@ -36,7 +36,7 @@ class Transaction < ActiveRecord::Base
   private ######################################################################
 
     def format_amount
-      if not amount.blank?
+      if amount.present?
         self.amount = amount_before_type_cast.to_s.gsub(' ', '').gsub(',', '.')
       end
     end
