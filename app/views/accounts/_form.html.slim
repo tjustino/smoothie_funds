@@ -16,7 +16,9 @@
   .form-group
     = f.label :initial_balance, t('.initial_balance'), class: "col-sm-2 control-label"
     .col-sm-4
-      = f.text_field :initial_balance, class: "form-control", placeholder: t('.initial_balance')
+      .input-group
+        = f.text_field :initial_balance, class: "form-control", placeholder: t('.initial_balance')
+        span.input-group-addon = t('number.currency.format.unit')
 
   .form-group
     .col-sm-offset-2.col-sm-2
