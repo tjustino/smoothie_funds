@@ -17,14 +17,27 @@
 #
 
 class Transaction < ActiveRecord::Base
-  # TODO created_by and updated_by should be supported by the model
-
   attr_accessor :balance
 
   belongs_to  :account
   belongs_to  :category
   belongs_to  :schedule
 
+  scope :order_by_date_and_id,  -> { order(date: :asc, id: :asc) }
+  scope :active,                -> { where(schedule_id: nil) }
+  scope :checked,               -> { where(checked: true) }
+
+  before_validation         :format_amount
+
   validates_presence_of     :account_id, :category_id, :date, :amount
   validates_numericality_of :amount
+
+
+  private ######################################################################
+
+    def format_amount
+      if not amount.blank?
+        self.amount = amount_before_type_cast.to_s.gsub(' ', '').gsub(',', '.')
+      end
+    end
 end
