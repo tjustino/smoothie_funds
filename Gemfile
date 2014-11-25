@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 # ~> 2.1 is identical to >= 2.1 and < 3.0
 # ~> 2.2.beta will match prerelease versions like 2.2.beta.12
 
-gem 'rails', '4.1.6'
+gem 'rails', '4.1.8'
 
 gem 'pg'                        # Use postgresql as the database for Active Record
 gem 'sass-rails',   '~> 4.0.3'  # Use SCSS for stylesheets
