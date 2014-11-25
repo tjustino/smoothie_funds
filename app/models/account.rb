@@ -31,7 +31,7 @@ class Account < ActiveRecord::Base
   private ######################################################################
 
     def format_initial_balance
-      # BUG balance_initiale 0,99 -> activerecord.errors.messages.not_a_number
+      # TODO balance_initiale 0,99 -> activerecord.errors.messages.not_a_number
       if self.initial_balance?
         self.initial_balance = initial_balance_before_type_cast.to_s.gsub(' ', '').gsub(',', '.')
       end
