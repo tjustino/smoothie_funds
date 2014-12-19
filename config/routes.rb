@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :users, except: [:index, :show] do
     resources :accounts, except: [:show] do
-      resources :categories,    except: [:show]
+      resources :categories,    except: [:show] { post 'import_from', on: :collection }
       resources :transactions,  except: [:show] { post 'easycheck', on: :member }
       resources :schedules,     except: [:show] { post 'insert', on: :member }
     end

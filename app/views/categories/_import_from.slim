@@ -1,0 +1,20 @@
+.modal.fade#importFrom
+  .modal-dialog
+    .modal-content = form_for(  [@current_user, @current_account], \
+                                method: :import_from, \
+                                url: :import_from_user_account_categories ) do |f|
+
+      .modal-body
+        p = t('.speech').html_safe
+        .form-group
+          = f.label :import_from, t('.import_from'), class: "control-label"
+          = f.collection_select :categories, \
+                                @other_accounts, \
+                                :id, \
+                                :name, \
+                                {}, \
+                                {class: "form-control"}
+
+      .modal-footer
+        button.btn.btn-default type="button" data-dismiss="modal" = t('.close')
+        = f.submit class: "btn btn-primary"

@@ -23,7 +23,9 @@ class ApplicationController < ActionController::Base
     end
 
     def userstamp(obj)
-      obj.update_attribute(:created_by, @current_user.id) if params[:action] == "create"
+      if params[:action] == "create" or params[:action] == "import_from"
+        obj.update_attribute(:created_by, @current_user.id)
+      end
       obj.update_attribute(:updated_by, @current_user.id)
     end
 

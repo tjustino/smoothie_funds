@@ -4,6 +4,7 @@ class CategoriesController < ApplicationController
   # GET /users/1/accounts/1/categories
   def index
     load_categories
+    load_other_accounts
   end
 
   # GET /users/1/accounts/1/categories/new
@@ -41,6 +42,20 @@ class CategoriesController < ApplicationController
     end
   end
 
+  # POST /users/1/accounts/1/categories
+  def import_from
+    load_other_categories
+    @other_categories.each do |other_category|
+      unless current_categories.exists?(name: other_category.name)
+        @category = current_categories.build
+        @category.name = other_category.name
+        save_category(nil)
+      end
+    end
+
+    redirect_to user_account_categories_url, notice: t('.successfully_imported')
+  end
+
 
   private ######################################################################
 
@@ -50,8 +65,16 @@ class CategoriesController < ApplicationController
       @categories ||= current_categories.order_by_name.page(params[:page]).per(20)
     end
 
+    def load_other_accounts
+      @other_accounts = @current_accounts.excluding(@current_account)
+    end
+
     def load_category
       @category ||= current_categories.find(params[:id])
+    end
+
+    def load_other_categories
+      @other_categories ||= @current_accounts.find(params[:account][:categories]).categories
     end
 
     def build_category
@@ -67,7 +90,7 @@ class CategoriesController < ApplicationController
     def save_category(notice)
       if @category.save
         userstamp(@category)
-        redirect_to user_account_categories_url, notice: notice
+        redirect_to( user_account_categories_url, notice: notice ) if notice
       end
     end
 

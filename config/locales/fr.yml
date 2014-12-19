@@ -46,12 +46,21 @@ fr:
     form:
       name:             "Nom"
       back:             "Retour arrière"
+    import_from:
+      import_from:      "Importer les catégories depuis"
+      speech:           |-
+        Avec cet assistant, importez toutes les catégories depuis vos autres comptes !<br />
+        Les catégories déjà existantes seront omises, il n'y aura pas de doublon.<br /><br />
+      close:            "Fermer"
+      import:           "Importer"
+      successfully_imported:  "L'import s'est terminé avec succès (les doublons ont été ignorés)"
     edit:
       edit_category:    "Editer la catégorie"
     index:
       listing_categories: "Liste des catégories du %{current_account}"
       total:            "Total : %{total}"
       new_category:     "Nouvelle catégorie"
+      import_from:      "Importer depuis..."
       name:             "Nom"
       use:              "Utilisation"
       time:             "%{total} fois"

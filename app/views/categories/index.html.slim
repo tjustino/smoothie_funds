@@ -1,8 +1,15 @@
 h1 = t('.listing_categories', current_account: @current_account.name)
 p.pull-right.label.label-info = t('.total', total: @nb_categories)
 
-h3 = link_to (fa_icon "plus-circle", text: t('.new_category')), \
-                        new_user_account_category_path, class: "btn btn-primary"
+h3.btn-toolbar
+  = link_to     (fa_icon "plus-circle", text: t('.new_category')), \
+                new_user_account_category_path, \
+                class: "btn btn-primary"
+  = button_tag  (fa_icon "exchange", text: t('.import_from')), \
+                class: "btn btn-default", \
+                data: { toggle: "modal", target: "#importFrom" }
+
+= render 'import_from'
 
 table.table.table-striped.table-hover
   thead
