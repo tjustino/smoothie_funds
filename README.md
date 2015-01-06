@@ -1,7 +1,7 @@
 Reminder
 =========
 [Linux] sudo systemctl start postgresql  
-[Mac] postgres -D /usr/local/var/postgres
+[Mac] postgres -D /usr/local/var/postgres9.4
 
 rake db:drop ; rake db:create ; rake db:migrate ; rake db:fixtures:load FIXTURES=users,accounts,categories,transactions,schedules
 
