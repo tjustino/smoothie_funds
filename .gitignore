@@ -19,6 +19,7 @@
 #/config/database.yml
 
 # Ignore other unneeded files
+/.capistrano
 *.swp
 *~
 .project
