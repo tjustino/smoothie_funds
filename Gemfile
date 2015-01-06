@@ -5,12 +5,12 @@ source 'https://rubygems.org'
 # ~> 2.1 is identical to >= 2.1 and < 3.0
 # ~> 2.2.beta will match prerelease versions like 2.2.beta.12
 
-gem 'rails', '4.1.8'
+gem 'rails', '4.2.0'
 
 gem 'pg'                        # Use postgresql as the database for Active Record
-gem 'sass-rails',   '~> 4.0.3'  # Use SCSS for stylesheets
+gem 'sass-rails',   '~> 5.0'    # Use SCSS for stylesheets
 gem 'uglifier'                  # Use Uglifier as compressor for JavaScript assets
-gem 'coffee-rails', '~> 4.0.1'  # Use CoffeeScript for .js.coffee assets and views
+gem 'coffee-rails', '~> 4.1.0'  # Use CoffeeScript for .js.coffee assets and views
 gem 'jquery-rails'              # Use jquery as the JavaScript library
 gem 'turbolinks'                # Make following links in web application faster
 gem 'jbuilder',     '~> 2.0'    # Build JSON APIs with ease
@@ -25,11 +25,13 @@ gem 'kaminari'                  # Paginator
 
 group :development do
   gem 'spring'                  # Keep application running in the background
+  gem 'byebug'                  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'web-console', '~> 2.0'   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'annotate'                # Annotates ActiveRecord Models, routes, fixtures, and others based on the database schema
   gem 'rails-erd'               # Automatically generate an entity-relationship diagram (ERD) for Rails models
 
   # Use Capistrano for deployment
-  gem 'capistrano',         '~> 3.2.1'
+  gem 'capistrano',         '~> 3.3.5'
   gem 'capistrano-rails',   '~> 1.1.2'
   gem 'capistrano-bundler', '~> 1.1.3'
   gem 'capistrano-rbenv',   '~> 2.0.2'
