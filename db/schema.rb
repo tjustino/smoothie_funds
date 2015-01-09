@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20141010125321) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "accounts", force: true do |t|
+  create_table "accounts", force: :cascade do |t|
     t.string   "name",                                                    null: false
     t.decimal  "initial_balance", precision: 8, scale: 2,                 null: false
     t.integer  "created_by"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20141010125321) do
     t.boolean  "hidden",                                  default: false
   end
 
-  create_table "accounts_users", id: false, force: true do |t|
+  create_table "accounts_users", id: false, force: :cascade do |t|
     t.integer "account_id", null: false
     t.integer "user_id",    null: false
   end
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20141010125321) do
   add_index "accounts_users", ["account_id"], name: "index_accounts_users_on_account_id", using: :btree
   add_index "accounts_users", ["user_id"], name: "index_accounts_users_on_user_id", using: :btree
 
-  create_table "categories", force: true do |t|
+  create_table "categories", force: :cascade do |t|
     t.integer  "account_id", null: false
     t.string   "name",       null: false
     t.integer  "created_by"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20141010125321) do
   add_index "categories", ["account_id", "name"], name: "index_categories_on_account_id_and_name", unique: true, using: :btree
   add_index "categories", ["account_id"], name: "index_categories_on_account_id", using: :btree
 
-  create_table "schedules", force: true do |t|
+  create_table "schedules", force: :cascade do |t|
     t.integer  "account_id", null: false
     t.date     "next_time",  null: false
     t.integer  "frequency",  null: false
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20141010125321) do
 
   add_index "schedules", ["account_id"], name: "index_schedules_on_account_id", using: :btree
 
-  create_table "transactions", force: true do |t|
+  create_table "transactions", force: :cascade do |t|
     t.integer  "account_id",                          null: false
     t.integer  "category_id",                         null: false
     t.date     "date",                                null: false
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 20141010125321) do
   add_index "transactions", ["category_id"], name: "index_transactions_on_category_id", using: :btree
   add_index "transactions", ["schedule_id"], name: "index_transactions_on_schedule_id", using: :btree
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email",           null: false
     t.string   "name",            null: false
     t.string   "password_digest"
