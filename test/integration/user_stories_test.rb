@@ -24,9 +24,7 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     assert_template "sessions/new"
-    assert_select ".alert-success", 
-                  CGI.escapeHTML(I18n.translate('users.create.successfully_created'))
-                  # hack
+    assert_select ".alert-success", I18n.translate('users.create.successfully_created')
 
     # login with this user
     post "/login", email: email, password: password
