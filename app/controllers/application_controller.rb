@@ -53,8 +53,8 @@ class ApplicationController < ActionController::Base
 
       if user_connected?
         redirect_to dashboard_url unless (  dashboard_url? or 
-                                            good_user_no_account or
-                                            good_user_good_account )
+                                            good_user_no_account? or
+                                            good_user_good_account? )
       else
         redirect_to login_url unless ( users_new? or users_create? )
       end
@@ -76,12 +76,12 @@ class ApplicationController < ActionController::Base
       params[:controller] == "dashboard"
     end
 
-    def good_user_no_account
+    def good_user_no_account?
       ( params[:user_id].to_s == @current_user.id.to_s and params[:account_id].blank? ) or
       ( params[:id].to_s == @current_user.id.to_s and params[:controller] == "users" )
     end
 
-    def good_user_good_account
+    def good_user_good_account?
       ( params[:user_id].to_s == @current_user.id.to_s if not params[:account_id].blank? ) and
       ( @current_accounts.ids.to_s.include?(params[:account_id].to_s) if not params[:account_id].blank? )
     end
