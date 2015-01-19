@@ -6,7 +6,7 @@
 #  account_id :integer          not null
 #  next_time  :date             not null
 #  frequency  :integer          not null
-#  period     :string(255)      not null
+#  period     :string           not null
 #  created_by :integer
 #  updated_by :integer
 #  created_at :datetime

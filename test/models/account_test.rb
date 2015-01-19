@@ -3,13 +3,13 @@
 # Table name: accounts
 #
 #  id              :integer          not null, primary key
-#  name            :string(255)      not null
+#  name            :string           not null
 #  initial_balance :decimal(8, 2)    not null
 #  created_by      :integer
 #  updated_by      :integer
 #  created_at      :datetime
 #  updated_at      :datetime
-#  hidden          :boolean          default(FALSE)
+#  hidden          :boolean          default("false")
 #
 
 require 'test_helper'
