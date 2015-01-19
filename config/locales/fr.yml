@@ -196,7 +196,7 @@ fr:
   users:
     # controllers
     create:
-      successfully_created: "L'utilisateur a bien été créé"
+      successfully_created: "L'utilisateur a bien été créé. Vous pouvez vous connecter !"
     update:
       successfully_updated: "L'utilisateur a bien été mis à jour"
     # views
