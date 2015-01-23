@@ -22,6 +22,8 @@ class Schedule < ActiveRecord::Base
 
   belongs_to :account
 
+  scope :order_by_next_time_and_id, -> { order(next_time: :asc, id: :asc) }
+
   validates_presence_of     :account_id, :next_time, :frequency, :period, :operation
   validates_numericality_of :frequency
 
