@@ -1,113 +1,116 @@
 class SchedulesController < ApplicationController
-  before_action :set_schedule, only: [:edit, :update, :destroy, :insert]
   before_action :set_current_account
 
   # GET /users/1/accounts/1/schedules
   def index
-    @schedules = @current_account.schedules.order(next_time: :asc, id: :asc)
+    load_schedules
   end
 
   # GET /users/1/accounts/1/schedules/new
   def new
-    @schedule = Schedule.new
+    build_schedule
     @schedule.build_operation
     @sign = "debit"
   end
 
   # GET /users/1/accounts/1/schedules/1/edit
   def edit
+    load_schedule
+    #build_schedule
+
     @schedule.operation.amount < 0 ? @sign = "debit" : @sign = "credit"
     @schedule.operation.amount = @schedule.operation.amount.abs
   end
 
   # POST /users/1/accounts/1/schedules
   def create
-    @schedule = Schedule.new(schedule_params)
+    build_schedule
 
-    @schedule.account     = @current_account
-    @schedule.created_by  = @current_user.id
-    @schedule.updated_by  = @current_user.id
-
+    #TODO could be refactored with update?
+    @schedule.account = @current_account
     @schedule.operation.account = @current_account
 
-    if params[:sign] == "credit"
-      @schedule.operation.amount = @schedule.operation.amount.abs if not @schedule.operation.amount.blank?
-    else
-      @schedule.operation.amount = -1 * @schedule.operation.amount.abs if not @schedule.operation.amount.blank?
-    end
-
-    respond_to do |format|
-      if @schedule.save
-        format.html { redirect_to user_account_schedules_url, notice: t('.successfully_created') }
-      else
-        format.html { render :new }
-      end
-    end
+    save_schedule( t('.successfully_created') ) or render 'new'
   end
 
   # PATCH/PUT /users/1/accounts/1/schedules/1
   def update
-    t_params = schedule_params
+    load_schedule
+    build_schedule
 
-    if params[:sign] == "credit"
-      t_params[:operation_attributes][:amount] = t_params[:operation_attributes][:amount].to_f.abs if not t_params[:operation_attributes][:amount].blank?
-    else
-      t_params[:operation_attributes][:amount] = -1 * t_params[:operation_attributes][:amount].to_f.abs if not t_params[:operation_attributes][:amount].blank?
-    end
+    #TODO could be refactored with create?
+    @schedule.account = @current_account
+    @schedule.operation.account = @current_account
 
-    t_params[:operation_attributes][:date]    = t_params[:next_time]
-    t_params[:operation_attributes][:account] = @current_account
-
-    respond_to do |format|
-      if @schedule.update(t_params)
-        format.html { redirect_to user_account_schedules_url, notice: t('.successfully_updated') }
-      else
-        format.html { render :edit }
-      end
-    end
+    save_schedule( t('.successfully_updated') ) or render 'edit'
   end
 
   # DELETE /users/1/accounts/1/schedules/1
   def destroy
-    @schedule.destroy
-    respond_to do |format|
-      format.html { redirect_to user_account_schedules_url, notice: t('.successfully_destroyed') }
+    load_schedule
+    if @schedule.destroy
+      redirect_to user_account_schedules_url, notice: t('.successfully_destroyed')
+    else
+      flash[:warning] = t('.cant_destroy')
+      redirect_to user_account_schedules_url
     end
   end
 
   # POST /users/1/accounts/1/schedules/1/insert
   def insert
+    #TODO to be refactored
+    load_schedule
+
     transaction = @schedule.operation.dup
-    transaction.created_by  = @current_user.id
-    transaction.updated_by  = @current_user.id
     transaction.schedule_id = nil
+    userstamp(transaction)
+    transaction.created_by  = @current_user.id
 
     @schedule.next_time  = @schedule.next_time.advance(@schedule.period.to_sym => @schedule.frequency)
-    @schedule.updated_by = @current_user.id
+    userstamp(@schedule)
 
     transaction.save
     @schedule.save
 
-    respond_to do |format|
-      format.html { redirect_to user_account_schedules_url, notice: t('.successfully_inserted') }
-    end
+    redirect_to user_account_schedules_url, notice: t('.successfully_inserted')
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_schedule
-      @schedule = Schedule.find(params[:id])
+  private ######################################################################
+
+    def load_schedules
+      #TODO remove kaminari
+      @nb_schedules = current_schedules.count
+      @schedules ||= current_schedules.order_by_next_time_and_id.page(params[:page]).per(20)
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    def load_schedule
+      @schedule ||= current_schedules.find(params[:id])
+    end
+
+    def build_schedule
+      @schedule ||= current_schedules.build
+      @schedule.attributes = schedule_params
+    end
+
     def schedule_params
-      params.require(:schedule).permit( :account_id,
-                                        :next_time,
-                                        :frequency,
-                                        :period,
-                                        operation_attributes: [ :amount,
-                                                                :category_id,
-                                                                :comment,
-                                                                :checked ])
+      schedule_params = params[:schedule]
+      schedule_params ? schedule_params.permit(:account_id, :next_time, :frequency, :period, operation_attributes: [:amount, :category_id, :comment, :checked]) : {}
+    end
+
+    def save_schedule(notice)
+      if @schedule.save
+        if params[:sign] == "credit"
+          @schedule.operation.amount = @schedule.operation.amount.abs if not @schedule.operation.amount.blank?
+        else
+          @schedule.operation.amount = -1 * @schedule.operation.amount.abs if not @schedule.operation.amount.blank?
+        end
+
+        userstamp(@schedule)
+        redirect_to( user_account_schedules_url, notice: notice ) if notice
+      end
+    end
+
+    def current_schedules
+      @current_account.schedules
     end
 end
