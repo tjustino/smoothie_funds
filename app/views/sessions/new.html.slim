@@ -19,4 +19,5 @@
       = submit_tag t('.login'), class: "btn btn-primary"
 
 list-group
-  = link_to t('.create_user'), new_user_path, class: "list-group-item list-group-item-info pull-right"
+  = link_to (fa_icon "user-plus", text: t('.create_user')), new_user_path, \
+                        class: "list-group-item list-group-item-info pull-right"
