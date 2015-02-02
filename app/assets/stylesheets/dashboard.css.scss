@@ -1,0 +1,16 @@
+.list-special .list-group-item:first-child {
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  border-top: 0px;
+}
+
+.list-special .list-group-item:last-child {
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-bottom: 0px;
+}
+
+.list-special .list-group-item {
+  border-right: 0px;
+  border-left: 0px;
+}
