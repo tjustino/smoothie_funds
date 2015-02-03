@@ -72,11 +72,17 @@ fr:
 
   dashboard:
     index:
-      dashboard:    "Tableaux de bord <small>sur les 30 derniers jours</small>"
-      gain:         "Gains : %{number}"
-      expenditure:  "Dépenses : %{number}"
-      more_expenditure_than_gain: "Plus de dépenses que de gains !"
-      more_gain_than_expenditure: "Que du gain, nickel !"
+      dashboard:            "Tableaux de bord"
+      transaction_summary:  "Synthèse des transactions"
+      current_balance:      "Balance actuelle :"
+      future_balance:       "Balance future :"
+      upcoming_terms:       "Échéances des 10 prochains jours"
+      next_time:            "Prochaine échéance"
+      category:             "Catégorie"
+      amount:               "Montant"
+      insert_schedule:      "Insérer la prochaine échéance dans les transactions"
+      no_terms:             "Aucune échéance"
+      no_transactions:      "Aucune transaction"
 
   layouts:
     # views

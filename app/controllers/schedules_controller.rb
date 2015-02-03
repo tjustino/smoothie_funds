@@ -72,7 +72,7 @@ class SchedulesController < ApplicationController
     transaction.save
     @schedule.save
 
-    redirect_to user_account_schedules_url, notice: t('.successfully_inserted')
+    redirect_to :back, notice: t('.successfully_inserted')
   end
 
   private ######################################################################

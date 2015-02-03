@@ -1,14 +1,25 @@
 class DashboardController < ApplicationController
+
+  # GET /
   def index
-    @sum_credits  = Hash.new
-    @sum_debits   = Hash.new
-
-    today = Time.now.end_of_day.to_formatted_s(:db)
-    past_days = Time.now.months_ago(1).beginning_of_day.to_formatted_s(:db)
-
-    @current_accounts.each do |account|
-      @sum_credits[account.id] = account.transactions.where(["amount > 0 and date >= ? and date <= ?", past_days, today]).sum(:amount)
-      @sum_debits[account.id]  = account.transactions.where(["amount < 0 and date >= ? and date <= ?", past_days, today]).sum(:amount)
-    end
+    load_transactions
+    load_current_transactions
+    load_schedules
   end
+
+  private ######################################################################
+
+    def load_transactions
+      @transactions = Transaction.active.where(account_id: @current_accounts.ids)
+    end
+
+    def load_current_transactions
+      @current_transactions = @transactions.where("date <= ?", Time.now)
+    end
+
+    def load_schedules
+      @schedules = Schedule.where(account_id: @current_accounts.ids)
+                            .where("next_time <= ?", Time.now.midnight + 10.days)
+                            .order(next_time: :asc, id: :asc)
+    end
 end

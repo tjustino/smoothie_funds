@@ -1,24 +1,79 @@
 .page-header
-  h1 = t('.dashboard').html_safe
+  h1 = t('.dashboard')
 
-- @current_accounts.each do |account|
-  .panel.panel-info
-    .panel-heading
-      h3.panel-title = account.name
-    .panel-body
-      p = t('.gain', number: number_to_currency(@sum_credits[account.id]))
-      p = t('.expenditure', number: number_to_currency(@sum_debits[account.id]))
-      .progress.progress-striped
-        - if @sum_credits[account.id] == 0 && @sum_debits[account.id] == 0
-          .progress-bar.progress-bar-success style="width: 0%;"
-        - elsif @sum_credits[account.id] == 0 || \
-                @sum_credits[account.id] < @sum_debits[account.id].abs
-          .progress-bar.progress-bar-danger style="width: 100%;"
-            span = t('.more_expenditure_than_gain')
-        - elsif @sum_debits[account.id] == 0
-          .progress-bar.progress-bar-success style="width: 100%;"
-            span = t('.more_gain_than_expenditure')
-        - elsif @sum_credits[account.id] >= @sum_debits[account.id].abs
-          .progress-bar.progress-bar-danger style="width: #{debit_percent(account)}%;"
-            span = t('.expenditure', number: number_to_percentage(debit_percent(account), precision: 0))
-          .progress-bar.progress-bar-success style="width: #{credit_percent(account)}%;"
+.row
+  .col-md-6
+    .panel.panel-info
+      .panel-heading
+        h3.panel-title = t('.transaction_summary')
+      .panel-body
+        - if @transactions.any?
+          .list-group.list-special
+            - @current_accounts.each do |account|
+              a.list-group-item href="#{user_account_transactions_path(@current_user, account)}"
+                h4.list-group-item-heading = account.name
+                dl.dl-horizontal.list-group-item-text
+                  dt = t('.current_balance')
+                  dd = "#{current_balance(account)} au #{current_date(account)}"
+                  - if future_transactions?(account)
+                    dt style=("color: gray;")
+                      = t('.future_balance')
+                    dd style=("color: gray;")
+                      = "#{future_balance(account)} au #{future_date(account)}"
+        - else
+          p = t('.no_transactions')
+
+  .col-md-6
+    .panel.panel-info
+      .panel-heading
+        h3.panel-title = t('.upcoming_terms')
+      .panel-body
+        - if @schedules.any?
+          table.table.table-striped.table-hover
+            thead
+              tr
+                th
+                th = t('.next_time')
+                th = t('.category')
+                th = t('.amount')
+            tbody
+              - @schedules.each do |schedule|
+                tr title="#{schedule.account.name}"
+                  td = link_to fa_icon("magic"), \
+                          insert_user_account_schedule_path(@current_user, \
+                                                            schedule.account, \
+                                                            schedule), \
+                          method: :insert, title: t('.insert_schedule')
+                  td = l(schedule.next_time)
+                  td = schedule.operation.category.name
+                  td = number_to_currency(schedule.operation.amount)
+        - else
+          p = t('.no_terms')
+
+/ - if @transactions.any?
+/   .row
+/     #dashboard-carousel.carousel.slide data-ride="carousel"
+/       / Indicators
+/       ol.carousel-indicators
+/         li.active data-target="#dashboard-carousel" data-slide-to="0"
+/         li data-target="#dashboard-carousel" data-slide-to="1"
+/         li data-target="#dashboard-carousel" data-slide-to="2"
+
+/       / Wrapper for slides
+/       .carousel-inner role="listbox"
+/         - @current_accounts.each_with_index do |account, index|
+/           .item class="#{index == 0 ? 'active' : nil}"
+/             canvas id="chart-area-#{account.id}" height="80"
+/             .carousel-caption
+/               h3 = account.name
+
+/       / Controls
+/       a.left.carousel-control href="#dashboard-carousel" role="button" data-slide="prev"
+/         span.icon-prev aria-hidden="true"
+/           /i.fa.fa-chevron-circle-left
+/         span.sr-only Previous
+
+/       a.right.carousel-control href="#dashboard-carousel" role="button" data-slide="next"
+/         span.icon-next aria-hidden="true"
+/           /i.fa.fa-chevron-circle-right
+/         span.sr-only Next

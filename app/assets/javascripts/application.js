@@ -15,7 +15,7 @@
 //= require bootstrap/collapse
 //= require bootstrap/dropdown
 //= require bootstrap/alert
-// require bootstrap/button
 //= require bootstrap/modal
+// require bootstrap/carousel
 //= require turbolinks
 //= require_tree .
