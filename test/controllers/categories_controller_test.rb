@@ -35,7 +35,7 @@ class CategoriesControllerTest < ActionController::TestCase
       #assert_difference('Category.count') do
         post :create, user_id:    @user,
                       account_id: account,
-                      category: { name: "New Category" }
+                      category: { name: "My Category" }
 
         assert_redirected_to user_account_categories_path
       #end

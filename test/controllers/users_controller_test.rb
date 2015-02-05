@@ -16,7 +16,7 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should get edit only for current user" do
     get :edit, id: wrong_user
-    assert_redirected_to edit_user_url(@user)
+    assert_redirected_to dashboard_url
   end
 
   # POST /users

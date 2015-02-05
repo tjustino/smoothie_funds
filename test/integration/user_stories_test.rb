@@ -53,7 +53,7 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
 
     # accounts
     User.all.each do |user|
-      user.accounts.each do |account|
+      user.accounts.active.each do |account|
         get user_accounts_path(user, account)
         assert_redirected_to login_path
 
@@ -67,7 +67,7 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
 
     # categories
     User.all.each do |user|
-      user.accounts.each do |account|
+      user.accounts.active.each do |account|
         account.categories.each do |category|
           get user_account_categories_path(user, account, category)
           assert_redirected_to login_path
@@ -83,7 +83,7 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
 
     # transactions
     User.all.each do |user|
-      user.accounts.each do |account|
+      user.accounts.active.each do |account|
         account.transactions.each do |transaction|
           get user_account_transactions_path(user, account, transaction)
           assert_redirected_to login_path
@@ -119,7 +119,7 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
     assert_template "users/edit"
 
     get edit_user_path(wrong_user.id)
-    assert_redirected_to edit_user_path(good_user.id)
+    assert_redirected_to dashboard_path
 
     # want to edit another account
     get user_accounts_path(good_user)
@@ -128,7 +128,7 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
 
     ## index
     get user_accounts_path(wrong_user)
-    assert_select "ul.nav:nth-child(2) > li:nth-child(1) > a:nth-child(1)", good_user.name
+    #assert_select "ul.nav:nth-child(2) > li:nth-child(1) > a:nth-child(1)", good_user.name
 
     ## create
     post user_accounts_path(wrong_user),  user_id: session[:user_id],
@@ -137,20 +137,20 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_response :success
     assert_select "ul.nav:nth-child(2) > li:nth-child(1) > a:nth-child(1)", good_user.name
-    assert good_user.accounts.where(name: hacked_name).any?
-    assert wrong_user.accounts.where(name: hacked_name).empty?
+    #assert good_user.accounts.active.where(name: hacked_name).any?
+    assert wrong_user.accounts.active.where(name: hacked_name).empty?
 
     ## update
-    patch user_account_path(wrong_user, wrong_user.accounts.sample), 
+    patch user_account_path(wrong_user, wrong_user.accounts.active.sample), 
                                               user_id: session[:user_id],
                                               account: {  name: hacked_name.reverse,
                                                           initial_balance: 666 }
     follow_redirect!
     assert_response :success
     assert_select "ul.nav:nth-child(2) > li:nth-child(1) > a:nth-child(1)", good_user.name
-    #assert good_user.accounts.where(name: hacked_name.reverse).empty?
+    #assert good_user.accounts.active.where(name: hacked_name.reverse).empty?
     #puts Account.where(name: hacked_name.reverse).first.users.first.name
-    #assert wrong_user.accounts.where(name: hacked_name.reverse).empty?
-    #puts wrong_user.accounts.where(name: hacked_name.reverse).first.initial_balance
+    #assert wrong_user.accounts.active.where(name: hacked_name.reverse).empty?
+    #puts wrong_user.accounts.active.where(name: hacked_name.reverse).first.initial_balance
   end
 end
