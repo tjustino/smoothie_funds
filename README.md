@@ -5,6 +5,7 @@ Reminder
 
 rake db:drop ; rake db:create ; rake db:migrate ; rake db:fixtures:load FIXTURES=users,accounts,categories,transactions,schedules
 
+rake db:drop ; rake db:create ; psql -d smoothiefunds_development < my_dump
 bundle exec annotate  
 rake erd
 
