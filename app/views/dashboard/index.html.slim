@@ -13,13 +13,17 @@
               a.list-group-item href="#{user_account_transactions_path(@current_user, account)}"
                 h4.list-group-item-heading = account.name
                 dl.dl-horizontal.list-group-item-text
-                  dt = t('.current_balance')
-                  dd = "#{current_balance(account)} au #{current_date(account)}"
-                  - if future_transactions?(account)
-                    dt style=("color: gray;")
-                      = t('.future_balance')
-                    dd style=("color: gray;")
-                      = "#{future_balance(account)} au #{future_date(account)}"
+                  - if account.transactions.any?
+                    dt = t('.current_balance')
+                    dd = "#{current_balance(account)} au #{current_date(account)}"
+                    - if future_transactions?(account)
+                      dt style=("color: gray;")
+                        = t('.future_balance')
+                      dd style=("color: gray;")
+                        = "#{future_balance(account)} au #{future_date(account)}"
+                  - else
+                    dt = t('.no_transactions')
+                    dd
         - else
           p = t('.no_transactions')
 
