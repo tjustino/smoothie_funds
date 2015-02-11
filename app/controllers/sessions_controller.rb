@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_action :authorize, :set_current_user, :set_current_accounts
+  skip_before_action :set_current_user, :set_current_accounts
 
   # GET /sessions/new
   def new
