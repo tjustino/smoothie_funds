@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
     end
 
     def set_current_account
-      @current_account = Account.find(params[:account_id])
+      @current_account = Account.find(params[:account_id]) unless params[:account_id].blank?
     end
 
     def userstamp(obj)
@@ -86,7 +86,11 @@ class ApplicationController < ActionController::Base
     end
 
     def good_user_good_account?
-      ( params[:user_id].to_s == @current_user.id.to_s if not params[:account_id].blank? ) and
-      ( @current_accounts.ids.to_s.include?(params[:account_id].to_s) if not params[:account_id].blank? )
+      unless params[:account_id].blank?
+        ( params[:user_id].to_s == @current_user.id.to_s ) and
+        ( @current_accounts.ids.to_s.include?(params[:account_id].to_s) )
+      else
+        false
+      end
     end
 end

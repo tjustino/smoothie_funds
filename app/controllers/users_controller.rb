@@ -3,7 +3,12 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
-    build_user
+    # authorize don't make the job
+    unless session[:user_id].blank?
+      redirect_to dashboard_url
+    else
+      build_user
+    end
   end
 
   # GET /users/1/edit
@@ -14,8 +19,13 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
-    build_user
-    save_created_user t('.successfully_created')
+    # authorize don't make the job
+    unless session[:user_id].blank?
+      redirect_to dashboard_url
+    else
+      build_user
+      save_created_user t('.successfully_created')      
+    end
   end
 
   # PATCH/PUT /users/1

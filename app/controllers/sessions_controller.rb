@@ -3,6 +3,10 @@ class SessionsController < ApplicationController
 
   # GET /sessions/new
   def new
+    # authorize don't make the job
+    unless session[:user_id].blank?
+      redirect_to dashboard_url
+    end
   end
 
   # POST /sessions
