@@ -239,7 +239,7 @@ class NotLoggedUserTest < ActionDispatch::IntegrationTest
       assert_no_difference 'Transaction.count' do
         post user_account_transactions_path user,
                                             account,
-                                            transaction: {  category_id:  account.categories.shuffle,
+                                            transaction: {  category_id:  account.categories.sample,
                                                             date:         DateTime.now,
                                                             amount:       rand(-500.00..500.00),
                                                             checked:      rand(0..1) == 1 ? true : false,
@@ -253,9 +253,9 @@ class NotLoggedUserTest < ActionDispatch::IntegrationTest
                                           account,
                                           schedule: { next_time:  DateTime.now,
                                                       frequency:  rand(1..10),
-                                                      period:     ["days","weeks","months","years"].shuffle,
+                                                      period:     ["days","weeks","months","years"].sample,
                                                       operation_attributes: { amount:   rand(-500.00..500.00),
-                                                                              category_id: account.categories.shuffle,
+                                                                              category_id: account.categories.sample,
                                                                               comment:  SecureRandom.hex,
                                                                               checked:  rand(0..1) == 1 ? true : false } }
         assert_redirected_to login_url
