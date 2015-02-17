@@ -19,13 +19,8 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
-    # authorize don't make the job
-    unless session[:user_id].blank?
-      redirect_to dashboard_url
-    else
-      build_user
-      save_created_user t('.successfully_created')      
-    end
+    build_user
+    save_created_user t('.successfully_created')      
   end
 
   # PATCH/PUT /users/1
