@@ -49,3 +49,16 @@ from one domain to another, like product_url(domain: "example2.com", product: pr
 The rest of the time, you can happily use product_path. This will generate only 
 the /products/1 part, and that’s all you need when doing links or pointing 
 forms, like link_to "My lovely product", product_path(product).
+
+---
+
+Controllers Tests :
+  was the web request successful?
+  was the user redirected to the right page?
+  was the user successfully authenticated?
+  was the correct object stored in the response template?
+  was the appropriate message displayed to the user in the view?
+
+Integration Testing :
+  Integration tests are used to test the interaction among any number of controllers.
+  They are generally used to test important work flows within your application.
