@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   # POST /users
   def create
     build_user
-    save_created_user t('.successfully_created')      
+    save_created_user t('.successfully_created')
   end
 
   # PATCH/PUT /users/1
