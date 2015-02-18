@@ -39,11 +39,7 @@ class UsersController < ApplicationController
   private ######################################################################
 
     def load_user
-      unless session[:user_id].to_i == params[:id].to_i
-        redirect_to edit_user_url(session[:user_id])
-      else
-        @user ||= User.find(params[:id])
-      end
+      @user ||= User.find(params[:id])
     end
 
     def build_user
