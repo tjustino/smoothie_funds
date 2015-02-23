@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     delete  "logout"  => :destroy
   end
 
+  # TODO Shallow Nesting http://guides.rubyonrails.org/routing.html#nested-resources
   resources :users, except: [:index, :show] do
     resources :accounts, except: [:show] do
       resources :categories,    except: [:show] { post "import_from", on: :collection }
