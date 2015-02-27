@@ -3,8 +3,7 @@ p.pull-right.label.label-info = t('.total', total: @nb_categories)
 
 h3.btn-toolbar
   = link_to     (fa_icon "plus-circle", text: t('.new_category')), \
-                new_user_account_category_path, \
-                class: "btn btn-primary"
+                new_account_category_path, class: "btn btn-primary"
   - if @current_accounts.count > 1
     = button_tag  (fa_icon "exchange", text: t('.import_from')), \
                   class: "btn btn-default", \
@@ -25,10 +24,8 @@ table.table.table-striped.table-hover
       tr
         td = category.name
         td = t('.time', total: category.transactions.count)
-        td = link_to (fa_icon "edit", text: t('.edit')), \
-              edit_user_account_category_path(@current_user, @current_account, category)
-        td = link_to (fa_icon "trash-o", text: t('.destroy')), \
-              user_account_category_path(@current_user, @current_account, category), \
+        td = link_to (fa_icon "edit", text: t('.edit')), edit_category_path(category)
+        td = link_to (fa_icon "trash-o", text: t('.destroy')), category_path(category), \
               method: :delete, data: { confirm: t('.are_you_sure', category: category.name) }
 
 = paginate @categories

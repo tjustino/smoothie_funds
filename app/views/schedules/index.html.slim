@@ -2,7 +2,7 @@ h1 = t('.listing_schedules', current_account: @current_account.name)
 p.pull-right.label.label-info = t('.total', total: @schedules.count)
 
 h3 = link_to (fa_icon "plus-circle", text: t('.new_schedule')), \
-                new_user_account_schedule_path, class: "btn btn-primary", \
+                new_account_schedule_path, class: "btn btn-primary", \
                 data: {no_turbolink: true}
 
 table.table.table-striped.table-hover
@@ -20,7 +20,7 @@ table.table.table-striped.table-hover
     - @schedules.each do |schedule|
       tr
         td = link_to fa_icon("magic"), \
-                insert_user_account_schedule_path(@current_user, @current_account, schedule), \
+                insert_schedule_path(schedule), \
                 method: :insert, title: t('.insert_schedule')
         td = l(schedule.next_time)
         td = t('.frequency_period', frequency: schedule.frequency.to_s, \
@@ -29,8 +29,7 @@ table.table.table-striped.table-hover
         td.text-right = number_to_currency(schedule.operation.amount)
         td = truncate(schedule.operation.comment, length: 30)
         td = link_to (fa_icon "edit", text: t('.edit')), \
-              edit_user_account_schedule_path(@current_user, @current_account, schedule), \
-              data: {no_turbolink: true}
+              edit_schedule_path(schedule), data: {no_turbolink: true}
         td = link_to (fa_icon "trash-o", text: t('.destroy')), \
-              user_account_schedule_path(@current_user, @current_account, schedule), \
+              schedule_path(schedule), \
               method: :delete, data: { confirm: t('.are_you_sure') }

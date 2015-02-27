@@ -1,4 +1,4 @@
-= form_for([@current_user, @account], html: { class: "form-horizontal" }) do |f|
+= form_for(@account, html: { class: "form-horizontal" }) do |f|
   - if @account.errors.any?
     .alert.alert-danger.alert-dismissable
       button.close type="button" data-dismiss="alert" aria-hidden="true"
@@ -32,6 +32,6 @@
       .btn-toolbar
         = f.submit class: "btn btn-primary"
         - if params[:action] == "new"
-          = link_to (fa_icon "reply", text: t('.back')), user_accounts_path, class: "btn btn-default"
+          = link_to (fa_icon "reply", text: t('.back')), accounts_path, class: "btn btn-default"
         - elsif params[:action] == "edit"
-          = link_to (fa_icon "reply", text: t('.back')), user_accounts_path, class: "btn btn-default"
+          = link_to (fa_icon "reply", text: t('.back')), accounts_path, class: "btn btn-default"

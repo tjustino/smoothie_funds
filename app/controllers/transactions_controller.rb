@@ -1,18 +1,18 @@
 class TransactionsController < ApplicationController
   before_action :set_current_account
 
-  # GET /users/1/accounts/1/transactions
+  # GET /accounts/:account_id/transactions
   def index
     load_transactions
   end
 
-  # GET /users/1/accounts/1/transactions/new
+  # GET /accounts/:account_id/transactions/new
   def new
     build_transaction
     @sign = "debit"
   end
 
-  # GET /users/1/accounts/1/transactions/1/edit
+  # GET /transactions/:id/edit
   def edit
     load_transaction
     #build_transaction
@@ -21,31 +21,31 @@ class TransactionsController < ApplicationController
     @transaction.amount = @transaction.amount.abs
   end
 
-  # POST /users/1/accounts/1/transactions
+  # POST /accounts/:account_id/transactions
   def create
     build_transaction
     save_transaction( t('.successfully_created') ) or render 'new'
   end
 
-  # PATCH/PUT /users/1/accounts/1/transactions/1
+  # PATCH/PUT /transactions/:id
   def update
     load_transaction
     build_transaction
     save_transaction( t('.successfully_updated') ) or render 'edit'
   end
 
-  # DELETE /users/1/accounts/1/transactions/1
+  # DELETE /transactions/:id
   def destroy
     load_transaction
     if @transaction.destroy
-      redirect_to user_account_transactions_url, notice: t('.successfully_destroyed')
+      redirect_to account_transactions_url, notice: t('.successfully_destroyed')
     else
       flash[:warning] = t('.cant_destroy')
-      redirect_to user_account_transactions_url
+      redirect_to account_transactions_url
     end
   end
 
-  # POST /users/1/accounts/1/transactions/1/easycheck
+  # POST /transactions/:id/easycheck
   def easycheck
     load_transaction
     @transaction.toggle :checked
@@ -105,7 +105,7 @@ class TransactionsController < ApplicationController
         end
 
         userstamp(@transaction)
-        redirect_to user_account_transactions_url, notice: notice
+        redirect_to account_transactions_url, notice: notice
       end
     end
 

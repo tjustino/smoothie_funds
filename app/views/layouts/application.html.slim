@@ -33,8 +33,7 @@ html
                       = fa_icon "credit-card", text: t('.transactions').html_safe
                     ul.dropdown-menu
                       - @current_accounts.each do |account|
-                        li = link_to account.name, \
-                                user_account_transactions_path(@current_user, account)
+                        li = link_to account.name, account_transactions_path(account)
 
                   / dropdown schedules
                   li.dropdown class=("active" if params[:controller] == "schedules")
@@ -43,7 +42,7 @@ html
                     ul.dropdown-menu
                       - @current_accounts.each do |account|
                         li = link_to account.name, \
-                                user_account_schedules_path(@current_user, account)
+                                account_schedules_path(account)
 
                 / dropdown categories
                 - if @current_accounts.any?
@@ -52,11 +51,10 @@ html
                       = fa_icon "tags", text: t('.categories').html_safe
                     ul.dropdown-menu
                       - @current_accounts.each do |account|
-                        li = link_to account.name, \
-                                user_account_categories_path(@current_user, account)
+                        li = link_to account.name, account_categories_path(account)
 
                 / link accounts
-                = nav_link t('.accounts'), user_accounts_path(@current_user), "book"
+                = nav_link t('.accounts'), accounts_path, "book"
 
               ul.nav.navbar-nav.navbar-right
                 = nav_link name_or_email, edit_user_path(@current_user), "user"
@@ -86,3 +84,5 @@ html
     - if Rails.env.development?
       .container
         = debug(params)
+
+/= console

@@ -2,7 +2,7 @@ h1 = t('.listing_accounts')
 p.pull-right.label.label-info = t('.total', total: @accounts.count)
 
 h3 = link_to (fa_icon "plus-circle", text: t('.new_account')), \
-                                new_user_account_path, class: "btn btn-primary"
+                                new_account_path, class: "btn btn-primary"
 
 table.table.table-striped.table-hover
   thead
@@ -16,9 +16,7 @@ table.table.table-striped.table-hover
       tr style=("color: gray;" if account.hidden == true)
         td = account.name
         td = number_to_currency(account.initial_balance)
-        td = link_to (fa_icon "edit", text: t('.edit')), \
-                                  edit_user_account_path(@current_user, account)
-        td = link_to (fa_icon "trash-o", text: t('.destroy')), \
-                              user_account_path(@current_user, account), \
+        td = link_to (fa_icon "edit", text: t('.edit')), edit_account_path(account)
+        td = link_to (fa_icon "trash-o", text: t('.destroy')), account_path(account), \
                               method: :delete, \
                               data: { confirm: t('.are_you_sure', account: account.name) }

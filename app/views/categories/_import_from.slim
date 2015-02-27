@@ -2,7 +2,7 @@
   .modal-dialog
     .modal-content = form_for(  [@current_user, @current_account], \
                                 method: :import_from, \
-                                url: :import_from_user_account_categories ) do |f|
+                                url: :import_from_account_categories ) do |f|
 
       .modal-body
         p = t('.speech').html_safe

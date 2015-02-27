@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/1/edit
+  # GET /users/:id/edit
   def edit
     load_user
     #build_user
@@ -23,23 +23,23 @@ class UsersController < ApplicationController
     save_created_user t('.successfully_created')
   end
 
-  # PATCH/PUT /users/1
+  # PATCH/PUT /users/:id
   def update
     load_user
     build_user
     save_updated_user t('.successfully_updated')
   end
 
-  # DELETE /users/1
-  def destroy
-    #TODO how to delete an account?
-  end
+  #TODO how to delete an account?
+  # DELETE /users/:id
+  # def destroy
+  # end
 
 
   private ######################################################################
 
     def load_user
-      @user ||= User.find(params[:id])
+      @user ||= @current_user
     end
 
     def build_user

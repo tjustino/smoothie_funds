@@ -10,7 +10,7 @@
         - if @transactions.any?
           .list-group.list-special
             - @current_accounts.each do |account|
-              a.list-group-item href="#{user_account_transactions_path(@current_user, account)}"
+              a.list-group-item href="#{account_transactions_path(account)}"
                 h4.list-group-item-heading = account.name
                 dl.dl-horizontal.list-group-item-text
                   - if account.transactions.any?
@@ -44,9 +44,7 @@
               - @schedules.each do |schedule|
                 tr title="#{schedule.account.name}"
                   td = link_to fa_icon("magic"), \
-                          insert_user_account_schedule_path(@current_user, \
-                                                            schedule.account, \
-                                                            schedule), \
+                          insert_schedule_path(schedule), \
                           method: :insert, title: t('.insert_schedule')
                   td = l(schedule.next_time)
                   td = schedule.operation.category.name

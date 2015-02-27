@@ -1,4 +1,4 @@
-= form_for([@current_user, @current_account, @transaction], html: { class: "form-horizontal" }) do |f|
+= form_for(@transaction, html: { class: "form-horizontal" }) do |f|
   - if @transaction.errors.any?
     .alert.alert-danger.alert-dismissable
       button.close type="button" data-dismiss="alert" aria-hidden="true"
@@ -49,9 +49,9 @@
         = f.submit class: "btn btn-primary"
         - if params[:action] == "new"
           = link_to (fa_icon "reply", text: t('.back')), \
-                    user_account_transactions_path(@current_user, @current_account), \
+                    account_transactions_path(@current_account), \
                     class: "btn btn-default"
         - elsif params[:action] == "edit"
           = link_to (fa_icon "reply", text: t('.back')), \
-                    user_account_transactions_path, \
+                    account_transactions_path(@current_account), \
                     class: "btn btn-default"

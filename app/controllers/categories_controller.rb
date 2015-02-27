@@ -1,48 +1,48 @@
 class CategoriesController < ApplicationController
   before_action :set_current_account
 
-  # GET /users/1/accounts/1/categories
+  # GET /accounts/:account_id/categories
   def index
     load_categories
     load_other_accounts
   end
 
-  # GET /users/1/accounts/1/categories/new
+  # GET /accounts/:account_id/categories/new
   def new
     build_category
   end
 
-  # GET /users/1/accounts/1/categories/1/edit
+  # GET /categories/:id/edit
   def edit
     load_category
     #build_category
   end
 
-  # POST /users/1/accounts/1/categories
+  # POST /accounts/:account_id/categories
   def create
     build_category
     save_category( t('.successfully_created') ) or render 'new'
   end
 
-  # PATCH/PUT /users/1/accounts/1/categories/1
+  # PATCH/PUT /categories/:id
   def update
     load_category
     build_category
     save_category( t('.successfully_updated') ) or render 'edit'
   end
 
-  # DELETE /users/1/accounts/1/categories/1
+  # DELETE /categories/:id
   def destroy
     load_category
     if @category.destroy
-      redirect_to user_account_categories_url, notice: t('.successfully_destroyed')
+      redirect_to account_categories_url, notice: t('.successfully_destroyed')
     else
       flash[:warning] = t('.cant_destroy')
-      redirect_to user_account_categories_url
+      redirect_to account_categories_url
     end
   end
 
-  # POST /users/1/accounts/1/categories
+  # POST /accounts/:account_id/categories/import_from
   def import_from
     load_other_categories
     @other_categories.each do |other_category|
@@ -53,7 +53,7 @@ class CategoriesController < ApplicationController
       end
     end
 
-    redirect_to user_account_categories_url, notice: t('.successfully_imported')
+    redirect_to account_categories_url, notice: t('.successfully_imported')
   end
 
 
@@ -90,7 +90,7 @@ class CategoriesController < ApplicationController
     def save_category(notice)
       if @category.save
         userstamp(@category)
-        redirect_to( user_account_categories_url, notice: notice ) if notice
+        redirect_to( account_categories_url, notice: notice ) if notice
       end
     end
 

@@ -1,4 +1,16 @@
 class ApplicationController < ActionController::Base
+  #                       +-------+-------+-------+-------+-------+----------+
+  #                       | Accou | Categ | Sched | Sessi | Trans | Users    |
+  # +---------------------+-------+-------+-------+-------+-------+----------+
+  # | authorize           |   ✓   |   ✓   |   ✓   |   ✓   |   ✓   | ✓        |
+  # +---------------------+-------+-------+-------+-------+-------+----------+
+  # | set_current_user    |   ✓   |   ✓   |   ✓   |   X   |   ✓   | X n&c, ✓ |
+  # +---------------------+-------+-------+-------+-------+-------+----------+
+  # | set_current_accounts|   ✓   |   ✓   |   ✓   |   X   |   ✓   | X n&c, ✓ |
+  # +=====================+=======+=======+=======+=======+=======+==========+
+  # | set_current_account |       |   ✓   |   ✓   |       |   ✓   |          |
+  # +---------------------+-------+-------+-------+-------+-------+----------+
+
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -7,12 +19,9 @@ class ApplicationController < ActionController::Base
   before_action :set_current_user, :set_current_accounts, :authorize
 
   private
-    def current_user
-      User.find_by(id: session[:user_id])
-    end
 
     def set_current_user
-      @current_user = current_user
+      @current_user = User.find_by(id: session[:user_id])
     end
 
     def set_current_accounts
@@ -20,7 +29,18 @@ class ApplicationController < ActionController::Base
     end
 
     def set_current_account
-      @current_account = Account.find(params[:account_id]) unless params[:account_id].blank?
+      unless params[:account_id].blank?
+        @current_account = Account.find(params[:account_id])
+      else
+        case controller_name
+          when "categories"
+            @current_account = Category.find(params[:id].to_i).account
+          when "transactions"
+            @current_account = Transaction.find(params[:id].to_i).account
+          when "schedules"
+            @current_account = Schedule.find(params[:id].to_i).account
+        end
+      end
     end
 
     def userstamp(obj)
@@ -31,34 +51,10 @@ class ApplicationController < ActionController::Base
     end
 
     def authorize
-      # This method only redirect exceptions
-      #
-      #                                +---------------+---------------+
-      #                                | not connected |   connected   |
-      #  +-----------------------------+---------------+---------------+
-      #  | users#new                   |   good url    | dashboard url |
-      #  +-----------------------------+---------------+---------------+
-      #  | users#create                |   good url    | dashboard url |
-      #  +-----------------------------+---------------+---------------+
-      #  | login url                   |   good url    | dashboard url |
-      #  +-----------------------------+---------------+---------------+
-      #  | good user & good account    |   login url   |   good url    |
-      #  +-----------------------------+---------------+---------------+
-      #  | good user & wrong account   |   login url   | dashboard url |
-      #  +-----------------------------+---------------+---------------+
-      #  | wrong user & wrong account  |   login url   | dashboard url |
-      #  +-----------------------------+---------------+---------------+
-      #  | wrong user & good account   |   login url   | dashboard url |
-      #  +-----------------------------+---------------+---------------+
-
       if user_connected?
-        redirect_to dashboard_url unless (  dashboard_url? or
-                                            good_user_no_account? or
-                                            good_user_good_account? )
+        redirect_to dashboard_url unless granted_urls_logged_user?
       else
-        redirect_to login_url unless (  users_new? or
-                                        users_create? or
-                                        params[:controller] == "sessions" )
+        redirect_to login_url unless granted_urls_not_logged_user?
       end
     end
 
@@ -66,29 +62,52 @@ class ApplicationController < ActionController::Base
       not @current_user.blank?
     end
 
-    def users_new?
-      # users#new
-      params[:controller] == "users" and params[:action] == "new"
+    def controller_action?(controller, action)
+      controller_name == controller and action_name == action
     end
 
-    def users_create?
-      # users#create
-      params[:controller] == "users" and params[:action] == "create"
+    def granted_urls_not_logged_user?
+      controller_action?("users",     "new"   ) or
+      controller_action?("users",     "create") or
+      controller_name == "sessions"
     end
 
-    def dashboard_url?
-      params[:controller] == "dashboard"
+    def granted_urls_logged_user?
+      controller_action?("dashboard", "index"  ) or
+      controller_action?("accounts",  "index"  ) or
+      controller_action?("accounts",  "create" ) or
+      controller_action?("accounts",  "new"    ) or
+      good_account_id?                           or
+      good_id?
     end
 
-    def good_user_no_account?
-      ( params[:user_id].to_s == @current_user.id.to_s and params[:account_id].blank? ) or
-      ( params[:id].to_s == @current_user.id.to_s and params[:controller] == "users" )
-    end
-
-    def good_user_good_account?
+    def good_account_id?
       unless params[:account_id].blank?
-        ( params[:user_id].to_s == @current_user.id.to_s ) and
-        ( @current_accounts.ids.to_s.include?(params[:account_id].to_s) )
+        @current_accounts.ids.include? params[:account_id].to_i
+      else
+        false
+      end
+    end
+
+    def good_id?
+      unless params[:id].blank?
+        ( controller_name == "users" and 
+          params[:id].to_i == @current_user.id ) or
+
+        ( controller_name == "categories" and 
+          Category.where(account_id: @current_accounts).ids
+                                                .include? params[:id].to_i ) or
+
+        ( controller_name == "transactions" and 
+          Transaction.where(account_id: @current_accounts).ids
+                                                .include? params[:id].to_i ) or
+
+        ( controller_name == "schedules" and 
+          Schedule.where(account_id: @current_accounts).ids
+                                                .include? params[:id].to_i ) or
+
+        ( controller_name == "accounts" and 
+          @current_accounts.ids.include? params[:id].to_i )
       else
         false
       end

@@ -1,42 +1,42 @@
 class AccountsController < ApplicationController
 
-  # GET /users/1/accounts
+  # GET /accounts
   def index
     load_accounts
   end
 
-  # GET /users/1/accounts/new
+  # GET /accounts/new
   def new
     build_account
   end
 
-  # GET /users/1/accounts/1/edit
+  # GET /accounts/:id/edit
   def edit
     load_account
     #build_account
   end
 
-  # POST /users/1/accounts
+  # POST /accounts
   def create
     build_account
     save_account( t('.successfully_created') ) or render 'new'
   end
 
-  # PATCH/PUT /users/1/accounts/1
+  # PATCH/PUT /accounts/:id
   def update
     load_account
     build_account
     save_account( t('.successfully_updated') ) or render 'edit'
   end
 
-  # DELETE /users/1/accounts/1
+  # DELETE /accounts/:id
   def destroy
     load_account
     if @account.destroy
-      redirect_to user_accounts_url, notice: t('.successfully_destroyed')
+      redirect_to accounts_url, notice: t('.successfully_destroyed')
     else
       flash[:warning] = t('.cant_destroy')
-      redirect_to user_accounts_url
+      redirect_to accounts_url
     end
   end
 
@@ -65,7 +65,7 @@ class AccountsController < ApplicationController
       if @account.save
         @account.users << @current_user if params[:action] == "create"
         userstamp(@account)
-        redirect_to user_accounts_url, notice: notice
+        redirect_to accounts_url, notice: notice
       end
     end
 

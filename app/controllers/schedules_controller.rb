@@ -1,19 +1,19 @@
 class SchedulesController < ApplicationController
   before_action :set_current_account
 
-  # GET /users/1/accounts/1/schedules
+  # GET /accounts/:account_id/schedules
   def index
     load_schedules
   end
 
-  # GET /users/1/accounts/1/schedules/new
+  # GET /accounts/:account_id/schedules/new
   def new
     build_schedule
     @schedule.build_operation
     @sign = "debit"
   end
 
-  # GET /users/1/accounts/1/schedules/1/edit
+  # GET /schedules/:id/edit
   def edit
     load_schedule
     #build_schedule
@@ -22,7 +22,7 @@ class SchedulesController < ApplicationController
     @schedule.operation.amount = @schedule.operation.amount.abs
   end
 
-  # POST /users/1/accounts/1/schedules
+  # POST /accounts/:account_id/schedules
   def create
     build_schedule
 
@@ -33,7 +33,7 @@ class SchedulesController < ApplicationController
     save_schedule( t('.successfully_created') ) or render 'new'
   end
 
-  # PATCH/PUT /users/1/accounts/1/schedules/1
+  # PATCH/PUT /schedules/:id
   def update
     load_schedule
     build_schedule
@@ -45,18 +45,18 @@ class SchedulesController < ApplicationController
     save_schedule( t('.successfully_updated') ) or render 'edit'
   end
 
-  # DELETE /users/1/accounts/1/schedules/1
+  # DELETE /schedules/:id
   def destroy
     load_schedule
     if @schedule.destroy
-      redirect_to user_account_schedules_url, notice: t('.successfully_destroyed')
+      redirect_to account_schedules_url, notice: t('.successfully_destroyed')
     else
       flash[:warning] = t('.cant_destroy')
-      redirect_to user_account_schedules_url
+      redirect_to account_schedules_url
     end
   end
 
-  # POST /users/1/accounts/1/schedules/1/insert
+  # POST /schedules/:id/insert
   def insert
     #TODO to be refactored
     load_schedule
@@ -106,7 +106,7 @@ class SchedulesController < ApplicationController
         end
 
         userstamp(@schedule)
-        redirect_to( user_account_schedules_url, notice: notice ) if notice
+        redirect_to( account_schedules_url, notice: notice ) if notice
       end
     end
 

@@ -6,7 +6,7 @@ p
   span.text-muted.nowrap = number_to_currency(@sum_checked)
 
 h3 = link_to (fa_icon "plus-circle", text: t('.new_transaction')), \
-                new_user_account_transaction_path, class: "btn btn-primary", \
+                new_account_transaction_path, class: "btn btn-primary", \
                 data: {no_turbolink: true}
 
 table.table.table-striped.table-hover
@@ -26,7 +26,7 @@ table.table.table-striped.table-hover
       tr class=("danger" if transaction.balance < 0) style=("color: gray;" if transaction.date > Date.today)
         td = link_to \
                 transaction.checked ? fa_icon("check-square-o") : fa_icon("square-o"), \
-                easycheck_user_account_transaction_path(@current_user, @current_account, transaction), \
+                easycheck_transaction_path(transaction), \
                 method: :insert, title: t('.check_transaction')
         td = l(transaction.date)
         td = transaction.category.name
@@ -36,11 +36,11 @@ table.table.table-striped.table-hover
         td = truncate(transaction.comment, length: 50)
 
         td = link_to (fa_icon "edit", text: t('.edit')), \
-              edit_user_account_transaction_path(@current_user, @current_account, transaction), \
+              edit_transaction_path(transaction), \
               data: {no_turbolink: true}, \
               title: t('.edit')
         td = link_to (fa_icon "trash-o", text: t('.destroy')), \
-              user_account_transaction_path(@current_user, @current_account, transaction), \
+              transaction_path(transaction), \
               method: :delete, \
               data: { confirm: t('.are_you_sure') }, \
               title: t('.destroy')
