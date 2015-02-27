@@ -26,20 +26,6 @@ MMEX : 3786 opérations du 01/01/2000 au 25/05/2014
 
 ---
 
-                      +-------+-------+-------+-------+-------+----------------+
-                      | Accou | Categ | Sched | Sessi | Trans | Users          |
-+---------------------+-------+-------+-------+-------+-------+----------------+
-| authorize           |   ✓   |   ✓   |   ✓   |   ✓   |   ✓   |   ✓            |
-+---------------------+-------+-------+-------+-------+-------+----------------+
-| set_current_user    |   ✓   |   ✓   |   ✓   |   X   |   ✓   | X new & cre, ✓ |
-+---------------------+-------+-------+-------+-------+-------+----------------+
-| set_current_accounts|   ✓   |   ✓   |   ✓   |   X   |   ✓   | X new & cre, ✓ |
-+=====================+=======+=======+=======+=======+=======+================+
-| set_current_account |       |   ✓   |   ✓   |       |   ✓   |                |
-+---------------------+-------+-------+-------+-------+-------+----------------+
-
----
-
 When you use product_url, you’ll get the full enchilada with protocol and domain 
 name, like http://example.com/products/1. That’s the thing to use when you’re 
 doing redirect_to because the HTTP spec requires a fully qualified URL when 
