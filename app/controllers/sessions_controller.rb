@@ -1,13 +1,13 @@
 class SessionsController < ApplicationController
   skip_before_action :set_current_user, :set_current_accounts
 
-  # GET /sessions/new
+  # GET /login
   def new
     # authorize don't make the job
     redirect_to dashboard_url unless session[:user_id].blank?
   end
 
-  # POST /sessions
+  # POST /login
   def create
     user = User.find_by(email: params[:email])
     if user and user.authenticate(params[:password])
@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
     end
   end
 
-  # DELETE /sessions/1
+  # DELETE /logout
   def destroy
     session[:user_id] = nil
     redirect_to login_url, notice: t('.logged_out')
