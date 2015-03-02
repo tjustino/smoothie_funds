@@ -35,10 +35,11 @@ class CategoriesController < ApplicationController
   def destroy
     load_category
     if @category.destroy
-      redirect_to account_categories_url, notice: t('.successfully_destroyed')
+      redirect_to account_categories_url @current_account,
+                  notice: t('.successfully_destroyed')
     else
       flash[:warning] = t('.cant_destroy')
-      redirect_to account_categories_url
+      redirect_to account_categories_url @current_account
     end
   end
 
@@ -53,7 +54,8 @@ class CategoriesController < ApplicationController
       end
     end
 
-    redirect_to account_categories_url, notice: t('.successfully_imported')
+    redirect_to account_categories_url(@current_account),
+                notice: t('.successfully_imported')
   end
 
 
@@ -90,7 +92,7 @@ class CategoriesController < ApplicationController
     def save_category(notice)
       if @category.save
         userstamp(@category)
-        redirect_to( account_categories_url, notice: notice ) if notice
+        redirect_to( account_categories_url(@current_account), notice: notice ) if notice
       end
     end
 
