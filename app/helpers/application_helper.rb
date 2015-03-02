@@ -7,4 +7,8 @@ module ApplicationHelper
   def name_or_email
     @current_user.name? ? @current_user.name : @current_user.email
   end
+
+  def shallow_args(parent, child)
+    action_name == "new" ? [parent, child] : child
+  end
 end
