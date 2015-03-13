@@ -35,11 +35,11 @@ class CategoriesController < ApplicationController
   def destroy
     load_category
     if @category.destroy
-      redirect_to account_categories_url @current_account,
+      redirect_to account_categories_url(@current_account),
                   notice: t('.successfully_destroyed')
     else
       flash[:warning] = t('.cant_destroy')
-      redirect_to account_categories_url @current_account
+      redirect_to account_categories_url(@current_account)
     end
   end
 

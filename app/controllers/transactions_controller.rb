@@ -38,10 +38,11 @@ class TransactionsController < ApplicationController
   def destroy
     load_transaction
     if @transaction.destroy
-      redirect_to account_transactions_url, notice: t('.successfully_destroyed')
+      redirect_to account_transactions_url(@current_account),
+                  notice: t('.successfully_destroyed')
     else
       flash[:warning] = t('.cant_destroy')
-      redirect_to account_transactions_url
+      redirect_to account_transactions_url(@current_account)
     end
   end
 
@@ -105,7 +106,7 @@ class TransactionsController < ApplicationController
         end
 
         userstamp(@transaction)
-        redirect_to account_transactions_url, notice: notice
+        redirect_to account_transactions_url(@current_account), notice: notice
       end
     end
 

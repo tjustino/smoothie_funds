@@ -49,10 +49,11 @@ class SchedulesController < ApplicationController
   def destroy
     load_schedule
     if @schedule.destroy
-      redirect_to account_schedules_url, notice: t('.successfully_destroyed')
+      redirect_to account_schedules_url(@current_account),
+                  notice: t('.successfully_destroyed')
     else
       flash[:warning] = t('.cant_destroy')
-      redirect_to account_schedules_url
+      redirect_to account_schedules_url(@current_account)
     end
   end
 
@@ -106,7 +107,7 @@ class SchedulesController < ApplicationController
         end
 
         userstamp(@schedule)
-        redirect_to( account_schedules_url, notice: notice ) if notice
+        redirect_to( account_schedules_url(@current_account), notice: notice ) if notice
       end
     end
 
