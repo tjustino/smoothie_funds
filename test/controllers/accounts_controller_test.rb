@@ -1,58 +1,122 @@
 require 'test_helper'
 
 class AccountsControllerTest < ActionController::TestCase
-  # GET /users/1/accounts
+  ################################################################ GET /accounts
   test "should get index" do
-    get :index, user_id: @user
+    get             :index
     assert_response :success
-    assert_not_nil assigns(:accounts)
+    assert_not_nil  assigns(:accounts)
   end
 
-  # GET /users/1/accounts/new
+  ############################################################ GET /accounts/new
   test "should get new" do
-    get :new, user_id: @user
+    get             :new
     assert_response :success
+    assert_not_nil  assigns(:account)
   end
 
-  # GET /users/1/accounts/1/edit
+  ####################################################### GET /accounts/:id/edit
   test "should get edit" do
-    @accounts.each do |account|
-      get :edit, user_id: @user, id: account
-      assert_response :success
-    end
+    get_edit        @some_account
+    assert_response :success
+    assert_not_nil  assigns(:account)
   end
 
-  # POST /users/1/accounts
+  test "should not get edit - hacker way" do
+    get_edit              @some_wrong_account
+    assert_redirected_to  dashboard_url
+  end
+
+  test "should not get edit - unknow account" do
+    get_edit              @unknow_account
+    assert_redirected_to  dashboard_url
+  end
+
+  ############################################################### POST /accounts
   test "should create account" do
-    assert_difference('Account.count') do
-      post :create, user_id: @user, account: {  name:             "My Account",
-                                                initial_balance:  12.34,
-                                                hidden:           false }
+    assert_difference 'Account.count' do
+      post  :create,
+            account: {  name:             SecureRandom.hex,
+                        initial_balance:  rand(-100..100),
+                        hidden:           rand(0..1) == 1 ? true : false }
+      assert_redirected_to  accounts_url
+      assert_equal          I18n.translate('accounts.create.successfully_created'),
+                            flash[:notice]
     end
-    assert_redirected_to user_accounts_path
   end
 
-  # PATCH/PUT /users/1/accounts/1
+  ###################################################### PATCH/PUT /accounts/:id
   test "should update account" do
-    patch :update, user_id: @user, id: @accounts.first,
-                            account: {  name:             "Account updated",
-                                        initial_balance:  -15,
-                                        hidden:           false }
-    assert_redirected_to user_accounts_path
+    patch_update          @some_account
+    assert_not_nil        assigns(:account)
+    assert_redirected_to  accounts_path
+    assert_equal          I18n.translate('accounts.update.successfully_updated'),
+                          flash[:notice]
+    assert_not_equal      @previous_account_name, @some_account.reload.name
   end
 
-  # DELETE /users/1/accounts/1
-  test "should destroy account" do
-    assert_no_difference('Account.count', -1) do
-      delete :destroy, user_id: @user, id: @accounts.last
-    end
-    assert_redirected_to user_accounts_path
+  test "should not update account - hacker way" do
+    patch_update          @some_wrong_account
+    assert_nil            assigns(:account)
+    assert_redirected_to  dashboard_url
+    assert_equal          @previous_account_name, @some_wrong_account.reload.name
+  end
 
-    @accounts.last.transactions.destroy_all
-    @accounts.last.categories.destroy_all
+  ######################################################### DELETE /accounts/:id
+  test "should not destroy account with transactions, schedules or categories" do
+    assert_no_difference 'Account.count' do
+      delete_destroy        @some_account
+      assert_not_nil        assigns(:account)
+      assert_redirected_to  accounts_path
+      assert_equal          I18n.translate('accounts.destroy.cant_destroy'),
+                            flash[:warning]
+    end
+  end
+
+  test "should destroy account without transactions, schedules or categories" do
+    @some_account.transactions.destroy_all
+    @some_account.schedules.destroy_all
+    @some_account.categories.destroy_all
+
     assert_difference('Account.count', -1) do
-      delete :destroy, user_id: @user, id: @accounts.last
+      delete_destroy        @some_account
+      assert_not_nil        assigns(:account)
+      assert_redirected_to  accounts_path
+      assert_equal          I18n.translate('accounts.destroy.successfully_destroyed'),
+                            flash[:notice]
     end
-    assert_redirected_to user_accounts_path
   end
+
+  test "should not destroy account - hacker way" do
+    @some_wrong_account.transactions.destroy_all
+    @some_wrong_account.schedules.destroy_all
+    @some_wrong_account.categories.destroy_all
+
+    assert_no_difference 'Account.count' do
+      delete_destroy        @some_wrong_account
+      assert_nil            assigns(:account)
+      assert_redirected_to  dashboard_url
+    end
+  end
+
+
+  private ######################################################################
+
+    def get_edit(account)
+      get :edit, id: account
+    end
+
+    def patch_update(account)
+      @previous_account_name = account.name
+
+      patch :update,
+            id: account,
+            account: {  name:             SecureRandom.hex,
+                        initial_balance:  rand(-100..100),
+                        hidden:           rand(0..1) == 1 ? true : false }
+    end
+
+    def delete_destroy(account)
+      delete :destroy, id: account
+    end
 end

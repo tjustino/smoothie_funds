@@ -1,47 +1,75 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
-  # GET /users/new
-  test "should get new" do
-    get :new
-    assert_response :success
+  ############################################################### GET /users/new
+  test "should be redirected to dashboard url" do
+    get                   :new
+    assert_redirected_to  dashboard_url
   end
 
-  # GET /users/1/edit
+  ########################################################## GET /users/:id/edit
   test "should get edit" do
-    get :edit, id: @user
+    get_edit        @user
     assert_response :success
-    assert_select '.active > a:nth-child(1)'
+    assert_not_nil  assigns(:user)
   end
 
-  test "should get edit only for current user" do
-    get :edit, id: wrong_user
-    assert_redirected_to dashboard_url
+  test "should not get edit - hacker way" do
+    get_edit              @wrong_user
+    assert_redirected_to  dashboard_url
   end
 
-  # POST /users
+  test "should not get edit - unknow id" do
+    get_edit              User.maximum(:id) + 1
+    assert_redirected_to  dashboard_url
+  end
+
+  ################################################################## POST /users
   test "should create user" do
-    assert_difference('User.count') do
-      post :create, user: { email: "foo@bar.com",
-                            name: "John Doe", 
-                            password: 'secret',
-                            password_confirmation: 'secret' }
+    # you can create an other user as a logged user, why not...
+    assert_difference 'User.count' do
+      post :create, user: { email:                  "john.doe@email.com",
+                            password:               "unbreakablePassword",
+                            password_confirmation:  "unbreakablePassword" }
+      assert_redirected_to  login_url
+      assert_equal          I18n.translate('users.create.successfully_created'),
+                            flash[:notice]
+    end
+  end
+
+  ######################################################### PATCH/PUT /users/:id
+  test "should update user" do
+    patch_update          @user
+    assert_redirected_to  edit_user_url
+    assert_equal          I18n.translate('users.update.successfully_updated'),
+                          flash[:notice]
+    assert_not_equal      @previous_user_name, @user.reload.name
+  end
+
+  test "should not update user - hacker way" do
+    patch_update          @wrong_user
+    assert_redirected_to  dashboard_url
+    assert_equal          @previous_user_name, @wrong_user.reload.name
+  end
+
+  ############################################################ DELETE /users/:id
+  # TODO how to delete an account?
+  # test "should destroy user" do
+  # end
+
+
+  private ######################################################################
+
+    def get_edit(user)
+      get :edit, id: user
     end
 
-    assert_redirected_to login_path
-  end
+    def patch_update(user)
+      @previous_user_name = user.name
 
-  # PATCH/PUT /users/1
-  test "should update user" do
-    patch :update, id: @user, user: { email: @user.email,
-                                      name: @user.name,
-                                      password: 'secret',
-                                      password_confirmation: 'secret' }
-    assert_redirected_to edit_user_url
-  end
-
-  # DELETE /users/1
-  test "should destroy user" do
-    #TODO how to delete an account?
-  end
+      patch :update, id: user, user: {  email:                  user.email,
+                                        name:                   SecureRandom.hex,
+                                        password:               "secret",
+                                        password_confirmation:  "secret" }
+    end
 end

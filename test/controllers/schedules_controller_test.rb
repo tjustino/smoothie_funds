@@ -1,99 +1,177 @@
 require 'test_helper'
 
 class SchedulesControllerTest < ActionController::TestCase
-  # GET /users/1/accounts/1/schedules
+  ########################################## GET /accounts/:account_id/schedules
   test "should get index" do
-    @accounts.each do |account|
-      get :index, user_id: @user, account_id: account
-      assert_response :success
-      assert_not_nil assigns(:schedules)
-    end
+    get_index       @some_account
+    assert_response :success
+    assert_not_nil  assigns(:schedules)
   end
 
-  # GET /users/1/accounts/1/schedules/new
+  test "should not get index - hacker way" do
+    get_index             @some_wrong_account
+    assert_redirected_to  dashboard_url
+  end
+
+  test "should not get index - unknow account" do
+    get_index             @unknow_account
+    assert_redirected_to  dashboard_url
+  end
+
+  ###################################### GET /accounts/:account_id/schedules/new
   test "should get new" do
-    @accounts.each do |account|
-      get :new, user_id: @user, account_id: account
-      assert_response :success
-    end
+    get_new         @some_account
+    assert_response :success
+    assert_not_nil  assigns(:schedule)
   end
 
-  # GET /users/1/accounts/1/schedules/1/edit
+  test "should not get new - hacker way" do
+    get_new               @some_wrong_account
+    assert_redirected_to  dashboard_url
+  end
+
+  test "should not get new - unknow account" do
+    get_new               @unknow_account
+    assert_redirected_to  dashboard_url
+  end
+
+  ###################################################### GET /schedules/:id/edit
   test "should get edit" do
-    @accounts.each do |account|
-      account.schedules.each do |schedule|
-        get :edit, user_id: @user, account_id: account, id: schedule
-        assert_response :success
-      end
+    get_edit        @some_schedule
+    assert_response :success
+    assert_not_nil  assigns(:schedule)
+  end
+
+  test "should not get edit - hacker way" do
+    get_edit              @some_wrong_schedule
+    assert_redirected_to  dashboard_url
+  end
+
+  test "should not get edit - unknow schedule" do
+    get_edit              @unknow_schedule
+    assert_redirected_to  dashboard_url
+  end
+
+  ######################################### POST /accounts/:account_id/schedules
+  test "should create schedule" do
+    assert_difference('Schedule.count') do
+      post_create           @some_account
+      assert_not_nil        assigns(:schedule)
+      assert_redirected_to  account_schedules_path @some_account
+      assert_equal          I18n.translate('schedules.create.successfully_created'),
+                            flash[:notice]
     end
   end
 
-  # POST /users/1/accounts/1/schedules
-  test "should create schedule" do
-    @accounts.each do |account|
-      #TODO fix problem with assert_difference
-      #assert_difference ['Schedule.count', 'Transaction.count'] do
-        post :create, user_id:    @user, 
-                      account_id: account,
+  test "should not create schedule - hacker way" do
+    assert_no_difference('Schedule.count') do
+      post_create           @some_wrong_account
+      assert_redirected_to  dashboard_url
+    end
+  end
+
+  ##################################################### PATCH/PUT /schedules/:id
+  test "should update schedule" do
+    patch_update          @some_schedule
+    assert_not_nil        assigns(:schedule)
+    assert_redirected_to  account_schedules_path @some_account
+    assert_equal          I18n.translate('schedules.update.successfully_updated'),
+                          flash[:notice]
+    assert_not_equal      @previous_schedule_amount,
+                          @some_schedule.reload.operation.amount
+  end
+
+  test "should not update schedule - hacker way" do
+    patch_update          @some_wrong_schedule
+    assert_nil            assigns(:schedule)
+    assert_redirected_to  dashboard_url
+    assert_equal          @previous_schedule_amount,
+                          @some_wrong_schedule.reload.operation.amount
+  end
+
+  ######################################################## DELETE /schedules/:id
+  test "should destroy schedule" do
+    assert_difference ['Schedule.count', 'Transaction.count'], -1 do
+      delete_destroy        @some_schedule
+      assert_not_nil        assigns(:schedule)
+      assert_redirected_to  account_schedules_path @some_account
+      assert_equal          I18n.translate('schedules.destroy.successfully_destroyed'),
+                            flash[:notice]
+    end
+  end
+
+  test "should not destroy schedule - hacker way" do
+    assert_no_difference ['Schedule.count', 'Transaction.count'] do
+      delete_destroy        @some_wrong_schedule
+      assert_nil            assigns(:schedule)
+      assert_redirected_to  dashboard_url
+    end
+  end
+
+  ################################################### POST /schedules/:id/insert
+  test "should insert transaction via schedule" do
+    post_insert           @some_schedule
+    assert_not_nil        assigns(:schedule)
+    assert_redirected_to  request.env['HTTP_REFERER']
+    assert_equal          I18n.translate('schedules.insert.successfully_inserted'),
+                          flash[:notice]
+    assert_not_equal      @previous_next_time, @some_schedule.reload.next_time
+  end
+
+  test "should not insert transaction via schedule - hacker way" do
+    post_insert           @some_wrong_schedule
+    assert_nil            assigns(:schedule)
+    assert_redirected_to  dashboard_url
+    assert_equal          @previous_next_time, @some_wrong_schedule.reload.next_time
+  end
+
+
+  private ######################################################################
+
+    def get_index(account)
+      get :index, account_id: account
+    end
+
+    def get_new(account)
+      get :new, account_id: account
+    end
+
+    def get_edit(schedule)
+      get :edit, id: schedule
+    end
+
+    def post_create(account)
+      post :create, account_id: account,
+                    schedule: { next_time:  DateTime.now,
+                                frequency:  rand(1..10),
+                                period:     ["days","weeks","months","years"].sample,
+                                operation_attributes: { category_id:  account.categories.sample,
+                                                        amount:       rand(-500.00..500.00),
+                                                        comment:      SecureRandom.hex,
+                                                        checked:      rand(0..1) == 1 ? true : false } }
+    end
+
+    def patch_update(schedule)
+      @previous_schedule_amount = schedule.operation.amount
+
+      patch :update,  id:       schedule,
                       schedule: { next_time:  DateTime.now,
                                   frequency:  rand(1..10),
                                   period:     ["days","weeks","months","years"].sample,
-                                  operation_attributes: { amount:   rand(-500.00..500.00),
-                                                          category_id: account.categories.sample,
-                                                          comment:  SecureRandom.hex,
-                                                          checked:  rand(0..1) == 1 ? true : false } }
-
-        assert_redirected_to user_account_schedules_path
-      #end
+                                  operation_attributes: { category_id:  schedule.account.categories.sample,
+                                                          amount:       rand(-500.00..500.00),
+                                                          comment:      SecureRandom.hex,
+                                                          checked:      rand(0..1) == 1 ? true : false } }
     end
-  end
 
-  # PATCH/PUT /users/1/accounts/1/schedules/1
-  test "should update schedule" do
-    @accounts.each do |account|
-      account.schedules.each do |schedule|
-        patch :update,  user_id:    @user,
-                        id:         schedule,
-                        account_id: account,
-                        schedule: { next_time:  DateTime.now,
-                                    frequency:  rand(1..10),
-                                    period:     ["days","weeks","months","years"].sample,
-                                    operation_attributes: { amount:   rand(-500.00..500.00),
-                                                            category_id: account.categories.sample,
-                                                            comment:  SecureRandom.hex,
-                                                            checked:  rand(0..1) == 1 ? true : false } }
-
-        assert_redirected_to user_account_schedules_path
-      end
+    def delete_destroy(schedule)
+      delete :destroy, id: schedule
     end
-  end
 
-  # DELETE /users/1/accounts/1/schedules/1
-  test "should destroy schedule" do
-    @accounts.each do |account|
-      account.schedules.each do |schedule|
-        #TODO fix problem with assert_difference
-        #assert_difference ['Schedule.count', 'Transaction.count'], -1 do
-          delete :destroy, user_id: @user, account_id: account, id: schedule
-        #end
+    def post_insert(schedule)
+      request.env['HTTP_REFERER'] = "/previous_link_url"
+      @previous_next_time = schedule.next_time
 
-        assert_redirected_to user_account_schedules_path
-      end
+      post :insert, id: schedule
     end
-  end
-
-  # POST /users/1/accounts/1/schedules/1/insert
-  test "should insert transaction" do
-    @accounts.each do |account|
-      account.schedules.each do |schedule|
-        request.env['HTTP_REFERER'] = "/previous_link_url"
-
-        assert_difference 'Transaction.count' do
-          post :insert, user_id: @user, account_id: account, id: schedule
-        end
-
-        assert_redirected_to request.env['HTTP_REFERER']
-      end
-    end
-  end
 end
