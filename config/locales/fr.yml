@@ -81,6 +81,7 @@ fr:
       category:             "Catégorie"
       amount:               "Montant"
       insert_schedule:      "Insérer la prochaine échéance dans les transactions"
+      balance_date:         "%{balance} au %{date}"
       no_terms:             "Aucune échéance"
       no_transactions:      "Aucune transaction"
 
