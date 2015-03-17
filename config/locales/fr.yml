@@ -76,7 +76,7 @@ fr:
       transaction_summary:  "Synthèse des transactions"
       current_balance:      "Balance actuelle :"
       future_balance:       "Balance future :"
-      upcoming_terms:       "Échéances des 10 prochains jours"
+      upcoming_terms:       "Échéances des 30 prochains jours"
       next_time:            "Prochaine échéance"
       category:             "Catégorie"
       amount:               "Montant"

@@ -19,7 +19,7 @@ class DashboardController < ApplicationController
 
     def load_schedules
       @schedules = Schedule.where(account_id: @current_accounts.ids)
-                            .where("next_time <= ?", Time.now.midnight + 10.days)
+                            .where("next_time <= ?", Time.now.midnight + 30.days)
                             .order(next_time: :asc, id: :asc)
     end
 end
