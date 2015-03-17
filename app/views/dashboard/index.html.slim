@@ -15,15 +15,18 @@
                 dl.dl-horizontal.list-group-item-text
                   - if account.transactions.any?
                     dt = t('.current_balance')
-                    dd = "#{current_balance(account)} au #{current_date(account)}"
+                    dd = t('.balance_date', balance: current_balance(account), \
+                                            date: current_date(account) )
                     - if future_transactions?(account)
                       dt style=("color: gray;")
                         = t('.future_balance')
                       dd style=("color: gray;")
-                        = "#{future_balance(account)} au #{future_date(account)}"
+                        = t('.balance_date',  balance: future_balance(account), \
+                                              date: future_date(account) )
                   - else
-                    dt = t('.no_transactions')
-                    dd
+                    dt = t('.current_balance')
+                    dd = t('.balance_date', balance: initial_balance(account), \
+                                            date: today )
         - else
           p = t('.no_transactions')
 

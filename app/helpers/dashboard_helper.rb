@@ -5,6 +5,14 @@ module DashboardHelper
                         .sum(:amount) + account.initial_balance )
   end
 
+  def initial_balance(account)
+    number_to_currency( account.initial_balance )
+  end
+
+  def today
+    l( Date.current )
+  end
+
   def current_date(account)
     l( @current_transactions.where(account: account).maximum(:date) )
   end
