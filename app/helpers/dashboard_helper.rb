@@ -29,4 +29,8 @@ module DashboardHelper
   def future_transactions?(account)
     @transactions.where(account: account).where("date > ?", Time.now).any?
   end
+
+  def shedules_for(account)
+    @schedules.where(account: account)
+  end
 end
