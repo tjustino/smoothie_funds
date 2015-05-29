@@ -9,7 +9,7 @@
 #  updated_by      :integer
 #  created_at      :datetime
 #  updated_at      :datetime
-#  hidden          :boolean          default("false")
+#  hidden          :boolean          default(FALSE)
 #
 
 courant_thomas:
