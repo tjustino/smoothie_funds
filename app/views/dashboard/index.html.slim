@@ -40,7 +40,7 @@
         - if @schedules.any?
           .list-group.list-special
             - @current_accounts.each do |account|
-              - if account.schedules.any?
+              - if @schedules.where(account_id: account.id).any?
                 .panel.panel-info
                   .panel-heading
                     h4.panel-title
