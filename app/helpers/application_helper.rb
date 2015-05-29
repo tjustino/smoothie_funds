@@ -9,6 +9,6 @@ module ApplicationHelper
   end
 
   def shallow_args(parent, child)
-    action_name == "new" or action_name == "create" ? [parent, child] : child
+    (action_name == "new" or action_name == "create") ? [parent, child] : child
   end
 end
