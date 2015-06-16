@@ -32,7 +32,11 @@ Rails.application.routes.draw do
     delete  "logout"  => :destroy
   end
 
-  resources :users, except: [:index, :show, :destroy]
+  shallow do
+    resources :users, except: [:index, :show, :destroy] do
+      resources :searches, except: [:index, :edit, :update]
+    end
+  end
 
   shallow do
     resources :accounts, except: [:show] do

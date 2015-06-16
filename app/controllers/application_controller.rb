@@ -73,11 +73,12 @@ class ApplicationController < ActionController::Base
     end
 
     def granted_urls_logged_user?
-      controller_action?("dashboard", "index"  ) or
-      controller_action?("accounts",  "index"  ) or
-      controller_action?("accounts",  "create" ) or
-      controller_action?("accounts",  "new"    ) or
-      good_account_id?                           or
+      controller_action?("dashboard", "index"  )  or
+      controller_action?("accounts",  "index"  )  or
+      controller_action?("accounts",  "create" )  or
+      controller_action?("accounts",  "new"    )  or
+      good_account_id?                            or
+      good_user_id?                               or
       good_id?
     end
 
@@ -89,25 +90,36 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def good_user_id?
+      unless params[:user_id].blank?
+        @current_user.id == params[:user_id].to_i
+      else
+        false
+      end
+    end
+
     def good_id?
       unless params[:id].blank?
         ( controller_name == "users" and 
-          params[:id].to_i == @current_user.id ) or
+          params[:id].to_i == @current_user.id )                              or
 
         ( controller_name == "categories" and 
           Category.where(account_id: @current_accounts).ids
-                                                .include? params[:id].to_i ) or
+                                                .include? params[:id].to_i )  or
 
         ( controller_name == "transactions" and 
           Transaction.where(account_id: @current_accounts).ids
-                                                .include? params[:id].to_i ) or
+                                                .include? params[:id].to_i )  or
 
         ( controller_name == "schedules" and 
           Schedule.where(account_id: @current_accounts).ids
-                                                .include? params[:id].to_i ) or
+                                                .include? params[:id].to_i )  or
 
         ( controller_name == "accounts" and 
-          @current_accounts.ids.include? params[:id].to_i )
+          @current_accounts.ids.include? params[:id].to_i )                   or
+
+        ( controller_name == "searches" and 
+          @current_user.searches.ids.include? params[:id].to_i )
       else
         false
       end

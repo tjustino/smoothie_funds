@@ -47,11 +47,4 @@
     .col-sm-offset-2.col-sm-8
       .btn-toolbar
         = f.submit class: "btn btn-primary"
-        - if params[:action] == "new"
-          = link_to (fa_icon "reply", text: t('.back')), \
-                    account_transactions_path(@current_account), \
-                    class: "btn btn-default"
-        - elsif params[:action] == "edit"
-          = link_to (fa_icon "reply", text: t('.back')), \
-                    account_transactions_path(@current_account), \
-                    class: "btn btn-default"
+        = link_to (fa_icon "reply", text: t('.back')), :back, class: "btn btn-default"

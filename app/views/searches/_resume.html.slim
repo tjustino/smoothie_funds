@@ -1,0 +1,53 @@
+dl.dl-horizontal
+  / Accounts
+  dt = t('.accounts')
+  dd = joined_accounts_names(search.accounts)
+
+  / Amounts
+  dt = t('.amount')
+  - if    not search.min.blank?  and not search.max.blank?
+    dd = t('.between_amount', min: number_to_currency(search.min), \
+                              max: number_to_currency(search.max) )
+  - elsif not search.min.blank?  and search.max.blank?
+    dd = t('.more_than', min: number_to_currency(search.min))
+  - elsif search.min.blank?      and not search.max.blank?
+    dd = t('.less_than', max: number_to_currency(search.max))
+  - else
+    dd = t('.no_restriction')
+
+  / Date
+  dt = t('.date')
+  - if    not search.before.blank? and not search.after.blank?
+    dd = t('.between_date', before: search.before, after: search.after )
+  - elsif not search.before.blank? and search.after.blank?
+    dd = t('.before', before: search.before)
+  - elsif search.before.blank?     and not search.after.blank?
+    dd = t('.after', after: search.after)
+  - else
+    dd = t('.no_restriction')
+
+  / Categories
+  dt = t('.categories')
+  dd = joined_categories_names(search.accounts, search.categories)
+
+  / Comment
+  dt = t('.comment')
+  - if    search.operator == "like"      and not search.comment.blank?
+    dd = t('.like', comment: search.comment)
+  - elsif search.operator == "like"      and search.comment.blank?
+    dd = t('.with_comment')
+  - elsif search.operator == "not_like"  and not search.comment.blank?
+    dd = t('.not_like', comment: search.comment)
+  - elsif search.operator == "not_like"  and search.comment.blank?
+    dd = t('.without_comment')
+  - else
+    dd = t('.no_restriction')
+
+  / Checked
+  dt = t('.checked')
+  - if    search.checked == "yep"
+    dd = t('.yep')
+  - elsif search.checked == "nop"
+    dd = t('.nop')
+  - else
+    dd = t('.checked_or_not')

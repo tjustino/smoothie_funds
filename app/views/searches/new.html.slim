@@ -1,0 +1,26 @@
+.page-header
+  h2 = t('.create_search')
+
+= render 'form'
+
+- if @searches.any?
+
+  hr
+
+  #accordion.panel-group role="tablist" aria-multiselectable="true"
+    - @searches.each_with_index do |search, index|
+      .panel.panel-info
+        .panel-heading role="tab" id="heading#{search.id}"
+          h4.panel-title
+            a.collapsed data-toggle="collapse" data-parent="#accordion" href="#collapse#{search.id}" aria-expanded="false" aria-controls="collapse#{search.id}"
+              = witch_search(search, index)
+        .panel-collapse.collapse id="collapse#{search.id}" role="tabpanel" aria-labelledby="heading#{search.id}"
+          .panel-body
+            = render partial: "resume", locals: { search: search }
+          .panel-footer
+            = link_to ( fa_icon "arrow-circle-o-right", text: t('.show_result') ), search
+            .pull-right = link_to (fa_icon "trash-o", text: t('.destroy')), \
+                                      search, \
+                                      method: :delete, \
+                                      data: { confirm: t('.are_you_sure') }, \
+                                      title: t('.destroy')

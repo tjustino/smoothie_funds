@@ -19,6 +19,7 @@ class TransactionsController < ApplicationController
 
     @transaction.amount < 0 ? @sign = "debit" : @sign = "credit"
     @transaction.amount = @transaction.amount.abs
+    flash[:search_id] = params[:search_id] unless params[:search_id].nil? 
   end
 
   # POST /accounts/:account_id/transactions
@@ -29,6 +30,7 @@ class TransactionsController < ApplicationController
 
   # PATCH/PUT /transactions/:id
   def update
+    #TODO trans en crédit + écran d'erreur = trans en débit
     load_transaction
     build_transaction
     save_transaction( t('.successfully_updated') ) or render 'edit'
@@ -38,11 +40,10 @@ class TransactionsController < ApplicationController
   def destroy
     load_transaction
     if @transaction.destroy
-      redirect_to account_transactions_url(@current_account),
-                  notice: t('.successfully_destroyed')
+      redirect_to :back, notice: t('.successfully_destroyed')
     else
       flash[:warning] = t('.cant_destroy')
-      redirect_to account_transactions_url(@current_account)
+      redirect_to :back
     end
   end
 
@@ -78,9 +79,11 @@ class TransactionsController < ApplicationController
         end
       end
 
-      @sum_checked = @current_account.initial_balance + current_transactions.checked.sum(:amount)
+      @sum_checked =  @current_account.initial_balance + 
+                      current_transactions.checked.sum(:amount)
 
-      @transactions = Kaminari.paginate_array(transanstions_without_balances.reverse!).page(params[:page]).per(20)
+      @transactions = Kaminari.paginate_array(transanstions_without_balances.reverse!)
+                              .page(params[:page]).per(20)
     end
 
     def load_transaction
@@ -94,7 +97,11 @@ class TransactionsController < ApplicationController
 
     def transaction_params
       transaction_params = params[:transaction]
-      transaction_params ? transaction_params.permit(:category_id, :date, :amount, :checked, :comment) : {}
+      transaction_params ? transaction_params.permit( :category_id,
+                                                      :date,
+                                                      :amount,
+                                                      :checked,
+                                                      :comment ) : {}
     end
 
     def save_transaction(notice)
@@ -106,7 +113,12 @@ class TransactionsController < ApplicationController
         end
 
         userstamp(@transaction)
-        redirect_to account_transactions_url(@current_account), notice: notice
+
+        if flash[:search_id].nil?
+          redirect_to account_transactions_url(@current_account), notice: notice
+        else
+          redirect_to search_url(flash[:search_id]), notice: notice
+        end
       end
     end
 

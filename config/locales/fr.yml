@@ -93,6 +93,7 @@ fr:
       categories:   'Catégories <b class="caret"></b>'
       accounts:     "Comptes"
       logout:       "Déconnexion"
+      search:       "Rechercher"
 
   sessions:
     # controllers
@@ -226,6 +227,75 @@ fr:
     new:
       create_user:  "Créer un nouvel utilisateur"
 
+  searches:
+    # controllers
+    destroy:
+      successfully_destroyed: "La recherche a bien été supprimée"
+      cant_destroy:           "La recherche ne peut pas être supprimée"
+    # views
+    form:
+      search:     "Recherche"
+      accounts:   "Comptes"
+      amount:     "Montant"
+      min:        "Supérieur à"
+      max:        "Inférieur à"
+      date:       "Date"
+      before:     "Avant le"
+      after:      "Après le"
+      categories: "Catégories"
+      comment:    "Commentaire"
+      like:       "Contient"
+      not_like:   "Ne contient pas"
+      no_comment: "Sans commentaire"
+      checked:    "Rapproché"
+      yep:        "Oui"
+      nop:        "Non"
+      comment_or_not: "Peu importe"
+      checked_or_not: "Peu importe"
+    resume:
+      accounts:       "Comptes"
+      amount:         "Montant"
+      between_amount: "Supérieur à %{min} et inférieur à %{max}"
+      more_than:      "Supérieur à %{min}"
+      less_than:      "Inférieur à %{max}"
+      no_restriction: "Aucune restriction"
+      date:           "Date"
+      between_date:   "Après le %{after} et avant le %{before}"
+      before:         "Avant le %{before}"
+      after:          "Après le %{after}"
+      categories:     "Catégories"
+      comment:        "Commentaire"
+      like:           "Contient '%{comment}'"
+      with_comment:    "Contenant n'importe quel commentaire" 
+      not_like:       "Ne contient pas '%{comment}'"
+      without_comment: "Ne content aucun commentaire"
+      checked:        "Rapproché"
+      yep:            "Oui"
+      nop:            "Non"
+      checked_or_not: "Peu importe"
+    new:
+      create_search:          "Nouvelle recherche"
+      date_search:            "Recherche du %{date}"
+      last_search:            "Dernière recherche"
+      next_to_last_search:    "Avant-dernière recherche"
+      antepenultimate_search: "Antépénultième recherche"
+      show_result:            "Voir les résultats"
+      destroy:                "Supprimer"
+      are_you_sure:           "Etes-vous certain de vouloir supprimer cette recherche ?"
+    show:
+      result:             "Résultat de recherche"
+      total:              "Total : %{total}"
+      account:            "Compte"
+      date:               "Date"
+      category:           "Catégorie"
+      debit:              "Débit"
+      credit:             "Crédit"
+      comment:            "Commentaire"
+      check_transaction:  "Rapprocher la transaction"
+      edit:               "Editer"
+      destroy:            "Supprimer"
+      are_you_sure:       "Etes-vous certain de vouloir supprimer la transaction ?"
+
   helpers:
     submit:
       create: "Créer %{model}"
@@ -300,8 +370,10 @@ fr:
   date:
     formats:
       default: "%d/%m/%Y"
-      short: "%e %b"
-      long: "%e %B %Y"
+
+  time:
+    formats:
+      default: "%d/%m/%Y %H:%M"
 
   number:
     currency:
