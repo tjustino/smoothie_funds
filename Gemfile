@@ -26,13 +26,13 @@ gem 'kaminari'                  # Paginator
 group :development do
   gem 'spring'                  # Keep application running in the background
   gem 'byebug'                  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'web-console', '~> 2.0'   # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console'             # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'annotate'                # Annotates ActiveRecord Models, routes, fixtures, and others based on the database schema
   gem 'rails-erd'               # Automatically generate an entity-relationship diagram (ERD) for Rails models
 
   # Use Capistrano for deployment
-  gem 'capistrano',         '~> 3.3.5'
-  gem 'capistrano-rails',   '~> 1.1.2'
-  gem 'capistrano-bundler', '~> 1.1.3'
-  gem 'capistrano-rbenv',   '~> 2.0.2'
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rbenv'
 end
