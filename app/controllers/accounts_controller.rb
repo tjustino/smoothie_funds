@@ -12,7 +12,6 @@ class AccountsController < ApplicationController
 
   # GET /accounts/:id/edit
   def edit
-    # TODO: can't edit an account if hidden
     load_account
     #build_account
   end

@@ -116,7 +116,7 @@ class ApplicationController < ActionController::Base
                                                 .include? params[:id].to_i )  or
 
         ( controller_name == "accounts" and 
-          @current_accounts.ids.include? params[:id].to_i )                   or
+          @current_user.accounts.ids.include? params[:id].to_i )              or
 
         ( controller_name == "searches" and 
           @current_user.searches.ids.include? params[:id].to_i )
