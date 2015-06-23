@@ -92,7 +92,7 @@ class TransactionsControllerTest < ActionController::TestCase
     assert_difference('Transaction.count', -1) do
       delete_destroy        @some_transaction
       assert_not_nil        assigns(:transaction)
-      assert_redirected_to  account_transactions_path @some_account
+      assert_redirected_to  request.env['HTTP_REFERER']
       assert_equal          I18n.translate('transactions.destroy.successfully_destroyed'),
                             flash[:notice]
     end
@@ -159,6 +159,7 @@ class TransactionsControllerTest < ActionController::TestCase
     end
 
     def delete_destroy(transaction)
+      request.env['HTTP_REFERER'] = "/previous_link_url"
       delete :destroy, id: transaction
     end
 

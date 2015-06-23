@@ -4,7 +4,7 @@ require 'rails/test_help'
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
-  fixtures :users, :accounts, :categories, :transactions, :schedules
+  fixtures :users, :accounts, :categories, :transactions, :schedules#, :searches
 
   # Add more helper methods to be used by all tests here...
   def setup
@@ -30,10 +30,12 @@ class ActiveSupport::TestCase
     @some_wrong_schedule    = @some_wrong_account.schedules.sample
     @some_wrong_transaction = @some_wrong_account.transactions.sample
 
-    @unknow_account         = Account.maximum(:id)      + 1
-    @unknow_category        = Category.maximum(:id)     + 1
-    @unknow_schedule        = Schedule.maximum(:id)     + 1
-    @unknow_transaction     = Transaction.maximum(:id)  + 1
+    @unknow_user            = User.maximum(:id).to_i        + 1
+    @unknow_account         = Account.maximum(:id).to_i     + 1
+    @unknow_category        = Category.maximum(:id).to_i    + 1
+    @unknow_schedule        = Schedule.maximum(:id).to_i    + 1
+    @unknow_transaction     = Transaction.maximum(:id).to_i + 1
+    @unknow_search          = Search.maximum(:id).to_i      + 1
   end
 
   def logout

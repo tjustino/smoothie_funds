@@ -1,0 +1,61 @@
+# == Schema Information
+#
+# Table name: searches
+#
+#  id         :integer          not null, primary key
+#  user_id    :integer          not null
+#  accounts   :text             not null
+#  min        :decimal(8, 2)
+#  max        :decimal(8, 2)
+#  before     :date
+#  after      :date
+#  categories :text
+#  operator   :integer
+#  comment    :string
+#  checked    :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# enum operator:  [ :comment_or_not, :like,  :not_like ]
+#                   0                 1       2
+# enum checked:   [ :checked_or_not, :yep,   :nop      ]
+
+# http://www.yamllint.com/
+# TODO : can't create search fixtures based on accounts and categories....
+
+# thomas_first_search:
+#   user: thomas
+#   accounts: <%= [ActiveRecord::FixtureSet.identify(:courant_thomas).to_s].to_yaml %>
+#   min: 5
+#   max: 
+#   before: 
+#   after: 
+#   categories: <%= "---\n- '" + ActiveRecord::FixtureSet.identify(:essence_courant_thomas).to_s + "'\n" %>
+#   operator: 0
+#   comment: 
+#   checked: 0
+
+# thomas_second_search:
+#   user: thomas
+#   accounts: <%= "---\n- '" + ActiveRecord::FixtureSet.identify(:compte_commun).to_s + "'\n" %>
+#   min: 
+#   max: 
+#   before: 
+#   after: <%= 1.year.ago %>
+#   categories: <%= "---\n- '" + ActiveRecord::FixtureSet.identify(:internet).to_s + "'\n" %>
+#   operator: 0
+#   comment: 
+#   checked: 2
+
+# emilie_first_search:
+#   user: emilie
+#   accounts: <%= "---\n- '" + ActiveRecord::FixtureSet.identify(:courant_emilie).to_s + "'\n" %>
+#   min: -500
+#   max: 500
+#   before: <%= 3.month.since %>
+#   after: <%= 3.month.ago %>
+#   categories: <%= "---\n- '" + ActiveRecord::FixtureSet.identify(:vetements_courant_emilie).to_s + "'\n" %>
+#   operator: 1
+#   comment: a
+#   checked: 0
