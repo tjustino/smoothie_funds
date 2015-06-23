@@ -56,7 +56,7 @@
         .col-sm-2
           .text-muted = truncate account.name, length: 20
           = f.select  :categories, \
-                      options_from_collection_for_select( account.categories, \
+                      options_from_collection_for_select( account.categories.order_by_name, \
                                                           :id, \
                                                           :name, \
                                                           account.categories.ids), \

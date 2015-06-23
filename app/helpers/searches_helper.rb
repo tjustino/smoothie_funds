@@ -13,7 +13,7 @@ module SearchesHelper
     categories_names  = []
 
     @current_accounts.where(id: accounts.map { |e| e.to_i }).each do |account|
-      account.categories.where(id: categories.map { |e| e.to_i }).each do |category|
+      account.categories.order_by_name.where(id: categories.map { |e| e.to_i }).each do |category|
         categories_names.push category.name
       end
     end
