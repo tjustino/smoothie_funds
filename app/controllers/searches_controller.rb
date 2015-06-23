@@ -69,7 +69,8 @@ private ########################################################################
   end
 
   def load_transactions
-    @transactions =  Transaction.search_accounts( sanitize_accounts(@search.accounts) )
+    @transactions =  Transaction.all.active
+                                .search_accounts( sanitize_accounts(@search.accounts) )
                                 .search_amount(@search.min, @search.max)
                                 .search_date(@search.before, @search.after)
                                 .search_categories( sanitize_categories(@search.categories) )
