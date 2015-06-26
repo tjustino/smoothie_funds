@@ -8,4 +8,3 @@ $ ->
     showOtherMonths:    true
     selectOtherMonths:  true
     showButtonPanel:    true
-  return
