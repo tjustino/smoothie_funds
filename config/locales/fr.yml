@@ -273,6 +273,11 @@ fr:
       yep:            "Oui"
       nop:            "Non"
       checked_or_not: "Peu importe"
+    transaction:
+      check_transaction:  "Rapprocher la transaction"
+      edit:               "Editer"
+      destroy:            "Supprimer"
+      are_you_sure:       "Etes-vous certain de vouloir supprimer la transaction ?"
     new:
       create_search:          "Nouvelle recherche"
       date_search:            "Recherche du %{date}"
@@ -291,10 +296,7 @@ fr:
       debit:              "Débit"
       credit:             "Crédit"
       comment:            "Commentaire"
-      check_transaction:  "Rapprocher la transaction"
-      edit:               "Editer"
-      destroy:            "Supprimer"
-      are_you_sure:       "Etes-vous certain de vouloir supprimer la transaction ?"
+      more_transactions:  "↓ Afficher plus de transactions ↓"
 
   helpers:
     submit:

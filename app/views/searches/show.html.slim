@@ -21,26 +21,11 @@ table.table.table-striped.table-hover
       th colspan="3"
 
   tbody
-    - @transactions.each do |transaction|
-      tr style=("color: gray;" if transaction.date > Date.today)
-        td = link_to \
-                transaction.checked ? fa_icon("check-square-o") : fa_icon("square-o"), \
-                easycheck_transaction_path(transaction), \
-                method: :insert, title: t('.check_transaction')
-        td = truncate(transaction.account.name, length: 20)
-        td = l(transaction.date)
-        td = transaction.category.name
-        td.text-right = number_to_currency(transaction.amount) if transaction.amount < 0
-        td.text-right = number_to_currency(transaction.amount) if transaction.amount >= 0
-        td = truncate(transaction.comment, length: 50)
+    = render partial: "transaction", locals: { transactions: @transactions }
 
-        td = link_to (fa_icon "edit", text: t('.edit')), \
-              edit_transaction_path(transaction, search_id: params[:id]), \
-              data: {no_turbolink: true}, \
-              title: t('.edit')
+= image_tag "loading.gif", style: "display:none;", class: "loading center-block"
 
-        td = link_to (fa_icon "trash-o", text: t('.destroy')), \
-              transaction_path(transaction), \
-              method: :delete, \
-              data: { confirm: t('.are_you_sure') }, \
-              title: t('.destroy')
+= link_to t('.more_transactions'), \
+          @search, \
+          { class:  "btn btn-primary center-block", \
+            id:     "more_transactions" }

@@ -1,9 +1,16 @@
 class SearchesController < ApplicationController
   # GET /searches/:id
   def show
+    limit = 15
     load_search
-    load_transactions
-    @nb_transactions = @transactions.count
+
+    if params[:offset]
+      load_transactions( params[:offset].to_i.abs, limit )
+    else
+      load_transactions
+      @nb_transactions  = @transactions.count
+      @transactions     = @transactions.limit( limit )
+    end
   end
 
   # GET /users/:user_id/searches/new
@@ -68,7 +75,7 @@ private ########################################################################
     @current_user.searches
   end
 
-  def load_transactions
+  def load_transactions(offset=nil, limit=nil)
     @transactions =  Transaction.all.active
                                 .search_accounts( sanitize_accounts(@search.accounts) )
                                 .search_amount(@search.min, @search.max)
@@ -76,6 +83,8 @@ private ########################################################################
                                 .search_categories( sanitize_categories(@search.categories) )
                                 .search_comment(@search.operator, @search.comment)
                                 .search_checked(@search.checked)
+                                .offset(offset)
+                                .limit(limit)
                                 .order_by_date_and_id_desc
   end
 
