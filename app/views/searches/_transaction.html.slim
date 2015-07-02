@@ -1,0 +1,24 @@
+- transactions.each do |transaction|
+  tr style=("color: gray;" if transaction.date > Date.today)
+    td = link_to \
+            transaction.checked ? fa_icon("check-square-o") : fa_icon("square-o"), \
+            easycheck_transaction_path(transaction), \
+            method: :insert, title: t('.check_transaction')
+
+    td            = truncate(transaction.account.name, length: 20)
+    td            = l(transaction.date)
+    td            = transaction.category.name
+    td.text-right = number_to_currency(transaction.amount) if transaction.amount < 0
+    td.text-right = number_to_currency(transaction.amount) if transaction.amount >= 0
+    td            = truncate(transaction.comment, length: 50)
+
+    td = link_to  (fa_icon "edit", text: t('.edit')), \
+                  edit_transaction_path(transaction, search_id: params[:id]), \
+                  data: { no_turbolink: true }, \
+                  title: t('.edit')
+
+    td = link_to  (fa_icon "trash-o", text: t('.destroy')), \
+                  transaction_path(transaction), \
+                  method: :delete, \
+                  data: { confirm: t('.are_you_sure') }, \
+                  title: t('.destroy')
