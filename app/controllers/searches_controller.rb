@@ -1,7 +1,7 @@
 class SearchesController < ApplicationController
   # GET /searches/:id
   def show
-    set_limit
+    load_limit
     load_search
 
     if params[:offset]
