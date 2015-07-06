@@ -19,6 +19,9 @@ class ApplicationController < ActionController::Base
   before_action :set_current_user, :set_current_accounts, :authorize
 
   private
+    def set_limit
+      @limit = 15
+    end
 
     def set_current_user
       @current_user = User.find_by(id: session[:user_id])

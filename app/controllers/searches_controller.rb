@@ -1,15 +1,15 @@
 class SearchesController < ApplicationController
   # GET /searches/:id
   def show
-    limit = 15
+    set_limit
     load_search
 
     if params[:offset]
-      load_transactions( params[:offset].to_i.abs, limit )
+      load_transactions( params[:offset].to_i.abs, @limit )
     else
       load_transactions
       @nb_transactions  = @transactions.count
-      @transactions     = @transactions.limit( limit )
+      @transactions     = @transactions.limit( @limit )
     end
   end
 
