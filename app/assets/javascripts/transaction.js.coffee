@@ -14,7 +14,7 @@ $(document).ready ->
       dataType: "script"
       success: ->
         $(".loading").hide()
-        if $("tbody").children("tr").length >= 35
+        if $("tbody").children("tr").length >= $("#total").text()
           $("#more_transactions").hide()
         else
           $("#more_transactions").show()
