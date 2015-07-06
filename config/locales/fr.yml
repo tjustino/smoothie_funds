@@ -289,7 +289,7 @@ fr:
       are_you_sure:           "Etes-vous certain de vouloir supprimer cette recherche ?"
     show:
       result:             "Résultat de recherche"
-      total:              "Total : %{total}"
+      total:              "Total : "
       account:            "Compte"
       date:               "Date"
       category:           "Catégorie"

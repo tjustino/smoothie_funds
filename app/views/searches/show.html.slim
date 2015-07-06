@@ -1,11 +1,14 @@
 .page-header
   h1 = t('.result')
 
+/ Resume
 .alert.alert-info.alert-dismissable
   = render partial: "resume", locals: { search: @search }
 
 / Total
-p.pull-right.label.label-info = t('.total', total: @nb_transactions)
+p.pull-right.label.label-info
+  = t('.total')
+  span#total = @nb_transactions
 
 / Table
 table.table.table-striped.table-hover
@@ -23,9 +26,12 @@ table.table.table-striped.table-hover
   tbody
     = render partial: "transaction", locals: { transactions: @transactions }
 
+/ More transactions image / button
 = image_tag "loading.gif", style: "display:none;", class: "loading center-block"
 
-= link_to t('.more_transactions'), \
-          @search, \
-          { class:  "btn btn-primary center-block", \
-            id:     "more_transactions" }
+- if @nb_transactions >= @limit
+  = button_to t('.more_transactions'), \
+              @search, \
+              { method: :get, \
+                class:  "btn btn-primary center-block", \
+                id:     "more_transactions" }
