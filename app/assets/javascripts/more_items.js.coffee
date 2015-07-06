@@ -9,7 +9,7 @@ $(document).ready ->
 
     $.ajax
       type: "GET"
-      url: $(this).attr("href")
+      url: $(this).attr("action")
       data: offset: nb_items
       dataType: "script"
       success: ->
