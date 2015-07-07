@@ -2,8 +2,7 @@ h1 = t('.listing_schedules', current_account: @current_account.name)
 p.pull-right.label.label-info = t('.total', total: @schedules.count)
 
 h3 = link_to (fa_icon "plus-circle", text: t('.new_schedule')), \
-                new_account_schedule_path, class: "btn btn-primary", \
-                data: {no_turbolink: true}
+                new_account_schedule_path, class: "btn btn-primary"
 
 table.table.table-striped.table-hover
   thead
@@ -28,8 +27,7 @@ table.table.table-striped.table-hover
         td = schedule.operation.category.name
         td.text-right = number_to_currency(schedule.operation.amount)
         td = truncate(schedule.operation.comment, length: 30)
-        td = link_to (fa_icon "edit", text: t('.edit')), \
-              edit_schedule_path(schedule), data: {no_turbolink: true}
+        td = link_to (fa_icon "edit", text: t('.edit')), edit_schedule_path(schedule)
         td = link_to (fa_icon "trash-o", text: t('.destroy')), \
               schedule_path(schedule), \
               method: :delete, data: { confirm: t('.are_you_sure') }

@@ -6,8 +6,7 @@ p
   span.text-muted.nowrap = number_to_currency(@sum_checked)
 
 h3 = link_to (fa_icon "plus-circle", text: t('.new_transaction')), \
-                new_account_transaction_path, class: "btn btn-primary", \
-                data: {no_turbolink: true}
+                new_account_transaction_path, class: "btn btn-primary"
 
 table.table.table-striped.table-hover
   thead
@@ -37,7 +36,6 @@ table.table.table-striped.table-hover
 
         td = link_to (fa_icon "edit", text: t('.edit')), \
               edit_transaction_path(transaction), \
-              data: {no_turbolink: true}, \
               title: t('.edit')
         td = link_to (fa_icon "trash-o", text: t('.destroy')), \
               transaction_path(transaction), \

@@ -12,7 +12,7 @@ gem "sass-rails",   "~> 5.0"    # Use SCSS for stylesheets
 gem "uglifier"                  # Use Uglifier as compressor for JavaScript assets
 gem "coffee-rails", "~> 4.1.0"  # Use CoffeeScript for .js.coffee assets and views
 gem "jquery-rails"              # Use jquery as the JavaScript library
-gem "turbolinks"                # Make following links in web application faster
+#gem "turbolinks"               # Make following links in web application faster
 gem "jbuilder",     "~> 2.0"    # Build JSON APIs with ease
 gem "bcrypt",       "~> 3.1.7"  # Use ActiveModel has_secure_password
 

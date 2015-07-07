@@ -3,8 +3,8 @@ html
   head
     title Smoothie Funds#{" - DEV" if Rails.env.development?}
     = favicon_link_tag "favicon.ico"
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = stylesheet_link_tag 'application', media: 'all'
+    = javascript_include_tag 'application'
     = csrf_meta_tags
     meta name="viewport" content="width=device-width, initial-scale=1.0"
 
@@ -36,8 +36,7 @@ html
                         li = link_to account.name, account_transactions_path(account)
                       li.divider role="presentation"
                         li = link_to  ( fa_icon "search", text: t('.search') ), \
-                                      new_user_search_path(@current_user), \
-                                      data: {no_turbolink: true}
+                                      new_user_search_path(@current_user)
 
                   / dropdown schedules
                   li.dropdown class=("active" if params[:controller] == "schedules")

@@ -14,7 +14,6 @@
 
     td = link_to  (fa_icon "edit", text: t('.edit')), \
                   edit_transaction_path(transaction, search_id: params[:id]), \
-                  data: { no_turbolink: true }, \
                   title: t('.edit')
 
     td = link_to  (fa_icon "trash-o", text: t('.destroy')), \
