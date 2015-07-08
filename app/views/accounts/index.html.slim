@@ -1,9 +1,15 @@
 h1 = t('.listing_accounts')
-p.pull-right.label.label-info = t('.total', total: @accounts.count)
 
+/ Total
+p.pull-right.label.label-info
+  = t('.total')
+  span#total = @nb_accounts
+
+/ New account
 h3 = link_to (fa_icon "plus-circle", text: t('.new_account')), \
                                 new_account_path, class: "btn btn-primary"
 
+/ Table
 table.table.table-striped.table-hover
   thead
     tr
@@ -12,11 +18,14 @@ table.table.table-striped.table-hover
       th colspan="3"
 
   tbody
-    - @accounts.each do |account|
-      tr style=("color: gray;" if account.hidden == true)
-        td = account.name
-        td = number_to_currency(account.initial_balance)
-        td = link_to (fa_icon "edit", text: t('.edit')), edit_account_path(account)
-        td = link_to (fa_icon "trash-o", text: t('.destroy')), account_path(account), \
-                              method: :delete, \
-                              data: { confirm: t('.are_you_sure', account: account.name) }
+    = render partial: "account", locals: { accounts: @accounts }
+
+/ More transactions image / button
+= image_tag "loading.gif", style: "display:none;", class: "loading center-block"
+
+- if @nb_accounts >= @limit
+  = button_to t('.more_accounts'), \
+              accounts_path, \
+              { method: :get, \
+                class:  "btn btn-primary center-block", \
+                id:     "more_items" }

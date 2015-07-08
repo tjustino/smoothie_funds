@@ -14,6 +14,10 @@ fr:
       successfully_destroyed: "Le compte a bien été supprimé"
       cant_destroy:           "Le compte ne peut pas être supprimé car des catégories et/ou transactions y sont liées"
     # views
+    account:
+      edit:             "Editer"
+      destroy:          "Supprimer"
+      are_you_sure:     "Etes-vous certain de vouloir supprimer le compte « %{account} » ?"
     form:
       name:             "Nom"
       initial_balance:  "Balance initiale"
@@ -23,13 +27,11 @@ fr:
       edit_account:     "Editer le compte"
     index:
       listing_accounts: "Liste des comptes"
-      total:            "Total : %{total}"
+      total:            "Total : "
       new_account:      "Nouveau compte"
       name:             "Nom"
       initial_balance:  "Balance initiale"
-      edit:             "Editer"
-      destroy:          "Supprimer"
-      are_you_sure:     "Etes-vous certain de vouloir supprimer le compte « %{account} » ?"
+      more_accounts:    "↓ Afficher plus de comptes ↓"
     new:
       create_account:   "Créer un compte"
 

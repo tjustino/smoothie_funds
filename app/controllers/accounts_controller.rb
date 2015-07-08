@@ -2,7 +2,15 @@ class AccountsController < ApplicationController
 
   # GET /accounts
   def index
-    load_accounts
+    load_limit
+
+    if params[:offset]
+      load_accounts( params[:offset].to_i.abs, @limit )
+    else
+      load_accounts
+      @nb_accounts  = @accounts.count
+      @accounts     = @accounts.limit( @limit )
+    end
   end
 
   # GET /accounts/new
@@ -43,8 +51,8 @@ class AccountsController < ApplicationController
 
   private ######################################################################
 
-    def load_accounts
-      @accounts ||= current_accounts.order_by_name
+    def load_accounts(offset=nil, limit=nil)
+      @accounts ||= current_accounts.order_by_name.offset(offset).limit(limit)
     end
 
     def load_account
