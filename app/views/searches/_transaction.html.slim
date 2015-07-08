@@ -3,7 +3,10 @@
     td = link_to \
             transaction.checked ? fa_icon("check-square-o") : fa_icon("square-o"), \
             easycheck_transaction_path(transaction), \
-            method: :insert, title: t('.check_transaction')
+            method: :post, \
+            remote: true, \
+            title: t('.check_transaction'), \
+            id: "check_#{transaction.id}"
 
     td            = truncate(transaction.account.name, length: 20)
     td            = l(transaction.date)

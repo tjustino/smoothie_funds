@@ -53,9 +53,12 @@ class TransactionsController < ApplicationController
     @transaction.toggle :checked
     @transaction.updated_by = @current_user.id
 
-    if @transaction.save
-      # TODO if activerecord send an error, redirect_to :back is broken
-      redirect_to :back, notice: t('.successfully_checked')
+    respond_to do |format|
+      if @transaction.save
+        # TODO if activerecord send an error, redirect_to :back is broken
+        format.html { redirect_to :back, notice: t('.successfully_checked') }
+        format.js   {}
+      end
     end
   end
 
