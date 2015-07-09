@@ -3,8 +3,14 @@ class CategoriesController < ApplicationController
 
   # GET /accounts/:account_id/categories
   def index
-    load_categories
-    load_other_accounts
+    load_limit
+
+    if params[:offset]
+      load_categories( params[:offset].to_i.abs, @limit )
+    else
+      load_categories( nil, @limit )
+      load_other_accounts
+    end
   end
 
   # GET /accounts/:account_id/categories/new
@@ -61,10 +67,9 @@ class CategoriesController < ApplicationController
 
   private ######################################################################
 
-    def load_categories
-      #TODO remove kaminari
+    def load_categories(offset=nil, limit=nil)
       @nb_categories = current_categories.count
-      @categories ||= current_categories.order_by_name.page(params[:page]).per(20)
+      @categories ||= current_categories.offset(offset).limit(limit).order_by_name
     end
 
     def load_other_accounts

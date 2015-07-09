@@ -45,6 +45,11 @@ fr:
       successfully_destroyed: "La catégorie a bien été supprimée"
       cant_destroy:           "La catégorie ne peut pas être supprimée car des transactions y sont liées"
     # views
+    category:
+      time:             "%{total} fois"
+      edit:             "Editer"
+      destroy:          "Supprimer"
+      are_you_sure:     "Etes-vous certain de vouloir supprimer la catégorie « %{category} » ?"
     form:
       name:             "Nom"
       back:             "Retour arrière"
@@ -60,15 +65,12 @@ fr:
       edit_category:    "Editer la catégorie"
     index:
       listing_categories: "Liste des catégories du %{current_account}"
-      total:            "Total : %{total}"
+      total:            "Total : "
       new_category:     "Nouvelle catégorie"
       import_from:      "Importer depuis..."
       name:             "Nom"
       use:              "Utilisation"
-      time:             "%{total} fois"
-      edit:             "Editer"
-      destroy:          "Supprimer"
-      are_you_sure:     "Etes-vous certain de vouloir supprimer la catégorie « %{category} » ?"
+      more_categories:  "↓ Afficher plus de catégories ↓"
     new:
       create_category:  "Créer la catégorie"
 
