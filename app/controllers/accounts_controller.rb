@@ -52,7 +52,7 @@ class AccountsController < ApplicationController
   private ######################################################################
 
     def load_accounts(offset=nil, limit=nil)
-      @accounts ||= current_accounts.order_by_name.offset(offset).limit(limit)
+      @accounts ||= current_accounts.offset(offset).limit(limit).order_by_name
     end
 
     def load_account
