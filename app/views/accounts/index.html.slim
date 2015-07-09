@@ -20,7 +20,7 @@ table.table.table-striped.table-hover
   tbody
     = render partial: "account", locals: { accounts: @accounts }
 
-/ More transactions image / button
+/ More accounts
 = image_tag "loading.gif", style: "display:none;", class: "loading center-block"
 
 - if @nb_accounts >= @limit
