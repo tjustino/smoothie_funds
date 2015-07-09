@@ -7,9 +7,7 @@ class AccountsController < ApplicationController
     if params[:offset]
       load_accounts( params[:offset].to_i.abs, @limit )
     else
-      load_accounts
-      @nb_accounts  = @accounts.count
-      @accounts     = @accounts.limit( @limit )
+      load_accounts( nil, @limit )
     end
   end
 
@@ -52,6 +50,7 @@ class AccountsController < ApplicationController
   private ######################################################################
 
     def load_accounts(offset=nil, limit=nil)
+      @nb_accounts = current_accounts.count
       @accounts ||= current_accounts.offset(offset).limit(limit).order_by_name
     end
 

@@ -1,0 +1,15 @@
+- schedules.each do |schedule|
+  tr
+    td = link_to fa_icon("magic"), \
+            insert_schedule_path(schedule), \
+            method: :insert, title: t('.insert_schedule')
+    td = l(schedule.next_time)
+    td = t('.frequency_period', frequency: schedule.frequency.to_s, \
+                                period: easy_t(schedule.period) )
+    td = schedule.operation.category.name
+    td.text-right = number_to_currency(schedule.operation.amount)
+    td = truncate(schedule.operation.comment, length: 30)
+    td = link_to (fa_icon "edit", text: t('.edit')), edit_schedule_path(schedule)
+    td = link_to (fa_icon "trash-o", text: t('.destroy')), \
+          schedule_path(schedule), \
+          method: :delete, data: { confirm: t('.are_you_sure') }

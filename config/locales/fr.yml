@@ -184,26 +184,28 @@ fr:
       amount:           "Montant"
       checked:          "Rapprochée"
       comment:          "Commentaire"
-    edit:
-      edit_schedule:      "Editer l'échéancier"
-    index:
-      listing_schedules:  "Liste des échéanciers du %{current_account}"
-      total:              "Total : %{total}"
-      new_schedule:       "Nouvel échéancier"
+    schedule:
       insert_schedule:    "Insérer la prochaine échéance dans les transactions"
-      next_time:          "Prochaine échéance"
-      frequency:          "Fréquence"
       frequency_period:   "Tous les %{frequency} %{period}"
       days:               "jours"
       weeks:              "semaines"
       months:             "mois"
       years:              "ans"
-      category:           "Catégorie"
-      amount:             "Montant"
-      comment:            "Commentaire"
       edit:               "Editer"
       destroy:            "Supprimer"
       are_you_sure:       "Etes-vous certain de vouloir supprimer cet échéancier ?"
+    edit:
+      edit_schedule:      "Editer l'échéancier"
+    index:
+      listing_schedules:  "Liste des échéanciers du %{current_account}"
+      total:              "Total : "
+      new_schedule:       "Nouvel échéancier"
+      next_time:          "Prochaine échéance"
+      frequency:          "Fréquence"
+      category:           "Catégorie"
+      amount:             "Montant"
+      comment:            "Commentaire"
+      more_schedules:     "↓ Afficher plus d'échéanciers ↓"
     new:
       create_schedule:    "Créer l'échéancier"
 

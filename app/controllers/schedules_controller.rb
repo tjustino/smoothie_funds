@@ -3,7 +3,13 @@ class SchedulesController < ApplicationController
 
   # GET /accounts/:account_id/schedules
   def index
-    load_schedules
+    load_limit
+
+    if params[:offset]
+      load_schedules( params[:offset].to_i.abs, @limit )
+    else
+      load_schedules( nil, @limit )
+    end
   end
 
   # GET /accounts/:account_id/schedules/new
@@ -78,10 +84,9 @@ class SchedulesController < ApplicationController
 
   private ######################################################################
 
-    def load_schedules
-      #TODO remove kaminari
+    def load_schedules(offset=nil, limit=nil)
       @nb_schedules = current_schedules.count
-      @schedules ||= current_schedules.order_by_next_time_and_id.page(params[:page]).per(20)
+      @schedules ||= current_schedules.offset(offset).limit(limit).order_by_next_time_and_id
     end
 
     def load_schedule
