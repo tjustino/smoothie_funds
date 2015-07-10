@@ -8,6 +8,7 @@ class SchedulesController < ApplicationController
     if params[:offset]
       load_schedules( params[:offset].to_i.abs, @limit )
     else
+      @limit = params[:limit].to_i * @limit unless params[:limit].blank?
       load_schedules( nil, @limit )
     end
   end
@@ -79,7 +80,15 @@ class SchedulesController < ApplicationController
     transaction.save
     @schedule.save
 
-    redirect_to :back, notice: t('.successfully_inserted')
+    if Rails.application.routes.recognize_path(request.referrer)[:controller] == "schedules"
+      load_limit
+      redirect_to account_schedules_url(
+                              @current_account, 
+                              limit: (params[:index].to_f / @limit.to_f).ceil ),
+                  notice: t('.successfully_inserted')
+    else
+      redirect_to dashboard_url, notice: t('.successfully_inserted')
+    end
   end
 
   private ######################################################################
