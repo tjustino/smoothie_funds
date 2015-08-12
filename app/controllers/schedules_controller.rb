@@ -66,7 +66,6 @@ class SchedulesController < ApplicationController
 
   # POST /schedules/:id/insert
   def insert
-    #TODO to be refactored
     load_schedule
 
     transaction = @schedule.operation.dup
