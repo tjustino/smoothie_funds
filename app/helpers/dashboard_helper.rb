@@ -14,7 +14,8 @@ module DashboardHelper
   end
 
   def current_date(account)
-    l( @current_transactions.where(account: account).maximum(:date) )
+    max_date = @current_transactions.where(account: account).maximum(:date)
+    max_date.nil? ? l( Date.today ) : l( max_date )
   end
 
   def future_balance(account)
