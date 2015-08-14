@@ -1,7 +1,7 @@
 ---
 # Server options
 socket: tmp/sockets/thin.sock
-chdir: /appli/seb-app/current
+chdir: /home/app/smoothiefunds/current
 
 # SSL options
 #ssl: true
