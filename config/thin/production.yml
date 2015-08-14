@@ -9,7 +9,7 @@ max_conns: 1024
 require: []
 environment: production
 max_persistent_conns: 512
-servers: 2  # 1 per core
+servers: 1  # 1 per core ( cat /proc/cpuinfo )
 threaded: true
 no-epoll: true
 daemonize: true
