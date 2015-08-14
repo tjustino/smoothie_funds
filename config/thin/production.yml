@@ -1,6 +1,6 @@
 --- 
-user: www
-group: www
+user: app
+group: app
 pid: tmp/pids/thin.pid
 timeout: 30
 wait: 30

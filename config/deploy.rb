@@ -1,29 +1,25 @@
-set :application, "smoothiefunds"
+# capistrano
+set :application,   "smoothiefunds"
+set :repo_url,      "git@github.com:tjustino/smoothie_funds.git"
+set :deploy_user,   "app"
+set :deploy_to,     "/home/#{fetch(:deploy_user)}/#{fetch(:application)}"
+set :linked_files,  fetch(:linked_files, []).push(  "config/database.yml",
+                                                    "config/secrets.yml" )
+set :linked_dirs,   fetch(:linked_dirs, []).push(   "bin",
+                                                    "log",
+                                                    "tmp/pids",
+                                                    "tmp/cache",
+                                                    "tmp/sockets",
+                                                    "vendor/bundle",
+                                                    "public/system" )
 
-# setup repo
-set :scm,       :git
-set :repo_url,  "git@github.com:tjustino/smoothie_funds.git"
-
-# setup deploy details
-set :deploy_user, "app"
-set :deploy_to,   "/home/#{fetch(:deploy_user)}/#{fetch(:application)}"
-
-# setup ssh
-set :ssh_options, { forward_agent: true }
-
-# setup rbenv
+# capistrano-rbenv
 set :rbenv_type,      :user
 set :rbenv_ruby,      "2.2.2"
 set :rbenv_prefix,    "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 set :rbenv_map_bins,  %w{rake gem bundle ruby rails}
 
-# files/dirs we want symlinking to shared
-set :linked_files,  %w{config/database.yml config/secrets.yml}
-set :linked_dirs,   %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
-
-# how many old releases do we want to keep
-set :keep_releases, 5
-
+# create commands cap [production|qualification] deploy:[start|stop|restart]
 namespace :deploy do
 
   COMMANDS = %w(start stop restart)
