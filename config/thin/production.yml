@@ -14,4 +14,4 @@ threaded: true
 no-epoll: true
 daemonize: true
 socket: tmp/sockets/thin.sock
-chdir: /home/www/smoothiefunds/current
+chdir: /home/app/smoothiefunds/current
