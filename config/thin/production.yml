@@ -1,17 +1,33 @@
---- 
+---
+# Server options
+socket: tmp/sockets/thin.sock
+chdir: /appli/seb-app/current
+
+# SSL options
+#ssl: true
+
+# Adapter options
+environment: production
+
+# Daemon options
+daemonize: true
+log: log/thin.log
+pid: tmp/pids/thin.pid
 user: app
 group: app
-pid: tmp/pids/thin.pid
-timeout: 30
+tag: smoothiefunds@production
+
+# Cluster options
+#servers: 1
+onebyone: true
 wait: 30
-log: log/thin.log
+
+# Tuning options
+timeout: 30
 max_conns: 1024
-require: []
-environment: production
 max_persistent_conns: 512
-servers: 1  # 1 per core ( cat /proc/cpuinfo )
 threaded: true
 no-epoll: true
-daemonize: true
-socket: tmp/sockets/thin.sock
-chdir: /home/app/smoothiefunds/current
+
+# Common options
+#require: []

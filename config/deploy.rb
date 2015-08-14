@@ -1,8 +1,7 @@
 # capistrano
 set :application,   "smoothiefunds"
 set :repo_url,      "git@github.com:tjustino/smoothie_funds.git"
-set :deploy_user,   "app"
-set :deploy_to,     "/home/#{fetch(:deploy_user)}/#{fetch(:application)}"
+set :deploy_to,     "/home/app/#{fetch(:application)}"
 set :linked_files,  fetch(:linked_files, []).push(  "config/database.yml",
                                                     "config/secrets.yml" )
 set :linked_dirs,   fetch(:linked_dirs, []).push(   "bin",
