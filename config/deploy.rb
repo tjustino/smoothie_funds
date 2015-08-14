@@ -25,7 +25,7 @@ namespace :deploy do
 
   COMMANDS.each do |command|
     task command do
-      on roles(:app), in: :sequence, wait: 5 do
+      on roles(:web), in: :sequence, wait: 5 do
         within current_path do
           execute :bundle, "exec thin #{command} -O --tag '#{fetch(:application)} #{fetch(:stage)}' -C config/thin/#{fetch(:stage)}.yml"
         end
