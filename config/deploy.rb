@@ -5,7 +5,7 @@ set :scm,       :git
 set :repo_url,  "git@github.com:tjustino/smoothie_funds.git"
 
 # setup deploy details
-set :deploy_user, "www"
+set :deploy_user, "app"
 set :deploy_to,   "/home/#{fetch(:deploy_user)}/#{fetch(:application)}"
 
 # setup ssh
