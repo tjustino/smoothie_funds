@@ -30,7 +30,7 @@ $(document).ready ->
       window.clearTimeout timeout
     # Object window.setTimeout(String fonc, Integer delai)
     # Déclenche une minuterie et appelle le code javascript fonc dans delai millisecondes.
-    timeout = window.setTimeout(check, 150)
+    timeout = window.setTimeout(check, 250)
 
 $(document).ready ->
   $("#more_items").click (e) ->
