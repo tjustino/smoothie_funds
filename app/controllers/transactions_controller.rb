@@ -3,7 +3,14 @@ class TransactionsController < ApplicationController
 
   # GET /accounts/:account_id/transactions
   def index
-    load_transactions
+    load_limit
+
+    if params[:offset]
+      load_transactions( params[:offset].to_i.abs, @limit )
+    else
+      @limit = params[:limit].to_i * @limit unless params[:limit].blank?
+      load_transactions( nil, @limit )
+    end
   end
 
   # GET /accounts/:account_id/transactions/new
@@ -55,6 +62,8 @@ class TransactionsController < ApplicationController
 
     respond_to do |format|
       if @transaction.save
+        @sum_checked =  @current_account.initial_balance +
+                        current_transactions.checked.sum(:amount)
         # TODO if activerecord send an error, redirect_to :back is broken
         format.html { redirect_to :back, notice: t('.successfully_checked') }
         format.js   {}
@@ -63,69 +72,55 @@ class TransactionsController < ApplicationController
   end
 
 
-  private ######################################################################
+private ########################################################################
 
-    def load_transactions
-      #TODO remove kaminari
-      @nb_transactions = current_transactions.count
-      transanstions_without_balances ||= current_transactions.active.order_by_date_and_id.to_a
+  def load_transactions(offset=nil, limit=nil)
+    @initial_balance  =   @current_account.initial_balance
+    @nb_transactions  =   current_transactions.count
+    @sum_checked      =   @initial_balance + 
+                          current_transactions.checked.sum(:amount)
+    @transactions     ||= current_transactions.offset(offset)
+                                              .limit(limit)
+                                              .order_by_date_and_id
+  end
 
-      transanstions_without_balances.each_index do |index|
-        if index == 0
-          transanstions_without_balances[index].balance = 
-                                    @current_account.initial_balance +
-                                    transanstions_without_balances[index].amount
-        else
-          transanstions_without_balances[index].balance = 
-                              transanstions_without_balances[index-1].balance +
-                              transanstions_without_balances[index].amount
-        end
+  def load_transaction
+    @transaction ||= current_transactions.find(params[:id])
+  end
+
+  def build_transaction
+    @transaction ||= current_transactions.build
+    @transaction.attributes = transaction_params
+  end
+
+  def transaction_params
+    transaction_params = params[:transaction]
+    transaction_params ? transaction_params.permit( :category_id,
+                                                    :date,
+                                                    :amount,
+                                                    :checked,
+                                                    :comment ) : {}
+  end
+
+  def save_transaction(notice)
+    if @transaction.save
+      if params[:sign] == "credit"
+        @transaction.amount = @transaction.amount.abs
+      else
+        @transaction.amount = -1 * @transaction.amount.abs
       end
 
-      @sum_checked =  @current_account.initial_balance + 
-                      current_transactions.checked.sum(:amount)
+      userstamp(@transaction)
 
-      @transactions = Kaminari.paginate_array(transanstions_without_balances.reverse!)
-                              .page(params[:page]).per(20)
-    end
-
-    def load_transaction
-      @transaction ||= current_transactions.find(params[:id])
-    end
-
-    def build_transaction
-      @transaction ||= current_transactions.build
-      @transaction.attributes = transaction_params
-    end
-
-    def transaction_params
-      transaction_params = params[:transaction]
-      transaction_params ? transaction_params.permit( :category_id,
-                                                      :date,
-                                                      :amount,
-                                                      :checked,
-                                                      :comment ) : {}
-    end
-
-    def save_transaction(notice)
-      if @transaction.save
-        if params[:sign] == "credit"
-          @transaction.amount = @transaction.amount.abs
-        else
-          @transaction.amount = -1 * @transaction.amount.abs
-        end
-
-        userstamp(@transaction)
-
-        if flash[:search_id].nil?
-          redirect_to account_transactions_url(@current_account), notice: notice
-        else
-          redirect_to search_url(flash[:search_id]), notice: notice
-        end
+      if flash[:search_id].nil?
+        redirect_to account_transactions_url(@current_account), notice: notice
+      else
+        redirect_to search_url(flash[:search_id]), notice: notice
       end
     end
+  end
 
-    def current_transactions
-      @current_account.transactions
-    end
+  def current_transactions
+    @current_account.transactions.active
+  end
 end

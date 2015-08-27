@@ -1,0 +1,26 @@
+- add_balances(transactions).each do |transaction|
+  tr class=("danger" if transaction.balance < 0) style=("color: gray;" if transaction.date > Date.today)
+    td = link_to \
+            transaction.checked ? fa_icon("check-square-o") : fa_icon("square-o"), \
+            easycheck_transaction_path(transaction), \
+            method: :post, \
+            remote: true, \
+            title: t('.check_transaction'), \
+            id: "check_#{transaction.id}"
+
+    td = l(transaction.date)
+    td = transaction.category.name
+    td.text-right = number_to_currency(transaction.amount) if transaction.amount < 0
+    td.text-right = number_to_currency(transaction.amount) if transaction.amount >= 0
+    td.text-right = number_to_currency(transaction.balance)
+    td = truncate(transaction.comment, length: 50)
+
+    td = link_to (fa_icon "edit", text: t('.edit')), \
+          edit_transaction_path(transaction), \
+          title: t('.edit')
+
+    td = link_to (fa_icon "trash-o", text: t('.destroy')), \
+          transaction_path(transaction), \
+          method: :delete, \
+          data: { confirm: t('.are_you_sure') }, \
+          title: t('.destroy')

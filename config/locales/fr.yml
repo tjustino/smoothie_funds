@@ -135,22 +135,25 @@ fr:
       checked:          "Rapprochée"
       comment:          "Commentaire"
       back:             "Retour arrière"
+    sum_checked:
+      sum_checked:      "Somme des montants rappochés : "
+    transaction:
+      check_transaction:  "Rapprocher la transaction"
+      edit:               "Editer"
+      destroy:            "Supprimer"
+      are_you_sure:       "Etes-vous certain de vouloir supprimer la transaction ?"
     edit:
       edit_transaction: "Editer la transaction"
     index:
       listing_transactions: "Liste des transactions du %{current_account}"
-      total:            "Total : %{total}"
-      sum_checked:      "Somme des montants rappochés : "
-      new_transaction:  "Nouvelle transaction"
-      date:             "Date"
-      category:         "Catégorie"
-      debit:            "Débit"
-      credit:           "Crédit"
-      comment:          "Commentaire"
-      edit:             "Editer"
-      destroy:          "Supprimer"
-      are_you_sure:     "Etes-vous certain de vouloir supprimer la transaction ?"
-      check_transaction: "Rapprocher la transaction"
+      total:              "Total : "
+      new_transaction:    "Nouvelle transaction"
+      date:               "Date"
+      category:           "Catégorie"
+      debit:              "Débit"
+      credit:             "Crédit"
+      comment:            "Commentaire"
+      more_transactions:  "↓ Afficher plus de transactions ↓"
     new:
       create_transaction: "Créer la transaction"
 

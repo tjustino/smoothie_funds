@@ -1,13 +1,18 @@
 h1 = t('.listing_transactions', current_account: @current_account.name)
-p.pull-right.label.label-info = t('.total', total: @nb_transactions)
 
-p
-  span.text-muted = t('.sum_checked', sum_checked: number_to_currency(@sum_checked))
-  span.text-muted.nowrap = number_to_currency(@sum_checked)
+/ Total
+p.pull-right.label.label-info
+  = t('.total')
+  span#total = @nb_transactions
 
+/ Sum checked
+= render partial: "sum_checked", locals: { sum_checked: @sum_checked }
+
+/ New transaction
 h3 = link_to (fa_icon "plus-circle", text: t('.new_transaction')), \
                 new_account_transaction_path, class: "btn btn-primary"
 
+/ Table
 table.table.table-striped.table-hover
   thead
     tr
@@ -21,26 +26,14 @@ table.table.table-striped.table-hover
       th colspan="3"
 
   tbody
-    - @transactions.each do |transaction|
-      tr class=("danger" if transaction.balance < 0) style=("color: gray;" if transaction.date > Date.today)
-        td = link_to \
-                transaction.checked ? fa_icon("check-square-o") : fa_icon("square-o"), \
-                easycheck_transaction_path(transaction), \
-                method: :insert, title: t('.check_transaction')
-        td = l(transaction.date)
-        td = transaction.category.name
-        td.text-right = number_to_currency(transaction.amount) if transaction.amount < 0
-        td.text-right = number_to_currency(transaction.amount) if transaction.amount >= 0
-        td.text-right = number_to_currency(transaction.balance)
-        td = truncate(transaction.comment, length: 50)
+    = render partial: "transaction", locals: { transactions: @transactions }
 
-        td = link_to (fa_icon "edit", text: t('.edit')), \
-              edit_transaction_path(transaction), \
-              title: t('.edit')
-        td = link_to (fa_icon "trash-o", text: t('.destroy')), \
-              transaction_path(transaction), \
-              method: :delete, \
-              data: { confirm: t('.are_you_sure') }, \
-              title: t('.destroy')
+/ More accounts
+= image_tag "loading.gif", style: "display:none;", class: "loading center-block"
 
-= paginate @transactions
+- if @nb_transactions >= @limit
+  = button_to t('.more_transactions'), \
+              account_transactions_path(@current_account), \
+              { method: :get, \
+                class:  "btn btn-primary center-block", \
+                id:     "more_items" }
