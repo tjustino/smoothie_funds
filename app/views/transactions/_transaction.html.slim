@@ -1,4 +1,4 @@
-- add_balances(transactions).each do |transaction|
+- transactions.each do |transaction|
   tr class=("danger" if transaction.balance < 0) style=("color: gray;" if transaction.date > Date.today)
     td = link_to \
             transaction.checked ? fa_icon("check-square-o") : fa_icon("square-o"), \

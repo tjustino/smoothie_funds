@@ -8,8 +8,7 @@ class TransactionsController < ApplicationController
     if params[:offset]
       load_transactions( params[:offset].to_i.abs, @limit )
     else
-      @limit = params[:limit].to_i * @limit unless params[:limit].blank?
-      load_transactions( nil, @limit )
+      load_transactions( 0, @limit )
     end
   end
 
@@ -74,14 +73,28 @@ class TransactionsController < ApplicationController
 
 private ########################################################################
 
-  def load_transactions(offset=nil, limit=nil)
-    @initial_balance  =   @current_account.initial_balance
-    @nb_transactions  =   current_transactions.count
-    @sum_checked      =   @initial_balance + 
-                          current_transactions.checked.sum(:amount)
-    @transactions     ||= current_transactions.offset(offset)
-                                              .limit(limit)
-                                              .order_by_date_and_id
+  def load_transactions(offset=0, limit=nil)
+    my_transactions   = current_transactions.order_by_date_and_id_desc
+    @nb_transactions  = my_transactions.count
+
+    if offset == 0
+      @initial_balance = @current_account.initial_balance
+      @sum_checked     = @initial_balance + my_transactions.checked.sum(:amount)
+    end
+
+    @transactions = add_balances(my_transactions).to_a[offset, limit]
+  end
+
+  def add_balances(transactions)
+    transactions.reverse.each_with_index do |transaction, index|
+      if index == 0
+        transaction.balance = @current_account.initial_balance + transaction.amount
+      else
+        transaction.balance = transactions.reverse[index-1].balance + transaction.amount
+      end
+    end
+
+    return transactions
   end
 
   def load_transaction
