@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
 private ########################################################################
 
   def load_limit
-    @limit = 15
+    @limit = 20
   end
 
   def set_current_user
