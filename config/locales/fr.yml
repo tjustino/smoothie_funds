@@ -394,13 +394,3 @@ fr:
         separator: ","
         delimiter: " "
         format: "%n %u"
-
-################################################################################
-# Kaminari
-# https://github.com/amatsuda/kaminari/blob/bcb6c1357a1751b86f93aa724a3e5a250526cbbc/README.rdoc#i18n-and-labels
-################################################################################
-  views:
-    pagination:
-      first: "&laquo;"
-      last: "&raquo;"
-      truncate: "&hellip;"
