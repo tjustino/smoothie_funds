@@ -13,7 +13,7 @@
     .col-sm-4
       = f.email_field :email, class: "form-control", placeholder: t('.email'), autofocus: true
 
-  - if params[:action] == "edit"
+  - if params[:action] == "edit" or params[:action] == "update"
     .form-group
       = f.label :name, t('.name'), class: "col-sm-2 control-label"
       .col-sm-4
