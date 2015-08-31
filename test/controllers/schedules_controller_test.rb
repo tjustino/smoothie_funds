@@ -112,7 +112,7 @@ class SchedulesControllerTest < ActionController::TestCase
   test "should insert transaction via schedule" do
     post_insert           @some_schedule
     assert_not_nil        assigns(:schedule)
-    assert_redirected_to  request.env['HTTP_REFERER']
+    assert_redirected_to  dashboard_url
     assert_equal          I18n.translate('schedules.insert.successfully_inserted'),
                           flash[:notice]
     assert_not_equal      @previous_next_time, @some_schedule.reload.next_time
@@ -169,7 +169,6 @@ class SchedulesControllerTest < ActionController::TestCase
     end
 
     def post_insert(schedule)
-      request.env['HTTP_REFERER'] = "/previous_link_url"
       @previous_next_time = schedule.next_time
 
       post :insert, id: schedule
