@@ -354,10 +354,11 @@ fr:
         name:     "Nom"
 
       transaction:
-        date:     "Date"
-        amount:   "Montant"
-        checked:  "Rapproché"
-        comment:  "Commentaire"
+        date:         "Date"
+        amount:       "Montant"
+        category_id:  "Catégorie"
+        checked:      "Rapproché"
+        comment:      "Commentaire"
 
       schedule:
         frequency:  "Fréquence"
@@ -366,7 +367,6 @@ fr:
 
       operation:
         amount:     "Montant"
-        #date:       "Date" -> en doublon avec "Prochaine échéance"
 
       user:
         name:     "Nom"
