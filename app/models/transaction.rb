@@ -32,15 +32,15 @@ class Transaction < ActiveRecord::Base
 
   validates_presence_of     :account_id, :category_id, :date, :amount
   validates_numericality_of :amount
+  validates_format_of       :date, with: /(19|20)\d{2}/i
 
+private ########################################################################
 
-  private ######################################################################
-
-    def format_amount
-      if amount.present?
-        self.amount = amount_before_type_cast.to_s.gsub(' ', '').gsub(',', '.')
-      end
+  def format_amount
+    if amount.present?
+      self.amount = amount_before_type_cast.to_s.gsub(' ', '').gsub(',', '.')
     end
+  end
 
   def self.search_accounts(accounts)
     where(account_id: accounts)
