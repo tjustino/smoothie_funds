@@ -40,7 +40,7 @@ GEM
       activerecord (>= 3.2, <= 4.3)
       rake (~> 10.4)
     arel (6.0.3)
-    autoprefixer-rails (6.0.2)
+    autoprefixer-rails (6.0.3)
       execjs
       json
     bcrypt (3.1.10)
@@ -93,7 +93,7 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
-    mime-types (2.6.1)
+    mime-types (2.6.2)
     mini_portile (0.6.2)
     minitest (5.8.0)
     net-scp (1.2.1)
@@ -146,7 +146,7 @@ GEM
     slim (3.0.6)
       temple (~> 0.7.3)
       tilt (>= 1.3.3, < 2.1)
-    spring (1.3.6)
+    spring (1.4.0)
     sprockets (3.3.4)
       rack (~> 1.0)
     sprockets-rails (2.3.3)
