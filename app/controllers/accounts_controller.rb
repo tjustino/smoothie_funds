@@ -25,11 +25,6 @@ class AccountsController < ApplicationController
   # POST /accounts
   def create
     build_account
-
-    params[:user_ids].each do |user_id|
-      puts "@@@@@@@@@@@@@@@@@ #{user_id.id}"
-    end
-
     save_account( t('.successfully_created') ) or render 'new'
   end
 
