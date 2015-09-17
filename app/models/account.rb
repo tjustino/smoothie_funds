@@ -18,6 +18,8 @@ class Account < ActiveRecord::Base
   has_many                  :transactions,  dependent: :restrict_with_error
   has_many                  :schedules,     dependent: :delete_all
 
+  accepts_nested_attributes_for :users
+
   scope :order_by_name, -> { order(name: :asc) }
   scope :active,        -> { where(hidden: false) }
   scope :excluding,     ->(account) { where.not(id: account) }

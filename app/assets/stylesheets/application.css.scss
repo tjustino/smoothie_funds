@@ -17,10 +17,6 @@
 @import "bootstrap";
 @import "font-awesome";
 
-//body {
-//  background-color: #FBF7EF;
-//}
-
 td, .nowrap {
   white-space: nowrap;
 }
@@ -34,4 +30,8 @@ td, .nowrap {
   bottom: 0;
   right: 5px;
   background-color: #F5ECCE;
+}
+
+.share:nth-child(n+3) {
+  margin-top: 10px;
 }
