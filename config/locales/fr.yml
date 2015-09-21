@@ -22,9 +22,9 @@ fr:
     form:
       name:             "Nom"
       initial_balance:  "Balance initiale"
-      share:            "Partage"
+      share:            "Partagé avec"
       shared_email:     "Courriel"
-      help_share:       "Une fois établi, le lien entre personnes reste actif même lors de la mise à jour du courriel"
+      help_share:       "Une fois établi, le partage du compte reste actif même si vous mettez à jour votre courriel"
       hidden:           "Masquer ce compte"
       back:             "Retour arrière"
     edit:
@@ -35,7 +35,7 @@ fr:
       new_account:      "Nouveau compte"
       name:             "Nom"
       initial_balance:  "Balance initiale"
-      share:            "Partage"
+      share:            "Partagé avec"
       more_accounts:    "↓ Afficher plus de comptes ↓"
     new:
       create_account:   "Créer un compte"

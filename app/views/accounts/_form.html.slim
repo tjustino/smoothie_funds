@@ -27,8 +27,8 @@
         = f.fields_for :users, other_user do |shared_user|
           = shared_user.hidden_field :id
           = shared_user.email_field :email, class: "form-control share", readonly: "readonly"
-      / = email_field_tag :new_email, nil, class: "form-control share", placeholder: t('.shared_email')
-      / span.help-block = fa_icon "info-circle", text: t('.help_share')
+      = email_field_tag :new_email, nil, class: "form-control share", placeholder: t('.shared_email')
+      small.text-muted = fa_icon "info-circle", text: t('.help_share')
 
   .form-group
     .col-sm-offset-2.col-sm-2
