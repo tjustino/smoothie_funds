@@ -1,12 +1,23 @@
 - accounts.each do |account|
   tr style=("color: gray;" if account.hidden == true)
     td = account.name
+
     td = number_to_currency(account.initial_balance)
+
     - if account.users.count == 1
       td = t('.personal_account')
     - else
       td = show_other_users(account).html_safe
+
+    - if account.users.count != 1
+      td = link_to  (fa_icon "chain-broken", text: t('.unlink')), unlink_path(account), \
+                    method: :delete, \
+                    data: { confirm: t('.are_you_sure_unlink', account: account.name) }
+    - else
+      td
+
     td = link_to (fa_icon "edit", text: t('.edit')), edit_account_path(account)
-    td = link_to (fa_icon "trash-o", text: t('.destroy')), account_path(account), \
-                          method: :delete, \
-                          data: { confirm: t('.are_you_sure', account: account.name) }
+
+    td = link_to  (fa_icon "trash-o", text: t('.destroy')), account_path(account), \
+                  method: :delete, \
+                  data: { confirm: t('.are_you_sure', account: account.name) }

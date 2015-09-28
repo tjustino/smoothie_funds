@@ -46,5 +46,7 @@ Rails.application.routes.draw do
     end
   end
 
+  delete "accounts/:id/unlink(.:format)", to: "accounts#unlink", as: "unlink"
+
   root "dashboard#index", as: "dashboard"
 end
