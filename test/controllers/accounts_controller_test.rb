@@ -99,24 +99,55 @@ class AccountsControllerTest < ActionController::TestCase
     end
   end
 
+  ################################################## DELETE /accounts/:id/unlink
+  test "should unlink shared account" do
+    delete_unlink         accounts(:compte_commun)
+    assert_equal          1, accounts(:compte_commun).users.count
+    assert_redirected_to  accounts_path
+    assert_equal          I18n.translate('accounts.unlink.successfully_unlinked'),
+                          flash[:notice]
+  end
 
-  private ######################################################################
+  test "should not unlink personal account" do
+    delete_unlink         accounts(:courant_thomas)
+    assert_equal          1, accounts(:courant_thomas).users.count
+    assert_redirected_to  accounts_path
+    assert_equal          I18n.translate('accounts.unlink.cant_unlink'),
+                          flash[:warning]
+  end
 
-    def get_edit(account)
-      get :edit, id: account
-    end
+  test "should not unlink shared account - hacker way" do
+    delete_unlink         accounts(:compte_commun_jackpot)
+    assert_equal          2, accounts(:compte_commun_jackpot).users.count
+    assert_redirected_to  dashboard_url
+  end
 
-    def patch_update(account)
-      @previous_account_name = account.name
+  test "should not unlink shared account - unknow account" do
+    delete_unlink         @unknow_account
+    assert_redirected_to  dashboard_url
+  end
 
-      patch :update,
-            id: account,
-            account: {  name:             SecureRandom.hex,
-                        initial_balance:  rand(-100..100),
-                        hidden:           rand(0..1) == 1 ? true : false }
-    end
+private ########################################################################
 
-    def delete_destroy(account)
-      delete :destroy, id: account
-    end
+  def get_edit(account)
+    get :edit, id: account
+  end
+
+  def patch_update(account)
+    @previous_account_name = account.name
+
+    patch :update,
+          id: account,
+          account: {  name:             SecureRandom.hex,
+                      initial_balance:  rand(-100..100),
+                      hidden:           rand(0..1) == 1 ? true : false }
+  end
+
+  def delete_destroy(account)
+    delete :destroy, id: account
+  end
+
+  def delete_unlink(account)
+    delete :unlink, id: account
+  end
 end

@@ -21,3 +21,15 @@ emilie:
   name: Emilie
   password_digest: <%= BCrypt::Password.create('secret') %>
   accounts: courant_emilie, ldd_emilie, compte_commun
+
+benoit:
+  email: benoit@email.com
+  name: b.
+  password_digest: <%= BCrypt::Password.create('secret') %>
+  accounts: compte_commun_jackpot
+
+vanessa:
+  email: vanessa@email.com
+  name: Vanessa
+  password_digest: <%= BCrypt::Password.create('secret') %>
+  accounts: compte_commun_jackpot

@@ -67,3 +67,11 @@ compte_commun:
   updated_by: emilie.id
   hidden: false
   users: thomas, emilie
+
+compte_commun_jackpot:
+  name: Compte Commun Jackpot
+  initial_balance: 100_000
+  created_by: benoit.id
+  updated_by: benoit.id
+  hidden: false
+  users: benoit, vanessa
