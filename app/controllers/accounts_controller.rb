@@ -57,41 +57,38 @@ class AccountsController < ApplicationController
     end
   end
 
-  private ######################################################################
+private ########################################################################
 
-    def load_accounts(offset=nil, limit=nil)
-      @nb_accounts = current_accounts.count
-      @accounts ||= current_accounts.offset(offset).limit(limit).order_by_name
-    end
+  def load_accounts(offset=nil, limit=nil)
+    @nb_accounts = current_accounts.count
+    @accounts ||= current_accounts.offset(offset).limit(limit).order_by_name
+  end
 
-    def load_account
-      @account ||= current_accounts.find(params[:id])
-    end
+  def load_account
+    @account ||= current_accounts.find(params[:id])
+  end
 
-    def build_account
-      @account ||= current_accounts.build
-      @account.attributes = account_params
-    end
+  def build_account
+    @account ||= current_accounts.build
+    @account.attributes = account_params
+  end
 
-    def account_params
-      account_params = params[:account]
-      account_params ? account_params.permit( :name,
-                                              :initial_balance,
-                                              :hidden
-                                              # { users_attributes: 
-                                              #                 [ :id, :email ] }
-                                            ) : {}
-    end
+  def account_params
+    account_params = params[:account]
+    account_params ? account_params.permit( :name,
+                                            :initial_balance,
+                                            :hidden ) : {}
+  end
 
-    def save_account(notice)
-      if @account.save
-        @account.users << @current_user if params[:action] == "create"
-        userstamp(@account)
-        redirect_to accounts_url, notice: notice
-      end
+  def save_account(notice)
+    if @account.save
+      @account.users << @current_user if params[:action] == "create"
+      userstamp(@account)
+      redirect_to accounts_url, notice: notice
     end
+  end
 
-    def current_accounts
-      @current_user.accounts
-    end
+  def current_accounts
+    @current_user.accounts
+  end
 end
