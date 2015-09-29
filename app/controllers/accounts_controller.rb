@@ -49,7 +49,7 @@ class AccountsController < ApplicationController
   # DELETE /accounts/:id/unlink
   def unlink
     load_account
-    if @account.users.destroy(@current_user)
+    if @account.users.count > 1 and @account.users.destroy(@current_user)
       redirect_to accounts_url, notice: t('.successfully_unlinked')
     else
       flash[:warning] = t('.cant_unlink')
