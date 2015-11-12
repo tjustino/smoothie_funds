@@ -24,7 +24,9 @@ class UserTest < ActiveSupport::TestCase
   test "email and name must not be empty" do
     user = User.new
     assert user.invalid?
-    assert_equal [I18n.translate('activerecord.errors.messages.blank')], user.errors[:email]
+    assert_equal [I18n.translate('activerecord.errors.messages.blank'), 
+                  I18n.translate('activerecord.errors.messages.invalid')],
+                  user.errors[:email]
   end
 
   test "email must be unique" do
@@ -34,6 +36,26 @@ class UserTest < ActiveSupport::TestCase
                     password_confirmation:  "yopmail")
     assert user.invalid?
     assert_equal [I18n.translate('activerecord.errors.messages.taken')], user.errors[:email]
+  end
+
+  test "email must be valid" do
+    user1 = User.new( email:                  "username@domain",
+                      password:               "secret",
+                      password_confirmation:  "secret")
+    assert user1.invalid?
+    assert_equal [I18n.translate('activerecord.errors.messages.invalid')], user1.errors[:email]
+
+    user2 = User.new( email:                  "@domain.tld",
+                      password:               "secret",
+                      password_confirmation:  "secret")
+    assert user2.invalid?
+    assert_equal [I18n.translate('activerecord.errors.messages.invalid')], user2.errors[:email]
+
+    user3 = User.new( email:                  "username#domain.tld",
+                      password:               "secret",
+                      password_confirmation:  "secret")
+    assert user3.invalid?
+    assert_equal [I18n.translate('activerecord.errors.messages.invalid')], user3.errors[:email]
   end
 
   test "the password must be at least 6 characters long" do
