@@ -6,6 +6,7 @@ class AccountsControllerTest < ActionController::TestCase
     get             :index
     assert_response :success
     assert_not_nil  assigns(:accounts)
+    assert_not_nil  assigns(:pendings)
   end
 
   ############################################################ GET /accounts/new
@@ -100,17 +101,20 @@ class AccountsControllerTest < ActionController::TestCase
   end
 
   ################################################## DELETE /accounts/:id/unlink
+  # Vous n'êtes plus lié au compte
   test "should unlink shared account" do
+    assert_equal          2, accounts(:compte_commun).users.count
     delete_unlink         accounts(:compte_commun)
-    assert_equal          1, accounts(:compte_commun).users.count
+    assert_equal          1, accounts(:compte_commun).reload.users.count
     assert_redirected_to  accounts_path
     assert_equal          I18n.translate('accounts.unlink.successfully_unlinked'),
                           flash[:notice]
   end
 
   test "should not unlink personal account" do
-    delete_unlink         accounts(:courant_thomas)
     assert_equal          1, accounts(:courant_thomas).users.count
+    delete_unlink         accounts(:courant_thomas)
+    assert_equal          1, accounts(:courant_thomas).reload.users.count
     assert_redirected_to  accounts_path
     assert_equal          I18n.translate('accounts.unlink.cant_unlink'),
                           flash[:warning]
@@ -124,6 +128,94 @@ class AccountsControllerTest < ActionController::TestCase
 
   test "should not unlink shared account - unknow account" do
     delete_unlink         @unknow_account
+    assert_redirected_to  dashboard_url
+  end
+
+  ################################################## DELETE /accounts/:id/unpend
+  # Le compte « %{account} » n'est plus proposé au partage
+  test "should unpend shared account" do
+    assert_not_nil        accounts(:thomas_account_waiting_benoit).pending_user
+    delete_unpend         accounts(:thomas_account_waiting_benoit)
+    assert_nil            accounts(:thomas_account_waiting_benoit).reload.pending_user
+    assert_redirected_to  accounts_path
+    assert_equal          I18n.translate('accounts.unpend.successfully_unpend', 
+                                          account: accounts(:thomas_account_waiting_benoit).name),
+                          flash[:notice]
+  end
+
+  test "should not unpend shared account - hacker way" do
+    assert_not_nil        accounts(:courant_benoit).pending_user
+    delete_unpend         accounts(:courant_benoit)
+    assert_redirected_to  dashboard_url
+    assert_not_nil        accounts(:courant_benoit).reload.pending_user
+  end
+
+  test "should not unpend shared account - unknow account" do
+    delete_unpend         @unknow_account
+    assert_redirected_to  dashboard_url
+  end
+
+  ################################################### POST /accounts/:id/sharing
+  # Vous partagez maintenant le compte « %{account} »
+  test "should share an account" do
+    session[:user_id]     = users(:benoit).id if defined? session
+    assert_not_nil        accounts(:thomas_account_waiting_benoit).pending_user
+    assert_equal          1, accounts(:thomas_account_waiting_benoit).users.count
+    post_sharing          accounts(:thomas_account_waiting_benoit)
+    assert_nil            accounts(:thomas_account_waiting_benoit).reload.pending_user
+    assert_equal          2, accounts(:thomas_account_waiting_benoit).reload.users.count
+    assert_redirected_to  accounts_path
+    assert_equal          I18n.translate('accounts.sharing.successfully_sharing', 
+                                          account: accounts(:thomas_account_waiting_benoit).name),
+                          flash[:notice]
+  end
+
+  test "should not share an account - hacker way" do
+    assert_not_nil        accounts(:courant_benoit).pending_user
+    assert_equal          1, accounts(:courant_benoit).users.count
+    post_sharing          accounts(:courant_benoit)
+    assert_not_nil        accounts(:courant_benoit).reload.pending_user
+    assert_equal          1, accounts(:courant_benoit).reload.users.count
+    assert_redirected_to  accounts_path
+    assert_equal          I18n.translate('accounts.sharing.cant_sharing', 
+                                          account: accounts(:courant_benoit).name),
+                          flash[:warning]
+  end
+
+  test "should not share an account - unknow account" do
+    post_sharing          @unknow_account
+    assert_redirected_to  dashboard_url
+  end
+
+  ############################################### DELETE /accounts/:id/unsharing
+  # Le compte « %{account} » n'est plus proposé au partage
+  test "should unshare an account" do
+    session[:user_id]     = users(:benoit).id if defined? session
+    assert_not_nil        accounts(:thomas_account_waiting_benoit).pending_user
+    assert_equal          1, accounts(:thomas_account_waiting_benoit).users.count
+    delete_unsharing      accounts(:thomas_account_waiting_benoit)
+    assert_nil            accounts(:thomas_account_waiting_benoit).reload.pending_user
+    assert_equal          1, accounts(:thomas_account_waiting_benoit).reload.users.count
+    assert_redirected_to  accounts_path
+    assert_equal          I18n.translate('accounts.unsharing.successfully_unsharing', 
+                                          account: accounts(:thomas_account_waiting_benoit).name),
+                          flash[:notice]
+  end
+
+  test "should not unshare an account - hacker way" do
+    assert_not_nil        accounts(:courant_benoit).pending_user
+    assert_equal          1, accounts(:courant_benoit).users.count
+    delete_unsharing      accounts(:courant_benoit)
+    assert_not_nil        accounts(:courant_benoit).reload.pending_user
+    assert_equal          1, accounts(:courant_benoit).reload.users.count
+    assert_redirected_to  accounts_path
+    assert_equal          I18n.translate('accounts.unsharing.cant_unsharing', 
+                                          account: accounts(:courant_benoit).name),
+                          flash[:warning]
+  end
+
+  test "should not unshare an account - unknow account" do
+    delete_unsharing      @unknow_account
     assert_redirected_to  dashboard_url
   end
 
@@ -149,5 +241,17 @@ private ########################################################################
 
   def delete_unlink(account)
     delete :unlink, id: account
+  end
+
+  def delete_unpend(account)
+    delete :unpend, id: account
+  end
+
+  def post_sharing(account)
+    post :sharing, id: account
+  end
+
+  def delete_unsharing(account)
+    delete :unsharing, id: account
   end
 end

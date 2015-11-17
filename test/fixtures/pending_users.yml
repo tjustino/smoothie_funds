@@ -1,0 +1,22 @@
+# == Schema Information
+#
+# Table name: pending_users
+#
+#  id         :integer          not null, primary key
+#  account_id :integer          not null
+#  email      :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+benoit:
+  account: thomas_account_waiting_benoit
+  email: benoit@email.com
+
+somebody:
+  account: thomas_emilie_account_waiting_unknown_user
+  email: somebody@email.com
+
+someone:
+  account: courant_benoit
+  email: someone@email.com

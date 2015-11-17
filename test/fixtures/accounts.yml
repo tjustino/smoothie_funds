@@ -44,6 +44,22 @@ hidden_thomas:
   hidden: true
   users: thomas
 
+thomas_account_waiting_benoit:
+  name: Alone waiting for b.
+  initial_balance: 123
+  created_by: thomas.id
+  updated_by: thomas.id
+  hidden: true
+  users: thomas
+
+thomas_emilie_account_waiting_unknown_user:
+  name: We are 2 waiting for a friend
+  initial_balance: 321
+  created_by: thomas.id
+  updated_by: thomas.id
+  hidden: true
+  users: thomas, emilie
+
 courant_emilie:
   name: Compte courant
   initial_balance: 9.02
@@ -67,6 +83,14 @@ compte_commun:
   updated_by: emilie.id
   hidden: false
   users: thomas, emilie
+
+courant_benoit:
+  name: Compte de benoit
+  initial_balance: 1
+  created_by: benoit.id
+  updated_by: benoit.id
+  hidden: false
+  users: benoit
 
 compte_commun_jackpot:
   name: Compte Commun Jackpot

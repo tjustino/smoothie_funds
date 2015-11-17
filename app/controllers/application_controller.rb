@@ -77,12 +77,14 @@ private ########################################################################
   end
 
   def granted_urls_logged_user?
-    controller_action?("dashboard", "index"  ) or
-    controller_action?("accounts",  "index"  ) or
-    controller_action?("accounts",  "create" ) or
-    controller_action?("accounts",  "new"    ) or
-    good_account_id?                           or
-    good_user_id?                              or
+    controller_action?("dashboard", "index"     ) or
+    controller_action?("accounts",  "index"     ) or
+    controller_action?("accounts",  "create"    ) or
+    controller_action?("accounts",  "new"       ) or
+    controller_action?("accounts",  "sharing"   ) or
+    controller_action?("accounts",  "unsharing" ) or
+    good_account_id?                              or
+    good_user_id?                                 or
     good_id?
   end
 

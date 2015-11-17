@@ -46,7 +46,10 @@ Rails.application.routes.draw do
     end
   end
 
-  delete "accounts/:id/unlink(.:format)", to: "accounts#unlink", as: "unlink"
+  delete  "accounts/:id/unlink(.:format)",    to: "accounts#unlink",    as: "unlink"
+  delete  "accounts/:id/unpend(.:format)",    to: "accounts#unpend",    as: "unpend"
+  post    "accounts/:id/sharing(.:format)",   to: "accounts#sharing",   as: "sharing"
+  delete  "accounts/:id/unsharing(.:format)", to: "accounts#unsharing", as: "unsharing"
 
   root "dashboard#index", as: "dashboard"
 end

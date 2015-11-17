@@ -4,7 +4,7 @@ require 'rails/test_help'
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
-  fixtures :users, :accounts, :categories, :transactions, :schedules#, :searches
+  fixtures :users, :accounts, :categories, :transactions, :schedules, :pending_users#, :searches
 
   # Add more helper methods to be used by all tests here...
   def setup
@@ -19,6 +19,8 @@ class ActiveSupport::TestCase
     @some_category          = @some_account.categories.sample
     @some_schedule          = @some_account.schedules.sample
     @some_transaction       = @some_account.transactions.sample
+
+    @some_pending_user      = PendingUser.all.sample
 
     @wrong_user             = users(:emilie)
     @wrong_accounts         = @wrong_user.accounts.active.where.not(id: accounts(:compte_commun))

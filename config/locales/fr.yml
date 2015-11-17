@@ -16,28 +16,46 @@ fr:
     unlink:
       successfully_unlinked:  "Vous n'êtes plus lié au compte"
       cant_unlink:            "Vous ne pouvez pas être dissocié à ce compte"
+    unpend:
+      successfully_unpend:    "Le compte « %{account} » n'est plus proposé au partage"
+      cant_unpend:            "Impossible de ne plus proposer le partage du compte « %{account} »"
+    sharing:
+      successfully_sharing:   "Vous partagez maintenant le compte « %{account} »"
+      cant_sharing:           "Impossible de partager le compte « %{account} »"
+    unsharing:
+      successfully_unsharing: "Le compte « %{account} » n'est plus proposé au partage"
+      cant_unsharing:         "Impossible de refuser le partage du compte « %{account} »"
     # views
     account:
       personal_account: "Compte personnel"
+      waiting_for:      "En attente de "
       edit:             "Editer"
       destroy:          "Supprimer"
       are_you_sure:     "Etes-vous certain de vouloir supprimer le compte « %{account} » ?"
-      unlink:           "Se séparer"
-      are_you_sure_unlink: "Etes-vous certain de ne plus être lié au compte « %{account} » ?"
     form:
       name:             "Nom"
       initial_balance:  "Balance initiale"
       share:            "Partagé avec"
+      unlink:           "Se délier de ce compte"
+      are_you_sure_unlink: "Etes-vous certain de ne plus être lié à ce compte ?"
+      propose_sharing:  "Nouveau partage"
       shared_email:     "Courriel"
       help_share:       "Une fois établi, le partage du compte reste actif même si vous mettez à jour votre courriel"
       hidden:           "Masquer ce compte"
       back:             "Retour arrière"
+    pending_user:
+      pending_user:     "Partage en attente"
+      no_longer_propose: "Ne plus proposer de partager ce compte"
     edit:
       edit_account:     "Editer le compte"
     index:
       listing_accounts: "Liste des comptes"
       total:            "Total : "
       new_account:      "Nouveau compte"
+      join_shared_account: "Voulez-vous partager le compte « %{account} » avec %{users} ?"
+      and:              " et "
+      reject:           "Refuser"
+      accept:           "Accepter"
       name:             "Nom"
       initial_balance:  "Balance initiale"
       share:            "Partagé avec"
@@ -87,6 +105,10 @@ fr:
   dashboard:
     index:
       dashboard:            "Tableaux de bord"
+      join_shared_account:  "Voulez-vous partager le compte « %{account} » avec %{users} ?"
+      and:                  " et "
+      reject:               "Refuser"
+      accept:               "Accepter"
       transaction_summary:  "Synthèse des transactions"
       current_balance:      "Balance actuelle :"
       future_balance:       "Balance future :"
@@ -362,6 +384,9 @@ fr:
 
       category:
         name:     "Nom"
+
+      pending_user:
+        email:        "Partage en attente"
 
       transaction:
         date:         "Date"

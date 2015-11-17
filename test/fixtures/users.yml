@@ -14,13 +14,13 @@ thomas:
   email: thomas@email.com
   name: Thomas
   password_digest: <%= BCrypt::Password.create('secret') %>
-  accounts: courant_thomas, livret_a, ldd_thomas, compte_commun
+  accounts: courant_thomas, livret_a, ldd_thomas, compte_commun, thomas_account_waiting_unknown_user, thomas_emilie_account_waiting_unknown_user
 
 emilie:
   email: emilie@email.com
   name: Emilie
   password_digest: <%= BCrypt::Password.create('secret') %>
-  accounts: courant_emilie, ldd_emilie, compte_commun
+  accounts: courant_emilie, ldd_emilie, compte_commun, thomas_emilie_account_waiting_unknown_user
 
 benoit:
   email: benoit@email.com

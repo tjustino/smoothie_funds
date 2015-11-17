@@ -9,6 +9,21 @@ p.pull-right.label.label-info
 h3 = link_to (fa_icon "plus-circle", text: t('.new_account')), \
                                 new_account_path, class: "btn btn-primary"
 
+/ Accept sharing
+- @pendings.each do | pending |
+  .alert.alert-info.clearfix
+    = t('.join_shared_account', account: pending.account.name, \
+                                users: show_other_users(pending.account)).html_safe
+    .btn-toolbar
+      = link_to (fa_icon "remove", text: t('.reject')), \
+              unsharing_path(pending.account), \
+              method: :delete, \
+              class: "btn btn-danger pull-right"
+      = link_to (fa_icon "thumbs-o-up", text: t('.accept')), \
+              sharing_path(pending.account), \
+              method: :post, \
+              class: "btn btn-success pull-right"
+
 / Table
 table.table.table-striped.table-hover
   thead

@@ -3,7 +3,7 @@ Reminder
 [Linux] sudo systemctl start postgresql  
 [Mac] postgres -D /usr/local/var/postgres9.4
 
-rake db:drop ; rake db:create ; rake db:migrate ; rake db:fixtures:load FIXTURES=users,accounts,categories,transactions,schedules
+rake db:drop ; rake db:create ; rake db:migrate ; rake db:fixtures:load FIXTURES=users,accounts,categories,transactions,schedules,pending_users
 
 rake db:drop ; rake db:create ; psql -d smoothiefunds_development < my_dump
 bundle exec annotate  
