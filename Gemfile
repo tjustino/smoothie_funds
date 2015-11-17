@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 # ~> 2.1 is identical to >= 2.1 and < 3.0
 # ~> 2.2.beta will match prerelease versions like 2.2.beta.12
 
-gem "rails", "4.2.5"
+gem "rails",        "4.2.5"
 
 gem "pg"                        # Use postgresql as the database for Active Record
 gem "sass-rails",   "~> 5.0"    # Use SCSS for stylesheets
@@ -21,7 +21,7 @@ gem "slim"                      # Template language
 gem "bootstrap-sass"            # Twitter's Bootstrap, converted to Sass
 gem "font-awesome-rails"        # Iconic font and CSS toolkit
 gem "jquery-ui-rails"           # jQuery UI's JavaScript, CSS, and image files packaged for Rails asset pipeline
-gem "mailgun-rails"             # Mailgun adapter for Rails
+#gem "mailgun-rails"             # Mailgun adapter for Rails
 
 group :development do
   gem "spring"                  # Keep application running in the background
