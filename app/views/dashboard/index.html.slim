@@ -60,22 +60,23 @@
                   .panel-heading
                     h4.panel-title
                       a href="#{account_schedules_path(account)}" = account.name
-                  table.table.table-striped.table-hover
-                    thead
-                      tr
-                        th
-                        th = t('.next_time')
-                        th = t('.category')
-                        th = t('.amount')
-                    tbody
-                      - shedules_for(account).each do |schedule|
-                        tr title="#{schedule.account.name}"
-                          td = link_to fa_icon("magic"), \
-                                  insert_schedule_path(schedule), \
-                                  method: :insert, title: t('.insert_schedule')
-                          td = l(schedule.next_time)
-                          td = schedule.operation.category.name
-                          td = number_to_currency(schedule.operation.amount)
+                  .table-responsive
+                    table.table.table-striped.table-hover
+                      thead
+                        tr
+                          th
+                          th = t('.next_time')
+                          th = t('.category')
+                          th = t('.amount')
+                      tbody
+                        - shedules_for(account).each do |schedule|
+                          tr title="#{schedule.account.name}"
+                            td = link_to fa_icon("magic"), \
+                                    insert_schedule_path(schedule), \
+                                    method: :insert, title: t('.insert_schedule')
+                            td = l(schedule.next_time)
+                            td = schedule.operation.category.name
+                            td = number_to_currency(schedule.operation.amount)
         - else
           p = t('.no_terms')
 

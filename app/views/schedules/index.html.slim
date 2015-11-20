@@ -10,19 +10,20 @@ h3 = link_to (fa_icon "plus-circle", text: t('.new_schedule')), \
                 new_account_schedule_path, class: "btn btn-primary"
 
 / Table
-table.table.table-striped.table-hover
-  thead
-    tr
-      th
-      th = t('.next_time')
-      th = t('.frequency')
-      th = t('.category')
-      th.text-right = t('.amount')
-      th = t('.comment')
-      th colspan="3"
+.table-responsive
+  table.table.table-striped.table-hover
+    thead
+      tr
+        th
+        th = t('.next_time')
+        th = t('.frequency')
+        th = t('.category')
+        th.text-right = t('.amount')
+        th = t('.comment')
+        th colspan="3"
 
-  tbody
-    = render partial: "schedule", locals: { schedules: @schedules }
+    tbody
+      = render partial: "schedule", locals: { schedules: @schedules }
 
 / More schedules
 = image_tag "loading.gif", style: "display:none;", class: "loading center-block"

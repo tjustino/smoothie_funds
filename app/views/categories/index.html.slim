@@ -18,15 +18,16 @@ h3.btn-toolbar
   = render 'import_from'
 
 / Table
-table.table.table-striped.table-hover
-  thead
-    tr
-      th = t('.name')
-      th = t('.use')
-      th colspan="3"
+.table-responsive
+  table.table.table-striped.table-hover
+    thead
+      tr
+        th = t('.name')
+        th = t('.use')
+        th colspan="3"
 
-  tbody
-    = render partial: "category", locals: { categories: @categories }
+    tbody
+      = render partial: "category", locals: { categories: @categories }
 
 / More categories
 = image_tag "loading.gif", style: "display:none;", class: "loading center-block"
