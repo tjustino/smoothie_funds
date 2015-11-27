@@ -10,6 +10,7 @@ class CategoriesController < ApplicationController
     else
       load_categories( nil, @limit )
       load_other_accounts
+      @all_user_categories = Category.where(account: @current_accounts)
     end
   end
 
@@ -65,43 +66,43 @@ class CategoriesController < ApplicationController
   end
 
 
-  private ######################################################################
+private ########################################################################
 
-    def load_categories(offset=nil, limit=nil)
-      @nb_categories = current_categories.count
-      @categories ||= current_categories.offset(offset).limit(limit).order_by_name
-    end
+  def load_categories(offset=nil, limit=nil)
+    @nb_categories = current_categories.count
+    @categories ||= current_categories.offset(offset).limit(limit).order_by_name
+  end
 
-    def load_other_accounts
-      @other_accounts = @current_accounts.excluding(@current_account)
-    end
+  def load_other_accounts
+    @other_accounts = @current_accounts.excluding(@current_account)
+  end
 
-    def load_category
-      @category ||= current_categories.find(params[:id])
-    end
+  def load_category
+    @category ||= current_categories.find(params[:id])
+  end
 
-    def load_other_categories
-      @other_categories ||= @current_accounts.find(params[:account][:categories]).categories
-    end
+  def load_other_categories
+    @other_categories ||= @current_accounts.find(params[:account][:categories]).categories
+  end
 
-    def build_category
-      @category ||= current_categories.build
-      @category.attributes = category_params
-    end
+  def build_category
+    @category ||= current_categories.build
+    @category.attributes = category_params
+  end
 
-    def category_params
-      category_params = params[:category]
-      category_params ? category_params.permit(:name) : {}
-    end
+  def category_params
+    category_params = params[:category]
+    category_params ? category_params.permit(:name) : {}
+  end
 
-    def save_category(notice)
-      if @category.save
-        userstamp(@category)
-        redirect_to( account_categories_url(@current_account), notice: notice ) if notice
-      end
+  def save_category(notice)
+    if @category.save
+      userstamp(@category)
+      redirect_to( account_categories_url(@current_account), notice: notice ) if notice
     end
+  end
 
-    def current_categories
-      @current_account.categories
-    end
+  def current_categories
+    @current_account.categories
+  end
 end

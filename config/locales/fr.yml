@@ -46,6 +46,30 @@ fr:
     pending_user:
       pending_user:     "Partage en attente"
       no_longer_propose: "Ne plus proposer de partager ce compte"
+    welcome:
+      welcome:          "La création de compte"
+      content:              |-
+        Pour créer un compte c'est assez simple : cliquez sur <button disabled>
+        %{new_icon} Nouveau compte</button> et donnez lui un nom (ex : 
+        compte courant).<br />
+        <br />
+        La notion de « balance initiale » est importante :<br />
+        <ul> 
+        <li> S'il s'agit d'un tout nouveau compte créé auprès de votre banque, 
+        la balance initiale peut être mis à 0 ;</li>
+        <li> Sinon, nous vous conseillons de prendre le dernier relevé transmis 
+        par votre banque et de faire correspondra la balance initiale à la 
+        valeur correspondant à votre "Nouveau solde" (il s'agit souvent de la 
+        dernière ligne).</li>
+        </ul>
+        <br />
+        Notez que vous pouvez également masquer votre compte ou bien le partager
+        avec une autre personne en toute étanchéité (si vous avez 3 comptes, 
+        elle ne verra que celui qui est partagé).<br />
+        <br />
+        Une fois le compte créé, un nouveau menu apparaitra : <button disabled>
+        %{categories_icon} Catégories</button>, cliquez dessus pour continuer !
+      close:            "Ok j'ai compris !"
     edit:
       edit_account:     "Editer le compte"
     index:
@@ -89,6 +113,28 @@ fr:
       close:            "Fermer"
       import:           "Importer"
       successfully_imported:  "L'import s'est terminé avec succès (les doublons ont été ignorés)"
+    welcome:
+      welcome:          "La création de catégorie"
+      content:              |-
+        Créer des catégories vous permettra à terme de répondre à des questions 
+        du genre : combien j'ai dépensé en essence ce mois-ci ?<br />
+        <br />
+        Pour créer une catégorie c'est très simple : cliquez sur <button disabled>
+        %{new_icon} Nouvelle catégorie</button> et donnez lui un nom (ex : 
+        assurance, crédit, électricité, salaire, etc.).<br />
+        <br />
+        N'essayez pas d'être exhaustif dès le premier coup, vous pourrez toujours 
+        revenir dessus par la suite !<br />
+        <br />
+        Lorsque vous aurez créé plusieurs comptes, il vous sera possible d'importer
+        les catégories des autres comptes pour ne pas avoir à tout recopier.<br />
+        <br />
+        Une fois que vous aurez quelques catégories, vous pourrez enfin créer 
+        votre première transaction en cliquant sur <button disabled>
+        %{transactions_icon} Transactions</button> dans le menu.<br />
+        Pour les transactions récurrentes, simplifiez-vous la vie avec les 
+        <button disabled>%{schedules_icon} Échéanciers</button>.
+      close:            "Ok j'ai compris !"
     edit:
       edit_category:    "Editer la catégorie"
     index:
@@ -103,6 +149,14 @@ fr:
       create_category:  "Créer la catégorie"
 
   dashboard:
+    welcome:
+      welcome:              "Bienvenue dans Smoothie Funds !"
+      content:              |-
+        Nous sommes vraiment enchanté de vous accueillir !<br />
+        Vous allez voir, c'est facile de faire ses comptes.<br /><br />
+        Pour commencer, cliquez sur <button disabled>%{accounts_icon} Comptes</button>
+        dans le menu pour accéder à l'écran permettant la création... de comptes !
+      close:                "Ok j'ai compris !"
     index:
       dashboard:            "Tableaux de bord"
       join_shared_account:  "Voulez-vous partager le compte « %{account} » avec %{users} ?"
@@ -174,6 +228,29 @@ fr:
       edit:               "Editer"
       destroy:            "Supprimer"
       are_you_sure:       "Etes-vous certain de vouloir supprimer la transaction ?"
+    welcome:
+      welcome:          "La création de transaction"
+      content:              |-
+        Les transactions sont les opérations listées par votre banque (ex : à 
+        chaque fois que vous dégainez votre CB) et qui mettent parfois plusieurs 
+        jours à s'afficher lorsque vous consultez vos comptes en lignes.<br />
+        <br />
+        Pour créer une transaction, rien de plus facile : cliquez sur <button disabled>
+        %{new_icon} Nouvelle transaction</button> et saisissez le montant à la
+        date donnée, en précisant la catégorie (celle que vous avez créé 
+        précédemment).<br />
+        <br />
+        Voilà, vous faites maintenant vos comptes !<br />
+        <br />
+        Un dernier truc : lorsque vous recevrez votre prochain relevé bancaire, 
+        la somme des montants rapprochés (au-dessus du bouton <button disabled>
+        %{new_icon} Nouvelle transaction</button>) doit correspondre à la 
+        première ligne de votre relevé.<br />
+        Prenez 5 minutes pour rapprocher chaque opération en utilisant la coche 
+        en début de ligne ( %{square_icon} / %{check_square_icon} ). Au final, 
+        la somme des montants rapprochés devra être équivalente au "Nouveau solde" 
+        (dernière ligne du relevé bancaire). C'est une sacrée bonne pratique !
+      close:            "Ok j'ai compris !"
     edit:
       edit_transaction: "Editer la transaction"
     index:
@@ -229,6 +306,26 @@ fr:
       edit:               "Editer"
       destroy:            "Supprimer"
       are_you_sure:       "Etes-vous certain de vouloir supprimer cet échéancier ?"
+    welcome:
+      welcome:          "La création d'échéancier"
+      content:              |-
+        Les échéanciers permettent de gérer simplement les opérations récurrentes
+        comme le prélèvement mensuel de vos impôts ou l'abonnement annuel que tout
+        le monde oublie.<br />
+        <br />
+        Pour créer un échéancier, il faut commencer par cliquer sur 
+        <button disabled>%{new_icon} Nouvel échéancier</button>. Les informations
+        à saisir sont les mêmes que pour une transaction à la différence que cette 
+        fois il faudra indiquer une fréquence et la date de la prochaine échéance.<br />
+        <br />
+        Lorsque vous aurez quelques échéances, cliquez sur la baguette magique 
+        %{magic_icon} en début de ligne pour créer l'opération directement dans 
+        l'écran des transactions. La prochaine échéance sera automatiquement 
+        recalculée, donc ne vous en souciez plus.<br />
+        <br />
+        Vous le remarquerez certainement mais, pour ne plus oublier ces opérations 
+        récurrentes, l'écran d'accueil affiche les échéances des 30 prochains jours.
+      close:            "Ok j'ai compris !"
     edit:
       edit_schedule:      "Editer l'échéancier"
     index:
@@ -291,8 +388,8 @@ fr:
       checked:    "Rapproché"
       yep:        "Oui"
       nop:        "Non"
-      comment_or_not: "Peu importe"
-      checked_or_not: "Peu importe"
+      comment_or_not: "Tous"
+      checked_or_not: "Tous"
     resume:
       accounts:       "Comptes"
       amount:         "Montant"
@@ -325,7 +422,7 @@ fr:
       last_search:            "Dernière recherche"
       next_to_last_search:    "Avant-dernière recherche"
       antepenultimate_search: "Antépénultième recherche"
-      show_result:            "Voir les résultats"
+      show_result:            "Voir le résultat"
       destroy:                "Supprimer"
       are_you_sure:           "Etes-vous certain de vouloir supprimer cette recherche ?"
     show:

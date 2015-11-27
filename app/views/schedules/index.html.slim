@@ -1,5 +1,9 @@
 h1 = t('.listing_schedules', current_account: @current_account.name)
 
+/ Welcome
+- unless @all_user_schedules.any?
+  = render "welcome"
+
 / Total
 p.pull-right.label.label-info
   = t('.total')

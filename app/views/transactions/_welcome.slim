@@ -1,0 +1,14 @@
+.modal.fade#welcomeModal tabindex="-1" role="dialog" aria-labelledby="welcomeModal"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        button.close type="button" data-dismiss="modal" aria-hidden="true" = fa_icon("times")
+        h4.modal-title = t('.welcome')
+      .modal-body = t('.content', new_icon: fa_icon("plus-circle"), \
+                                  square_icon: fa_icon("square-o"), \
+                                  check_square_icon: fa_icon("check-square-o")).html_safe
+      .modal-footer
+        button.btn.btn-success type="button" data-dismiss="modal" = t('.close')
+
+javascript:
+  $("#welcomeModal").modal("show")

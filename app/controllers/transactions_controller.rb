@@ -9,6 +9,7 @@ class TransactionsController < ApplicationController
       load_transactions( params[:offset].to_i.abs, @limit )
     else
       load_transactions( 0, @limit )
+      @all_user_transactions = Transaction.where(account: @current_accounts)
     end
   end
 

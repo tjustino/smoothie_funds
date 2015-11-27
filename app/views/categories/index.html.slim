@@ -1,5 +1,9 @@
 h1 = t('.listing_categories', current_account: @current_account.name)
 
+/ Welcome
+- unless @all_user_categories.any?
+  = render "welcome"
+
 / Total
 p.pull-right.label.label-info
   = t('.total')

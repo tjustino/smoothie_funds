@@ -10,6 +10,7 @@ class SchedulesController < ApplicationController
     else
       @limit = params[:limit].to_i * @limit unless params[:limit].blank?
       load_schedules( nil, @limit )
+      @all_user_schedules = Schedule.where(account: @current_accounts)
     end
   end
 

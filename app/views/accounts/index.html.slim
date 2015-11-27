@@ -1,5 +1,9 @@
 h1 = t('.listing_accounts')
 
+/ Welcome
+- unless @current_accounts.any?
+  = render "welcome"
+
 / Total
 p.pull-right.label.label-info
   = t('.total')
