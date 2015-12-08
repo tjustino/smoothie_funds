@@ -4,7 +4,7 @@ socket: tmp/sockets/thin.sock
 chdir: /home/app/smoothiefunds/current
 
 # SSL options
-#ssl: true
+ssl: true
 
 # Adapter options
 environment: production
