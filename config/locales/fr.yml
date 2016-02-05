@@ -50,22 +50,22 @@ fr:
       welcome:          "La création de compte"
       content:              |-
         Pour créer un compte c'est assez simple : cliquez sur <button disabled>
-        %{new_icon} Nouveau compte</button> et donnez lui un nom (ex : 
+        %{new_icon} Nouveau compte</button> et donnez lui un nom (ex :
         compte courant).<br />
         <br />
         La notion de « balance initiale » est importante :<br />
-        <ul> 
-        <li> S'il s'agit d'un tout nouveau compte créé auprès de votre banque, 
-        la balance initiale peut être mis à 0 ;</li>
-        <li> Sinon, nous vous conseillons de prendre le dernier relevé transmis 
-        par votre banque et de faire correspondra la balance initiale à la 
-        valeur correspondant à votre "Nouveau solde" (il s'agit souvent de la 
-        dernière ligne).</li>
+        <ul>
+        <li> S'il s'agit d'un tout nouveau compte créé auprès de votre banque,
+        la balance initiale peut être égal à 0 ;</li>
+        <li> Sinon, nous vous conseillons de prendre le dernier relevé transmis
+        par votre banque et de faire correspondre la balance initiale à la
+        valeur de votre "Nouveau solde" (il s'agit souvent de la dernière
+        ligne).</li>
         </ul>
         <br />
         Notez que vous pouvez également masquer votre compte ou bien le partager
-        avec une autre personne en toute étanchéité (si vous avez 3 comptes, 
-        elle ne verra que celui qui est partagé).<br />
+        avec une autre personne (et si vous avez plusieurs comptes, elle ne
+        verra que celui qui est partagé).<br />
         <br />
         Une fois le compte créé, un nouveau menu apparaitra : <button disabled>
         %{categories_icon} Catégories</button>, cliquez dessus pour continuer !
@@ -116,23 +116,23 @@ fr:
     welcome:
       welcome:          "La création de catégorie"
       content:              |-
-        Créer des catégories vous permettra à terme de répondre à des questions 
-        du genre : combien j'ai dépensé en essence ce mois-ci ?<br />
+        Créer des catégories vous permettra de regrouper vos dépenses de la
+        même famille.<br />
         <br />
         Pour créer une catégorie c'est très simple : cliquez sur <button disabled>
-        %{new_icon} Nouvelle catégorie</button> et donnez lui un nom (ex : 
+        %{new_icon} Nouvelle catégorie</button> et donnez lui un nom (ex :
         assurance, crédit, électricité, salaire, etc.).<br />
         <br />
-        N'essayez pas d'être exhaustif dès le premier coup, vous pourrez toujours 
+        N'essayez pas d'être exhaustif dès le premier coup, vous pourrez toujours
         revenir dessus par la suite !<br />
         <br />
         Lorsque vous aurez créé plusieurs comptes, il vous sera possible d'importer
         les catégories des autres comptes pour ne pas avoir à tout recopier.<br />
         <br />
-        Une fois que vous aurez quelques catégories, vous pourrez enfin créer 
+        Une fois que vous aurez quelques catégories, vous pourrez enfin créer
         votre première transaction en cliquant sur <button disabled>
         %{transactions_icon} Transactions</button> dans le menu.<br />
-        Pour les transactions récurrentes, simplifiez-vous la vie avec les 
+        Pour les transactions récurrentes, simplifiez-vous la vie avec les
         <button disabled>%{schedules_icon} Échéanciers</button>.
       close:            "Ok j'ai compris !"
     edit:
@@ -231,25 +231,25 @@ fr:
     welcome:
       welcome:          "La création de transaction"
       content:              |-
-        Les transactions sont les opérations listées par votre banque (ex : à 
-        chaque fois que vous dégainez votre CB) et qui mettent parfois plusieurs 
-        jours à s'afficher lorsque vous consultez vos comptes en lignes.<br />
+        Les transactions sont les opérations listées par votre banque et qui
+        mettent parfois plusieurs jours à s'afficher lorsque vous consultez vos
+        comptes en lignes.<br />
         <br />
         Pour créer une transaction, rien de plus facile : cliquez sur <button disabled>
         %{new_icon} Nouvelle transaction</button> et saisissez le montant à la
-        date donnée, en précisant la catégorie (celle que vous avez créé 
+        date donnée, en précisant la catégorie (celle que vous avez créé
         précédemment).<br />
         <br />
         Voilà, vous faites maintenant vos comptes !<br />
         <br />
-        Un dernier truc : lorsque vous recevrez votre prochain relevé bancaire, 
+        Un dernier truc : lorsque vous recevrez votre prochain relevé bancaire,
         la somme des montants rapprochés (au-dessus du bouton <button disabled>
-        %{new_icon} Nouvelle transaction</button>) doit correspondre à la 
-        première ligne de votre relevé.<br />
-        Prenez 5 minutes pour rapprocher chaque opération en utilisant la coche 
-        en début de ligne ( %{square_icon} / %{check_square_icon} ). Au final, 
-        la somme des montants rapprochés devra être équivalente au "Nouveau solde" 
-        (dernière ligne du relevé bancaire). C'est une sacrée bonne pratique !
+        %{new_icon} Nouvelle transaction</button>) doit correspondre à la
+        première ligne de votre relevé (souvent appelé "Ancien solde").<br />
+        Prenez 5 minutes pour rapprocher chaque opération en utilisant la coche
+        en début de ligne ( %{square_icon} / %{check_square_icon} ). Au final,
+        la somme des montants rapprochés devra être équivalente au "Nouveau solde"
+        (dernière ligne du relevé bancaire). C'est une bonne pratique !
       close:            "Ok j'ai compris !"
     edit:
       edit_transaction: "Editer la transaction"
@@ -261,6 +261,7 @@ fr:
       category:           "Catégorie"
       debit:              "Débit"
       credit:             "Crédit"
+      balance:            "Balance"
       comment:            "Commentaire"
       more_transactions:  "↓ Afficher plus de transactions ↓"
     new:
@@ -313,17 +314,17 @@ fr:
         comme le prélèvement mensuel de vos impôts ou l'abonnement annuel que tout
         le monde oublie.<br />
         <br />
-        Pour créer un échéancier, il faut commencer par cliquer sur 
+        Pour créer un échéancier, il faut commencer par cliquer sur
         <button disabled>%{new_icon} Nouvel échéancier</button>. Les informations
-        à saisir sont les mêmes que pour une transaction à la différence que cette 
+        à saisir sont les mêmes que pour une transaction à la différence que cette
         fois il faudra indiquer une fréquence et la date de la prochaine échéance.<br />
         <br />
-        Lorsque vous aurez quelques échéances, cliquez sur la baguette magique 
-        %{magic_icon} en début de ligne pour créer l'opération directement dans 
-        l'écran des transactions. La prochaine échéance sera automatiquement 
+        Lorsque vous aurez quelques échéances, cliquez sur la baguette magique
+        %{magic_icon} en début de ligne pour créer l'opération directement dans
+        l'écran des transactions. La prochaine échéance sera automatiquement
         recalculée, donc ne vous en souciez plus.<br />
         <br />
-        Vous le remarquerez certainement mais, pour ne plus oublier ces opérations 
+        Vous le remarquerez certainement mais, pour ne plus oublier ces opérations
         récurrentes, l'écran d'accueil affiche les échéances des 30 prochains jours.
       close:            "Ok j'ai compris !"
     edit:
@@ -359,7 +360,7 @@ fr:
       title_bug:  "Support"
       speech_bug: |-
         Vous avez trouvé un bug et vous souhaitez le signaler ?<br />
-        Vous pouvez utiliser ce 
+        Vous pouvez utiliser ce
         <a href="https://github.com/tjustino/smoothie_funds/issues" target="_blank">lien</a>
         (en anglais ou français uniquement, merci !)
     new:
@@ -404,7 +405,7 @@ fr:
       categories:     "Catégories"
       comment:        "Commentaire"
       like:           "Contient '%{comment}'"
-      with_comment:    "Contenant n'importe quel commentaire" 
+      with_comment:    "Contenant n'importe quel commentaire"
       not_like:       "Ne contient pas '%{comment}'"
       without_comment: "Ne content aucun commentaire"
       checked:        "Rapproché"
