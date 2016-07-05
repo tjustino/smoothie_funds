@@ -5,29 +5,36 @@ source 'https://rubygems.org'
 # ~> 2.1 is identical to >= 2.1 and < 3.0
 # ~> 2.2.beta will match prerelease versions like 2.2.beta.12
 
-gem "rails",        "4.2.5.1"
+gem "rails",        "~> 5.0.0"
 
-gem "pg"                        # Use postgresql as the database for Active Record
+gem "pg"                        # Use postgresql as the db for Active Record
+#gem "redis",        "~> 3.0"    # Use Redis adapter to run Action Cable in prod
 gem "sass-rails",   "~> 5.0"    # Use SCSS for stylesheets
-gem "uglifier"                  # Use Uglifier as compressor for JavaScript assets
-gem "coffee-rails", "~> 4.1.0"  # Use CoffeeScript for .js.coffee assets and views
+gem "uglifier",     ">= 1.3.0"  # Use as compressor for JavaScript assets
+gem "coffee-rails", "~> 4.2"    # Use CoffeeScript for .coffee assets and views
 gem "jquery-rails"              # Use jquery as the JavaScript library
-#gem "turbolinks"               # Make following links in web application faster
-#gem "jbuilder",     "~> 2.0"    # Build JSON APIs with ease
+#gem "turbolinks",   "~> 5"     # Make following links in web application faster
+#gem "jbuilder",     "~> 2.5"   # Build JSON APIs with ease
 gem "bcrypt",       "~> 3.1.7"  # Use ActiveModel has_secure_password
 
-gem "thin"                      # A thin and fast web server
+gem "puma",         "~> 3.0"    # App web server
 gem "slim"                      # Template language
 gem "bootstrap-sass"            # Twitter's Bootstrap, converted to Sass
 gem "font-awesome-rails"        # Iconic font and CSS toolkit
-gem "jquery-ui-rails"           # jQuery UI's JavaScript, CSS, and image files packaged for Rails asset pipeline
+gem "jquery-ui-rails"           # jQuery UI's packaged for Rails asset pipeline
 #gem "mailgun-rails"             # Mailgun adapter for Rails
+
+group :development, :test do
+  gem "byebug", platform: :mri  # Call 'byebug' anywhere in the code to stop it
+end
 
 group :development do
   gem "spring"                  # Keep application running in the background
-  gem "web-console"             # Access an IRB console on exception pages or by using <%= console %> in views
-  gem "annotate"                # Annotates ActiveRecord Models, routes, fixtures, and others based on the database schema
-  gem "rails-erd"               # Automatically generate an entity-relationship diagram (ERD) for Rails models
+  gem "listen", "~> 3.0.5"      # Listen to file modifications and notifies you
+  gem "spring-watcher-listen", "~> 2.0.0" # Makes spring watch files
+  gem "web-console"             # Access an IRB console on exception pages
+  gem "annotate"                # Annotates ActiveRecord Model, route & fixture
+  gem "rails-erd"               # Generate an entity-relationship diagram (ERD)
 
   # Use Capistrano for deployment
   gem "capistrano"
