@@ -9,7 +9,7 @@
 #  updated_at :datetime         not null
 #
 
-class PendingUser < ActiveRecord::Base
+class PendingUser < ApplicationRecord
   belongs_to  :account
 
   validates_uniqueness_of :account_id

@@ -13,7 +13,7 @@
 #  updated_at :datetime
 #
 
-class Schedule < ActiveRecord::Base
+class Schedule < ApplicationRecord
   has_one :operation, foreign_key: "schedule_id",
                       class_name: "Transaction",
                       dependent: :destroy

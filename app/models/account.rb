@@ -12,7 +12,7 @@
 #  hidden          :boolean          default(FALSE)
 #
 
-class Account < ActiveRecord::Base
+class Account < ApplicationRecord
   has_and_belongs_to_many :users, uniq: true
   has_many                :categories,    dependent: :restrict_with_error
   has_many                :transactions,  dependent: :restrict_with_error

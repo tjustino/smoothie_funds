@@ -16,7 +16,7 @@
 #  schedule_id :integer
 #
 
-class Transaction < ActiveRecord::Base
+class Transaction < ApplicationRecord
   attr_accessor :balance
 
   belongs_to  :account

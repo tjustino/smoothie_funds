@@ -10,7 +10,7 @@
 #  updated_at      :datetime
 #
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   has_and_belongs_to_many :accounts
   has_many                :searches, dependent: :delete_all
 

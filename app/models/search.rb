@@ -17,7 +17,7 @@
 #  updated_at :datetime         not null
 #
 
-class Search < ActiveRecord::Base
+class Search < ApplicationRecord
   belongs_to  :user
 
   serialize :accounts,    Array
