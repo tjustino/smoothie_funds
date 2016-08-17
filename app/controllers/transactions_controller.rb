@@ -47,10 +47,23 @@ class TransactionsController < ApplicationController
   def destroy
     load_transaction
     if @transaction.destroy
-      redirect_to :back, notice: t('.successfully_destroyed')
+      # redirect_to :back, notice: t('.successfully_destroyed')
+      case controller_name
+        when "transactions"
+          redirect_back fallback_location: account_transactions_path(@current_account),
+                        notice: t('.successfully_destroyed')
+        when "searches"
+          redirect_back fallback_location: new_user_search_path(@current_user),
+                        notice: t('.successfully_destroyed')
+      end
     else
       flash[:warning] = t('.cant_destroy')
-      redirect_to :back
+      case controller_name
+        when "transactions"
+          redirect_back fallback_location: account_transactions_path(@current_account)
+        when "searches"
+          redirect_back fallback_location: new_user_search_path(@current_user)
+      end
     end
   end
 
@@ -65,7 +78,12 @@ class TransactionsController < ApplicationController
         @sum_checked =  @current_account.initial_balance +
                         current_transactions.checked.sum(:amount)
         # TODO if activerecord send an error, redirect_to :back is broken
-        format.html { redirect_to :back, notice: t('.successfully_checked') }
+        format.html { case controller_name
+                        when "transactions"
+                          redirect_back fallback_location: account_transactions_path(@current_account), notice: t('.successfully_checked')
+                        when "searches"
+                          redirect_back fallback_location: new_user_search_path(@current_user), notice: t('.successfully_checked')
+                      end }
         format.js   {}
       end
     end
