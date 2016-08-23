@@ -5,7 +5,7 @@ class CategoriesControllerTest < ActionController::TestCase
   test "should get index" do
     get_index       @some_account
     assert_response :success
-    assert_not_nil  assigns(:categories)
+    #assert_not_nil  assigns(:categories)
   end
 
   test "should not get index - hacker way" do
@@ -22,7 +22,7 @@ class CategoriesControllerTest < ActionController::TestCase
   test "should get new" do
     get_new         @some_account
     assert_response :success
-    assert_not_nil  assigns(:category)
+    #assert_not_nil  assigns(:category)
   end
 
   test "should not get new - hacker way" do
@@ -39,7 +39,7 @@ class CategoriesControllerTest < ActionController::TestCase
   test "should get edit" do
     get_edit        @some_category
     assert_response :success
-    assert_not_nil  assigns(:category)
+    #assert_not_nil  assigns(:category)
   end
 
   test "should not get edit - hacker way" do
@@ -56,7 +56,7 @@ class CategoriesControllerTest < ActionController::TestCase
   test "should create category" do
     assert_difference('Category.count') do
       post_create           @some_account
-      assert_not_nil        assigns(:category)
+      #assert_not_nil        assigns(:category)
       assert_redirected_to  account_categories_path @some_account
       assert_equal          I18n.translate('categories.create.successfully_created'),
                             flash[:notice]
@@ -80,7 +80,7 @@ class CategoriesControllerTest < ActionController::TestCase
   #################################################### PATCH/PUT /categories/:id
   test "should update category" do
     patch_update          @some_category
-    assert_not_nil        assigns(:category)
+    #assert_not_nil        assigns(:category)
     assert_redirected_to  account_categories_path @some_account
     assert_equal          I18n.translate('categories.update.successfully_updated'),
                           flash[:notice]
@@ -89,7 +89,7 @@ class CategoriesControllerTest < ActionController::TestCase
 
   test "should not update category - hacker way" do
     patch_update          @some_wrong_category
-    assert_nil            assigns(:category)
+    #assert_nil            assigns(:category)
     assert_redirected_to  dashboard_url
     assert_equal          @previous_category_name, @some_wrong_category.reload.name
   end
@@ -98,7 +98,7 @@ class CategoriesControllerTest < ActionController::TestCase
   test "should not destroy category with transactions" do
     assert_no_difference 'Category.count' do
       delete_destroy        @some_category
-      assert_not_nil        assigns(:category)
+      #assert_not_nil        assigns(:category)
       assert_redirected_to  account_categories_path @some_account
       assert_equal          I18n.translate('categories.destroy.cant_destroy'),
                             flash[:warning]
@@ -110,7 +110,7 @@ class CategoriesControllerTest < ActionController::TestCase
 
     assert_difference('Category.count', -1) do
       delete_destroy        @some_category
-      assert_not_nil        assigns(:category)
+      #assert_not_nil        assigns(:category)
       assert_redirected_to  account_categories_path @some_account
       assert_equal          I18n.translate('categories.destroy.successfully_destroyed'),
                             flash[:notice]
@@ -122,7 +122,7 @@ class CategoriesControllerTest < ActionController::TestCase
 
     assert_no_difference 'Category.count' do
       delete_destroy        @some_wrong_category
-      assert_nil            assigns(:category)
+      #assert_nil            assigns(:category)
       assert_redirected_to  dashboard_url
     end
   end
@@ -142,30 +142,30 @@ class CategoriesControllerTest < ActionController::TestCase
   private ######################################################################
 
     def get_index(account)
-      get :index, account_id: account
+      get :index, params: { account_id: account }
     end
 
     def get_new(account)
-      get :new, account_id: account
+      get :new, params: { account_id: account }
     end
 
     def get_edit(category)
-      get :edit, id: category
+      get :edit, params: { id: category }
     end
 
     def post_create(account)
-      post :create, account_id: account,
-                    category:   { name: SecureRandom.hex }
+      post :create, params: { account_id: account,
+                              category:   { name: SecureRandom.hex } }
     end
 
     def patch_update(category)
       @previous_category_name = category.name
 
-      patch :update,  id:       category,
-                      category: { name: SecureRandom.hex }
+      patch :update,  params: { id:       category,
+                                category: { name: SecureRandom.hex } }
     end
 
     def delete_destroy(category)
-      delete :destroy, id: category
+      delete :destroy, params: { id: category }
     end
 end
