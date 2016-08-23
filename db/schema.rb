@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -29,11 +28,10 @@ ActiveRecord::Schema.define(version: 20151009111758) do
   create_table "accounts_users", id: false, force: :cascade do |t|
     t.integer "account_id", null: false
     t.integer "user_id",    null: false
+    t.index ["account_id", "user_id"], name: "index_accounts_users_on_account_id_and_user_id", unique: true, using: :btree
+    t.index ["account_id"], name: "index_accounts_users_on_account_id", using: :btree
+    t.index ["user_id"], name: "index_accounts_users_on_user_id", using: :btree
   end
-
-  add_index "accounts_users", ["account_id", "user_id"], name: "index_accounts_users_on_account_id_and_user_id", unique: true, using: :btree
-  add_index "accounts_users", ["account_id"], name: "index_accounts_users_on_account_id", using: :btree
-  add_index "accounts_users", ["user_id"], name: "index_accounts_users_on_user_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.integer  "account_id", null: false
@@ -42,19 +40,17 @@ ActiveRecord::Schema.define(version: 20151009111758) do
     t.integer  "updated_by"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["account_id", "name"], name: "index_categories_on_account_id_and_name", unique: true, using: :btree
+    t.index ["account_id"], name: "index_categories_on_account_id", using: :btree
   end
-
-  add_index "categories", ["account_id", "name"], name: "index_categories_on_account_id_and_name", unique: true, using: :btree
-  add_index "categories", ["account_id"], name: "index_categories_on_account_id", using: :btree
 
   create_table "pending_users", force: :cascade do |t|
     t.integer  "account_id", null: false
     t.string   "email",      null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_pending_users_on_account_id", unique: true, using: :btree
   end
-
-  add_index "pending_users", ["account_id"], name: "index_pending_users_on_account_id", unique: true, using: :btree
 
   create_table "schedules", force: :cascade do |t|
     t.integer  "account_id", null: false
@@ -65,9 +61,8 @@ ActiveRecord::Schema.define(version: 20151009111758) do
     t.integer  "updated_by"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["account_id"], name: "index_schedules_on_account_id", using: :btree
   end
-
-  add_index "schedules", ["account_id"], name: "index_schedules_on_account_id", using: :btree
 
   create_table "searches", force: :cascade do |t|
     t.integer  "user_id",                            null: false
@@ -82,9 +77,8 @@ ActiveRecord::Schema.define(version: 20151009111758) do
     t.integer  "checked"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.index ["user_id"], name: "index_searches_on_user_id", using: :btree
   end
-
-  add_index "searches", ["user_id"], name: "index_searches_on_user_id", using: :btree
 
   create_table "transactions", force: :cascade do |t|
     t.integer  "account_id",                          null: false
@@ -98,11 +92,10 @@ ActiveRecord::Schema.define(version: 20151009111758) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "schedule_id"
+    t.index ["account_id"], name: "index_transactions_on_account_id", using: :btree
+    t.index ["category_id"], name: "index_transactions_on_category_id", using: :btree
+    t.index ["schedule_id"], name: "index_transactions_on_schedule_id", using: :btree
   end
-
-  add_index "transactions", ["account_id"], name: "index_transactions_on_account_id", using: :btree
-  add_index "transactions", ["category_id"], name: "index_transactions_on_category_id", using: :btree
-  add_index "transactions", ["schedule_id"], name: "index_transactions_on_schedule_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",           null: false
@@ -110,8 +103,7 @@ ActiveRecord::Schema.define(version: 20151009111758) do
     t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
 end
