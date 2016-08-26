@@ -14,24 +14,6 @@ set :linked_dirs,   fetch(:linked_dirs, []).push(   "bin",
 
 # capistrano-rbenv
 set :rbenv_type,      :user
-set :rbenv_ruby,      "2.3.0"
+set :rbenv_ruby,      "2.3.1"
 set :rbenv_prefix,    "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 set :rbenv_map_bins,  %w{rake gem bundle ruby rails}
-
-# create commands cap [production|qualification] deploy:[start|stop|restart]
-namespace :deploy do
-
-  COMMANDS = %w(start stop restart)
-
-  COMMANDS.each do |command|
-    task command do
-      on roles(:web), in: :sequence, wait: 5 do
-        within current_path do
-          execute :bundle, "exec thin #{command} -O --tag '#{fetch(:application)} #{fetch(:stage)}' -C config/thin/#{fetch(:stage)}.yml"
-        end
-      end
-    end
-  end
-
-  after :finishing, "deploy:cleanup"
-end
