@@ -83,7 +83,7 @@ class SchedulesController < ApplicationController
     if Rails.application.routes.recognize_path(request.referrer)[:controller] == "schedules"
       load_limit
       redirect_to account_schedules_url(
-                              @current_account, 
+                              @current_account,
                               limit: (params[:index].to_f / @limit.to_f).ceil ),
                   notice: t('.successfully_inserted')
     else
@@ -117,7 +117,9 @@ class SchedulesController < ApplicationController
         if params[:sign] == "credit"
           @schedule.operation.amount = @schedule.operation.amount.abs if not @schedule.operation.amount.blank?
         else
+          # TODO to refactor
           @schedule.operation.amount = -1 * @schedule.operation.amount.abs if not @schedule.operation.amount.blank?
+          @schedule.operation.save if not @schedule.operation.amount.blank?
         end
 
         userstamp(@schedule)
