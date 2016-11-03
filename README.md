@@ -4,13 +4,19 @@ Reminder
 [Mac] postgres -D /usr/local/var/postgres9.5
 (ou pg_ctl -D /usr/local/var/postgres9.5 -l logfile start -> démon)
 
-rake db:drop ; rake db:create ; rake db:migrate ; rake db:fixtures:load FIXTURES=users,accounts,categories,transactions,schedules,pending_users
+rails db:drop ; rails db:create ; rails db:migrate ; rails db:fixtures:load FIXTURES=users,accounts,categories,transactions,schedules,pending_users
 
 rake db:drop ; rake db:create ; psql -d smoothiefunds_development < my_dump
 bundle exec annotate  
 rake erd
 
 Après une mise à jour PostgreSQL : initdb /usr/local/var/postgres9.x -E utf8
+
+
+dropdb smoothiefunds_development
+rails db:create
+rails db:migrate
+pg_restore --no-acl --no-owner --data-only --dbname=smoothiefunds_development db.dump
 ---
 
 Convention d'indexation
