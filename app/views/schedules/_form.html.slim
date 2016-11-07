@@ -1,18 +1,13 @@
 = form_for(shallow_args(@current_account, @schedule), html: { class: "form-horizontal" }) do |f|
-  - if @schedule.errors.any?
+  - if @schedule.errors.any? || @schedule.operation.errors.any?
     .alert.alert-danger.alert-dismissable
       button.close type="button" data-dismiss="alert" aria-hidden="true"
         = fa_icon "times"
-      h3 = t('errors.template.header', count: @schedule.errors.count)
+      h3 = t('errors.template.header', count: \
+                      @schedule.errors.count + @schedule.operation.errors.count)
       ul
         - @schedule.errors.full_messages.each do |msg|
           li = msg
-  - if @schedule.operation.errors.any?
-    .alert.alert-danger.alert-dismissable
-      button.close type="button" data-dismiss="alert" aria-hidden="true"
-        = fa_icon "times"
-      h3 = t('errors.template.header', count: @schedule.operation.errors.count)
-      ul
         - @schedule.operation.errors.full_messages.each do |msg|
           li = msg
 
