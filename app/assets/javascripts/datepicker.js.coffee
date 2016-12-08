@@ -1,5 +1,5 @@
-//= require jquery-ui/datepicker
-//= require jquery-ui/datepicker-fr
+//= require jquery-ui/widgets/datepicker
+//= require jquery-ui/i18n/datepicker-fr
 
 $ ->
   $(".datepicker").datepicker
