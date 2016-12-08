@@ -38,6 +38,8 @@ html
                       li.divider role="presentation"
                         li = link_to  ( fa_icon "search", text: t('.search') ), \
                                       new_user_search_path(@current_user)
+                        li = link_to  ( fa_icon "bar-chart", text: t('.analytics') ), \
+                                      user_analytics_path(@current_user)
 
                   / dropdown schedules
                   li.dropdown class=("active" if params[:controller] == "schedules")

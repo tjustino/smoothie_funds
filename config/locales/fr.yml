@@ -184,6 +184,7 @@ fr:
       accounts:     "Comptes"
       logout:       "Déconnexion"
       search:       "Rechercher"
+      analytics:    "Analyser"
 
   sessions:
     # controllers
@@ -436,6 +437,12 @@ fr:
       credit:             "Crédit"
       comment:            "Commentaire"
       more_transactions:  "↓ Afficher plus de transactions ↓"
+
+  analytics:
+    index:
+      analytics:  "Analyse"
+      tendency:   "Tendance des 3 derniers mois"
+      balance:    "Balance"
 
   helpers:
     submit:

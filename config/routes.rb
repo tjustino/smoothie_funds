@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   shallow do
     resources :users, except: [:index, :show, :destroy] do
       resources :searches, except: [:index, :edit, :update]
+      resources :analytics, only: [:index]
     end
   end
 
