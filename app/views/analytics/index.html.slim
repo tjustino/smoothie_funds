@@ -24,8 +24,9 @@
                   fill: true,
                   backgroundColor: "rgba(75,192,192,0.4)",
                   borderColor: "rgba(75,192,192,1)",
-                  data: #{ raw past_data(account) } }
-                ] } } );
+                  data: #{ raw past_data(account) }}]},
+              options: { scales: { yAxes: [ { ticks: { beginAtZero:true }}]}}
+            });
 
           / h3 Répartition des frais
           / canvas id="pieChart#{index}" height="80"
