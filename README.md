@@ -1,8 +1,10 @@
 Reminder
 =========
-[Linux] sudo systemctl start postgresql  
-[Mac] postgres -D /usr/local/var/postgres9.6
-(ou pg_ctl -D /usr/local/var/postgres9.6 -l logfile start -> démon)
+[Linux] sudo systemctl start postgresql
+        pg_ctl -D /var/lib/postgres/data -l journal_applicatif start
+
+[Mac] postgres -D /usr/local/var/postgres
+      pg_ctl -D /usr/local/var/postgres -l logfile start -> démon
 
 rails db:drop ; rails db:create ; rails db:migrate ; rails db:fixtures:load FIXTURES=users,accounts,categories,transactions,schedules,pending_users
 
@@ -11,7 +13,6 @@ bundle exec annotate
 rake erd
 
 Après une mise à jour PostgreSQL : initdb /usr/local/var/postgres9.x -E utf8
-
 
 dropdb smoothiefunds_development
 rails db:create
