@@ -18,6 +18,7 @@ dropdb smoothiefunds_development
 rails db:create
 rails db:migrate
 pg_restore --no-acl --no-owner --data-only --dbname=smoothiefunds_development db.dump
+
 ---
 
 Convention d'indexation
