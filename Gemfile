@@ -5,27 +5,29 @@ source 'https://rubygems.org'
 # ~> 2.1 is identical to >= 2.1 and < 3.0
 # ~> 2.2.beta will match prerelease versions like 2.2.beta.12
 
-gem "rails",        "~> 5.0.0"
+gem "rails",        "~> 5.0.2"
 
 gem "pg"                        # Use postgresql as the db for Active Record
-#gem "redis",        "~> 3.0"    # Use Redis adapter to run Action Cable in prod
+#gem "redis",        "~> 3.0"   # Use Redis adapter to run Action Cable in prod
 gem "sass-rails",   "~> 5.0"    # Use SCSS for stylesheets
-gem "uglifier",     ">= 1.3.0"  # Use as compressor for JavaScript assets
+gem "uglifier"                  # Use as compressor for JavaScript assets
 gem "coffee-rails", "~> 4.2"    # Use CoffeeScript for .coffee assets and views
 gem "jquery-rails"              # Use jquery as the JavaScript library
-#gem "turbolinks",   "~> 5"     # Make following links in web application faster
-#gem "jbuilder",     "~> 2.5"   # Build JSON APIs with ease
+#gem "turbolinks",  "~> 5"      # Make following links in web application faster
+#gem "jbuilder",    "~> 2.5"    # Build JSON APIs with ease
 gem "bcrypt",       "~> 3.1.7"  # Use ActiveModel has_secure_password
 
 gem "puma",         "~> 3.0"    # App web server
 gem "slim"                      # Template language
 gem "bootstrap-sass"            # Twitter's Bootstrap, converted to Sass
 gem "font-awesome-rails"        # Iconic font and CSS toolkit
-gem "jquery-ui-rails"           # jQuery UI's packaged for Rails asset pipeline
-#gem "mailgun-rails"             # Mailgun adapter for Rails
+gem "bootstrap-datepicker-rails"# A datepicker for Bootstrap
+#gem "mailgun-rails"            # Mailgun adapter for Rails
 
 group :development, :test do
   gem "byebug", platform: :mri  # Call 'byebug' anywhere in the code to stop it
+  #gem "capybara", "~> 2.7.0"    # Integration testing tool
+  #gem "selenium-webdriver"      # Tool for writing automated tests of websites
 end
 
 group :development do
