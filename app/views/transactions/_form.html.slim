@@ -16,7 +16,7 @@
           { class: "form-control" }
     .col-sm-2
       .input-group
-        = f.text_field :amount, class: "form-control", placeholder: t('.amount'), autofocus: true
+        = f.telephone_field :amount, class: "form-control", placeholder: t('.amount'), autofocus: true
         span.input-group-addon = t('number.currency.format.unit')
 
   .form-group

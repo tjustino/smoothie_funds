@@ -17,7 +17,7 @@
     = f.label :initial_balance, t('.initial_balance'), class: "col-sm-2 control-label"
     .col-sm-4
       .input-group
-        = f.text_field :initial_balance, class: "form-control", placeholder: t('.initial_balance')
+        = f.telephone_field :initial_balance, class: "form-control", placeholder: t('.initial_balance')
         span.input-group-addon = t('number.currency.format.unit')
 
   - unless params[:action] == "new" or params[:action] == "create"

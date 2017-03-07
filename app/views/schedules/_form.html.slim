@@ -21,7 +21,7 @@
     .col-sm-2
       .input-group
         span.input-group-addon = t('.all_the')
-        = f.text_field :frequency, class: "form-control", placeholder: t('.frequency'), autofocus: true
+        = f.number_field :frequency, class: "form-control", placeholder: t('.frequency'), autofocus: true
     .col-sm-2
       = f.select :period, [ [t('.days'), :days], [t('.weeks'), :weeks], \
                             [t('.months'), :months], [t('.years'), :years]], \
