@@ -3,8 +3,8 @@
 
 $ ->
   $(".datepicker").datepicker
-    todayBtn:       "linked",
-    language:       "fr",
-    autoclose:      true,
-    # daysOfWeekHighlighted: "0,6",
-    todayHighlight: true
+    language:               "fr"
+    todayBtn:               "linked"
+    autoclose:              true
+    # todayHighlight:         true
+    # daysOfWeekHighlighted:  "0,6"
