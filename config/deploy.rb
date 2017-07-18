@@ -21,7 +21,7 @@ set :linked_dirs,   fetch(:linked_dirs, []).push(   "bin",
 set :rbenv_type,      :user
 set :rbenv_ruby,      "2.4.1"
 set :rbenv_prefix,    "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
-set :rbenv_map_bins,  %w{rake gem bundle ruby rails}
+set :rbenv_map_bins,  %w{rake gem bundle ruby rails puma pumactl}
 
 # how many old releases do we want to keep
 set :keep_releases, 5
