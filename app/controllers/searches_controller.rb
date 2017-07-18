@@ -9,6 +9,7 @@ class SearchesController < ApplicationController
     else
       load_transactions
       @nb_transactions  = @transactions.count
+      @sum_transactions = @transactions.sum(:amount)
       @transactions     = @transactions.limit( @limit )
     end
   end
