@@ -4,9 +4,9 @@ h1 = t('.listing_categories', current_account: @current_account.name)
 - unless @all_user_categories.any?
   = render "welcome"
 
-/ Total
+/ Category's count
 p.pull-right.label.label-info
-  = t('.total')
+  = t('.count')
   span#total = @nb_categories
 
 / New category and import categories from

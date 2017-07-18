@@ -74,7 +74,7 @@ fr:
       edit_account:     "Editer le compte"
     index:
       listing_accounts: "Liste des comptes"
-      total:            "Total : "
+      count:            "Nombre de comptes : "
       new_account:      "Nouveau compte"
       join_shared_account: "Voulez-vous partager le compte « %{account} » avec %{users} ?"
       and:              " et "
@@ -139,7 +139,7 @@ fr:
       edit_category:    "Editer la catégorie"
     index:
       listing_categories: "Liste des catégories du %{current_account}"
-      total:            "Total : "
+      count:            "Nombre de catégories : "
       new_category:     "Nouvelle catégorie"
       import_from:      "Importer depuis..."
       name:             "Nom"
@@ -256,7 +256,7 @@ fr:
       edit_transaction: "Editer la transaction"
     index:
       listing_transactions: "Liste des transactions du %{current_account}"
-      total:              "Total : "
+      count:              "Nombre de transations : "
       new_transaction:    "Nouvelle transaction"
       date:               "Date"
       category:           "Catégorie"
@@ -332,7 +332,7 @@ fr:
       edit_schedule:      "Editer l'échéancier"
     index:
       listing_schedules:  "Liste des échéanciers du %{current_account}"
-      total:              "Total : "
+      count:              "Nombre d'échéanciers : "
       new_schedule:       "Nouvel échéancier"
       next_time:          "Prochaine échéance"
       frequency:          "Fréquence"

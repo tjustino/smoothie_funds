@@ -4,9 +4,9 @@ h1 = t('.listing_transactions', current_account: @current_account.name)
 - unless @all_user_transactions.any?
   = render "welcome"
 
-/ Total
+/ Transaction's count
 p.pull-right.label.label-info
-  = t('.total')
+  = t('.count')
   span#total = @nb_transactions
 
 / Sum checked

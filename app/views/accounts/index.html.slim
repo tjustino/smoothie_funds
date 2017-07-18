@@ -4,9 +4,9 @@ h1 = t('.listing_accounts')
 - unless @current_accounts.any?
   = render "welcome"
 
-/ Total
+/ Account's count
 p.pull-right.label.label-info
-  = t('.total')
+  = t('.count')
   span#total = @nb_accounts
 
 / New account

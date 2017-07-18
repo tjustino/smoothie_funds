@@ -4,9 +4,9 @@ h1 = t('.listing_schedules', current_account: @current_account.name)
 - unless @all_user_schedules.any?
   = render "welcome"
 
-/ Total
+/ Schedule's count
 p.pull-right.label.label-info
-  = t('.total')
+  = t('.count')
   span#total = @nb_schedules
 
 / New schedule
