@@ -9,7 +9,7 @@
   / Trasnaction's sum
   p.pull-left.label.label-info
     = t('.sum')
-    span#total = number_to_currency(@sum_transactions)
+    span = number_to_currency(@sum_transactions)
 
   / Trasnaction's count
   p.pull-right.label.label-info
