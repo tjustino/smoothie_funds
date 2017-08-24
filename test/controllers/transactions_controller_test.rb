@@ -36,6 +36,7 @@ class TransactionsControllerTest < ActionController::TestCase
   end
 
   ################################################### GET /transactions/:id/edit
+  # TODO: fix
   test "should get edit" do
     get_edit        @some_transaction
     assert_response :success
@@ -71,6 +72,7 @@ class TransactionsControllerTest < ActionController::TestCase
   end
 
   ################################################## PATCH/PUT /transactions/:id
+  # TODO: fix
   test "should update transaction" do
     patch_update          @some_transaction
     #assert_not_nil        assigns(:transaction)
@@ -88,6 +90,7 @@ class TransactionsControllerTest < ActionController::TestCase
   end
 
   ##################################################### DELETE /transactions/:id
+  # TODO: fix
   test "should destroy transaction" do
     assert_difference('Transaction.count', -1) do
       delete_destroy        @some_transaction
@@ -107,6 +110,7 @@ class TransactionsControllerTest < ActionController::TestCase
   end
 
   ############################################# POST /transactions/:id/easycheck
+  # TODO: fix
   test "should easycheck transaction" do
     post_easycheck        @some_transaction
     #assert_not_nil        assigns(:transaction)
