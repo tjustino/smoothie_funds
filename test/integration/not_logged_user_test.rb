@@ -3,13 +3,18 @@ require 'test_helper'
 class NotLoggedUserTest < ActionDispatch::IntegrationTest
   fixtures :users
 
+  setup do
+    # to get session[:user_id]
+    post login_url, params: { email: users(:thomas).email, password: "secret" }
+  end
+
   ####################################################################### DELETE
 
   # As a not logged user,
   # I want to delete data
   # so that I will be redirected to the login path and data will not be deleted
   test "DELETE data knowing all ids" do
-    user = users(:thomas)
+    user = User.find session[:user_id]
     accounts = user.accounts.active
 
     # sessions#destroy
@@ -64,6 +69,8 @@ class NotLoggedUserTest < ActionDispatch::IntegrationTest
   # I want to access pages without params
   # so that I will be redirected to the login path, except for the login path
   test "GET pages without params" do
+    delete logout_url
+
     # sessions#new
     get login_path
     assert_response :success
@@ -77,7 +84,9 @@ class NotLoggedUserTest < ActionDispatch::IntegrationTest
   # I want to access pages with this params
   # so that I will be redirected to the login path
   test "GET knowing user id" do
-    user = users(:thomas)
+    user = User.find session[:user_id]
+
+    delete logout_url
 
     # accounts#index
     get accounts_path
@@ -96,8 +105,10 @@ class NotLoggedUserTest < ActionDispatch::IntegrationTest
   # I want to access pages with this params
   # so that I will be redirected to the login path, except for the new user path
   test "GET knowing all ids" do
-    user = users(:thomas)
+    user = User.find session[:user_id]
     accounts = user.accounts.active
+
+    delete logout_url
 
     accounts.each do |account|
       # categories#index
@@ -158,8 +169,10 @@ class NotLoggedUserTest < ActionDispatch::IntegrationTest
   # I want to patch data
   # so that I will be redirected to the login path and data will not be updated
   test "PATCH data knowing all ids" do
-    user = users(:thomas)
+    user = User.find session[:user_id]
     accounts = user.accounts.active
+
+    delete logout_url
 
     accounts.each do |account|
       # categories#update
@@ -226,8 +239,10 @@ class NotLoggedUserTest < ActionDispatch::IntegrationTest
   # I want to post data
   # so that I will be redirected to the login path and data will not be created
   test "POST knowing all ids" do
-    user = users(:thomas)
+    user = User.find session[:user_id]
     accounts = user.accounts.active
+
+    delete logout_url
 
     accounts.each do |account|
       # categories#create
@@ -274,8 +289,10 @@ class NotLoggedUserTest < ActionDispatch::IntegrationTest
   # I want to post data via specific routes
   # so that I will be redirected to the login path and data will not be created
   test "POST specific routes" do
-    user = users(:thomas)
+    user = User.find session[:user_id]
     accounts = user.accounts.active
+
+    delete logout_url
 
     accounts.each do |account|
       # categories#import_from

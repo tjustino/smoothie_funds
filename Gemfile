@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 # ~> 2.1 is identical to >= 2.1 and < 3.0
 # ~> 2.2.beta will match prerelease versions like 2.2.beta.12
 
-gem "rails",        "~> 5.0.2"
+gem "rails",        "~> 5.1.3"
 
 gem "pg"                        # Use postgresql as the db for Active Record
 #gem "redis",        "~> 3.0"   # Use Redis adapter to run Action Cable in prod
@@ -17,7 +17,7 @@ gem "jquery-rails"              # Use jquery as the JavaScript library
 #gem "jbuilder",    "~> 2.5"    # Build JSON APIs with ease
 gem "bcrypt",       "~> 3.1.7"  # Use ActiveModel has_secure_password
 
-gem "puma",         "~> 3.0"    # App web server
+gem "puma",         "~> 3.7"    # App web server
 gem "slim"                      # Template language
 gem "bootstrap-sass"            # Twitter's Bootstrap, converted to Sass
 gem "font-awesome-rails"        # Iconic font and CSS toolkit
@@ -26,13 +26,13 @@ gem "bootstrap-datepicker-rails"# A datepicker for Bootstrap
 
 group :development, :test do
   gem "byebug", platform: :mri  # Call 'byebug' anywhere in the code to stop it
-  #gem "capybara", "~> 2.7.0"    # Integration testing tool
-  #gem "selenium-webdriver"      # Tool for writing automated tests of websites
+  gem "capybara", "~> 2.13.0"   # Integration testing tool
+  gem "selenium-webdriver"      # Tool for writing automated tests of websites
 end
 
 group :development do
   gem "spring"                  # Keep application running in the background
-  gem "listen", "~> 3.0.5"      # Listen to file modifications and notifies you
+  gem "listen", ">= 3.0.5", "< 3.2" # Listen to file modif and notifies you
   gem "spring-watcher-listen", "~> 2.0.0" # Makes spring watch files
   gem "web-console"             # Access an IRB console on exception pages
   gem "annotate"                # Annotates ActiveRecord Model, route & fixture
