@@ -17,9 +17,10 @@
 !/log/.keep
 !/tmp/.keep
 
-# Ignore webpacker's files
+# Ignore yarn files
 /node_modules
 /yarn-error.log
+.yarnclean
 
 # Ignore other unneeded files
 /.capistrano
@@ -28,4 +29,5 @@
 .project
 .DS_Store
 *.pdf
-.byebug_history
+.byebug_history/public/packs
+/node_modules
