@@ -12,11 +12,14 @@
 /db/*.sqlite3-journal
 
 # Ignore all logfiles and tempfiles.
-/log/*.log
-/tmp
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
 
-# Ignore config files with passwords
-#/config/database.yml
+# Ignore webpacker's files
+/node_modules
+/yarn-error.log
 
 # Ignore other unneeded files
 /.capistrano
@@ -25,3 +28,4 @@
 .project
 .DS_Store
 *.pdf
+.byebug_history
