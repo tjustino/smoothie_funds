@@ -10,7 +10,7 @@ namespace :populate do
       account = Account.create( name:            SecureRandom.base58(10),
                                 initial_balance: rand(-1000..1000),
                                 hidden:          rand(0..1) == 1 ? true : false)
-      account.users << USER
+      account.users << @user
     end
   end
 
