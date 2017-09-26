@@ -1,4 +1,4 @@
-class AddScheduleIdToTransactions < ActiveRecord::Migration
+class AddScheduleIdToTransactions < ActiveRecord::Migration[4.2]
   def change
     add_column  :transactions, :schedule_id, :integer
     add_index   :transactions, :schedule_id

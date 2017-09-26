@@ -1,4 +1,4 @@
-class CreatePendingUsers < ActiveRecord::Migration
+class CreatePendingUsers < ActiveRecord::Migration[4.2]
   def change
     create_table :pending_users do |t|
       t.belongs_to  :account, null: false

@@ -1,4 +1,4 @@
-class CreateAccountsUsers < ActiveRecord::Migration
+class CreateAccountsUsers < ActiveRecord::Migration[4.2]
   def change
     create_table :accounts_users, id: false do |t|
       t.belongs_to :account, null: false, index: true
