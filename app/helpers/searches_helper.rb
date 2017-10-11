@@ -21,6 +21,10 @@ module SearchesHelper
     categories_names.join(", ")
   end
 
+  def accounts_with_categories
+    Account.where(id: @current_user.categories.select(:account_id)).order_by_name
+  end
+
   def witch_search(search, index)
     case index
       when 0 then t('.last_search')
