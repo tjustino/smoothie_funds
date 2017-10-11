@@ -16,7 +16,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   # respect this order for the authorize method that call @current_user
-  before_action :set_current_user, :set_current_accounts, :authorize
+  before_action :set_current_user,
+                :set_current_accounts,
+                :set_accounts_with_categories,
+                :authorize
 
 private ########################################################################
 

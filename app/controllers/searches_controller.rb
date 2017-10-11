@@ -18,7 +18,6 @@ class SearchesController < ApplicationController
   def new
     load_searches
     build_search
-    set_accounts_with_categories
   end
 
   # POST /users/:user_id/searches
