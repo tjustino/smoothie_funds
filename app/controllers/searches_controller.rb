@@ -18,8 +18,7 @@ class SearchesController < ApplicationController
   def new
     load_searches
     build_search
-    @accounts_with_categories = Account.where(id: 
-                    @current_user.categories.select(:account_id)).order_by_name
+    set_accounts_with_categories
   end
 
   # POST /users/:user_id/searches

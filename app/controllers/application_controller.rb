@@ -47,6 +47,11 @@ private ########################################################################
     end
   end
 
+  def set_accounts_with_categories
+    accounts = @current_user.categories.select(:account_id)
+    @accounts_with_categories = Account.active.where(id: accounts).order_by_name
+  end
+
   def userstamp(obj)
     if params[:action] == "create" or params[:action] == "import_from"
       obj.update_attribute(:created_by, @current_user.id)
