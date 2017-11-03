@@ -29,29 +29,30 @@ fr:
     account:
       personal_account: "Compte personnel"
       waiting_for:      "En attente de "
-      edit:             "Editer"
+      edit:             "Éditer"
       destroy:          "Supprimer"
       are_you_sure:     "Etes-vous certain de vouloir supprimer le compte « %{account} » ?"
     form:
       name:             "Nom"
       initial_balance:  "Balance initiale"
       share:            "Partagé avec"
-      unlink:           "Se délier de ce compte"
-      are_you_sure_unlink: "Etes-vous certain de ne plus être lié à ce compte ?"
-      propose_sharing:  "Nouveau partage"
+      unlink:           "Se délier"
+      are_you_sure_unlink: "Êtes-vous certain de ne plus vouloir accéder à ce compte ?\nNotez bien que ce compte continuera d'exister pour les personnes avec qui il est actuellement partagé"
+      propose_sharing:  "Partager avec"
+      explanation:      "Vous pouvez proposer de partager ce compte avec une autre personne"
       shared_email:     "Courriel"
       help_share:       "Une fois établi, le partage du compte reste actif même si vous mettez à jour votre courriel"
       hidden:           "Masquer ce compte"
-      back:             "Retour arrière"
+      # back:             "Retour arrière"
     pending_user:
       pending_user:     "Partage en attente"
-      no_longer_propose: "Ne plus proposer de partager ce compte"
+      no_longer_propose: "Ne plus proposer"
     welcome:
       welcome:          "La création de compte"
       content:              |-
-        Pour créer un compte c'est assez simple : cliquez sur <button disabled>
-        %{new_icon} Nouveau compte</button> et donnez lui un nom (ex :
-        compte courant).<br />
+        Pour créer un compte c'est assez simple : cliquez sur <button 
+        class="btn btn-primary" disabled>%{new_icon} Nouveau compte</button> et 
+        donnez lui un nom (ex : compte courant).<br />
         <br />
         La notion de « balance initiale » est importante :<br />
         <ul>
@@ -62,21 +63,19 @@ fr:
         valeur de votre "Nouveau solde" (il s'agit souvent de la dernière
         ligne).</li>
         </ul>
-        <br />
         Notez que vous pouvez également masquer votre compte ou bien le partager
         avec une autre personne (et si vous avez plusieurs comptes, elle ne
         verra que celui qui est partagé).<br />
         <br />
-        Une fois le compte créé, un nouveau menu apparaitra : <button disabled>
+        Une fois le compte créé, un nouveau menu apparaitra : <button class="btn btn-light" disabled>
         %{categories_icon} Catégories</button>, cliquez dessus pour continuer !
       close:            "Ok j'ai compris !"
     edit:
-      edit_account:     "Editer le compte"
+      edit_account:     "Éditer le compte"
     index:
-      listing_accounts: "Liste des comptes"
-      count:            "Nombre de comptes : "
+      listing_accounts: "Mes comptes "
       new_account:      "Nouveau compte"
-      join_shared_account: "Voulez-vous partager le compte « %{account} » avec %{users} ?"
+      join_shared_account: "Voulez-vous partager le compte « %{account} » avec %{users} ?"
       and:              " et "
       reject:           "Refuser"
       accept:           "Accepter"
@@ -84,6 +83,7 @@ fr:
       initial_balance:  "Balance initiale"
       share:            "Partagé avec"
       more_accounts:    "↓ Afficher plus de comptes ↓"
+      personal_account: "Compte personnel"
     new:
       create_account:   "Créer un compte"
 
@@ -99,16 +99,17 @@ fr:
     # views
     category:
       time:             "%{total} fois"
-      edit:             "Editer"
+      edit:             "Éditer"
       destroy:          "Supprimer"
       are_you_sure:     "Etes-vous certain de vouloir supprimer la catégorie « %{category} » ?"
     form:
       name:             "Nom"
-      back:             "Retour arrière"
+      # back:             "Retour arrière"
     import_from:
-      import_from:      "Importer les catégories depuis"
+      title:            "Importer depuis..."
+      import_from:      "Importer les catégories depuis :"
       speech:           |-
-        Avec cet assistant, importez toutes les catégories depuis vos autres comptes !<br />
+        Avec cet assistant, importez toutes les catégories d'un autre compte vers celui-ci !<br />
         Les catégories déjà existantes seront omises, il n'y aura pas de doublon.<br /><br />
       close:            "Fermer"
       import:           "Importer"
@@ -119,7 +120,7 @@ fr:
         Créer des catégories vous permettra de regrouper vos dépenses de la
         même famille.<br />
         <br />
-        Pour créer une catégorie c'est très simple : cliquez sur <button disabled>
+        Pour créer une catégorie c'est très simple : cliquez sur <button class="btn btn-primary" disabled>
         %{new_icon} Nouvelle catégorie</button> et donnez lui un nom (ex :
         assurance, crédit, électricité, salaire, etc.).<br />
         <br />
@@ -130,16 +131,16 @@ fr:
         les catégories des autres comptes pour ne pas avoir à tout recopier.<br />
         <br />
         Une fois que vous aurez quelques catégories, vous pourrez enfin créer
-        votre première transaction en cliquant sur <button disabled>
+        votre première transaction en cliquant sur <button class="btn btn-light" disabled>
         %{transactions_icon} Transactions</button> dans le menu.<br />
         Pour les transactions récurrentes, simplifiez-vous la vie avec les
-        <button disabled>%{schedules_icon} Échéanciers</button>.
+        <button class="btn btn-light" disabled>%{schedules_icon} Échéanciers</button>.
       close:            "Ok j'ai compris !"
     edit:
-      edit_category:    "Editer la catégorie"
+      edit_category:    "Éditer la catégorie"
     index:
-      listing_categories: "Liste des catégories du %{current_account}"
-      count:            "Nombre de catégories : "
+      listing_categories: "Catégories du %{current_account} "
+      # count:            "Nombre de catégories : "
       new_category:     "Nouvelle catégorie"
       import_from:      "Importer depuis..."
       name:             "Nom"
@@ -154,7 +155,7 @@ fr:
       content:              |-
         Nous sommes vraiment enchanté de vous accueillir !<br />
         Vous allez voir, c'est facile de faire ses comptes.<br /><br />
-        Pour commencer, cliquez sur <button disabled>%{accounts_icon} Comptes</button>
+        Pour commencer, cliquez sur <button class="btn btn-light" disabled>%{accounts_icon} Comptes</button>
         dans le menu pour accéder à l'écran permettant la création... de comptes !
       close:                "Ok j'ai compris !"
     index:
@@ -165,11 +166,8 @@ fr:
       accept:               "Accepter"
       transaction_summary:  "Synthèse des transactions"
       current_balance:      "Balance actuelle :"
-      future_balance:       "Balance future :"
+      future_balance:       "Balance à terme :"
       upcoming_terms:       "Échéances des 30 prochains jours"
-      next_time:            "Prochaine échéance"
-      category:             "Catégorie"
-      amount:               "Montant"
       insert_schedule:      "Insérer la prochaine échéance dans les transactions"
       balance_date:         "%{balance} au %{date}"
       no_terms:             "Aucune échéance"
@@ -185,6 +183,7 @@ fr:
       logout:       "Déconnexion"
       search:       "Rechercher"
       analytics:    "Analyser"
+      create_user:  "Créer un nouvel utilisateur"
 
   sessions:
     # controllers
@@ -194,11 +193,9 @@ fr:
       logged_out: "Déconnexion réussie"
     # views
     new:
-      please_login: "Merci de vous connecter"
       email:        "Courriel"
       password:     "Mot de passe"
       login:        "Connexion"
-      create_user:  "Créer un nouvel utilisateur"
 
   transactions:
     # controllers
@@ -221,12 +218,12 @@ fr:
       amount:           "Montant"
       checked:          "Rapprochée"
       comment:          "Commentaire"
-      back:             "Retour arrière"
+      # back:             "Retour arrière"
     sum_checked:
       sum_checked:      "Somme des montants rappochés : "
     transaction:
       check_transaction:  "Rapprocher la transaction"
-      edit:               "Editer"
+      edit:               "Éditer"
       destroy:            "Supprimer"
       are_you_sure:       "Etes-vous certain de vouloir supprimer la transaction ?"
     welcome:
@@ -236,7 +233,7 @@ fr:
         mettent parfois plusieurs jours à s'afficher lorsque vous consultez vos
         comptes en lignes.<br />
         <br />
-        Pour créer une transaction, rien de plus facile : cliquez sur <button disabled>
+        Pour créer une transaction, rien de plus facile : cliquez sur <button class="btn btn-primary" disabled>
         %{new_icon} Nouvelle transaction</button> et saisissez le montant à la
         date donnée, en précisant la catégorie (celle que vous avez créé
         précédemment).<br />
@@ -244,7 +241,7 @@ fr:
         Voilà, vous faites maintenant vos comptes !<br />
         <br />
         Un dernier truc : lorsque vous recevrez votre prochain relevé bancaire,
-        la somme des montants rapprochés (au-dessus du bouton <button disabled>
+        la somme des montants rapprochés (au-dessus du bouton <button class="btn btn-primary" disabled>
         %{new_icon} Nouvelle transaction</button>) doit correspondre à la
         première ligne de votre relevé (souvent appelé "Ancien solde").<br />
         Prenez 5 minutes pour rapprocher chaque opération en utilisant la coche
@@ -253,9 +250,9 @@ fr:
         (dernière ligne du relevé bancaire). C'est une bonne pratique !
       close:            "Ok j'ai compris !"
     edit:
-      edit_transaction: "Editer la transaction"
+      edit_transaction: "Éditer la transaction"
     index:
-      listing_transactions: "Liste des transactions du %{current_account}"
+      listing_transactions: "Liste des transactions du %{current_account} "
       count:              "Nombre de transations : "
       new_transaction:    "Nouvelle transaction"
       date:               "Date"
@@ -288,7 +285,7 @@ fr:
       weeks:              "semaines"
       months:             "mois"
       years:              "ans"
-      back:               "Retour arrière"
+      # back:               "Retour arrière"
     operation_form:
       debit:            "Débit"
       credit:           "Crédit"
@@ -305,7 +302,7 @@ fr:
       weeks:              "semaines"
       months:             "mois"
       years:              "ans"
-      edit:               "Editer"
+      edit:               "Éditer"
       destroy:            "Supprimer"
       are_you_sure:       "Etes-vous certain de vouloir supprimer cet échéancier ?"
     welcome:
@@ -316,22 +313,22 @@ fr:
         le monde oublie.<br />
         <br />
         Pour créer un échéancier, il faut commencer par cliquer sur
-        <button disabled>%{new_icon} Nouvel échéancier</button>. Les informations
+        <button class="btn btn-primary" disabled>%{new_icon} Nouvel échéancier</button>. Les informations
         à saisir sont les mêmes que pour une transaction à la différence que cette
         fois il faudra indiquer une fréquence et la date de la prochaine échéance.<br />
         <br />
         Lorsque vous aurez quelques échéances, cliquez sur la baguette magique
         %{magic_icon} en début de ligne pour créer l'opération directement dans
         l'écran des transactions. La prochaine échéance sera automatiquement
-        recalculée, donc ne vous en souciez plus.<br />
+        recalculée, donc pas de soucis à se faire.<br />
         <br />
         Vous le remarquerez certainement mais, pour ne plus oublier ces opérations
         récurrentes, l'écran d'accueil affiche les échéances des 30 prochains jours.
       close:            "Ok j'ai compris !"
     edit:
-      edit_schedule:      "Editer l'échéancier"
+      edit_schedule:      "Éditer l'échéancier"
     index:
-      listing_schedules:  "Liste des échéanciers du %{current_account}"
+      listing_schedules:  "Liste des échéanciers du %{current_account} "
       count:              "Nombre d'échéanciers : "
       new_schedule:       "Nouvel échéancier"
       next_time:          "Prochaine échéance"
@@ -355,12 +352,13 @@ fr:
       name:                   "Nom"
       password:               "Mot de passe"
       password_confirmation:  "Confirmation"
-      back:                   "Retour arrière"
+      # back:                   "Retour arrière"
     edit:
-      edit_user:  "Edition de l'utilisateur courant"
+      edit_user:  "Édition de l'utilisateur courant"
       title_bug:  "Support"
       speech_bug: |-
         Vous avez trouvé un bug et vous souhaitez le signaler ?<br />
+        Une idée de nouvelle fonctionnalité incroyable ?<br />
         Vous pouvez utiliser ce
         <a href="https://github.com/tjustino/smoothie_funds/issues" target="_blank">lien</a>
         (en anglais ou français uniquement, merci !)
@@ -408,14 +406,14 @@ fr:
       like:           "Contient '%{comment}'"
       with_comment:    "Contenant n'importe quel commentaire"
       not_like:       "Ne contient pas '%{comment}'"
-      without_comment: "Ne content aucun commentaire"
+      without_comment: "Ne contient aucun commentaire"
       checked:        "Rapproché"
       yep:            "Oui"
       nop:            "Non"
       checked_or_not: "Peu importe"
     transaction:
       check_transaction:  "Rapprocher la transaction"
-      edit:               "Editer"
+      edit:               "Éditer"
       destroy:            "Supprimer"
       are_you_sure:       "Etes-vous certain de vouloir supprimer la transaction ?"
     new:
@@ -460,7 +458,7 @@ fr:
     template:
       header:
         one: "1 erreur a été rencontrée sur ce champ :"
-        other: "%{count} erreurs ont été rencontrées sur ces champs :"
+        other: "%{count} erreurs ont été rencontrées :"
 
 ################################################################################
 # Active Record
@@ -521,7 +519,8 @@ fr:
 ################################################################################
   date:
     formats:
-      default: "%d/%m/%Y"
+      default:  "%d/%m/%Y"
+      short:    "%d/%m"
 
   time:
     formats:
