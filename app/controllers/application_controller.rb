@@ -51,8 +51,12 @@ private ########################################################################
   end
 
   def set_accounts_with_categories
-    accounts = @current_user.categories.select(:account_id)
-    @accounts_with_categories = Account.active.where(id: accounts).order_by_name
+    if @current_user
+      accounts = @current_user.categories.select(:account_id)
+      @accounts_with_categories =  Account.active
+                                          .where(id: accounts)
+                                          .order_by_name
+    end
   end
 
   def userstamp(obj)

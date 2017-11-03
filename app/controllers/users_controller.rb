@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
-  skip_before_action :set_current_user, :set_current_accounts, only: [:new, :create]
+  skip_before_action  :set_current_user,
+                      :set_current_accounts,
+                      :set_accounts_with_categories,
+                      only: [:new, :create]
 
   # GET /users/new
   def new
