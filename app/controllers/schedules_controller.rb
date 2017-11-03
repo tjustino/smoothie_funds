@@ -80,13 +80,17 @@ class SchedulesController < ApplicationController
     transaction.save
     @schedule.save
 
-    if Rails.application.routes.recognize_path(request.referrer)[:controller] == "schedules"
-      load_limit
-      redirect_to account_schedules_url(
+    begin
+      if Rails.application.routes.recognize_path(request.referrer)[:controller] == "schedules"
+        load_limit
+        redirect_to account_schedules_url(
                               @current_account,
                               limit: (params[:index].to_f / @limit.to_f).ceil ),
-                  notice: t('.successfully_inserted')
-    else
+                              notice: t('.successfully_inserted')
+      else
+        redirect_to dashboard_url, notice: t('.successfully_inserted')
+      end
+    rescue
       redirect_to dashboard_url, notice: t('.successfully_inserted')
     end
   end
@@ -109,7 +113,18 @@ class SchedulesController < ApplicationController
 
     def schedule_params
       schedule_params = params[:schedule]
-      schedule_params ? schedule_params.permit(:account_id, :next_time, :frequency, :period, operation_attributes: [:amount, :category_id, :comment, :checked]) : {}
+      if schedule_params
+        schedule_params.permit( :account_id,
+                                :next_time,
+                                :frequency,
+                                :period,
+                                operation_attributes: [ :amount,
+                                                        :category_id,
+                                                        :comment,
+                                                        :checked ] )
+      else
+        {}
+      end
     end
 
     def save_schedule(notice)
