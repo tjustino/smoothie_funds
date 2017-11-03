@@ -14,6 +14,9 @@
 #
 
 class Schedule < ApplicationRecord
+  # BUG : Edit 1 schedule, remove amoutn an confirm -> Error
+  # transaction was deleted (why?) but not the schedule. Must delete schedule:
+  #   Schedule.delete 688540077
   has_one :operation, foreign_key: "schedule_id",
                       class_name: "Transaction",
                       dependent: :destroy
