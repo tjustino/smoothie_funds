@@ -1,27 +1,23 @@
-= form_for(shallow_args(@current_account, @category), html: { class: "form-horizontal" }) do |f|
-  - if @category.errors.any?
-    .alert.alert-danger.alert-dismissable
-      button.close type="button" data-dismiss="alert" aria-hidden="true"
-        = fa_icon "times"
-      h3 = t('errors.template.header', count: @category.errors.count)
-      ul
-        - @category.errors.full_messages.each do |msg|
-          li = msg
+= form_for(shallow_args(@current_account, @category)) do |f|
+  h1.card-header = title
 
-  .form-group
-    = f.label :name, t('.name'), class: "col-sm-2 control-label"
-    .col-sm-4
-      = f.text_field :name, class: "form-control", placeholder: t('.name'), autofocus: true
+  .card-body
+    .form-group.row
+      = f.label :name, t('.name'), class: "col-sm-4 col-form-label"
+      .col
+        = f.text_field :name, class: "form-control", \
+                              placeholder: t('.name'), \
+                              autofocus: true
 
-  .form-group
-    .col-sm-offset-2.col-sm-4
-      .btn-toolbar
+  .card-footer
+    .row.justify-content-end
+      .col-auto
         = f.submit class: "btn btn-primary"
-        - if params[:action] == "new"
-          = link_to (fa_icon "reply", text: t('.back')), \
-                                      account_categories_path(@current_account), \
-                                      class: "btn btn-default"
-        - elsif params[:action] == "edit"
-          = link_to (fa_icon "reply", text: t('.back')), \
-                                      account_categories_path(@current_account), \
-                                      class: "btn btn-default"
+        / - if params[:action] == "new"
+        /   = link_to (fa_icon "reply"), \
+        /             account_categories_path(@current_account), \
+        /             class: "btn btn-secondary"
+        / - elsif params[:action] == "edit"
+        /   = link_to (fa_icon "reply"), \
+        /             account_categories_path(@current_account), \
+        /             class: "btn btn-secondary"

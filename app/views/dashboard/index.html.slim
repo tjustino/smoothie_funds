@@ -1,113 +1,91 @@
-.page-header
-  h1 = t('.dashboard')
-
 / Welcome
 - unless @current_accounts.any?
   = render "welcome"
 
+/ Header
+.row.mb-3
+  .col
+    h1 = t('.dashboard')
+
 / Accept sharing
 - @pendings.each do | pending |
-  .alert.alert-info.clearfix
-    = t('.join_shared_account', account: pending.account.name, \
-                                users: show_other_users(pending.account)).html_safe
-    .btn-toolbar
-      = link_to (fa_icon "remove", text: "Refuser"), \
-              unsharing_path(pending.account), \
-              method: :delete, \
-              class: "btn btn-danger pull-right"
-      = link_to (fa_icon "thumbs-o-up", text: "Accepter"), \
-              sharing_path(pending.account), \
-              method: :post, \
-              class: "btn btn-success pull-right"
+  .row
+    .col
+      .alert.alert-info.clearfix role="alert"
+        h5 = t('.join_shared_account', \
+              account: pending.account.name, \
+              users: show_other_users(pending.account)).html_safe
+        hr
+        .row.justify-content-start
+          .col-auto
+            = link_to (fa_icon "thumbs-o-up", text: t('.accept')), \
+                    sharing_path(pending.account), \
+                    method: :post, \
+                    class: "btn btn-success"
+          .col-auto
+            = link_to (fa_icon "remove", text: t('.reject')), \
+                    unsharing_path(pending.account), \
+                    method: :delete, \
+                    class: "btn btn-danger"
 
-.row
+/ Dashboard
+.row.justify-content-between
   / transaction summary
   .col-md-6
-    .panel.panel-primary
-      .panel-heading
-        h3.panel-title = t('.transaction_summary')
-      .panel-body
+    .card.border-primary.mb-3
+      .card-header.text-white.bg-primary
+        h4 = t('.transaction_summary')
+      .card-body
         - if @transactions.any?
-          .list-group.list-special
+          .list-group
             - @current_accounts.each do |account|
-              a.list-group-item href="#{account_transactions_path(account)}"
-                h4.list-group-item-heading = account.name
-                dl.dl-horizontal.list-group-item-text
+              a.list-group-item.list-group-item-action href="#{account_transactions_path(account)}"
+                  h5 = account.name
                   - if account.transactions.any?
-                    dt = t('.current_balance')
-                    dd = t('.balance_date', balance: current_balance(account), \
-                                            date: current_date(account) )
-                    - if future_transactions?(account)
-                      dt style=("color: gray;")
-                        = t('.future_balance')
-                      dd style=("color: gray;")
-                        = t('.balance_date',  balance: future_balance(account), \
-                                              date: future_date(account) )
+                    dl.row.mb-0
+                      dt.col-auto = t('.current_balance')
+                      dd.col-auto = t('.balance_date', \
+                                      balance: current_balance(account), \
+                                      date: current_date(account) )
+                      - if future_transactions?(account)
+                        dt.col-auto style=("color: gray;")
+                          = t('.future_balance')
+                        dd.col-auto style=("color: gray;")
+                          = t('.balance_date',  \
+                                balance: future_balance(account), \
+                                date: future_date(account) )
                   - else
-                    dt = t('.current_balance')
-                    dd = t('.balance_date', balance: initial_balance(account), \
-                                            date: today )
+                    dl.row.mb-0
+                      dt.col-auto = t('.current_balance')
+                      dd.col-auto = t('.balance_date', \
+                                      balance: initial_balance(account), \
+                                      date: today )
         - else
-          p = t('.no_transactions')
+          p.card-text = t('.no_transactions')
 
   / upcoming terms
   .col-md-6
-    .panel.panel-primary
-      .panel-heading
-        h3.panel-title = t('.upcoming_terms')
-      .panel-body
+    .card.border-primary.mb-3
+      .card-header.text-white.bg-primary
+        h3 = t('.upcoming_terms')
+      .card-body
         - if @schedules.any?
-          .list-group.list-special
-            - @current_accounts.each do |account|
-              - if @schedules.where(account_id: account.id).any?
-                .panel.panel-info
-                  .panel-heading
-                    h4.panel-title
-                      a href="#{account_schedules_path(account)}" = account.name
-                  .table-responsive
-                    table.table.table-striped.table-hover
-                      thead
-                        tr
-                          th
-                          th = t('.next_time')
-                          th = t('.category')
-                          th = t('.amount')
-                      tbody
-                        - shedules_for(account).each do |schedule|
-                          tr title="#{schedule.account.name}"
-                            td = link_to fa_icon("magic"), \
-                                    insert_schedule_path(schedule), \
-                                    method: :insert, title: t('.insert_schedule')
-                            td = l(schedule.next_time)
-                            td = schedule.operation.category.name
-                            td = number_to_currency(schedule.operation.amount)
+          - @current_accounts.each do |account|
+            - if @schedules.where(account_id: account.id).any?
+              .row.ml-2.mr-2.mb-3
+                table.table.table-striped.table-hover
+                  thead
+                    tr
+                      th colspan="4" = link_to(account.name, \
+                                                  account_schedules_path(account))
+                  tbody
+                  - shedules_for(account).each do |schedule|
+                    tr title="#{schedule.account.name}"
+                      td = link_to fa_icon("magic"), \
+                              insert_schedule_path(schedule), \
+                              method: :insert, title: t('.insert_schedule')
+                      td = l(schedule.next_time, format: :short)
+                      td = schedule.operation.category.name
+                      td.nowrap = number_to_currency(schedule.operation.amount)
         - else
-          p = t('.no_terms')
-
-/ - if @transactions.any?
-/   .row
-/     #dashboard-carousel.carousel.slide data-ride="carousel"
-/       / Indicators
-/       ol.carousel-indicators
-/         li.active data-target="#dashboard-carousel" data-slide-to="0"
-/         li data-target="#dashboard-carousel" data-slide-to="1"
-/         li data-target="#dashboard-carousel" data-slide-to="2"
-
-/       / Wrapper for slides
-/       .carousel-inner role="listbox"
-/         - @current_accounts.each_with_index do |account, index|
-/           .item class="#{index == 0 ? 'active' : nil}"
-/             canvas id="chart-area-#{account.id}" height="80"
-/             .carousel-caption
-/               h3 = account.name
-
-/       / Controls
-/       a.left.carousel-control href="#dashboard-carousel" role="button" data-slide="prev"
-/         span.icon-prev aria-hidden="true"
-/           /i.fa.fa-chevron-circle-left
-/         span.sr-only Previous
-
-/       a.right.carousel-control href="#dashboard-carousel" role="button" data-slide="next"
-/         span.icon-next aria-hidden="true"
-/           /i.fa.fa-chevron-circle-right
-/         span.sr-only Next
+          p.card-text = t('.no_terms')

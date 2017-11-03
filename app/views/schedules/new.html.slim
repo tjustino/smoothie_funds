@@ -1,4 +1,4 @@
-.page-header
-  h2 = t('.create_schedule')
-
-= render 'form'
+.row.justify-content-center
+  .col-md-auto
+    .card.mb-3
+      = render partial: "form", locals: { title: t('.create_schedule') }

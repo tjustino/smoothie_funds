@@ -1,26 +1,32 @@
-.page-header
-  h2 = t('.create_search')
-
-= render 'form'
+.row.justify-content-center
+  .col-md-auto
+    .card.mb-3
+      = render partial: "form", locals: { title: t('.create_search') }
 
 - if @searches.any?
 
   hr
 
-  #accordion.panel-group role="tablist" aria-multiselectable="true"
-    - @searches.each_with_index do |search, index|
-      .panel.panel-info
-        .panel-heading role="tab" id="heading#{search.id}"
-          h4.panel-title
-            a.collapsed data-toggle="collapse" data-parent="#accordion" href="#collapse#{search.id}" aria-expanded="false" aria-controls="collapse#{search.id}"
-              = witch_search(search, index)
-        .panel-collapse.collapse id="collapse#{search.id}" role="tabpanel" aria-labelledby="heading#{search.id}"
-          .panel-body
-            = render partial: "resume", locals: { search: search }
-          .panel-footer
-            = link_to ( fa_icon "arrow-circle-o-right", text: t('.show_result') ), search
-            .pull-right = link_to (fa_icon "trash-o", text: t('.destroy')), \
-                                      search, \
-                                      method: :delete, \
-                                      data: { confirm: t('.are_you_sure') }, \
-                                      title: t('.destroy')
+  .row.mb-3
+    #accordion.col role="tablist"
+      - @searches.each_with_index do |search, index|
+        .card.mb-3
+          .card-header role="tab" id="heading#{search.id}"
+            h4.mb-0
+              a.collapsed data-toggle="collapse" href="#collapse#{search.id}" aria-expanded="false" aria-controls="collapse#{search.id}"
+                = witch_search(search, index)
+          .collapse role="tabpanel" aria-labelledby="heading#{search.id}" data-parent="#accordion" id="collapse#{search.id}"
+            .card-body
+              = render partial: "resume", locals: { search: search }
+            .card-footer
+              .row.justify-content-between
+                .col-auto
+                   = link_to ( fa_icon "arrow-circle-o-right", \
+                                                    text: t('.show_result') ), \
+                                                    search
+                .col-auto
+                  = link_to (fa_icon "trash-o", text: t('.destroy')), \
+                                        search, \
+                                        method: :delete, \
+                                        data: { confirm: t('.are_you_sure') }, \
+                                        title: t('.destroy')

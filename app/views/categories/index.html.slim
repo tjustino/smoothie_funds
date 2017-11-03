@@ -1,44 +1,48 @@
-h1 = t('.listing_categories', current_account: @current_account.name)
-
 / Welcome
 - unless @all_user_categories.any?
   = render "welcome"
 
-/ Category's count
-p.pull-right.label.label-info
-  = t('.count')
-  span#total = @nb_categories
-
-/ New category and import categories from
-h3.btn-toolbar
-  = link_to     (fa_icon "plus-circle", text: t('.new_category')), \
-                new_account_category_path, class: "btn btn-primary"
+/ Header
+.row.align-items-center.justify-content-between.mb-3
+  .col
+    h2
+      = t('.listing_categories', current_account: @current_account.name)
+      span.badge.badge-secondary#total = @nb_categories
+  / Import categories from
   - if @current_accounts.count > 1
-    = button_tag  (fa_icon "exchange", text: t('.import_from')), \
-                  class: "btn btn-default", \
-                  data: { toggle: "modal", target: "#importFrom" }
+    = render "import_from"
+    .col-md-auto
+      h2 = button_tag  (fa_icon "exchange", text: t('.import_from')), \
+                    class: "btn btn-default", \
+                    data: { toggle: "modal", target: "#importFrom" }
 
-- if @current_accounts.count > 1
-  = render 'import_from'
+  / New category
+  .col-md-auto
+    h2 = link_to (fa_icon "plus-circle",  text: t('.new_category')), \
+                                          new_account_category_path, \
+                                          class: "btn btn-primary"
 
 / Table
-.table-responsive
-  table.table.table-striped.table-hover
-    thead
-      tr
-        th = t('.name')
-        th = t('.use')
-        th colspan="3"
+.row#content-table
+    table.table.table-striped#magic-table
+      thead
+        tr
+          th = t('.name')
+          th = t('.use')
+          th
 
-    tbody
-      = render partial: "category", locals: { categories: @categories }
+      tbody#listing
+        = render partial: "category", locals: { categories: @categories,
+                                                name:       t('.name'),
+                                                use:        t('.use')    }
 
 / More categories
-= image_tag "loading.gif", style: "display:none;", class: "loading center-block"
+.row.justify-content-center.mb-3
+  = image_tag "loading.gif", style: "display:none;", class: "loading"
 
-- if @nb_categories >= @limit
-  = button_to t('.more_categories'), \
-              account_categories_path(@current_account), \
-              { method: :get, \
-                class:  "btn btn-primary center-block", \
-                id:     "more_items" }
+  - if @nb_categories >= @limit
+    = button_to t('.more_categories'), \
+                account_categories_path(@current_account), \
+                { method: :get, \
+                  class:  "btn btn-primary", \
+                  id:     "more_items" }

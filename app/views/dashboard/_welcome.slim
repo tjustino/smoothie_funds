@@ -2,8 +2,8 @@
   .modal-dialog role="document"
     .modal-content
       .modal-header
-        button.close type="button" data-dismiss="modal" aria-hidden="true" = fa_icon("times")
         h4.modal-title = t('.welcome')
+        button.close type="button" data-dismiss="modal" aria-hidden="true" = fa_icon("times")
       .modal-body = t('.content', accounts_icon: fa_icon("book")).html_safe
       .modal-footer
         button.btn.btn-success type="button" data-dismiss="modal" = t('.close')

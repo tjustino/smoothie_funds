@@ -1,22 +1,29 @@
 - accounts.each do |account|
   tr style=("color: gray;" if account.hidden == true)
     / name
-    td = account.name
+    td data-title="#{name}" = account.name
 
     / initial balance
-    td = number_to_currency(account.initial_balance)
+    td.nowrap data-title="#{init_bal}" = \
+                                  number_to_currency(account.initial_balance)
 
     / share
     - unless account.pending_user.blank?
-      td =  show_others_or_me(account).html_safe + \
-            tag("br") + \
-            t('.waiting_for') + mail_to(account.pending_user.email)
+      td data-title="#{share}" =  show_others_or_me(account).html_safe + \
+                                  tag("br") + \
+                                  t('.waiting_for') + \
+                                  mail_to(account.pending_user.email)
     - else
-      td = show_others_or_me(account).html_safe
+      td data-title="#{share}" = show_others_or_me(account).html_safe
 
     / common
-    td = link_to (fa_icon "edit", text: t('.edit')), edit_account_path(account)
-
-    td = link_to  (fa_icon "trash-o", text: t('.destroy')), account_path(account), \
-                  method: :delete, \
-                  data: { confirm: t('.are_you_sure', account: account.name) }
+    td
+      .row.justify-content-start.dotted-top
+        .col-auto
+          = link_to (fa_icon "edit", text: t('.edit')), \
+                                                    edit_account_path(account)
+        .col-auto
+          = link_to (fa_icon "trash-o", text: t('.destroy')), \
+                    account_path(account), \
+                    method: :delete, \
+                    data: {confirm: t('.are_you_sure', account: account.name)}

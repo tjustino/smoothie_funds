@@ -1,47 +1,45 @@
-= form_for(shallow_args(@current_account, @schedule), html: { class: "form-horizontal" }) do |f|
-  - if @schedule.errors.any? || @schedule.operation.errors.any?
-    .alert.alert-danger.alert-dismissable
-      button.close type="button" data-dismiss="alert" aria-hidden="true"
-        = fa_icon "times"
-      h3 = t('errors.template.header', count: \
-                      @schedule.errors.count + @schedule.operation.errors.count)
-      ul
-        - @schedule.errors.full_messages.each do |msg|
-          li = msg
-        - @schedule.operation.errors.full_messages.each do |msg|
-          li = msg
+= form_for(shallow_args(@current_account, @schedule)) do |f|
+  h1.card-header = title
 
-  = f.fields_for :operation do |operation_fields|
-    = render 'operation_form', f: operation_fields
+  .card-body
+    = f.fields_for :operation do |operation_fields|
+      = render "operation_form", f: operation_fields
 
-  hr
+    hr
 
-  .form-group
-    = f.label :frequency, t('.frequency'), class: "col-sm-2 control-label"
-    .col-sm-2
-      .input-group
-        span.input-group-addon = t('.all_the')
-        = f.number_field :frequency, class: "form-control", placeholder: t('.frequency'), autofocus: true
-    .col-sm-2
-      = f.select :period, [ [t('.days'), :days], [t('.weeks'), :weeks], \
-                            [t('.months'), :months], [t('.years'), :years]], \
-                          {}, { class: "form-control" }
+    .form-group.row
+      = f.label :frequency, t('.frequency'), class: "col-sm-4 col-form-label"
+      .col
+        .input-group
+          span.input-group-addon = t('.all_the')
+          = f.number_field :frequency,  class: "form-control", \
+                                        placeholder: t('.frequency')
+      .col
+        = f.select :period, [ [t('.days'), :days], [t('.weeks'), :weeks], \
+                              [t('.months'), :months], [t('.years'), :years]], \
+                            {}, { class: "form-control custom-select" }
 
-  .form-group
-    = f.label :next_time, t('.next_time'), class: "col-sm-2 control-label"
-    .col-sm-4
-      = f.text_field :next_time, class: "form-control datepicker", placeholder: t('.next_time'), \
-            value: @schedule.next_time.nil? ? l(Date.today) : l(@schedule.next_time)
+    .form-group.row
+      = f.label :next_time, t('.next_time'), class: "col-sm-4 col-form-label"
+      .col
+        .input-group
+          = f.text_field :next_time, \
+            class: "form-control datepicker", \
+            placeholder: t('.next_time'), \
+        value: @schedule.next_time.nil? ? l(Date.today) : l(@schedule.next_time)
+          span.input-group-addon = fa_icon "calendar"
 
-  .form-group
-    .col-sm-offset-2.col-sm-8
-      .btn-toolbar
+  .card-footer
+    .row.justify-content-end
+      .col-auto
         = f.submit class: "btn btn-primary"
-        - if params[:action] == "new"
-          = link_to (fa_icon "reply", text: t('.back')), \
-                    account_schedules_path(@current_account), \
-                    class: "btn btn-default"
-        - elsif params[:action] == "edit"
-          = link_to (fa_icon "reply", text: t('.back')), \
-                    account_schedules_path(@current_account), \
-                    class: "btn btn-default"
+        / - if params[:action] == "new"
+        /   .col-auto
+        /     = link_to (fa_icon "reply"), \
+        /               account_schedules_path(@current_account), \
+        /               class: "btn btn-secondary"
+        / - elsif params[:action] == "edit"
+        /   .col-auto
+        /     = link_to (fa_icon "reply"), \
+        /               account_schedules_path(@current_account), \
+        /               class: "btn btn-secondary"

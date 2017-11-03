@@ -1,20 +1,22 @@
-.modal.fade#importFrom
-  .modal-dialog
+.modal.fade#importFrom tabindex="-1" role="dialog" aria-labelledby="importFrom"
+  .modal-dialog role="document"
     .modal-content = form_for(  [@current_user, @current_account], \
                                 method: :import_from, \
                                 url: :import_from_account_categories ) do |f|
-
+      .modal-header
+        h4.modal-title = t('.title')
+        button.close type="button" data-dismiss="modal" aria-hidden="true" = fa_icon("times")
       .modal-body
         p = t('.speech').html_safe
         .form-group
-          = f.label :import_from, t('.import_from'), class: "control-label"
+          = f.label :import_from, t('.import_from'), class: "form-control-label"
           = f.collection_select :categories, \
                                 @other_accounts, \
                                 :id, \
                                 :name, \
                                 {}, \
-                                {class: "form-control"}
+                                {class: "form-control custom-select"}
 
       .modal-footer
-        button.btn.btn-default type="button" data-dismiss="modal" = t('.close')
+        / button.btn.btn-default type="button" data-dismiss="modal" = t('.close')
         = f.submit class: "btn btn-primary"

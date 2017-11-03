@@ -1,34 +1,36 @@
-.page-header
-  h1 = t('.analytics')
+/ Header
+.row.mb-3
+  .col
+    h2 = t('.analytics')
 
-#accordion.panel-group role="tablist" aria-multiselectable="true"
-  - @current_accounts.each_with_index do |account, index|
-    .panel.panel-default
-      .panel-heading role="tab" id="heading#{index}"
-        h2.panel-title
-          a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse#{index}" aria-controls="collapse#{index}" #{account.name}
+.row.mb-3
+  #accordion.col role="tablist"
+    - @accounts_with_categories.each_with_index do |account, index|
+      .card.mb-2
+        .card-header role="tab" id="heading#{index}"
+          h3.mb-0
+            a data-toggle="collapse" href="#collapse#{index}" aria-expanded="true" aria-controls="collapse#{index}" #{account.name}
+        .collapse id="collapse#{index}" class=("show" if index == 0) role="tabpanel" aria-labelledby="heading#{index}" data-parent="#accordion"
+          .card-body
+            h4 = t('.tendency')
+            canvas id="lineChart#{index}"
+            javascript:
+              var ctx=document.getElementById("lineChart#{index}").getContext("2d");
+              var options= { responsive: true, maintainAspectRatio: false };
+              new Chart(ctx, {
+                type: "line",
+                data: {
+                  labels: #{ raw dates_before_past_time(account) },
+                  datasets: [ {
+                    label: "#{ t('.balance') }",
+                    fill: true,
+                    backgroundColor: "rgba(75,192,192,0.4)",
+                    borderColor: "rgba(75,192,192,1)",
+                    data: #{ raw past_data(account) }}]},
+                options: { scales: { yAxes: [ { ticks: { beginAtZero:true }}]}}
+              });
 
-      .panel-collapse.collapse class=("in" if index == 0) id="collapse#{index}" role="tabpanel" aria-labelledby="heading#{index}"
-        .panel-body
-          h3 = t('.tendency')
-          canvas id="lineChart#{index}"
-          javascript:
-            var ctx=document.getElementById("lineChart#{index}").getContext("2d");
-            var options= { responsive: true, maintainAspectRatio: false };
-            new Chart(ctx, {
-              type: "line",
-              data: {
-                labels: #{ raw dates_before_past_time(account) },
-                datasets: [ {
-                  label: "#{ t('.balance') }",
-                  fill: true,
-                  backgroundColor: "rgba(75,192,192,0.4)",
-                  borderColor: "rgba(75,192,192,1)",
-                  data: #{ raw past_data(account) }}]},
-              options: { scales: { yAxes: [ { ticks: { beginAtZero:true }}]}}
-            });
-
-          / h3 Répartition des frais
-          / canvas id="pieChart#{index}" height="80"
-          / javascript:
-          /   var ctx=document.getElementById("pieChart#{index}");var options={responsive:true,maintainAspectRatio:false};new Chart(ctx,{type:'pie',data:{labels:["January","February","March","April","May","June","July"],datasets:[{label:"My First dataset",backgroundColor:['rgba(255, 99, 132, 0.2)','rgba(54, 162, 235, 0.2)','rgba(255, 206, 86, 0.2)','rgba(75, 192, 192, 0.2)','rgba(153, 102, 255, 0.2)','rgba(255, 159, 64, 0.2)'],borderColor:['rgba(255,99,132,1)','rgba(54, 162, 235, 1)','rgba(255, 206, 86, 1)','rgba(75, 192, 192, 1)','rgba(153, 102, 255, 1)','rgba(255, 159, 64, 1)'],borderWidth:1,data:[65,59,80,81,56,55,40]}]}});
+/ h3 Répartition des frais
+/ canvas id="pieChart#{index}" height="80"
+/ javascript:
+/   var ctx=document.getElementById("pieChart#{index}");var options={responsive:true,maintainAspectRatio:false};new Chart(ctx,{type:'pie',data:{labels:["January","February","March","April","May","June","July"],datasets:[{label:"My First dataset",backgroundColor:['rgba(255, 99, 132, 0.2)','rgba(54, 162, 235, 0.2)','rgba(255, 206, 86, 0.2)','rgba(75, 192, 192, 0.2)','rgba(153, 102, 255, 0.2)','rgba(255, 159, 64, 0.2)'],borderColor:['rgba(255,99,132,1)','rgba(54, 162, 235, 1)','rgba(255, 206, 86, 1)','rgba(75, 192, 192, 1)','rgba(153, 102, 255, 1)','rgba(255, 159, 64, 1)'],borderWidth:1,data:[65,59,80,81,56,55,40]}]}});

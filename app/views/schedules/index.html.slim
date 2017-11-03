@@ -1,21 +1,22 @@
-h1 = t('.listing_schedules', current_account: @current_account.name)
-
 / Welcome
 - unless @all_user_schedules.any?
   = render "welcome"
 
-/ Schedule's count
-p.pull-right.label.label-info
-  = t('.count')
-  span#total = @nb_schedules
-
-/ New schedule
-h3 = link_to (fa_icon "plus-circle", text: t('.new_schedule')), \
-                new_account_schedule_path, class: "btn btn-primary"
+/ Header
+.row.align-items-center.justify-content-between.mb-3
+  .col
+    h2
+      = t('.listing_schedules', current_account: @current_account.name)
+      span.badge.badge-secondary#total = @nb_schedules
+  .col-md-auto
+    / New schedule
+    h2 = link_to (fa_icon "plus-circle",  text: t('.new_schedule')), \
+                                          new_account_schedule_path, \
+                                          class: "btn btn-primary"
 
 / Table
-.table-responsive
-  table.table.table-striped.table-hover
+.row#content-table
+  table.table.table-striped#magic-table
     thead
       tr
         th
@@ -24,17 +25,23 @@ h3 = link_to (fa_icon "plus-circle", text: t('.new_schedule')), \
         th = t('.category')
         th.text-right = t('.amount')
         th = t('.comment')
-        th colspan="3"
+        th
 
-    tbody
-      = render partial: "schedule", locals: { schedules: @schedules }
+    tbody#listing
+      = render partial: "schedule", locals: { schedules:  @schedules,
+                                              next_time:  t('.next_time'),
+                                              frequency:  t('.frequency'),
+                                              category:   t('.category'),
+                                              amount:     t('.amount'),
+                                              comment:    t('.comment') }
 
 / More schedules
-= image_tag "loading.gif", style: "display:none;", class: "loading center-block"
+.row.justify-content-center.mb-3
+  = image_tag "loading.gif", style: "display:none;", class: "loading"
 
-- if @nb_schedules >= @limit
-  = button_to t('.more_schedules'), \
-              account_schedules_path(@current_account), \
-              { method: :get, \
-                class:  "btn btn-primary center-block", \
-                id:     "more_items" }
+  - if @nb_schedules >= @limit
+    = button_to t('.more_schedules'), \
+                account_schedules_path(@current_account), \
+                { method: :get, \
+                  class:  "btn btn-primary", \
+                  id:     "more_items" }

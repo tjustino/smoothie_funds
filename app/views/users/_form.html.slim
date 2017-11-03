@@ -1,39 +1,35 @@
-= form_for(@user, html: { class: "form-horizontal" }) do |f|
-  - if @user.errors.any?
-    .alert.alert-danger.alert-dismissable
-      button.close type="button" data-dismiss="alert" aria-hidden="true"
-        = fa_icon "times"
-      h3 = t('errors.template.header', count: @user.errors.count)
-      ul
-        - @user.errors.full_messages.each do |msg|
-          li = msg
+= form_for @user do |f|
+  h1.card-header = title
 
-  .form-group
-    = f.label :email, t('.email'), class: "col-sm-2 control-label"
-    .col-sm-4
-      = f.email_field :email, class: "form-control", placeholder: t('.email'), autofocus: true
+  .card-body
+    .form-group.row
+      = f.label :email, t('.email'), class: "col-sm-4 col-form-label"
+      .col
+        = f.email_field :email, class: "form-control", placeholder: t('.email'), autofocus: true
 
-  - if params[:action] == "edit" or params[:action] == "update"
-    .form-group
-      = f.label :name, t('.name'), class: "col-sm-2 control-label"
-      .col-sm-4
-        = f.text_field :name, class: "form-control", placeholder: t('.name')
+    - if params[:action] == "edit" or params[:action] == "update"
+      .form-group.row
+        = f.label :name, t('.name'), class: "col-sm-4 col-form-label"
+        .col
+          = f.text_field :name, class: "form-control", placeholder: t('.name')
 
-  .form-group
-    = f.label :password, t('.password'), class: "col-sm-2 control-label"
-    .col-sm-4
-      = f.password_field :password, class: "form-control", placeholder: t('.password')
+    .form-group.row
+      = f.label :password, t('.password'), class: "col-sm-4 col-form-label"
+      .col
+        = f.password_field :password, class: "form-control", \
+                                      placeholder: t('.password')
 
-  .form-group
-    = f.label :password_confirmation, t('.password_confirmation'), \
-                                                  class: "col-sm-2 control-label"
-    .col-sm-4
-      = f.password_field :password_confirmation, class: "form-control", \
-                                        placeholder: t('.password_confirmation')
+    .form-group.row
+      = f.label :password_confirmation, t('.password_confirmation'), \
+                                        class: "col-sm-4 col-form-label"
+      .col
+        = f.password_field :password_confirmation, class: "form-control", \
+                                          placeholder: t('.password_confirmation')
 
-  .form-group
-    .col-sm-offset-2.col-sm-4
-      .btn-toolbar
+  .card-footer
+    .row.justify-content-end
+      .col-auto
         = f.submit class: "btn btn-primary"
-        - if params[:action] == "new"
-          = link_to (fa_icon "reply", text: t('.back')), login_path, class: "btn btn-default"
+      / - if params[:action] == "new"
+      /   .col-auto
+      /     = link_to (fa_icon "reply"), login_path, class: "btn btn-secondary", title: t('.back')

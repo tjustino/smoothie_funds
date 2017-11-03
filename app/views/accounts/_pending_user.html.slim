@@ -1,8 +1,8 @@
-.form-group
-  = f.label :pending_user, t('.pending_user'), class: "col-sm-2 control-label"
-  .col-sm-2
+.form-group.row
+  = f.label :pending_user, t('.pending_user'), class: "col-sm-4 col-form-label"
+  .col
     = f.email_field :email, class: "form-control"
-  .col-sm-2
+  .col-auto
     = link_to (fa_icon "undo", text: t('.no_longer_propose')), \
               unpend_path, \
               method: :delete, \

@@ -1,7 +1,19 @@
 - categories.each do |category|
   tr
-    td = category.name
-    td = t('.time', total: category.transactions.count)
-    td = link_to (fa_icon "edit", text: t('.edit')), edit_category_path(category)
-    td = link_to (fa_icon "trash-o", text: t('.destroy')), category_path(category), \
-          method: :delete, data: { confirm: t('.are_you_sure', category: category.name) }
+    / name
+    td data-title="#{name}" = category.name
+
+    / count
+    td data-title="#{use}" = t('.time', total: category.transactions.count)
+
+    / common
+    td
+      .row.justify-content-start.dotted-top
+        .col-auto
+          = link_to (fa_icon "edit", text: t('.edit')), \
+                                                    edit_category_path(category)
+        .col-auto
+          = link_to (fa_icon "trash-o", text: t('.destroy')), \
+                    category_path(category), \
+                    method: :delete, \
+                    data: {confirm: t('.are_you_sure', category: category.name)}

@@ -1,5 +1,7 @@
 - transactions.each do |transaction|
   tr style=("color: gray;" if transaction.date > Date.today)
+
+    / Check
     td = link_to \
             transaction.checked ? fa_icon("check-square-o") : fa_icon("square-o"), \
             easycheck_transaction_path(transaction), \
@@ -8,19 +10,37 @@
             title: t('.check_transaction'), \
             id: "check_#{transaction.id}"
 
-    td            = truncate(transaction.account.name, length: 20)
-    td            = l(transaction.date)
-    td            = transaction.category.name
-    td.text-right = number_to_currency(transaction.amount) if transaction.amount < 0
-    td.text-right = number_to_currency(transaction.amount) if transaction.amount >= 0
-    td            = truncate(transaction.comment, length: 50)
+    / Account
+    td data-title="#{account}" = truncate(transaction.account.name, length: 20)
 
-    td = link_to  (fa_icon "edit", text: t('.edit')), \
+    / Date
+    td data-title="#{date}" = l(transaction.date)
+
+    / Category
+    td data-title="#{category}" = transaction.category.name
+
+    / Debit
+    td style="text-align: right;" data-title="#{debit}" = \
+                number_to_currency(transaction.amount) if transaction.amount < 0
+
+    / Credit
+    td style="text-align: right;" data-title="#{credit}" = \
+              number_to_currency(transaction.amount) if transaction.amount >= 0
+
+    / Comment
+    td data-title="#{comment}" = truncate(transaction.comment, length: 50)
+
+    / common
+    td
+      .row.justify-content-start.dotted-top
+        .col-auto
+          = link_to (fa_icon "edit",  \
+                  text: t('.edit')), \
                   edit_transaction_path(transaction, search_id: params[:id]), \
                   title: t('.edit')
-
-    td = link_to  (fa_icon "trash-o", text: t('.destroy')), \
-                  transaction_path(transaction), \
-                  method: :delete, \
-                  data: { confirm: t('.are_you_sure') }, \
-                  title: t('.destroy')
+        .col-auto
+          = link_to (fa_icon "trash-o", text: t('.destroy')), \
+                                        transaction_path(transaction), \
+                                        method: :delete, \
+                                        data: { confirm: t('.are_you_sure') }, \
+                                        title: t('.destroy')

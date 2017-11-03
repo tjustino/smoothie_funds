@@ -1,14 +1,10 @@
-.page-header
-  h2 = t('.edit_user')
+.row.justify-content-center.mb-3
+  .col-md-auto
+    .card.mb-3
+      = render partial: "form", locals: { title: t('.edit_user') }
 
-= render 'form'
-
-hr
-
-br
-br
-.panel.panel-primary
-  .panel-heading
-    h3.panel-title = t('.title_bug')
-  .panel-body
-    p = t('.speech_bug').html_safe
+.row.justify-content-md-center
+  .col
+    .alert.alert-info role="alert"
+      h2.alert-heading = t('.title_bug')
+      p = t('.speech_bug').html_safe

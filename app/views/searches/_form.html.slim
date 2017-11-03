@@ -1,91 +1,89 @@
-= form_for(shallow_args(@current_user, @search), html: { class: "form-horizontal" }) do |f|
-  - if @search.errors.any?
-    .alert.alert-danger.alert-dismissable
-      button.close type="button" data-dismiss="alert" aria-hidden="true"
-        = fa_icon "times"
-      h3 = t('errors.template.header', count: @search.errors.count)
-      ul
-        - @search.errors.full_messages.each do |msg|
-          li = msg
+= form_for(shallow_args(@current_user, @search)) do |f|
+  h2.card-header = title
 
-  / Accounts
-  .form-group
-    = f.label :accounts, t('.accounts'), class: "col-sm-2 control-label"
-    .col-sm-4
-      = f.select  :accounts, \
-                  options_from_collection_for_select( @current_accounts, \
-                                                      :id, \
-                                                      :name, \
-                                                      @current_accounts.ids), \
-                  { include_hidden: false },
-                  { multiple: true, class: "form-control" }
+  .card-body
+    / Accounts
+    .form-group.row
+      = f.label :accounts, t('.accounts'), class: "col-md-4 col-form-label"
+      .col-md-8
+        = f.select  :accounts, \
+                options_from_collection_for_select( @accounts_with_categories, \
+                                                    :id, \
+                                                    :name, \
+                                              @accounts_with_categories.ids), \
+                { include_hidden: false },
+                { multiple: true, class: "form-control" }
 
-  / Amount
-  .form-inline.form-group
-      = f.label :amount, t('.amount'), class: "col-sm-2 control-label"
-      .col-sm-3
+    / Amount
+    .form-group.row
+      = f.label :amount, t('.amount'), class: "col-md-4 col-form-label"
+      .col-md-8
+        / min
         .input-group
           span.input-group-addon = t('.min')
           = f.text_field :min, class: "form-control", placeholder: t('.amount')
           span.input-group-addon = t('number.currency.format.unit')
-      .col-sm-3
+        / max
         .input-group
           span.input-group-addon = t('.max')
-          = f.text_field :max, class: "form-control", placeholder: t('.amount')
+          = f.text_field :max, class: "form-control lol", placeholder: t('.amount')
           span.input-group-addon = t('number.currency.format.unit')
 
-  / Date
-  .form-inline.form-group
-      = f.label :date, t('.date'), class: "col-sm-2 control-label"
-      .col-sm-3
+    / Date
+    .form-group.row
+      = f.label :date, t('.date'), class: "col-md-4 col-form-label"
+      .col-md-8
+        / after
         .input-group
           span.input-group-addon = t('.after')
           = f.text_field :after, class: "form-control datepicker", \
-                                                        placeholder: t('.date')
-      .col-sm-3
+                                                      placeholder: t('.date')
+          span.input-group-addon = fa_icon "calendar"
+        / before
         .input-group
           span.input-group-addon = t('.before')
           = f.text_field :before, class: "form-control datepicker", \
-                                                        placeholder: t('.date')
+                                                      placeholder: t('.date')
+          span.input-group-addon = fa_icon "calendar"
 
-  / Categories
-  .form-group
-    = f.label :categories, t('.categories'), class: "col-sm-2 control-label"
-    .col-sm-offset-2
-      - @current_accounts.each do |account|
-        .col-sm-2
-          .text-muted = truncate account.name, length: 20
+    / Categories
+    .form-group.row
+      = f.label :categories, t('.categories'), class: "col-md-4 col-form-label"
+      .col-md-8
+        - @current_accounts.each do |account|
+         - if account.categories.exists?
+          .text-muted = account.name
           = f.select  :categories, \
-                      options_from_collection_for_select( account.categories.order_by_name, \
-                                                          :id, \
-                                                          :name, \
-                                                          account.categories.ids), \
-                      { include_hidden: false }, \
-                      { multiple: true, class: "form-control" }
+        options_from_collection_for_select( account.categories.order_by_name, \
+                                    :id, \
+                                    :name, \
+                                    account.categories.ids), \
+                                  { include_hidden: false }, \
+                                  { multiple: true, class: "form-control mb-2" }
 
-  / Comment
-  .form-group
-    = f.label :comment, t('.comment'), class: "col-sm-2 control-label"
-    .col-sm-2
-      = f.select  :operator, \
-                  options_for_select( \
-                    Search.operators.keys.map { |key| [t(".#{key}"), key] } \
-                  ), {}, { class: "form-control" }
-    .col-sm-4
-      = f.text_field :comment, class: "form-control", placeholder: t('.comment')
+    / Comment
+    .form-group.row
+      = f.label :comment, t('.comment'), class: "col-md-4 col-form-label"
+      .col-md-3
+        = f.select  :operator, \
+                    options_for_select( Search.operators.keys.map { |key| \
+                                        [t(".#{key}"), key] } ), {}, \
+                                        { class: "form-control custom-select" }
+      .col-md-5
+        = f.text_field :comment, class: "form-control", placeholder: t('.comment')
 
-  / Checked
-  .form-group
-    = f.label :checked, t('.checked'), class: "col-sm-2 control-label"
-    .col-sm-10
-      - Search.checkeds.each do |key, value|
-        .radio
-          label
-            = f.radio_button :checked, key, checked: value == 0 ? true : false
-            span = t(".#{key}")
+    / Checked
+    .form-group.row
+      = f.label :checked, t('.checked'), class: "col-md-4 col-form-label"
+      .col-md-8
+        - Search.checkeds.each do |key, value|
+          .form-check
+            label.form-check-label
+              = f.radio_button :checked, key, checked: (value == 0 ? true : false), class: "form-check-input"
+              span = t(".#{key}")
 
   / Search
-  .form-group
-    .col-sm-offset-2.col-sm-8
-      .btn-toolbar
+  .card-footer
+    .row.justify-content-end
+      .col-auto
         = f.submit t('.search'), class: "btn btn-primary"

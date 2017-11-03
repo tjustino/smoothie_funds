@@ -1,50 +1,58 @@
-= form_for(shallow_args(@current_account, @transaction), html: { class: "form-horizontal" }) do |f|
-  - if @transaction.errors.any?
-    .alert.alert-danger.alert-dismissable
-      button.close type="button" data-dismiss="alert" aria-hidden="true"
-        = fa_icon "times"
-      h3 = t('errors.template.header', count: @transaction.errors.count)
-      ul
-        - @transaction.errors.full_messages.each do |msg|
-          li = msg
+= form_for(shallow_args(@current_account, @transaction)) do |f|
+  h1.card-header = title
 
-  .form-group
-    = f.label :amount, t('.amount'), class: "col-sm-2 control-label"
-    .col-sm-2
-      = select_tag :sign, options_for_select( [ \
-          [t('.debit'), "debit"], [t('.credit'), "credit"] ], @sign), \
-          { class: "form-control" }
-    .col-sm-2
-      .input-group
-        = f.telephone_field :amount, class: "form-control", placeholder: t('.amount'), autofocus: true
-        span.input-group-addon = t('number.currency.format.unit')
+  .card-body
+    .form-group.row
+      = f.label :amount, t('.amount'), class: "col-sm-4 col-form-label"
+      .col
+        = select_tag :sign, options_for_select( [ \
+            [t('.debit'), "debit"], [t('.credit'), "credit"] ], @sign), \
+            { class: "form-control custom-select" }
+      .col
+        .input-group
+          = f.telephone_field :amount,  class: "form-control", \
+                                        placeholder: t('.amount'), \
+                                        autofocus: true
+          span.input-group-addon = t('number.currency.format.unit')
 
-  .form-group
-    = f.label :date, t('.date'), class: "col-sm-2 control-label"
-    .col-sm-4
-      = f.text_field :date, class: "form-control datepicker", placeholder: t('.date'), \
+    .form-group.row
+      = f.label :date, t('.date'), class: "col-sm-4 col-form-label"
+      .col
+        .input-group
+          = f.text_field :date, \
+            class: "form-control datepicker", \
+            placeholder: t('.date'), \
             value: @transaction.date.nil? ? l(Date.today) : l(@transaction.date)
+          span.input-group-addon = fa_icon "calendar"
 
-  .form-group
-    = f.label :category_id, t('.category'), class: "col-sm-2 control-label"
-    .col-sm-4
-      = f.select :category_id, @current_account.categories.order(:name ).collect { |category| \
-                    [ category.name, category.id ] }, {}, { class: "form-control" }
+    .form-group.row
+      = f.label :category_id, t('.category'), class: "col-sm-4 col-form-label"
+      .col
+        = f.select :category_id, \
+            @current_account.categories.order(:name ).collect { |category| \
+                                        [ category.name, category.id ] }, \
+                                        {}, \
+                                        { class: "form-control custom-select" }
 
-  .form-group
-    = f.label :comment, t('.comment'), class: "col-sm-2 control-label"
-    .col-sm-4
-      = f.text_area :comment, class: "form-control", placeholder: t('.comment'), rows: 5
+    .form-group.row
+      = f.label :comment, t('.comment'), class: "col-sm-4 col-form-label"
+      .col
+        = f.text_area :comment, \
+                      class: "form-control", \
+                      placeholder: t('.comment'), \
+                      rows: 5
 
-  .form-group
-    .col-sm-offset-2.col-sm-2
-      .checkbox
-        = f.label :checked do
-          = f.check_box :checked
-          = t('.checked')
+    .form-group.row
+      .col-sm-4
+      .col
+        .form-check
+          = f.label :checked, class: "form-check-label" do
+            = f.check_box :checked, class: "form-check-input"
+            = t('.checked')
 
-  .form-group
-    .col-sm-offset-2.col-sm-8
-      .btn-toolbar
+  .card-footer
+    .row.justify-content-end
+      .col-auto
         = f.submit class: "btn btn-primary"
-        = link_to (fa_icon "reply", text: t('.back')), :back, class: "btn btn-default"
+      / .col-auto
+      /   = link_to (fa_icon "reply"), :back, class: "btn btn-secondary"

@@ -1,67 +1,66 @@
-= form_for(@account, html: { class: "form-horizontal" }) do |f|
-  - if @account.errors.any?
-    .alert.alert-danger.alert-dismissable
-      button.close type="button" data-dismiss="alert" aria-hidden="true"
-        = fa_icon "times"
-      h3 = t('errors.template.header', count: @account.errors.count)
-      ul
-        - @account.errors.full_messages.each do |msg|
-          li = msg
+= form_for @account do |f|
+  h1.card-header = title
 
-  .form-group
-    = f.label :name, t('.name'), class: "col-sm-2 control-label"
-    .col-sm-4
-      = f.text_field :name, class: "form-control", placeholder: t('.name'), autofocus: true
+  .card-body
+    .form-group.row
+      = f.label :name, t('.name'), class: "col-sm-4 col-form-label"
+      .col
+        = f.text_field :name, class: "form-control", placeholder: t('.name'), autofocus: true
 
-  .form-group
-    = f.label :initial_balance, t('.initial_balance'), class: "col-sm-2 control-label"
-    .col-sm-4
-      .input-group
-        = f.telephone_field :initial_balance, class: "form-control", placeholder: t('.initial_balance')
-        span.input-group-addon = t('number.currency.format.unit')
+    .form-group.row
+      = f.label :initial_balance, t('.initial_balance'), class: "col-sm-4 col-form-label"
+      .col
+        .input-group
+          = f.telephone_field :initial_balance, class: "form-control", placeholder: t('.initial_balance')
+          .input-group-addon = t('number.currency.format.unit')
 
-  - unless params[:action] == "new" or params[:action] == "create"
-    / shared with
-    - unless f.object.users.count == 1
-      .form-group.form-inline
-        = f.label :share, t('.share'), class: "col-sm-2 control-label"
-        .col-sm-2
-          - other_users(f.object).each do |other_user|
-            = f.fields_for :users, other_user do |shared_user|
-              = shared_user.hidden_field :id
-              = shared_user.email_field :email, class: "form-control share", readonly: "readonly"
-        .col-sm-2
-          = link_to (fa_icon "chain-broken", text: t('.unlink')), \
-                    unlink_path(f.object), \
-                    method: :delete, \
-                    data: { confirm: t('.are_you_sure_unlink') }, \
-                    class: "btn btn-danger"
+    - unless params[:action] == "new" or params[:action] == "create"
+      / shared with
+      - unless f.object.users.count == 1
+        .form-group.row
+          = f.label :share, t('.share'), class: "col-sm-4 col-form-label"
+          .col
+            - other_users(f.object).each do |other_user|
+              = f.fields_for :users, other_user do |shared_user|
+                = shared_user.hidden_field :id
+                = shared_user.email_field :email, class: "form-control", \
+                                                  readonly: "readonly"
+          .col-auto
+            = link_to (fa_icon "chain-broken", text: t('.unlink')), \
+                      unlink_path(f.object), \
+                      method: :delete, \
+                      data: { confirm: t('.are_you_sure_unlink') }, \
+                      class: "btn btn-danger"
 
-    / pending user
-    - unless f.object.pending_user.blank?
-      = f.fields_for :pending_user do |pending_user|
-        = render 'pending_user', f: pending_user
+      / pending user
+      - unless f.object.pending_user.blank?
+        = f.fields_for :pending_user do |pending_user|
+          = render 'pending_user', f: pending_user
 
-    / new share
-    - else
-      .form-group
-        = f.label :share, t('.propose_sharing'), class: "col-sm-2 control-label"
-        .col-sm-4
-          = email_field_tag :new_share, nil, class: "form-control share", placeholder: t('.shared_email')
-          /small.text-muted = fa_icon "info-circle", text: t('.help_share')
+      / new share
+      - else
+        .form-group.row
+          = f.label :share, t('.propose_sharing'), class: "col-sm-4 col-form-label"
+          .col
+            = email_field_tag :new_share, nil,  class: "form-control", \
+                                                placeholder: t('.shared_email')
+            small.form-text.text-muted = t('.explanation')
 
-  .form-group
-    .col-sm-offset-2.col-sm-2
-      .checkbox
-        = f.label :hidden do
-          = f.check_box :hidden
-          = t('.hidden')
+    .form-group.row
+      .col-sm-4
+      .col
+        .form-check
+          = f.label :hidden, class: "form-check-label" do
+            = f.check_box :hidden, class: "form-check-input"
+            = t('.hidden')
 
-  .form-group
-    .col-sm-offset-2.col-sm-4
-      .btn-toolbar
+  .card-footer
+    .row.justify-content-end
+      .col-auto
         = f.submit class: "btn btn-primary"
-        - if params[:action] == "new"
-          = link_to (fa_icon "reply", text: t('.back')), accounts_path, class: "btn btn-default"
-        - elsif params[:action] == "edit"
-          = link_to (fa_icon "reply", text: t('.back')), accounts_path, class: "btn btn-default"
+        / - if params[:action] == "new"
+        /   .col-auto
+        /     = link_to (fa_icon "reply"), accounts_path, class: "btn btn-secondary", title: t('.back')
+        / - elsif params[:action] == "edit"
+        /   .col-auto
+        /     = link_to (fa_icon "reply"), accounts_path, class: "btn btn-secondary", title: t('.back')
