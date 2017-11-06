@@ -1,6 +1,6 @@
 Smoothie Funds
 ===============
-Smoothie Funds allows you to manage your money with ease.
+Smoothie Funds allows you to manage your money with ease.  
 You can get more complicated, but it's useless!
 
 How To
