@@ -8,18 +8,15 @@ How To
 Start PostgreSQL server (on Archlinux):
 > sudo systemctl start postgresql
   
-<br/>
 Load fixture in dev environnement:
 > rails db:drop ; rails db:create ; rails db:migrate ; rails db:fixtures:load FIXTURES=users,accounts,categories,transactions,schedules,pending_users
   
-<br/>
 Restore data from production to dev environnement:
 > dropdb smoothiefunds_development  
 > bundle exec rails db:create RAILS_ENV=development  
 > bundle exec rails db:migrate RAILS_ENV=development  
 > pg_restore --no-acl --no-owner --data-only --dbname=smoothiefunds_development db.dump
   
-<br/>
 Miscellaneous:
 > bundle exec annotate  
 > bundle exec rake erd
@@ -39,7 +36,6 @@ What to test:
 > - test the interaction among any number of controllers
 > - test important work flows within your application
   
-<br/>
 Convention d'indexation :
 > 1. les colonnes composant la clef
 > 2. les colonnes composant les clefs étrangères
@@ -48,7 +44,6 @@ Convention d'indexation :
 > 5. les colonnes fréquemment mises en relation, indépendamment des jointures naturelles
 > 6. les colonnes les plus sollicitées par les recherches
   
-<br/>
 Words of wisdom:
 > When you use *product_url*, you’ll get the full enchilada with protocol and 
 > domain name, like http://example.com/products/1. That’s the thing to use when 
