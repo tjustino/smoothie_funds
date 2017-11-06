@@ -7,7 +7,8 @@
   .col
     h2
       = t('.listing_schedules', current_account: @current_account.name)
-      span.badge.badge-secondary#total = @nb_schedules
+      sup
+        .badge.badge-secondary#total = @nb_schedules
   .col-md-auto
     / New schedule
     h2 = link_to (fa_icon "plus-circle",  text: t('.new_schedule')), \

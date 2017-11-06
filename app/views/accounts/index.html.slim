@@ -7,7 +7,8 @@
   .col
     h2
       = t('.listing_accounts')
-      span.badge.badge-secondary#total = @nb_accounts
+      sup
+        .badge.badge-secondary#total = @nb_accounts
   .col-md-auto
     / New account
     h2 = link_to (fa_icon "plus-circle",  text: t('.new_account')), \

@@ -7,7 +7,8 @@
   .col
     h2
       = t('.listing_categories', current_account: @current_account.name)
-      span.badge.badge-secondary#total = @nb_categories
+      sup
+        .badge.badge-secondary#total = @nb_categories
   / Import categories from
   - if @current_accounts.count > 1
     = render "import_from"

@@ -7,7 +7,8 @@
   .col
     h2
       = t('.listing_transactions', current_account: @current_account.name)
-      span.badge.badge-secondary#total = @nb_transactions
+      sup
+        .badge.badge-secondary#total = @nb_transactions
     = render partial: "sum_checked", locals: { sum_checked: @sum_checked }
   .col-md-auto
     / New transaction
