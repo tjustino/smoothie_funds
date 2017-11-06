@@ -43,21 +43,21 @@
                   h5 = account.name
                   - if account.transactions.any?
                     dl.row.mb-0
-                      dt.col-auto = t('.current_balance')
-                      dd.col-auto = t('.balance_date', \
+                      dt.col-sm-4 = t('.current_balance')
+                      dd.col-sm-8 class=("text-danger" if sum_today(account) < 0) = t('.balance_date', \
                                       balance: current_balance(account), \
                                       date: current_date(account) )
                       - if future_transactions?(account)
-                        dt.col-auto style=("color: gray;")
+                        dt.col-sm-4 style=("color: gray;")
                           = t('.future_balance')
-                        dd.col-auto style=("color: gray;")
+                        dd.col-sm-8 class=("text-danger" if sum_tomorrow(account) < 0) style=("color: gray;")
                           = t('.balance_date',  \
                                 balance: future_balance(account), \
                                 date: future_date(account) )
                   - else
                     dl.row.mb-0
-                      dt.col-auto = t('.current_balance')
-                      dd.col-auto = t('.balance_date', \
+                      dt.col-sm-4 = t('.current_balance')
+                      dd.col-sm-8 class=("text-danger" if account.initial_balance < 0) = t('.balance_date', \
                                       balance: initial_balance(account), \
                                       date: today )
         - else
