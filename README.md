@@ -7,16 +7,19 @@ How To
 -------
 Start PostgreSQL server (on Archlinux):
 > sudo systemctl start postgresql
-
+  
+<br/>
 Load fixture in dev environnement:
 > rails db:drop ; rails db:create ; rails db:migrate ; rails db:fixtures:load FIXTURES=users,accounts,categories,transactions,schedules,pending_users
-
+  
+<br/>
 Restore data from production to dev environnement:
-> dropdb smoothiefunds_development
-> bundle exec rails db:create RAILS_ENV=development
-> bundle exec rails db:migrate RAILS_ENV=development
+> dropdb smoothiefunds_development  
+> bundle exec rails db:create RAILS_ENV=development  
+> bundle exec rails db:migrate RAILS_ENV=development  
 > pg_restore --no-acl --no-owner --data-only --dbname=smoothiefunds_development db.dump
-
+  
+<br/>
 Miscellaneous:
 > bundle exec annotate  
 > bundle exec rake erd
@@ -35,7 +38,8 @@ What to test:
 > **Integration Testing :**
 > - test the interaction among any number of controllers
 > - test important work flows within your application
-
+  
+<br/>
 Convention d'indexation :
 > 1. les colonnes composant la clef
 > 2. les colonnes composant les clefs étrangères
@@ -43,15 +47,16 @@ Convention d'indexation :
 > 4. les colonnes dotées de contraintes de validité
 > 5. les colonnes fréquemment mises en relation, indépendamment des jointures naturelles
 > 6. les colonnes les plus sollicitées par les recherches
-
+  
+<br/>
 Words of wisdom:
-> When you use product_url, you’ll get the full enchilada with protocol and 
+> When you use *product_url*, you’ll get the full enchilada with protocol and 
 > domain name, like http://example.com/products/1. That’s the thing to use when 
 > you’re doing redirect_to because the HTTP spec requires a fully qualified URL 
 > when doing 302 Redirect and friends. You also need the full URL if you’re 
 > redirecting from one domain to another, like 
-> product_url(domain: "example2.com", product: product).
+> *product_url(domain: "example2.com", product: product)*.
 > 
-> The rest of the time, you can happily use product_path. This will generate 
-> only the /products/1 part, and that’s all you need when doing links or 
-> pointing forms, like link_to "My lovely product", product_path(product).
+> The rest of the time, you can happily use *product_path*. This will generate 
+> only the */products/1* part, and that’s all you need when doing links or 
+> pointing forms, like *link_to "My lovely product", product_path(product)*.
