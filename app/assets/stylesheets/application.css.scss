@@ -17,6 +17,11 @@
 @import "bootstrap";
 @import "font-awesome";
 
+// reduce global font-size (defaults: Bootstrap v3 14px, Bootstrap v4 16px)
+body {
+  font-size: 15px;
+}
+
 // sadely, tables have margin-[right|left]: -15px
 #content-table {
   margin-right: 0;
