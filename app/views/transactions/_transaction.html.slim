@@ -1,5 +1,5 @@
 - transactions.each do |transaction|
-  tr class=("danger" if transaction.balance < 0) style=("color: gray;" if transaction.date > Date.today)
+  tr class=("text-danger" if transaction.balance < 0) style=("color: gray;" if transaction.date > Date.today)
 
     / Check
     td = link_to \
@@ -17,19 +17,19 @@
     td data-title="#{category}" = transaction.category.name
 
     / Debit
-    td style="text-align: right;" data-title="#{debit}" = \
+    td.nowrap style="text-align: right;" data-title="#{debit}" = \
                 number_to_currency(transaction.amount) if transaction.amount < 0
 
     / Credit
-    td style="text-align: right;" data-title="#{credit}" = \
+    td.nowrap style="text-align: right;" data-title="#{credit}" = \
               number_to_currency(transaction.amount) if transaction.amount >= 0
 
     / Balance
-    td style="text-align: right;" data-title="#{balance}" = \
+    td.nowrap style="text-align: right;" data-title="#{balance}" = \
                                         number_to_currency(transaction.balance)
 
     / Comment
-    td data-title="#{comment}" = truncate(transaction.comment, length: 50)
+    td data-title="#{comment}" = truncate(transaction.comment, length: 30)
 
     / common
     td
