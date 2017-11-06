@@ -1,8 +1,11 @@
 module DashboardHelper
+  def sum_today(account)
+    @current_transactions.where(account: account).sum(:amount) + 
+                                                        account.initial_balance
+  end
+
   def current_balance(account)
-    number_to_currency( @current_transactions
-                        .where(account: account)
-                        .sum(:amount) + account.initial_balance )
+    number_to_currency( sum_today(account) )
   end
 
   def initial_balance(account)
@@ -18,9 +21,12 @@ module DashboardHelper
     max_date.nil? ? l( Date.today ) : l( max_date )
   end
 
+  def sum_tomorrow(account)
+    @transactions.where(account: account).sum(:amount) + account.initial_balance
+  end
+
   def future_balance(account)
-    number_to_currency( @transactions.where(account: account)
-                          .sum(:amount) + account.initial_balance )
+    number_to_currency( sum_tomorrow(account) )
   end
 
   def future_date(account)
