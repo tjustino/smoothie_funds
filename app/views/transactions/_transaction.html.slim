@@ -35,12 +35,12 @@
     td
       .row.justify-content-start.dotted-top
         .col-auto
-          = link_to (fa_icon "edit",  text: t('.edit')), \
-                                      edit_transaction_path(transaction), \
-                                      title: t('.edit')
+          = link_to (fa_icon "edit"), \
+                    edit_transaction_path(transaction), \
+                    title: t('.edit')
         .col-auto
-          = link_to (fa_icon "trash-o", text: t('.destroy')), \
-                                        transaction_path(transaction), \
-                                        method: :delete, \
-                                        data: { confirm: t('.are_you_sure') }, \
-                                        title: t('.destroy')
+          = link_to (fa_icon "trash-o"), \
+                    transaction_path(transaction), \
+                    method: :delete, \
+                    data: { confirm: t('.are_you_sure') }, \
+                    title: t('.destroy')

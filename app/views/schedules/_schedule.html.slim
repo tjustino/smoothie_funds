@@ -29,9 +29,12 @@
     td
       .row.justify-content-start.dotted-top
         .col-auto
-          = link_to (fa_icon "edit", text: t('.edit')), \
-                                                    edit_schedule_path(schedule)
+          = link_to (fa_icon "edit"), \
+                    edit_schedule_path(schedule), \
+                    title: t('.edit')
         .col-auto
-          = link_to (fa_icon "trash-o", text: t('.destroy')), \
-                          schedule_path(schedule), \
-                          method: :delete, data: { confirm: t('.are_you_sure') }
+          = link_to (fa_icon "trash-o"), \
+                    schedule_path(schedule), \
+                    method: :delete, \
+                    data: { confirm: t('.are_you_sure') }, \
+                    title: t('.destroy')
