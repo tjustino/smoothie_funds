@@ -19,8 +19,8 @@
       = f.label :date, t('.date'), class: "col-sm-4 col-form-label"
       .col
         .input-group
-          = f.text_field :date, \
-            class: "form-control datepicker", \
+          = f.date_field :date, \
+            class: "form-control", \
             placeholder: t('.date'), \
             value: @transaction.date.nil? ? l(Date.today) : l(@transaction.date)
           span.input-group-addon = fa_icon "calendar"

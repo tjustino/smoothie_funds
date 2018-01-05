@@ -54,8 +54,6 @@ GEM
       autoprefixer-rails (>= 6.0.3)
       popper_js (>= 1.12.3, < 2)
       sass (>= 3.5.2)
-    bootstrap-datepicker-rails (1.7.1.1)
-      railties (>= 3.0)
     builder (3.2.3)
     byebug (9.1.0)
     capistrano (3.10.1)
@@ -222,7 +220,6 @@ DEPENDENCIES
   annotate
   bcrypt (~> 3.1.7)
   bootstrap
-  bootstrap-datepicker-rails
   byebug
   capistrano-rails
   capistrano-rbenv

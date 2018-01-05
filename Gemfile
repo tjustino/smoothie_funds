@@ -20,7 +20,6 @@ gem "jquery-rails"              # Use jquery as the JavaScript library
 gem "slim"                      # Template language
 gem "bootstrap"                 # Twitter's Bootstrap
 gem "font-awesome-rails"        # Iconic font and CSS toolkit
-gem "bootstrap-datepicker-rails"# A datepicker for Bootstrap
 gem "chart-js-rails"            # Chart.js for use in Rails asset pipeline
 #gem "mailgun-rails"            # Mailgun adapter for Rails
 

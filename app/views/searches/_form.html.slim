@@ -36,14 +36,12 @@
         / after
         .input-group
           span.input-group-addon = t('.after')
-          = f.text_field :after, class: "form-control datepicker", \
-                                                      placeholder: t('.date')
+          = f.date_field :after, class: "form-control", placeholder: t('.date')
           span.input-group-addon = fa_icon "calendar"
         / before
         .input-group
           span.input-group-addon = t('.before')
-          = f.text_field :before, class: "form-control datepicker", \
-                                                      placeholder: t('.date')
+          = f.date_field :before, class: "form-control", placeholder: t('.date')
           span.input-group-addon = fa_icon "calendar"
 
     / Categories

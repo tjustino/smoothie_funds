@@ -23,8 +23,8 @@
       = f.label :next_time, t('.next_time'), class: "col-sm-4 col-form-label"
       .col
         .input-group
-          = f.text_field :next_time, \
-            class: "form-control datepicker", \
+          = f.date_field :next_time, \
+            class: "form-control", \
             placeholder: t('.next_time'), \
         value: @schedule.next_time.nil? ? l(Date.today) : l(@schedule.next_time)
           span.input-group-addon = fa_icon "calendar"
