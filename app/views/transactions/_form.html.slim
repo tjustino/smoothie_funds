@@ -13,7 +13,8 @@
           = f.telephone_field :amount,  class: "form-control", \
                                         placeholder: t('.amount'), \
                                         autofocus: true
-          span.input-group-addon = t('number.currency.format.unit')
+          .input-group-append
+            span.input-group-text = t('number.currency.format.unit')
 
     .form-group.row
       = f.label :date, t('.date'), class: "col-sm-4 col-form-label"
@@ -23,7 +24,8 @@
             class: "form-control", \
             placeholder: t('.date'), \
             value: @transaction.date.nil? ? l(Date.today) : l(@transaction.date)
-          span.input-group-addon = fa_icon "calendar"
+          .input-group-append
+            span.input-group-text = fa_icon "calendar"
 
     .form-group.row
       = f.label :category_id, t('.category'), class: "col-sm-4 col-form-label"

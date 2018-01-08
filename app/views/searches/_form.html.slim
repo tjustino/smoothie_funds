@@ -20,14 +20,18 @@
       .col-md-8
         / min
         .input-group
-          span.input-group-addon = t('.min')
+          .input-group-prepend
+            span class="input-group-text" = t('.min')
           = f.text_field :min, class: "form-control", placeholder: t('.amount')
-          span.input-group-addon = t('number.currency.format.unit')
+          .input-group-append
+            span class="input-group-text" = t('number.currency.format.unit')
         / max
         .input-group
-          span.input-group-addon = t('.max')
+          .input-group-prepend
+            span class="input-group-text" = t('.max')
           = f.text_field :max, class: "form-control lol", placeholder: t('.amount')
-          span.input-group-addon = t('number.currency.format.unit')
+          .input-group-append
+            span class="input-group-text" = t('number.currency.format.unit')
 
     / Date
     .form-group.row
@@ -35,14 +39,18 @@
       .col-md-8
         / after
         .input-group
-          span.input-group-addon = t('.after')
+          .input-group-prepend
+            span class="input-group-text" = t('.after')
           = f.date_field :after, class: "form-control", placeholder: t('.date')
-          span.input-group-addon = fa_icon "calendar"
+          .input-group-append
+            span class="input-group-text" = fa_icon "calendar"
         / before
         .input-group
-          span.input-group-addon = t('.before')
+          .input-group-prepend
+            span class="input-group-text" = t('.before')
           = f.date_field :before, class: "form-control", placeholder: t('.date')
-          span.input-group-addon = fa_icon "calendar"
+          .input-group-append
+            span class="input-group-text" = fa_icon "calendar"
 
     / Categories
     .form-group.row

@@ -11,7 +11,8 @@
       = f.label :frequency, t('.frequency'), class: "col-sm-4 col-form-label"
       .col
         .input-group
-          span.input-group-addon = t('.all_the')
+          .input-group-prepend
+            span.input-group-text = t('.all_the')
           = f.number_field :frequency,  class: "form-control", \
                                         placeholder: t('.frequency')
       .col
@@ -27,7 +28,8 @@
             class: "form-control", \
             placeholder: t('.next_time'), \
         value: @schedule.next_time.nil? ? l(Date.today) : l(@schedule.next_time)
-          span.input-group-addon = fa_icon "calendar"
+          .input-group-append
+            span.input-group-text = fa_icon "calendar"
 
   .card-footer
     .row.justify-content-end

@@ -11,8 +11,11 @@
       = f.label :initial_balance, t('.initial_balance'), class: "col-sm-4 col-form-label"
       .col
         .input-group
-          = f.telephone_field :initial_balance, class: "form-control", placeholder: t('.initial_balance')
-          .input-group-addon = t('number.currency.format.unit')
+          = f.telephone_field :initial_balance, \
+                              class: "form-control", \
+                              placeholder: t('.initial_balance')
+          .input-group-append
+            span.input-group-text = t('number.currency.format.unit')
 
     - unless params[:action] == "new" or params[:action] == "create"
       / shared with

@@ -75,14 +75,3 @@ body {
 .nowrap {
   white-space: nowrap;
 }
-
-// https://github.com/twbs/bootstrap/issues/23454
-.input-group {
-    padding-bottom: 1em;
-}
-
-.input-group .invalid-feedback {
-    position: absolute;
-    left: 0;
-    top: 2.5em;
-}
