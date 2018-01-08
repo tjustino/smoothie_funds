@@ -19,7 +19,7 @@
       = f.label :amount, t('.amount'), class: "col-md-4 col-form-label"
       .col-md-8
         / min
-        .input-group
+        .input-group.mb-2
           .input-group-prepend
             span class="input-group-text" = t('.min')
           = f.text_field :min, class: "form-control", placeholder: t('.amount')
@@ -38,7 +38,7 @@
       = f.label :date, t('.date'), class: "col-md-4 col-form-label"
       .col-md-8
         / after
-        .input-group
+        .input-group.mb-2
           .input-group-prepend
             span class="input-group-text" = t('.after')
           = f.date_field :after, class: "form-control", placeholder: t('.date')
