@@ -41,9 +41,9 @@ Rails.application.routes.draw do
 
   shallow do
     resources :accounts, except: [:show] do
-      resources :categories,    except: [:show] { post "import_from", on: :collection }
-      resources :transactions,  except: [:show] { post "easycheck",   on: :member }
-      resources :schedules,     except: [:show] { post "insert",      on: :member }
+      resources :categories,   except: [:show] do post "import_from", on: :collection end
+      resources :transactions, except: [:show] do post "easycheck",   on: :member end
+      resources :schedules,    except: [:show] do post "insert",      on: :member end
     end
   end
 
