@@ -31,9 +31,11 @@ html
                       = link_to account.name, account_transactions_path(account), class: "dropdown-item"
                     .dropdown-divider
                     = link_to ( fa_icon "search", text: t('.search') ), \
-                                  new_user_search_path(@current_user), class: "dropdown-item"
+                              new_user_search_path(@current_user), \
+                              class: "dropdown-item"
                     = link_to ( fa_icon "area-chart", text: t('.analytics') ), \
-                                  user_analytics_path(@current_user), class: "dropdown-item"
+                              user_analytics_path(@current_user), \
+                              class: "dropdown-item"
 
                 / dropdown schedules
                 li.nav-item.dropdown class=("active" if params[:controller] == "schedules")
@@ -56,13 +58,20 @@ html
               = nav_link t('.accounts'), accounts_path, "book"
 
             ul.navbar-nav
-              / link user edit
-              = nav_link name_or_email, edit_user_path(@current_user), "user"
-
-              / link logout
-              li.nav-item
-                = link_to t('.logout'), logout_path,  method: :delete, \
-                                                      class: "nav-link"
+              li.nav-item.dropdown class=("active" if params[:controller] == "users")
+                a.nav-link.dropdown-toggle href="#" data-toggle="dropdown"
+                  = fa_icon "user", text: name_or_email
+                .dropdown-menu
+                  / Profil
+                  = link_to ( fa_icon "sliders", text: t('.profile') ), \
+                            edit_user_path(@current_user), \
+                            class: "dropdown-item"
+                  .dropdown-divider
+                  / Logout
+                  = link_to ( fa_icon "sign-out", text: t('.logout') ), \
+                            logout_path,  \
+                            method: :delete, \
+                            class: "dropdown-item"
 
           - elsif params[:controller] != "users"
             / New user

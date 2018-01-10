@@ -180,6 +180,7 @@ fr:
       schedules:    'Échéanciers <b class="caret"></b>'
       categories:   'Catégories <b class="caret"></b>'
       accounts:     "Comptes"
+      profile:      "Profil"
       logout:       "Déconnexion"
       search:       "Rechercher"
       analytics:    "Analyser"
