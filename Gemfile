@@ -1,4 +1,5 @@
-source 'https://rubygems.org'
+source  "https://rubygems.org"
+ruby    "2.5.0"
 
 ## from http://bundler.io/gemfile.html
 # ~> 2.0.3 is identical to >= 2.0.3 and < 2.1
