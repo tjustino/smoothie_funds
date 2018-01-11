@@ -27,7 +27,7 @@
           = f.date_field :next_time, \
             class: "form-control", \
             placeholder: t('.next_time'), \
-        value: @schedule.next_time.nil? ? l(Date.today) : l(@schedule.next_time)
+            value: @schedule.next_time.nil? ? Date.today : @schedule.next_time
           .input-group-append
             span.input-group-text = fa_icon "calendar"
 

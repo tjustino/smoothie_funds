@@ -23,7 +23,7 @@
           = f.date_field :date, \
             class: "form-control", \
             placeholder: t('.date'), \
-            value: @transaction.date.nil? ? l(Date.today) : l(@transaction.date)
+            value: @transaction.date.nil? ? Date.today : @transaction.date
           .input-group-append
             span.input-group-text = fa_icon "calendar"
 
