@@ -16,7 +16,7 @@ gem "coffee-rails", "~> 4.2"    # Use CoffeeScript for .coffee assets and views
 #gem "redis",       "~> 3.0"    # Use Redis adapter to run Action Cable in prod
 gem "bcrypt",       "~> 3.1.7"  # Use ActiveModel has_secure_password
 
-gem "pg"                        # Use postgresql as the db for Active Record
+gem "pg", "~> 0.18"             # Use postgresql as the db for Active Record
 gem "jquery-rails"              # Use jquery as the JavaScript library
 gem "slim"                      # Template language
 gem "bootstrap"                 # Twitter's Bootstrap
