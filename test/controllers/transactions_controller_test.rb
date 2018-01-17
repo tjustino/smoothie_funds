@@ -5,7 +5,6 @@ class TransactionsControllerTest < ActionController::TestCase
   test "should get index" do
     get_index       @some_account
     assert_response :success
-    #assert_not_nil  assigns(:transactions)
   end
 
   test "should not get index - hacker way" do
@@ -22,7 +21,6 @@ class TransactionsControllerTest < ActionController::TestCase
   test "should get new" do
     get_new         @some_account
     assert_response :success
-    #assert_not_nil  assigns(:transaction)
   end
 
   test "should not get new - hacker way" do
@@ -40,7 +38,6 @@ class TransactionsControllerTest < ActionController::TestCase
   test "should get edit" do
     get_edit        @some_transaction
     assert_response :success
-    #assert_not_nil  assigns(:transaction)
   end
 
   test "should not get edit - hacker way" do
@@ -57,7 +54,6 @@ class TransactionsControllerTest < ActionController::TestCase
   test "should create transaction" do
     assert_difference('Transaction.count') do
       post_create           @some_account
-      #assert_not_nil        assigns(:transaction)
       assert_redirected_to  account_transactions_path @some_account
       assert_equal          I18n.translate('transactions.create.successfully_created'),
                             flash[:notice]
@@ -75,7 +71,6 @@ class TransactionsControllerTest < ActionController::TestCase
   # TODO: fix
   test "should update transaction" do
     patch_update          @some_transaction
-    #assert_not_nil        assigns(:transaction)
     assert_redirected_to  account_transactions_path @some_account
     assert_equal          I18n.translate('transactions.update.successfully_updated'),
                           flash[:notice]
@@ -84,7 +79,6 @@ class TransactionsControllerTest < ActionController::TestCase
 
   test "should not update transaction - hacker way" do
     patch_update          @some_wrong_transaction
-    #assert_nil            assigns(:transaction)
     assert_redirected_to  dashboard_url
     assert_equal          @previous_transaction_amount, @some_wrong_transaction.reload.amount
   end
@@ -94,7 +88,6 @@ class TransactionsControllerTest < ActionController::TestCase
   test "should destroy transaction" do
     assert_difference('Transaction.count', -1) do
       delete_destroy        @some_transaction
-      #assert_not_nil        assigns(:transaction)
       assert_redirected_to  request.env['HTTP_REFERER']
       assert_equal          I18n.translate('transactions.destroy.successfully_destroyed'),
                             flash[:notice]
@@ -104,7 +97,6 @@ class TransactionsControllerTest < ActionController::TestCase
   test "should not destroy transaction - hacker way" do
     assert_no_difference 'Transaction.count' do
       delete_destroy        @some_wrong_transaction
-      #assert_nil            assigns(:transaction)
       assert_redirected_to  dashboard_url
     end
   end
@@ -113,7 +105,6 @@ class TransactionsControllerTest < ActionController::TestCase
   # TODO: fix
   test "should easycheck transaction" do
     post_easycheck        @some_transaction
-    #assert_not_nil        assigns(:transaction)
     assert_redirected_to  request.env['HTTP_REFERER']
     assert_equal          I18n.translate('transactions.easycheck.successfully_checked'),
                           flash[:notice]
@@ -122,7 +113,6 @@ class TransactionsControllerTest < ActionController::TestCase
 
   test "should not easycheck transaction - hacker way" do
     post_easycheck        @some_wrong_transaction
-    #assert_nil            assigns(:transaction)
     assert_redirected_to  dashboard_url
     assert_equal          @previous_status, @some_wrong_transaction.reload.checked
   end

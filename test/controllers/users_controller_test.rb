@@ -11,7 +11,6 @@ class UsersControllerTest < ActionController::TestCase
   test "should get edit" do
     get_edit        @user
     assert_response :success
-    #assert_not_nil  assigns(:user)
   end
 
   test "should not get edit - hacker way" do

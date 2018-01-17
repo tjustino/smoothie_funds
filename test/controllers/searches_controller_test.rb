@@ -5,15 +5,12 @@ class SearchesControllerTest < ActionController::TestCase
   test "should get show" do
     get_show        some_search
     assert_response :success
-    #assert_not_nil  assigns(:search)
-    #assert_not_nil  assigns(:transactions)
   end
 
   ############################################# GET /users/:user_id/searches/new
   test "should get new" do
     get_new         @user
     assert_response :success
-    #assert_not_nil  assigns(:searches)
   end
 
   test "should not get new - hacker way" do
@@ -30,8 +27,6 @@ class SearchesControllerTest < ActionController::TestCase
   test "should create search" do
     assert_difference('Search.count') do
       post_create           @user
-      #assert_not_nil        assigns(:search)
-      #assert_redirected_to  assigns(:search)
     end
   end
 
@@ -62,7 +57,6 @@ class SearchesControllerTest < ActionController::TestCase
 
     assert_difference('Search.count', -1) do
       delete_destroy        second_search
-      #assert_not_nil        assigns(:search)
       assert_redirected_to  new_user_search_url @user
       assert_equal          I18n.translate('searches.destroy.successfully_destroyed'),
                             flash[:notice]
@@ -75,7 +69,6 @@ class SearchesControllerTest < ActionController::TestCase
 
     assert_no_difference 'Search.count' do
       delete_destroy        second_wrong_search
-      #assert_nil            assigns(:search)
       assert_redirected_to  dashboard_url
     end
   end
@@ -84,7 +77,6 @@ class SearchesControllerTest < ActionController::TestCase
   # test "should destroy search with user" do
   #   assert_no_difference 'Search.count' do
   #     delete_destroy        @some_category
-  #     assert_not_nil        assigns(:search)
   #   end
   # end
 

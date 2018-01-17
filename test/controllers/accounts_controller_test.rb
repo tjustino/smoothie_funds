@@ -5,22 +5,18 @@ class AccountsControllerTest < ActionController::TestCase
   test "should get index" do
     get             :index
     assert_response :success
-    #assert_not_nil  assigns(:accounts)
-    #assert_not_nil  assigns(:pendings)
   end
 
   ############################################################ GET /accounts/new
   test "should get new" do
     get             :new
     assert_response :success
-    #assert_not_nil  assigns(:account)
   end
 
   ####################################################### GET /accounts/:id/edit
   test "should get edit" do
     get_edit        @some_account
     assert_response :success
-    #assert_not_nil  assigns(:account)
   end
 
   test "should not get edit - hacker way" do
@@ -48,7 +44,6 @@ class AccountsControllerTest < ActionController::TestCase
   ###################################################### PATCH/PUT /accounts/:id
   test "should update account" do
     patch_update          @some_account
-    #assert_not_nil        assigns(:account)
     assert_redirected_to  accounts_path
     assert_equal          I18n.translate('accounts.update.successfully_updated'),
                           flash[:notice]
@@ -57,7 +52,6 @@ class AccountsControllerTest < ActionController::TestCase
 
   test "should not update account - hacker way" do
     patch_update          @some_wrong_account
-    #assert_nil            assigns(:account)
     assert_redirected_to  dashboard_url
     assert_equal          @previous_account_name, @some_wrong_account.reload.name
   end
@@ -66,7 +60,6 @@ class AccountsControllerTest < ActionController::TestCase
   test "should not destroy account with transactions, schedules or categories" do
     assert_no_difference 'Account.count' do
       delete_destroy        @some_account
-      #assert_not_nil        assigns(:account)
       assert_redirected_to  accounts_path
       assert_equal          I18n.translate('accounts.destroy.cant_destroy'),
                             flash[:warning]
@@ -80,7 +73,6 @@ class AccountsControllerTest < ActionController::TestCase
 
     assert_difference('Account.count', -1) do
       delete_destroy        @some_account
-      #assert_not_nil        assigns(:account)
       assert_redirected_to  accounts_path
       assert_equal          I18n.translate('accounts.destroy.successfully_destroyed'),
                             flash[:notice]
@@ -94,7 +86,6 @@ class AccountsControllerTest < ActionController::TestCase
 
     assert_no_difference 'Account.count' do
       delete_destroy        @some_wrong_account
-      #assert_nil            assigns(:account)
       assert_redirected_to  dashboard_url
     end
   end
