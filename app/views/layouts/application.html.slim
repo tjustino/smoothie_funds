@@ -71,7 +71,8 @@ html
                   = link_to ( fa_icon "sign-out", text: t('.logout') ), \
                             logout_path,  \
                             method: :delete, \
-                            class: "dropdown-item"
+                            class: "dropdown-item", \
+                            id: "logout"
 
           - elsif params[:controller] != "users"
             / New user
