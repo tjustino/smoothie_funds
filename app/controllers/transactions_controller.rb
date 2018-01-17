@@ -105,15 +105,13 @@ private ########################################################################
   end
 
   def add_balances(transactions)
-    transactions.reverse.each_with_index do |transaction, index|
-      if index == 0
-        transaction.balance = @current_account.initial_balance + transaction.amount
-      else
-        transaction.balance = transactions.reverse[index-1].balance + transaction.amount
-      end
-    end
+    adding_balance_column = "*,
+      ( ( SUM(amount) OVER ( ORDER BY date ASC, id ASC
+         ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW ) ) +
+       ( SELECT initial_balance FROM accounts WHERE id = #{@current_account.id})
+      ) AS balance"
 
-    return transactions
+    return transactions.select( adding_balance_column )
   end
 
   def load_transaction

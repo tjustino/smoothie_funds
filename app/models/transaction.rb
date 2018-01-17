@@ -17,8 +17,6 @@
 #
 
 class Transaction < ApplicationRecord
-  attr_accessor :balance
-
   belongs_to  :account
   belongs_to  :category
   belongs_to  :schedule
