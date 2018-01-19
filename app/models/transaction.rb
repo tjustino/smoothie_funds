@@ -40,6 +40,16 @@ private ########################################################################
     end
   end
 
+  def self.with_balances_for(account)
+    adding_balance_column = "*,
+      ( ( SUM(amount) OVER ( ORDER BY date ASC, id ASC
+         ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW ) ) +
+        ( SELECT initial_balance FROM accounts WHERE id = #{account.id} )
+      ) AS balance"
+
+    self.select( adding_balance_column )
+  end
+
   def self.search_accounts(accounts)
     where(account_id: accounts)
   end

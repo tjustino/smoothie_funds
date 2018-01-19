@@ -101,17 +101,7 @@ private ########################################################################
       @sum_checked     = @initial_balance + my_transactions.checked.sum(:amount)
     end
 
-    @transactions = add_balances(my_transactions).to_a[offset, limit]
-  end
-
-  def add_balances(transactions)
-    adding_balance_column = "*,
-      ( ( SUM(amount) OVER ( ORDER BY date ASC, id ASC
-         ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW ) ) +
-       ( SELECT initial_balance FROM accounts WHERE id = #{@current_account.id})
-      ) AS balance"
-
-    return transactions.select( adding_balance_column )
+    @transactions = my_transactions.with_balances_for(@current_account).to_a[offset, limit]
   end
 
   def load_transaction
