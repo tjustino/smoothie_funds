@@ -1,5 +1,5 @@
 namespace :populate do
-  MANY = 50
+  MANY = 100
   NAME = "Thomas"
 
   desc "Create #{MANY.to_s} accounts"
@@ -52,5 +52,13 @@ namespace :populate do
                           checked:  rand(0..1) == 1 ? true : false,
                           comment:  rand(0..1) == 1 ? SecureRandom.base58(20) : nil )
     end
+  end
+
+  desc "Create #{MANY.to_s} accounts, categories, schedules and transactions"
+  task all: :environment do
+    Rake::Task["populate:accounts"]     .invoke
+    Rake::Task["populate:categories"]   .invoke
+    Rake::Task["populate:schedules"]    .invoke
+    Rake::Task["populate:transactions"] .invoke
   end
 end
