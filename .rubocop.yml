@@ -1,4 +1,15 @@
+# https://rubocop.readthedocs.io/en/latest/
+
 # I always use double quotes
 Style/StringLiterals:
   Enabled: true
   EnforcedStyle: double_quotes
+
+# Well, it's seem it's a rails project
+Rails:
+  Enabled: true
+
+# Specific to my eccentric comments
+Layout/ExtraSpacing:
+  Exclude:
+    - Gemfile
