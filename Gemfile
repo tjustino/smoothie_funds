@@ -38,6 +38,7 @@ group :development do
   gem "spring"                  # Keep application running in the background
   gem "spring-watcher-listen", "~> 2.0.0" # Makes spring watch files
 
+  gem "rubocop"                 # Automatic Ruby code style checking tool
   gem "annotate"                # Annotates ActiveRecord Model, route & fixture
   #gem "rails-erd"              # Generate an entity-relationship diagram (ERD)
 
