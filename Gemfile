@@ -6,8 +6,8 @@ ruby    "2.5.0"
 # ~> 2.1 is identical to >= 2.1 and < 3.0
 # ~> 2.2.beta will match prerelease versions like 2.2.beta.12
 
-gem "rails",        "~> 5.1.4"
-gem "puma",         "~> 3.7"    # App web server
+gem "rails",        "~> 5.2.0.rc1"
+gem "puma",         "~> 3.11"   # App web server
 gem "sass-rails",   "~> 5.0"    # Use SCSS for stylesheets
 gem "uglifier"                  # Use as compressor for JavaScript assets
 gem "coffee-rails", "~> 4.2"    # Use CoffeeScript for .coffee assets and views
@@ -16,18 +16,20 @@ gem "coffee-rails", "~> 4.2"    # Use CoffeeScript for .coffee assets and views
 #gem "redis",       "~> 3.0"    # Use Redis adapter to run Action Cable in prod
 gem "bcrypt",       "~> 3.1.7"  # Use ActiveModel has_secure_password
 
-gem "pg", "~> 0.18"             # Use postgresql as the db for Active Record
+gem "pg"                        # Use postgresql as the db for Active Record
 gem "jquery-rails"              # Use jquery as the JavaScript library
 gem "slim"                      # Template language
 gem "bootstrap"                 # Twitter's Bootstrap
 gem "font-awesome-rails"        # Iconic font and CSS toolkit
 gem "chart-js-rails"            # Chart.js for use in Rails asset pipeline
 #gem "mailgun-rails"            # Mailgun adapter for Rails
+gem "bootsnap", require: false  # Reduces boot times through caching
 
 group :development, :test do
   gem "byebug", platform: :mri  # Call 'byebug' anywhere in the code to stop it
-  gem "capybara", "~> 2.13"     # Integration testing tool
+  gem "capybara", "~> 2.15"     # Integration testing tool
   gem "selenium-webdriver"      # Tool for writing automated tests of websites
+  gem "chromedriver-helper"     # Easy installation and use of chromedriver
 end
 
 group :development do
