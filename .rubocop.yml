@@ -2,12 +2,13 @@
 
 # I always use double quotes
 Style/StringLiterals:
-  Enabled: true
   EnforcedStyle: double_quotes
 
 # Well, it's seem it's a rails project
 Rails:
   Enabled: true
+Layout/IndentationConsistency:
+  EnforcedStyle: rails
 
 # Specific to my eccentric comments
 Layout/ExtraSpacing:
