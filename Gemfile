@@ -16,7 +16,7 @@ gem "jquery-rails"              # Use jquery as the JavaScript library
 # gem "mailgun-rails"           # Mailgun adapter for Rails
 gem "pg"                        # Use postgresql as the db for Active Record
 gem "puma",         "~> 3.11"   # App web server
-gem "rails",        "~> 5.2.0.rc1" # Full-stack web framework
+gem "rails",        "~> 5.2.0.rc2" # Full-stack web framework
 gem "sass-rails",   "~> 5.0"    # Use SCSS for stylesheets
 gem "slim"                      # Template language
 # gem "turbolinks",  "~> 5"     # Make following links in web application faster
@@ -24,14 +24,14 @@ gem "uglifier"                  # Use as compressor for JavaScript assets
 
 group :development, :test do
   gem "byebug", platform: :mri  # Call 'byebug' anywhere in the code to stop it
-  gem "capybara", "~> 2.15"     # Integration testing tool
+  gem "capybara", "< 4.0"       # Integration testing tool
   gem "chromedriver-helper"     # Easy installation and use of chromedriver
   gem "selenium-webdriver"      # Tool for writing automated tests of websites
 end
 
 group :development do
   gem "annotate"                # Annotates ActiveRecord Model, route & fixture
-  gem "listen", ">= 3.0.5", "< 3.2" # Listen to file modif and notifies you
+  gem "listen", "< 3.2"         # Listen to file modif and notifies you
   gem "rubocop"                 # Automatic Ruby code style checking tool
   gem "spring"                  # Keep application running in the background
   gem "spring-watcher-listen", "~> 2.0.0" # Makes spring watch files
