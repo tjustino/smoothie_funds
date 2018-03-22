@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class DashboardControllerTest < ActionController::TestCase
   ######################################################################## GET /
@@ -6,6 +8,6 @@ class DashboardControllerTest < ActionController::TestCase
     get             :index
     assert_response :success
     assert_select   "title", "Smoothie Funds"
-    assert_select   "#logout", I18n.translate('layouts.application.logout')
+    assert_select   "#logout", I18n.translate("layouts.application.logout")
   end
 end

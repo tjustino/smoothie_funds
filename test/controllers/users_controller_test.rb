@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class UsersControllerTest < ActionController::TestCase
   ############################################################### GET /users/new
@@ -26,12 +28,14 @@ class UsersControllerTest < ActionController::TestCase
   ################################################################## POST /users
   test "should create user" do
     # you can create an other user as a logged user, why not...
-    assert_difference 'User.count' do
-      post :create, params: { user: { email:                  "john.doe@email.com",
-                                      password:               "unbreakablePassword",
-                                      password_confirmation:  "unbreakablePassword" } }
+    assert_difference "User.count" do
+      post :create, params: {
+        user: { email:                  "john.doe@email.com",
+                password:               "unbreakablePassword",
+                password_confirmation:  "unbreakablePassword" }
+      }
       assert_redirected_to  login_url
-      assert_equal          I18n.translate('users.create.successfully_created'),
+      assert_equal          I18n.translate("users.create.successfully_created"),
                             flash[:notice]
     end
   end
@@ -40,7 +44,7 @@ class UsersControllerTest < ActionController::TestCase
   test "should update user" do
     patch_update          @user
     assert_redirected_to  edit_user_url
-    assert_equal          I18n.translate('users.update.successfully_updated'),
+    assert_equal          I18n.translate("users.update.successfully_updated"),
                           flash[:notice]
     assert_not_equal      @previous_user_name, @user.reload.name
   end
@@ -52,10 +56,9 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   ############################################################ DELETE /users/:id
-  # TODO how to delete an account?
+  # TODO: how to delete an account?
   # test "should destroy user" do
   # end
-
 
   private ######################################################################
 
@@ -65,11 +68,10 @@ class UsersControllerTest < ActionController::TestCase
 
     def patch_update(user)
       @previous_user_name = user.name
-
-      patch :update, params: {  id: user, 
-                                user: { email:                  user.email,
-                                        name:                   SecureRandom.hex,
-                                        password:               "secret",
-                                        password_confirmation:  "secret" } }
+      patch :update, params: {  id: user,
+                                user: { email:                 user.email,
+                                        name:                  SecureRandom.hex,
+                                        password:              "secret",
+                                        password_confirmation: "secret" } }
     end
 end

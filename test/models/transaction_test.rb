@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: transactions
@@ -16,7 +18,7 @@
 #  schedule_id :integer
 #
 
-require 'test_helper'
+require "test_helper"
 
 class TransactionTest < ActiveSupport::TestCase
   test "should create transaction" do
@@ -25,7 +27,7 @@ class TransactionTest < ActiveSupport::TestCase
 
     transaction = Transaction.new(account:  account,
                                   category: category,
-                                  date:     DateTime.now,
+                                  date:     Time.zone.now,
                                   amount:   42,
                                   checked:  true,
                                   comment:  "Super comment !!!")
@@ -35,19 +37,19 @@ class TransactionTest < ActiveSupport::TestCase
   test "account_id, category_id, date and amount must not be empty" do
     transaction = Transaction.new
     assert transaction.invalid?
-    assert_equal [  I18n.translate('activerecord.errors.messages.blank')],
-                    transaction.errors[:account_id]
+    assert_equal [I18n.translate("activerecord.errors.messages.blank")],
+                 transaction.errors[:account_id]
 
-    assert_equal [  I18n.translate('activerecord.errors.messages.blank')],
-                    transaction.errors[:category_id]
+    assert_equal [I18n.translate("activerecord.errors.messages.blank")],
+                 transaction.errors[:category_id]
 
-    assert_equal [  I18n.translate('activerecord.errors.messages.blank'),
-                    I18n.translate('activerecord.errors.messages.invalid')],
-                    transaction.errors[:date]
+    assert_equal [I18n.translate("activerecord.errors.messages.blank"),
+                  I18n.translate("activerecord.errors.messages.invalid")],
+                 transaction.errors[:date]
 
-    assert_equal [  I18n.translate('activerecord.errors.messages.blank'),
-                    I18n.translate('activerecord.errors.messages.not_a_number')],
-                    transaction.errors[:amount]
+    assert_equal [I18n.translate("activerecord.errors.messages.blank"),
+                  I18n.translate("activerecord.errors.messages.not_a_number")],
+                 transaction.errors[:amount]
   end
 
   test "amount must be numerical" do
@@ -56,12 +58,12 @@ class TransactionTest < ActiveSupport::TestCase
 
     transaction = Transaction.new(account:  account,
                                   category: category,
-                                  date:     DateTime.now,
+                                  date:     Time.zone.now,
                                   amount:   "forty two",
                                   checked:  true,
                                   comment:  "Super comment !!!")
     assert transaction.invalid?
-    assert_equal [I18n.translate('activerecord.errors.messages.not_a_number')],
-                                                      transaction.errors[:amount]
+    assert_equal [I18n.translate("activerecord.errors.messages.not_a_number")],
+                 transaction.errors[:amount]
   end
 end
