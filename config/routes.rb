@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   # By default, there is 7 different paths and 7 actions in each controller:
   # +-----------+------------------+-------------------+
@@ -33,24 +35,31 @@ Rails.application.routes.draw do
   end
 
   shallow do
-    resources :users, except: [:index, :show, :destroy] do
-      resources :searches, except: [:index, :edit, :update]
+    resources :users, except: %i[index show destroy] do
+      resources :searches, except: %i[index edit update]
       resources :analytics, only: [:index]
     end
   end
 
   shallow do
     resources :accounts, except: [:show] do
-      resources :categories,   except: [:show] do post "import_from", on: :collection end
-      resources :transactions, except: [:show] do post "easycheck",   on: :member     end
-      resources :schedules,    except: [:show] do post "insert",      on: :member     end
+      resources :categories, except: [:show] do
+        post "import_from", on: :collection
+      end
+      resources :transactions, except: [:show] do
+        post "easycheck", on: :member
+      end
+      resources :schedules, except: [:show] do
+        post "insert", on: :member
+      end
     end
   end
 
-  delete  "accounts/:id/unlink(.:format)",    to: "accounts#unlink",    as: "unlink"
-  delete  "accounts/:id/unpend(.:format)",    to: "accounts#unpend",    as: "unpend"
-  post    "accounts/:id/sharing(.:format)",   to: "accounts#sharing",   as: "sharing"
-  delete  "accounts/:id/unsharing(.:format)", to: "accounts#unsharing", as: "unsharing"
+  delete "accounts/:id/unlink(.:format)", to: "accounts#unlink", as: "unlink"
+  delete "accounts/:id/unpend(.:format)", to: "accounts#unpend", as: "unpend"
+  post   "accounts/:id/sharing(.:format)", to: "accounts#sharing", as: "sharing"
+  delete "accounts/:id/unsharing(.:format)", to: "accounts#unsharing",
+                                             as: "unsharing"
 
   root "dashboard#index", as: "dashboard"
 end

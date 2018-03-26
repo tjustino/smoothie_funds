@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Create Transactions settings
 class CreateTransactions < ActiveRecord::Migration[4.2]
   def change
     create_table :transactions do |t|

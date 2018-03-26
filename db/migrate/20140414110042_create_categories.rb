@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Create Categories settings
 class CreateCategories < ActiveRecord::Migration[4.2]
   def change
     create_table :categories do |t|
@@ -9,6 +12,6 @@ class CreateCategories < ActiveRecord::Migration[4.2]
       t.timestamps
     end
 
-    add_index :categories, [:account_id, :name], unique: true
+    add_index :categories, %i[account_id name], unique: true
   end
 end

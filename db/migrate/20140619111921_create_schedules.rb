@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Create Schedules settings
 class CreateSchedules < ActiveRecord::Migration[4.2]
   def change
     create_table :schedules do |t|

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Create Accounts settings
 class CreateAccounts < ActiveRecord::Migration[4.2]
   def change
     create_table :accounts do |t|
