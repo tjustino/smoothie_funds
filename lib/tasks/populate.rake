@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 namespace :populate do
   MANY = 100
-  NAME = "Thomas".freeze
+  NAME = "Thomas"
 
   desc "Create #{MANY} accounts, categories, schedules and transactions"
   task all: :environment do

@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class CategoriesControllerTest < ActionController::TestCase
   ######################################### GET /accounts/:account_id/categories
@@ -51,23 +53,23 @@ class CategoriesControllerTest < ActionController::TestCase
 
   ######################################## POST /accounts/:account_id/categories
   test "should create category" do
-    assert_difference('Category.count') do
+    assert_difference("Category.count") do
       post_create           @some_account
       assert_redirected_to  account_categories_path @some_account
-      assert_equal          I18n.translate('categories.create.successfully_created'),
-                            flash[:notice]
+      assert_equal I18n.translate("categories.create.successfully_created"),
+                   flash[:notice]
     end
   end
 
   test "should not create category - hacker way" do
-    assert_no_difference('Category.count') do
+    assert_no_difference("Category.count") do
       post_create           @some_wrong_account
       assert_redirected_to  dashboard_url
     end
   end
 
   test "should not create category - unknow account" do
-    assert_no_difference('Category.count') do
+    assert_no_difference("Category.count") do
       post_create           @unknow_account
       assert_redirected_to  dashboard_url
     end
@@ -77,23 +79,23 @@ class CategoriesControllerTest < ActionController::TestCase
   test "should update category" do
     patch_update          @some_category
     assert_redirected_to  account_categories_path @some_account
-    assert_equal          I18n.translate('categories.update.successfully_updated'),
-                          flash[:notice]
+    assert_equal I18n.translate("categories.update.successfully_updated"),
+                 flash[:notice]
     assert_not_equal      @previous_category_name, @some_category.reload.name
   end
 
   test "should not update category - hacker way" do
     patch_update          @some_wrong_category
     assert_redirected_to  dashboard_url
-    assert_equal          @previous_category_name, @some_wrong_category.reload.name
+    assert_equal @previous_category_name, @some_wrong_category.reload.name
   end
 
   ####################################################### DELETE /categories/:id
   test "should not destroy category with transactions" do
-    assert_no_difference 'Category.count' do
+    assert_no_difference "Category.count" do
       delete_destroy        @some_category
       assert_redirected_to  account_categories_path @some_account
-      assert_equal          I18n.translate('categories.destroy.cant_destroy'),
+      assert_equal          I18n.translate("categories.destroy.cant_destroy"),
                             flash[:warning]
     end
   end
@@ -101,24 +103,24 @@ class CategoriesControllerTest < ActionController::TestCase
   test "should destroy category without transactions" do
     @some_category.transactions.destroy_all
 
-    assert_difference('Category.count', -1) do
+    assert_difference("Category.count", -1) do
       delete_destroy        @some_category
       assert_redirected_to  account_categories_path @some_account
-      assert_equal          I18n.translate('categories.destroy.successfully_destroyed'),
-                            flash[:notice]
+      assert_equal I18n.translate("categories.destroy.successfully_destroyed"),
+                   flash[:notice]
     end
   end
 
   test "should not destroy category - hacker way" do
     @some_wrong_category.transactions.destroy_all
 
-    assert_no_difference 'Category.count' do
+    assert_no_difference "Category.count" do
       delete_destroy        @some_wrong_category
       assert_redirected_to  dashboard_url
     end
   end
 
-  #TODO how to test? refactoring route/controller?
+  # TODO: how to test? refactoring route/controller?
   # POST /accounts/:account_id/categories/import_from
   # test "should import categories from another account" do
   # end
@@ -128,7 +130,6 @@ class CategoriesControllerTest < ActionController::TestCase
 
   # test "should not import categories from another account - unknow account" do
   # end
-
 
   private ######################################################################
 
@@ -152,8 +153,8 @@ class CategoriesControllerTest < ActionController::TestCase
     def patch_update(category)
       @previous_category_name = category.name
 
-      patch :update,  params: { id:       category,
-                                category: { name: SecureRandom.hex } }
+      patch :update, params: { id:       category,
+                               category: { name: SecureRandom.hex } }
     end
 
     def delete_destroy(category)

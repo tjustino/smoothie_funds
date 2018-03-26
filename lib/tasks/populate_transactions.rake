@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :populate do
   desc "Create #{MANY} transactions only for the first account not hidden"
   task transactions: :environment do

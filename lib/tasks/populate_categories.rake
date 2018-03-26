@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :populate do
   desc "Create #{MANY} categories only for the first account not hidden"
   task categories: :environment do

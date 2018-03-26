@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :populate do
   desc "Create #{MANY} accounts"
   task accounts: :environment do

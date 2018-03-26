@@ -1,6 +1,8 @@
-require 'test_helper'
+# frozen_string_literal: true
 
-class NotLoggedUserTest < ActionDispatch::IntegrationTest
+require "test_helper"
+
+class UnknowUserTest < ActionDispatch::IntegrationTest
   fixtures :users
 
   setup do
@@ -23,7 +25,7 @@ class NotLoggedUserTest < ActionDispatch::IntegrationTest
 
     accounts.each do |account|
       # categories#destroy
-      assert_no_difference 'Category.count' do
+      assert_no_difference "Category.count" do
         account.categories.each do |category|
           delete category_path category
           assert_redirected_to login_url
@@ -31,7 +33,7 @@ class NotLoggedUserTest < ActionDispatch::IntegrationTest
       end
 
       # transactions#destroy
-      assert_no_difference 'Transaction.count' do
+      assert_no_difference "Transaction.count" do
         account.transactions.each do |transaction|
           delete transaction_path transaction
           assert_redirected_to login_url
@@ -39,7 +41,7 @@ class NotLoggedUserTest < ActionDispatch::IntegrationTest
       end
 
       # schedules#destroy
-      assert_no_difference 'Schedule.count' do
+      assert_no_difference "Schedule.count" do
         account.schedules.each do |schedule|
           delete schedule_path schedule
           assert_redirected_to login_url
@@ -47,15 +49,15 @@ class NotLoggedUserTest < ActionDispatch::IntegrationTest
       end
 
       # accounts#destroy
-      assert_no_difference 'Account.count' do
+      assert_no_difference "Account.count" do
         delete account_path account
         assert_redirected_to login_url
       end
     end
 
-    #TODO how to delete an account?
+    # TODO: how to delete an account?
     # users#destroy
-    # assert_no_difference 'User.count' do
+    # assert_no_difference "User.count" do
     #   User.all.each do |user|
     #     delete user_path user
     #     assert_redirected_to login_url
@@ -177,7 +179,7 @@ class NotLoggedUserTest < ActionDispatch::IntegrationTest
     accounts.each do |account|
       # categories#update
       account.categories.each do |category|
-        assert_no_difference 'category.name.sum' do
+        assert_no_difference "category.name.sum" do
           patch category_path category, params: { name: SecureRandom.hex }
           assert_redirected_to login_url
         end
@@ -185,29 +187,33 @@ class NotLoggedUserTest < ActionDispatch::IntegrationTest
 
       # transactions#update
       account.transactions.each do |transaction|
-        assert_no_difference 'transaction.amount' do
-          patch transaction_path transaction, params: { amount: transaction.amount + 1 }
+        assert_no_difference "transaction.amount" do
+          patch transaction_path transaction, params: {
+            amount: transaction.amount + 1
+          }
           assert_redirected_to login_url
         end
       end
 
       # schedules#update
       account.schedules.each do |schedule|
-        assert_no_difference 'schedule.frequency' do
-          patch schedule_path schedule, params: { frequency: schedule.frequency + 1 }
+        assert_no_difference "schedule.frequency" do
+          patch schedule_path schedule, params: {
+            frequency: schedule.frequency + 1
+          }
           assert_redirected_to login_url
         end
       end
 
       # accounts#update
-      assert_no_difference 'account.name.sum' do
+      assert_no_difference "account.name.sum" do
         patch account_path account, params: { name: SecureRandom.hex }
         assert_redirected_to login_url
       end
     end
 
     # users#update
-    assert_no_difference 'user.email.sum' do
+    assert_no_difference "user.email.sum" do
       patch user_path user, params: { email: "wrong@email.com" }
       assert_redirected_to login_url
     end
@@ -223,7 +229,7 @@ class NotLoggedUserTest < ActionDispatch::IntegrationTest
     password  = "unbreakablePassword"
 
     # users#create
-    assert_difference('User.count') do
+    assert_difference("User.count") do
       post users_path, params: { user: {  email: email,
                                           password: password,
                                           password_confirmation: password } }
@@ -246,41 +252,50 @@ class NotLoggedUserTest < ActionDispatch::IntegrationTest
 
     accounts.each do |account|
       # categories#create
-      assert_no_difference 'Category.count' do
-        post account_categories_path account, params: { category: { name: SecureRandom.hex } }
+      assert_no_difference "Category.count" do
+        post account_categories_path account, params: {
+          category: {
+            name: SecureRandom.hex
+          }
+        }
         assert_redirected_to login_url
       end
 
       # transactions#create
-      assert_no_difference 'Transaction.count' do
+      assert_no_difference "Transaction.count" do
         post account_transactions_path account, params: {
-                                            transaction: {  category_id:  account.categories.sample,
-                                                            date:         DateTime.now,
-                                                            amount:       rand(-500.00..500.00),
-                                                            checked:      rand(0..1) == 1 ? true : false,
-                                                            comment:      SecureRandom.hex } }
+          transaction: {  category_id:  account.categories.sample,
+                          date:         Time.zone.now,
+                          amount:       rand(-500.00..500.00),
+                          checked:      rand(0..1) == 1,
+                          comment:      SecureRandom.hex }
+        }
         assert_redirected_to login_url
       end
 
       # schedules#create
-      assert_no_difference 'Schedule.count' do
+      assert_no_difference "Schedule.count" do
         post account_schedules_path account, params: {
-                                          schedule: { next_time:  DateTime.now,
-                                                      frequency:  rand(1..10),
-                                                      period:     ["days","weeks","months","years"].sample,
-                                                      operation_attributes: { amount:   rand(-500.00..500.00),
-                                                                              category_id: account.categories.sample,
-                                                                              comment:  SecureRandom.hex,
-                                                                              checked:  rand(0..1) == 1 ? true : false } } }
+          schedule: { next_time:  Time.zone.now,
+                      frequency:  rand(1..10),
+                      period:     %w[days weeks months years].sample,
+                      operation_attributes: { amount:   rand(-500.00..500.00),
+                                              category_id: \
+                                                      account.categories.sample,
+                                              comment:  SecureRandom.hex,
+                                              checked:  rand(0..1) == 1 } }
+        }
         assert_redirected_to login_url
       end
     end
 
     # accounts#create
-    assert_no_difference 'Account.count' do
-      post accounts_path, params: { account: {  name:             SecureRandom.hex,
-                                                initial_balance:  rand(-100..100),
-                                                idden:            false } }
+    assert_no_difference "Account.count" do
+      post accounts_path, params: {
+        account: { name:            SecureRandom.hex,
+                   initial_balance: rand(-100..100),
+                   idden:           false }
+      }
       assert_redirected_to login_url
     end
   end
@@ -296,20 +311,20 @@ class NotLoggedUserTest < ActionDispatch::IntegrationTest
 
     accounts.each do |account|
       # categories#import_from
-      assert_no_difference 'Category.count' do
+      assert_no_difference "Category.count" do
         post import_from_account_categories_path user, account
         assert_redirected_to login_url
       end
 
       # transactions#easycheck
       account.transactions.each do |transaction|
-        assert_no_difference 'transaction.checked ? 1 : 0' do
+        assert_no_difference "transaction.checked ? 1 : 0" do
           post easycheck_transaction_path transaction
         end
       end
 
       # schedules#insert
-      assert_no_difference 'Transaction.count' do
+      assert_no_difference "Transaction.count" do
         account.schedules.each do |schedule|
           post insert_schedule_path schedule
           assert_redirected_to login_url
