@@ -4,13 +4,16 @@
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
+# Specific to my eccentric comments
+Layout/ExtraSpacing:
+  Exclude:
+    - Gemfile
+
 # Well, it's seem it's a rails project
 Rails:
   Enabled: true
 Layout/IndentationConsistency:
   EnforcedStyle: rails
-
-# Specific to my eccentric comments
-Layout/ExtraSpacing:
+AllCops:
   Exclude:
-    - Gemfile
+    - db/schema.rb
