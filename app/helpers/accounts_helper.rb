@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Accounts Helper
 module AccountsHelper
   def other_users(account)
     account.users.where.not(id: @current_user)
@@ -5,16 +8,14 @@ module AccountsHelper
 
   def show_others_or_me(account)
     if account.users.count == 1
-      return t('.personal_account')
+      t(".personal_account")
     else
       others = other_users(account)
 
       if others.count == 1
         email_or_name(others.take)
       else
-        array_of_users = []
-        others.each { |other_user| array_of_users << email_or_name(other_user) }
-        array_of_users.join(", ")
+        join_in(others)
       end
     end
   end
@@ -24,12 +25,22 @@ module AccountsHelper
       mail_to user.email
     else
       mail_to user.email, user.name
-    end 
+    end
   end
 
   def show_other_users(account)
     array_of_users = []
-    account.users.each { |other_user| array_of_users << email_or_name(other_user) }
-    array_of_users.join( t('.and') )
+    account.users.each do |other_user|
+      array_of_users << email_or_name(other_user)
+    end
+    array_of_users.join(t(".and"))
   end
+
+  private
+
+    def join_in(others)
+      array_of_users = []
+      others.each { |other_user| array_of_users << email_or_name(other_user) }
+      array_of_users.join(", ")
+    end
 end

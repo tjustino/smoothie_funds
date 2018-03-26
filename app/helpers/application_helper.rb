@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
+# Application Helper
 module ApplicationHelper
-  def nav_link(name, url, fa)
-    class_name = current_page?(url) ? 'active' : nil
+  def nav_link(name, url, icon)
+    class_name = current_page?(url) ? "active" : nil
     content_tag(:li, class: [class_name, "nav-item"].join(" ")) do
-      link_to fa_icon(fa, text: name), url, class: "nav-link"
+      link_to fa_icon(icon, text: name), url, class: "nav-link"
     end
   end
 
@@ -11,6 +14,6 @@ module ApplicationHelper
   end
 
   def shallow_args(parent, child)
-    (action_name == "new" or action_name == "create") ? [parent, child] : child
+    action_name == "new" || action_name == "create" ? [parent, child] : child
   end
 end
