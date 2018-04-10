@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source  "https://rubygems.org"
-ruby    "2.5.0"
+ruby    "2.5.1"
 
 ## from http://bundler.io/gemfile.html
 # ~> 2.0.3 is identical to >= 2.0.3 and < 2.1
@@ -18,7 +18,7 @@ gem "jquery-rails"              # Use jquery as the JavaScript library
 # gem "mailgun-rails"           # Mailgun adapter for Rails
 gem "pg"                        # Use postgresql as the db for Active Record
 gem "puma",         "~> 3.11"   # App web server
-gem "rails",        "~> 5.2.0.rc2" # Full-stack web framework
+gem "rails",        "~> 5.2.0"  # Full-stack web framework
 gem "sass-rails",   "~> 5.0"    # Use SCSS for stylesheets
 gem "slim"                      # Template language
 # gem "turbolinks",  "~> 5"     # Make following links in web application faster
