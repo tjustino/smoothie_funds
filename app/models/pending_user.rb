@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: pending_users
@@ -9,10 +11,14 @@
 #  updated_at :datetime         not null
 #
 
+# PendingUser model
 class PendingUser < ApplicationRecord
-  belongs_to  :account
+  belongs_to :account
 
-  validates_uniqueness_of :account_id
-  validates_presence_of   :email, :account_id
-  validates_format_of     :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+  validates :account_id, uniqueness: true
+  validates :email,      presence: true
+  validates :account_id, presence: true
+  validates :email,      format: {
+    with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+  }
 end

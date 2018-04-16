@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: categories
@@ -11,12 +13,13 @@
 #  updated_at :datetime
 #
 
+# Category model
 class Category < ApplicationRecord
   belongs_to  :account
   has_many    :transactions, dependent: :restrict_with_error
 
-  scope :order_by_name,       -> { order(name: :asc) }
+  scope :order_by_name, -> { order(name: :asc) }
 
-  validates_presence_of   :name, :account_id
-  validates_uniqueness_of :name, scope: :account_id
+  validates :account_id, presence: true
+  validates :name,       presence: true, uniqueness: { scope: :account_id }
 end

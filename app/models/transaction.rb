@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: transactions
@@ -16,6 +18,7 @@
 #  schedule_id :integer
 #
 
+# Transaction model
 class Transaction < ApplicationRecord
   belongs_to  :account
   belongs_to  :category
@@ -26,83 +29,89 @@ class Transaction < ApplicationRecord
   scope :active,                    -> { where(schedule_id: nil) }
   scope :checked,                   -> { where(checked: true) }
 
-  before_validation         :format_amount
+  before_validation :format_amount
 
-  validates_presence_of     :account_id, :category_id, :date, :amount
-  validates_numericality_of :amount
-  validates_format_of       :date, with: /(19|20)\d{2}/i
+  validates :account_id,  presence: true
+  validates :category_id, presence: true
+  validates :date,        presence: true, format: { with: /(19|20)\d{2}/i }
+  validates :amount,      presence: true, numericality: true
 
-private ########################################################################
+  private ######################################################################
 
-  def format_amount
-    if amount.present?
-      self.amount = amount_before_type_cast.to_s.gsub(' ', '').gsub(',', '.')
+    def format_amount
+      return if amount.blank?
+
+      self.amount = amount_before_type_cast.to_s
+                                           .strip
+                                           .tr_s(" ", "")
+                                           .tr_s(",", ".")
     end
-  end
 
-  def self.with_balances_for(account)
-    adding_balance_column = "*,
-      ( ( SUM(amount) OVER ( ORDER BY date ASC, id ASC
-         ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW ) ) +
-        ( SELECT initial_balance FROM accounts WHERE id = #{account.id} )
-      ) AS balance"
+    class << self
+      def with_balances_for(account)
+        adding_balance_column = "*,
+          ( ( SUM(amount) OVER ( ORDER BY date ASC, id ASC
+             ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW ) ) +
+            ( SELECT initial_balance FROM accounts WHERE id = #{account.id} )
+          ) AS balance"
 
-    self.select( adding_balance_column )
-  end
+        select(adding_balance_column)
+      end
 
-  def self.search_accounts(accounts)
-    where(account_id: accounts)
-  end
+      def search_accounts(accounts)
+        where(account_id: accounts)
+      end
 
-  def self.search_amount(min, max)
-    if    not min.blank?  and not max.blank?
-      where( ["amount > ? and amount < ?", min, max] )
-    elsif not min.blank?  and max.blank?
-      where( ["amount > ?", min] )
-    elsif min.blank?      and not max.blank?
-      where( ["amount < ?", max] )
-    else
-      where( "1=1" )
+      def search_amount(min, max)
+        if min.present? && max.present?
+          where(["amount > ? and amount < ?", min, max])
+        elsif min.present? && max.blank?
+          where(["amount > ?", min])
+        elsif min.blank? && max.present?
+          where(["amount < ?", max])
+        else
+          where("1=1")
+        end
+      end
+
+      def search_date(before, after)
+        if before.present? && after.present?
+          where(["date < ? and date > ?", before, after])
+        elsif before.present? && after.blank?
+          where(["date < ?", before])
+        elsif before.blank? && after.present?
+          where(["date > ?", after])
+        else
+          where("1=1")
+        end
+      end
+
+      def search_categories(categories)
+        where(category_id: categories)
+      end
+
+      def search_comment(operator, comment)
+        case operator
+        when "like" && comment.present?
+          where("UPPER(comment) LIKE UPPER('%#{comment}%')")
+        when "like" && comment.blank?
+          where("comment IS NOT NULL")
+        when "not_like" && comment.present?
+          where("UPPER(comment) NOT LIKE UPPER('%#{comment}%')")
+        when "not_like" && comment.blank?
+          where("comment IS NULL")
+        else where("1=1")
+        end
+      end
+
+      def search_checked(checked)
+        if checked == "yep"
+          where(checked: true)
+        elsif checked == "nop"
+          where(checked: false)
+        else
+          where("1=1")
+        end
+      end
     end
-  end
-
-  def self.search_date(before, after)
-    if    not before.blank? and not after.blank?
-      where( ["date < ? and date > ?", before, after] )
-    elsif not before.blank? and after.blank?
-      where( ["date < ?", before] )
-    elsif before.blank?     and not after.blank?
-      where( ["date > ?", after] )
-    else
-      where( "1=1" )
-    end
-  end
-
-  def self.search_categories(categories)
-    where(category_id: categories)
-  end
-
-  def self.search_comment(operator, comment)
-    if    operator == "like"      and not comment.blank?
-      where( "UPPER(comment) LIKE UPPER('%#{comment}%')" )
-    elsif operator == "like"      and comment.blank?
-      where( "comment IS NOT NULL" )
-    elsif operator == "not_like"  and not comment.blank?
-      where( "UPPER(comment) NOT LIKE UPPER('%#{comment}%')" )
-    elsif operator == "not_like"  and comment.blank?
-      where( "comment IS NULL" )
-    else
-      where( "1=1" )
-    end
-  end
-
-  def self.search_checked(checked)
-    if    checked == "yep"
-      where(checked: true)
-    elsif checked == "nop"
-      where(checked: false)
-    else
-      where( "1=1" )
-    end
-  end
 end
