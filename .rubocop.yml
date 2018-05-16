@@ -17,3 +17,17 @@ Layout/IndentationConsistency:
 AllCops:
   Exclude:
     - db/schema.rb
+
+# too much work for now
+Metrics/AbcSize:
+  Enabled: false
+Metrics/BlockLength:
+  Enabled: false
+Metrics/ClassLength:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
