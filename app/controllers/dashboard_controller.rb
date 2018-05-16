@@ -1,5 +1,7 @@
-class DashboardController < ApplicationController
+# frozen_string_literal: true
 
+# Dashboard Controller
+class DashboardController < ApplicationController
   # GET /
   def index
     load_transactions
@@ -11,17 +13,19 @@ class DashboardController < ApplicationController
   private ######################################################################
 
     def load_transactions
-      @transactions = Transaction.active.where(account_id: @current_accounts.ids)
+      @transactions = Transaction.active
+                                 .where(account_id: @current_accounts.ids)
     end
 
     def load_current_transactions
-      @current_transactions = @transactions.where("date <= ?", Time.now)
+      @current_transactions = @transactions.where("date <= ?", Time.zone.now)
     end
 
     def load_schedules
       @schedules = Schedule.where(account_id: @current_accounts.ids)
-                            .where("next_time <= ?", Time.now.midnight + 30.days)
-                            .order(next_time: :asc, id: :asc)
+                           .where("next_time <= ?",
+                                  Time.zone.now.midnight + 30.days)
+                           .order(next_time: :asc, id: :asc)
     end
 
     def load_pendings
