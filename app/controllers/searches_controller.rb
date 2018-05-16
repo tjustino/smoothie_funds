@@ -81,11 +81,13 @@ class SearchesController < ApplicationController
       @transactions = Transaction.all
                                  .active
                                  .search_accounts(
-                                   sanitize_accounts(@search.accounts))
+                                   sanitize_accounts(@search.accounts)
+                                 )
                                  .search_amount(@search.min, @search.max)
                                  .search_date(@search.before, @search.after)
                                  .search_categories(
-                                   sanitize_categories(@search.categories))
+                                   sanitize_categories(@search.categories)
+                                 )
                                  .search_comment(@search.operator,
                                                  @search.comment)
                                  .search_checked(@search.checked)
