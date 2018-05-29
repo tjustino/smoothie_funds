@@ -37,7 +37,7 @@ fr:
       initial_balance:  "Balance initiale"
       share:            "Partagé avec"
       unlink:           "Se délier"
-      are_you_sure_unlink: "Êtes-vous certain de ne plus vouloir accéder à ce compte ?\nNotez bien que ce compte continuera d'exister pour les personnes avec qui il est actuellement partagé"
+      are_you_sure_unlink: "Êtes-vous certain de ne plus vouloir accéder à ce compte ?\nNotez bien que ce compte continuera d'exister pour les personnes avec qui il est actuellement partagé !"
       propose_sharing:  "Partager avec"
       explanation:      "Vous pouvez proposer de partager ce compte avec une autre personne"
       shared_email:     "Courriel"
@@ -52,12 +52,12 @@ fr:
       content:              |-
         Pour créer un compte c'est assez simple : cliquez sur <button 
         class="btn btn-primary" disabled>%{new_icon} Nouveau compte</button> et 
-        donnez lui un nom (ex : compte courant).<br />
+        donnez lui un nom (ex : Compte courant).<br />
         <br />
         La notion de « balance initiale » est importante :<br />
         <ul>
         <li> S'il s'agit d'un tout nouveau compte créé auprès de votre banque,
-        la balance initiale peut être égal à 0 ;</li>
+        la balance initiale est égale à 0 ;</li>
         <li> Sinon, nous vous conseillons de prendre le dernier relevé transmis
         par votre banque et de faire correspondre la balance initiale à la
         valeur de votre "Nouveau solde" (il s'agit souvent de la dernière
@@ -156,7 +156,7 @@ fr:
         Nous sommes vraiment enchanté de vous accueillir !<br />
         Vous allez voir, c'est facile de faire ses comptes.<br /><br />
         Pour commencer, cliquez sur <button class="btn btn-light" disabled>%{accounts_icon} Comptes</button>
-        dans le menu pour accéder à l'écran permettant la création... de comptes !
+        dans le menu pour accéder à l'écran permettant la création de comptes !
       close:                "Ok j'ai compris !"
     index:
       dashboard:            "Tableaux de bord"
@@ -230,9 +230,7 @@ fr:
     welcome:
       welcome:          "La création de transaction"
       content:              |-
-        Les transactions sont les opérations listées par votre banque et qui
-        mettent parfois plusieurs jours à s'afficher lorsque vous consultez vos
-        comptes en lignes.<br />
+        Ça y est, nous y sommes !<br />
         <br />
         Pour créer une transaction, rien de plus facile : cliquez sur <button class="btn btn-primary" disabled>
         %{new_icon} Nouvelle transaction</button> et saisissez le montant à la
@@ -242,8 +240,7 @@ fr:
         Voilà, vous faites maintenant vos comptes !<br />
         <br />
         Un dernier truc : lorsque vous recevrez votre prochain relevé bancaire,
-        la somme des montants rapprochés (au-dessus du bouton <button class="btn btn-primary" disabled>
-        %{new_icon} Nouvelle transaction</button>) doit correspondre à la
+        la somme des montants rapprochés doit correspondre à la
         première ligne de votre relevé (souvent appelé "Ancien solde").<br />
         Prenez 5 minutes pour rapprocher chaque opération en utilisant la coche
         en début de ligne ( %{square_icon} / %{check_square_icon} ). Au final,
