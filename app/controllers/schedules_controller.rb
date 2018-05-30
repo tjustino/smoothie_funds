@@ -76,7 +76,9 @@ class SchedulesController < ApplicationController
     userstamp(transaction)
     transaction.created_by = @current_user.id
 
-    @schedule.next_time = @schedule.next_time.advance(@schedule.period.to_sym => @schedule.frequency)
+    @schedule.next_time = @schedule.next_time.advance(
+      @schedule.period.to_sym => @schedule.frequency
+    )
     userstamp(@schedule)
 
     transaction.save
@@ -85,9 +87,9 @@ class SchedulesController < ApplicationController
     begin
       if current_controller == "schedules"
         load_limit
-        redirect_to account_schedules_url(@current_account,
-                      limit: (params[:index].to_f / @limit.to_f).ceil),
-                    notice: t(".successfully_inserted")
+        redirect_to account_schedules_url(
+          @current_account, limit: (params[:index].to_f / @limit.to_f).ceil
+        ), notice: t(".successfully_inserted")
       else
         redirect_to dashboard_url, notice: t(".successfully_inserted")
       end
@@ -133,15 +135,20 @@ class SchedulesController < ApplicationController
     def save_schedule(notice)
       return unless @schedule.save
       if params[:sign] == "credit"
-        @schedule.operation.amount = @schedule.operation.amount.abs if @schedule.operation.amount.present?
+        if @schedule.operation.amount.present?
+          @schedule.operation.amount = @schedule.operation.amount.abs
+        end
       else
         # TODO: to refactor
-        @schedule.operation.amount = -1 * @schedule.operation.amount.abs if @schedule.operation.amount.present?
+        if @schedule.operation.amount.present?
+          @schedule.operation.amount = -1 * @schedule.operation.amount.abs
+        end
         @schedule.operation.save if @schedule.operation.amount.present?
       end
 
       userstamp(@schedule)
-      redirect_to(account_schedules_url(@current_account), notice: notice) if notice
+      return unless notice
+      redirect_to(account_schedules_url(@current_account), notice: notice)
     end
 
     def current_schedules
