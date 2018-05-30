@@ -52,8 +52,10 @@ class TransactionsController < ApplicationController
       # redirect_to :back, notice: t(".successfully_destroyed")
       case controller_name
       when "transactions"
-        redirect_back fallback_location: account_transactions_path(@current_account),
-                      notice: t(".successfully_destroyed")
+        redirect_back(
+          fallback_location: account_transactions_path(@current_account),
+          notice: t(".successfully_destroyed")
+        )
       when "searches"
         redirect_back fallback_location: new_user_search_path(@current_user),
                       notice: t(".successfully_destroyed")
@@ -62,7 +64,9 @@ class TransactionsController < ApplicationController
       flash[:warning] = t(".cant_destroy")
       case controller_name
       when "transactions"
-        redirect_back fallback_location: account_transactions_path(@current_account)
+        redirect_back(
+          fallback_location: account_transactions_path(@current_account)
+        )
       when "searches"
         redirect_back fallback_location: new_user_search_path(@current_user)
       end
@@ -83,9 +87,15 @@ class TransactionsController < ApplicationController
         format.html do
           case controller_name
           when "transactions"
-            redirect_back fallback_location: account_transactions_path(@current_account), notice: t(".successfully_checked")
+            redirect_back(
+              fallback_location: account_transactions_path(@current_account),
+              notice: t(".successfully_checked")
+            )
           when "searches"
-            redirect_back fallback_location: new_user_search_path(@current_user), notice: t(".successfully_checked")
+            redirect_back(
+              fallback_location: new_user_search_path(@current_user),
+              notice: t(".successfully_checked")
+            )
           end
         end
         format.js {}
@@ -133,11 +143,11 @@ class TransactionsController < ApplicationController
 
     def save_transaction(notice)
       return unless @transaction.save
-      if params[:sign] == "credit"
-        @transaction.amount = @transaction.amount.abs
-      else
-        @transaction.amount = -1 * @transaction.amount.abs
-      end
+      @transaction.amount = if params[:sign] == "credit"
+                              @transaction.amount.abs
+                            else
+                              -1 * @transaction.amount.abs
+                            end
 
       userstamp(@transaction)
 
