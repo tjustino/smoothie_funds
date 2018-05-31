@@ -2,6 +2,15 @@
   h1.card-header = title
 
   .card-body
+    - if @schedule.errors.any?
+      .alert.alert-danger.alert-dismissable
+        button.close type="button" data-dismiss="alert" aria-hidden="true"
+          = fa_icon "times"
+        h3 = t('errors.template.header', count: @schedule.errors.count)
+        ul
+          - @schedule.errors.full_messages.each do |msg|
+            li = msg
+
     = f.fields_for :operation do |operation_fields|
       = render "operation_form", f: operation_fields
 

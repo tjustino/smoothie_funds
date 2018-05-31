@@ -455,8 +455,8 @@ fr:
     format: "« %{attribute} » %{message}"
     template:
       header:
-        one: "1 erreur a été rencontrée sur ce champ :"
-        other: "%{count} erreurs ont été rencontrées :"
+        one: "1 erreur a été détectée :"
+        other: "%{count} erreurs ont été détectées :"
 
 ################################################################################
 # Active Record

@@ -2,6 +2,15 @@
   h1.card-header = (fa_icon "user-plus", text: title)
 
   .card-body
+    - if @user.errors.any?
+      .alert.alert-danger.alert-dismissable
+        button.close type="button" data-dismiss="alert" aria-hidden="true"
+          = fa_icon "times"
+        h3 = t('errors.template.header', count: @user.errors.count)
+        ul
+          - @user.errors.full_messages.each do |msg|
+            li = msg
+
     .form-group.row
       = f.label :email, t('.email'), class: "col-sm-4 col-form-label"
       .col

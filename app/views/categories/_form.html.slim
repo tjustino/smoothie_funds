@@ -2,6 +2,15 @@
   h1.card-header = title
 
   .card-body
+    - if @category.errors.any?
+      .alert.alert-danger.alert-dismissable
+        button.close type="button" data-dismiss="alert" aria-hidden="true"
+          = fa_icon "times"
+        h3 = t('errors.template.header', count: @category.errors.count)
+        ul
+          - @category.errors.full_messages.each do |msg|
+            li = msg
+
     .form-group.row
       = f.label :name, t('.name'), class: "col-sm-4 col-form-label"
       .col
