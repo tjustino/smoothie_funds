@@ -2,31 +2,17 @@
   h1.card-header = title
 
   .card-body
-    - if @category.errors.any?
-      .alert.alert-danger.alert-dismissable
-        button.close type="button" data-dismiss="alert" aria-hidden="true"
-          = fa_icon "times"
-        h3 = t('errors.template.header', count: @category.errors.count)
-        ul
-          - @category.errors.full_messages.each do |msg|
-            li = msg
-
     .form-group.row
       = f.label :name, t('.name'), class: "col-sm-4 col-form-label"
       .col
-        = f.text_field :name, class: "form-control", \
-                              placeholder: t('.name'), \
-                              autofocus: true
+        = f.text_field :name, \
+                       class: "form-control", \
+                       placeholder: t('.name'), \
+                       autofocus: true
+        - @category.errors.full_messages_for(:name).each do |message|
+          .invalid-feedback = message
 
   .card-footer
     .row.justify-content-end
       .col-auto
         = f.submit class: "btn btn-primary"
-        / - if params[:action] == "new"
-        /   = link_to (fa_icon "reply"), \
-        /             account_categories_path(@current_account), \
-        /             class: "btn btn-secondary"
-        / - elsif params[:action] == "edit"
-        /   = link_to (fa_icon "reply"), \
-        /             account_categories_path(@current_account), \
-        /             class: "btn btn-secondary"

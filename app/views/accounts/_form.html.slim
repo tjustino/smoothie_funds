@@ -2,19 +2,15 @@
   h1.card-header = title
 
   .card-body
-    - if @account.errors.any?
-      .alert.alert-danger.alert-dismissable
-        button.close type="button" data-dismiss="alert" aria-hidden="true"
-          = fa_icon "times"
-        h3 = t('errors.template.header', count: @account.errors.count)
-        ul
-          - @account.errors.full_messages.each do |msg|
-            li = msg
-
     .form-group.row
       = f.label :name, t('.name'), class: "col-sm-4 col-form-label"
       .col
-        = f.text_field :name, class: "form-control", placeholder: t('.name'), autofocus: true
+        = f.text_field :name, \
+                       class: "form-control", \
+                       placeholder: t('.name'), \
+                       autofocus: true
+        - @account.errors.full_messages_for(:name).each do |message|
+          .invalid-feedback = message
 
     .form-group.row
       = f.label :initial_balance, t('.initial_balance'), class: "col-sm-4 col-form-label"
@@ -25,6 +21,8 @@
                               placeholder: t('.initial_balance')
           .input-group-append
             span.input-group-text = t('number.currency.format.unit')
+          - @account.errors.full_messages_for(:initial_balance).each do |msg|
+            .invalid-feedback = msg
 
     - unless params[:action] == "new" or params[:action] == "create"
       / shared with
@@ -52,10 +50,12 @@
       / new share
       - else
         .form-group.row
-          = f.label :share, t('.propose_sharing'), class: "col-sm-4 col-form-label"
+          = f.label :share, t('.propose_sharing'), \
+                    class: "col-sm-4 col-form-label"
           .col
-            = email_field_tag :new_share, nil,  class: "form-control", \
-                                                placeholder: t('.shared_email')
+            = email_field_tag :new_share, nil, \
+                              class: "form-control", \
+                              placeholder: t('.shared_email')
             small.form-text.text-muted = t('.explanation')
 
     .form-group.row
@@ -70,9 +70,3 @@
     .row.justify-content-end
       .col-auto
         = f.submit class: "btn btn-primary"
-        / - if params[:action] == "new"
-        /   .col-auto
-        /     = link_to (fa_icon "reply"), accounts_path, class: "btn btn-secondary", title: t('.back')
-        / - elsif params[:action] == "edit"
-        /   .col-auto
-        /     = link_to (fa_icon "reply"), accounts_path, class: "btn btn-secondary", title: t('.back')

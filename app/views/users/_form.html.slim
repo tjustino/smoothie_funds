@@ -2,43 +2,45 @@
   h1.card-header = (fa_icon "user-plus", text: title)
 
   .card-body
-    - if @user.errors.any?
-      .alert.alert-danger.alert-dismissable
-        button.close type="button" data-dismiss="alert" aria-hidden="true"
-          = fa_icon "times"
-        h3 = t('errors.template.header', count: @user.errors.count)
-        ul
-          - @user.errors.full_messages.each do |msg|
-            li = msg
-
     .form-group.row
       = f.label :email, t('.email'), class: "col-sm-4 col-form-label"
       .col
-        = f.email_field :email, class: "form-control", placeholder: t('.email'), autofocus: true
+        = f.email_field :email, \
+                        class: "form-control", \
+                        placeholder: t('.email'), \
+                        autofocus: true
+        - @user.errors.full_messages_for(:email).each do |message|
+          .invalid-feedback = message
 
     - if params[:action] == "edit" or params[:action] == "update"
       .form-group.row
         = f.label :name, t('.name'), class: "col-sm-4 col-form-label"
         .col
           = f.text_field :name, class: "form-control", placeholder: t('.name')
+          - @user.errors.full_messages_for(:name).each do |message|
+            .invalid-feedback = message
 
     .form-group.row
       = f.label :password, t('.password'), class: "col-sm-4 col-form-label"
       .col
-        = f.password_field :password, class: "form-control", \
-                                      placeholder: t('.password')
+        = f.password_field :password, \
+                           class: "form-control", \
+                           placeholder: t('.password')
+        - @user.errors.full_messages_for(:password).each do |message|
+          .invalid-feedback = message
 
     .form-group.row
-      = f.label :password_confirmation, t('.password_confirmation'), \
-                                        class: "col-sm-4 col-form-label"
+      = f.label :password_confirmation, \
+                t('.password_confirmation'), \
+                class: "col-sm-4 col-form-label"
       .col
-        = f.password_field :password_confirmation, class: "form-control", \
-                                          placeholder: t('.password_confirmation')
+        = f.password_field :password_confirmation, \
+                           class: "form-control", \
+                           placeholder: t('.password_confirmation')
+        - @user.errors.full_messages_for(:password_confirmation).each do |msg|
+          .invalid-feedback = msg
 
   .card-footer
     .row.justify-content-end
       .col-auto
         = f.submit class: "btn btn-primary"
-      / - if params[:action] == "new"
-      /   .col-auto
-      /     = link_to (fa_icon "reply"), login_path, class: "btn btn-secondary", title: t('.back')

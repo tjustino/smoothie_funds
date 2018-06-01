@@ -4,11 +4,15 @@
     = select_tag :sign, options_for_select( [ \
         [t('.debit'), "debit"], [t('.credit'), "credit"] ], @sign), \
         { class: "form-control custom-select" }
+    - @schedule.operation.errors.full_messages_for(:sign).each do |message|
+      .invalid-feedback = message
   .col
     .input-group
       = f.telephone_field :amount, class: "form-control", placeholder: t('.amount'), autofocus: true
       .input-group-append
         span.input-group-text = t('number.currency.format.unit')
+      - @schedule.operation.errors.full_messages_for(:amount).each do |message|
+        .invalid-feedback = message
 
 .form-group.row
   = f.label :category_id, t('.category'), class: "col-sm-4 col-form-label"
@@ -18,12 +22,18 @@
                                         [ category.name, category.id ] }, \
                                         {}, \
                                         { class: "form-control custom-select" }
+    - @schedule.operation.errors.full_messages_for(:category_id).each do |msg|
+      .invalid-feedback = msg
 
 .form-group.row
   = f.label :comment, t('.comment'), class: "col-sm-4 col-form-label"
   .col
-    = f.text_area :comment, class: "form-control", placeholder: t('.comment'), \
-                                                                        rows: 3
+    = f.text_area :comment, \
+                  class: "form-control", \
+                  placeholder: t('.comment'), \
+                  rows: 3
+    - @schedule.operation.errors.full_messages_for(:comment).each do |message|
+      .invalid-feedback = message
 
 .form-group.row
   .col-sm-4
@@ -32,3 +42,5 @@
       = f.label :checked, class: "form-check-label" do
         = f.check_box :checked, class: "form-check-input"
         = t('.checked')
+      - @schedule.operation.errors.full_messages_for(:checked).each do |message|
+        .invalid-feedback = message

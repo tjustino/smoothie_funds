@@ -2,15 +2,6 @@
   h1.card-header = title
 
   .card-body
-    - if @schedule.errors.any?
-      .alert.alert-danger.alert-dismissable
-        button.close type="button" data-dismiss="alert" aria-hidden="true"
-          = fa_icon "times"
-        h3 = t('errors.template.header', count: @schedule.errors.count)
-        ul
-          - @schedule.errors.full_messages.each do |msg|
-            li = msg
-
     = f.fields_for :operation do |operation_fields|
       = render "operation_form", f: operation_fields
 
@@ -22,35 +13,32 @@
         .input-group
           .input-group-prepend
             span.input-group-text = t('.all_the')
-          = f.number_field :frequency,  class: "form-control", \
-                                        placeholder: t('.frequency')
+          = f.number_field :frequency, \
+                           class: "form-control", \
+                           placeholder: t('.frequency')
+          - @schedule.errors.full_messages_for(:frequency).each do |message|
+            .invalid-feedback = message
       .col
         = f.select :period, [ [t('.days'), :days], [t('.weeks'), :weeks], \
                               [t('.months'), :months], [t('.years'), :years]], \
                             {}, { class: "form-control custom-select" }
+        - @schedule.errors.full_messages_for(:period).each do |message|
+          .invalid-feedback = message
 
     .form-group.row
       = f.label :next_time, t('.next_time'), class: "col-sm-4 col-form-label"
       .col
         .input-group
           = f.date_field :next_time, \
-            class: "form-control", \
-            placeholder: t('.next_time'), \
-            value: @schedule.next_time.nil? ? Date.today : @schedule.next_time
+                         class: "form-control", \
+                         placeholder: t('.next_time'), \
+              value: @schedule.next_time.nil? ? Date.today : @schedule.next_time
           .input-group-append
             span.input-group-text = fa_icon "calendar"
+          - @schedule.errors.full_messages_for(:next_time).each do |message|
+            .invalid-feedback = message
 
   .card-footer
     .row.justify-content-end
       .col-auto
         = f.submit class: "btn btn-primary"
-        / - if params[:action] == "new"
-        /   .col-auto
-        /     = link_to (fa_icon "reply"), \
-        /               account_schedules_path(@current_account), \
-        /               class: "btn btn-secondary"
-        / - elsif params[:action] == "edit"
-        /   .col-auto
-        /     = link_to (fa_icon "reply"), \
-        /               account_schedules_path(@current_account), \
-        /               class: "btn btn-secondary"
