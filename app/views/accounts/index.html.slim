@@ -4,13 +4,19 @@
 
 / Header
 .row.align-items-center.justify-content-between.mb-3
+  / Title
   .col
     h2
       = t('.listing_accounts')
       sup
         .badge.badge-secondary#total = @nb_accounts
+
+  / Download
   .col-md-auto
-    / New account
+    h2 = link_to (fa_icon "download"), accounts_path(format: :csv), class: "btn btn-light"
+
+  / New account
+  .col-md-auto
     h2 = link_to (fa_icon "plus-circle",  text: t('.new_account')), \
                                           new_account_path, \
                                           class: "btn btn-primary"

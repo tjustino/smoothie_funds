@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "csv"
+
 # Accounts Controller
 class AccountsController < ApplicationController
   # GET /accounts
@@ -11,6 +13,13 @@ class AccountsController < ApplicationController
     else
       accounts(nil, @limit)
       load_pendings
+    end
+
+    respond_to do |format|
+      format.html
+      format.csv do
+        send_data @accounts.to_csv, filename: "accounts_#{Time.zone.today}.csv"
+      end
     end
   end
 

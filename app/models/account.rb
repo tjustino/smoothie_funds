@@ -36,6 +36,18 @@ class Account < ApplicationRecord
   validates :name,            presence: true
   validates :initial_balance, presence: true, numericality: true
 
+  def self.to_csv
+    attributes = %w[name initial_balance]
+
+    CSV.generate(headers: true, col_sep: ";", force_quotes: true) do |csv|
+      csv << attributes
+
+      all.find_each do |account|
+        csv << attributes.map { |attr| account.send(attr) }
+      end
+    end
+  end
+
   private ######################################################################
 
     def format_initial_balance
