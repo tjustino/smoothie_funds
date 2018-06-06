@@ -23,7 +23,7 @@ class Account < ApplicationRecord
   has_one                 :pending_user,
                           foreign_key:    "account_id",
                           inverse_of:     :account,
-                          dependent:    :destroy
+                          dependent:      :destroy
 
   accepts_nested_attributes_for :pending_user, update_only: true
 
@@ -35,18 +35,6 @@ class Account < ApplicationRecord
 
   validates :name,            presence: true
   validates :initial_balance, presence: true, numericality: true
-
-  def self.to_csv
-    attributes = %w[name initial_balance]
-
-    CSV.generate(headers: true, col_sep: ";", force_quotes: true) do |csv|
-      csv << attributes
-
-      all.find_each do |account|
-        csv << attributes.map { |attr| account.send(attr) }
-      end
-    end
-  end
 
   private ######################################################################
 
