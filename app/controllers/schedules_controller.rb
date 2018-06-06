@@ -15,6 +15,17 @@ class SchedulesController < ApplicationController
       schedules(nil, @limit)
       @all_user_schedules = Schedule.where(account: @current_accounts)
     end
+
+    respond_to do |format|
+      format.html
+      format.js.coffee
+      format.csv do
+        attributes_to_extract = %w[id account_id next_time frequency period]
+        send_data current_schedules.to_csv(attributes_to_extract),
+                  filename: "schedules_#{timestamp_for_export}.csv",
+                  type:     "text/csv"
+      end
+    end
   end
 
   # GET /accounts/:account_id/schedules/new

@@ -15,6 +15,17 @@ class CategoriesController < ApplicationController
       load_other_accounts
       @all_user_categories = Category.where(account: @current_accounts)
     end
+
+    respond_to do |format|
+      format.html
+      format.js.coffee
+      format.csv do
+        attributes_to_extract = %w[id account_id name]
+        send_data current_categories.to_csv(attributes_to_extract),
+                  filename: "categories_#{timestamp_for_export}.csv",
+                  type:     "text/csv"
+      end
+    end
   end
 
   # GET /accounts/:account_id/categories/new

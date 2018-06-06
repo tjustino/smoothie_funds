@@ -13,13 +13,16 @@
 
   / Download
   .col-md-auto
-    h2 = link_to (fa_icon "download"), accounts_path(format: :csv), class: "btn btn-light"
+    h2 = link_to (fa_icon "download"), \
+                 accounts_path(format: :csv), \
+                 title: t(".export_accounts"), \
+                 class: "btn btn-light"
 
   / New account
   .col-md-auto
-    h2 = link_to (fa_icon "plus-circle",  text: t('.new_account')), \
-                                          new_account_path, \
-                                          class: "btn btn-primary"
+    h2 = link_to (fa_icon "plus-circle", text: t('.new_account')), \
+                                         new_account_path, \
+                                         class: "btn btn-primary"
 
 / Accept sharing
 - @pendings.each do | pending |
@@ -64,6 +67,6 @@
 
   - if @nb_accounts >= @limit
     = button_to t('.more_accounts'), accounts_path, \
-                                      { method: :get, \
-                                        class:  "btn btn-primary", \
-                                        id:     "more_items" }
+                                     { method: :get, \
+                                       class:  "btn btn-primary", \
+                                       id:     "more_items" }

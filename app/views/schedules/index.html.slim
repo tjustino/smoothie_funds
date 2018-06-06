@@ -4,13 +4,22 @@
 
 / Header
 .row.align-items-center.justify-content-between.mb-3
+  / Title
   .col
     h2
       = t('.listing_schedules', current_account: @current_account.name)
       sup
         .badge.badge-secondary#total = @nb_schedules
+
+  / Download
   .col-md-auto
-    / New schedule
+    h2 = link_to (fa_icon "download"), \
+                 account_schedules_path(@current_account, format: :csv), \
+                 title: t(".export_schedules"), \
+                 class: "btn btn-light"
+
+  / New schedule
+  .col-md-auto
     h2 = link_to (fa_icon "plus-circle",  text: t('.new_schedule')), \
                                           new_account_schedule_path, \
                                           class: "btn btn-primary"

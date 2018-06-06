@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "csv"
-
 # Accounts Controller
 class AccountsController < ApplicationController
   # GET /accounts
@@ -17,8 +15,12 @@ class AccountsController < ApplicationController
 
     respond_to do |format|
       format.html
+      format.js.coffee
       format.csv do
-        send_data @accounts.to_csv, filename: "accounts_#{Time.zone.today}.csv"
+        attributes_to_extract = %w[id name initial_balance hidden]
+        send_data current_accounts.to_csv(attributes_to_extract),
+                  filename: "accounts_#{timestamp_for_export}.csv",
+                  type:     "text/csv"
       end
     end
   end
@@ -117,10 +119,6 @@ class AccountsController < ApplicationController
       else
         {}
       end
-      # account_params ? account_params.permit(:name,
-      #                                        :initial_balance,
-      #                                        :hidden,
-      #                                  pending_user_attributes: [:email]) : {}
     end
 
     def save_account(notice)

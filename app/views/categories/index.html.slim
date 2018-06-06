@@ -4,11 +4,19 @@
 
 / Header
 .row.align-items-center.justify-content-between.mb-3
+  / Title
   .col
     h2
       = t('.listing_categories', current_account: @current_account.name)
       sup
         .badge.badge-secondary#total = @nb_categories
+
+  / Download
+  .col-md-auto
+    h2 = link_to (fa_icon "download"), \
+                 account_categories_path(@current_account, format: :csv), \
+                 title: t(".export_categories"), \
+                 class: "btn btn-light"
 
   / Import categories from
   - if @current_accounts.count > 1

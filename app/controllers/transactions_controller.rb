@@ -14,6 +14,18 @@ class TransactionsController < ApplicationController
       transactions(0, @limit)
       @all_user_transactions = Transaction.where(account: @current_accounts)
     end
+
+    respond_to do |format|
+      format.html
+      format.js.coffee
+      format.csv do
+        attributes_to_extract = %w[id account_id category_id
+                                   date amount checked comment]
+        send_data current_transactions.to_csv(attributes_to_extract),
+                  filename: "transactions_#{timestamp_for_export}.csv",
+                  type:     "text/csv"
+      end
+    end
   end
 
   # GET /accounts/:account_id/transactions/new

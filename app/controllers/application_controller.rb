@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "csv"
+
 # Application Controller
 class ApplicationController < ActionController::Base
   #                       +-------+-------+-------+-------+-------+----------+
@@ -28,6 +30,10 @@ class ApplicationController < ActionController::Base
 
     def load_limit
       @limit = 20
+    end
+
+    def timestamp_for_export
+      Time.zone.today.strftime("%Y%m%d")
     end
 
     def set_current_user
