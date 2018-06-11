@@ -88,8 +88,9 @@ class SearchesController < ApplicationController
                                  .search_categories(
                                    sanitize_categories(@search.categories)
                                  )
-                                 .search_comment(@search.operator,
-                                                 @search.comment)
+                                 .search_comment(
+                                   @search.operator, @search.comment
+                                 )
                                  .search_checked(@search.checked)
                                  .offset(offset)
                                  .limit(limit)
