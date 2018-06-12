@@ -17,6 +17,8 @@ Layout/IndentationConsistency:
 AllCops:
   Exclude:
     - db/schema.rb
+    - bin/setup     # https://github.com/rubocop-hq/rubocop/issues/5237
+    - bin/update    # https://github.com/rubocop-hq/rubocop/issues/5237
 
 # too much work for now
 Metrics/AbcSize:
