@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151009111758) do
+ActiveRecord::Schema.define(version: 2018_06_08_084651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,14 +23,6 @@ ActiveRecord::Schema.define(version: 20151009111758) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean "hidden", default: false
-  end
-
-  create_table "accounts_users", id: false, force: :cascade do |t|
-    t.integer "account_id", null: false
-    t.integer "user_id", null: false
-    t.index ["account_id", "user_id"], name: "index_accounts_users_on_account_id_and_user_id", unique: true
-    t.index ["account_id"], name: "index_accounts_users_on_account_id"
-    t.index ["user_id"], name: "index_accounts_users_on_user_id"
   end
 
   create_table "categories", id: :serial, force: :cascade do |t|
@@ -50,6 +42,14 @@ ActiveRecord::Schema.define(version: 20151009111758) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_pending_users_on_account_id", unique: true
+  end
+
+  create_table "relations", id: false, force: :cascade do |t|
+    t.integer "account_id", null: false
+    t.integer "user_id", null: false
+    t.index ["account_id", "user_id"], name: "index_relations_on_account_id_and_user_id", unique: true
+    t.index ["account_id"], name: "index_relations_on_account_id"
+    t.index ["user_id"], name: "index_relations_on_user_id"
   end
 
   create_table "schedules", id: :serial, force: :cascade do |t|

@@ -15,9 +15,9 @@
 class PendingUser < ApplicationRecord
   belongs_to :account
 
-  validates :account_id, uniqueness: true
+  # TODO: if account_id+email already exist in relation, crash after validation
+  validates :account_id, presence: true, uniqueness: true
   validates :email,      presence: true
-  validates :account_id, presence: true
   validates :email,      format: {
     with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
   }
