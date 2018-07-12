@@ -53,7 +53,7 @@ body {
     overflow: hidden !important;
   }
 
-  // Hide row if there is no data to display
+  // hide row if there is no data to display
   #magic-table td:empty {
     display: none;
   }
