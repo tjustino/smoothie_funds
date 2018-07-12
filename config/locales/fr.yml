@@ -256,6 +256,7 @@ fr:
       count:              "Nombre de transations : "
       export_transactions: "Exporter mes transactions"
       new_transaction:    "Nouvelle transaction"
+      checked:            "Rapproché"
       date:               "Date"
       category:           "Catégorie"
       debit:              "Débit"

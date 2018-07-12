@@ -41,6 +41,7 @@
 
     tbody#listing
       = render partial: "transaction", locals: {  transactions: @transactions, \
+                                                  checked:      t('.checked'), \
                                                   date:         t('.date'), \
                                                   category:     t('.category'),\
                                                   debit:        t('.debit'), \

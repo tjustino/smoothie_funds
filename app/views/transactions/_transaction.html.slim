@@ -2,13 +2,13 @@
   tr class=("text-danger" if transaction.balance < 0) style=("color: gray;" if transaction.date > Date.today)
 
     / Check
-    td = link_to \
-          transaction.checked ? fa_icon("check-square-o") : fa_icon("square-o"), \
-          easycheck_transaction_path(transaction), \
-          method: :post, \
-          remote: true, \
-          title: t('.check_transaction'), \
-          id: "check_#{transaction.id}"
+    td data-title="#{checked}" = link_to \
+                                 transaction.checked ? fa_icon("check-square-o") : fa_icon("square-o"), \
+                                 easycheck_transaction_path(transaction), \
+                                 method: :post, \
+                                 remote: true, \
+                                 title: t('.check_transaction'), \
+                                 id: "check_#{transaction.id}"
 
     / Date
     td data-title="#{date}" = l(transaction.date)

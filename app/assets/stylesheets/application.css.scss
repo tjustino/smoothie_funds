@@ -30,7 +30,7 @@ body {
 
 // magic transformation for tables
 @media (max-width: 768px) {
-  #magic-table td:before { content: attr(data-title); }
+  #magic-table td::before { content: attr(data-title); }
   #magic-table table,
   #magic-table thead,
   #magic-table tbody,
@@ -42,7 +42,7 @@ body {
     display:none;
   }
 
-  #magic-table td:before {
+  #magic-table td::before {
     position: absolute;
     left: 5px;
     width: 35%;
@@ -51,6 +51,11 @@ body {
     white-space: nowrap;
     text-overflow: ellipsis !important;
     overflow: hidden !important;
+  }
+
+  // Hide row if there is no data to display
+  #magic-table td:empty {
+    display: none;
   }
 
   #magic-table td {
