@@ -476,6 +476,9 @@ fr:
         not_a_number: "doit être une valeur numérique"
         too_short:    "doit comporter au minimum %{count} caractères"
         invalid:      "n'est pas valide"
+        restrict_dependent_destroy:
+          has_one:  "Impossible de supprimer car il existe une %{record}."
+          has_many: "Impossible de supprimer car il existe des %{record}."
 
     models:
       account:      "le compte"
