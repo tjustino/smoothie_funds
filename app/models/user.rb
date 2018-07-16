@@ -14,8 +14,9 @@
 
 # User model
 class User < ApplicationRecord
-  has_many :relations,    dependent: :nullify
+  has_many :relations
   has_many :accounts,     through:   :relations
+
   has_many :categories,   through:   :accounts
   has_many :schedules,    through:   :accounts
   has_many :transactions, through:   :accounts
