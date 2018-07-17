@@ -91,14 +91,19 @@ class Transaction < ApplicationRecord
       end
 
       def search_comment(operator, comment)
-        if operator == "like" && comment.present?
-          where("UPPER(comment) LIKE UPPER('%#{comment}%')")
-        elsif operator == "like" && comment.blank?
-          where("comment IS NULL")
-        elsif operator == "not_like" && comment.present?
-          where("UPPER(comment) NOT LIKE UPPER('%#{comment}%')")
-        elsif operator == "not_like" && comment.blank?
-          where("comment IS NOT NULL")
+        case operator
+        when "like"
+          if comment.present?
+            where("UPPER(comment) LIKE UPPER('%#{comment}%')")
+          else
+            where("comment IS NULL")
+          end
+        when "not_like"
+          if comment.present?
+            where("UPPER(comment) NOT LIKE UPPER('%#{comment}%')")
+          else
+            where("comment IS NOT NULL")
+          end
         else
           where("1=1")
         end
