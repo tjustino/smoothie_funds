@@ -14,7 +14,7 @@
 
 # User model
 class User < ApplicationRecord
-  has_many :relations
+  has_many :relations,    dependent: :delete_all
   has_many :accounts,     through:   :relations
 
   has_many :categories,   through:   :accounts
