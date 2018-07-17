@@ -33,14 +33,14 @@ dl.row
 
   / Comment
   dt.col-md-2 = t('.comment')
-  - if search.operator == "like" and not search.comment.blank?
+  - if search.operator == "like" and search.comment.present?
     dd.col-md-10 = t('.like', comment: search.comment)
   - elsif search.operator == "like" and search.comment.blank?
-    dd.col-md-10 = t('.with_comment')
-  - elsif search.operator == "not_like" and not search.comment.blank?
+    dd.col-md-10 = t('.without_comment')
+  - elsif search.operator == "not_like" and search.comment.present?
     dd.col-md-10 = t('.not_like', comment: search.comment)
   - elsif search.operator == "not_like"  and search.comment.blank?
-    dd.col-md-10 = t('.without_comment')
+    dd.col-md-10 = t('.with_comment')
   - else
     dd.col-md-10 = t('.no_restriction')
 
