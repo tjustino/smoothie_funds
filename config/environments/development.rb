@@ -53,4 +53,9 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  # For security reasons, the web console is configured to only be shown when
+  # accessed from the same machine as the web server is running on.
+  # You need to adjust the configuration to see this in c9 or via a VM
+  config.web_console.whitelisted_ips = %w[0.0.0.0/0 ::/0]
 end
