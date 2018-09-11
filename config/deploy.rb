@@ -6,7 +6,7 @@ set :application,   "smoothiefunds"
 set :repo_url,      "git@github.com:tjustino/smoothie_funds.git"
 
 # setup deploy details
-set :deploy_to,     "/home/app/#{fetch(:application)}"
+set :deploy_to,     "/srv/http/#{fetch(:application)}"
 
 # files/dirs we want symlinking to shared
 set :linked_files,  fetch(:linked_files, []).push("config/database.yml",
