@@ -18,7 +18,7 @@ gem "jquery-rails"              # Use jquery as the JavaScript library
 # gem "mailgun-rails"           # Mailgun adapter for Rails
 gem "pg"                        # Use postgresql as the db for Active Record
 gem "puma",         "~> 3.11"   # App web server
-gem "rails",        "~> 5.2.0"  # Full-stack web framework
+gem "rails",        "~> 5.2.1"  # Full-stack web framework
 gem "sass-rails",   "~> 5.0"    # Use SCSS for stylesheets
 gem "slim"                      # Template language
 # gem "turbolinks",  "~> 5"     # Make following links in web application faster
