@@ -68,6 +68,7 @@ class CategoriesController < ApplicationController
     other_categories
     @other_categories.each do |other_category|
       next if current_categories.exists?(name: other_category.name)
+
       @category = current_categories.build
       @category.name = other_category.name
       save_category(nil)
@@ -111,8 +112,10 @@ class CategoriesController < ApplicationController
 
     def save_category(notice)
       return unless @category.save
+
       userstamp(@category)
       return unless notice
+
       redirect_to(account_categories_url(@current_account), notice: notice)
     end
 

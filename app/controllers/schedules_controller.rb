@@ -145,6 +145,7 @@ class SchedulesController < ApplicationController
 
     def save_schedule(notice)
       return unless @schedule.save
+
       if params[:sign] == "credit"
         if @schedule.operation.amount.present?
           @schedule.operation.amount = @schedule.operation.amount.abs
@@ -159,6 +160,7 @@ class SchedulesController < ApplicationController
 
       userstamp(@schedule)
       return unless notice
+
       redirect_to(account_schedules_url(@current_account), notice: notice)
     end
 

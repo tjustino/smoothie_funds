@@ -42,6 +42,7 @@ class ApplicationController < ActionController::Base
 
     def set_current_accounts
       return unless @current_user
+
       @current_accounts = @current_user.accounts.active.order_by_name
     end
 
@@ -62,6 +63,7 @@ class ApplicationController < ActionController::Base
 
     def set_accounts_with_categories
       return unless @current_user
+
       accounts = @current_user.categories.select(:account_id)
       @accounts_with_categories = Account.active
                                          .where(id: accounts)

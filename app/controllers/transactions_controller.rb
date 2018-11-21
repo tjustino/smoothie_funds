@@ -155,6 +155,7 @@ class TransactionsController < ApplicationController
 
     def save_transaction(notice)
       return unless @transaction.save
+
       @transaction.amount = if params[:sign] == "credit"
                               @transaction.amount.abs
                             else
