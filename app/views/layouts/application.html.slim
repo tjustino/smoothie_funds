@@ -3,10 +3,12 @@ html
   head
     title Smoothie Funds#{" - DEV" if Rails.env.development?}
     = render partial: "layouts/favicon"
-    = stylesheet_link_tag 'application', media: 'all'
-    = javascript_include_tag 'application'
+    = stylesheet_link_tag "application", media: "all"
+    = javascript_include_tag "application"
     = csrf_meta_tags
     meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    meta name="author" content="Thomas JUSTINO"
+    meta name="description" content="Gérez vos comptes en toute simplicité !"
 
   body
     .container
