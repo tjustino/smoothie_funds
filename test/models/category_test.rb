@@ -17,8 +17,8 @@ require "test_helper"
 
 class CategoryTest < ActiveSupport::TestCase
   test "should create category" do
-    category = Category.new(account:  @accounts.first,
-                            name:     "My Category")
+    category = Category.new(account: @accounts.first,
+                            name:    "My Category")
     assert category.valid?
   end
 

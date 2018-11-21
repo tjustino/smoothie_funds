@@ -128,10 +128,10 @@ class AccountsControllerTest < ActionController::TestCase
     delete_unpend  accounts(:thomas_account_waiting_benoit)
     assert_nil     accounts(:thomas_account_waiting_benoit).reload.pending_user
     assert_redirected_to accounts_path
-    assert_equal I18n.translate("accounts.unpend.successfully_unpend",
-                                account: \
-                                 accounts(:thomas_account_waiting_benoit).name),
-                 flash[:notice]
+    assert_equal I18n.translate(
+      "accounts.unpend.successfully_unpend",
+      account: accounts(:thomas_account_waiting_benoit).name
+    ), flash[:notice]
   end
 
   test "should not unpend shared account - hacker way" do
@@ -155,10 +155,10 @@ class AccountsControllerTest < ActionController::TestCase
     assert_nil     accounts(:thomas_account_waiting_benoit).reload.pending_user
     assert_equal 2, accounts(:thomas_account_waiting_benoit).reload.users.count
     assert_redirected_to accounts_path
-    assert_equal I18n.translate("accounts.sharing.successfully_sharing",
-                                account: \
-                                 accounts(:thomas_account_waiting_benoit).name),
-                 flash[:notice]
+    assert_equal I18n.translate(
+      "accounts.sharing.successfully_sharing",
+      account: accounts(:thomas_account_waiting_benoit).name
+    ), flash[:notice]
   end
 
   test "should not share an account - hacker way" do
@@ -168,10 +168,10 @@ class AccountsControllerTest < ActionController::TestCase
     assert_not_nil       accounts(:courant_benoit).reload.pending_user
     assert_equal         1, accounts(:courant_benoit).reload.users.count
     assert_redirected_to accounts_path
-    assert_equal         I18n.translate("accounts.sharing.cant_sharing",
-                                        account: \
-                                                accounts(:courant_benoit).name),
-                         flash[:warning]
+    assert_equal         I18n.translate(
+      "accounts.sharing.cant_sharing",
+      account: accounts(:courant_benoit).name
+    ), flash[:warning]
   end
 
   test "should not share an account - unknow account" do
@@ -188,10 +188,10 @@ class AccountsControllerTest < ActionController::TestCase
     assert_nil   accounts(:thomas_account_waiting_benoit).reload.pending_user
     assert_equal 1, accounts(:thomas_account_waiting_benoit).reload.users.count
     assert_redirected_to accounts_path
-    assert_equal I18n.translate("accounts.unsharing.successfully_unsharing",
-                                account: \
-                                 accounts(:thomas_account_waiting_benoit).name),
-                 flash[:notice]
+    assert_equal I18n.translate(
+      "accounts.unsharing.successfully_unsharing",
+      account: accounts(:thomas_account_waiting_benoit).name
+    ), flash[:notice]
   end
 
   test "should not unshare an account - hacker way" do
@@ -201,10 +201,10 @@ class AccountsControllerTest < ActionController::TestCase
     assert_not_nil       accounts(:courant_benoit).reload.pending_user
     assert_equal         1, accounts(:courant_benoit).reload.users.count
     assert_redirected_to accounts_path
-    assert_equal         I18n.translate("accounts.unsharing.cant_unsharing",
-                                        account: \
-                                                accounts(:courant_benoit).name),
-                         flash[:warning]
+    assert_equal         I18n.translate(
+      "accounts.unsharing.cant_unsharing",
+      account: accounts(:courant_benoit).name
+    ), flash[:warning]
   end
 
   test "should not unshare an account - unknow account" do
@@ -221,7 +221,7 @@ class AccountsControllerTest < ActionController::TestCase
     def patch_update(account)
       @previous_account_name = account.name
 
-      patch :update, params: { id: account,
+      patch :update, params: { id:      account,
                                account: { name:            SecureRandom.hex,
                                           initial_balance: rand(-100..100),
                                           hidden:          rand(0..1) == 1 } }

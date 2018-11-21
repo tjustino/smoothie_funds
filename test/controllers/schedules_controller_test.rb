@@ -147,9 +147,9 @@ class SchedulesControllerTest < ActionController::TestCase
     end
 
     def schedule_attributes(category)
-      { next_time: Time.zone.now,
-        frequency: rand(1..10),
-        period:    %w[days weeks months years].sample,
+      { next_time:            Time.zone.now,
+        frequency:            rand(1..10),
+        period:               %w[days weeks months years].sample,
         operation_attributes: { category_id: category,
                                 amount:      rand(-500.00..500.00),
                                 comment:     SecureRandom.hex,

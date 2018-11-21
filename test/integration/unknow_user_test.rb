@@ -230,8 +230,8 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
 
     # users#create
     assert_difference("User.count") do
-      post users_path, params: { user: {  email: email,
-                                          password: password,
+      post users_path, params: { user: {  email:                 email,
+                                          password:              password,
                                           password_confirmation: password } }
       assert_redirected_to login_url
     end
@@ -264,11 +264,11 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
       # transactions#create
       assert_no_difference "Transaction.count" do
         post account_transactions_path account, params: {
-          transaction: {  category_id:  account.categories.sample,
-                          date:         Time.zone.now,
-                          amount:       rand(-500.00..500.00),
-                          checked:      rand(0..1) == 1,
-                          comment:      SecureRandom.hex }
+          transaction: { category_id: account.categories.sample,
+                         date:        Time.zone.now,
+                         amount:      rand(-500.00..500.00),
+                         checked:     rand(0..1) == 1,
+                         comment:     SecureRandom.hex }
         }
         assert_redirected_to login_url
       end
@@ -276,14 +276,15 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
       # schedules#create
       assert_no_difference "Schedule.count" do
         post account_schedules_path account, params: {
-          schedule: { next_time:  Time.zone.now,
-                      frequency:  rand(1..10),
-                      period:     %w[days weeks months years].sample,
-                      operation_attributes: { amount:   rand(-500.00..500.00),
-                                              category_id: \
-                                                      account.categories.sample,
-                                              comment:  SecureRandom.hex,
-                                              checked:  rand(0..1) == 1 } }
+          schedule: { next_time:            Time.zone.now,
+                      frequency:            rand(1..10),
+                      period:               %w[days weeks months years].sample,
+                      operation_attributes: {
+                        amount:      rand(-500.00..500.00),
+                        category_id: account.categories.sample,
+                        comment:     SecureRandom.hex,
+                        checked:     rand(0..1) == 1
+                      } }
         }
         assert_redirected_to login_url
       end

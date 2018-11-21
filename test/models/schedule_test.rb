@@ -22,10 +22,10 @@ class ScheduleTest < ActiveSupport::TestCase
     account   = @accounts.first
     category  = account.categories.first
 
-    schedule = Schedule.new(account:    account,
-                            next_time:  Time.zone.now + 5.days,
-                            frequency:  13,
-                            period:     "days",
+    schedule = Schedule.new(account:              account,
+                            next_time:            Time.zone.now + 5.days,
+                            frequency:            13,
+                            period:               "days",
                             operation_attributes: { account:  account,
                                                     amount:   666,
                                                     category: category,
@@ -65,10 +65,10 @@ class ScheduleTest < ActiveSupport::TestCase
   test "operation must not be empty" do
     account = @accounts.first
 
-    schedule = Schedule.new(account:    account,
-                            next_time:  Time.zone.now + 5.days,
-                            frequency:  13,
-                            period:     "days")
+    schedule = Schedule.new(account:   account,
+                            next_time: Time.zone.now + 5.days,
+                            frequency: 13,
+                            period:    "days")
 
     assert schedule.invalid?
 
@@ -80,10 +80,10 @@ class ScheduleTest < ActiveSupport::TestCase
     account   = @accounts.first
     category  = account.categories.first
 
-    schedule = Schedule.new(account:    account,
-                            next_time:  Time.zone.now + 5.days,
-                            frequency:  "forty two",
-                            period:     "days",
+    schedule = Schedule.new(account:              account,
+                            next_time:            Time.zone.now + 5.days,
+                            frequency:            "forty two",
+                            period:               "days",
                             operation_attributes: { account:  account,
                                                     amount:   666,
                                                     category: category,

@@ -18,16 +18,16 @@ require "test_helper"
 
 class AccountTest < ActiveSupport::TestCase
   test "should create account" do
-    account = Account.new(name:             "Crazy Account",
-                          initial_balance:  30.11,
-                          hidden:           false)
+    account = Account.new(name:            "Crazy Account",
+                          initial_balance: 30.11,
+                          hidden:          false)
     assert account.valid?
   end
 
   test "format initial balance" do
-    account = Account.new(name:             "Crazy initial balance Account",
-                          initial_balance:  "1 234,56",
-                          hidden:           false)
+    account = Account.new(name:            "Crazy initial balance Account",
+                          initial_balance: "1 234,56",
+                          hidden:          false)
 
     assert account.valid?
     assert account.initial_balance == 1234.56

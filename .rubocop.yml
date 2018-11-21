@@ -1,8 +1,12 @@
-# https://rubocop.readthedocs.io/en/latest/
+# https://rubocop.readthedocs.io/en/stable/
 
-# I always use double quotes
+# Preferences
 Style/StringLiterals:
   EnforcedStyle: double_quotes
+
+Layout/AlignHash:
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle: table
 
 # Specific to my eccentric comments
 Layout/ExtraSpacing:
@@ -17,8 +21,8 @@ Layout/IndentationConsistency:
 AllCops:
   Exclude:
     - db/schema.rb
-    - bin/setup     # https://github.com/rubocop-hq/rubocop/issues/5237
-    - bin/update    # https://github.com/rubocop-hq/rubocop/issues/5237
+    - bin/setup     # https://github.com/rubocop-hq/rubocop-rails/issues/13
+    - bin/update    # https://github.com/rubocop-hq/rubocop-rails/issues/13
 
 # too much work for now
 Metrics/AbcSize:

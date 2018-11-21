@@ -30,9 +30,9 @@ class UsersControllerTest < ActionController::TestCase
     # you can create an other user as a logged user, why not...
     assert_difference "User.count" do
       post :create, params: {
-        user: { email:                  "john.doe@email.com",
-                password:               "unbreakablePassword",
-                password_confirmation:  "unbreakablePassword" }
+        user: { email:                 "john.doe@email.com",
+                password:              "unbreakablePassword",
+                password_confirmation: "unbreakablePassword" }
       }
       assert_redirected_to  login_url
       assert_equal          I18n.translate("users.create.successfully_created"),
@@ -68,7 +68,7 @@ class UsersControllerTest < ActionController::TestCase
 
     def patch_update(user)
       @previous_user_name = user.name
-      patch :update, params: {  id: user,
+      patch :update, params: {  id:   user,
                                 user: { email:                 user.email,
                                         name:                  SecureRandom.hex,
                                         password:              "secret",

@@ -66,11 +66,11 @@ class TransactionsController < ApplicationController
       when "transactions"
         redirect_back(
           fallback_location: account_transactions_path(@current_account),
-          notice: t(".successfully_destroyed")
+          notice:            t(".successfully_destroyed")
         )
       when "searches"
         redirect_back fallback_location: new_user_search_path(@current_user),
-                      notice: t(".successfully_destroyed")
+                      notice:            t(".successfully_destroyed")
       end
     else
       flash[:warning] = t(".cant_destroy")
@@ -101,12 +101,12 @@ class TransactionsController < ApplicationController
           when "transactions"
             redirect_back(
               fallback_location: account_transactions_path(@current_account),
-              notice: t(".successfully_checked")
+              notice:            t(".successfully_checked")
             )
           when "searches"
             redirect_back(
               fallback_location: new_user_search_path(@current_user),
-              notice: t(".successfully_checked")
+              notice:            t(".successfully_checked")
             )
           end
         end

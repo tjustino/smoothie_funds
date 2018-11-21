@@ -155,11 +155,11 @@ class TransactionsControllerTest < ActionController::TestCase
     end
 
     def transaction_attributes(category)
-      { category_id:  category,
-        date:         Time.zone.now + rand(1..9).days,
-        amount:       rand(-500.00..500.00),
-        checked:      rand(0..1) == 1,
-        comment:      SecureRandom.hex }
+      { category_id: category,
+        date:        Time.zone.now + rand(1..9).days,
+        amount:      rand(-500.00..500.00),
+        checked:     rand(0..1) == 1,
+        comment:     SecureRandom.hex }
     end
 
     def delete_destroy(transaction)

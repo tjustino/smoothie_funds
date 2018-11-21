@@ -56,8 +56,9 @@ module ActiveSupport
                                      .active
                                      .where
                                      .not(id: accounts(:compte_commun))
-        @some_wrong_account = @wrong_accounts.where(id: \
-                               @wrong_user.schedules.select(:account_id)).sample
+        @some_wrong_account = @wrong_accounts.where(
+          id: @wrong_user.schedules.select(:account_id)
+        ).sample
       end
 
       def category_use_cases
