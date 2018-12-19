@@ -1,24 +1,32 @@
-.row.justify-content-center
-  .col-md-auto
-    .card.mb-3
-      = form_tag("login") do
-        h1.card-header = t('.login')
+.ui.placeholder.segment
+  .ui.two.column.very.relaxed.stackable.grid
+    / Left part
+    .column
+      .ui.form
+        = form_tag("login") do
+          / h1 = t('.login')
+          .field
+            = label_tag :email, t('.email')
+            .ui.left.icon.input
+              = email_field_tag :email, params[:email], \
+                                placeholder: t('.email'), \
+                                autofocus: true
+              i.user.icon
 
-        .card-body
-          .form-group.row
-            = label_tag :email, t('.email'), class: "col-sm-4 col-form-label"
-            .col
-              = email_field_tag :email, params[:email], class: "form-control", \
-                                                        placeholder: t('.email'), \
-                                                        autofocus: true
-
-          .form-group.row
-            = label_tag :password, t('.password'), class: "col-sm-4 col-form-label"
-            .col
+          .field
+            = label_tag :password, t('.password')
+            .ui.left.icon.input
               = password_field_tag :password, params[:password], \
-                                              class: "form-control", \
                                               placeholder: t('.password')
-        .card-footer
-          .row.justify-content-end
-            .col-auto
-              = submit_tag t('.login'), class: "btn btn-primary"
+              i.lock.icon
+
+          .ui.blue.submit.button = submit_tag t('.login')
+
+    / Right part
+    .middle.aligned.column
+      .ui.big.button
+        i.signup.icon
+        = t(".create_user")
+
+  / Divider
+  .ui.vertical.divider Or

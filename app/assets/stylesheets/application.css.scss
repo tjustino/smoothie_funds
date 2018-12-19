@@ -14,69 +14,106 @@
  *= require_self
  */
 
-@import "bootstrap";
-@import "font-awesome";
+/* https://github.com/doabit/semantic-ui-sass/tree/master/app/assets/stylesheets/semantic-ui */
 
-// reduce global font-size (defaults: Bootstrap v3 14px, Bootstrap v4 16px)
+// globals
+@import "semantic-ui/globals/all";
+// elements
+@import "semantic-ui/elements/button";
+@import "semantic-ui/elements/container";
+@import "semantic-ui/elements/divider";
+// @import "semantic-ui/elements/header";
+@import "semantic-ui/elements/icon";
+// @import "semantic-ui/elements/image";
+// @import "semantic-ui/elements/label";
+// @import "semantic-ui/elements/list";
+@import "semantic-ui/elements/placeholder";
+@import "semantic-ui/elements/segment";
+// collections
+@import "semantic-ui/collections/form";
+@import "semantic-ui/collections/grid";
+@import "semantic-ui/collections/menu";
+@import "semantic-ui/collections/message";
+@import "semantic-ui/collections/table";
+// views
+// @import "semantic-ui/views/card";
+// @import "semantic-ui/views/item";
+// modules
+// @import "semantic-ui/modules/dimmer";
+@import "semantic-ui/modules/modal";
+@import "semantic-ui/modules/transition";
+
+/* http://colorsafe.co/ */
+
+// $background: #f5efe5;
+$background: #f1f1f1;
+
 body {
-  font-size: 15px;
-}
-
-// sadely, tables have margin-[right|left]: -15px
-#content-table {
-  margin-right: 0;
-  margin-left: 0;
-}
-
-// magic transformation for tables
-@media (max-width: 768px) {
-  #magic-table td::before { content: attr(data-title); }
-  #magic-table table,
-  #magic-table thead,
-  #magic-table tbody,
-  #magic-table th,
-  #magic-table td,
-  #magic-table tr { display: block; }
-
-  #magic-table thead tr {
-    display:none;
-  }
-
-  #magic-table td::before {
-    position: absolute;
-    left: 5px;
-    width: 35%;
-    padding-right: 15px;
-    height: 100%;
-    white-space: nowrap;
-    text-overflow: ellipsis !important;
-    overflow: hidden !important;
-  }
-
-  // hide row if there is no data to display
-  #magic-table td:empty {
-    display: none;
-  }
-
-  #magic-table td {
-    position: relative;
-    border: 0px solid transparent;
-    padding-left: 35% !important;
-    white-space: normal;
-  }
-
-  #magic-table .dotted-top {
-    border-top: 1px dotted gray;
-    margin-right: 0;
-    padding-top: 0.5em;
-  }
-
-  #magic-table #listing > tr > td {
-    text-align: unset !important;
-  }
+  background-color: $background;
 }
 
 // never cut off certain spaces
 .nowrap {
   white-space: nowrap;
 }
+
+// debug dialog position
+#debug {
+  position: fixed;
+  bottom: 0px;
+  right: 10px;
+}
+
+// // sadely, tables have margin-[right|left]: -15px
+// #content-table {
+//   margin-right: 0;
+//   margin-left: 0;
+// }
+
+// // magic transformation for tables
+// @media (max-width: 768px) {
+//   #magic-table td::before { content: attr(data-title); }
+//   #magic-table table,
+//   #magic-table thead,
+//   #magic-table tbody,
+//   #magic-table th,
+//   #magic-table td,
+//   #magic-table tr { display: block; }
+
+//   #magic-table thead tr {
+//     display:none;
+//   }
+
+//   #magic-table td::before {
+//     position: absolute;
+//     left: 5px;
+//     width: 35%;
+//     padding-right: 15px;
+//     height: 100%;
+//     white-space: nowrap;
+//     text-overflow: ellipsis !important;
+//     overflow: hidden !important;
+//   }
+
+//   // hide row if there is no data to display
+//   #magic-table td:empty {
+//     display: none;
+//   }
+
+//   #magic-table td {
+//     position: relative;
+//     border: 0px solid transparent;
+//     padding-left: 35% !important;
+//     white-space: normal;
+//   }
+
+//   #magic-table .dotted-top {
+//     border-top: 1px dotted gray;
+//     margin-right: 0;
+//     padding-top: 0.5em;
+//   }
+
+//   #magic-table #listing > tr > td {
+//     text-align: unset !important;
+//   }
+// }

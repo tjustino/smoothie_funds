@@ -10,16 +10,15 @@ ruby    "2.5.3"
 
 gem "bcrypt",       "~> 3.1.7"  # Use ActiveModel has_secure_password
 gem "bootsnap", require: false  # Reduces boot times through caching
-gem "bootstrap"                 # Twitter's Bootstrap
 gem "chart-js-rails"            # Chart.js for use in Rails asset pipeline
 gem "coffee-rails", "~> 4.2"    # Use CoffeeScript for .coffee assets and views
-gem "font-awesome-rails"        # Iconic font and CSS toolkit
 gem "jquery-rails"              # Use jquery as the JavaScript library
 # gem "mailgun-rails"           # Mailgun adapter for Rails
 gem "pg"                        # Use postgresql as the db for Active Record
 gem "puma",         "~> 3.11"   # App web server
 gem "rails",        "~> 5.2.1"  # Full-stack web framework
 gem "sass-rails",   "~> 5.0"    # Use SCSS for stylesheets
+gem "semantic-ui-sass"          # Semantic UI
 gem "slim"                      # Template language
 # gem "turbolinks",  "~> 5"     # Make following links in web application faster
 gem "uglifier"                  # Use as compressor for JavaScript assets
