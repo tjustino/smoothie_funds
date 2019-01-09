@@ -1,12 +1,13 @@
-.modal.fade#welcomeModal tabindex="-1" role="dialog" aria-labelledby="welcomeModal"
-  .modal-dialog role="document"
-    .modal-content
-      .modal-header
-        h4.modal-title = t('.welcome')
-        button.close type="button" data-dismiss="modal" aria-hidden="true" = fa_icon("times")
-      .modal-body = t('.content', accounts_icon: fa_icon("book")).html_safe
-      .modal-footer
-        button.btn.btn-success type="button" data-dismiss="modal" = t('.close')
+#welcomeModal.ui.basic.modal
+  .ui.icon.header
+    i.hand.peace.icon
+    = t(".welcome")
+  .content
+    = t(".content").html_safe
+  .actions
+    .ui.positive.right.labeled.icon.button
+      = t(".close")
+      i.checkmark.icon
 
 javascript:
   $("#welcomeModal").modal("show")

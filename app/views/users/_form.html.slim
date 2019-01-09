@@ -1,46 +1,55 @@
-= form_for @user do |f|
-  h1.card-header = (fa_icon "user-plus", text: title)
+h2.ui.secondary.segment.header
+  i.signup.icon
+  .content = title
 
-  .card-body
-    .form-group.row
-      = f.label :email, t('.email'), class: "col-sm-4 col-form-label"
-      .col
-        = f.email_field :email, \
-                        class: "form-control", \
-                        placeholder: t('.email'), \
-                        autofocus: true
-        - @user.errors.full_messages_for(:email).each do |message|
-          .invalid-feedback = message
+= form_with(model: @user, local: true, class: "ui form") do |f|
+  .ui.attached.segment
+    .field class=("error" if @user.errors.include?(:email))
+      = f.label :email, t(".email")
+      .ui.left.icon.corner.labeled.input
+        = f.email_field :email, placeholder: t(".email"), autofocus: true
+        i.envelope.icon
+        .ui.corner.label
+          i.asterisk.icon
+      - if @user.errors.include?(:email)
+        .ui.pointing.red.basic.label
+          - @user.errors.full_messages_for(:email).each do |message|
+            div = message
 
     - if params[:action] == "edit" or params[:action] == "update"
-      .form-group.row
-        = f.label :name, t('.name'), class: "col-sm-4 col-form-label"
-        .col
-          = f.text_field :name, class: "form-control", placeholder: t('.name')
-          - @user.errors.full_messages_for(:name).each do |message|
-            .invalid-feedback = message
+      .field class=("error" if @user.errors.include?(:name))
+        = f.label :name, t(".name")
+        = f.text_field :name, placeholder: t(".name")
+        i.user.icon
+        - if @user.errors.include?(:name)
+          .ui.pointing.red.basic.label
+            - @user.errors.full_messages_for(:name).each do |message|
+              div = message
 
-    .form-group.row
-      = f.label :password, t('.password'), class: "col-sm-4 col-form-label"
-      .col
-        = f.password_field :password, \
-                           class: "form-control", \
-                           placeholder: t('.password')
-        - @user.errors.full_messages_for(:password).each do |message|
-          .invalid-feedback = message
+    .field class=("error" if @user.errors.include?(:password))
+      = f.label :password, t(".password")
+      .ui.left.icon.corner.labeled.input
+        = f.password_field :password, placeholder: t(".password")
+        i.lock.icon
+        .ui.corner.label
+          i.asterisk.icon
+      - if @user.errors.include?(:password)
+        .ui.pointing.red.basic.label
+          - @user.errors.full_messages_for(:password).each do |message|
+            div = message
 
-    .form-group.row
-      = f.label :password_confirmation, \
-                t('.password_confirmation'), \
-                class: "col-sm-4 col-form-label"
-      .col
+    .field class=("error" if @user.errors.include?(:password_confirmation))
+      = f.label :password_confirmation, t(".password_confirmation")
+      .ui.left.icon.corner.labeled.input
         = f.password_field :password_confirmation, \
-                           class: "form-control", \
-                           placeholder: t('.password_confirmation')
-        - @user.errors.full_messages_for(:password_confirmation).each do |msg|
-          .invalid-feedback = msg
+                          placeholder: t(".password_confirmation")
+        i.lock.icon
+        .ui.corner.label
+          i.asterisk.icon
+      - if @user.errors.include?(:password_confirmation)
+        .ui.pointing.red.basic.label
+          - @user.errors.full_messages_for(:password_confirmation).each do |message|
+            div = message
 
-  .card-footer
-    .row.justify-content-end
-      .col-auto
-        = f.submit class: "btn btn-primary"
+  .ui.attached.secondary.clearing.segment
+    = f.submit class: "ui right floated positive button"

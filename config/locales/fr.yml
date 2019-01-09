@@ -157,7 +157,7 @@ fr:
       content:              |-
         Nous sommes vraiment enchanté de vous accueillir !<br />
         Vous allez voir, c'est facile de faire ses comptes.<br /><br />
-        Pour commencer, cliquez sur <button class="btn btn-light" disabled>%{accounts_icon} Comptes</button>
+        Pour commencer, cliquez sur « <i class="book icon"></i>Comptes »
         dans le menu pour accéder à l'écran permettant la création de comptes !
       close:                "Ok j'ai compris !"
     index:
@@ -186,7 +186,6 @@ fr:
       logout:       "Déconnexion"
       search:       "Rechercher"
       analytics:    "Analyser"
-      create_user:  "Créer un nouvel utilisateur"
 
   sessions:
     # controllers
@@ -199,6 +198,8 @@ fr:
       email:        "Courriel"
       password:     "Mot de passe"
       login:        "Connexion"
+      create_user:  "Inscription"
+      or:           "Ou"
 
   transactions:
     # controllers
@@ -366,7 +367,7 @@ fr:
         <a href="https://github.com/tjustino/smoothie_funds/issues" target="_blank">lien</a>
         (en anglais ou français uniquement, merci !)
     new:
-      create_user:  "Créer un nouvel utilisateur"
+      create_user:  "Inscription à Smoothie Funds"
 
   searches:
     # controllers
@@ -484,7 +485,7 @@ fr:
       account:      "le compte"
       category:     "la catégorie"
       transaction:  "la transaction"
-      user:         "l'utilisateur"
+      user:         "le compte utilisateur"
       schedule:     "l'échéancier"
 
     attributes:
