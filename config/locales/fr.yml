@@ -50,8 +50,8 @@ fr:
     welcome:
       welcome:          "La création de compte"
       content:              |-
-        Pour créer un compte c'est assez simple : cliquez sur <button 
-        class="btn btn-primary" disabled>%{new_icon} Nouveau compte</button> et 
+        Pour créer un compte c'est assez simple : cliquez sur <button
+        class="btn btn-primary" disabled>%{new_icon} Nouveau compte</button> et
         donnez lui un nom (ex : Compte courant).<br />
         <br />
         La notion de « balance initiale » est importante :<br />
@@ -475,7 +475,7 @@ fr:
         taken:        "a déjà été pris"
         confirmation: "ne correspond pas au mot de passe"
         not_a_number: "doit être une valeur numérique"
-        too_short:    "doit comporter au minimum %{count} caractères"
+        too_short:    "doit comporter au moins %{count} caractères"
         invalid:      "n'est pas valide"
         restrict_dependent_destroy:
           has_one:  "Impossible de supprimer car il existe une %{record}."
