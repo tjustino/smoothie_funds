@@ -50,13 +50,15 @@ https://github.com/doabit/semantic-ui-sass/tree/master/app/assets/stylesheets/se
 
 body {
   /* http://colorsafe.co/ */
-  background-color: #f1f1f1;
+  background-color: #f2f1ef;
+  // background-color: #f1f1f1;
+  // background-color: #f6f2ef; /* Basecamp */
 }
 
 // fix login position
-#login {
-  margin-top: 0;
-}
+// #login {
+//   margin-top: 0;
+// }
 
 // fix header margin
 header {

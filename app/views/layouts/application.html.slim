@@ -12,11 +12,10 @@ html
 
   body
     header.ui.container
-      / Static navbar
-      nav.ui.stackable.small.menu
-        = link_to image_tag("_icon.svg"), dashboard_path, class: "header item"
-
-        - if @current_user
+      - if @current_user
+        / Static navbar
+        nav.ui.stackable.small.menu
+          = link_to image_tag("_icon.svg"), dashboard_path, class: "header item"
           / /menu
           / ul.navbar-nav.mr-auto
           /   / dropdown transactions
@@ -56,19 +55,26 @@ html
           /   = nav_link t('.accounts'), accounts_path, "book"
 
           .right.menu
-            .ui.simple.dropdown.item class=("active" if params[:controller] == "users")
-              i.user.icon
-              = name_or_email
-              i.dropdown.icon
-              .menu
-                / Profil
-                .item
-                  i.sliders.horizontal.icon
-                  = link_to t(".profile"), edit_user_path(@current_user)
-                / Logout
-                .item
-                  i.sign-out.icon
-                  = link_to t(".logout"), logout_path, method: :delete
+          .ui.simple.dropdown.item class=("active" if params[:controller] == "users")
+            i.user.icon
+            = name_or_email
+            i.dropdown.icon
+            .menu
+              / Profil
+              .item
+                i.sliders.horizontal.icon
+                = link_to t(".profile"), edit_user_path(@current_user)
+              / Logout
+              .item
+                i.sign-out.icon
+                = link_to t(".logout"), logout_path, method: :delete
+      - else
+        .ui.basic.segment
+          h1.ui.header
+            = link_to image_tag("_icon.svg"), dashboard_path, class: "ui image"
+            .content
+              | Smoothie Funds
+              .sub.header Be smoothie with your money!
 
       / alerts
       - if flash[:alert]

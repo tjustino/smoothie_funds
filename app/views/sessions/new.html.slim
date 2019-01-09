@@ -1,31 +1,45 @@
-#login.ui.placeholder.segment
-  .ui.two.column.stackable.grid
-    / Left part
-    .column
-      = form_tag("login", class: "ui form") do
-        .field
-          = label_tag :email, t(".email")
-          .ui.left.icon.input
-            = email_field_tag :email, params[:email], \
-                              placeholder: t(".email"), \
-                              autofocus: true
-            i.user.icon
+/ login
+.ui.basic.segment
+  .ui.grid
+    .row
+      .height.wide.column
+        h2 bbb
+      .height.wide.column
+        .ui.placeholder.segment
+          .ui.two.column.stackable.grid
+            / Left part
+            .column
+              = form_tag("login", class: "ui form") do
+                .field
+                  = label_tag :email, t(".email")
+                  .ui.left.icon.input
+                    = email_field_tag :email, params[:email], \
+                                      placeholder: t(".email"), \
+                                      autofocus: true
+                    i.user.icon
 
-        .field
-          = label_tag :password, t(".password")
-          .ui.left.icon.input
-            = password_field_tag :password, \
-                                 params[:password], \
-                                 placeholder: t(".password")
-            i.lock.icon
+                .field
+                  = label_tag :password, t(".password")
+                  .ui.left.icon.input
+                    = password_field_tag :password, \
+                                         params[:password], \
+                                         placeholder: t(".password")
+                    i.lock.icon
 
-        = submit_tag t(".login"), class: "ui blue submit button"
+                = submit_tag t(".login"), class: "ui blue submit button"
 
-    / Right part
-    .middle.aligned.column
-      = button_to new_user_path, method: "get", class: "ui teal big button" do
-        i.signup.icon
-        = t(".create_user")
+            / Right part
+            .middle.aligned.column
+              = button_to new_user_path, method: "get", class: "ui teal big button" do
+                i.signup.icon
+                = t(".create_user")
 
-  / Divider
-  .ui.vertical.divider = t(".or")
+          / Divider
+          .ui.vertical.divider = t(".or")
+
+    / marketing
+    .row
+      .three.wide.column
+        i.money.bill.alternate.outline.icon
+      .thirteen.wide.column
+        p blabla
