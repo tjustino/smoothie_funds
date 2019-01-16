@@ -13,6 +13,13 @@ module ApplicationHelper
     @current_user.name? ? @current_user.name : @current_user.email
   end
 
+  def icon_text(text, icon_class)
+    text[0] == " " ? text : text = " " + text
+    icon_class.include?(" icon") ? icon_class : icon_class += " icon"
+
+    content_tag(:i, text, class: icon_class + " icon")
+  end
+
   def shallow_args(parent, child)
     action_name == "new" || action_name == "create" ? [parent, child] : child
   end
