@@ -13,10 +13,13 @@ html
   body
     header.ui.container
       - if @current_user
-        / Static navbar
+        / navbar
         nav.ui.stackable.small.menu
-          = link_to image_tag("_icon.svg"), dashboard_path, class: "header item"
-          / /menu
+          / homepage
+          = link_to image_tag("_icon.svg"), \
+            dashboard_path, \
+            class: "header item #{'active' if params[:controller] == 'dashboard'}"
+          / menu
           / ul.navbar-nav.mr-auto
           /   / dropdown transactions
           /   - if Category.exists?(account: @current_accounts)
@@ -55,19 +58,22 @@ html
           /   = nav_link t('.accounts'), accounts_path, "book"
 
           .right.menu
-          .ui.simple.dropdown.item class=("active" if params[:controller] == "users")
-            i.user.icon
-            = name_or_email
-            i.dropdown.icon
-            .menu
-              / Profil
-              .item
-                i.sliders.horizontal.icon
-                = link_to t(".profile"), edit_user_path(@current_user)
-              / Logout
-              .item
-                i.sign-out.icon
-                = link_to t(".logout"), logout_path, method: :delete
+          / user menu
+          .right.menu
+            / + class=("active" if params[:controller] == "users")
+            .ui.simple.dropdown.item
+              = name_or_email
+              i.dropdown.icon
+              .menu
+                / Profil
+                = link_to icon_text(t(".profile"), "sliders horizontal"), \
+                  edit_user_path(@current_user), \
+                  class: "item"
+                / Logout
+                = link_to icon_text(t(".logout"), "sign-out"), \
+                  logout_path, \
+                  method: :delete, \
+                  class: "item"
       - else
         .ui.basic.segment
           h1.ui.header
