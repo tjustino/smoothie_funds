@@ -14,7 +14,7 @@
 // require turbolinks
 //= require jquery3
 //= require semantic-ui/dimmer
-//= require semantic-ui/dropdown
+// require semantic-ui/dropdown
 //= require semantic-ui/modal
 //= require semantic-ui/transition
 //= require Chart.min
