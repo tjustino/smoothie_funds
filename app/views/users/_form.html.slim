@@ -19,12 +19,13 @@ h2.ui.secondary.segment.header
     - if params[:action] == "edit" or params[:action] == "update"
       .field class=("error" if @user.errors.include?(:name))
         = f.label :name, t(".name")
-        = f.text_field :name, placeholder: t(".name")
-        i.user.icon
-        - if @user.errors.include?(:name)
-          .ui.pointing.red.basic.label
-            - @user.errors.full_messages_for(:name).each do |message|
-              div = message
+        .ui.left.icon.corner.labeled.input
+          = f.text_field :name, placeholder: t(".name")
+          i.user.icon
+          - if @user.errors.include?(:name)
+            .ui.pointing.red.basic.label
+              - @user.errors.full_messages_for(:name).each do |message|
+                div = message
 
     .field class=("error" if @user.errors.include?(:password))
       = f.label :password, t(".password")
