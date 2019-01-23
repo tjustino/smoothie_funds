@@ -1,10 +1,14 @@
-.row.justify-content-center.mb-3
-  .col-md-auto
-    .card.mb-3
-      = render partial: "form", locals: { title: t('.edit_user') }
+.ui.center.aligned.grid
+  .ui.row
+    .ui.compact.segments
+      = render partial: "form", locals: { title: t(".edit_user") }
 
-.row.justify-content-md-center
-  .col
-    .alert.alert-info role="alert"
-      h2.alert-heading = t('.title_bug')
-      p = t('.speech_bug').html_safe
+  .ui.divider
+
+  .ui.row
+    .ui.compact.segments
+      .ui.icon.message
+        i.bug.icon
+        .content
+          h2.header = t(".title_bug")
+          p = t(".speech_bug").html_safe
