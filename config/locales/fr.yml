@@ -364,8 +364,7 @@ fr:
         Vous avez trouvé un bug et vous souhaitez le signaler ?<br />
         Une idée de nouvelle fonctionnalité incroyable ?<br />
         Vous pouvez utiliser ce
-        <a href="https://github.com/tjustino/smoothie_funds/issues" target="_blank">lien</a>
-        (en anglais ou français uniquement, merci !)
+        <a href="https://github.com/tjustino/smoothie_funds/issues" target="_blank">lien</a>.
     new:
       create_user:  "Inscription à Smoothie Funds"
 
