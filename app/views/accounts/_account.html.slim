@@ -1,31 +1,41 @@
 - accounts.each do |account|
   tr style=("color: gray;" if account.hidden == true)
     / name
-    td data-title="#{name}" = account.name
+    / td data-title="#{name}" = account.name
+    td = account.name
 
     / initial balance
-    td.nowrap data-title="#{init_bal}" = \
-                                  number_to_currency(account.initial_balance)
+    / td.nowrap data-title="#{init_bal}" = \
+    /                               number_to_currency(account.initial_balance)
+    td.nowrap = number_to_currency(account.initial_balance)
 
     / share
     - unless account.pending_user.blank?
-      td data-title="#{share}" =  show_others_or_me(account).html_safe + \
-                                  tag("br") + \
-                                  t('.waiting_for') + \
-                                  mail_to(account.pending_user.email)
+      / td data-title="#{share}" =  show_others_or_me(account).html_safe + \
+      td =  show_others_or_me(account).html_safe + tag("br") + \
+            t('.waiting_for') + mail_to(account.pending_user.email)
     - else
-      td data-title="#{share}" = show_others_or_me(account).html_safe
+      / td data-title="#{share}" = show_others_or_me(account).html_safe
+      td = show_others_or_me(account).html_safe
 
     / common
-    td
-      .row.justify-content-start.dotted-top
-        .col-auto
-          = link_to (fa_icon "edit"), \
-                    edit_account_path(account), \
-                    title: t('.edit')
-        .col-auto
-          = link_to (fa_icon "trash-o"), \
-                    account_path(account), \
-                    method: :delete, \
-                    data: {confirm: t('.are_you_sure', account: account.name)}, \
-                    title: t('.destroy')
+    td.collapsing
+      = link_to content_tag(:i, nil, class: "pencil alternate icon"), edit_account_path(account), title: t('.edit')
+
+    td.collapsing
+      = link_to content_tag(:i, nil, class: "trash icon"), \
+                account_path(account), \
+                method: :delete, \
+                data: { confirm: t('.are_you_sure', account: account.name) }, \
+                title: t('.destroy')
+    / td.collapsing
+    /   .ui.stackable.two.column.centered.grid
+    /     .col
+    /       = link_to content_tag(:i, nil, class: "pencil alternate icon"), edit_account_path(account), title: t('.edit')
+    /
+    /     .col
+    /       = link_to content_tag(:i, nil, class: "trash icon"), \
+    /                 account_path(account), \
+    /                 method: :delete, \
+    /                 data: { confirm: t('.are_you_sure', account: account.name) }, \
+    /                 title: t('.destroy')

@@ -2,71 +2,73 @@
 - unless @current_accounts.any?
   = render "welcome"
 
-/ Header
-.row.align-items-center.justify-content-between.mb-3
-  / Title
-  .col
-    h2
-      = t('.listing_accounts')
-      sup
-        .badge.badge-secondary#total = @nb_accounts
+.ui.stackable.grid
+  / Header
+  .ui.row
+    .ui.two.column.stackable.grid
+      / Title
+      .left.floated.column
+        h1.ui.header
+          = t(".listing_accounts")
+          sup.ui.tag.grey.labels
+           .ui.mini.label#total = @nb_accounts
 
-  / Download
-  .col-md-auto
-    h2 = link_to (fa_icon "download"), \
-                 accounts_path(format: :csv), \
-                 title: t(".export_accounts"), \
-                 class: "btn btn-light"
+      .right.floated.right.aligned.column
+        .ui.two.column.grid
+          / Download
+          .column
+            = button_to accounts_path(format: :csv), method: "get", class: "ui button", title: t(".export_accounts") do
+              i.download.icon
 
-  / New account
-  .col-md-auto
-    h2 = link_to (fa_icon "plus-circle", text: t('.new_account')), \
-                                         new_account_path, \
-                                         class: "btn btn-primary"
+          / New account
+          .column
+            = button_to new_account_path, method: "get", class: "ui primary button" do
+              i.plus.circle.icon
+              = t(".new_account")
 
-/ Accept sharing
-- @pendings.each do | pending |
-  .row
-    .col
-      .alert.alert-info.clearfix role="alert"
-        h5 = t('.join_shared_account', \
-              account: pending.account.name, \
-              users: show_other_users(pending.account)).html_safe
-        hr
-        .row.justify-content-start
-          .col-auto
-            = link_to (fa_icon "thumbs-o-up", text: t('.accept')), \
-                    sharing_path(pending.account), \
-                    method: :post, \
-                    class: "btn btn-success"
-          .col-auto
-            = link_to (fa_icon "remove", text: t('.reject')), \
-                    unsharing_path(pending.account), \
-                    method: :delete, \
-                    class: "btn btn-danger"
+  / / Accept sharing
+  / - @pendings.each do | pending |
+  /   .row
+  /     .col
+  /       .alert.alert-info.clearfix role="alert"
+  /         h5 = t('.join_shared_account', \
+  /               account: pending.account.name, \
+  /               users: show_other_users(pending.account)).html_safe
+  /         hr
+  /         .row.justify-content-start
+  /           .col-auto
+  /             = link_to sharing_path(pending.account), \
+  /                     method: :post, \
+  /                     class: "btn btn-success"
+  /           .col-auto
+  /             = link_to unsharing_path(pending.account), \
+  /                     method: :delete, \
+  /                     class: "btn btn-danger"
 
-/ Table
-.row#content-table
-  table.table.table-striped#magic-table
-    thead
-      tr
-        th = t('.name')
-        th = t('.initial_balance')
-        th = t('.share')
-        th
+  / Table
+  / .row#content-table
+  .ui.row
+    / table.table.table-striped#magic-table
+    table.ui.single.line.striped.table
+      thead
+        tr
+          th = t(".name")
+          th = t(".initial_balance")
+          th = t(".share")
+          th
+          th
+      tbody#listing
+        = render partial: "account", locals: {  accounts: @accounts,
+                                                name:     t(".name"),
+                                                init_bal: t(".initial_balance"),
+                                                share:    t(".share") }
 
-    tbody#listing
-      = render partial: "account", locals: {  accounts: @accounts,
-                                              name:     t('.name'),
-                                              init_bal: t('.initial_balance'),
-                                              share:    t('.share') }
+  / More accounts
+  .ui.centered.row
+    = content_tag(:i, nil, class: "large spinner loading icon", style: "display:none;")
 
-/ More accounts
-.row.justify-content-center.mb-3
-  = image_tag "loading.gif", style: "display:none;", class: "loading"
-
-  - if @nb_accounts >= @limit
-    = button_to t('.more_accounts'), accounts_path, \
-                                     { method: :get, \
-                                       class:  "btn btn-primary", \
-                                       id:     "more_items" }
+    - if @nb_accounts >= @limit
+      = button_to t(".more_accounts"), accounts_path, \
+                                       { method: :get, \
+                                         class:  "ui primary button", \
+                                         id:     "more_items" }
