@@ -54,10 +54,9 @@ html
           /         - @current_accounts.each do |account|
           /           = link_to account.name, account_categories_path(account), class: "dropdown-item"
 
-          /   / link accounts
-          /   = nav_link t('.accounts'), accounts_path, "book"
+          / link accounts
+          = nav_link t(".accounts"), accounts_path, "book"
 
-          .right.menu
           / user menu
           .right.menu
             / + class=("active" if params[:controller] == "users")
@@ -66,11 +65,11 @@ html
               i.dropdown.icon
               .menu
                 / Profil
-                = link_to icon_text(t(".profile"), "sliders horizontal"), \
+                = link_to icon_text("sliders horizontal", t(".profile")), \
                   edit_user_path(@current_user), \
                   class: "item"
                 / Logout
-                = link_to icon_text(t(".logout"), "sign-out"), \
+                = link_to icon_text("sign-out", t(".logout")), \
                   logout_path, \
                   method: :delete, \
                   class: "item"
