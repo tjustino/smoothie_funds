@@ -3,21 +3,18 @@
 # Application Helper
 module ApplicationHelper
   def nav_link(name, url, icon)
-    class_name = current_page?(url) ? "active" : nil
-    content_tag(:li, class: [class_name, "nav-item"].join(" ")) do
-      link_to fa_icon(icon, text: name), url, class: "nav-link"
-    end
+    active = current_page?(url) ? "active" : nil
+    link_to icon_text(icon, name), url, class: [active, "item"].join(" ")
   end
 
   def name_or_email
     @current_user.name? ? @current_user.name : @current_user.email
   end
 
-  def icon_text(text, icon_class)
-    text[0] == " " ? text : text = " " + text
+  def icon_text(icon_class, text)
     icon_class.include?(" icon") ? icon_class : icon_class += " icon"
 
-    content_tag(:i, text, class: icon_class + " icon")
+    safe_join([content_tag(:i, nil, class: icon_class), text])
   end
 
   def shallow_args(parent, child)
