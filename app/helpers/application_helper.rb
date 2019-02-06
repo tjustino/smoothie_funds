@@ -12,9 +12,12 @@ module ApplicationHelper
   end
 
   def icon_text(icon_class, text)
-    icon_class.include?(" icon") ? icon_class : icon_class += " icon"
+    safe_join [icon(icon_class), text]
+  end
 
-    safe_join([content_tag(:i, nil, class: icon_class), text])
+  def icon(icon_class)
+    icon_class.include?(" icon") ? icon_class : icon_class += " icon"
+    content_tag(:i, nil, class: icon_class)
   end
 
   def shallow_args(parent, child)
