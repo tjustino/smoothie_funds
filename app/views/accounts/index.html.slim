@@ -2,10 +2,10 @@
 - unless @current_accounts.any?
   = render "welcome"
 
-.ui.stackable.grid
+.ui.grid
   / Header
   .ui.row
-    .ui.two.column.stackable.grid
+    .ui.two.column.grid
       / Title
       .left.floated.column
         h1.ui.header
@@ -46,16 +46,13 @@
   /                     class: "btn btn-danger"
 
   / Table
-  / .row#content-table
-  .ui.row
-    / table.table.table-striped#magic-table
-    table.ui.single.line.striped.table
+  .ui.centered.row
+    table.ui.single.line.striped.collapsing.grey.table
       thead
         tr
           th = t(".name")
-          th = t(".initial_balance")
           th = t(".share")
-          th
+          th = t(".initial_balance")
           th
       tbody#listing
         = render partial: "account", locals: {  accounts: @accounts,
