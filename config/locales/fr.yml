@@ -32,6 +32,7 @@ fr:
       edit:             "Éditer"
       destroy:          "Supprimer"
       are_you_sure:     "Etes-vous certain de vouloir supprimer le compte « %{account} » ?"
+      or:               "ou"
     form:
       name:             "Nom"
       initial_balance:  "Balance initiale"
@@ -51,8 +52,8 @@ fr:
       welcome:          "La création de compte"
       content:              |-
         Pour créer un compte c'est assez simple : cliquez sur <button
-        class="btn btn-primary" disabled>%{new_icon} Nouveau compte</button> et
-        donnez lui un nom (ex : Compte courant).<br />
+        class="mini ui disabled primary button">%{new_icon} Nouveau compte
+        </button> et donnez lui un nom (ex : Compte courant).<br />
         <br />
         La notion de « balance initiale » est importante :<br />
         <ul>
@@ -67,8 +68,9 @@ fr:
         avec une autre personne (et si vous avez plusieurs comptes, elle ne
         verra que celui qui est partagé).<br />
         <br />
-        Une fois le compte créé, un nouveau menu apparaitra : <button class="btn btn-light" disabled>
-        %{categories_icon} Catégories</button>, cliquez dessus pour continuer !
+        Une fois le compte créé, un nouveau menu apparaitra : <button
+        class="mini ui disabled button">%{categories_icon} Catégories
+        </button>, cliquez dessus pour continuer !
       close:            "Ok j'ai compris !"
     edit:
       edit_account:     "Éditer le compte"
