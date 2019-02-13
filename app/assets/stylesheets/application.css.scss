@@ -44,6 +44,7 @@ https://github.com/doabit/semantic-ui-sass/tree/master/app/assets/stylesheets/se
 
 // modules
 @import "semantic-ui/modules/accordion";
+@import "semantic-ui/modules/checkbox";
 @import "semantic-ui/modules/dimmer";
 @import "semantic-ui/modules/dropdown";
 @import "semantic-ui/modules/modal";
@@ -52,7 +53,7 @@ https://github.com/doabit/semantic-ui-sass/tree/master/app/assets/stylesheets/se
 
 body {
   /* http://colorsafe.co/ */
-  background-color: #f1f1f1;
+  background-color: #008b8b;
 }
 
 // fix header margin

@@ -1,72 +1,79 @@
-= form_for @account do |f|
-  h1.card-header = title
+h2.ui.secondary.segment.header
+  i.book.icon
+  .content = title
 
-  .card-body
-    .form-group.row
-      = f.label :name, t('.name'), class: "col-sm-4 col-form-label"
-      .col
-        = f.text_field :name, \
-                       class: "form-control", \
-                       placeholder: t('.name'), \
-                       autofocus: true
-        - @account.errors.full_messages_for(:name).each do |message|
-          .invalid-feedback = message
+= form_with(model: @account, local: true, class: "ui form") do |f|
+  .ui.attached.segment
+    .field class=("error" if @account.errors.include?(:name))
+      = f.label :name, t(".name")
+      .ui.labeled.input
+        = f.text_field :name, placeholder: t(".name"), autofocus: true
+        .ui.corner.label
+          i.asterisk.icon
+      - if @account.errors.include?(:name)
+        .ui.pointing.red.basic.label
+          - @account.errors.full_messages_for(:name).each do |message|
+            div = message
 
-    .form-group.row
-      = f.label :initial_balance, t('.initial_balance'), class: "col-sm-4 col-form-label"
-      .col
-        .input-group
-          = f.telephone_field :initial_balance, \
-                              class: "form-control", \
-                              placeholder: t('.initial_balance')
-          .input-group-append
-            span.input-group-text = t('number.currency.format.unit')
-          - @account.errors.full_messages_for(:initial_balance).each do |msg|
-            .invalid-feedback = msg
+    .field class=("error" if @account.errors.include?(:initial_balance))
+      = f.label :initial_balance, t(".initial_balance")
+      .ui.right.labeled.left.icon.input
+        - case t('number.currency.format.unit')
+        - when "€"
+          i.euro.sign.icon
+        - when "$"
+          i.dollar.sign.icon
+        - when "£"
+          i.pound.sign.icon
+        - when "¥"
+          i.yen.sign.icon
 
-    - unless params[:action] == "new" or params[:action] == "create"
-      / shared with
-      - unless f.object.users.count == 1
-        .form-group.row
-          = f.label :share, t('.share'), class: "col-sm-4 col-form-label"
-          .col
-            - other_users(f.object).each do |other_user|
-              = f.fields_for :users, other_user do |shared_user|
-                = shared_user.hidden_field :id
-                = shared_user.email_field :email, class: "form-control", \
-                                                  readonly: "readonly"
-          .col-auto
-            = link_to (fa_icon "chain-broken", text: t('.unlink')), \
-                      unlink_path(f.object), \
-                      method: :delete, \
-                      data: { confirm: t('.are_you_sure_unlink') }, \
-                      class: "btn btn-danger"
+        = f.telephone_field :initial_balance, placeholder: t(".initial_balance")
+        .ui.corner.label
+          i.asterisk.icon
+      - if @account.errors.include?(:initial_balance)
+        .ui.pointing.red.basic.label
+          - @account.errors.full_messages_for(:initial_balance).each do |message|
+            div = message
 
-      / pending user
-      - unless f.object.pending_user.blank?
-        = f.fields_for :pending_user do |pending_user|
-          = render 'pending_user', f: pending_user
+    / - unless params[:action] == "new" or params[:action] == "create"
+    /   / shared with
+    /   - unless f.object.users.count == 1
+    /     .form-group.row
+    /       = f.label :share, t('.share'), class: "col-sm-4 col-form-label"
+    /       .col
+    /         - other_users(f.object).each do |other_user|
+    /           = f.fields_for :users, other_user do |shared_user|
+    /             = shared_user.hidden_field :id
+    /             = shared_user.email_field :email, class: "form-control", \
+    /                                               readonly: "readonly"
+    /       .col-auto
+    /         = link_to (fa_icon "chain-broken", text: t('.unlink')), \
+    /                   unlink_path(f.object), \
+    /                   method: :delete, \
+    /                   data: { confirm: t('.are_you_sure_unlink') }, \
+    /                   class: "btn btn-danger"
+    /
+    /   / pending user
+    /   - unless f.object.pending_user.blank?
+    /     = f.fields_for :pending_user do |pending_user|
+    /       = render 'pending_user', f: pending_user
+    /
+    /   / new share
+    /   - else
+    /     .form-group.row
+    /       = f.label :share, t('.propose_sharing'), \
+    /                 class: "col-sm-4 col-form-label"
+    /       .col
+    /         = email_field_tag :new_share, nil, \
+    /                           class: "form-control", \
+    /                           placeholder: t('.shared_email')
+    /         small.form-text.text-muted = t('.explanation')
 
-      / new share
-      - else
-        .form-group.row
-          = f.label :share, t('.propose_sharing'), \
-                    class: "col-sm-4 col-form-label"
-          .col
-            = email_field_tag :new_share, nil, \
-                              class: "form-control", \
-                              placeholder: t('.shared_email')
-            small.form-text.text-muted = t('.explanation')
+    .field
+      .ui.toggle.checkbox
+        = f.check_box :hidden
+        = f.label :hidden, t(".hidden")
 
-    .form-group.row
-      .col-sm-4
-      .col
-        .form-check
-          = f.label :hidden, class: "form-check-label" do
-            = f.check_box :hidden, class: "form-check-input"
-            = t('.hidden')
-
-  .card-footer
-    .row.justify-content-end
-      .col-auto
-        = f.submit class: "btn btn-primary"
+  .ui.attached.secondary.clearing.segment
+    = f.submit class: "ui right floated positive button"
