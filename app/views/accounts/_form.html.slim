@@ -18,7 +18,7 @@ h2.ui.secondary.segment.header
     .field class=("error" if @account.errors.include?(:initial_balance))
       = f.label :initial_balance, t(".initial_balance")
       .ui.right.labeled.left.icon.input
-        - case t('number.currency.format.unit')
+        - case t("number.currency.format.unit")
         - when "€"
           i.euro.sign.icon
         - when "$"
@@ -36,39 +36,35 @@ h2.ui.secondary.segment.header
           - @account.errors.full_messages_for(:initial_balance).each do |message|
             div = message
 
-    / - unless params[:action] == "new" or params[:action] == "create"
-    /   / shared with
-    /   - unless f.object.users.count == 1
-    /     .form-group.row
-    /       = f.label :share, t('.share'), class: "col-sm-4 col-form-label"
-    /       .col
-    /         - other_users(f.object).each do |other_user|
-    /           = f.fields_for :users, other_user do |shared_user|
-    /             = shared_user.hidden_field :id
-    /             = shared_user.email_field :email, class: "form-control", \
-    /                                               readonly: "readonly"
-    /       .col-auto
-    /         = link_to (fa_icon "chain-broken", text: t('.unlink')), \
-    /                   unlink_path(f.object), \
-    /                   method: :delete, \
-    /                   data: { confirm: t('.are_you_sure_unlink') }, \
-    /                   class: "btn btn-danger"
-    /
-    /   / pending user
-    /   - unless f.object.pending_user.blank?
-    /     = f.fields_for :pending_user do |pending_user|
-    /       = render 'pending_user', f: pending_user
-    /
-    /   / new share
-    /   - else
-    /     .form-group.row
-    /       = f.label :share, t('.propose_sharing'), \
-    /                 class: "col-sm-4 col-form-label"
-    /       .col
-    /         = email_field_tag :new_share, nil, \
-    /                           class: "form-control", \
-    /                           placeholder: t('.shared_email')
-    /         small.form-text.text-muted = t('.explanation')
+    - unless params[:action] == "new" or params[:action] == "create"
+      / shared with
+      - unless f.object.users.count == 1
+        .field
+          = f.label :share, t(".share")
+          .col
+            - other_users(f.object).each do |other_user|
+              = f.fields_for :users, other_user do |shared_user|
+                = shared_user.hidden_field :id
+                = shared_user.email_field :email, class: "form-control", \
+                                                  readonly: "readonly"
+          .col-auto
+            = link_to (t(".unlink")), \
+                      unlink_path(f.object), \
+                      method: :delete, \
+                      data: { confirm: t(".are_you_sure_unlink") }, \
+                      class: "btn btn-danger"
+
+      / pending user
+      - unless f.object.pending_user.blank?
+        = f.fields_for :pending_user do |pending_user|
+          = render "pending_user", f: pending_user
+
+      / new share
+      - else
+        .field
+          = f.label :share, t(".propose_sharing")
+          .ui.labeled.input
+            = email_field_tag :new_share, nil, placeholder: t(".shared_email")
 
     .field
       .ui.toggle.checkbox
