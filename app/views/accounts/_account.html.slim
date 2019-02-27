@@ -18,7 +18,6 @@
       .ui.mini.buttons
         = link_to edit_account_path(account), method: "get", class: "ui button", title: t(".edit") do
           i.pencil.alternate.icon
-        style .ui.buttons .or::before { content: '#{t(".or")}'; }
-        .or
+        .or data-text="#{t('.or')}"
         = link_to account_path(account), method: "delete", class: "ui button", title: t(".destroy"), data: { confirm: t(".are_you_sure", account: account.name) } do
           i.trash.icon
