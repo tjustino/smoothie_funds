@@ -12,7 +12,7 @@
 #       Install PostgreSQL and put its /bin directory on your path.
 #
 # Configure Using Gemfile
-# gem 'pg'
+# gem "pg"
 #
 default: &default
   adapter: postgresql
@@ -67,8 +67,8 @@ test:
 #
 production:
   <<: *default
-  database: <%=ENV['APP_NAME']%>
-  host: <%=ENV['POSTGRESQL_DB_HOST']%>
-  port: <%=ENV['POSTGRESQL_DB_PORT']%>
-  username: <%=ENV['POSTGRESQL_DB_USERNAME']%>
-  password: <%=ENV['POSTGRESQL_DB_PASSWORD']%>
+  database: <%=ENV["APP_NAME"]%>
+  host: <%=ENV["POSTGRESQL_DB_HOST"]%>
+  port: <%=ENV["POSTGRESQL_DB_PORT"]%>
+  username: <%=ENV["POSTGRESQL_DB_USERNAME"]%>
+  password: <%=ENV["POSTGRESQL_DB_PASSWORD"]%>
