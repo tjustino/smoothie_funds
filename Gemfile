@@ -16,16 +16,17 @@ gem "jquery-rails"              # Use jquery as the JavaScript library
 # gem "mailgun-rails"           # Mailgun adapter for Rails
 gem "pg"                        # Use postgresql as the db for Active Record
 gem "puma",         "~> 3.11"   # App web server
-gem "rails",        "~> 5.2.1"  # Full-stack web framework
+gem "rails",   "~> 6.0.0.beta2" # Full-stack web framework
 gem "sass-rails",   "~> 5.0"    # Use SCSS for stylesheets
 gem "semantic-ui-sass"          # Semantic UI
 gem "slim"                      # Template language
 # gem "turbolinks",  "~> 5"     # Make following links in web application faster
 gem "uglifier"                  # Use as compressor for JavaScript assets
+gem "webpacker"
 
 group :development, :test do
   gem "byebug", platform: :mri  # Call 'byebug' anywhere in the code to stop it
-  gem "capybara", "< 4.0"       # Integration testing tool
+  gem "capybara", ">= 2.15"     # Integration testing tool
   gem "chromedriver-helper"     # Easy installation and use of chromedriver
   gem "selenium-webdriver"      # Tool for writing automated tests of websites
 end
