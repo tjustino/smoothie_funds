@@ -21,6 +21,7 @@ Layout/IndentationConsistency:
 AllCops:
   Exclude:
     - db/schema.rb
+    - node_modules/**/*
 
 # too much work for now
 Metrics/AbcSize:
