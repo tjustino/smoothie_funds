@@ -37,7 +37,7 @@ fr:
       name:             "Nom"
       initial_balance:  "Balance initiale"
       share:            "Compte partagé avec"
-      unlink:           "Se délier"
+      unlink:           "Ne plus suivre ce compte"
       are_you_sure_unlink: "Êtes-vous certain de ne plus vouloir accéder à ce compte ?\nNotez bien que ce compte continuera d'exister pour les personnes avec qui il est actuellement partagé !"
       propose_sharing:  "Proposer de partager ce compte avec"
       explanation:      "Vous pouvez proposer de partager ce compte avec une autre personne"

@@ -39,20 +39,18 @@ h2.ui.secondary.segment.header
     - unless params[:action] == "new" or params[:action] == "create"
       / shared with
       - unless f.object.users.count == 1
-        .field
-          = f.label :share, t(".share")
-          .col
+        .fields
+          .field
+            = f.label :share, t(".share")
             - other_users(f.object).each do |other_user|
               = f.fields_for :users, other_user do |shared_user|
                 = shared_user.hidden_field :id
-                = shared_user.email_field :email, class: "form-control", \
-                                                  readonly: "readonly"
-          .col-auto
-            = link_to (t(".unlink")), \
-                      unlink_path(f.object), \
-                      method: :delete, \
-                      data: { confirm: t(".are_you_sure_unlink") }, \
-                      class: "btn btn-danger"
+                = shared_user.email_field :email, class: "disabled field", \
+                                                  readonly: ""
+        .field
+          = link_to unlink_path(f.object), method: :delete, data: { confirm: t(".are_you_sure_unlink") }, class: "ui red button" do
+            i.unlink.icon
+            = t(".unlink")
 
       / pending user
       - unless f.object.pending_user.blank?

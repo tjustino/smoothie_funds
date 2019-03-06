@@ -29,16 +29,16 @@
   / Accept sharing
   - @pendings.each do | pending |
     .ui.icon.warning.message
-      i.users.icon
+      i.users.icon.not-for-mobile
       .content
         .header= t(".join_shared_account", \
                     account: pending.account.name, \
                     users: show_other_users(pending.account)).html_safe
       .ui.buttons
-        = button_to sharing_path(pending.account), method: :post, class: "ui positive button" do
+        = link_to sharing_path(pending.account), method: :post, class: "ui positive button" do
           = t(".accept")
         .or data-text="#{t('.or')}"
-        = button_to unsharing_path(pending.account), method: :delete, class: "ui negative button" do
+        = link_to unsharing_path(pending.account), method: :delete, class: "ui negative button" do
           = t(".reject")
 
   / Table

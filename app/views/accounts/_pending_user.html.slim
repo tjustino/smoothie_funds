@@ -1,9 +1,9 @@
-.form-group.row
-  = f.label :pending_user, t('.pending_user'), class: "col-sm-4 col-form-label"
-  .col
-    = f.email_field :email, class: "form-control"
-  .col-auto
-    = link_to (fa_icon "undo", text: t('.no_longer_propose')), \
-              unpend_path, \
-              method: :delete, \
-              class: "btn btn-warning"
+.field
+  = f.label :pending_user, t(".pending_user")
+  .inline.fields
+    .field
+      = f.email_field :email
+    .field
+      = button_to unpend_path, method: :delete, class: "ui orange button" do
+        i.undo.icon
+        = t(".no_longer_propose")
