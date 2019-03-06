@@ -21,8 +21,6 @@ Layout/IndentationConsistency:
 AllCops:
   Exclude:
     - db/schema.rb
-    - bin/setup     # https://github.com/rubocop-hq/rubocop-rails/issues/13
-    - bin/update    # https://github.com/rubocop-hq/rubocop-rails/issues/13
 
 # too much work for now
 Metrics/AbcSize:
