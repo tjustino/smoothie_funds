@@ -6,6 +6,8 @@ require "rails/test_help"
 
 module ActiveSupport
   class TestCase
+    parallelize(workers: :number_of_processors)
+
     # Setup all fixtures in test/fixtures/*.yml for tests in alphabetical order
     fixtures :users,
              :accounts,
