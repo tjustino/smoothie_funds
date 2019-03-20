@@ -4,42 +4,42 @@
 
 .ui.grid
   / Header
-  .ui.row
-    .ui.two.column.grid
-      / Title
-      .left.floated.column
-        h1.ui.header
-          = t(".listing_accounts")
-          sup.ui.tag.grey.labels
-           .ui.mini.label#total = @nb_accounts
+  .two.column.row
+    / Title
+    .left.floated.column
+      h1.ui.header
+        = t(".listing_accounts")
+        sup.ui.tag.grey.labels.not-for-mobile
+         .ui.mini.label#total = @nb_accounts
 
-      .right.floated.right.aligned.column
-        .ui.two.column.grid
-          / Download
-          .column
-            = button_to accounts_path(format: :csv), method: "get", class: "ui button", title: t(".export_accounts") do
-              i.download.icon
+    .right.floated.right.aligned.column
+      .ui.two.column.stackable.grid
+        / Download
+        .column
+          = link_to accounts_path(format: :csv), method: "get", class: "ui circular icon button not-for-mobile", title: t(".export_accounts") do
+            i.download.icon
 
-          / New account
-          .column
-            = button_to new_account_path, method: "get", class: "ui primary button" do
-              i.plus.circle.icon
-              = t(".new_account")
+        / New account
+        .column
+          = link_to new_account_path, method: "get", class: "ui primary button" do
+            i.plus.circle.icon
+            = t(".new_account")
 
   / Accept sharing
-  - @pendings.each do | pending |
-    .ui.icon.warning.message
-      i.users.icon.not-for-mobile
-      .content
-        .header= t(".join_shared_account", \
-                    account: pending.account.name, \
-                    users: show_other_users(pending.account)).html_safe
-      .ui.buttons
-        = link_to sharing_path(pending.account), method: :post, class: "ui positive button" do
-          = t(".accept")
-        .or data-text="#{t('.or')}"
-        = link_to unsharing_path(pending.account), method: :delete, class: "ui negative button" do
-          = t(".reject")
+  - unless @pendings.nil?
+    - @pendings.each do | pending |
+      .ui.icon.warning.message
+        i.users.icon.not-for-mobile
+        .content
+          .header= t(".join_shared_account", \
+                      account: pending.account.name, \
+                      users: show_other_users(pending.account)).html_safe
+        .ui.buttons
+          = link_to sharing_path(pending.account), method: :post, class: "ui positive button" do
+            = t(".accept")
+          .or data-text="#{t('.or')}"
+          = link_to unsharing_path(pending.account), method: :delete, class: "ui negative button" do
+            = t(".reject")
 
   / Table
   .ui.centered.row
