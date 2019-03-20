@@ -181,9 +181,9 @@ fr:
   layouts:
     # views
     application:
-      transactions: 'Transactions <b class="caret"></b>'
-      schedules:    'Échéanciers <b class="caret"></b>'
-      categories:   'Catégories <b class="caret"></b>'
+      transactions: "Transactions"
+      schedules:    "Échéanciers"
+      categories:   "Catégories"
       accounts:     "Comptes"
       profile:      "Profil"
       logout:       "Déconnexion"
