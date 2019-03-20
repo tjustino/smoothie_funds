@@ -1,4 +1,3 @@
-/* eslint no-console:0 */
 // This file is automatically compiled by Webpack, along with any other files
 // present in this directory. You're encouraged to place your actual application
 // logic in a relevant structure within app/javascript and only use these pack
@@ -15,4 +14,15 @@
 // const images = require.context("../images", true)
 // const imagePath = (name) => images(name, true)
 
-console.log("Hello World from Webpacker")
+require("@rails/ujs").start()
+require("jquery")
+// import "semantic-ui-dimmer"
+// import "semantic-ui-dropdown"
+// import "semantic-ui-modal"
+// import "semantic-ui-transition"
+// import "chart.js"
+
+// require("close_icon")
+require("dropdown")
+
+console.log('Hello World from Webpacker')

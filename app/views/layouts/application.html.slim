@@ -4,7 +4,7 @@ html
     title = Rails.env.development? ? "🚧 Smoothie Funds 🚧" : "Smoothie Funds"
     = render partial: "layouts/favicon"
     = stylesheet_link_tag "application", media: "all"
-    = javascript_include_tag "application"
+    = javascript_pack_tag "application"
     = csrf_meta_tags
     meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
     meta name="author" content="Thomas JUSTINO"
@@ -19,40 +19,45 @@ html
           = link_to image_tag("_icon.svg"), \
             dashboard_path, \
             class: "header item #{'active' if params[:controller] == 'dashboard'}"
-          / menu
-          / ul.navbar-nav.mr-auto
-          /   / dropdown transactions
-          /   - if Category.exists?(account: @current_accounts)
-          /     li.nav-item.dropdown class=("active" if params[:controller] == "transactions")
-          /       a.nav-link.dropdown-toggle href="#" data-toggle="dropdown"
-          /         = fa_icon "credit-card", text: t('.transactions').html_safe
-          /       .dropdown-menu
-          /         - @accounts_with_categories.each do |account|
-          /           = link_to account.name, account_transactions_path(account), class: "dropdown-item"
-          /         .dropdown-divider
-          /         = link_to ( fa_icon "search", text: t('.search') ), \
-          /                   new_user_search_path(@current_user), \
-          /                   class: "dropdown-item"
-          /         = link_to ( fa_icon "area-chart", text: t('.analytics') ), \
-          /                   user_analytics_path(@current_user), \
-          /                   class: "dropdown-item"
 
-          /     / dropdown schedules
-          /     li.nav-item.dropdown class=("active" if params[:controller] == "schedules")
-          /       a.nav-link.dropdown-toggle href="#" data-toggle="dropdown"
-          /         = fa_icon "calendar", text: t('.schedules').html_safe
-          /       .dropdown-menu
-          /         - @accounts_with_categories.each do |account|
-          /           = link_to account.name, account_schedules_path(account), class: "dropdown-item"
+          / dropdown transactions
+          - if Category.exists?(account: @current_accounts)
+            .ui.dropdown.item
+              span.text = icon_text("credit card", t(".transactions"))
+              i.dropdown.icon
+              .menu
+                - @accounts_with_categories.each do |account|
+                  = link_to account.name, \
+                            account_transactions_path(account), \
+                            class: "item"
+                .ui.divider
+                = link_to icon_text("search", t(".search")), \
+                          new_user_search_path(@current_user), \
+                          class: "item"
+                = link_to icon_text("chart area", t(".analytics")), \
+                          user_analytics_path(@current_user), \
+                          class: "item"
 
-          /   / dropdown categories
-          /   - if @current_accounts.any?
-          /     li.nav-item.dropdown class=("active" if params[:controller] == "categories")
-          /       a.nav-link.dropdown-toggle href="#" data-toggle="dropdown"
-          /         = fa_icon "tags", text: t('.categories').html_safe
-          /       .dropdown-menu
-          /         - @current_accounts.each do |account|
-          /           = link_to account.name, account_categories_path(account), class: "dropdown-item"
+            / dropdown schedules
+            .ui.dropdown.item
+              span.text = icon_text("calendar alternate", t(".schedules"))
+              i.dropdown.icon
+              .menu
+                - @accounts_with_categories.each do |account|
+                  = link_to account.name, \
+                            account_schedules_path(account), \
+                            class: "item"
+
+          / dropdown categories
+          - if @current_accounts.any?
+            .ui.dropdown.item
+              span.text = icon_text("tags", t(".categories"))
+              i.dropdown.icon
+              .menu
+                - @current_accounts.each do |account|
+                  = link_to account.name, \
+                            account_categories_path(account), \
+                            class: "item"
 
           / link accounts
           = nav_link t(".accounts"), accounts_path, "book"
@@ -60,14 +65,15 @@ html
           / user menu
           .right.menu
             / + class=("active" if params[:controller] == "users")
-            .ui.simple.dropdown.item
-              = name_or_email
+            .ui.dropdown.item
+              span.text = name_or_email
               i.dropdown.icon
               .menu
                 / Profil
                 = link_to icon_text("sliders horizontal", t(".profile")), \
                   edit_user_path(@current_user), \
                   class: "item"
+                .ui.divider
                 / Logout
                 = link_to icon_text("sign-out", t(".logout")), \
                   logout_path, \
