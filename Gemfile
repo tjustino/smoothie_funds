@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source  "https://rubygems.org"
-ruby    "2.6.1"
+ruby    "2.6.2"
 
 ## from http://bundler.io/gemfile.html
 # ~> 2.0.3 is identical to >= 2.0.3 and < 2.1
@@ -10,19 +10,15 @@ ruby    "2.6.1"
 
 gem "bcrypt",       "~> 3.1.7"  # Use ActiveModel has_secure_password
 gem "bootsnap", require: false  # Reduces boot times through caching
-gem "chart-js-rails"            # Chart.js for use in Rails asset pipeline
-gem "coffee-rails", "~> 4.2"    # Use CoffeeScript for .coffee assets and views
-gem "jquery-rails"              # Use jquery as the JavaScript library
 # gem "mailgun-rails"           # Mailgun adapter for Rails
 gem "pg"                        # Use postgresql as the db for Active Record
 gem "puma",         "~> 3.11"   # App web server
-gem "rails",   "~> 6.0.0.beta2" # Full-stack web framework
+gem "rails",   "~> 6.0.0.beta3" # Full-stack web framework
 gem "sass-rails",   "~> 5.0"    # Use SCSS for stylesheets
 gem "semantic-ui-sass"          # Semantic UI
 gem "slim"                      # Template language
 # gem "turbolinks",  "~> 5"     # Make following links in web application faster
-gem "uglifier"                  # Use as compressor for JavaScript assets
-gem "webpacker"
+gem "webpacker"                 # Transpile app-like JavaScript
 
 group :development, :test do
   gem "byebug", platform: :mri  # Call 'byebug' anywhere in the code to stop it
