@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source  "https://rubygems.org"
-ruby    "2.5.3"
+ruby    "2.6.2"
 
 ## from http://bundler.io/gemfile.html
 # ~> 2.0.3 is identical to >= 2.0.3 and < 2.1
@@ -27,7 +27,7 @@ gem "uglifier"                  # Use as compressor for JavaScript assets
 group :development, :test do
   gem "byebug", platform: :mri  # Call 'byebug' anywhere in the code to stop it
   gem "capybara", "< 4.0"       # Integration testing tool
-  gem "chromedriver-helper"     # Easy installation and use of chromedriver
+  gem "webdrivers"              # Easy installation and use of chromedriver
   gem "selenium-webdriver"      # Tool for writing automated tests of websites
 end
 
