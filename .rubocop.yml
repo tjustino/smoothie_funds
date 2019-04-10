@@ -1,4 +1,5 @@
 # https://rubocop.readthedocs.io/en/stable/
+require: rubocop-performance
 
 # Preferences
 Style/StringLiterals:
@@ -21,8 +22,7 @@ Layout/IndentationConsistency:
 AllCops:
   Exclude:
     - db/schema.rb
-    - bin/setup     # https://github.com/rubocop-hq/rubocop-rails/issues/13
-    - bin/update    # https://github.com/rubocop-hq/rubocop-rails/issues/13
+    - node_modules/**/*
 
 # too much work for now
 Metrics/AbcSize:
