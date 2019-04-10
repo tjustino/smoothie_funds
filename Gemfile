@@ -8,35 +8,33 @@ ruby    "2.6.2"
 # ~> 2.1 is identical to >= 2.1 and < 3.0
 # ~> 2.2.beta will match prerelease versions like 2.2.beta.12
 
-gem "bcrypt",       "~> 3.1.7"  # Use ActiveModel has_secure_password
+gem "bcrypt"                    # Use ActiveModel has_secure_password
 gem "bootsnap", require: false  # Reduces boot times through caching
-gem "bootstrap"                 # Twitter's Bootstrap
-gem "chart-js-rails"            # Chart.js for use in Rails asset pipeline
-gem "coffee-rails", "~> 4.2"    # Use CoffeeScript for .coffee assets and views
+gem "bootstrap"
 gem "font-awesome-rails"        # Iconic font and CSS toolkit
-gem "jquery-rails"              # Use jquery as the JavaScript library
 # gem "mailgun-rails"           # Mailgun adapter for Rails
 gem "pg"                        # Use postgresql as the db for Active Record
-gem "puma",         "~> 3.11"   # App web server
-gem "rails",        "~> 5.2.1"  # Full-stack web framework
-gem "sass-rails",   "~> 5.0"    # Use SCSS for stylesheets
+gem "puma"                      # App web server
+gem "rails",   "~> 6.0.0.beta3" # Full-stack web framework
+gem "sass-rails"                # Sass adapter for the Rails asset pipeline
 gem "slim"                      # Template language
-# gem "turbolinks",  "~> 5"     # Make following links in web application faster
-gem "uglifier"                  # Use as compressor for JavaScript assets
+# gem "turbolinks"              # Make following links in web application faster
+gem "webpacker"                 # Transpile app-like JavaScript
 
 group :development, :test do
   gem "byebug", platform: :mri  # Call 'byebug' anywhere in the code to stop it
-  gem "capybara", "< 4.0"       # Integration testing tool
-  gem "webdrivers"              # Easy installation and use of chromedriver
+  gem "capybara"                # Integration testing tool
   gem "selenium-webdriver"      # Tool for writing automated tests of websites
+  gem "webdrivers"              # Easy installation and use of chromedriver
 end
 
 group :development do
   gem "annotate"                # Annotates ActiveRecord Model, route & fixture
-  gem "listen", "< 3.2"         # Listen to file modif and notifies you
+  gem "listen"                  # Listen to file modif and notifies you
   gem "rubocop"                 # Automatic Ruby code style checking tool
+  gem "rubocop-performance"     # Check for performance optimizations
   gem "spring"                  # Keep application running in the background
-  gem "spring-watcher-listen", "~> 2.0.0" # Makes spring watch files
+  gem "spring-watcher-listen"   # Makes spring watch files
   gem "web-console"             # Access an IRB console on exception pages
 
   # Use Capistrano for deployment

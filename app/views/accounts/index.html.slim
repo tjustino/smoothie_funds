@@ -25,25 +25,26 @@
                                          class: "btn btn-primary"
 
 / Accept sharing
-- @pendings.each do | pending |
-  .row
-    .col
-      .alert.alert-info.clearfix role="alert"
-        h5 = t('.join_shared_account', \
-              account: pending.account.name, \
-              users: show_other_users(pending.account)).html_safe
-        hr
-        .row.justify-content-start
-          .col-auto
-            = link_to (fa_icon "thumbs-o-up", text: t('.accept')), \
-                    sharing_path(pending.account), \
-                    method: :post, \
-                    class: "btn btn-success"
-          .col-auto
-            = link_to (fa_icon "remove", text: t('.reject')), \
-                    unsharing_path(pending.account), \
-                    method: :delete, \
-                    class: "btn btn-danger"
+- unless @pendings.nil?
+  - @pendings.each do | pending |
+    .row
+      .col
+        .alert.alert-info.clearfix role="alert"
+          h5 = t('.join_shared_account', \
+                account: pending.account.name, \
+                users: show_other_users(pending.account)).html_safe
+          hr
+          .row.justify-content-start
+            .col-auto
+              = link_to (fa_icon "thumbs-o-up", text: t('.accept')), \
+                      sharing_path(pending.account), \
+                      method: :post, \
+                      class: "btn btn-success"
+            .col-auto
+              = link_to (fa_icon "remove", text: t('.reject')), \
+                      unsharing_path(pending.account), \
+                      method: :delete, \
+                      class: "btn btn-danger"
 
 / Table
 .row#content-table
