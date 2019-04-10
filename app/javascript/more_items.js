@@ -20,12 +20,20 @@ var showMeMore = function() {
       }
     }
   });
+  // ↑ still jQuery ↑
 };
 
-$(document).ready(function() {
-  return $("#more_items").click(function(e) {
-    e.preventDefault();
-    return showMeMore();
-  });
+function ready(fn) {
+  if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading"){
+    fn();
+  } else {
+    document.addEventListener('DOMContentLoaded', fn);
+  }
+}
+
+ready(function(){
+  document.getElementById('more_items').onclick = function(event){
+    event.preventDefault();
+    showMeMore();
+  };
 });
-// ↑ still jQuery ↑
