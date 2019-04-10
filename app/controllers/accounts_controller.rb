@@ -15,7 +15,7 @@ class AccountsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.js.coffee
+      format.js.erb
       format.csv do
         attributes_to_extract = %w[id name initial_balance hidden]
         send_data current_accounts.to_csv(attributes_to_extract),
