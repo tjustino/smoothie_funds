@@ -18,7 +18,7 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.js.coffee
+      format.js.erb
       format.csv do
         attributes_to_extract = %w[id account_id name]
         send_data current_categories.to_csv(attributes_to_extract),

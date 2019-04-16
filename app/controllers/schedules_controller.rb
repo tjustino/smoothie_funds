@@ -18,7 +18,7 @@ class SchedulesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.js.coffee
+      format.js.erb
       format.csv do
         attributes_to_extract = %w[id account_id next_time frequency period]
         send_data current_schedules.to_csv(attributes_to_extract),
