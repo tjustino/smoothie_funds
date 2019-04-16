@@ -1,7 +1,11 @@
 var showMeMore = function() {
-  document.getElementById('more_items').style.display = 'none';
-  document.getElementsByClassName('loading')[0].style.display = '';
-  var nb_items = document.getElementById('listing').rows.length;
+  var more_items = document.getElementById('more_items');
+  var loading    = document.getElementsByClassName('loading')[0];
+  var nb_items   = document.getElementById('listing').rows.length;
+  var total      = document.getElementById('total');
+
+  more_items.style.display = 'none';
+  loading.style.display = '';
 
   // ↓ still jQuery ↓
   return $.ajax({
@@ -21,6 +25,30 @@ var showMeMore = function() {
     }
   });
   // ↑ still jQuery ↑
+
+  // var request = new XMLHttpRequest();
+  // request.open('GET', '?offset=' + nb_items, true);
+  //
+  // request.onload = function() {
+  //   if (request.status >= 200 && request.status < 400) {
+  //     loading.style.display = 'none';
+  //     if (nb_items >= total.textContent) {
+  //       more_items.style.display = 'none';
+  //     } else {
+  //       more_items.style.display = '';
+  //     }
+  //
+  //     return request.response;
+  //   } else {
+  //     console.log("We reached our target server, but it returned an error 😵");
+  //   }
+  // };
+  //
+  // request.onerror = function() {
+  //   console.log("There was a connection error 😵");
+  // };
+  //
+  // request.send();
 };
 
 function ready(fn) {
