@@ -1,3 +1,5 @@
+import { once_ready } from 'once_ready';
+
 var showMeMore = function() {
   var more_items = document.getElementById('more_items');
   var loading    = document.getElementsByClassName('loading')[0];
@@ -51,17 +53,11 @@ var showMeMore = function() {
   // request.send();
 };
 
-function ready(fn) {
-  if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading"){
-    fn();
-  } else {
-    document.addEventListener('DOMContentLoaded', fn);
-  }
-}
-
-ready(function(){
-  document.getElementById('more_items').onclick = function(event){
-    event.preventDefault();
-    showMeMore();
+once_ready(function(){
+  if (document.getElementById('more_items') !== null ) {
+    document.getElementById('more_items').onclick = function(event){
+      event.preventDefault();
+      showMeMore();
+    };
   };
 });

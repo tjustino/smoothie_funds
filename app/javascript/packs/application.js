@@ -11,11 +11,12 @@
 // (e.g <%= image_pack_tag "rails.png" %>) or the `imagePath` JavaScript
 // helper below.
 //
-// const images = require.context("../images", true)
+// const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-require("@rails/ujs").start();
-require("bootstrap");
-require("chart.js");
+require('@rails/ujs').start();
+require('bootstrap');
+require('chart.js');
 // own code
-require("more_items.js");
+require('more_items.js');
+require('show_modal.js');
