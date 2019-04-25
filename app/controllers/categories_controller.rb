@@ -88,7 +88,7 @@ class CategoriesController < ApplicationController
     end
 
     def load_other_accounts
-      @other_accounts = @current_accounts.excluding(@current_account)
+      @other_accounts = @current_accounts.free_of(@current_account)
     end
 
     def category

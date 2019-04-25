@@ -30,7 +30,7 @@ class Account < ApplicationRecord
 
   scope :order_by_name, ->          { order(name: :asc) }
   scope :active,        ->          { where(hidden: false) }
-  scope :excluding,     ->(account) { where.not(id: account) }
+  scope :free_of,       ->(account) { where.not(id: account) }
 
   before_validation :format_initial_balance
 
