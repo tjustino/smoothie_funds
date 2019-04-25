@@ -17,7 +17,9 @@ set :linked_dirs,   fetch(:linked_dirs, []).push("bin",
                                                  "tmp/pids",
                                                  "tmp/cache",
                                                  "tmp/sockets",
+                                                 "node_modules",
                                                  "vendor/bundle",
+                                                 "public/packs",
                                                  "public/system")
 
 # setup rbenv
