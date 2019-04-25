@@ -15,7 +15,7 @@ gem "font-awesome-rails"        # Iconic font and CSS toolkit
 # gem "mailgun-rails"           # Mailgun adapter for Rails
 gem "pg"                        # Use postgresql as the db for Active Record
 gem "puma"                      # App web server
-gem "rails",   "~> 6.0.0.beta3" # Full-stack web framework
+gem "rails",   "~> 6.0.0.rc1"   # Full-stack web framework
 gem "sass-rails"                # Sass adapter for the Rails asset pipeline
 gem "slim"                      # Template language
 # gem "turbolinks"              # Make following links in web application faster
