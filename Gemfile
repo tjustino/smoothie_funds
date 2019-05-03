@@ -10,9 +10,8 @@ ruby    "2.6.3"
 
 gem "bcrypt"                    # Use ActiveModel has_secure_password
 gem "bootsnap", require: false  # Reduces boot times through caching
-gem "bootstrap"
+gem "bootstrap"                 # The most popular CSS framework ever
 gem "font-awesome-rails"        # Iconic font and CSS toolkit
-# gem "mailgun-rails"           # Mailgun adapter for Rails
 gem "pg"                        # Use postgresql as the db for Active Record
 gem "puma"                      # App web server
 gem "rails",   "~> 6.0.0.rc1"   # Full-stack web framework
@@ -38,7 +37,8 @@ group :development do
   gem "web-console"             # Access an IRB console on exception pages
 
   # Use Capistrano for deployment
-  gem "capistrano-rails"
+  gem "capistrano-bundler"      # Bundler specific tasks for Capistrano v3
+  gem "capistrano-rails"        # Rails specific Capistrano tasks
   gem "capistrano-rbenv"        # Idiomatic rbenv support for Capistrano 3
   gem "capistrano3-puma"        # Puma integration for Capistrano 3
 end
