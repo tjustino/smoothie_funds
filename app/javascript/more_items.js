@@ -6,14 +6,12 @@ var showMeMore = function() {
   var nb_items   = document.getElementById('listing').rows.length;
   var total      = document.getElementById('total');
   var csrf_token = document.querySelector("meta[name='csrf-token']").getAttribute('content');
-  var action     = document.querySelector('form.button_to').getAttribute('action')
+  var action     = document.querySelector('form.button_to').getAttribute('action');
 
   more_items.style.display = 'none';
   loading.style.display = '';
 
   var request = new XMLHttpRequest();
-  // var timestamp = new Date().getTime()
-  // request.open('GET', document.referrer + '?offset=' + nb_items + '&_=' + timestamp, true);
   request.open('GET', action + '?offset=' + nb_items, true);
   request.setRequestHeader('X-CSRF-Token', csrf_token);
   request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
@@ -22,13 +20,13 @@ var showMeMore = function() {
   request.onload = function() {
     if (this.status >= 200 && this.status < 400) {
       loading.style.display = 'none';
-      if (nb_items >= total.textContent) {      // pb dernier appel
+      eval(this.response);
+
+      if (document.getElementById('listing').rows.length >= total.textContent) {
         more_items.style.display = 'none';
       } else {
         more_items.style.display = '';
       }
-
-      eval(this.response);
     } else {
       console.log('We reached the target server, but it returned an error 😵');
     }
