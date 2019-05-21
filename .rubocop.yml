@@ -1,4 +1,5 @@
 # https://rubocop.readthedocs.io/en/stable/
+require: rubocop-performance
 
 # Preferences
 Style/StringLiterals:
