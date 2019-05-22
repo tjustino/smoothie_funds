@@ -1,0 +1,12 @@
+var checkbox = document.getElementById('check_<%= @transaction.id %>').getElementsByTagName('i');
+
+if (checkbox[0].className == 'fa fa-square-o') {
+  checkbox[0].className = 'fa fa-check-square-o';
+} else {
+  checkbox[0].className = 'fa fa-square-o';
+}
+
+<% sum = escape_javascript(render partial: "sum_checked",
+                                  locals:  { sum_checked: @sum_checked }) %>
+
+document.getElementById('sum_checked').outerHTML = '<%= sum %>';
