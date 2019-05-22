@@ -14,15 +14,14 @@
 // const images = require.context("../images", true)
 // const imagePath = (name) => images(name, true)
 
-require("@rails/ujs").start()
-require("jquery")
+require("@rails/ujs").start();
+require("jquery");
 // import "semantic-ui-dimmer"
 // import "semantic-ui-dropdown"
 // import "semantic-ui-modal"
 // import "semantic-ui-transition"
-// import "chart.js"
-
-// require("close_icon")
-require("dropdown")
-
-console.log('Hello World from Webpacker')
+require('chart.js');
+// own code
+require('more_items.js');
+require('close_icon.js');
+// require("dropdown");

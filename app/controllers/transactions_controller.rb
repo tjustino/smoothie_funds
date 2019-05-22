@@ -17,7 +17,7 @@ class TransactionsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.js.coffee
+      format.js.erb
       format.csv do
         attributes_to_extract = %w[id account_id category_id
                                    date amount checked comment]
