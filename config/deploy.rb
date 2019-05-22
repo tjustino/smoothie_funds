@@ -12,12 +12,14 @@ set :deploy_to,     "/srv/http/#{fetch(:application)}"
 set :linked_files,  fetch(:linked_files, []).push("config/database.yml",
                                                   "config/secrets.yml")
 
-set :linked_dirs,   fetch(:linked_dirs, []).push("bin",
-                                                 "log",
+set :linked_dirs,   fetch(:linked_dirs, []).push("log",
+                                                 ".bundle",
                                                  "tmp/pids",
                                                  "tmp/cache",
                                                  "tmp/sockets",
+                                                 "node_modules",
                                                  "vendor/bundle",
+                                                 "public/packs",
                                                  "public/system")
 
 # setup rbenv
