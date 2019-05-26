@@ -7151,6 +7151,26 @@ selfsigned@^1.10.4:
   dependencies:
     node-forge "0.7.5"
 
+semantic-ui-dimmer@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/semantic-ui-dimmer/-/semantic-ui-dimmer-2.4.0.tgz#4962f5983419cc9b33e8ea25eeaf3dd4812ef00a"
+  integrity sha512-ra7sd+LMtf4ZKXm1AxwemIrj2tuoFPejvVOFEMYGK/gtKu7cXt6TeIbwE7jyZ8w4c9y0SCb2Zpd38iu2wQyqVA==
+
+semantic-ui-dropdown@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/semantic-ui-dropdown/-/semantic-ui-dropdown-2.4.1.tgz#9ae311acd9b35674fb89bb8eb0f77e5b2fddc8ab"
+  integrity sha512-TZio+bIeTLD7xXM9CGrDQj2GDJZp5DzedQvFazuh9LSiU2Y+YNT1ZP2LJJMvKtL8qlmrIQz3as2ibBCz5wii5A==
+
+semantic-ui-modal@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/semantic-ui-modal/-/semantic-ui-modal-2.4.1.tgz#f1d084aa07942947056d25403245d1b01c43734c"
+  integrity sha512-hey0eafUtAIkF7slYABzNWfn3QwpFEWF6Rq9+enowdKm8lnUwRkpLijSHXT5S66aMjjqC1MGxWfhnUwOba1BhQ==
+
+semantic-ui-transition@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/semantic-ui-transition/-/semantic-ui-transition-2.3.1.tgz#4e43c65b4d9b923c15f2328543558e48c582d51c"
+  integrity sha512-eQ66Ih+Q9laA/WAwR90EGy2Kt0hiRBiCiOS3DIQBYl/OpcuID2zSecdjh3Q//eTk0yC66yTuVdQKnThbfWzEwA==
+
 semver-diff@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/semver-diff/-/semver-diff-2.1.0.tgz#4bbb8437c8d37e4b0cf1a68fd726ec6d645d6d36"

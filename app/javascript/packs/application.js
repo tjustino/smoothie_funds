@@ -14,14 +14,13 @@
 // const images = require.context("../images", true)
 // const imagePath = (name) => images(name, true)
 
-require("@rails/ujs").start();
-require("jquery");
-// import "semantic-ui-dimmer"
-// import "semantic-ui-dropdown"
-// import "semantic-ui-modal"
-// import "semantic-ui-transition"
+require('@rails/ujs').start();
 require('chart.js');
+require('semantic-ui-dimmer');
+require('semantic-ui-dropdown');
+require('semantic-ui-modal');
+require('semantic-ui-transition');
 // own code
 require('more_items.js');
 require('close_icon.js');
-// require("dropdown");
+require('dropdown.js');

@@ -1,7 +1,6 @@
-import $ from "jquery";
+import { once_ready } from 'once_ready';
 
-
-$(document).ready(function() {
+once_ready(function(){
   return $(".close.icon").on("click", function() {
     return $(this).closest(".message").transition("scale");
   });
