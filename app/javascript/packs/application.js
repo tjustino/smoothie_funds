@@ -16,11 +16,12 @@
 
 require('@rails/ujs').start();
 require('chart.js');
-require('semantic-ui-dimmer');
-require('semantic-ui-dropdown');
-require('semantic-ui-modal');
-require('semantic-ui-transition');
+require('semantic-ui-dimmer/dimmer');
+require('semantic-ui-dropdown/dropdown');
+require('semantic-ui-modal/modal');
+require('semantic-ui-transition/transition');
 // own code
 require('more_items.js');
 require('close_icon.js');
 require('dropdown.js');
+require('modal.js');
