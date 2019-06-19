@@ -11,6 +11,10 @@
       p = t(".speech").html_safe
       .field
         = f.label :import_from, t(".import_from")
-        = f.collection_select :categories, @other_accounts, :id, :name, {}, \
+        = f.collection_select :categories, \
+                              @accounts_with_categories.free_of(@current_account), \
+                              :id, \
+                              :name, \
+                              {}, \
                               { class: "ui dropdown" }
       = f.submit class: "ui positive button"
