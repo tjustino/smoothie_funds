@@ -1,14 +1,13 @@
-.modal.fade#welcomeModal tabindex="-1" role="dialog" aria-labelledby="welcomeModal"
-  .modal-dialog role="document"
-    .modal-content
-      .modal-header
-        h4.modal-title = t('.welcome')
-        button.close type="button" data-dismiss="modal" aria-hidden="true" = fa_icon("times")
-      .modal-body = t('.content', new_icon: fa_icon("plus-circle"), \
-                                  transactions_icon: fa_icon("credit-card"), \
-                                  schedules_icon: fa_icon("calendar")).html_safe
-      .modal-footer
-        button.btn.btn-success type="button" data-dismiss="modal" = t('.close')
-
-javascript:
-  $("#welcomeModal").modal("show")
+#welcomeModal.ui.basic.modal
+  .ui.icon.header
+    i.tags.icon
+    = t(".welcome")
+  .content
+    = t(".content", \
+        new_icon: icon("plus circle"), \
+        transactions_icon: icon("credit card"), \
+        schedules_icon: icon("calendar alternate")).html_safe
+  .actions
+    .ui.positive.right.labeled.icon.button
+      = t(".close")
+      i.checkmark.icon

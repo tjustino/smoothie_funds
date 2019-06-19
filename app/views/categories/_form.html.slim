@@ -1,18 +1,19 @@
-= form_for(shallow_args(@current_account, @category)) do |f|
-  h1.card-header = title
+h2.ui.secondary.segment.header
+  i.tags.icon
+  .content = title
 
-  .card-body
-    .form-group.row
-      = f.label :name, t('.name'), class: "col-sm-4 col-form-label"
-      .col
-        = f.text_field :name, \
-                       class: "form-control", \
-                       placeholder: t('.name'), \
-                       autofocus: true
-        - @category.errors.full_messages_for(:name).each do |message|
-          .invalid-feedback = message
+= form_with(model: shallow_args(@current_account, @category), local: true, class: "ui form") do |f|
+  .ui.attached.segment
+    .field class=("error" if @category.errors.include?(:name))
+      = f.label :name, t(".name")
+      .ui.labeled.input
+        = f.text_field :name, placeholder: t(".name"), autofocus: true
+        .ui.corner.label
+          i.asterisk.icon
+      - if @category.errors.include?(:name)
+        .ui.pointing.red.basic.label
+          - @category.errors.full_messages_for(:name).each do |message|
+            div = message
 
-  .card-footer
-    .row.justify-content-end
-      .col-auto
-        = f.submit class: "btn btn-primary"
+  .ui.attached.secondary.clearing.segment
+    = f.submit class: "ui right floated positive button"

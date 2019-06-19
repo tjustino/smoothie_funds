@@ -2,57 +2,57 @@
 - unless @all_user_categories.any?
   = render "welcome"
 
-/ Header
-.row.align-items-center.justify-content-between.mb-3
-  / Title
-  .col
-    h2
-      = t('.listing_categories', current_account: @current_account.name)
-      sup
-        .badge.badge-secondary#total = @nb_categories
+.ui.grid
+  / Header
+  .two.column.row
+    / Title
+    .left.floated.column
+      h1.ui.header
+        = t(".listing_categories", current_account: @current_account.name)
+        sup.ui.tag.grey.labels.not-for-mobile
+         .ui.mini.label#total = @nb_categories
 
-  / Download
-  .col-md-auto
-    h2 = link_to (fa_icon "download"), \
-                 account_categories_path(@current_account, format: :csv), \
-                 title: t(".export_categories"), \
-                 class: "btn btn-light"
+    .right.floated.right.aligned.column
+      .ui.three.column.stackable.grid
+        / Download
+        .two.wide.column
+          = link_to account_categories_path(@current_account, format: :csv), method: "get", class: "ui circular icon button not-for-mobile", title: t(".export_categories") do
+            i.download.icon
 
-  / Import categories from
-  - if @current_accounts.count > 1
-    = render "import_from"
-    .col-md-auto
-      h2 = button_tag  (fa_icon "exchange", text: t('.import_from')), \
-                    class: "btn btn-default", \
-                    data: { toggle: "modal", target: "#importFrom" }
+        / Import categories from
+        - if @current_accounts.count > 1
+          .seven.wide.column
+            = render "import_from"
+            = button_tag icon_text("exchange", t(".import_from")), \
+                         id: "importAccountsButton", \
+                         class: "ui button"
 
-  / New category
-  .col-md-auto
-    h2 = link_to (fa_icon "plus-circle",  text: t('.new_category')), \
-                                          new_account_category_path, \
-                                          class: "btn btn-primary"
+        / New category
+        .seven.wide.column
+          = link_to new_account_category_path, method: "get", class: "ui primary button" do
+            i.plus.circle.icon
+            = t(".new_category")
 
-/ Table
-.row#content-table
-    table.table.table-striped#magic-table
+  / Table
+  .ui.centered.row
+    table.ui.single.line.striped.collapsing.grey.table
       thead
         tr
-          th = t('.name')
-          th = t('.use')
+          th = t(".name")
+          th = t(".use")
           th
-
       tbody#listing
         = render partial: "category", locals: { categories: @categories,
                                                 name:       t('.name'),
-                                                use:        t('.use')    }
+                                                use:        t('.use') }
 
-/ More categories
-.row.justify-content-center.mb-3
-  = image_tag "loading.gif", style: "display:none;", class: "loading"
+  / More categories
+  .ui.centered.row
+    = content_tag(:i, nil, class: "large spinner loading icon", style: "display:none;")
 
-  - if @nb_categories >= @limit
-    = button_to t('.more_categories'), \
-                account_categories_path(@current_account), \
-                { method: :get, \
-                  class:  "btn btn-primary", \
-                  id:     "more_items" }
+    - if @nb_categories >= @limit
+      = button_to t(".more_categories"), \
+                  account_categories_path(@current_account), \
+                  { method: :get, \
+                    class:  "ui primary button", \
+                    id:     "more_items" }

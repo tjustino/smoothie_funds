@@ -106,12 +106,13 @@ fr:
       edit:             "Éditer"
       destroy:          "Supprimer"
       are_you_sure:     "Etes-vous certain de vouloir supprimer la catégorie « %{category} » ?"
+      or:               "ou"
     form:
       name:             "Nom"
       # back:             "Retour arrière"
     import_from:
       title:            "Importer depuis..."
-      import_from:      "Importer les catégories depuis :"
+      import_from:      "Importer les catégories de :"
       speech:           |-
         Avec cet assistant, importez toutes les catégories d'un autre compte vers celui-ci !<br />
         Les catégories déjà existantes seront omises, il n'y aura pas de doublon.<br /><br />

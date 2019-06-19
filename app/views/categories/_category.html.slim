@@ -1,21 +1,16 @@
 - categories.each do |category|
   tr
     / name
-    td data-title="#{name}" = category.name
+    td = category.name
 
     / count
-    td data-title="#{use}" = t('.time', total: category.transactions.active.count)
+    td = t(".time", total: category.transactions.active.count)
 
     / common
-    td
-      .row.justify-content-start.dotted-top
-        .col-auto
-          = link_to (fa_icon "edit"), \
-                    edit_category_path(category), \
-                    title: t('.edit')
-        .col-auto
-          = link_to (fa_icon "trash-o"), \
-                    category_path(category), \
-                    method: :delete, \
-                    data: {confirm: t('.are_you_sure', category: category.name)}, \
-                    title: t('.destroy')
+    td.right.aligned.collapsing
+      .ui.mini.buttons
+        = link_to edit_category_path(category), method: "get", class: "ui button", title: t(".edit") do
+          i.pencil.alternate.icon
+        .or data-text="#{t('.or')}"
+        = link_to category_path(category), method: "delete", class: "ui button", title: t(".destroy"), data: { confirm: t(".are_you_sure", category: category.name) } do
+          i.trash.icon
