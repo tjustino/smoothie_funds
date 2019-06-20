@@ -1,44 +1,47 @@
-= form_for(shallow_args(@current_account, @schedule)) do |f|
-  h1.card-header = title
+h2.ui.secondary.segment.header
+  i.calendar.alternate.icon
+  .content = title
 
-  .card-body
+/ = form_for(shallow_args(@current_account, @schedule)) do |f|
+= form_with(model: shallow_args(@current_account, @schedule), local: true, class: "ui form") do |f|
+  .ui.attached.segment
     = f.fields_for :operation do |operation_fields|
       = render "operation_form", f: operation_fields
 
-    hr
+    .ui.divider
 
-    .form-group.row
-      = f.label :frequency, t('.frequency'), class: "col-sm-4 col-form-label"
-      .col
-        .input-group
-          .input-group-prepend
-            span.input-group-text = t('.all_the')
-          = f.number_field :frequency, \
-                           class: "form-control", \
-                           placeholder: t('.frequency')
-          - @schedule.errors.full_messages_for(:frequency).each do |message|
-            .invalid-feedback = message
-      .col
-        = f.select :period, [ [t('.days'), :days], [t('.weeks'), :weeks], \
-                              [t('.months'), :months], [t('.years'), :years]], \
-                            {}, { class: "form-control custom-select" }
-        - @schedule.errors.full_messages_for(:period).each do |message|
-          .invalid-feedback = message
+    .field
+      = f.label :frequency, t(".frequency")
+      .two.fields
+        .field class=("error" if @schedule.errors.include?(:frequency))
+          .ui.labeled.input
+            .ui.label = t(".all_the")
+            = f.number_field :frequency, placeholder: t(".frequency")
+          - if @schedule.errors.include?(:frequency)
+            .ui.pointing.red.basic.label
+              - @schedule.errors.full_messages_for(:frequency).each do |message|
+                .invalid-feedback = message
+        .field class=("error" if @schedule.errors.include?(:period))
+          = f.select :period, [[t(".days"), :days], \
+                               [t(".weeks"), :weeks], \
+                               [t(".months"), :months], \
+                               [t(".years"), :years]], {}, { class: "ui fluid dropdown" }
+          - if @schedule.errors.include?(:period)
+            .ui.pointing.red.basic.label
+              - @schedule.errors.full_messages_for(:period).each do |message|
+                .invalid-feedback = message
 
-    .form-group.row
-      = f.label :next_time, t('.next_time'), class: "col-sm-4 col-form-label"
-      .col
-        .input-group
-          = f.date_field :next_time, \
-                         class: "form-control", \
-                         placeholder: t('.next_time'), \
-              value: @schedule.next_time.nil? ? Date.today : @schedule.next_time
-          .input-group-append
-            span.input-group-text = fa_icon "calendar"
+    .field class=("error" if @schedule.errors.include?(:next_time))
+      = f.label :next_time, t(".next_time")
+      .ui.left.icon.input
+        i.calendar.alternate.sign.icon
+        = f.date_field :next_time, \
+                       placeholder: t(".next_time"), \
+                       value: @schedule.next_time.nil? ? Date.today : @schedule.next_time
+      - if @schedule.errors.include?(:next_time)
+        .ui.pointing.red.basic.label
           - @schedule.errors.full_messages_for(:next_time).each do |message|
             .invalid-feedback = message
 
-  .card-footer
-    .row.justify-content-end
-      .col-auto
-        = f.submit class: "btn btn-primary"
+  .ui.attached.secondary.clearing.segment
+    = f.submit class: "ui right floated positive button"

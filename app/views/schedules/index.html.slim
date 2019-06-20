@@ -2,56 +2,56 @@
 - unless @all_user_schedules.any?
   = render "welcome"
 
-/ Header
-.row.align-items-center.justify-content-between.mb-3
-  / Title
-  .col
-    h2
-      = t('.listing_schedules', current_account: @current_account.name)
-      sup
-        .badge.badge-secondary#total = @nb_schedules
+.ui.grid
+  / Header
+  .two.column.row
+    / Title
+    .left.floated.column
+      h1.ui.header
+        = t(".listing_schedules", current_account: @current_account.name)
+        sup.ui.tag.grey.labels.not-for-mobile
+         .ui.mini.label#total = @nb_schedules
 
-  / Download
-  .col-md-auto
-    h2 = link_to (fa_icon "download"), \
-                 account_schedules_path(@current_account, format: :csv), \
-                 title: t(".export_schedules"), \
-                 class: "btn btn-light"
+    .right.floated.right.aligned.column
+      .ui.two.column.stackable.grid
+        / Download
+        .column
+          = link_to account_schedules_path(@current_account, format: :csv), method: "get", class: "ui circular icon button not-for-mobile", title: t(".export_schedules") do
+            i.download.icon
 
-  / New schedule
-  .col-md-auto
-    h2 = link_to (fa_icon "plus-circle",  text: t('.new_schedule')), \
-                                          new_account_schedule_path, \
-                                          class: "btn btn-primary"
+        / New schedule
+        .column
+          = link_to new_account_schedule_path, method: "get", class: "ui primary button" do
+            i.plus.circle.icon
+            = t(".new_schedule")
 
-/ Table
-.row#content-table
-  table.table.table-striped#magic-table
-    thead
-      tr
-        th
-        th = t('.next_time')
-        th = t('.frequency')
-        th = t('.category')
-        th.text-right = t('.amount')
-        th = t('.comment')
-        th
+  / Table
+  .ui.centered.row
+    table.ui.single.line.striped.collapsing.grey.table
+      thead
+        tr
+          th
+          th = t(".next_time")
+          th = t(".frequency")
+          th = t(".category")
+          th.text-right = t(".amount")
+          th = t(".comment")
+          th
+      tbody#listing
+        = render partial: "schedule", locals: { schedules:  @schedules,
+                                                next_time:  t(".next_time"),
+                                                frequency:  t(".frequency"),
+                                                category:   t(".category"),
+                                                amount:     t(".amount"),
+                                                comment:    t(".comment") }
 
-    tbody#listing
-      = render partial: "schedule", locals: { schedules:  @schedules,
-                                              next_time:  t('.next_time'),
-                                              frequency:  t('.frequency'),
-                                              category:   t('.category'),
-                                              amount:     t('.amount'),
-                                              comment:    t('.comment') }
+  / More schedules
+  .ui.centered.row
+    = content_tag(:i, nil, class: "large spinner loading icon", style: "display:none;")
 
-/ More schedules
-.row.justify-content-center.mb-3
-  = image_tag "loading.gif", style: "display:none;", class: "loading"
-
-  - if @nb_schedules >= @limit
-    = button_to t('.more_schedules'), \
-                account_schedules_path(@current_account), \
-                { method: :get, \
-                  class:  "btn btn-primary", \
-                  id:     "more_items" }
+    - if @nb_schedules >= @limit
+      = button_to t(".more_schedules"), \
+                  account_schedules_path(@current_account), \
+                  { method: :get, \
+                    class:  "ui primary button", \
+                    id:     "more_items" }
