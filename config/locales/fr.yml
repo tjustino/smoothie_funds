@@ -31,7 +31,7 @@ fr:
       waiting_for:      "En attente de "
       edit:             "Éditer"
       destroy:          "Supprimer"
-      are_you_sure:     "Etes-vous certain de vouloir supprimer le compte « %{account} » ?"
+      are_you_sure:     "Êtes-vous certain de vouloir supprimer le compte « %{account} » ?"
       or:               "ou"
     form:
       name:             "Nom"
@@ -105,7 +105,7 @@ fr:
       time:             "%{total} fois"
       edit:             "Éditer"
       destroy:          "Supprimer"
-      are_you_sure:     "Etes-vous certain de vouloir supprimer la catégorie « %{category} » ?"
+      are_you_sure:     "Êtes-vous certain de vouloir supprimer la catégorie « %{category} » ?"
       or:               "ou"
     form:
       name:             "Nom"
@@ -233,7 +233,7 @@ fr:
       check_transaction:  "Rapprocher la transaction"
       edit:               "Éditer"
       destroy:            "Supprimer"
-      are_you_sure:       "Etes-vous certain de vouloir supprimer la transaction ?"
+      are_you_sure:       "Êtes-vous certain de vouloir supprimer la transaction ?"
     welcome:
       welcome:          "La création de transaction"
       content:              |-
@@ -310,8 +310,9 @@ fr:
       months:             "mois"
       years:              "ans"
       edit:               "Éditer"
+      or:                 "ou"
       destroy:            "Supprimer"
-      are_you_sure:       "Etes-vous certain de vouloir supprimer cet échéancier ?"
+      are_you_sure:       "Êtes-vous certain de vouloir supprimer cet échéancier ?"
     welcome:
       welcome:          "La création d'échéancier"
       content:              |-
@@ -422,7 +423,7 @@ fr:
       check_transaction:  "Rapprocher la transaction"
       edit:               "Éditer"
       destroy:            "Supprimer"
-      are_you_sure:       "Etes-vous certain de vouloir supprimer la transaction ?"
+      are_you_sure:       "Êtes-vous certain de vouloir supprimer la transaction ?"
     new:
       create_search:          "Nouvelle recherche"
       date_search:            "Recherche du %{date}"
@@ -431,7 +432,7 @@ fr:
       antepenultimate_search: "Antépénultième recherche"
       show_result:            "Voir le résultat"
       destroy:                "Supprimer"
-      are_you_sure:           "Etes-vous certain de vouloir supprimer cette recherche ?"
+      are_you_sure:           "Êtes-vous certain de vouloir supprimer cette recherche ?"
     show:
       result:             "Résultat de recherche"
       sum:                "Somme des montants : "
