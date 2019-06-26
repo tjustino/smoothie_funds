@@ -133,7 +133,7 @@ GEM
     parser (2.6.3.0)
       ast (~> 2.4.0)
     pg (1.1.4)
-    public_suffix (3.1.0)
+    public_suffix (3.1.1)
     puma (3.12.1)
     rack (2.0.7)
     rack-proxy (0.6.5)
@@ -172,7 +172,7 @@ GEM
     rb-inotify (0.10.0)
       ffi (~> 1.0)
     regexp_parser (1.5.1)
-    rubocop (0.71.0)
+    rubocop (0.72.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.6)
@@ -181,6 +181,9 @@ GEM
       unicode-display_width (>= 1.4.0, < 1.7)
     rubocop-performance (1.4.0)
       rubocop (>= 0.71.0)
+    rubocop-rails (2.1.0)
+      rack (>= 1.1)
+      rubocop (>= 0.72.0)
     ruby-progressbar (1.10.1)
     ruby_dep (1.5.0)
     rubyzip (1.2.3)
@@ -264,6 +267,7 @@ DEPENDENCIES
   rails (~> 6.0.0.rc1)
   rubocop
   rubocop-performance
+  rubocop-rails
   sass-rails (~> 5.0)
   selenium-webdriver
   semantic-ui-sass

@@ -1,5 +1,9 @@
 # https://rubocop.readthedocs.io/en/stable/
-require: rubocop-performance
+# https://rubocop-performance.readthedocs.io/en/stable/cops_performance/
+# https://docs.rubocop.org/projects/rails/en/stable/cops_rails/
+require:
+  - rubocop-performance
+  - rubocop-rails
 
 # Preferences
 Style/StringLiterals:
@@ -15,10 +19,8 @@ Layout/ExtraSpacing:
     - Gemfile
 
 # Well, it's seem it's a rails project
-Rails:
-  Enabled: true
 Layout/IndentationConsistency:
-  EnforcedStyle: rails
+  EnforcedStyle: indented_internal_methods
 AllCops:
   Exclude:
     - db/schema.rb
