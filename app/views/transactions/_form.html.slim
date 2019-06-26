@@ -1,71 +1,146 @@
-= form_for(shallow_args(@current_account, @transaction)) do |f|
-  h1.card-header = title
+/ = form_for(shallow_args(@current_account, @transaction)) do |f|
+/   h1.card-header = title
+/
+/   .card-body
+/     .form-group.row
+/       = f.label :amount, t('.amount'), class: "col-sm-4 col-form-label"
+/       .col
+/         = select_tag :sign, options_for_select( [ \
+/             [t('.debit'), "debit"], [t('.credit'), "credit"] ], @sign), \
+/             { class: "form-control custom-select" }
+/         - @transaction.errors.full_messages_for(:sign).each do |message|
+/           .invalid-feedback = message
+/       .col
+/         .input-group
+/           = f.telephone_field :amount, \
+/                               class: "form-control", \
+/                               placeholder: t('.amount'), \
+/                               autofocus: true
+/           .input-group-append
+/             span.input-group-text = t('number.currency.format.unit')
+/           - @transaction.errors.full_messages_for(:amount).each do |message|
+/             .invalid-feedback = message
+/
+/     .form-group.row
+/       = f.label :date, t('.date'), class: "col-sm-4 col-form-label"
+/       .col
+/         .input-group
+/           = f.date_field :date, \
+/                          class: "form-control", \
+/                          placeholder: t('.date'), \
+/                   value: @transaction.date.nil? ? Date.today : @transaction.date
+/           .input-group-append
+/             span.input-group-text = icon "calendar"
+/           - @transaction.errors.full_messages_for(:date).each do |message|
+/             .invalid-feedback = message
+/
+/     .form-group.row
+/       = f.label :category_id, t('.category'), class: "col-sm-4 col-form-label"
+/       .col
+/         = f.select :category_id, \
+/             @current_account.categories.order(:name ).collect { |category| \
+/                                         [ category.name, category.id ] }, \
+/                                         {}, \
+/                                         { class: "form-control custom-select" }
+/         - @transaction.errors.full_messages_for(:category_id).each do |message|
+/           .invalid-feedback = message
+/
+/     .form-group.row
+/       = f.label :comment, t('.comment'), class: "col-sm-4 col-form-label"
+/       .col
+/         = f.text_area :comment, \
+/                       class: "form-control", \
+/                       placeholder: t('.comment'), \
+/                       rows: 3
+/         - @transaction.errors.full_messages_for(:comment).each do |message|
+/           .invalid-feedback = message
+/
+/     .form-group.row
+/       .col-sm-4
+/       .col
+/         .form-check
+/           = f.label :checked, class: "form-check-label" do
+/             = f.check_box :checked, class: "form-check-input"
+/             = t('.checked')
+/           - @transaction.errors.full_messages_for(:checked).each do |message|
+/             .invalid-feedback = message
+/
+/   .card-footer
+/     .row.justify-content-end
+/       .col-auto
+/         = f.submit class: "btn btn-primary"
+/
 
-  .card-body
-    .form-group.row
-      = f.label :amount, t('.amount'), class: "col-sm-4 col-form-label"
-      .col
-        = select_tag :sign, options_for_select( [ \
-            [t('.debit'), "debit"], [t('.credit'), "credit"] ], @sign), \
-            { class: "form-control custom-select" }
-        - @transaction.errors.full_messages_for(:sign).each do |message|
-          .invalid-feedback = message
-      .col
-        .input-group
-          = f.telephone_field :amount, \
-                              class: "form-control", \
-                              placeholder: t('.amount'), \
-                              autofocus: true
-          .input-group-append
-            span.input-group-text = t('number.currency.format.unit')
-          - @transaction.errors.full_messages_for(:amount).each do |message|
-            .invalid-feedback = message
 
-    .form-group.row
-      = f.label :date, t('.date'), class: "col-sm-4 col-form-label"
-      .col
-        .input-group
-          = f.date_field :date, \
-                         class: "form-control", \
-                         placeholder: t('.date'), \
-                  value: @transaction.date.nil? ? Date.today : @transaction.date
-          .input-group-append
-            span.input-group-text = fa_icon "calendar"
-          - @transaction.errors.full_messages_for(:date).each do |message|
-            .invalid-feedback = message
 
-    .form-group.row
-      = f.label :category_id, t('.category'), class: "col-sm-4 col-form-label"
-      .col
-        = f.select :category_id, \
-            @current_account.categories.order(:name ).collect { |category| \
-                                        [ category.name, category.id ] }, \
-                                        {}, \
-                                        { class: "form-control custom-select" }
-        - @transaction.errors.full_messages_for(:category_id).each do |message|
-          .invalid-feedback = message
+h2.ui.secondary.segment.header
+  i.calendar.alternate.icon
+  .content = title
 
-    .form-group.row
-      = f.label :comment, t('.comment'), class: "col-sm-4 col-form-label"
-      .col
-        = f.text_area :comment, \
-                      class: "form-control", \
-                      placeholder: t('.comment'), \
-                      rows: 3
-        - @transaction.errors.full_messages_for(:comment).each do |message|
-          .invalid-feedback = message
+= form_with(model: shallow_args(@current_account, @transaction), local: true, class: "ui form") do |f|
+  .ui.attached.segment
+    .field
+      = f.label :amount, t(".amount")
+      .two.fields
+        .field class=("error" if @transaction.errors.include?(:sign))
+          = select_tag :sign, \
+                       options_for_select([ \
+                         [t(".debit"), "debit"], \
+                         [t(".credit"), "credit"] \
+                       ], @sign), { class: "ui fluid dropdown" }
+          - if @transaction.errors.include?(:sign)
+            .ui.pointing.red.basic.label
+              - @transaction.errors.full_messages_for(:sign).each do |message|
+                .invalid-feedback = message
 
-    .form-group.row
-      .col-sm-4
-      .col
-        .form-check
-          = f.label :checked, class: "form-check-label" do
-            = f.check_box :checked, class: "form-check-input"
-            = t('.checked')
+        .field class=("error" if @transaction.errors.include?(:amount))
+          .ui.right.labeled.left.icon.input
+            - case t("number.currency.format.unit")
+            - when "€"
+              i.euro.sign.icon
+            - when "$"
+              i.dollar.sign.icon
+            - when "£"
+              i.pound.sign.icon
+            - when "¥"
+              i.yen.sign.icon
+            = f.telephone_field :amount, placeholder: t(".amount"), autofocus: true
+            .ui.corner.label
+              i.asterisk.icon
+          - if @transaction.errors.include?(:amount)
+            .ui.pointing.red.basic.label
+              - @transaction.errors.full_messages_for(:amount).each do |message|
+                div = message
+
+    .field class=("error" if @transaction.errors.include?(:category_id))
+      = f.label :category_id, t(".category")
+      = f.select :category_id, \
+                 @current_account.categories.order(:name ).collect { |category| \
+                   [ category.name, category.id ] }, \
+                 {}, \
+                 { class: "ui fluid dropdown" }
+      - if @transaction.errors.include?(:category_id)
+       .ui.pointing.red.basic.label
+         - @transaction.errors.full_messages_for(:category_id).each do |message|
+           div = message
+
+    .field class=("error" if @transaction.errors.include?(:comment))
+      = f.label :comment, t(".comment")
+      = f.text_area :comment, placeholder: t(".comment"), rows: 3
+      - if @transaction.errors.include?(:comment)
+        .ui.pointing.red.basic.label
+          - @transaction.errors.full_messages_for(:comment).each do |message|
+            div = message
+
+    .inline.field class=("error" if @transaction.errors.include?(:checked))
+      .ui.checkbox
+        = f.check_box :checked
+        = f.label :checked do
+          = t(".checked")
+      - if @transaction.errors.include?(:checked)
+        .ui.pointing.red.basic.label
           - @transaction.errors.full_messages_for(:checked).each do |message|
-            .invalid-feedback = message
+            div = message
 
-  .card-footer
-    .row.justify-content-end
-      .col-auto
-        = f.submit class: "btn btn-primary"
+  .ui.attached.secondary.clearing.segment
+    = f.submit class: "ui right floated positive button"

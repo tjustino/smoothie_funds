@@ -44,7 +44,6 @@ fr:
       shared_email:     "Courriel"
       help_share:       "Une fois établi, le partage du compte reste actif même si vous mettez à jour votre courriel"
       hidden:           "Masquer ce compte"
-      # back:             "Retour arrière"
     pending_user:
       pending_user:     "Partage en attente"
       no_longer_propose: "Ne plus proposer"
@@ -109,7 +108,6 @@ fr:
       or:               "ou"
     form:
       name:             "Nom"
-      # back:             "Retour arrière"
     import_from:
       title:            "Importer depuis..."
       import_from:      "Importer les catégories de :"
@@ -226,12 +224,12 @@ fr:
       amount:           "Montant"
       checked:          "Rapprochée"
       comment:          "Commentaire"
-      # back:             "Retour arrière"
     sum_checked:
-      sum_checked:      "Somme des montants rappochés : "
+      sum_checked:      "Somme des montants rappochés : %{sum}"
     transaction:
       check_transaction:  "Rapprocher la transaction"
       edit:               "Éditer"
+      or:                 "ou"
       destroy:            "Supprimer"
       are_you_sure:       "Êtes-vous certain de vouloir supprimer la transaction ?"
     welcome:
@@ -250,7 +248,7 @@ fr:
         la somme des montants rapprochés doit correspondre à la
         première ligne de votre relevé (souvent appelé "Ancien solde").<br />
         Prenez 5 minutes pour rapprocher chaque opération en utilisant la coche
-        en début de ligne ( %{square_icon} / %{check_square_icon} ). Au final,
+        en début de ligne ( %{unchecked_icon} / %{checked_icon} ). Au final,
         la somme des montants rapprochés devra être équivalente au "Nouveau solde"
         (dernière ligne du relevé bancaire). C'est une bonne pratique !
       close:            "Ok j'ai compris !"
@@ -258,7 +256,6 @@ fr:
       edit_transaction: "Éditer la transaction"
     index:
       listing_transactions: "Liste des transactions du %{current_account} "
-      count:              "Nombre de transations : "
       export_transactions: "Exporter mes transactions"
       new_transaction:    "Nouvelle transaction"
       checked:            "Rapproché"
@@ -292,7 +289,6 @@ fr:
       weeks:              "semaines"
       months:             "mois"
       years:              "ans"
-      # back:               "Retour arrière"
     operation_form:
       debit:            "Débit"
       credit:           "Crédit"
@@ -361,7 +357,6 @@ fr:
       name:                   "Nom"
       password:               "Mot de passe"
       password_confirmation:  "Confirmation"
-      # back:                   "Retour arrière"
     edit:
       edit_user:  "Édition de l'utilisateur courant"
       title_bug:  "Support"

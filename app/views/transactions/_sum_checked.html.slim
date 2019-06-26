@@ -1,3 +1,1 @@
-footer.text-muted#sum_checked
-  span = t('.sum_checked')
-  span.nowrap = number_to_currency(sum_checked)
+.sub.header#sum_checked = t(".sum_checked", sum: number_to_currency(sum_checked))
