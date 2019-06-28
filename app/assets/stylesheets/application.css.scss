@@ -50,14 +50,16 @@ https://github.com/doabit/semantic-ui-sass/tree/master/app/assets/stylesheets/se
 @import "semantic-ui/modules/modal";
 @import "semantic-ui/modules/transition";
 
-
 body {
   /* http://colorsafe.co/ */
   /* https://www.w3schools.com/colors/colors_picker.asp */
   /* sf_color : #bf3060 */
   // background-color: #f2f1ef;
-  background-image: linear-gradient(to right, #f2f1ef, #faebf0, #f2f1ef);
+  // background-image: linear-gradient(to right, #f2f1ef, #faebf0, #f2f1ef);
   // background-color: #34dbdb; // Emilie
+  // background-color: #add8e6;
+  // background-color: #15738C;
+  background-color: #ebebeb;
 }
 
 // fix header margin
