@@ -1,5 +1,7 @@
 # https://rubocop.readthedocs.io/en/stable/
-require: rubocop-performance
+require:
+  - rubocop-performance
+  - rubocop-rails
 
 # Preferences
 Style/StringLiterals:
@@ -18,7 +20,7 @@ Layout/ExtraSpacing:
 Rails:
   Enabled: true
 Layout/IndentationConsistency:
-  EnforcedStyle: rails
+  EnforcedStyle: indented_internal_methods
 AllCops:
   Exclude:
     - db/schema.rb

@@ -32,6 +32,7 @@ group :development do
   gem "listen"                  # Listen to file modif and notifies you
   gem "rubocop"                 # Automatic Ruby code style checking tool
   gem "rubocop-performance"     # Check for performance optimizations
+  gem "rubocop-rails"           # Automatic Rails code style checking tool
   gem "spring"                  # Keep application running in the background
   gem "spring-watcher-listen"   # Makes spring watch files
   gem "web-console"             # Access an IRB console on exception pages
