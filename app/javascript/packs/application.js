@@ -20,8 +20,10 @@ require('semantic-ui-dimmer/dimmer');
 require('semantic-ui-dropdown/dropdown');
 require('semantic-ui-modal/modal');
 require('semantic-ui-transition/transition');
+require('semantic-ui-accordion/accordion');
 // own code
 require('more_items.js');
 require('close_icon.js');
 require('dropdown.js');
 require('modal.js');
+require('accordion.js');
