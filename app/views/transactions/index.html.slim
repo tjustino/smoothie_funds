@@ -14,14 +14,14 @@
 
   / Download
   .col-md-auto
-    h2 = link_to (fa_icon "download"), \
+    h2 = link_to (icon "fas fa-download"), \
                  account_transactions_path(@current_account, format: :csv), \
                  title: t(".export_transactions"), \
                  class: "btn btn-light"
 
   / New transaction
   .col-md-auto
-    h2 = link_to (fa_icon "plus-circle",  text: t('.new_transaction')), \
+    h2 = link_to (icon_text "fas fa-plus-circle", t('.new_transaction')), \
                                           new_account_transaction_path, \
                                           class: "btn btn-primary"
 

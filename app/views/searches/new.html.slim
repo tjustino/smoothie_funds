@@ -21,11 +21,11 @@
             .card-footer
               .row.justify-content-between
                 .col-auto
-                   = link_to ( fa_icon "arrow-circle-o-right", \
-                                                    text: t('.show_result') ), \
+                   = link_to ( icon_text "far fa-arrow-alt-circle-right", \
+                                                    t('.show_result') ), \
                                                     search
                 .col-auto
-                  = link_to (fa_icon "trash-o", text: t('.destroy')), \
+                  = link_to (icon_text "far fa-trash-alt", t('.destroy')), \
                                         search, \
                                         method: :delete, \
                                         data: { confirm: t('.are_you_sure') }, \

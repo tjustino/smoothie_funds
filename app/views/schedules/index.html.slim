@@ -13,14 +13,14 @@
 
   / Download
   .col-md-auto
-    h2 = link_to (fa_icon "download"), \
+    h2 = link_to (icon "fas fa-download"), \
                  account_schedules_path(@current_account, format: :csv), \
                  title: t(".export_schedules"), \
                  class: "btn btn-light"
 
   / New schedule
   .col-md-auto
-    h2 = link_to (fa_icon "plus-circle",  text: t('.new_schedule')), \
+    h2 = link_to (icon_text "fas fa-plus-circle", t('.new_schedule')), \
                                           new_account_schedule_path, \
                                           class: "btn btn-primary"
 

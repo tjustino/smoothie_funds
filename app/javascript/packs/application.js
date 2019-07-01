@@ -17,6 +17,9 @@
 require('@rails/ujs').start();
 require('bootstrap');
 require('chart.js');
+
 // own code
 require('more_items.js');
 require('show_modal.js');
+import '../stylesheets/application.css.scss';
+import '../stylesheets/dashboard.css.scss';

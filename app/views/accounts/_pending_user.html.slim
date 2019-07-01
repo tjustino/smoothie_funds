@@ -3,7 +3,7 @@
   .col
     = f.email_field :email, class: "form-control"
   .col-auto
-    = link_to (fa_icon "undo", text: t('.no_longer_propose')), \
+    = link_to (icon_text "fas fa-undo", t('.no_longer_propose')), \
               unpend_path, \
               method: :delete, \
               class: "btn btn-warning"

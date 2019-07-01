@@ -20,11 +20,11 @@
     td
       .row.justify-content-start.dotted-top
         .col-auto
-          = link_to (fa_icon "edit"), \
+          = link_to (icon "fas fa-edit"), \
                     edit_account_path(account), \
                     title: t('.edit')
         .col-auto
-          = link_to (fa_icon "trash-o"), \
+          = link_to (icon "far fa-trash-alt"), \
                     account_path(account), \
                     method: :delete, \
                     data: {confirm: t('.are_you_sure', account: account.name)}, \

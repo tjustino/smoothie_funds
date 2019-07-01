@@ -10,11 +10,11 @@
     td
       .row.justify-content-start.dotted-top
         .col-auto
-          = link_to (fa_icon "edit"), \
+          = link_to (icon "fas fa-edit"), \
                     edit_category_path(category), \
                     title: t('.edit')
         .col-auto
-          = link_to (fa_icon "trash-o"), \
+          = link_to (icon "far fa-trash-alt"), \
                     category_path(category), \
                     method: :delete, \
                     data: {confirm: t('.are_you_sure', category: category.name)}, \

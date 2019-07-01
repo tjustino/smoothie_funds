@@ -3,7 +3,7 @@
     .modal-content
       .modal-header
         h4.modal-title = t('.welcome')
-        button.close type="button" data-dismiss="modal" aria-hidden="true" = fa_icon("times")
-      .modal-body = t('.content', accounts_icon: fa_icon("book")).html_safe
+        button.close type="button" data-dismiss="modal" aria-hidden="true" = icon("fas fa-times")
+      .modal-body = t('.content', accounts_icon: icon("fas fa-book")).html_safe
       .modal-footer
         button.btn.btn-success type="button" data-dismiss="modal" = t('.close')

@@ -30,7 +30,7 @@
                          placeholder: t('.date'), \
                   value: @transaction.date.nil? ? Date.today : @transaction.date
           .input-group-append
-            span.input-group-text = fa_icon "calendar"
+            span.input-group-text = icon "far fa-calendar-alt"
           - @transaction.errors.full_messages_for(:date).each do |message|
             .invalid-feedback = message
 

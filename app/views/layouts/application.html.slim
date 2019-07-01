@@ -3,7 +3,7 @@ html
   head
     title Smoothie Funds#{" - DEV" if Rails.env.development?}
     = render partial: "layouts/favicon"
-    = stylesheet_link_tag "application", media: "all"
+    = stylesheet_pack_tag "application", media: "all"
     = javascript_pack_tag "application"
     = csrf_meta_tags
     meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -27,22 +27,22 @@ html
               - if Category.exists?(account: @current_accounts)
                 li.nav-item.dropdown class=("active" if params[:controller] == "transactions")
                   a.nav-link.dropdown-toggle href="#" data-toggle="dropdown"
-                    = fa_icon "credit-card", text: t('.transactions').html_safe
+                    = icon_text "far fa-credit-card", t('.transactions').html_safe
                   .dropdown-menu
                     - @accounts_with_categories.each do |account|
                       = link_to account.name, account_transactions_path(account), class: "dropdown-item"
                     .dropdown-divider
-                    = link_to ( fa_icon "search", text: t('.search') ), \
+                    = link_to ( icon_text "fas fa-search", t('.search') ), \
                               new_user_search_path(@current_user), \
                               class: "dropdown-item"
-                    = link_to ( fa_icon "area-chart", text: t('.analytics') ), \
+                    = link_to ( icon_text "fas fa-chart-area", t('.analytics') ), \
                               user_analytics_path(@current_user), \
                               class: "dropdown-item"
 
                 / dropdown schedules
                 li.nav-item.dropdown class=("active" if params[:controller] == "schedules")
                   a.nav-link.dropdown-toggle href="#" data-toggle="dropdown"
-                    = fa_icon "calendar", text: t('.schedules').html_safe
+                    = icon_text "far fa-calendar-alt", t('.schedules').html_safe
                   .dropdown-menu
                     - @accounts_with_categories.each do |account|
                       = link_to account.name, account_schedules_path(account), class: "dropdown-item"
@@ -51,26 +51,26 @@ html
               - if @current_accounts.any?
                 li.nav-item.dropdown class=("active" if params[:controller] == "categories")
                   a.nav-link.dropdown-toggle href="#" data-toggle="dropdown"
-                    = fa_icon "tags", text: t('.categories').html_safe
+                    = icon_text "fas fa-tags", t('.categories').html_safe
                   .dropdown-menu
                     - @current_accounts.each do |account|
                       = link_to account.name, account_categories_path(account), class: "dropdown-item"
 
               / link accounts
-              = nav_link t('.accounts'), accounts_path, "book"
+              = nav_link t('.accounts'), accounts_path, "fas fa-book"
 
             ul.navbar-nav
               li.nav-item.dropdown class=("active" if params[:controller] == "users")
                 a.nav-link.dropdown-toggle href="#" data-toggle="dropdown"
-                  = fa_icon "user", text: name_or_email
+                  = icon_text "fas fa-user", name_or_email
                 .dropdown-menu
                   / Profil
-                  = link_to ( fa_icon "sliders", text: t('.profile') ), \
+                  = link_to ( icon_text "fas fa-sliders-h", t('.profile') ), \
                             edit_user_path(@current_user), \
                             class: "dropdown-item"
                   .dropdown-divider
                   / Logout
-                  = link_to ( fa_icon "sign-out", text: t('.logout') ), \
+                  = link_to ( icon_text "fas fa-sign-out-alt", t('.logout') ), \
                             logout_path,  \
                             method: :delete, \
                             class: "dropdown-item", \
@@ -81,26 +81,26 @@ html
             ul.navbar-nav.mr-auto
             ul.navbar-nav
               li.nav-item
-                = link_to (fa_icon "user-plus", text: t('.create_user')), \
-                                                new_user_path, \
-                                                class: "btn btn-info"
+                = link_to (icon_text "fas fa-user-plus", t('.create_user')), \
+                          new_user_path, \
+                          class: "btn btn-info"
       / alerts
       .row
         .col
           - if flash[:alert]
             .alert.alert-danger.alert-dismissable.fade.show role="alert"
               button.close type="button" data-dismiss="alert" aria-hidden="true"
-                = fa_icon "times"
+                = icon "fas fa-times"
               = flash[:alert]
           - elsif flash[:warning]
             .alert.alert-warning.alert-dismissable.fade.show role="alert"
               button.close type="button" data-dismiss="alert" aria-hidden="true"
-                = fa_icon "times"
+                = icon "fas fa-times"
               = flash[:warning]
           - elsif flash[:notice]
             .alert.alert-success.alert-dismissable.fade.show role="alert"
               button.close type="button" data-dismiss="alert" aria-hidden="true"
-                = fa_icon "times"
+                = icon "fas fa-times"
               = flash[:notice]
 
       / content
@@ -113,5 +113,5 @@ html
           .col-auto
             .alert.alert-warning.alert-dismissable.fade.show role="alert"
               button.close type="button" data-dismiss="alert" aria-hidden="true"
-                = fa_icon "times"
+                = icon "fas fa-times"
               = debug(params)

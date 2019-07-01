@@ -36,7 +36,7 @@
                 = shared_user.email_field :email, class: "form-control", \
                                                   readonly: "readonly"
           .col-auto
-            = link_to (fa_icon "chain-broken", text: t('.unlink')), \
+            = link_to (icon_text "fas fa-unlink", t('.unlink')), \
                       unlink_path(f.object), \
                       method: :delete, \
                       data: { confirm: t('.are_you_sure_unlink') }, \

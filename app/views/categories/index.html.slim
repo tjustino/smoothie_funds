@@ -13,7 +13,7 @@
 
   / Download
   .col-md-auto
-    h2 = link_to (fa_icon "download"), \
+    h2 = link_to (icon "fas fa-download"), \
                  account_categories_path(@current_account, format: :csv), \
                  title: t(".export_categories"), \
                  class: "btn btn-light"
@@ -22,13 +22,13 @@
   - if @current_accounts.count > 1
     = render "import_from"
     .col-md-auto
-      h2 = button_tag  (fa_icon "exchange", text: t('.import_from')), \
+      h2 = button_tag  (icon_text "fas fa-exchange-alt", t('.import_from')), \
                     class: "btn btn-default", \
                     data: { toggle: "modal", target: "#importFrom" }
 
   / New category
   .col-md-auto
-    h2 = link_to (fa_icon "plus-circle",  text: t('.new_category')), \
+    h2 = link_to (icon_text "fas fa-plus-circle", t('.new_category')), \
                                           new_account_category_path, \
                                           class: "btn btn-primary"
 

@@ -1,7 +1,7 @@
 - schedules.each_with_index do |schedule, index|
   tr
     / magic wand
-    td = link_to  fa_icon("magic"), \
+    td = link_to  icon("fas fa-magic"), \
                   insert_schedule_path(schedule, \
                                     index: index + params[:offset].to_i + 1), \
                   method: :post, \
@@ -29,11 +29,11 @@
     td
       .row.justify-content-start.dotted-top
         .col-auto
-          = link_to (fa_icon "edit"), \
+          = link_to (icon "fas fa-edit"), \
                     edit_schedule_path(schedule), \
                     title: t('.edit')
         .col-auto
-          = link_to (fa_icon "trash-o"), \
+          = link_to (icon "far fa-trash-alt"), \
                     schedule_path(schedule), \
                     method: :delete, \
                     data: { confirm: t('.are_you_sure') }, \

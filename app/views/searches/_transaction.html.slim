@@ -3,7 +3,7 @@
 
     / Check
     td = link_to \
-            transaction.checked ? fa_icon("check-square-o") : fa_icon("square-o"), \
+            transaction.checked ? icon("far fa-check-square") : icon("far fa-square"), \
             easycheck_transaction_path(transaction), \
             method: :post, \
             remote: true, \
@@ -34,11 +34,11 @@
     td
       .row.justify-content-start.dotted-top
         .col-auto
-          = link_to (fa_icon "edit"), \
+          = link_to (icon "fas fa-edit"), \
                   edit_transaction_path(transaction, search_id: params[:id]), \
                   title: t('.edit')
         .col-auto
-          = link_to (fa_icon "trash-o"), \
+          = link_to (icon "far fa-trash-alt"), \
                     transaction_path(transaction), \
                     method: :delete, \
                     data: { confirm: t('.are_you_sure') }, \

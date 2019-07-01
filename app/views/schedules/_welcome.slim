@@ -3,8 +3,8 @@
     .modal-content
       .modal-header
         h4.modal-title = t('.welcome')
-        button.close type="button" data-dismiss="modal" aria-hidden="true" = fa_icon("times")
-      .modal-body = t('.content', new_icon: fa_icon("plus-circle"), \
-                                  magic_icon: fa_icon("magic")).html_safe
+        button.close type="button" data-dismiss="modal" aria-hidden="true" = icon("fas fa-times")
+      .modal-body = t('.content', new_icon: icon("fas fa-plus-circle"), \
+                                  magic_icon: icon("fas fa-magic")).html_safe
       .modal-footer
         button.btn.btn-success type="button" data-dismiss="modal" = t('.close')

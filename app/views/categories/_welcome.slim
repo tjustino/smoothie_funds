@@ -3,9 +3,9 @@
     .modal-content
       .modal-header
         h4.modal-title = t('.welcome')
-        button.close type="button" data-dismiss="modal" aria-hidden="true" = fa_icon("times")
-      .modal-body = t('.content', new_icon: fa_icon("plus-circle"), \
-                                  transactions_icon: fa_icon("credit-card"), \
-                                  schedules_icon: fa_icon("calendar")).html_safe
+        button.close type="button" data-dismiss="modal" aria-hidden="true" = icon("fas fa-times")
+      .modal-body = t('.content', new_icon: icon("fas fa-plus-circle"), \
+                                  transactions_icon: icon("far fa-credit-card"), \
+                                  schedules_icon: icon("far fa-calendar-alt")).html_safe
       .modal-footer
         button.btn.btn-success type="button" data-dismiss="modal" = t('.close')

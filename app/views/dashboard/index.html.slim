@@ -18,12 +18,12 @@
         hr
         .row.justify-content-start
           .col-auto
-            = link_to (fa_icon "thumbs-o-up", text: t('.accept')), \
+            = link_to (icon_text "far fa-thumbs-up", t('.accept')), \
                     sharing_path(pending.account), \
                     method: :post, \
                     class: "btn btn-success"
           .col-auto
-            = link_to (fa_icon "remove", text: t('.reject')), \
+            = link_to (icon_text "far fa-times-circle", t('.reject')), \
                     unsharing_path(pending.account), \
                     method: :delete, \
                     class: "btn btn-danger"
@@ -43,12 +43,12 @@
                   h5 = account.name
                   - if account.transactions.any?
                     dl.row.mb-0
-                      dt.col-sm-4 = t('.current_balance')
+                      dt.col-sm-4.nowrap = t('.current_balance')
                       dd.col-sm-8 class=("text-danger" if sum_today(account) < 0) = t('.balance_date', \
                                       balance: current_balance(account), \
                                       date: current_date(account) )
                       - if future_transactions?(account)
-                        dt.col-sm-4 style=("color: gray;")
+                        dt.col-sm-4.nowrap style=("color: gray;")
                           = t('.future_balance')
                         dd.col-sm-8 class=("text-danger" if sum_tomorrow(account) < 0) style=("color: gray;")
                           = t('.balance_date',  \
@@ -56,7 +56,7 @@
                                 date: future_date(account) )
                   - else
                     dl.row.mb-0
-                      dt.col-sm-4 = t('.current_balance')
+                      dt.col-sm-4.nowrap = t('.current_balance')
                       dd.col-sm-8 class=("text-danger" if account.initial_balance < 0) = t('.balance_date', \
                                       balance: initial_balance(account), \
                                       date: today )
@@ -81,7 +81,7 @@
                   tbody
                   - shedules_for(account).each do |schedule|
                     tr title="#{schedule.account.name}"
-                      td = link_to fa_icon("magic"), \
+                      td = link_to icon("fas fa-magic"), \
                               insert_schedule_path(schedule), \
                               method: :insert, title: t('.insert_schedule')
                       td = l(schedule.next_time, format: :short)
