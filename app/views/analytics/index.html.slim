@@ -20,13 +20,13 @@
               new Chart(ctx, {
                 type: "line",
                 data: {
-                  labels: #{ raw dates_before_past_time(account) },
+                  labels: #{ raw dates_before_past_time(account, @transactions) },
                   datasets: [ {
                     label: "#{ t('.balance') }",
                     fill: true,
                     backgroundColor: "rgba(75,192,192,0.4)",
                     borderColor: "rgba(75,192,192,1)",
-                    data: #{ raw past_data(account) }}]},
+                    data: #{ raw past_data(account, @transactions) }}]},
                 options: { scales: { yAxes: [ { ticks: { beginAtZero:true }}]}}
               });
 
