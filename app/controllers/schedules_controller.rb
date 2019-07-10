@@ -99,7 +99,7 @@ class SchedulesController < ApplicationController
       if current_controller == "schedules"
         load_limit
         redirect_to account_schedules_url(
-          @current_account, limit: (params[:index].to_f / @limit.to_f).ceil
+          @current_account, limit: (params[:index].to_f / @limit).ceil
         ), notice: t(".successfully_inserted")
       else
         redirect_to dashboard_url, notice: t(".successfully_inserted")
