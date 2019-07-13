@@ -9,8 +9,9 @@
     .left.floated.column
       h1.ui.header
         = t(".listing_accounts")
-        sup.ui.tag.grey.labels.not-for-mobile
-         .ui.mini.label#total = @nb_accounts
+        / sup.ui.tag.grey.labels.not-for-mobile
+        /  .ui.mini.label#total = @nb_accounts
+        sup.ui.grey.circular.tiny.label.not-for-mobile#total = @nb_accounts
 
     .right.floated.right.aligned.column
       .ui.two.column.stackable.grid
