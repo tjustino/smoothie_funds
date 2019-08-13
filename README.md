@@ -55,3 +55,8 @@ Words of wisdom:
 > The rest of the time, you can happily use *product_path*. This will generate
 > only the */products/1* part, and that’s all you need when doing links or
 > pointing forms, like *link_to "My lovely product", product_path(product)*.
+
+Testing like the TSA
+https://signalvnoise.com/posts/3159-testing-like-the-tsa
+> Don’t aim for 100% coverage.
+> Code-to-test ratios above 1:2 is a smell, above 1:3 is a stink.
