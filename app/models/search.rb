@@ -23,11 +23,11 @@
 class Search < ApplicationRecord
   belongs_to :user
 
-  serialize :accounts,    Array
-  serialize :categories,  Array
+  serialize :accounts,   Array
+  serialize :categories, Array
 
-  enum operator: %i[comment_or_not like not_like]
-  enum checked:  %i[checked_or_not yep nop]
+  enum operator: { comment_or_not: 0, like: 1, not_like: 2 }
+  enum checked:  { checked_or_not: 0, yep: 1, nop: 2 }
 
   validates :user_id,  presence: true
   validates :accounts, presence: true
