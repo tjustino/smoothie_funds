@@ -17,6 +17,9 @@
 !/log/.keep
 !/tmp/.keep
 
+# Ignore master key for decrypting credentials and more.
+/config/master.key
+
 # Ignore yarn and webpacker files
 /public/packs
 /public/packs-test
@@ -25,6 +28,10 @@
 yarn-debug.log*
 .yarn-integrity
 
+# Ignore uploaded files in development.
+/storage/*
+!/storage/.keep
+
 # Ignore other unneeded files
 /.capistrano
 *.swp
@@ -32,4 +39,5 @@ yarn-debug.log*
 .project
 .DS_Store
 *.pdf
-.byebug_history/public/packs
+.byebug_history
+/public/assets
