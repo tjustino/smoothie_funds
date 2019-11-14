@@ -19,6 +19,7 @@ require('bootstrap');
 require('chart.js');
 
 // own code
+require.context('../images', true)
 require('more_items.js');
 require('show_modal.js');
 import '../stylesheets/application.css.scss';
