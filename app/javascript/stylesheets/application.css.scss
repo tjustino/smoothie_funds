@@ -14,6 +14,8 @@
  *= require_self
  */
 
+// ~ tell webpack that this is not a relative import
+
 @import '~bootstrap/scss/bootstrap';
 $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
