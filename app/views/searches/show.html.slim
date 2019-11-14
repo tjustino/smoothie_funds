@@ -48,7 +48,7 @@
 
 / More transactions
 .row.justify-content-center.mb-3
-  = image_tag "loading.gif", style: "display:none;", class: "loading"
+  = image_pack_tag "media/images/loading.gif", style: "display:none;", class: "loading"
 
   - if @nb_transactions >= @limit
     = button_to t('.more_transactions'), @search, { method: :get, \
