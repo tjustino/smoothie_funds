@@ -13,19 +13,19 @@
 thomas:
   email: thomas@email.com
   name: Thomas
-  password_digest: <%= BCrypt::Password.create('secret') %>
+  password_digest: <%= BCrypt::Password.create('p@ssw0rd!') %>
 
 emilie:
   email: emilie@email.com
   name: Emilie
-  password_digest: <%= BCrypt::Password.create('secret') %>
+  password_digest: <%= BCrypt::Password.create('p@ssw0rd!') %>
 
 benoit:
   email: benoit@email.com
   name: b.
-  password_digest: <%= BCrypt::Password.create('secret') %>
+  password_digest: <%= BCrypt::Password.create('p@ssw0rd!') %>
 
 vanessa:
   email: vanessa@email.com
   name: Vanessa
-  password_digest: <%= BCrypt::Password.create('secret') %>
+  password_digest: <%= BCrypt::Password.create('p@ssw0rd!') %>
