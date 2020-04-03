@@ -7,7 +7,9 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
 
   setup do
     # to get session[:user_id]
-    post login_url, params: { email: users(:thomas).email, password: "secret" }
+    post login_url, params: {
+      email: users(:thomas).email, password: "p@ssw0rd!"
+    }
   end
 
   ####################################################################### DELETE

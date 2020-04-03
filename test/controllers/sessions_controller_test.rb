@@ -11,7 +11,7 @@ class SessionsControllerTest < ActionController::TestCase
 
   ################################################################## POST /login
   test "should fail relogin" do
-    post :create, params: { email: @user.email, password: "secret" }
+    post :create, params: { email: @user.email, password: "p@ssw0rd!" }
     assert_redirected_to  dashboard_url
     assert_not            flash[:notice]
   end

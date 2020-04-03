@@ -71,7 +71,7 @@ class UsersControllerTest < ActionController::TestCase
       patch :update, params: {  id:   user,
                                 user: { email:                 user.email,
                                         name:                  SecureRandom.hex,
-                                        password:              "secret",
-                                        password_confirmation: "secret" } }
+                                        password:              "p@ssw0rd!",
+                                        password_confirmation: "p@ssw0rd!" } }
     end
 end
