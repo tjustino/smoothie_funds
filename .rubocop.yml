@@ -3,18 +3,23 @@ require:
   - rubocop-performance
   - rubocop-rails
 
-# Preferences
-Style/StringLiterals:
-  EnforcedStyle: double_quotes
+# rubocop requirement
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
 
-Layout/HashAlignment:
-  EnforcedHashRocketStyle: table
-  EnforcedColonStyle: table
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
 
 Lint/RaiseException:
   Enabled: true
 
 Lint/StructNewOverride:
+  Enabled: true
+
+Style/ExponentialNotation:
   Enabled: true
 
 Style/HashEachMethods:
@@ -26,6 +31,20 @@ Style/HashTransformKeys:
 Style/HashTransformValues:
   Enabled: true
 
+Style/SlicingWithRange:
+  Enabled: true
+
+# Preferences
+Layout/HashAlignment:
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle: table
+
+Layout/IndentationConsistency:
+  EnforcedStyle: indented_internal_methods
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
 # Specific to my eccentric comments
 Layout/ExtraSpacing:
   Exclude:
@@ -34,8 +53,6 @@ Layout/ExtraSpacing:
 # Well, it's seem it's a rails project
 Rails:
   Enabled: true
-Layout/IndentationConsistency:
-  EnforcedStyle: indented_internal_methods
 AllCops:
   Exclude:
     - db/schema.rb
