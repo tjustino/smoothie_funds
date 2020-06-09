@@ -60,3 +60,22 @@ Testing like the TSA
 https://signalvnoise.com/posts/3159-testing-like-the-tsa
 > Don’t aim for 100% coverage.
 > Code-to-test ratios above 1:2 is a smell, above 1:3 is a stink.
+
+
+Audit query
+
+    SELECT
+      users.email,
+      TO_CHAR(users.created_at, 'DD/MM/YYYY') AS user_creation,
+      accounts.name AS account_name,
+      accounts.hidden,
+      COUNT(transactions.id) AS nb_transactions,
+      TO_CHAR(MAX(transactions.updated_at), 'DD/MM/YYYY') AS last_transaction
+    FROM users
+      LEFT JOIN relations ON users.id = relations.user_id
+      LEFT JOIN accounts ON relations.account_id = accounts.id
+      LEFT JOIN transactions ON relations.account_id = transactions.account_id
+    WHERE
+      transactions.schedule_id IS NULL
+    GROUP BY users.email, users.created_at, accounts.name, accounts.hidden
+    ORDER BY users.email, accounts.name;
