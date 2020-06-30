@@ -1,10 +1,6 @@
-.row.justify-content-center.mb-3
-  .col-md-auto
-    .card.mb-3
-      = render partial: "form", locals: { title: t('.edit_user') }
+= render partial: "form", locals: { user: @user, title: t(".edit_user") }
 
-.row.justify-content-md-center
-  .col
-    .alert.alert-info role="alert"
-      h2.alert-heading = t('.title_bug')
-      p = t('.speech_bug').html_safe
+section.hero.is-info
+  .hero-body
+    h2.title = t(".title_bug")
+    p.subtitle = t(".speech_bug").html_safe

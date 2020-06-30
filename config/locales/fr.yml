@@ -50,8 +50,8 @@ fr:
     welcome:
       welcome:          "La création de compte"
       content:              |-
-        Pour créer un compte c'est assez simple : cliquez sur <button 
-        class="btn btn-primary" disabled>%{new_icon} Nouveau compte</button> et 
+        Pour créer un compte c'est assez simple : cliquez sur <button
+        class="btn btn-primary" disabled>%{new_icon} Nouveau compte</button> et
         donnez lui un nom (ex : Compte courant).<br />
         <br />
         La notion de « balance initiale » est importante :<br />
@@ -178,9 +178,9 @@ fr:
   layouts:
     # views
     application:
-      transactions: 'Transactions <b class="caret"></b>'
-      schedules:    'Échéanciers <b class="caret"></b>'
-      categories:   'Catégories <b class="caret"></b>'
+      transactions: "Transactions"
+      schedules:    "Échéanciers"
+      categories:   "Catégories"
       accounts:     "Comptes"
       profile:      "Profil"
       logout:       "Déconnexion"

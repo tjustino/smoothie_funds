@@ -1,24 +1,30 @@
-.row.justify-content-center
-  .col-md-auto
-    .card.mb-3
-      = form_tag("login") do
-        h1.card-header = t('.login')
-
-        .card-body
-          .form-group.row
-            = label_tag :email, t('.email'), class: "col-sm-4 col-form-label"
-            .col
-              = email_field_tag :email, params[:email], class: "form-control", \
-                                                        placeholder: t('.email'), \
-                                                        autofocus: true
-
-          .form-group.row
-            = label_tag :password, t('.password'), class: "col-sm-4 col-form-label"
-            .col
-              = password_field_tag :password, params[:password], \
-                                              class: "form-control", \
-                                              placeholder: t('.password')
-        .card-footer
-          .row.justify-content-end
-            .col-auto
-              = submit_tag t('.login'), class: "btn btn-primary"
+.columns.is-centered
+  .column.is-half
+    .card
+      = form_with url: login_path do |form|
+        / card header
+        header.card-header
+          .card-header-title = t('.login')
+        / car content
+        .card-content
+          .content
+            / email
+            .field
+              = form.label :email, t('.email'), class: "label"
+              .control
+                = form.email_field :email, \
+                                   class: "input", \
+                                   placeholder: t('.email'), \
+                                   autofocus: true
+            / password
+            .field
+              = form.label :password, t('.password'), class: "label"
+              .control
+                = form.password_field :password, \
+                                      class: "input", \
+                                      placeholder: t('.password')
+        / card footer
+        footer.card-footer
+          .field.is-grouped.is-grouped-right.card-footer-item
+            .control
+              = form.submit class: "button is-link"

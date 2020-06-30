@@ -2,27 +2,35 @@
 
 # Application Helper
 module ApplicationHelper
-  def nav_link(name, url, icon)
-    class_name = current_page?(url) ? "active" : nil
-    content_tag(:li, class: [class_name, "nav-item"].join(" ")) do
-      link_to icon_text(icon, name), url, class: "nav-link"
-    end
-  end
-
+  # menu
   def name_or_email
     @current_user.name? ? @current_user.name : @current_user.email
   end
 
-  def shallow_args(parent, child)
-    action_name == "new" || action_name == "create" ? [parent, child] : child
+                # needed?
+                def shallow_args(parent, child)
+                  action_name == "new" || action_name == "create" ? [parent, child] : child
+                end
+
+  # icons
+  def nbsp
+    [160].pack("U*")
   end
 
-  def icon_text(icon_class, text)
-    safe_join [icon(icon_class), " ", text]
+  def single_icon(icon)
+    content_tag(:i, nil, class: icon)
   end
 
-  def icon(icon_class)
-    # icon_class.include?(" icon") ? icon_class : icon_class += " icon"
-    content_tag(:i, nil, class: icon_class)
+  def icon_text(icon, text)
+    safe_join([single_icon(icon), text], nbsp)
+  end
+
+  def text_icon(text, icon)
+    safe_join([text, single_icon(icon)], nbsp)
+  end
+
+  def icon_text_icon(first_icon, text, second_icon = nil)
+    second_icon = first_icon if second_icon.nil?
+    safe_join([single_icon(first_icon), text, single_icon(second_icon)], nbsp)
   end
 end

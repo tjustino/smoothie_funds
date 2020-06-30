@@ -2,27 +2,25 @@
 - unless @current_accounts.any?
   = render "welcome"
 
-/ Header
-.row.align-items-center.justify-content-between.mb-3
-  / Title
-  .col
-    h2
-      = t('.listing_accounts')
+/ header
+.columns
+  / title
+  .column
+    h1.title
+      = t(".listing_accounts")
       sup
-        .badge.badge-secondary#total = @nb_accounts
-
-  / Download
-  .col-md-auto
-    h2 = link_to (icon "fas fa-download"), \
-                 accounts_path(format: :csv), \
-                 title: t(".export_accounts"), \
-                 class: "btn btn-light"
-
-  / New account
-  .col-md-auto
-    h2 = link_to (icon_text "fas fa-plus-circle", t('.new_account')), \
-                                         new_account_path, \
-                                         class: "btn btn-primary"
+        span.tag.is-rounded#total = @nb_accounts
+  / download
+  .column.is-narrow.is-hidden-mobile
+    = link_to single_icon("fas fa-download"), \
+              accounts_path(format: :csv), \
+              title: t(".export_accounts"), \
+              class: "button is-link is-light is-rounded"
+  / new account
+  .column.is-narrow
+    h2 = link_to icon_text("fas fa-plus-circle", t(".new_account")), \
+                 new_account_path, \
+                 class: "button is-link"
 
 / Accept sharing
 - unless @pendings.nil?

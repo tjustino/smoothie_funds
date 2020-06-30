@@ -1,46 +1,61 @@
-= form_for @user do |f|
-  h1.card-header = (icon_text "fas fa-user-plus", title)
-
-  .card-body
-    .form-group.row
-      = f.label :email, t('.email'), class: "col-sm-4 col-form-label"
-      .col
-        = f.email_field :email, \
-                        class: "form-control", \
-                        placeholder: t('.email'), \
-                        autofocus: true
-        - @user.errors.full_messages_for(:email).each do |message|
-          .invalid-feedback = message
-
-    - if params[:action] == "edit" or params[:action] == "update"
-      .form-group.row
-        = f.label :name, t('.name'), class: "col-sm-4 col-form-label"
-        .col
-          = f.text_field :name, class: "form-control", placeholder: t('.name')
-          - @user.errors.full_messages_for(:name).each do |message|
-            .invalid-feedback = message
-
-    .form-group.row
-      = f.label :password, t('.password'), class: "col-sm-4 col-form-label"
-      .col
-        = f.password_field :password, \
-                           class: "form-control", \
-                           placeholder: t('.password')
-        - @user.errors.full_messages_for(:password).each do |message|
-          .invalid-feedback = message
-
-    .form-group.row
-      = f.label :password_confirmation, \
-                t('.password_confirmation'), \
-                class: "col-sm-4 col-form-label"
-      .col
-        = f.password_field :password_confirmation, \
-                           class: "form-control", \
-                           placeholder: t('.password_confirmation')
-        - @user.errors.full_messages_for(:password_confirmation).each do |msg|
-          .invalid-feedback = msg
-
-  .card-footer
-    .row.justify-content-end
-      .col-auto
-        = f.submit class: "btn btn-primary"
+.columns.is-centered
+  .column.is-half
+    .card
+      = form_with(model: user, local: true) do |form|
+        / card header
+        header.card-header
+          .card-header-title = icon_text("fas fa-user-plus", title)
+        / car content
+        .card-content
+          .content
+            / email
+            .field
+              = form.label :email, t('.email'), class: "label"
+              .control.has-icons-left
+                span.icon.is-small.is-left
+                  = single_icon("fas fa-envelope")
+                = form.email_field :email, \
+                                   class: "input #{'is-danger' if user.errors.include?(:email)}", \
+                                   placeholder: t('.email'), \
+                                   autofocus: true
+              - user.errors.full_messages_for(:email).each do |message|
+                .help.is-danger = message
+            / name
+            - if params[:action] == "edit" or params[:action] == "update"
+              .field
+                = form.label :name, t('.name'), class: "label"
+                .control.has-icons-left
+                  span.icon.is-small.is-left
+                    = single_icon("fas fa-signature")
+                  = form.text_field :name, \
+                                    class: "input #{'is-danger' if user.errors.include?(:name)}", \
+                                    placeholder: t('.name')
+                - user.errors.full_messages_for(:name).each do |message|
+                  .help.is-danger = message
+            / password
+            .field
+              = form.label :password, t('.password'), class: "label"
+              .control.has-icons-left
+                span.icon.is-small.is-left
+                  = single_icon("fas fa-lock")
+                = form.password_field :password, \
+                                      class: "input  #{'is-danger' if user.errors.include?(:password)}", \
+                                      placeholder: t('.password')
+              - user.errors.full_messages_for(:password).each do |message|
+                p.help.is-danger = message
+            / password confirmation
+            .field
+              = form.label :password_confirmation, t('.password_confirmation'), class: "label"
+              .control.has-icons-left
+                span.icon.is-small.is-left
+                  = single_icon("fas fa-lock")
+                = form.password_field :password_confirmation, \
+                                      class: "input  #{'is-danger' if user.errors.include?(:password_confirmation)}", \
+                                      placeholder: t('.password_confirmation')
+              - user.errors.full_messages_for(:password_confirmation).each do |message|
+                p.help.is-danger = message
+        / card footer
+        footer.card-footer
+          .field.is-grouped.is-grouped-right.card-footer-item
+            .control
+              = form.submit class: "button is-link"
