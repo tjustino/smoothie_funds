@@ -1,4 +1,4 @@
-import { once_ready } from 'once_ready';
+import { once_ready } from 'src/once_ready';
 
 var showMeMore = function() {
   var more_items = document.getElementById('more_items');
