@@ -15,12 +15,12 @@
 // const imagePath = (name) => images(name, true)
 
 require('@rails/ujs').start();
-require('bootstrap');
-require('chart.js');
 
-// own code
-require.context('../images', true)
-require('more_items.js');
-require('show_modal.js');
-import '../stylesheets/application.css.scss';
-import '../stylesheets/dashboard.css.scss';
+// images
+require.context('images', true)
+
+// own javascript
+require('src/navbar_burger.js');
+require('src/close_button.js');
+require('src/more_items.js');
+// require('show_modal.js');
