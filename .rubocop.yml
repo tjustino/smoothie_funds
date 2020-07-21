@@ -1,7 +1,10 @@
-# https://rubocop.readthedocs.io/en/stable/
+# https://docs.rubocop.org/rubocop/
 require:
+  - rubocop-md
+  - rubocop-minitest
   - rubocop-performance
   - rubocop-rails
+  - rubocop-rake
 
 # rubocop requirement
 Layout/EmptyLinesAroundAttributeAccessor:
@@ -13,6 +16,9 @@ Layout/SpaceAroundMethodCallOperator:
 Lint/DeprecatedOpenSSLConstant:
   Enabled: true
 
+Lint/DuplicateElsifCondition:
+  Enabled: true
+
 Lint/MixedRegexpCaptureTypes:
   Enabled: true
 
@@ -22,16 +28,145 @@ Lint/RaiseException:
 Lint/StructNewOverride:
   Enabled: true
 
+Minitest/AssertInDelta:
+  Enabled: true
+
+Minitest/AssertionInLifecycleHook:
+  Enabled: true
+
+Minitest/AssertKindOf:
+  Enabled: true
+
+Minitest/AssertOutput:
+  Enabled: true
+
+Minitest/AssertPathExists:
+  Enabled: true
+
+Minitest/AssertSilent:
+  Enabled: true
+
+Minitest/LiteralAsActualArgument:
+  Enabled: true
+
+Minitest/MultipleAssertions:
+  Enabled: true
+
+Minitest/RefuteInDelta:
+  Enabled: true
+
+Minitest/RefuteKindOf:
+  Enabled: true
+
+Minitest/RefutePathExists:
+  Enabled: true
+
+Minitest/TestMethodName:
+  Enabled: true
+
+Minitest/UnspecifiedException:
+  Enabled: true
+
+Performance/AncestorsInclude:
+  Enabled: true
+
+Performance/BigDecimalWithNumericArgument:
+  Enabled: true
+
+Performance/RedundantSortBlock:
+  Enabled: true
+
+Performance/RedundantStringChars:
+  Enabled: true
+
+Performance/ReverseFirst:
+  Enabled: true
+
+Performance/SortReverse:
+  Enabled: true
+
+Performance/Squeeze:
+  Enabled: true
+
+Performance/StringInclude:
+  Enabled: true
+
+Rails/ActiveRecordCallbacksOrder:
+  Enabled: true
+
+Rails/FindById:
+  Enabled: true
+
+Rails/Inquiry:
+  Enabled: true
+
+Rails/MailerName:
+  Enabled: true
+
+Rails/MatchRoute:
+  Enabled: true
+
+Rails/NegateInclude:
+  Enabled: true
+
+Rails/Pluck:
+  Enabled: true
+
+Rails/PluckId:
+  Enabled: true
+
+Rails/PluckInWhere:
+  Enabled: true
+
+Rails/RenderInline:
+  Enabled: true
+
+Rails/RenderPlainText:
+  Enabled: true
+
+Rails/ShortI18n:
+  Enabled: true
+
+Rails/WhereExists:
+  Enabled: true
+
+Style/AccessorGrouping:
+  Enabled: true
+
+Style/ArrayCoercion:
+  Enabled: true
+
+Style/BisectedAttrAccessor:
+  Enabled: true
+
+Style/CaseLikeIf:
+  Enabled: true
+
 Style/ExponentialNotation:
   Enabled: true
 
+Style/HashAsLastArrayItem:
+  Enabled: true
+
 Style/HashEachMethods:
+  Enabled: true
+
+Style/HashLikeCase:
   Enabled: true
 
 Style/HashTransformKeys:
   Enabled: true
 
 Style/HashTransformValues:
+  Enabled: true
+
+Style/RedundantAssignment:
+  Enabled: true
+
+Style/RedundantFetchBlock:
+  Enabled: true
+
+Style/RedundantFileExtensionInRequire:
   Enabled: true
 
 Style/RedundantRegexpCharacterClass:
@@ -60,8 +195,6 @@ Layout/ExtraSpacing:
     - Gemfile
 
 # Well, it's seem it's a rails project
-Rails:
-  Enabled: true
 AllCops:
   Exclude:
     - db/schema.rb
