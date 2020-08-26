@@ -51,10 +51,10 @@ table.table.is-striped.is-fullwidth#magic-table
       th
 
   tbody#listing
-    = render partial: "account", locals: {  accounts: @accounts,
-                                            name:     t(".name"),
-                                            init_bal: t(".initial_balance"),
-                                            share:    t(".share") }
+    = render partial: "account", locals: { accounts: @accounts,
+                                           name:     t(".name"),
+                                           init_bal: t(".initial_balance"),
+                                           share:    t(".share") }
 
 / more accounts
 .columns.is-centered
