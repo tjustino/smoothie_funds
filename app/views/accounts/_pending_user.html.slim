@@ -1,6 +1,6 @@
 = f.label :pending_user, t(".pending_user"), class: "label"
 .field.has-addons
-  .control
+  .control.is-expanded
     = f.email_field :email, class: "input"
   .control
     = link_to (icon_text "fas fa-undo", t(".no_longer_propose")), \

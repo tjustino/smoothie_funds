@@ -39,7 +39,7 @@
               - unless form.object.users.count == 1
                 = form.label :share, t(".share"), class: "label"
                 .field.has-addons
-                  .control
+                  .control.is-expanded
                     - other_users(form.object).each do |other_user|
                       = form.fields_for :users, other_user do |shared_user|
                         = shared_user.hidden_field :id
