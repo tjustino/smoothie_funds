@@ -12,7 +12,7 @@ html
 
   body
     / Static navbar
-    nav.navbar.mb-4.is-light role="navigation" aria-label="main navigation"
+    nav.navbar.is-light role="navigation" aria-label="main navigation"
       .container
         / brand
         .navbar-brand
@@ -84,24 +84,28 @@ html
 
     / flash
     - if flash[:alert]
-      .container
-        .notification.is-danger
-          button.delete
-          = flash[:alert]
+      section.section.pt-5.pb-0
+        .container
+          .notification.is-danger
+            button.delete
+            = flash[:alert]
     - elsif flash[:warning]
-      .container
-        .notification.is-warning
-          button.delete
-          = flash[:warning]
+      section.section.pt-5.pb-0
+        .container
+          .notification.is-warning
+            button.delete
+            = flash[:warning]
     - elsif flash[:notice]
-      .container
-        .notification.is-success
-          button.delete
-          = flash[:notice]
+      section.section.pt-5.pb-0
+        .container
+          .notification.is-success
+            button.delete
+            = flash[:notice]
 
     / content
-    .container
-      = yield
+    section.section
+      .container
+        = yield
 
     / debugger
     - if Rails.env.development?
