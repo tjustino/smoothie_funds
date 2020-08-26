@@ -1,18 +1,27 @@
-= form_for(shallow_args(@current_account, @category)) do |f|
-  h1.card-header = title
-
-  .card-body
-    .form-group.row
-      = f.label :name, t('.name'), class: "col-sm-4 col-form-label"
-      .col
-        = f.text_field :name, \
-                       class: "form-control", \
-                       placeholder: t('.name'), \
-                       autofocus: true
-        - @category.errors.full_messages_for(:name).each do |message|
-          .invalid-feedback = message
-
-  .card-footer
-    .row.justify-content-end
-      .col-auto
-        = f.submit class: "btn btn-primary"
+.columns.is-mobile.is-centered
+  .column.is-half-desktop
+    .card
+      = form_with(model: shallow_args(@current_account, category), local: true) do |form|
+        / card header
+        header.card-header
+          .card-header-title = icon_text("fas fa-user-plus", title)
+        / car content
+        .card-content
+          .content
+            / name
+            .field
+              = form.label :name, t(".name"), class: "label"
+              .control.has-icons-left
+                span.icon.is-small.is-left
+                  = single_icon("fas fa-signature")
+                = form.text_field :name, \
+                                  class: "input #{"is-danger" if category.errors.include?(:name)}", \
+                                  placeholder: t(".name"), \
+                                  autofocus: true
+              - category.errors.full_messages_for(:name).each do |message|
+                .help.is-danger = message
+        / card footer
+        footer.card-footer
+          .field.is-grouped.is-grouped-right.card-footer-item
+            .control
+              = form.submit class: "button is-link"

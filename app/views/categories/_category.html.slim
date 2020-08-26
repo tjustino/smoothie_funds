@@ -4,18 +4,18 @@
     td data-title="#{name}" = category.name
 
     / count
-    td data-title="#{use}" = t('.time', total: category.transactions.active.count)
+    td data-title="#{use}" = t(".time", total: category.transactions.active.count)
 
     / common
     td
-      .row.justify-content-start.dotted-top
-        .col-auto
-          = link_to (icon "fas fa-edit"), \
+      .columns.is-mobile
+        .column
+          = link_to (single_icon "fas fa-edit"), \
                     edit_category_path(category), \
-                    title: t('.edit')
-        .col-auto
-          = link_to (icon "far fa-trash-alt"), \
+                    title: t(".edit")
+        .column
+          = link_to (single_icon "far fa-trash-alt"), \
                     category_path(category), \
                     method: :delete, \
-                    data: {confirm: t('.are_you_sure', category: category.name)}, \
-                    title: t('.destroy')
+                    data: {confirm: t(".are_you_sure", category: category.name)}, \
+                    title: t(".destroy")
