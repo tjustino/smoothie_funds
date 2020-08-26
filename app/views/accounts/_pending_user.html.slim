@@ -1,9 +1,9 @@
-.form-group.row
-  = f.label :pending_user, t('.pending_user'), class: "col-sm-4 col-form-label"
-  .col
-    = f.email_field :email, class: "form-control"
-  .col-auto
-    = link_to (icon_text "fas fa-undo", t('.no_longer_propose')), \
+= f.label :pending_user, t(".pending_user"), class: "label"
+.field.has-addons
+  .control
+    = f.email_field :email, class: "input"
+  .control
+    = link_to (icon_text "fas fa-undo", t(".no_longer_propose")), \
               unpend_path, \
               method: :delete, \
-              class: "btn btn-warning"
+              class: "button is-danger"

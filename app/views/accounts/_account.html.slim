@@ -1,5 +1,5 @@
 - accounts.each do |account|
-  tr style=("color: gray;" if account.hidden == true)
+  tr class=("has-text-grey" if account.hidden == true)
     / name
     td data-title="#{name}" = account.name
 
@@ -11,21 +11,21 @@
     - unless account.pending_user.blank?
       td data-title="#{share}" =  show_others_or_me(account).html_safe + \
                                   tag("br") + \
-                                  t('.waiting_for') + \
+                                  t(".waiting_for") + \
                                   mail_to(account.pending_user.email)
     - else
       td data-title="#{share}" = show_others_or_me(account).html_safe
 
     / common
     td
-      .row.justify-content-start.dotted-top
-        .col-auto
+      .columns.is-mobile
+        .column
           = link_to (single_icon "fas fa-edit"), \
                     edit_account_path(account), \
-                    title: t('.edit')
-        .col-auto
+                    title: t(".edit")
+        .column
           = link_to (single_icon "far fa-trash-alt"), \
                     account_path(account), \
                     method: :delete, \
-                    data: {confirm: t('.are_you_sure', account: account.name)}, \
-                    title: t('.destroy')
+                    data: {confirm: t(".are_you_sure", account: account.name)}, \
+                    title: t(".destroy")

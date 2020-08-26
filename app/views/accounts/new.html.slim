@@ -1,4 +1,1 @@
-.row.justify-content-center
-  .col-md-auto
-    .card.mb-3
-      = render partial: "form", locals: { title: t('.create_account') }
+= render partial: "form", locals: { account: @account, title: t(".create_account") }

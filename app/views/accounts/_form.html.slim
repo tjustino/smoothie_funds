@@ -1,72 +1,79 @@
-= form_for @account do |f|
-  h1.card-header = title
+.columns.is-mobile.is-centered
+  .column.is-half-desktop
+    .card
+      = form_with(model: account, local: true) do |form|
+        / card header
+        header.card-header
+          .card-header-title = icon_text("fas fa-user-plus", title)
+        / car content
+        .card-content
+          .content
+            / name
+            .field
+              = form.label :name, t(".name"), class: "label"
+              .control.has-icons-left
+                span.icon.is-small.is-left
+                  = single_icon("fas fa-signature")
+                = form.text_field :name, \
+                                  class: "input #{"is-danger" if account.errors.include?(:name)}", \
+                                  placeholder: t(".name"), \
+                                  autofocus: true
+              - account.errors.full_messages_for(:name).each do |message|
+                .help.is-danger = message
+            / initial balance
+            .field
+              = form.label :name, t(".initial_balance"), class: "label"
+              .control.has-icons-left.has-icons-right
+                span.icon.is-small.is-left
+                  = single_icon("fas fa-coins")
+                = form.telephone_field :initial_balance, \
+                                       class: "input #{"is-danger" if account.errors.include?(:initial_balance)}", \
+                                       placeholder: t(".name")
+                span.icon.is-small.is-right
+                  = t("number.currency.format.unit")
+              - account.errors.full_messages_for(:initial_balance).each do |message|
+                .help.is-danger = message
 
-  .card-body
-    .form-group.row
-      = f.label :name, t('.name'), class: "col-sm-4 col-form-label"
-      .col
-        = f.text_field :name, \
-                       class: "form-control", \
-                       placeholder: t('.name'), \
-                       autofocus: true
-        - @account.errors.full_messages_for(:name).each do |message|
-          .invalid-feedback = message
+            - unless params[:action] == "new" or params[:action] == "create"
+              / shared with
+              - unless form.object.users.count == 1
+                = form.label :share, t(".share"), class: "label"
+                .field.has-addons
+                  .control
+                    - other_users(form.object).each do |other_user|
+                      = form.fields_for :users, other_user do |shared_user|
+                        = shared_user.hidden_field :id
+                        = shared_user.email_field :email, class: "input", readonly: "readonly"
+                  .control
+                    = link_to (icon_text "fas fa-unlink", t(".unlink")), \
+                              unlink_path(form.object), \
+                              method: :delete, \
+                              data: { confirm: t(".are_you_sure_unlink") }, \
+                              class: "button is-danger"
 
-    .form-group.row
-      = f.label :initial_balance, t('.initial_balance'), class: "col-sm-4 col-form-label"
-      .col
-        .input-group
-          = f.telephone_field :initial_balance, \
-                              class: "form-control", \
-                              placeholder: t('.initial_balance')
-          .input-group-append
-            span.input-group-text = t('number.currency.format.unit')
-          - @account.errors.full_messages_for(:initial_balance).each do |msg|
-            .invalid-feedback = msg
+              / pending user
+              - unless form.object.pending_user.blank?
+                = form.fields_for :pending_user do |pending_user|
+                  = render "pending_user", f: pending_user
 
-    - unless params[:action] == "new" or params[:action] == "create"
-      / shared with
-      - unless f.object.users.count == 1
-        .form-group.row
-          = f.label :share, t('.share'), class: "col-sm-4 col-form-label"
-          .col
-            - other_users(f.object).each do |other_user|
-              = f.fields_for :users, other_user do |shared_user|
-                = shared_user.hidden_field :id
-                = shared_user.email_field :email, class: "form-control", \
-                                                  readonly: "readonly"
-          .col-auto
-            = link_to (icon_text "fas fa-unlink", t('.unlink')), \
-                      unlink_path(f.object), \
-                      method: :delete, \
-                      data: { confirm: t('.are_you_sure_unlink') }, \
-                      class: "btn btn-danger"
+              / new share
+              - else
+                .field
+                  = form.label :share, t(".propose_sharing"), class: "label"
+                  .control.is-expanded
+                    = email_field_tag :new_share, nil, class: "input", placeholder: t(".shared_email")
+                    .help = t(".explanation")
 
-      / pending user
-      - unless f.object.pending_user.blank?
-        = f.fields_for :pending_user do |pending_user|
-          = render 'pending_user', f: pending_user
+          / hide account
+          .field
+            = form.label :hidden, class: "checkbox" do
+              = form.check_box :hidden
+              = nbsp + t(".hidden")
+            - account.errors.full_messages_for(:hidden).each do |message|
+              p.help.is-danger = message
 
-      / new share
-      - else
-        .form-group.row
-          = f.label :share, t('.propose_sharing'), \
-                    class: "col-sm-4 col-form-label"
-          .col
-            = email_field_tag :new_share, nil, \
-                              class: "form-control", \
-                              placeholder: t('.shared_email')
-            small.form-text.text-muted = t('.explanation')
-
-    .form-group.row
-      .col-sm-4
-      .col
-        .form-check
-          = f.label :hidden, class: "form-check-label" do
-            = f.check_box :hidden, class: "form-check-input"
-            = t('.hidden')
-
-  .card-footer
-    .row.justify-content-end
-      .col-auto
-        = f.submit class: "btn btn-primary"
+        / card footer
+        footer.card-footer
+          .field.is-grouped.is-grouped-right.card-footer-item
+            .control
+              = form.submit class: "button is-link"

@@ -3,7 +3,7 @@
   = render "welcome"
 
 / header
-.columns
+.columns.is-multiline.is-vcentered
   / title
   .column
     h1.title
@@ -22,50 +22,46 @@
                  new_account_path, \
                  class: "button is-link"
 
-/ Accept sharing
+/ accept sharing
 - unless @pendings.nil?
   - @pendings.each do | pending |
-    .row
-      .col
-        .alert.alert-info.clearfix role="alert"
-          h5 = t('.join_shared_account', \
-                account: pending.account.name, \
-                users: show_other_users(pending.account)).html_safe
-          hr
-          .row.justify-content-start
-            .col-auto
-              = link_to (icon_text "far fa-thumbs-up", t('.accept')), \
-                      sharing_path(pending.account), \
-                      method: :post, \
-                      class: "btn btn-success"
-            .col-auto
-              = link_to (icon_text "far fa-times-circle", t('.reject')), \
-                      unsharing_path(pending.account), \
-                      method: :delete, \
-                      class: "btn btn-danger"
+    .columns.is-mobile.is-centered
+      .card
+        .card-content
+          .content = t(".join_shared_account", \
+                     account: pending.account.name, \
+                     users: show_other_users(pending.account)).html_safe
+        .card-footer
+          = link_to icon_text("far fa-thumbs-up", t(".accept")), \
+                    sharing_path(pending.account), \
+                    method: :post, \
+                    class: "card-footer-item"
+          = link_to icon_text("far fa-times-circle", t(".reject")), \
+                    unsharing_path(pending.account), \
+                    method: :delete, \
+                    class: "card-footer-item"
 
-/ Table
-.row#content-table
-  table.table.table-striped#magic-table
-    thead
-      tr
-        th = t('.name')
-        th = t('.initial_balance')
-        th = t('.share')
-        th
+/ accounts table
+table.table.is-striped.is-fullwidth#magic-table
+  thead
+    tr
+      th = t(".name")
+      th = t(".initial_balance")
+      th = t(".share")
+      th
 
-    tbody#listing
-      = render partial: "account", locals: {  accounts: @accounts,
-                                              name:     t('.name'),
-                                              init_bal: t('.initial_balance'),
-                                              share:    t('.share') }
+  tbody#listing
+    = render partial: "account", locals: {  accounts: @accounts,
+                                            name:     t(".name"),
+                                            init_bal: t(".initial_balance"),
+                                            share:    t(".share") }
 
-/ More accounts
-.row.justify-content-center.mb-3
-  = image_pack_tag "media/images/loading.gif", style: "display:none;", class: "loading"
-
-  - if @nb_accounts >= @limit
-    = button_to t('.more_accounts'), accounts_path, \
-                                     { method: :get, \
-                                       class:  "btn btn-primary", \
-                                       id:     "more_items" }
+/ more accounts
+.columns.is-centered
+  .column.is-narrow
+    = image_pack_tag "media/images/loading.gif", style: "display:none;", class: "loading"
+    - if @nb_accounts >= @limit
+      = button_to t(".more_accounts"), accounts_path, \
+                                       { method: :get, \
+                                         class:  "button is-link is-light is-rounded", \
+                                         id:     "more_items" }
