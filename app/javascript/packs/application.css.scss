@@ -13,6 +13,16 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 
 @import '../stylesheets/dashboard.css.scss';
 
+// never cut off certain spaces
+.nowrap {
+  white-space: nowrap;
+}
+
+// cells are vertical centered by default
+table tr td {
+  vertical-align: middle !important;
+}
+
 ///////////////////////////////////////////////////////////////////////// legacy
 // sadely, tables have margin-[right|left]: -15px
 #content-table {
@@ -66,9 +76,4 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
   #magic-table #listing > tr > td {
     text-align: unset !important;
   }
-}
-
-// never cut off certain spaces
-.nowrap {
-  white-space: nowrap;
 }
