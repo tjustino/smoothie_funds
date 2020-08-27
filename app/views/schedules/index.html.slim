@@ -13,7 +13,7 @@
 
   / Download
   .col-md-auto
-    h2 = link_to (icon "fas fa-download"), \
+    h2 = link_to single_icon("fas fa-download"), \
                  account_schedules_path(@current_account, format: :csv), \
                  title: t(".export_schedules"), \
                  class: "btn btn-light"
