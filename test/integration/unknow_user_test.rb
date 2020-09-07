@@ -2,6 +2,7 @@
 
 require "test_helper"
 
+# Unknow User Test
 class UnknowUserTest < ActionDispatch::IntegrationTest
   fixtures :users
 
@@ -12,7 +13,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
     }
   end
 
-  ####################################################################### DELETE
+  ############################################################################################################### DELETE
 
   # As a not logged user,
   # I want to delete data
@@ -67,7 +68,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
     # end
   end
 
-  ########################################################################## GET
+  ################################################################################################################## GET
 
   # As a not logged user,
   # I want to access pages without params
@@ -167,7 +168,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
     end
   end
 
-  ################################################################## PATCH / PUT
+  ########################################################################################################## PATCH / PUT
 
   # As a not logged user,
   # I want to patch data
@@ -221,7 +222,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
     end
   end
 
-  ######################################################################### POST
+  ################################################################################################################# POST
 
   # As a not logged user,
   # I want to create an user and connect myself

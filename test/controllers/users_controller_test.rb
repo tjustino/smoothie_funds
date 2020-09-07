@@ -2,30 +2,31 @@
 
 require "test_helper"
 
+# Users Controller Test
 class UsersControllerTest < ActionController::TestCase
-  ############################################################### GET /users/new
+  ####################################################################################################### GET /users/new
   test "should be redirected to dashboard url" do
     get                  :new
     assert_redirected_to dashboard_url
   end
 
-  ########################################################## GET /users/:id/edit
+  ################################################################################################## GET /users/:id/edit
   test "should get edit" do
-    get_edit        @user
-    assert_response :success
+    test_delete_destroy @user
+    assert_response     :success
   end
 
   test "should not get edit - hacker way" do
-    get_edit             @wrong_user
+    test_delete_destroy  @wrong_user
     assert_redirected_to dashboard_url
   end
 
   test "should not get edit - unknow id" do
-    get_edit             User.maximum(:id) + 1
+    test_delete_destroy  User.maximum(:id) + 1
     assert_redirected_to dashboard_url
   end
 
-  ################################################################## POST /users
+  ########################################################################################################## POST /users
   test "should create user" do
     # you can create an other user as a logged user, why not...
     assert_difference "User.count" do
@@ -39,32 +40,32 @@ class UsersControllerTest < ActionController::TestCase
     end
   end
 
-  ######################################################### PATCH/PUT /users/:id
+  ################################################################################################# PATCH/PUT /users/:id
   test "should update user" do
-    patch_update         @user
+    test_patch_update    @user
     assert_redirected_to edit_user_url
     assert_equal         I18n.t("users.update.successfully_updated"), flash[:notice]
     assert_not_equal     @previous_user_name, @user.reload.name
   end
 
   test "should not update user - hacker way" do
-    patch_update         @wrong_user
+    test_patch_update    @wrong_user
     assert_redirected_to dashboard_url
     assert_equal         @previous_user_name, @wrong_user.reload.name
   end
 
-  ############################################################ DELETE /users/:id
+  #################################################################################################### DELETE /users/:id
   # TODO: how to delete an account?
   # test "should destroy user" do
   # end
 
-  private ######################################################################
+  private ##############################################################################################################
 
-    def get_edit(user)
+    def test_delete_destroy(user)
       get :edit, params: { id: user }
     end
 
-    def patch_update(user)
+    def test_patch_update(user)
       @previous_user_name = user.name
       patch :update, params: {  id:   user,
                                 user: { email:                 user.email,
