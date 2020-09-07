@@ -10,13 +10,13 @@ class TransactionsControllerTest < ActionController::TestCase
   end
 
   test "should not get index - hacker way" do
-    get_index             @some_wrong_account
-    assert_redirected_to  dashboard_url
+    get_index            @some_wrong_account
+    assert_redirected_to dashboard_url
   end
 
   test "should not get index - unknow account" do
-    get_index             @unknow_account
-    assert_redirected_to  dashboard_url
+    get_index            @unknow_account
+    assert_redirected_to dashboard_url
   end
 
   ################################### GET /accounts/:account_id/transactions/new
@@ -26,13 +26,13 @@ class TransactionsControllerTest < ActionController::TestCase
   end
 
   test "should not get new - hacker way" do
-    get_new               @some_wrong_account
-    assert_redirected_to  dashboard_url
+    get_new              @some_wrong_account
+    assert_redirected_to dashboard_url
   end
 
   test "should not get new - unknow account" do
-    get_new               @unknow_account
-    assert_redirected_to  dashboard_url
+    get_new              @unknow_account
+    assert_redirected_to dashboard_url
   end
 
   ################################################### GET /transactions/:id/edit
@@ -43,84 +43,76 @@ class TransactionsControllerTest < ActionController::TestCase
   end
 
   test "should not get edit - hacker way" do
-    get_edit              @some_wrong_transaction
-    assert_redirected_to  dashboard_url
+    get_edit             @some_wrong_transaction
+    assert_redirected_to dashboard_url
   end
 
   test "should not get edit - unknow transaction" do
-    get_edit              @unknow_transaction
-    assert_redirected_to  dashboard_url
+    get_edit             @unknow_transaction
+    assert_redirected_to dashboard_url
   end
 
   ###################################### POST /accounts/:account_id/transactions
   test "should create transaction" do
     assert_difference("Transaction.count") do
-      post_create           @some_account
-      assert_redirected_to  account_transactions_path @some_account
-      assert_equal I18n.translate("transactions.create.successfully_created"),
-                   flash[:notice]
+      post_create          @some_account
+      assert_redirected_to account_transactions_path @some_account
+      assert_equal         I18n.t("transactions.create.successfully_created"), flash[:notice]
     end
   end
 
   test "should not create transaction - hacker way" do
     assert_no_difference("Transaction.count") do
-      post_create           @some_wrong_account
-      assert_redirected_to  dashboard_url
+      post_create          @some_wrong_account
+      assert_redirected_to dashboard_url
     end
   end
 
   ################################################## PATCH/PUT /transactions/:id
   # TODO: fix
   test "should update transaction" do
-    patch_update          @some_transaction
-    assert_redirected_to  account_transactions_path @some_account
-    assert_equal     I18n.translate("transactions.update.successfully_updated"),
-                     flash[:notice]
-    assert_not_equal @previous_transaction_amount,
-                     @some_transaction.reload.amount
+    patch_update         @some_transaction
+    assert_redirected_to account_transactions_path @some_account
+    assert_equal         I18n.t("transactions.update.successfully_updated"), flash[:notice]
+    assert_not_equal     @previous_transaction_amount, @some_transaction.reload.amount
   end
 
   test "should not update transaction - hacker way" do
-    patch_update          @some_wrong_transaction
-    assert_redirected_to  dashboard_url
-    assert_equal          @previous_transaction_amount,
-                          @some_wrong_transaction.reload.amount
+    patch_update         @some_wrong_transaction
+    assert_redirected_to dashboard_url
+    assert_equal         @previous_transaction_amount, @some_wrong_transaction.reload.amount
   end
 
   ##################################################### DELETE /transactions/:id
   # TODO: fix
   test "should destroy transaction" do
     assert_difference("Transaction.count", -1) do
-      delete_destroy        @some_transaction
-      assert_redirected_to  request.env["HTTP_REFERER"]
-      assert_equal \
-        I18n.translate("transactions.destroy.successfully_destroyed"),
-        flash[:notice]
+      delete_destroy       @some_transaction
+      assert_redirected_to request.env["HTTP_REFERER"]
+      assert_equal         I18n.t("transactions.destroy.successfully_destroyed"), flash[:notice]
     end
   end
 
   test "should not destroy transaction - hacker way" do
     assert_no_difference "Transaction.count" do
-      delete_destroy        @some_wrong_transaction
-      assert_redirected_to  dashboard_url
+      delete_destroy       @some_wrong_transaction
+      assert_redirected_to dashboard_url
     end
   end
 
   ############################################# POST /transactions/:id/easycheck
   # TODO: fix
   test "should easycheck transaction" do
-    post_easycheck        @some_transaction
-    assert_redirected_to  request.env["HTTP_REFERER"]
-    assert_equal I18n.translate("transactions.easycheck.successfully_checked"),
-                 flash[:notice]
-    assert_not_equal      @previous_status, @some_transaction.reload.checked
+    post_easycheck       @some_transaction
+    assert_redirected_to request.env["HTTP_REFERER"]
+    assert_equal         I18n.t("transactions.easycheck.successfully_checked"), flash[:notice]
+    assert_not_equal     @previous_status, @some_transaction.reload.checked
   end
 
   test "should not easycheck transaction - hacker way" do
-    post_easycheck        @some_wrong_transaction
-    assert_redirected_to  dashboard_url
-    assert_equal          @previous_status,
-                          @some_wrong_transaction.reload.checked
+    post_easycheck       @some_wrong_transaction
+    assert_redirected_to dashboard_url
+    assert_equal         @previous_status, @some_wrong_transaction.reload.checked
   end
 
   private ######################################################################

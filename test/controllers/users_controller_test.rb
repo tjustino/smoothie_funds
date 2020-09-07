@@ -5,8 +5,8 @@ require "test_helper"
 class UsersControllerTest < ActionController::TestCase
   ############################################################### GET /users/new
   test "should be redirected to dashboard url" do
-    get                   :new
-    assert_redirected_to  dashboard_url
+    get                  :new
+    assert_redirected_to dashboard_url
   end
 
   ########################################################## GET /users/:id/edit
@@ -16,13 +16,13 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should not get edit - hacker way" do
-    get_edit              @wrong_user
-    assert_redirected_to  dashboard_url
+    get_edit             @wrong_user
+    assert_redirected_to dashboard_url
   end
 
   test "should not get edit - unknow id" do
-    get_edit              User.maximum(:id) + 1
-    assert_redirected_to  dashboard_url
+    get_edit             User.maximum(:id) + 1
+    assert_redirected_to dashboard_url
   end
 
   ################################################################## POST /users
@@ -34,25 +34,23 @@ class UsersControllerTest < ActionController::TestCase
                 password:              "unbreakablePassword",
                 password_confirmation: "unbreakablePassword" }
       }
-      assert_redirected_to  login_url
-      assert_equal          I18n.translate("users.create.successfully_created"),
-                            flash[:notice]
+      assert_redirected_to login_url
+      assert_equal         I18n.t("users.create.successfully_created"), flash[:notice]
     end
   end
 
   ######################################################### PATCH/PUT /users/:id
   test "should update user" do
-    patch_update          @user
-    assert_redirected_to  edit_user_url
-    assert_equal          I18n.translate("users.update.successfully_updated"),
-                          flash[:notice]
-    assert_not_equal      @previous_user_name, @user.reload.name
+    patch_update         @user
+    assert_redirected_to edit_user_url
+    assert_equal         I18n.t("users.update.successfully_updated"), flash[:notice]
+    assert_not_equal     @previous_user_name, @user.reload.name
   end
 
   test "should not update user - hacker way" do
-    patch_update          @wrong_user
-    assert_redirected_to  dashboard_url
-    assert_equal          @previous_user_name, @wrong_user.reload.name
+    patch_update         @wrong_user
+    assert_redirected_to dashboard_url
+    assert_equal         @previous_user_name, @wrong_user.reload.name
   end
 
   ############################################################ DELETE /users/:id

@@ -16,19 +16,19 @@ class SearchesControllerTest < ActionController::TestCase
   end
 
   test "should not get new - hacker way" do
-    get_new               @wrong_user
-    assert_redirected_to  dashboard_url
+    get_new              @wrong_user
+    assert_redirected_to dashboard_url
   end
 
   test "should not get new - unknow user" do
-    get_new               @unknow_user
-    assert_redirected_to  dashboard_url
+    get_new              @unknow_user
+    assert_redirected_to dashboard_url
   end
 
   ################################################ POST /users/:user_id/searches
   test "should create search" do
     assert_difference("Search.count") do
-      post_create           @user
+      post_create @user
     end
   end
 
@@ -40,15 +40,15 @@ class SearchesControllerTest < ActionController::TestCase
 
   test "should not create search - hacker way" do
     assert_no_difference("Search.count") do
-      post_create           @wrong_user
-      assert_redirected_to  dashboard_url
+      post_create          @wrong_user
+      assert_redirected_to dashboard_url
     end
   end
 
   test "should not create search - unknow user" do
     assert_no_difference("Search.count") do
-      post_create           @unknow_user
-      assert_redirected_to  dashboard_url
+      post_create          @unknow_user
+      assert_redirected_to dashboard_url
     end
   end
 
@@ -58,10 +58,9 @@ class SearchesControllerTest < ActionController::TestCase
     second_search = some_search
 
     assert_difference("Search.count", -1) do
-      delete_destroy        second_search
-      assert_redirected_to  new_user_search_url @user
-      assert_equal I18n.translate("searches.destroy.successfully_destroyed"),
-                   flash[:notice]
+      delete_destroy       second_search
+      assert_redirected_to new_user_search_url @user
+      assert_equal         I18n.t("searches.destroy.successfully_destroyed"), flash[:notice]
     end
   end
 
@@ -70,8 +69,8 @@ class SearchesControllerTest < ActionController::TestCase
     second_wrong_search = some_wrong_search
 
     assert_no_difference "Search.count" do
-      delete_destroy        second_wrong_search
-      assert_redirected_to  dashboard_url
+      delete_destroy       second_wrong_search
+      assert_redirected_to dashboard_url
     end
   end
 

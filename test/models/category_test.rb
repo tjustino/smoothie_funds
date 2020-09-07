@@ -17,19 +17,15 @@ require "test_helper"
 
 class CategoryTest < ActiveSupport::TestCase
   test "should create category" do
-    category = Category.new(account: @accounts.first,
-                            name:    "My Category")
+    category = Category.new(account: @accounts.first, name: "My Category")
     assert category.valid?
   end
 
   test "name and account_id must not be empty" do
     category = Category.new
     assert category.invalid?
-    assert_equal [I18n.translate("activerecord.errors.messages.blank")],
-                 category.errors[:name]
-
-    assert_equal [I18n.translate("activerecord.errors.messages.blank")],
-                 category.errors[:account_id]
+    assert_equal [I18n.t("activerecord.errors.messages.blank")], category.errors[:name]
+    assert_equal [I18n.t("activerecord.errors.messages.blank")], category.errors[:account_id]
   end
 
   test "name/account_id must be unique" do
@@ -40,8 +36,6 @@ class CategoryTest < ActiveSupport::TestCase
     assert category1.valid?
     assert category2.invalid?
     assert category3.valid?
-
-    assert_equal [I18n.translate("activerecord.errors.messages.taken")],
-                 category2.errors[:name]
+    assert_equal [I18n.t("activerecord.errors.messages.taken")], category2.errors[:name]
   end
 end
