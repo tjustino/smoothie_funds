@@ -41,8 +41,9 @@ group :development do
 
   # Use Capistrano for deployment
   gem "capistrano"              # Execute commands in parallel on remote machine
+  gem "capistrano3-puma"        # Puma integration for Capistrano 3
   gem "capistrano-bundler"      # Bundler specific tasks for Capistrano v3
   gem "capistrano-rails"        # Rails specific Capistrano tasks
   gem "capistrano-rbenv"        # Idiomatic rbenv support for Capistrano 3
-  gem "capistrano3-puma"        # Puma integration for Capistrano 3
+
 end
