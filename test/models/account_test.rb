@@ -29,8 +29,8 @@ class AccountTest < ActiveSupport::TestCase
     account = Account.new(name:            "Crazy initial balance Account",
                           initial_balance: "1 234,56",
                           hidden:          false)
-    assert account.valid?
-    assert account.initial_balance == 1234.56
+    assert          account.valid?
+    assert_in_delta account.initial_balance, 1234.56
   end
 
   test "name and initial_balance must not be empty" do

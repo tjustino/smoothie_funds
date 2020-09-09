@@ -139,9 +139,10 @@ class SearchesControllerTest < ActionController::TestCase
     end
 
     def test_random_period_for(period)
-      if    period == :before
+      case period
+      when :before
         rand(Time.zone.now..3.months.since)
-      elsif period == :after
+      when :after
         rand(3.months.ago..Time.zone.now)
       end
     end
