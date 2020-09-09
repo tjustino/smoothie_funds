@@ -18,7 +18,7 @@ module ApplicationHelper
   end
 
   def single_icon(icon)
-    content_tag(:i, nil, class: icon)
+    tag.i(class: icon)
   end
 
   def icon_text(icon, text)

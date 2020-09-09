@@ -18,7 +18,8 @@ class String
   end
 end
 
-task :cleanup do
+desc "Cleanup your environment"
+task cleanup: :environment do
   Rake::Task["assets:clean"].invoke
   puts "Old compiled assets removed 👍".green
 
