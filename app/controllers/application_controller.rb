@@ -71,9 +71,7 @@ class ApplicationController < ActionController::Base
     end
 
     def userstamp(obj)
-      if params[:action] == "create" || params[:action] == "import_from"
-        obj.update(created_by: @current_user.id)
-      end
+      obj.update(created_by: @current_user.id) if params[:action] == "create" || params[:action] == "import_from"
       obj.update(updated_by: @current_user.id)
     end
 

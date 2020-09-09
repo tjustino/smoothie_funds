@@ -147,15 +147,10 @@ class SchedulesController < ApplicationController
       return unless @schedule.save
 
       if params[:sign] == "credit"
-        if @schedule.operation.amount.present?
-          @schedule.operation.amount = @schedule.operation.amount.abs
-        end
-      else
-        # TODO: to refactor
-        if @schedule.operation.amount.present?
-          @schedule.operation.amount = -1 * @schedule.operation.amount.abs
-        end
-        @schedule.operation.save if @schedule.operation.amount.present?
+        @schedule.operation.amount = @schedule.operation.amount.abs if @schedule.operation.amount.present?
+      elsif @schedule.operation.amount.present?
+        @schedule.operation.amount = -1 * @schedule.operation.amount.abs
+        @schedule.operation.save
       end
 
       userstamp(@schedule)
