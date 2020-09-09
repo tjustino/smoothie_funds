@@ -1,6 +1,5 @@
 # https://docs.rubocop.org/rubocop/
 require:
-  - rubocop-i18n
   - rubocop-md
   - rubocop-minitest
   - rubocop-performance
@@ -30,12 +29,6 @@ AllCops:
     - node_modules/**/*
   # pending Cops
   NewCops: enable
-
-# rubocop-i18n configuration
-RailsI18n:
-  Enabled: true
-GetText:
-  Enabled: false
 
 # too much work for now
 Metrics/AbcSize:

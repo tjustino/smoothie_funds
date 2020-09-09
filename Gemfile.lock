@@ -182,8 +182,6 @@ GEM
       unicode-display_width (>= 1.4.0, < 2.0)
     rubocop-ast (0.3.0)
       parser (>= 2.7.1.4)
-    rubocop-i18n (2.0.2)
-      rubocop (~> 0.51)
     rubocop-md (0.4.0)
       rubocop (~> 0.60)
     rubocop-minitest (0.10.1)
@@ -276,7 +274,6 @@ DEPENDENCIES
   puma
   rails (~> 6.0.0)
   rubocop
-  rubocop-i18n
   rubocop-md
   rubocop-minitest
   rubocop-performance
