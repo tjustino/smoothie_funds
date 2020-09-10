@@ -19,11 +19,11 @@
     / common
     td
       .columns.is-mobile
-        .column
+        .column.has-text-centered
           = link_to (single_icon "fas fa-edit"), \
                     edit_account_path(account), \
                     title: t(".edit")
-        .column
+        .column.has-text-centered
           = link_to (single_icon "far fa-trash-alt"), \
                     account_path(account), \
                     method: :delete, \

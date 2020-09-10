@@ -9,11 +9,11 @@
     / common
     td
       .columns.is-mobile
-        .column
+        .column.has-text-centered
           = link_to (single_icon "fas fa-edit"), \
                     edit_category_path(category), \
                     title: t(".edit")
-        .column
+        .column.has-text-centered
           = link_to (single_icon "far fa-trash-alt"), \
                     category_path(category), \
                     method: :delete, \
