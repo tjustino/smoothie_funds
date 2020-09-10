@@ -6,28 +6,32 @@
       .select
         = select_tag :sign,
                      options_for_select([[t(".debit"), "debit"], [t(".credit"), "credit"]], @sign), \
-                     { class: "#{"is-danger" if schedule.errors.include?(:sign)}" }
+                     class: "#{"is-danger" if schedule.operation.errors.include?(:sign)}"
         - schedule.operation.errors.full_messages_for(:sign).each do |message|
           .help.is-danger = message
-    .control.is-expanded.has-icons-right
-        = form.telephone_field :amount, \
-                               class: "input #{"is-danger" if schedule.errors.include?(:amount)}", \
-                               placeholder: t(".amount"), \
-                               autofocus: true
-        span.icon.is-small.is-right
-          = t("number.currency.format.unit")
-        - schedule.operation.errors.full_messages_for(:amount).each do |message|
-          .help.is-danger = message
+    .control.is-expanded.has-icons-left.has-icons-right
+      span.icon.is-small.is-left
+        = single_icon("fas fa-coins")
+      = form.telephone_field :amount, \
+                             class: "input #{"is-danger" if schedule.operation.errors.include?(:amount)}", \
+                             placeholder: t(".amount"), \
+                             autofocus: true
+      span.icon.is-small.is-right
+        = t("number.currency.format.unit")
+      - schedule.operation.errors.full_messages_for(:amount).each do |message|
+        .help.is-danger = message
 
 / category
 .field
   = form.label :category_id, t(".category"), class: "label"
-  .control
+  .control.has-icons-left
+    span.icon.is-small.is-right
+      = single_icon("fas fa-tags")
     .select.is-fullwidth
       = form.select :category_id, \
                     @current_account.categories.order(:name).collect { |category| [category.name, category.id] }, \
                     {}, \
-                    { class: "#{"is-danger" if schedule.errors.include?(:category_id)}" }
+                    class: "#{"is-danger" if schedule.operation.errors.include?(:category_id)}"
       - schedule.operation.errors.full_messages_for(:category_id).each do |message|
         .help.is-danger = message
 
