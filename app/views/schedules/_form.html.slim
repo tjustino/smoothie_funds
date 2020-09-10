@@ -1,44 +1,53 @@
-= form_for(shallow_args(@current_account, @schedule)) do |f|
-  h1.card-header = title
+.columns.is-mobile.is-centered
+  .column.is-half-desktop
+    .card
+      = form_with(model: shallow_args(@current_account, schedule), local: true) do |form|
+        / card header
+        header.card-header
+          .card-header-title = icon_text("fas fa-user-plus", title)
+        / car content
+        .card-content
+          .content
+            / transaction
+            .card-body
+              = form.fields_for :operation do |operation_fields|
+                = render "operation_form", schedule: schedule, form: operation_fields
+            hr
+            / frequency
+            .field
+              = form.label :frequency, t(".frequency"), class: "label"
+              .field.has-addons
+                .control
+                  .button.is-static = t(".all_the")
+                .control.is-expanded
+                  = form.number_field :frequency, \
+                                      class: "input #{"is-danger" if schedule.errors.include?(:frequency)}", \
+                                      placeholder: t(".frequency"), \
+                                      autofocus: true
+                  - schedule.errors.full_messages_for(:frequency).each do |message|
+                    .help.is-danger = message
+                .control
+                  .select
+                    = form.select :period, [ [t('.days'), :days], [t('.weeks'), :weeks], \
+                                           [t('.months'), :months], [t('.years'), :years]], \
+                                           {}, { class: "#{"is-danger" if schedule.errors.include?(:period)}" }
+                    - schedule.errors.full_messages_for(:period).each do |message|
+                      .help.is-danger = message
+            / next time
+            .field
+              = form.label :next_time, t(".next_time"), class: "label"
+              .control.is-expanded.has-icons-left
+                span.icon.is-small.is-left
+                  = single_icon("far fa-calendar-alt")
+                = form.date_field :next_time, \
+                                  class: "input #{"is-danger" if schedule.errors.include?(:next_time)}", \
+                                  placeholder: t(".next_time"), \
+                                  value: schedule.next_time.nil? ? Date.today : schedule.next_time
+                - schedule.errors.full_messages_for(:next_time).each do |message|
+                  .help.is-danger = message
 
-  .card-body
-    = f.fields_for :operation do |operation_fields|
-      = render "operation_form", f: operation_fields
-
-    hr
-
-    .form-group.row
-      = f.label :frequency, t('.frequency'), class: "col-sm-4 col-form-label"
-      .col
-        .input-group
-          .input-group-prepend
-            span.input-group-text = t('.all_the')
-          = f.number_field :frequency, \
-                           class: "form-control", \
-                           placeholder: t('.frequency')
-          - @schedule.errors.full_messages_for(:frequency).each do |message|
-            .invalid-feedback = message
-      .col
-        = f.select :period, [ [t('.days'), :days], [t('.weeks'), :weeks], \
-                              [t('.months'), :months], [t('.years'), :years]], \
-                            {}, { class: "form-control custom-select" }
-        - @schedule.errors.full_messages_for(:period).each do |message|
-          .invalid-feedback = message
-
-    .form-group.row
-      = f.label :next_time, t('.next_time'), class: "col-sm-4 col-form-label"
-      .col
-        .input-group
-          = f.date_field :next_time, \
-                         class: "form-control", \
-                         placeholder: t('.next_time'), \
-              value: @schedule.next_time.nil? ? Date.today : @schedule.next_time
-          .input-group-append
-            span.input-group-text = single_icon("far fa-calendar-alt")
-          - @schedule.errors.full_messages_for(:next_time).each do |message|
-            .invalid-feedback = message
-
-  .card-footer
-    .row.justify-content-end
-      .col-auto
-        = f.submit class: "btn btn-primary"
+        / card footer
+        footer.card-footer
+          .field.is-grouped.is-grouped-right.card-footer-item
+            .control
+              = form.submit class: "button is-link"

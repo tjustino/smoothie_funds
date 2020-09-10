@@ -2,56 +2,52 @@
 - unless @all_user_schedules.any?
   = render "welcome"
 
-/ Header
-.row.align-items-center.justify-content-between.mb-3
-  / Title
-  .col
-    h2
-      = t('.listing_schedules', current_account: @current_account.name)
-      sup
-        .badge.badge-secondary#total = @nb_schedules
+/ header
+.columns.is-multiline.is-vcentered
+  / title
+  .column
+   h1.title
+     = t(".listing_schedules", current_account: @current_account.name)
+     sup
+       span.tag.is-rounded#total = @nb_schedules
+  / download
+  .column.is-narrow.is-hidden-mobile
+    = link_to single_icon("fas fa-download"), \
+              account_schedules_path(@current_account, format: :csv), \
+              title: t(".export_schedules"), \
+              class: "button is-link is-light is-rounded"
+  / new schedule
+  .column.is-narrow
+    h2 = link_to icon_text("fas fa-plus-circle", t(".new_schedule")), \
+                new_account_schedule_path, \
+                class: "button is-link"
 
-  / Download
-  .col-md-auto
-    h2 = link_to single_icon("fas fa-download"), \
-                 account_schedules_path(@current_account, format: :csv), \
-                 title: t(".export_schedules"), \
-                 class: "btn btn-light"
+/ schedules table
+table.table.is-striped.is-fullwidth#magic-table
+  thead
+    tr
+      th
+      th = t(".next_time")
+      th = t(".frequency")
+      th = t(".category")
+      th.has-text-right = t(".amount")
+      th = t(".comment")
+      th
 
-  / New schedule
-  .col-md-auto
-    h2 = link_to (icon_text "fas fa-plus-circle", t('.new_schedule')), \
-                                          new_account_schedule_path, \
-                                          class: "btn btn-primary"
+  tbody#listing
+    = render partial: "schedule", locals: { schedules: @schedules,
+                                            next_time: t(".next_time"),
+                                            frequency: t(".frequency"),
+                                            category:  t(".category"),
+                                            amount:    t(".amount"),
+                                            comment:   t(".comment") }
 
-/ Table
-.row#content-table
-  table.table.table-striped#magic-table
-    thead
-      tr
-        th
-        th = t('.next_time')
-        th = t('.frequency')
-        th = t('.category')
-        th.text-right = t('.amount')
-        th = t('.comment')
-        th
-
-    tbody#listing
-      = render partial: "schedule", locals: { schedules:  @schedules,
-                                              next_time:  t('.next_time'),
-                                              frequency:  t('.frequency'),
-                                              category:   t('.category'),
-                                              amount:     t('.amount'),
-                                              comment:    t('.comment') }
-
-/ More schedules
-.row.justify-content-center.mb-3
-  = image_pack_tag "media/images/loading.gif", style: "display:none;", class: "loading"
-
-  - if @nb_schedules >= @limit
-    = button_to t('.more_schedules'), \
-                account_schedules_path(@current_account), \
-                { method: :get, \
-                  class:  "btn btn-primary", \
-                  id:     "more_items" }
+/ more schedules
+.columns.is-centered
+  .column.is-narrow
+    = image_pack_tag "media/images/loading.gif", style: "display:none;", class: "loading"
+    - if @nb_schedules >= @limit
+      = button_to t(".more_accounts"), account_schedules_path(@current_account), \
+                                       { method: :get, \
+                                         class:  "button is-link is-light is-rounded", \
+                                         id:     "more_items" }
