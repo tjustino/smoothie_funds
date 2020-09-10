@@ -1,3 +1,4 @@
+/ amount
 .field
   = form.label :amount, t(".amount"), class: "label"
   .field.has-addons
@@ -18,6 +19,7 @@
         - schedule.operation.errors.full_messages_for(:amount).each do |message|
           .help.is-danger = message
 
+/ category
 .field
   = form.label :category_id, t(".category"), class: "label"
   .control
@@ -29,6 +31,7 @@
       - schedule.operation.errors.full_messages_for(:category_id).each do |message|
         .help.is-danger = message
 
+/ comment
 .field
   = form.label :comment, t(".comment"), class: "label"
   .control
@@ -39,6 +42,7 @@
     - schedule.operation.errors.full_messages_for(:comment).each do |message|
       .help.is-danger = message
 
+/ checkbox
 .field
   = form.label :checked, class: "checkbox" do
     = form.check_box :checked
