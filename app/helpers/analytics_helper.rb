@@ -19,7 +19,7 @@ module AnalyticsHelper
   end
 
   def balance_before_past_time(account, transactions)
-    Account.find(account.id).initial_balance + transactions
+    Account.find(account).initial_balance + transactions
                                                .where(account: account)
                                                .where("date < ?", past_time)
                                                .sum(:amount)

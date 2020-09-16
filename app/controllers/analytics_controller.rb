@@ -4,7 +4,7 @@
 class AnalyticsController < ApplicationController
   # GET /users/:user_id/analytics
   def index
-    @transactions = Transaction.active
-                               .where(account_id: @accounts_with_categories.ids)
+    @account_to_analyse = params[:account_id].nil? ? @current_accounts.first.id : params[:account_id].to_i
+    @transactions = Transaction.active.where(account_id: @account_to_analyse)
   end
 end

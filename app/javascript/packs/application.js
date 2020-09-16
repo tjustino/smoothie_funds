@@ -15,6 +15,7 @@
 // const imagePath = (name) => images(name, true)
 
 require('@rails/ujs').start();
+require('chart.js');
 
 // images
 require.context('images', true)
