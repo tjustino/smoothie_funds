@@ -6,10 +6,10 @@
 .columns.is-multiline.is-vcentered
   / title
   .column
-   h1.title
-     = t(".listing_schedules", current_account: @current_account.name)
-     sup
-       span.tag.is-rounded#total = @nb_schedules
+    h1.title
+      = t(".listing_schedules", current_account: @current_account.name)
+      sup
+        span.tag.is-rounded#total = @nb_schedules
   / download
   .column.is-narrow.is-hidden-mobile
     = link_to single_icon("fas fa-download"), \
@@ -19,8 +19,8 @@
   / new schedule
   .column.is-narrow
     h2 = link_to icon_text("fas fa-plus-circle", t(".new_schedule")), \
-                new_account_schedule_path, \
-                class: "button is-link"
+                 new_account_schedule_path, \
+                 class: "button is-link"
 
 / schedules table
 table.table.is-striped.is-fullwidth#magic-table
