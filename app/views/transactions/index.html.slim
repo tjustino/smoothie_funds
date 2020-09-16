@@ -2,60 +2,57 @@
 - unless @all_user_transactions.any?
   = render "welcome"
 
-/ Header
-.row.align-items-center.justify-content-between.mb-3
-  / Title
-  .col
-    h2
-      = t('.listing_transactions', current_account: @current_account.name)
+/ header
+.columns.is-multiline.is-vcentered
+  / title
+  .column
+    h1.title
+      = t(".listing_transactions", current_account: @current_account.name)
       sup
-        .badge.badge-secondary#total = @nb_transactions
+        span.tag.is-rounded#total = @nb_transactions
     = render partial: "sum_checked", locals: { sum_checked: @sum_checked }
+  / download
+  .column.is-narrow.is-hidden-mobile
+    = link_to single_icon("fas fa-download"), \
+              account_transactions_path(@current_account, format: :csv), \
+              title: t(".export_transactions"), \
+              class: "button is-link is-light is-rounded"
+  / new transaction
+  .column.is-narrow
+    h2 = link_to icon_text("fas fa-plus-circle", t(".new_transaction")), \
+                 new_account_transaction_path, \
+                 class: "button is-link"
 
-  / Download
-  .col-md-auto
-    h2 = link_to single_icon("fas fa-download"), \
-                 account_transactions_path(@current_account, format: :csv), \
-                 title: t(".export_transactions"), \
-                 class: "btn btn-light"
+/ transactions table
+table.table.is-striped.is-fullwidth#magic-table
+  thead
+    tr
+      th
+      th = t(".date")
+      th = t(".category")
+      th.has-text-right = t(".debit")
+      th.has-text-right = t(".credit")
+      th.has-text-right = t(".balance")
+      th = t(".comment")
+      th
 
-  / New transaction
-  .col-md-auto
-    h2 = link_to (icon_text "fas fa-plus-circle", t('.new_transaction')), \
-                                          new_account_transaction_path, \
-                                          class: "btn btn-primary"
+  tbody#listing
+    = render partial: "transaction", locals: { transactions: @transactions, \
+                                               checked:      t(".checked"), \
+                                               date:         t(".date"), \
+                                               category:     t(".category"),\
+                                               debit:        t(".debit"), \
+                                               credit:       t(".credit"), \
+                                               balance:      t(".balance"), \
+                                               comment:      t(".comment") }
 
-/ Table
-.row#content-table
-  table.table.table-striped#magic-table
-    thead
-      tr
-        th
-        th = t('.date')
-        th = t('.category')
-        th.text-right = t('.debit')
-        th.text-right = t('.credit')
-        th.text-right = t('.balance')
-        th = t('.comment')
-        th
-
-    tbody#listing
-      = render partial: "transaction", locals: {  transactions: @transactions, \
-                                                  checked:      t('.checked'), \
-                                                  date:         t('.date'), \
-                                                  category:     t('.category'),\
-                                                  debit:        t('.debit'), \
-                                                  credit:       t('.credit'), \
-                                                  balance:      t('.balance'), \
-                                                  comment:      t('.comment') }
-
-/ More transactions
-.row.justify-content-center.mb-3
-  = image_pack_tag "media/images/loading.gif", style: "display:none;", class: "loading"
-
-  - if @nb_transactions >= @limit
-    = button_to t('.more_transactions'), \
-                account_transactions_path(@current_account), \
-                { method: :get, \
-                  class:  "btn btn-primary", \
-                  id:     "more_items" }
+/ more transactions
+.columns.is-centered
+  .column.is-narrow
+    = image_pack_tag "media/images/loading.gif", style: "display:none;", class: "loading"
+    - if @nb_transactions >= @limit
+      = button_to t(".more_transactions"), \
+                  account_transactions_path(@current_account), \
+                  { method: :get, \
+                    class:  "button is-link is-light is-rounded", \
+                    id:     "more_items" }
