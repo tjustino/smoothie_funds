@@ -13,11 +13,12 @@
       ul.menu-list
         li
           ul
-            - @current_accounts.each do |account|
+            - @current_accounts.each_with_index do |account, index|
               li
                 = link_to account.name, \
                           user_analytics_path(@current_user, account_id: account.id), \
-                          class: "#{"is-active" if @account_to_analyse == account.id}"
+                          class: "#{"is-active" if @account_to_analyse == account.id}", \
+                          id: "analytic#{index}"
       / / distribution
       / .menu-label Répartition
       / ul.menu-list
