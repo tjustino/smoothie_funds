@@ -7,10 +7,9 @@ module ApplicationHelper
     @current_user.name? ? @current_user.name : @current_user.email
   end
 
-                # needed?
-                def shallow_args(parent, child)
-                  action_name == "new" || action_name == "create" ? [parent, child] : child
-                end
+  def shallow_args(parent, child)
+    action_name == "new" || action_name == "create" ? [parent, child] : child
+  end
 
   # icons
   def nbsp
