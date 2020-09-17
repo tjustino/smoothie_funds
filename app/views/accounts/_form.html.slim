@@ -28,7 +28,7 @@
                   = single_icon("fas fa-coins")
                 = form.telephone_field :initial_balance, \
                                        class: "input #{"is-danger" if account.errors.include?(:initial_balance)}", \
-                                       placeholder: t(".name")
+                                       placeholder: t(".initial_balance")
                 span.icon.is-small.is-right
                   = t("number.currency.format.unit")
               - account.errors.full_messages_for(:initial_balance).each do |message|
