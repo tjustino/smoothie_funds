@@ -87,19 +87,19 @@ html
     - if flash[:alert]
       section.section.pt-5.pb-0
         .container
-          .notification.is-danger
+          .notification.is-danger.is-light
             button.delete
             = flash[:alert]
     - elsif flash[:warning]
       section.section.pt-5.pb-0
         .container
-          .notification.is-warning
+          .notification.is-warning.is-light
             button.delete
             = flash[:warning]
     - elsif flash[:notice]
       section.section.pt-5.pb-0
         .container
-          .notification.is-success
+          .notification.is-success.is-light
             button.delete
             = flash[:notice]
 
