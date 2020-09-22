@@ -101,7 +101,7 @@
                 - Search.checkeds.each do |key, value|
                   label.radio
                     = form.radio_button :checked, key, checked: (value == 0 ? true : false)
-                    span = t(".#{key}")
+                    span = nbsp + t(".#{key}")
 
         / card footer
         footer.card-footer
