@@ -1,110 +1,108 @@
-.columns.is-mobile.is-centered
-  .column.is-one-third-desktop
-    .card
-      = form_with(model: shallow_args(@current_user, @search), local: true) do |form|
-        / card header
-        header.card-header
-          .card-header-title = icon_text("fas fa-search", title)
-        / car content
-        .card-content
-          .content
+.card
+  = form_with(model: shallow_args(@current_user, @search), local: true) do |form|
+    / card header
+    header.card-header
+      .card-header-title = icon_text("fas fa-search", title)
+    / car content
+    .card-content
+      .content
 
-            / accounts
-            .field
-              = form.label :name, t(".accounts"), class: "label"
+        / accounts
+        .field
+          = form.label :name, t(".accounts"), class: "label"
+          .control
+            .select.is-multiple.is-small.is-fullwidth
+              = form.select :accounts, \
+                            options_from_collection_for_select( \
+                              @accounts_with_categories, :id, :name, @accounts_with_categories.ids), \
+                            { include_hidden: false },
+                            { multiple: true }
+
+        / amount
+        .field
+          = form.label :name, t(".amount"), class: "label"
+          / min
+          .field.has-addons
+            .control
+              .button.is-static = t(".min")
+            .control.is-expanded.has-icons-left.has-icons-right
+              span.icon.is-small.is-left
+                = single_icon("fas fa-coins")
+              = form.telephone_field :min, class: "input", placeholder: t(".amount")
+              span.icon.is-small.is-right
+                = t("number.currency.format.unit")
+          / max
+          .field.has-addons
+            .control
+              .button.is-static = t(".max")
+            .control.is-expanded.has-icons-left.has-icons-right
+              span.icon.is-small.is-left
+                = single_icon("fas fa-coins")
+              = form.telephone_field :max, class: "input", placeholder: t(".amount")
+              span.icon.is-small.is-right
+                = t("number.currency.format.unit")
+
+        / amount
+        .field
+          = form.label :name, t(".date"), class: "label"
+          / min
+          .field.has-addons
+            .control
+              .button.is-static = t(".after")
+            .control.is-expanded.has-icons-left
+              span.icon.is-small.is-left
+                = single_icon("far fa-calendar-alt")
+              = form.date_field :after, class: "input", placeholder: t(".date")
+          / max
+          .field.has-addons
+            .control
+              .button.is-static = t(".before")
+            .control.is-expanded.has-icons-left
+              span.icon.is-small.is-left
+                = single_icon("far fa-calendar-alt")
+              = form.date_field :before, class: "input", placeholder: t(".date")
+
+        / categories
+        .field
+          = form.label :name, t(".categories"), class: "label"
+          - @current_accounts.each do |account|
+            - if account.categories.exists?
+              .has-text-weight-light = account.name
               .control
                 .select.is-multiple.is-small.is-fullwidth
-                  = form.select :accounts, \
+                  = form.select :categories, \
                                 options_from_collection_for_select( \
-                                  @accounts_with_categories, :id, :name, @accounts_with_categories.ids), \
-                                { include_hidden: false },
+                                  account.categories.order_by_name, :id, :name, account.categories.ids), \
+                                { include_hidden: false }, \
                                 { multiple: true }
+              br
 
-            / amount
-            .field
-              = form.label :name, t(".amount"), class: "label"
-              / min
-              .field.has-addons
-                .control
-                  .button.is-static = t(".min")
-                .control.is-expanded.has-icons-left.has-icons-right
-                  span.icon.is-small.is-left
-                    = single_icon("fas fa-coins")
-                  = form.telephone_field :min, class: "input", placeholder: t(".amount")
-                  span.icon.is-small.is-right
-                    = t("number.currency.format.unit")
-              / max
-              .field.has-addons
-                .control
-                  .button.is-static = t(".max")
-                .control.is-expanded.has-icons-left.has-icons-right
-                  span.icon.is-small.is-left
-                    = single_icon("fas fa-coins")
-                  = form.telephone_field :max, class: "input", placeholder: t(".amount")
-                  span.icon.is-small.is-right
-                    = t("number.currency.format.unit")
-
-            / amount
-            .field
-              = form.label :name, t(".date"), class: "label"
-              / min
-              .field.has-addons
-                .control
-                  .button.is-static = t(".after")
-                .control.is-expanded.has-icons-left
-                  span.icon.is-small.is-left
-                    = single_icon("far fa-calendar-alt")
-                  = form.date_field :after, class: "input", placeholder: t(".date")
-              / max
-              .field.has-addons
-                .control
-                  .button.is-static = t(".before")
-                .control.is-expanded.has-icons-left
-                  span.icon.is-small.is-left
-                    = single_icon("far fa-calendar-alt")
-                  = form.date_field :before, class: "input", placeholder: t(".date")
-
-            / categories
-            .field
-              = form.label :name, t(".categories"), class: "label"
-              - @current_accounts.each do |account|
-                - if account.categories.exists?
-                  .has-text-weight-light = account.name
-                  .control
-                    .select.is-multiple.is-small.is-fullwidth
-                      = form.select :categories, \
-                                    options_from_collection_for_select( \
-                                      account.categories.order_by_name, :id, :name, account.categories.ids), \
-                                    { include_hidden: false }, \
-                                    { multiple: true }
-                  br
-
-            / comment
-            .field
-              = form.label :name, t(".comment"), class: "label"
-              .field.has-addons
-                .control
-                  .select
-                    = form.select :operator, \
-                                  options_for_select( Search.operators.keys.map { |key| [t(".#{key}"), key] } ), \
-                                  {}, \
-                                  { class: "form-control custom-select" }
-                .control.is-expanded.has-icons-left
-                  span.icon.is-small.is-left
-                    = single_icon("fas fa-signature")
-                  = form.text_field :comment, class: "input", placeholder: t(".comment")
-
-            / comment
-            .field
-              = form.label :name, t(".checked"), class: "label"
-              .control
-                - Search.checkeds.each do |key, value|
-                  label.radio
-                    = form.radio_button :checked, key, checked: (value == 0 ? true : false)
-                    span = nbsp + t(".#{key}")
-
-        / card footer
-        footer.card-footer
-          .field.is-grouped.is-grouped-right.card-footer-item
+        / comment
+        .field
+          = form.label :name, t(".comment"), class: "label"
+          .field.has-addons
             .control
-              = form.submit t(".search"), class: "button is-link"
+              .select
+                = form.select :operator, \
+                              options_for_select( Search.operators.keys.map { |key| [t(".#{key}"), key] } ), \
+                              {}, \
+                              { class: "form-control custom-select" }
+            .control.is-expanded.has-icons-left
+              span.icon.is-small.is-left
+                = single_icon("fas fa-signature")
+              = form.text_field :comment, class: "input", placeholder: t(".comment")
+
+        / comment
+        .field
+          = form.label :name, t(".checked"), class: "label"
+          .control
+            - Search.checkeds.each do |key, value|
+              label.radio
+                = form.radio_button :checked, key, checked: (value == 0 ? true : false)
+                span = nbsp + t(".#{key}")
+
+    / card footer
+    footer.card-footer
+      .field.is-grouped.is-grouped-right.card-footer-item
+        .control
+          = form.submit t(".search"), class: "button is-link"

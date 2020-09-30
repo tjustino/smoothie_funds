@@ -421,6 +421,7 @@ fr:
       are_you_sure:       "Etes-vous certain de vouloir supprimer la transaction ?"
     new:
       create_search:          "Nouvelle recherche"
+      past_search:            "Recherches antérieures"
       date_search:            "Recherche du %{date}"
       last_search:            "Dernière recherche"
       next_to_last_search:    "Avant-dernière recherche"
