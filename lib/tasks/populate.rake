@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-namespace :populate do
-  MANY = 100
-  NAME = "Thomas"
+MANY = 100
+NAME = "Thomas"
 
+namespace :populate do
   desc "Create #{MANY} accounts, categories, schedules and transactions"
   task all: :environment do
     Rake::Task["populate:accounts"].invoke
