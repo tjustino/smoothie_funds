@@ -4,7 +4,7 @@
     label.label = t(".accounts")
   .field-body
     .field.is-narrow
-      .control = joined_accounts_names(search.accounts)
+      .control = joined_accounts_names(@current_accounts, search.accounts)
 
 / amounts
 .field.is-horizontal
@@ -45,7 +45,7 @@
   .field-label.is-small
     label.label = t(".categories")
   .field-body
-    .field.is-narrow = joined_categories_names(search.accounts, search.categories)
+    .field.is-narrow = joined_categories_names(@current_accounts, search.accounts, search.categories)
 
 / comment
 .field.is-horizontal

@@ -2,24 +2,21 @@
 
 # Searches Helper
 module SearchesHelper
-  def joined_accounts_names(accounts)
+  def joined_accounts_names(current_accounts, accounts)
     accounts_names = []
 
-    @current_accounts.where(id: accounts.map(&:to_i)).each do |account|
+    current_accounts.where(id: accounts.map(&:to_i)).each do |account|
       accounts_names.push account.name
     end
 
     accounts_names.join(", ")
   end
 
-  def joined_categories_names(accounts, categories)
+  def joined_categories_names(current_accounts, accounts, categories)
     categories_names = []
 
-    @current_accounts.where(id: accounts.map(&:to_i)).each do |account|
-      account.categories
-             .order_by_name
-             .where(id: categories.map(&:to_i))
-             .each do |category|
+    current_accounts.where(id: accounts.map(&:to_i)).each do |account|
+      account.categories.order_by_name.where(id: categories.map(&:to_i)).each do |category|
         categories_names.push category.name
       end
     end
