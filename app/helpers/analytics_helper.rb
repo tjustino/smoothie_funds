@@ -19,10 +19,9 @@ module AnalyticsHelper
   end
 
   def balance_before_past_time(account, transactions)
-    Account.find(account).initial_balance + transactions
-                                               .where(account: account)
-                                               .where("date < ?", past_time)
-                                               .sum(:amount)
+    Account.find(account).initial_balance + transactions.where(account: account)
+                                                        .where("date < ?", past_time)
+                                                        .sum(:amount)
   end
 
   def transactions_from_past_time_to_now(account, transactions)
@@ -33,11 +32,6 @@ module AnalyticsHelper
                 .order(date: :asc) # must be before sum
                 .sum(:amount)
   end
-
-  # def futur_data(account)
-  #   @transactions.where(account: account).where("date > ?", Time.now.midnight)
-  #                                         .order(date: :asc, id: :asc)
-  # end
 
   def past_time
     -3.months.from_now.midnight
