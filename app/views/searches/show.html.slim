@@ -1,7 +1,7 @@
 / Header
 .row.align-items-center.justify-content-between.mb-3
   .col
-    h2 = t('.result')
+    h2 = t(".result")
 
 / Resume
 .row
@@ -9,48 +9,47 @@
     .alert.alert-info.clearfix role="alert"
       = render partial: "resume", locals: { search: @search }
 
-/ Infos
-.row.justify-content-between.mb-2
-  .col-auto
-    / Trasnaction's sum
-    p.badge.badge-info
-      = t('.sum')
+/ infos
+.columns.is-multiline.is-vcentered
+  / trasnaction's sum
+  .column
+    .tag.is-info
+      = t(".sum")
       span = number_to_currency(@sum_transactions)
 
-  .col-auto
-    / Trasnaction's count
-    p.badge.badge-info
-      = t('.count')
+  / trasnaction's count
+  .column.is-narrow
+    .tag.is-info
+      = t(".count")
       span#total = @nb_transactions
 
-/ Table
-.row#content-table
-  table.table.table-striped#magic-table
-    thead
-      tr
-        th
-        th = t('.account')
-        th = t('.date')
-        th = t('.category')
-        th.text-right = t('.debit')
-        th.text-right = t('.credit')
-        th = t('.comment')
+/ transactions table
+table.table.is-striped.is-fullwidth#magic-table
+  thead
+    tr
+      th
+        th = t(".account")
+        th = t(".date")
+        th = t(".category")
+        th.has-text-right = t(".debit")
+        th.has-text-right = t(".credit")
+        th = t(".comment")
         th
 
     tbody#listing
       = render partial: "transaction", locals: {  transactions: @transactions,
-                                                  account:      t('.account'),
-                                                  date:         t('.date'),
-                                                  category:     t('.category'),
-                                                  debit:        t('.debit'),
-                                                  credit:       t('.credit'),
-                                                  comment:      t('.comment') }
+                                                  account:      t(".account"),
+                                                  date:         t(".date"),
+                                                  category:     t(".category"),
+                                                  debit:        t(".debit"),
+                                                  credit:       t(".credit"),
+                                                  comment:      t(".comment") }
 
-/ More transactions
-.row.justify-content-center.mb-3
-  = image_pack_tag "media/images/loading.gif", style: "display:none;", class: "loading"
-
-  - if @nb_transactions >= @limit
-    = button_to t('.more_transactions'), @search, { method: :get, \
-                                                    class:  "btn btn-primary", \
-                                                    id:     "more_items" }
+/ more transactions
+.columns.is-centered
+  .column.is-narrow
+    = image_pack_tag "media/images/loading.gif", style: "display:none;", class: "loading"
+    - if @nb_transactions >= @limit
+      = button_to t(".more_transactions"), @search, { method: :get, \
+                                                      class:  "button is-link is-light is-rounded", \
+                                                      id:     "more_items" }
