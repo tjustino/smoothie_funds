@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source  "https://rubygems.org"
-ruby    "2.7.1"
+ruby    "2.7.2"
 
 ## from http://bundler.io/gemfile.html
 # ~> 2.0.3 is identical to >= 2.0.3 and < 2.1
@@ -40,7 +40,6 @@ group :development do
 
   # Use Capistrano for deployment
   gem "capistrano"              # Execute commands in parallel on remote machine
-  gem "capistrano3-puma"        # Puma integration for Capistrano 3
   gem "capistrano-bundler"      # Bundler specific tasks for Capistrano v3
   gem "capistrano-rails"        # Rails specific Capistrano tasks
   gem "capistrano-rbenv"        # Idiomatic rbenv support for Capistrano 3
