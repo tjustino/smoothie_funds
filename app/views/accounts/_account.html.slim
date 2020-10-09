@@ -1,10 +1,10 @@
 - accounts.each do |account|
   tr class=("has-text-grey" if account.hidden == true)
     / name
-    td data-title="#{name}" = account.name
+    td.is-vcentered data-title="#{name}" = account.name
 
     / initial balance
-    td.nowrap data-title="#{init_bal}" = \
+    td.is-vcentered.nowrap data-title="#{init_bal}" = \
                                   number_to_currency(account.initial_balance)
 
     / share
