@@ -1,12 +1,12 @@
-.columns.is-multiline
+.columns.is-centered.is-multiline
   .column.is-one-third-desktop
     = render partial: "form", locals: { title: t(".create_search") }
 
-  .column
-    - if @searches.any?
+  - if @searches.any?
+    .column
       .title = t(".past_search")
       - @searches.each_with_index do |search, index|
-        .card
+        .card.mb-5
           .card-content
             .content = render partial: "resume", locals: { search: search }
           footer.card-footer
