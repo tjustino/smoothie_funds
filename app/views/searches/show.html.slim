@@ -1,13 +1,12 @@
-/ Header
-.row.align-items-center.justify-content-between.mb-3
-  .col
-    h2 = t(".result")
+/ header
+h1.title = t(".result")
 
-/ Resume
-.row
-  .col
-    .alert.alert-info.clearfix role="alert"
-      = render partial: "resume", locals: { search: @search }
+/ resume
+.column
+  .card
+    .card-content.has-background-info-light
+      .content
+        = render partial: "resume", locals: { search: @search }
 
 / infos
 .columns.is-multiline.is-vcentered
@@ -37,13 +36,13 @@ table.table.is-striped.is-fullwidth#magic-table
         th
 
     tbody#listing
-      = render partial: "transaction", locals: {  transactions: @transactions,
-                                                  account:      t(".account"),
-                                                  date:         t(".date"),
-                                                  category:     t(".category"),
-                                                  debit:        t(".debit"),
-                                                  credit:       t(".credit"),
-                                                  comment:      t(".comment") }
+      = render partial: "transaction", locals: { transactions: @transactions,
+                                                 account:      t(".account"),
+                                                 date:         t(".date"),
+                                                 category:     t(".category"),
+                                                 debit:        t(".debit"),
+                                                 credit:       t(".credit"),
+                                                 comment:      t(".comment") }
 
 / more transactions
 .columns.is-centered
