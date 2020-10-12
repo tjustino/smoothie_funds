@@ -32,10 +32,10 @@ html
                 / transactions
                 .navbar-item.has-dropdown.is-hoverable
                   .navbar-link = icon_text("far fa-credit-card", t(".transactions"))
-                  .navbar-dropdown
+                  .navbar-dropdown.is-hidden-mobile
                     - @accounts_with_categories.each do |account|
                       = link_to account.name, account_transactions_path(account), class: "navbar-item"
-                    hr.navbar-divider
+                    .navbar-divider
                     = link_to icon_text("fas fa-search", t(".search")), \
                               new_user_search_path(@current_user), \
                               class: "navbar-item"
@@ -45,14 +45,14 @@ html
                 / dropdown
                 .navbar-item.has-dropdown.is-hoverable
                   .navbar-link = icon_text("far fa-calendar-alt", t(".schedules"))
-                  .navbar-dropdown
+                  .navbar-dropdown.is-hidden-mobile
                     - @accounts_with_categories.each do |account|
                       = link_to account.name, account_schedules_path(account), class: "navbar-item"
               / categories
               - if @current_accounts.any?
                 .navbar-item.has-dropdown.is-hoverable
                   .navbar-link = icon_text("fas fa-tags", t(".categories"))
-                  .navbar-dropdown
+                  .navbar-dropdown.is-hidden-mobile
                     - @current_accounts.each do |account|
                       = link_to account.name, account_categories_path(account), class: "navbar-item"
               / accounts
@@ -63,12 +63,12 @@ html
             .navbar-end
               .navbar-item.has-dropdown.is-hoverable
                 .navbar-link = icon_text("fas fa-user", name_or_email)
-                .navbar-dropdown
+                .navbar-dropdown.is-hidden-mobile
                   / Profil
                   = link_to icon_text("fas fa-sliders-h", t(".profile")), \
                             edit_user_path(@current_user), \
                             class: "navbar-item"
-                  hr.navbar-divider
+                  .navbar-divider
                   / Logout
                   = link_to icon_text("fas fa-sign-out-alt", t(".logout")), \
                             logout_path,  \
