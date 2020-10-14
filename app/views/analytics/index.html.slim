@@ -19,12 +19,6 @@
                           user_analytics_path(@current_user, account_id: account.id), \
                           class: "#{"is-active" if @account_to_analyse == account.id}", \
                           id: "analytic#{index}"
-      / / distribution
-      / .menu-label Répartition
-      / ul.menu-list
-      /   li
-      /     ul
-      /       li toto
   / chart
   .column
     .subtitle = t(".tendency")
