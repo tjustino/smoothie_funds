@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title Smoothie Funds#{" - DEV" if Rails.env.development?}
+    title #{"🚧 " if Rails.env.development?}Smoothie Funds#{" 🚧" if Rails.env.development?}
     = render partial: "layouts/favicon"
     = stylesheet_pack_tag "application", media: "all"
     = javascript_pack_tag "application"
