@@ -1,7 +1,7 @@
 - transactions.each do |transaction|
   tr class=("has-text-danger" if transaction.balance < 0) style=("color: gray;" if transaction.date > Date.today)
 
-    / Check
+    / check
     td data-title="#{checked}" = link_to \
                                  transaction.checked ? single_icon("far fa-check-square") : single_icon("far fa-square"), \
                                  easycheck_transaction_path(transaction), \
@@ -10,25 +10,22 @@
                                  title: t(".check_transaction"), \
                                  id: "check_#{transaction.id}"
 
-    / Date
+    / date
     td data-title="#{date}" = l(transaction.date)
 
-    / Category
+    / category
     td data-title="#{category}" = transaction.category.name
 
-    / Debit
-    td.nowrap.has-text-right data-title="#{debit}" = \
-                number_to_currency(transaction.amount) if transaction.amount < 0
+    / debit
+    td.nowrap.has-text-right data-title="#{debit}" = number_to_currency(transaction.amount) if transaction.amount < 0
 
-    / Credit
-    td.nowrap.has-text-right data-title="#{credit}" = \
-              number_to_currency(transaction.amount) if transaction.amount >= 0
+    / credit
+    td.nowrap.has-text-right data-title="#{credit}" = number_to_currency(transaction.amount) if transaction.amount >= 0
 
-    / Balance
-    td.nowrap.has-text-right data-title="#{balance}" = \
-                                        number_to_currency(transaction.balance)
+    / balance
+    td.nowrap.has-text-right data-title="#{balance}" = number_to_currency(transaction.balance)
 
-    / Comment
+    / comment
     td data-title="#{comment}" = truncate(transaction.comment, length: 30)
 
     / common
