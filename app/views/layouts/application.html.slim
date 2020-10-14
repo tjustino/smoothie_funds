@@ -11,7 +11,7 @@ html
     meta name="description" content="Gérez vos comptes en toute simplicité !"
 
   body
-    / Static navbar
+    / static navbar
     nav.navbar.is-light role="navigation" aria-label="main navigation"
       .container
         / brand
@@ -64,12 +64,12 @@ html
               .navbar-item.has-dropdown.is-hoverable
                 .navbar-link = icon_text("fas fa-user", name_or_email)
                 .navbar-dropdown.is-hidden-mobile
-                  / Profil
+                  / profil
                   = link_to icon_text("fas fa-sliders-h", t(".profile")), \
                             edit_user_path(@current_user), \
                             class: "navbar-item"
                   .navbar-divider
-                  / Logout
+                  / logout
                   = link_to icon_text("fas fa-sign-out-alt", t(".logout")), \
                             logout_path,  \
                             method: :delete, \
@@ -77,7 +77,7 @@ html
                             id: "logout"
           / not logged user
           - elsif params[:controller] != "users"
-            / New user
+            / new user
             .navbar-end
               = link_to (icon_text "fas fa-user-plus", t(".create_user")), \
                         new_user_path, \
