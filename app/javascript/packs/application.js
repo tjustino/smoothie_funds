@@ -24,4 +24,4 @@ require.context('images', true)
 require('src/navbar_burger.js');
 require('src/close_button.js');
 require('src/more_items.js');
-// require('show_modal.js');
+require('src/show_modal.js');

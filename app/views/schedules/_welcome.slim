@@ -1,10 +1,11 @@
-.modal.fade#welcomeModal tabindex="-1" role="dialog" aria-labelledby="welcomeModal"
-  .modal-dialog role="document"
-    .modal-content
-      .modal-header
-        h4.modal-title = t('.welcome')
-        button.close type="button" data-dismiss="modal" aria-hidden="true" = link_to single_icon("fas fa-times")
-      .modal-body = t('.content', new_icon: link_to single_icon("fas fa-plus-circle"), \
-                                  magic_icon: link_to single_icon("fas fa-magic")).html_safe
-      .modal-footer
-        button.btn.btn-success type="button" data-dismiss="modal" = t('.close')
+.modal.is-active#welcomeModal
+  .modal-background
+  .modal-card
+    header.modal-card-head
+      .modal-card-title = t(".welcome")
+      button.delete aria-label="close"
+    section.modal-card-body
+      = t(".content", new_icon: link_to(single_icon("fas fa-plus-circle")), \
+                      magic_icon: link_to(single_icon("fas fa-magic"))).html_safe
+    footer.modal-card-foot.buttons.is-right
+      button.button.is-success aria-label="close" = t(".close")
