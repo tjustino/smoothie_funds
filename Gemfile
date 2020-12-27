@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source  "https://rubygems.org"
-ruby    "2.7.2"
+ruby    "3.0.0"
 
 ## from http://bundler.io/gemfile.html
 # ~> 2.0.3 is identical to >= 2.0.3 and < 2.1
@@ -12,7 +12,7 @@ gem "bcrypt"                    # Use ActiveModel has_secure_password
 gem "bootsnap", require: false  # Reduces boot times through caching
 gem "pg"                        # Use postgresql as the db for Active Record
 gem "puma"                      # App web server
-gem "rails",   "~> 6.0.0"       # Full-stack web framework
+gem "rails",   "~> 6.1.0"       # Full-stack web framework
 gem "sass-rails"                # Sass adapter for the Rails asset pipeline
 gem "slim"                      # Template language
 # gem "turbolinks"              # Make following links in web application faster
