@@ -2,14 +2,11 @@
   "name": "SmoothieFunds",
   "private": true,
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.0",
-    "@rails/ujs": "^6.0.3-3",
-    "@rails/webpacker": "^5.2.1",
+    "@fortawesome/fontawesome-free": "^5.15.1",
+    "@rails/ujs": "^6.1.0",
+    "@rails/webpacker": "^6.0.0-pre.1",
     "bulma": "^0.9.1",
-    "chart.js": "^2.9.3"
+    "chart.js": "^2.9.4"
   },
-  "version": "1.0.0",
-  "devDependencies": {
-    "webpack-dev-server": "^3.11.0"
-  }
+  "version": "1.0.0"
 }
