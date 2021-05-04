@@ -1,9 +1,9 @@
-.modal.fade#welcomeModal tabindex="-1" role="dialog" aria-labelledby="welcomeModal"
+.modal#welcomeModal tabindex="-1" role="dialog" aria-labelledby="welcomeModal"
   .modal-dialog role="document"
     .modal-content
       .modal-header
         h4.modal-title = t('.welcome')
-        button.close type="button" data-bs-dismiss="modal" aria-hidden="true" = icon("fas fa-times")
+        button.btn-close type="button" data-bs-dismiss="modal" aria-hidden="true"
       .modal-body = t('.content', new_icon: icon("fas fa-plus-circle"), \
                                   magic_icon: icon("fas fa-magic")).html_safe
       .modal-footer
