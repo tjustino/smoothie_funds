@@ -2,7 +2,7 @@
   h1.card-header = title
 
   .card-body
-    .form-group.row
+    .mb-3.row
       = f.label :name, t('.name'), class: "col-sm-4 col-form-label"
       .col
         = f.text_field :name, \
@@ -12,7 +12,7 @@
         - @account.errors.full_messages_for(:name).each do |message|
           .invalid-feedback = message
 
-    .form-group.row
+    .mb-3.row
       = f.label :initial_balance, t('.initial_balance'), class: "col-sm-4 col-form-label"
       .col
         .input-group
@@ -27,7 +27,7 @@
     - unless params[:action] == "new" or params[:action] == "create"
       / shared with
       - unless f.object.users.count == 1
-        .form-group.row
+        .mb-3.row
           = f.label :share, t('.share'), class: "col-sm-4 col-form-label"
           .col
             - other_users(f.object).each do |other_user|
@@ -49,7 +49,7 @@
 
       / new share
       - else
-        .form-group.row
+        .mb-3.row
           = f.label :share, t('.propose_sharing'), \
                     class: "col-sm-4 col-form-label"
           .col
@@ -58,7 +58,7 @@
                               placeholder: t('.shared_email')
             small.form-text.text-muted = t('.explanation')
 
-    .form-group.row
+    .mb-3.row
       .col-sm-4
       .col
         .form-check

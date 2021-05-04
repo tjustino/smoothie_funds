@@ -16,16 +16,13 @@
 
 // ~ tell webpack that this is not a relative import
 
-@import '~bootstrap/scss/bootstrap';
+$font-size-base: 0.9rem;
+
+@import 'bootstrap';
 $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import '~@fortawesome/fontawesome-free/scss/regular';
 @import '~@fortawesome/fontawesome-free/scss/solid';
-
-// reduce global font-size (defaults: Bootstrap v3 14px, Bootstrap v4 16px)
-body {
-  font-size: 14px;
-}
 
 // sadely, tables have margin-[right|left]: -15px
 #content-table {

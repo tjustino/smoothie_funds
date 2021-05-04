@@ -22,9 +22,9 @@
   - if @current_accounts.count > 1
     = render "import_from"
     .col-md-auto
-      h2 = button_tag  (icon_text "fas fa-exchange-alt", t('.import_from')), \
-                    class: "btn btn-default", \
-                    data: { toggle: "modal", target: "#importFrom" }
+      h2 = button_tag (icon_text "fas fa-exchange-alt", t('.import_from')), \
+                      class: "btn btn-outline-primary", \
+                      data: { bs_toggle: "modal", bs_target: "#importFrom" }
 
   / New category
   .col-md-auto

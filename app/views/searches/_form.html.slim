@@ -3,7 +3,7 @@
 
   .card-body
     / Accounts
-    .form-group.row
+    .mb-3.row
       = f.label :accounts, t('.accounts'), class: "col-md-4 col-form-label"
       .col-md-8
         = f.select  :accounts, \
@@ -15,7 +15,7 @@
                 { multiple: true, class: "form-control" }
 
     / Amount
-    .form-group.row
+    .mb-3.row
       = f.label :amount, t('.amount'), class: "col-md-4 col-form-label"
       .col-md-8
         / min
@@ -34,7 +34,7 @@
             span class="input-group-text" = t('number.currency.format.unit')
 
     / Date
-    .form-group.row
+    .mb-3.row
       = f.label :date, t('.date'), class: "col-md-4 col-form-label"
       .col-md-8
         / after
@@ -53,7 +53,7 @@
             span class="input-group-text" = icon "far fa-calendar-alt"
 
     / Categories
-    .form-group.row
+    .mb-3.row
       = f.label :categories, t('.categories'), class: "col-md-4 col-form-label"
       .col-md-8
         - @current_accounts.each do |account|
@@ -68,7 +68,7 @@
                                   { multiple: true, class: "form-control mb-2" }
 
     / Comment
-    .form-group.row
+    .mb-3.row
       = f.label :comment, t('.comment'), class: "col-md-4 col-form-label"
       .col-md-3
         = f.select  :operator, \
@@ -79,7 +79,7 @@
         = f.text_field :comment, class: "form-control", placeholder: t('.comment')
 
     / Checked
-    .form-group.row
+    .mb-3.row
       = f.label :checked, t('.checked'), class: "col-md-4 col-form-label"
       .col-md-8
         - Search.checkeds.each do |key, value|

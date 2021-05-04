@@ -2,7 +2,7 @@
   h1.card-header = title
 
   .card-body
-    .form-group.row
+    .mb-3.row
       = f.label :amount, t('.amount'), class: "col-sm-4 col-form-label"
       .col
         = select_tag :sign, options_for_select( [ \
@@ -21,7 +21,7 @@
           - @transaction.errors.full_messages_for(:amount).each do |message|
             .invalid-feedback = message
 
-    .form-group.row
+    .mb-3.row
       = f.label :date, t('.date'), class: "col-sm-4 col-form-label"
       .col
         .input-group
@@ -34,7 +34,7 @@
           - @transaction.errors.full_messages_for(:date).each do |message|
             .invalid-feedback = message
 
-    .form-group.row
+    .mb-3.row
       = f.label :category_id, t('.category'), class: "col-sm-4 col-form-label"
       .col
         = f.select :category_id, \
@@ -45,7 +45,7 @@
         - @transaction.errors.full_messages_for(:category_id).each do |message|
           .invalid-feedback = message
 
-    .form-group.row
+    .mb-3.row
       = f.label :comment, t('.comment'), class: "col-sm-4 col-form-label"
       .col
         = f.text_area :comment, \
@@ -55,7 +55,7 @@
         - @transaction.errors.full_messages_for(:comment).each do |message|
           .invalid-feedback = message
 
-    .form-group.row
+    .mb-3.row
       .col-sm-4
       .col
         .form-check

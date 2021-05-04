@@ -72,7 +72,7 @@
         - if @schedules.any?
           - @current_accounts.each do |account|
             - if @schedules.where(account_id: account.id).any?
-              .row.ml-2.mr-2.mb-3
+              .row.ms-2.me-2.mb-3
                 table.table.table-striped.table-hover
                   thead
                     tr

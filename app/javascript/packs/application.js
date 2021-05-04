@@ -14,12 +14,14 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-require('@rails/ujs').start();
-require('bootstrap');
-require('chart.js');
+import Rails from "@rails/ujs";
+import "bootstrap";
+import "chart.js";
+
+Rails.start();
 
 // own code
-require.context('../images', true)
+require.context('../images', true);
 require('more_items.js');
 require('show_modal.js');
 import '../stylesheets/application.css.scss';

@@ -5,10 +5,10 @@
                                 url: :import_from_account_categories ) do |f|
       .modal-header
         h4.modal-title = t('.title')
-        button.close type="button" data-dismiss="modal" aria-hidden="true" = icon("fas fa-times")
+        button.btn-close type="button" data-bs-dismiss="modal" aria-hidden="true"
       .modal-body
         p = t('.speech').html_safe
-        .form-group
+        .mb-3
           = f.label :import_from, t('.import_from'), class: "form-control-label"
           = f.collection_select :categories, \
                                 @other_accounts, \
@@ -18,5 +18,4 @@
                                 {class: "form-control custom-select"}
 
       .modal-footer
-        / button.btn.btn-default type="button" data-dismiss="modal" = t('.close')
         = f.submit class: "btn btn-primary"

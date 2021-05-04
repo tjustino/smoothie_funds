@@ -7,7 +7,7 @@
 
     hr
 
-    .form-group.row
+    .mb-3.row
       = f.label :frequency, t('.frequency'), class: "col-sm-4 col-form-label"
       .col
         .input-group
@@ -25,7 +25,7 @@
         - @schedule.errors.full_messages_for(:period).each do |message|
           .invalid-feedback = message
 
-    .form-group.row
+    .mb-3.row
       = f.label :next_time, t('.next_time'), class: "col-sm-4 col-form-label"
       .col
         .input-group

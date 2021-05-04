@@ -13,9 +13,9 @@
         .card.mb-3
           .card-header role="tab" id="heading#{search.id}"
             h4.mb-0
-              a.collapsed data-toggle="collapse" href="#collapse#{search.id}" aria-expanded="false" aria-controls="collapse#{search.id}"
+              a.collapsed data-bs-toggle="collapse" href="#collapse#{search.id}" aria-expanded="false" aria-controls="collapse#{search.id}"
                 = witch_search(search, index)
-          .collapse role="tabpanel" aria-labelledby="heading#{search.id}" data-parent="#accordion" id="collapse#{search.id}"
+          .collapse role="tabpanel" aria-labelledby="heading#{search.id}" data-bs-parent="#accordion" id="collapse#{search.id}"
             .card-body
               = render partial: "resume", locals: { search: search }
             .card-footer

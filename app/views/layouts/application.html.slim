@@ -13,105 +13,104 @@ html
   body
     .container
       / Static navbar
-      nav.navbar.navbar-expand-lg.navbar-light.bg-light.rounded.mb-3
-        = link_to "Smoothie Funds", dashboard_path, class: "navbar-brand"
-        - unless params[:controller] == "users" and params[:action] == "new"
-          button.navbar-toggler type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Toggle navigation"
-            span.navbar-toggler-icon
+      nav.navbar.navbar-expand-lg.navbar-light.bg-light.rounded.mb-3 style="background-color: #e3f2fd;"
+        .container-fluid
+          = link_to "Smoothie Funds", dashboard_path, class: "navbar-brand"
+          - unless params[:controller] == "users" and params[:action] == "new"
+            button.navbar-toggler type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-label="Toggle navigation"
+              span.navbar-toggler-icon
 
-        .collapse.navbar-collapse
-          - if @current_user
-            /menu
-            ul.navbar-nav.mr-auto
-              / dropdown transactions
-              - if Category.exists?(account: @current_accounts)
-                li.nav-item.dropdown class=("active" if params[:controller] == "transactions")
-                  a.nav-link.dropdown-toggle href="#" data-toggle="dropdown"
-                    = icon_text "far fa-credit-card", t('.transactions').html_safe
+          .collapse.navbar-collapse
+            - if @current_user
+              /menu
+              ul.navbar-nav.me-auto
+                / dropdown transactions
+                - if Category.exists?(account: @current_accounts)
+                  li.nav-item.dropdown
+                    a.nav-link.dropdown-toggle href="#" data-bs-toggle="dropdown" class=("active" if params[:controller] == "transactions")
+                      = icon_text "far fa-credit-card", t('.transactions').html_safe
+                    .dropdown-menu
+                      - @accounts_with_categories.each do |account|
+                        = link_to account.name, account_transactions_path(account), class: "dropdown-item"
+                      .dropdown-divider
+                      = link_to ( icon_text "fas fa-search", t('.search') ), \
+                                new_user_search_path(@current_user), \
+                                class: "dropdown-item"
+                      = link_to ( icon_text "fas fa-chart-area", t('.analytics') ), \
+                                user_analytics_path(@current_user), \
+                                class: "dropdown-item"
+
+                  / dropdown schedules
+                  li.nav-item.dropdown
+                    a.nav-link.dropdown-toggle href="#" data-bs-toggle="dropdown" class=("active" if params[:controller] == "schedules")
+                      = icon_text "far fa-calendar-alt", t('.schedules').html_safe
+                    .dropdown-menu
+                      - @accounts_with_categories.each do |account|
+                        = link_to account.name, account_schedules_path(account), class: "dropdown-item"
+
+                / dropdown categories
+                - if @current_accounts.any?
+                  li.nav-item.dropdown
+                    a.nav-link.dropdown-toggle href="#" data-bs-toggle="dropdown" class=("active" if params[:controller] == "categories")
+                      = icon_text "fas fa-tags", t('.categories').html_safe
+                    .dropdown-menu
+                      - @current_accounts.each do |account|
+                        = link_to account.name, account_categories_path(account), class: "dropdown-item"
+
+                / link accounts
+                = nav_link t('.accounts'), accounts_path, "fas fa-book"
+
+              ul.navbar-nav
+                li.nav-item.dropdown
+                  a.nav-link.dropdown-toggle href="#" data-bs-toggle="dropdown" class=("active" if params[:controller] == "users")
+                    = icon_text "fas fa-user", name_or_email
                   .dropdown-menu
-                    - @accounts_with_categories.each do |account|
-                      = link_to account.name, account_transactions_path(account), class: "dropdown-item"
+                    / Profil
+                    = link_to ( icon_text "fas fa-sliders-h", t('.profile') ), \
+                              edit_user_path(@current_user), \
+                              class: "dropdown-item"
                     .dropdown-divider
-                    = link_to ( icon_text "fas fa-search", t('.search') ), \
-                              new_user_search_path(@current_user), \
-                              class: "dropdown-item"
-                    = link_to ( icon_text "fas fa-chart-area", t('.analytics') ), \
-                              user_analytics_path(@current_user), \
-                              class: "dropdown-item"
+                    / Logout
+                    = link_to ( icon_text "fas fa-sign-out-alt", t('.logout') ), \
+                              logout_path,  \
+                              method: :delete, \
+                              class: "dropdown-item", \
+                              id: "logout"
 
-                / dropdown schedules
-                li.nav-item.dropdown class=("active" if params[:controller] == "schedules")
-                  a.nav-link.dropdown-toggle href="#" data-toggle="dropdown"
-                    = icon_text "far fa-calendar-alt", t('.schedules').html_safe
-                  .dropdown-menu
-                    - @accounts_with_categories.each do |account|
-                      = link_to account.name, account_schedules_path(account), class: "dropdown-item"
-
-              / dropdown categories
-              - if @current_accounts.any?
-                li.nav-item.dropdown class=("active" if params[:controller] == "categories")
-                  a.nav-link.dropdown-toggle href="#" data-toggle="dropdown"
-                    = icon_text "fas fa-tags", t('.categories').html_safe
-                  .dropdown-menu
-                    - @current_accounts.each do |account|
-                      = link_to account.name, account_categories_path(account), class: "dropdown-item"
-
-              / link accounts
-              = nav_link t('.accounts'), accounts_path, "fas fa-book"
-
-            ul.navbar-nav
-              li.nav-item.dropdown class=("active" if params[:controller] == "users")
-                a.nav-link.dropdown-toggle href="#" data-toggle="dropdown"
-                  = icon_text "fas fa-user", name_or_email
-                .dropdown-menu
-                  / Profil
-                  = link_to ( icon_text "fas fa-sliders-h", t('.profile') ), \
-                            edit_user_path(@current_user), \
-                            class: "dropdown-item"
-                  .dropdown-divider
-                  / Logout
-                  = link_to ( icon_text "fas fa-sign-out-alt", t('.logout') ), \
-                            logout_path,  \
-                            method: :delete, \
-                            class: "dropdown-item", \
-                            id: "logout"
-
-          - elsif params[:controller] != "users"
-            / New user
-            ul.navbar-nav.mr-auto
-            ul.navbar-nav
-              li.nav-item
-                = link_to (icon_text "fas fa-user-plus", t('.create_user')), \
-                          new_user_path, \
-                          class: "btn btn-info"
+            - elsif params[:controller] != "users"
+              / New user
+              ul.navbar-nav.me-auto
+              ul.navbar-nav
+                li.nav-item
+                  = link_to (icon_text "fas fa-user-plus", t('.create_user')), \
+                            new_user_path, \
+                            class: "btn btn-info"
       / alerts
-      .row
+      .row.align-items-center
         .col
           - if flash[:alert]
-            .alert.alert-danger.alert-dismissable.fade.show role="alert"
-              button.close type="button" data-dismiss="alert" aria-hidden="true"
-                = icon "fas fa-times"
+            .alert.alert-danger.alert-dismissible.fade.show role="alert"
               = flash[:alert]
+              button.btn-close type="button" data-bs-dismiss="alert" aria-hidden="true"
           - elsif flash[:warning]
-            .alert.alert-warning.alert-dismissable.fade.show role="alert"
-              button.close type="button" data-dismiss="alert" aria-hidden="true"
-                = icon "fas fa-times"
+            .alert.alert-warning.alert-dismissible.fade.show role="alert"
               = flash[:warning]
+              button.btn-close type="button" data-bs-dismiss="alert" aria-hidden="true"
           - elsif flash[:notice]
-            .alert.alert-success.alert-dismissable.fade.show role="alert"
-              button.close type="button" data-dismiss="alert" aria-hidden="true"
-                = icon "fas fa-times"
+            .alert.alert-success.alert-dismissible.fade.show role="alert"
               = flash[:notice]
+              button.btn-close type="button" data-bs-dismiss="alert" aria-hidden="true"
 
       / content
       = yield
 
       / debugger
       - if Rails.env.development?
-        / = console
-        .row.fixed-bottom.justify-content-end
-          .col-auto
-            .alert.alert-warning.alert-dismissable.fade.show role="alert"
-              button.close type="button" data-dismiss="alert" aria-hidden="true"
-                = icon "fas fa-times"
+        .position-fixed.bottom-0.end-0.p-3
+          .toast.show data-bs-autohide="false"
+            .toast-header
+              strong.me-auto = icon_text("fas fa-bug", "Debug Mode")
+              button.btn-close type="button" data-bs-dismiss="toast" aria-label="Close"
+            .toast-body
               = debug(params)
+        = console

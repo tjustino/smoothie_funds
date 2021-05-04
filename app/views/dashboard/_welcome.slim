@@ -1,9 +1,10 @@
-.modal.fade#welcomeModal tabindex="-1" role="dialog" aria-labelledby="welcomeModal"
+p yes papa
+.modal#welcomeModal tabindex="-1" role="dialog" aria-labelledby="welcomeModal"
   .modal-dialog role="document"
     .modal-content
       .modal-header
         h4.modal-title = t('.welcome')
-        button.close type="button" data-dismiss="modal" aria-hidden="true" = icon("fas fa-times")
+        button.btn-close type="button" data-bs-dismiss="modal" aria-hidden="true"
       .modal-body = t('.content', accounts_icon: icon("fas fa-book")).html_safe
       .modal-footer
-        button.btn.btn-success type="button" data-dismiss="modal" = t('.close')
+        button.btn.btn-success type="button" data-bs-dismiss="modal" = t('.close')
