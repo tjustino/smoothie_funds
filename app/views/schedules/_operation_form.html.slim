@@ -3,14 +3,13 @@
   .col
     = select_tag :sign, options_for_select( [ \
         [t('.debit'), "debit"], [t('.credit'), "credit"] ], @sign), \
-        { class: "form-control custom-select" }
+        { class: "form-select" }
     - @schedule.operation.errors.full_messages_for(:sign).each do |message|
       .invalid-feedback = message
   .col
     .input-group
       = f.telephone_field :amount, class: "form-control", placeholder: t('.amount'), autofocus: true
-      .input-group-append
-        span.input-group-text = t('number.currency.format.unit')
+      span.input-group-text = t('number.currency.format.unit')
       - @schedule.operation.errors.full_messages_for(:amount).each do |message|
         .invalid-feedback = message
 
@@ -21,7 +20,7 @@
                 @current_account.categories.order(:name ).collect { |category| \
                                         [ category.name, category.id ] }, \
                                         {}, \
-                                        { class: "form-control custom-select" }
+                                        { class: "form-select" }
     - @schedule.operation.errors.full_messages_for(:category_id).each do |msg|
       .invalid-feedback = msg
 

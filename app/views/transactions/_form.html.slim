@@ -7,7 +7,7 @@
       .col
         = select_tag :sign, options_for_select( [ \
             [t('.debit'), "debit"], [t('.credit'), "credit"] ], @sign), \
-            { class: "form-control custom-select" }
+            { class: "form-select" }
         - @transaction.errors.full_messages_for(:sign).each do |message|
           .invalid-feedback = message
       .col
@@ -16,8 +16,7 @@
                               class: "form-control", \
                               placeholder: t('.amount'), \
                               autofocus: true
-          .input-group-append
-            span.input-group-text = t('number.currency.format.unit')
+          span.input-group-text = t('number.currency.format.unit')
           - @transaction.errors.full_messages_for(:amount).each do |message|
             .invalid-feedback = message
 
@@ -29,8 +28,7 @@
                          class: "form-control", \
                          placeholder: t('.date'), \
                   value: @transaction.date.nil? ? Date.today : @transaction.date
-          .input-group-append
-            span.input-group-text = icon "far fa-calendar-alt"
+          span.input-group-text = icon "far fa-calendar-alt"
           - @transaction.errors.full_messages_for(:date).each do |message|
             .invalid-feedback = message
 
@@ -41,7 +39,7 @@
             @current_account.categories.order(:name ).collect { |category| \
                                         [ category.name, category.id ] }, \
                                         {}, \
-                                        { class: "form-control custom-select" }
+                                        { class: "form-select" }
         - @transaction.errors.full_messages_for(:category_id).each do |message|
           .invalid-feedback = message
 

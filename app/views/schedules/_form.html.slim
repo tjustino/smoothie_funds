@@ -11,8 +11,7 @@
       = f.label :frequency, t('.frequency'), class: "col-sm-4 col-form-label"
       .col
         .input-group
-          .input-group-prepend
-            span.input-group-text = t('.all_the')
+          span.input-group-text = t('.all_the')
           = f.number_field :frequency, \
                            class: "form-control", \
                            placeholder: t('.frequency')
@@ -21,7 +20,7 @@
       .col
         = f.select :period, [ [t('.days'), :days], [t('.weeks'), :weeks], \
                               [t('.months'), :months], [t('.years'), :years]], \
-                            {}, { class: "form-control custom-select" }
+                            {}, { class: "form-select" }
         - @schedule.errors.full_messages_for(:period).each do |message|
           .invalid-feedback = message
 
@@ -33,8 +32,7 @@
                          class: "form-control", \
                          placeholder: t('.next_time'), \
               value: @schedule.next_time.nil? ? Date.today : @schedule.next_time
-          .input-group-append
-            span.input-group-text = icon "far fa-calendar-alt"
+          span.input-group-text = icon "far fa-calendar-alt"
           - @schedule.errors.full_messages_for(:next_time).each do |message|
             .invalid-feedback = message
 

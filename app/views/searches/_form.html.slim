@@ -20,18 +20,14 @@
       .col-md-8
         / min
         .input-group.mb-2
-          .input-group-prepend
-            span class="input-group-text" = t('.min')
+          span class="input-group-text" = t('.min')
           = f.text_field :min, class: "form-control", placeholder: t('.amount')
-          .input-group-append
-            span class="input-group-text" = t('number.currency.format.unit')
+          span class="input-group-text" = t('number.currency.format.unit')
         / max
         .input-group
-          .input-group-prepend
-            span class="input-group-text" = t('.max')
+          span class="input-group-text" = t('.max')
           = f.text_field :max, class: "form-control lol", placeholder: t('.amount')
-          .input-group-append
-            span class="input-group-text" = t('number.currency.format.unit')
+          span class="input-group-text" = t('number.currency.format.unit')
 
     / Date
     .mb-3.row
@@ -39,18 +35,14 @@
       .col-md-8
         / after
         .input-group.mb-2
-          .input-group-prepend
-            span class="input-group-text" = t('.after')
+          span class="input-group-text" = t('.after')
           = f.date_field :after, class: "form-control", placeholder: t('.date')
-          .input-group-append
-            span class="input-group-text" = icon "far fa-calendar-alt"
+          span class="input-group-text" = icon "far fa-calendar-alt"
         / before
         .input-group
-          .input-group-prepend
-            span class="input-group-text" = t('.before')
+          span class="input-group-text" = t('.before')
           = f.date_field :before, class: "form-control", placeholder: t('.date')
-          .input-group-append
-            span class="input-group-text" = icon "far fa-calendar-alt"
+          span class="input-group-text" = icon "far fa-calendar-alt"
 
     / Categories
     .mb-3.row
@@ -74,7 +66,7 @@
         = f.select  :operator, \
                     options_for_select( Search.operators.keys.map { |key| \
                                         [t(".#{key}"), key] } ), {}, \
-                                        { class: "form-control custom-select" }
+                                        { class: "form-select" }
       .col-md-5
         = f.text_field :comment, class: "form-control", placeholder: t('.comment')
 
