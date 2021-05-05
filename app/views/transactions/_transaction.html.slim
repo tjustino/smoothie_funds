@@ -18,15 +18,14 @@
 
     / Debit
     td.nowrap style="text-align: right;" data-title="#{debit}" = \
-                number_to_currency(transaction.amount) if transaction.amount < 0
+      number_to_currency(transaction.amount) if transaction.amount < 0
 
     / Credit
     td.nowrap style="text-align: right;" data-title="#{credit}" = \
-              number_to_currency(transaction.amount) if transaction.amount >= 0
+      number_to_currency(transaction.amount) if transaction.amount >= 0
 
     / Balance
-    td.nowrap style="text-align: right;" data-title="#{balance}" = \
-                                        number_to_currency(transaction.balance)
+    td.nowrap style="text-align: right;" data-title="#{balance}" = number_to_currency(transaction.balance)
 
     / Comment
     td data-title="#{comment}" = truncate(transaction.comment, length: 30)
