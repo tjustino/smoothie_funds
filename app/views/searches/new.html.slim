@@ -1,6 +1,6 @@
 .row.justify-content-center
   .col-md-auto
-    .card.mb-3
+    .card.shadow.mb-3
       = render partial: "form", locals: { title: t('.create_search') }
 
 - if @searches.any?
@@ -10,7 +10,7 @@
   .row.mb-3
     #accordion.col role="tablist"
       - @searches.each_with_index do |search, index|
-        .card.mb-3
+        .card.shadow.mb-3
           .card-header role="tab" id="heading#{search.id}"
             h4.mb-0
               a.collapsed data-bs-toggle="collapse" href="#collapse#{search.id}" aria-expanded="false" aria-controls="collapse#{search.id}"

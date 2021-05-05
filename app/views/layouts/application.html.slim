@@ -13,7 +13,7 @@ html
   body
     .container
       / Static navbar
-      nav.navbar.navbar-expand-lg.navbar-light.bg-light.rounded.mb-3 style="background-color: #e3f2fd;"
+      nav.navbar.navbar-expand-lg.navbar-light.bg-light.rounded.mb-3.shadow-sm style="background-color: #e3f2fd;"
         .container-fluid
           = link_to "Smoothie Funds", dashboard_path, class: "navbar-brand"
           - unless params[:controller] == "users" and params[:action] == "new"
