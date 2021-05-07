@@ -8,16 +8,15 @@
   hr
 
   .row.mb-3
-    #accordion.col role="tablist"
+    .accordion#accordion
       - @searches.each_with_index do |search, index|
-        .card.shadow.mb-3
-          .card-header role="tab" id="heading#{search.id}"
-            h4.mb-0
-              a.collapsed data-bs-toggle="collapse" href="#collapse#{search.id}" aria-expanded="false" aria-controls="collapse#{search.id}"
+        .accordion-item
+          h2.accordion-header id="heading#{index}"
+            button.accordion-button class=("collapsed" unless index == 0) type="button" data-bs-toggle="collapse" data-bs-target="#collapse#{index}" aria-expanded="true" aria-controls="collapse#{index}"
                 = witch_search(search, index)
-          .collapse role="tabpanel" aria-labelledby="heading#{search.id}" data-bs-parent="#accordion" id="collapse#{search.id}"
-            .card-body
-              = render partial: "resume", locals: { search: search }
+        .accordion-collapse.collapse id="collapse#{index}" class=("show" if index == 0) aria-labelledby="heading#{index}" data-bs-parent="#accordion"
+          .accordion-body
+            = render partial: "resume", locals: { search: search }
             .card-footer
               .row.justify-content-between
                 .col-auto
