@@ -32,7 +32,6 @@ group :development do
   gem "rubocop-performance"     # Check for performance optimizations
   gem "rubocop-rails"           # Automatic Rails code style checking tool
   gem "spring"                  # Keep application running in the background
-  gem "spring-watcher-listen"   # Makes spring watch files
   gem "web-console"             # Access an IRB console on exception pages
 
   # Use Capistrano for deployment
