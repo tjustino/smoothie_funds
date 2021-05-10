@@ -4,14 +4,14 @@
     h2 = t('.analytics')
 
 .row.mb-3
-  #accordion.col role="tablist"
+  .accordion#accordion
     - @accounts_with_categories.each_with_index do |account, index|
-      .card.mb-2
-        .card-header role="tab" id="heading#{index}"
-          h3.mb-0
-            a data-bs-toggle="collapse" href="#collapse#{index}" aria-expanded="true" aria-controls="collapse#{index}" #{account.name}
-        .collapse id="collapse#{index}" class=("show" if index == 0) role="tabpanel" aria-labelledby="heading#{index}" data-bs-parent="#accordion"
-          .card-body
+      .accordion-item
+        h2.accordion-header id="heading#{index}"
+          button.accordion-button class=("collapsed" unless index == 0) type="button" data-bs-toggle="collapse" data-bs-target="#collapse#{index}" aria-expanded="true" aria-controls="collapse#{index}"
+            = account.name
+        .accordion-collapse.collapse id="collapse#{index}" class=("show" if index == 0) aria-labelledby="heading#{index}" data-bs-parent="#accordion"
+          .accordion-body
             h4 = t('.tendency')
             canvas id="lineChart#{index}"
             javascript:
