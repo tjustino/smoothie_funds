@@ -13,13 +13,13 @@
 .row.justify-content-between.mb-2
   .col-auto
     / Trasnaction's sum
-    p.badge.badge-info
+    p.badge.bg-info
       = t('.sum')
       span = number_to_currency(@sum_transactions)
 
   .col-auto
     / Trasnaction's count
-    p.badge.badge-info
+    p.badge.bg-info
       = t('.count')
       span#total = @nb_transactions
 

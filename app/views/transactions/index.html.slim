@@ -9,7 +9,7 @@
     h2
       = t('.listing_transactions', current_account: @current_account.name)
       sup
-        .badge.badge-secondary#total = @nb_transactions
+        .badge.rounded-pill.bg-secondary#total = @nb_transactions
     = render partial: "sum_checked", locals: { sum_checked: @sum_checked }
 
   / Download
