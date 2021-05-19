@@ -16,7 +16,7 @@ gem "rails",   "~> 6.1.0"       # Full-stack web framework
 gem "sass-rails"                # Sass adapter for the Rails asset pipeline
 gem "slim"                      # Template language
 # gem "turbolinks"              # Make following links in web application faster
-gem "webpacker"                 # Transpile app-like JavaScript
+gem "webpacker", "6.0.0.beta.7" # Transpile app-like JavaScript
 
 group :development, :test do
   gem "byebug"                  # Call 'byebug' anywhere in the code to stop it
