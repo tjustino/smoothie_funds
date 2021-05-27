@@ -107,10 +107,9 @@ html
       / debugger
       - if Rails.env.development?
         .position-fixed.bottom-0.end-0.p-3
-          .toast.show data-bs-autohide="false"
+          #debugToast.toast
             .toast-header
-              strong.me-auto = icon_text("fas fa-bug", "Debug Mode")
+              strong.me-auto = icon_text("fas fa-bug", "Debug Toaster")
               button.btn-close type="button" data-bs-dismiss="toast" aria-label="Close"
             .toast-body
               = debug(params)
-        / = console
