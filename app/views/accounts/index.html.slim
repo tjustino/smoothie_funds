@@ -63,11 +63,12 @@
                                               share:    t('.share') }
 
 / More accounts
-.row.justify-content-center.mb-3
-  = image_tag "loading.gif", style: "display:none;", class: "loading"
+.row.mb-3
+  .d-flex.justify-content-center
+    #loading.spinner-border role="status" style="display:none;"
 
-  - if @nb_accounts >= @limit
-    = button_to t('.more_accounts'), accounts_path, \
-                                     { method: :get, \
-                                       class:  "btn btn-primary", \
-                                       id:     "more_items" }
+    - if @nb_accounts >= @limit
+      = button_to t('.more_accounts'), accounts_path, \
+                                      { method: :get, \
+                                        class:  "btn btn-primary", \
+                                        id:     "more_items" }

@@ -1,6 +1,6 @@
 var showMeMore = function() {
   var more_items = document.getElementById('more_items');
-  var loading    = document.getElementsByClassName('loading')[0];
+  var loading    = document.getElementById('loading');
   var nb_items   = document.getElementById('listing').rows.length;
   var total      = document.getElementById('total');
   var csrf_token = document.querySelector("meta[name='csrf-token']").getAttribute('content');
