@@ -35,8 +35,7 @@ class UsersControllerTest < ActionController::TestCase
                 password_confirmation: "unbreakablePassword" }
       }
       assert_redirected_to  login_url
-      assert_equal          I18n.translate("users.create.successfully_created"),
-                            flash[:notice]
+      assert_equal          I18n.t("users.create.successfully_created"), flash[:notice]
     end
   end
 
@@ -44,8 +43,7 @@ class UsersControllerTest < ActionController::TestCase
   test "should update user" do
     patch_update          @user
     assert_redirected_to  edit_user_url
-    assert_equal          I18n.translate("users.update.successfully_updated"),
-                          flash[:notice]
+    assert_equal          I18n.t("users.update.successfully_updated"), flash[:notice]
     assert_not_equal      @previous_user_name, @user.reload.name
   end
 

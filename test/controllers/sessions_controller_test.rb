@@ -20,7 +20,6 @@ class SessionsControllerTest < ActionController::TestCase
   test "should logout" do
     delete                :destroy
     assert_redirected_to  login_url
-    assert_equal          I18n.translate("sessions.destroy.logged_out"),
-                          flash[:notice]
+    assert_equal          I18n.t("sessions.destroy.logged_out"), flash[:notice]
   end
 end

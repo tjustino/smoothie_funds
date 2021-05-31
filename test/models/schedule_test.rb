@@ -48,17 +48,11 @@ class ScheduleTest < ActiveSupport::TestCase
 
     assert schedule.invalid?
 
-    assert_equal [I18n.translate("activerecord.errors.messages.blank")],
-                 schedule.errors[:account_id]
+    assert_equal [I18n.t("activerecord.errors.messages.blank")], schedule.errors[:account_id]
+    assert_equal [I18n.t("activerecord.errors.messages.blank")], schedule.errors[:next_time]
+    assert_equal [I18n.t("activerecord.errors.messages.blank")], schedule.errors[:period]
 
-    assert_equal [I18n.translate("activerecord.errors.messages.blank")],
-                 schedule.errors[:next_time]
-
-    assert_equal [I18n.translate("activerecord.errors.messages.blank")],
-                 schedule.errors[:period]
-
-    assert_equal [I18n.translate("activerecord.errors.messages.blank"),
-                  I18n.translate("activerecord.errors.messages.not_a_number")],
+    assert_equal [I18n.t("activerecord.errors.messages.blank"), I18n.t("activerecord.errors.messages.not_a_number")],
                  schedule.errors[:frequency]
   end
 
@@ -72,8 +66,7 @@ class ScheduleTest < ActiveSupport::TestCase
 
     assert schedule.invalid?
 
-    assert_equal [I18n.translate("activerecord.errors.messages.blank")],
-                 schedule.errors[:operation]
+    assert_equal [I18n.t("activerecord.errors.messages.blank")], schedule.errors[:operation]
   end
 
   test "frequency must be numerical" do
@@ -91,7 +84,6 @@ class ScheduleTest < ActiveSupport::TestCase
                                                     checked:  false })
 
     assert schedule.invalid?
-    assert_equal [I18n.translate("activerecord.errors.messages.not_a_number")],
-                 schedule.errors[:frequency]
+    assert_equal [I18n.t("activerecord.errors.messages.not_a_number")], schedule.errors[:frequency]
   end
 end

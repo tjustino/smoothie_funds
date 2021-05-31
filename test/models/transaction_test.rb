@@ -37,18 +37,13 @@ class TransactionTest < ActiveSupport::TestCase
   test "account_id, category_id, date and amount must not be empty" do
     transaction = Transaction.new
     assert transaction.invalid?
-    assert_equal [I18n.translate("activerecord.errors.messages.blank")],
-                 transaction.errors[:account_id]
+    assert_equal [I18n.t("activerecord.errors.messages.blank")], transaction.errors[:account_id]
+    assert_equal [I18n.t("activerecord.errors.messages.blank")], transaction.errors[:category_id]
 
-    assert_equal [I18n.translate("activerecord.errors.messages.blank")],
-                 transaction.errors[:category_id]
-
-    assert_equal [I18n.translate("activerecord.errors.messages.blank"),
-                  I18n.translate("activerecord.errors.messages.invalid")],
+    assert_equal [I18n.t("activerecord.errors.messages.blank"), I18n.t("activerecord.errors.messages.invalid")],
                  transaction.errors[:date]
 
-    assert_equal [I18n.translate("activerecord.errors.messages.blank"),
-                  I18n.translate("activerecord.errors.messages.not_a_number")],
+    assert_equal [I18n.t("activerecord.errors.messages.blank"), I18n.t("activerecord.errors.messages.not_a_number")],
                  transaction.errors[:amount]
   end
 
@@ -63,7 +58,6 @@ class TransactionTest < ActiveSupport::TestCase
                                   checked:  true,
                                   comment:  "Super comment !!!")
     assert transaction.invalid?
-    assert_equal [I18n.translate("activerecord.errors.messages.not_a_number")],
-                 transaction.errors[:amount]
+    assert_equal [I18n.t("activerecord.errors.messages.not_a_number")], transaction.errors[:amount]
   end
 end

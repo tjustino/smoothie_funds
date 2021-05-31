@@ -60,8 +60,7 @@ class SearchesControllerTest < ActionController::TestCase
     assert_difference("Search.count", -1) do
       delete_destroy        second_search
       assert_redirected_to  new_user_search_url @user
-      assert_equal I18n.translate("searches.destroy.successfully_destroyed"),
-                   flash[:notice]
+      assert_equal I18n.t("searches.destroy.successfully_destroyed"), flash[:notice]
     end
   end
 

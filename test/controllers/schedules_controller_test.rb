@@ -56,8 +56,7 @@ class SchedulesControllerTest < ActionController::TestCase
     assert_difference("Schedule.count") do
       post_create           @some_account
       assert_redirected_to  account_schedules_path @some_account
-      assert_equal I18n.translate("schedules.create.successfully_created"),
-                   flash[:notice]
+      assert_equal I18n.t("schedules.create.successfully_created"), flash[:notice]
     end
   end
 
@@ -72,17 +71,14 @@ class SchedulesControllerTest < ActionController::TestCase
   test "should update schedule" do
     patch_update          @some_schedule
     assert_redirected_to  account_schedules_path @some_account
-    assert_equal I18n.translate("schedules.update.successfully_updated"),
-                 flash[:notice]
-    assert_not_equal      @previous_schedule_amount,
-                          @some_schedule.reload.operation.amount
+    assert_equal          I18n.t("schedules.update.successfully_updated"), flash[:notice]
+    assert_not_equal      @previous_schedule_amount, @some_schedule.reload.operation.amount
   end
 
   test "should not update schedule - hacker way" do
     patch_update          @some_wrong_schedule
     assert_redirected_to  dashboard_url
-    assert_equal          @previous_schedule_amount,
-                          @some_wrong_schedule.reload.operation.amount
+    assert_equal          @previous_schedule_amount, @some_wrong_schedule.reload.operation.amount
   end
 
   ######################################################## DELETE /schedules/:id
@@ -90,8 +86,7 @@ class SchedulesControllerTest < ActionController::TestCase
     assert_difference ["Schedule.count", "Transaction.count"], -1 do
       delete_destroy        @some_schedule
       assert_redirected_to  account_schedules_path @some_account
-      assert_equal I18n.translate("schedules.destroy.successfully_destroyed"),
-                   flash[:notice]
+      assert_equal I18n.t("schedules.destroy.successfully_destroyed"), flash[:notice]
     end
   end
 
@@ -106,8 +101,7 @@ class SchedulesControllerTest < ActionController::TestCase
   test "should insert transaction via schedule" do
     post_insert           @some_schedule
     assert_redirected_to  dashboard_url
-    assert_equal I18n.translate("schedules.insert.successfully_inserted"),
-                 flash[:notice]
+    assert_equal          I18n.t("schedules.insert.successfully_inserted"), flash[:notice]
     assert_not_equal      @previous_next_time, @some_schedule.reload.next_time
   end
 

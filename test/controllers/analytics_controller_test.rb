@@ -7,10 +7,9 @@ class AnalyticsControllerTest < ActionController::TestCase
   test "should get index" do
     get             :index, params: { user_id: @user }
     assert_response :success
-    assert_select   "h2", I18n.translate("analytics.index.analytics")
+    assert_select   "h2", I18n.t("analytics.index.analytics")
     @accounts.order(name: :asc).each_with_index do |account, index|
-      assert_select "#heading#{index} > h3:nth-child(1) > a:nth-child(1)",
-                    account.name
+      assert_select "#heading#{index} > button", account.name
     end
   end
 end

@@ -57,8 +57,7 @@ class TransactionsControllerTest < ActionController::TestCase
     assert_difference("Transaction.count") do
       post_create           @some_account
       assert_redirected_to  account_transactions_path @some_account
-      assert_equal I18n.translate("transactions.create.successfully_created"),
-                   flash[:notice]
+      assert_equal I18n.t("transactions.create.successfully_created"), flash[:notice]
     end
   end
 
@@ -74,8 +73,7 @@ class TransactionsControllerTest < ActionController::TestCase
   test "should update transaction" do
     patch_update          @some_transaction
     assert_redirected_to  account_transactions_path @some_account
-    assert_equal     I18n.translate("transactions.update.successfully_updated"),
-                     flash[:notice]
+    assert_equal     I18n.t("transactions.update.successfully_updated"), flash[:notice]
     assert_not_equal @previous_transaction_amount,
                      @some_transaction.reload.amount
   end
@@ -93,9 +91,7 @@ class TransactionsControllerTest < ActionController::TestCase
     assert_difference("Transaction.count", -1) do
       delete_destroy        @some_transaction
       assert_redirected_to  request.env["HTTP_REFERER"]
-      assert_equal \
-        I18n.translate("transactions.destroy.successfully_destroyed"),
-        flash[:notice]
+      assert_equal          I18n.t("transactions.destroy.successfully_destroyed"), flash[:notice]
     end
   end
 
@@ -111,8 +107,7 @@ class TransactionsControllerTest < ActionController::TestCase
   test "should easycheck transaction" do
     post_easycheck        @some_transaction
     assert_redirected_to  request.env["HTTP_REFERER"]
-    assert_equal I18n.translate("transactions.easycheck.successfully_checked"),
-                 flash[:notice]
+    assert_equal          I18n.t("transactions.easycheck.successfully_checked"), flash[:notice]
     assert_not_equal      @previous_status, @some_transaction.reload.checked
   end
 

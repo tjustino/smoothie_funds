@@ -38,8 +38,7 @@ class AccountsControllerTest < ActionController::TestCase
                                          initial_balance: rand(-100..100),
                                          hidden:          rand(0..1) == 1 } }
       assert_redirected_to accounts_url
-      assert_equal  I18n.translate("accounts.create.successfully_created"),
-                    flash[:notice]
+      assert_equal  I18n.t("accounts.create.successfully_created"), flash[:notice]
     end
   end
 
@@ -47,7 +46,7 @@ class AccountsControllerTest < ActionController::TestCase
   test "should update account" do
     patch_update          @some_account
     assert_redirected_to  accounts_path
-    assert_equal I18n.translate("accounts.update.successfully_updated"),
+    assert_equal I18n.t("accounts.update.successfully_updated"),
                  flash[:notice]
     assert_not_equal @previous_account_name, @some_account.reload.name
   end
@@ -63,8 +62,7 @@ class AccountsControllerTest < ActionController::TestCase
     assert_no_difference "Account.count" do
       delete_destroy        @some_account
       assert_redirected_to  accounts_path
-      assert_equal          I18n.translate("accounts.destroy.cant_destroy"),
-                            flash[:warning]
+      assert_equal          I18n.t("accounts.destroy.cant_destroy"), flash[:warning]
     end
   end
 
@@ -76,8 +74,7 @@ class AccountsControllerTest < ActionController::TestCase
     assert_difference("Account.count", -1) do
       delete_destroy        @some_account
       assert_redirected_to  accounts_path
-      assert_equal I18n.translate("accounts.destroy.successfully_destroyed"),
-                   flash[:notice]
+      assert_equal I18n.t("accounts.destroy.successfully_destroyed"), flash[:notice]
     end
   end
 
@@ -98,8 +95,7 @@ class AccountsControllerTest < ActionController::TestCase
     delete_unlink         accounts(:compte_commun)
     assert_equal          1, accounts(:compte_commun).reload.users.count
     assert_redirected_to  accounts_path
-    assert_equal      I18n.translate("accounts.unlink.successfully_unlinked"),
-                      flash[:notice]
+    assert_equal      I18n.t("accounts.unlink.successfully_unlinked"), flash[:notice]
   end
 
   test "should not unlink personal account" do
@@ -107,8 +103,7 @@ class AccountsControllerTest < ActionController::TestCase
     delete_unlink         accounts(:courant_thomas)
     assert_equal          1, accounts(:courant_thomas).reload.users.count
     assert_redirected_to  accounts_path
-    assert_equal          I18n.translate("accounts.unlink.cant_unlink"),
-                          flash[:warning]
+    assert_equal          I18n.t("accounts.unlink.cant_unlink"), flash[:warning]
   end
 
   test "should not unlink shared account - hacker way" do
@@ -128,7 +123,7 @@ class AccountsControllerTest < ActionController::TestCase
     delete_unpend  accounts(:thomas_account_waiting_benoit)
     assert_nil     accounts(:thomas_account_waiting_benoit).reload.pending_user
     assert_redirected_to accounts_path
-    assert_equal I18n.translate(
+    assert_equal I18n.t(
       "accounts.unpend.successfully_unpend",
       account: accounts(:thomas_account_waiting_benoit).name
     ), flash[:notice]
@@ -155,7 +150,7 @@ class AccountsControllerTest < ActionController::TestCase
     assert_nil     accounts(:thomas_account_waiting_benoit).reload.pending_user
     assert_equal 2, accounts(:thomas_account_waiting_benoit).reload.users.count
     assert_redirected_to accounts_path
-    assert_equal I18n.translate(
+    assert_equal I18n.t(
       "accounts.sharing.successfully_sharing",
       account: accounts(:thomas_account_waiting_benoit).name
     ), flash[:notice]
@@ -168,7 +163,7 @@ class AccountsControllerTest < ActionController::TestCase
     assert_not_nil       accounts(:courant_benoit).reload.pending_user
     assert_equal         1, accounts(:courant_benoit).reload.users.count
     assert_redirected_to accounts_path
-    assert_equal         I18n.translate(
+    assert_equal         I18n.t(
       "accounts.sharing.cant_sharing",
       account: accounts(:courant_benoit).name
     ), flash[:warning]
@@ -188,7 +183,7 @@ class AccountsControllerTest < ActionController::TestCase
     assert_nil   accounts(:thomas_account_waiting_benoit).reload.pending_user
     assert_equal 1, accounts(:thomas_account_waiting_benoit).reload.users.count
     assert_redirected_to accounts_path
-    assert_equal I18n.translate(
+    assert_equal I18n.t(
       "accounts.unsharing.successfully_unsharing",
       account: accounts(:thomas_account_waiting_benoit).name
     ), flash[:notice]
@@ -201,7 +196,7 @@ class AccountsControllerTest < ActionController::TestCase
     assert_not_nil       accounts(:courant_benoit).reload.pending_user
     assert_equal         1, accounts(:courant_benoit).reload.users.count
     assert_redirected_to accounts_path
-    assert_equal         I18n.translate(
+    assert_equal         I18n.t(
       "accounts.unsharing.cant_unsharing",
       account: accounts(:courant_benoit).name
     ), flash[:warning]

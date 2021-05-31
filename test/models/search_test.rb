@@ -39,11 +39,8 @@ class SearchTest < ActiveSupport::TestCase
   test "user_id and accounts must not be empty" do
     search = Search.new
     assert search.invalid?
-    assert_equal [I18n.translate("activerecord.errors.messages.blank")],
-                 search.errors[:user_id]
-
-    assert_equal [I18n.translate("activerecord.errors.messages.blank")],
-                 search.errors[:accounts]
+    assert_equal [I18n.t("activerecord.errors.messages.blank")], search.errors[:user_id]
+    assert_equal [I18n.t("activerecord.errors.messages.blank")], search.errors[:accounts]
   end
 
   test "min and max must be numerical" do
@@ -58,9 +55,7 @@ class SearchTest < ActiveSupport::TestCase
                         comment:    "a",
                         checked:    0)
     assert search.invalid?
-    assert_equal [I18n.translate("activerecord.errors.messages.not_a_number")],
-                 search.errors[:min]
-    assert_equal [I18n.translate("activerecord.errors.messages.not_a_number")],
-                 search.errors[:max]
+    assert_equal [I18n.t("activerecord.errors.messages.not_a_number")], search.errors[:min]
+    assert_equal [I18n.t("activerecord.errors.messages.not_a_number")], search.errors[:max]
   end
 end

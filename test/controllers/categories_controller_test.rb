@@ -56,8 +56,7 @@ class CategoriesControllerTest < ActionController::TestCase
     assert_difference("Category.count") do
       post_create           @some_account
       assert_redirected_to  account_categories_path @some_account
-      assert_equal I18n.translate("categories.create.successfully_created"),
-                   flash[:notice]
+      assert_equal I18n.t("categories.create.successfully_created"), flash[:notice]
     end
   end
 
@@ -79,8 +78,7 @@ class CategoriesControllerTest < ActionController::TestCase
   test "should update category" do
     patch_update          @some_category
     assert_redirected_to  account_categories_path @some_account
-    assert_equal I18n.translate("categories.update.successfully_updated"),
-                 flash[:notice]
+    assert_equal          I18n.t("categories.update.successfully_updated"), flash[:notice]
     assert_not_equal      @previous_category_name, @some_category.reload.name
   end
 
@@ -95,8 +93,7 @@ class CategoriesControllerTest < ActionController::TestCase
     assert_no_difference "Category.count" do
       delete_destroy        @some_category
       assert_redirected_to  account_categories_path @some_account
-      assert_equal          I18n.translate("categories.destroy.cant_destroy"),
-                            flash[:warning]
+      assert_equal          I18n.t("categories.destroy.cant_destroy"), flash[:warning]
     end
   end
 
@@ -106,8 +103,7 @@ class CategoriesControllerTest < ActionController::TestCase
     assert_difference("Category.count", -1) do
       delete_destroy        @some_category
       assert_redirected_to  account_categories_path @some_account
-      assert_equal I18n.translate("categories.destroy.successfully_destroyed"),
-                   flash[:notice]
+      assert_equal I18n.t("categories.destroy.successfully_destroyed"), flash[:notice]
     end
   end
 
