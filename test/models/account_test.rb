@@ -30,7 +30,7 @@ class AccountTest < ActiveSupport::TestCase
                           hidden:          false)
 
     assert account.valid?
-    assert account.initial_balance == 1234.56
+    assert_equal(account.initial_balance, 1234.56)
   end
 
   test "name and initial_balance must not be empty" do

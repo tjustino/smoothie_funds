@@ -1,6 +1,6 @@
 Smoothie Funds
 ===============
-Smoothie Funds allows you to manage your money with ease.  
+Smoothie Funds allows you to manage your money with ease.
 You can get more complicated, but it's useless!
 
 How To
@@ -12,14 +12,13 @@ Load fixture in dev environnement:
 > bin/rails db:drop ; bin/rails db:create ; bin/rails db:migrate ; bin/rails db:fixtures:load FIXTURES=users,accounts,categories,transactions,schedules,pending_users
 
 Restore data from production to dev environnement:
-> dropdb smoothiefunds_development  
-> bundle exec bin/rails db:create RAILS_ENV=development  
-> bundle exec bin/rails db:migrate RAILS_ENV=development  
+> dropdb smoothiefunds_development
+> bundle exec bin/rails db:create RAILS_ENV=development
+> bundle exec bin/rails db:migrate RAILS_ENV=development
 > pg_restore --no-acl --no-owner --data-only --dbname=smoothiefunds_development db.dump
 
 Miscellaneous:
-> bundle exec annotate  
-> bundle exec rake erd
+> bundle exec annotate
 
 ---
 Remember
