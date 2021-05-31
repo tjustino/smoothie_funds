@@ -28,8 +28,11 @@ group :development do
   gem "annotate"                # Annotates ActiveRecord Model, route & fixture
   gem "listen"                  # Listen to file modif and notifies you
   gem "rubocop"                 # Automatic Ruby code style checking tool
+  gem "rubocop-md"              # Run Rubocop against your Markdown files
+  gem "rubocop-minitest"        # Extension focused on Minitest best practices
   gem "rubocop-performance"     # Check for performance optimizations
   gem "rubocop-rails"           # Automatic Rails code style checking tool
+  gem "rubocop-rake"            # RuboCop plugin for Rake
   gem "spring"                  # Keep application running in the background
   gem "web-console"             # Access an IRB console on exception pages
 
