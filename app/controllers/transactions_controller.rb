@@ -110,7 +110,7 @@ class TransactionsController < ApplicationController
             )
           end
         end
-        format.js {}
+        format.js
       end
     end
   end

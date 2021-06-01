@@ -96,13 +96,13 @@ class Transaction < ApplicationRecord
           if comment.present?
             where("UPPER(comment) LIKE UPPER('%#{comment}%')")
           else
-            where("comment IS NULL")
+            where(comment: nil)
           end
         when "not_like"
           if comment.present?
             where("UPPER(comment) NOT LIKE UPPER('%#{comment}%')")
           else
-            where("comment IS NOT NULL")
+            where.not(comment: nil)
           end
         else
           where("1=1")
@@ -110,9 +110,10 @@ class Transaction < ApplicationRecord
       end
 
       def search_checked(checked)
-        if checked == "yep"
+        case checked
+        when "yep"
           where(checked: true)
-        elsif checked == "nop"
+        when "nop"
           where(checked: false)
         else
           where("1=1")

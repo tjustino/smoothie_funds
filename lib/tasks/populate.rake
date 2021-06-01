@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 namespace :populate do
-  MANY = 100
-  NAME = "Thomas"
+  @many = 100
+  @name = "Thomas"
 
-  desc "Create #{MANY} accounts, categories, schedules and transactions"
+  desc "Create #{@many} accounts, categories, schedules and transactions"
   task all: :environment do
     Rake::Task["populate:accounts"].invoke
     Rake::Task["populate:categories"].invoke

@@ -2,6 +2,7 @@
 
 require "test_helper"
 
+# Users Controller Test
 class UsersControllerTest < ActionController::TestCase
   ############################################################### GET /users/new
   test "should be redirected to dashboard url" do

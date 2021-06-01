@@ -2,6 +2,7 @@
 
 require "test_helper"
 
+# Transactions Controller Test
 class TransactionsControllerTest < ActionController::TestCase
   ####################################### GET /accounts/:account_id/transactions
   test "should get index" do

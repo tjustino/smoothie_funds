@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 namespace :populate do
-  desc "Create #{MANY} transactions only for the first account not hidden"
+  desc "Create #{@many} transactions only for the first account not hidden"
   task transactions: :environment do
-    @account = User.where(name: NAME)
+    @account = User.where(name: @name)
                    .first
                    .accounts
                    .where(hidden: false)
                    .order_by_name
                    .first
-    MANY.times do
+    @many.times do
       Transaction.create(
         account:  @account,
         category: @account.categories.sample,

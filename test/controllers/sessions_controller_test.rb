@@ -2,6 +2,7 @@
 
 require "test_helper"
 
+# Sessions Controller Test
 class SessionsControllerTest < ActionController::TestCase
   ################################################################### GET /login
   test "should be redirected to dashboard url" do

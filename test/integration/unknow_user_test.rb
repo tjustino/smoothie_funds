@@ -2,6 +2,7 @@
 
 require "test_helper"
 
+# Unknow User Test
 class UnknowUserTest < ActionDispatch::IntegrationTest
   fixtures :users
 
@@ -247,8 +248,9 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
   # I want to post data
   # so that I will be redirected to the login path and data will not be created
   test "POST knowing all ids" do
-    user = User.find session[:user_id]
+    user     = User.find session[:user_id]
     accounts = user.accounts.active
+    periods  = %w[days weeks months years]
 
     delete logout_url
 
@@ -280,7 +282,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
         post account_schedules_path account, params: {
           schedule: { next_time:            Time.zone.now,
                       frequency:            rand(1..10),
-                      period:               %w[days weeks months years].sample,
+                      period:               periods.sample,
                       operation_attributes: {
                         amount:      rand(-500.00..500.00),
                         category_id: account.categories.sample,

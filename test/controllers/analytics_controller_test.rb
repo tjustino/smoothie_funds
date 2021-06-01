@@ -2,6 +2,7 @@
 
 require "test_helper"
 
+# Analytics Controller Test
 class AnalyticsControllerTest < ActionController::TestCase
   ################################################ GET /users/:user_id/analytics
   test "should get index" do

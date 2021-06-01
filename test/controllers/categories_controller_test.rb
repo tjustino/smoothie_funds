@@ -2,6 +2,7 @@
 
 require "test_helper"
 
+# Categories Controller Test
 class CategoriesControllerTest < ActionController::TestCase
   ######################################### GET /accounts/:account_id/categories
   test "should get index" do

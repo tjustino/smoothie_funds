@@ -13,6 +13,7 @@
 
 require "test_helper"
 
+# Pending User Model Test
 class PendingUserTest < ActiveSupport::TestCase
   test "should create pending user" do
     pending_user = PendingUser.new(account: @some_account,

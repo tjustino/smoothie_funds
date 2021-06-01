@@ -2,6 +2,7 @@
 
 require "test_helper"
 
+# Dashboard Controller Test
 class DashboardControllerTest < ActionController::TestCase
   ######################################################################## GET /
   test "should get index" do

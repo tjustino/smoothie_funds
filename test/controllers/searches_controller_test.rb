@@ -2,6 +2,7 @@
 
 require "test_helper"
 
+# Searches Controller Test
 class SearchesControllerTest < ActionController::TestCase
   ############################################################ GET /searches/:id
   test "should get show" do
@@ -138,9 +139,10 @@ class SearchesControllerTest < ActionController::TestCase
     end
 
     def random_period_for(period)
-      if    period == :before
+      case period
+      when :before
         rand(Time.zone.now..3.months.since)
-      elsif period == :after
+      when :after
         rand(3.months.ago..Time.zone.now)
       end
     end

@@ -17,6 +17,7 @@
 
 require "test_helper"
 
+# Schedule Model Test
 class ScheduleTest < ActiveSupport::TestCase
   test "should create schedule" do
     account   = @accounts.first

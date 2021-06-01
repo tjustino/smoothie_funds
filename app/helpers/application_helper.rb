@@ -4,7 +4,7 @@
 module ApplicationHelper
   def nav_link(name, url, icon)
     class_name = current_page?(url) ? "active" : nil
-    content_tag(:li, class: [class_name, "nav-item"].join(" ")) do
+    tag.li class: [class_name, "nav-item"].join(" ") do
       link_to icon_text(icon, name), url, class: "nav-link"
     end
   end
@@ -22,7 +22,6 @@ module ApplicationHelper
   end
 
   def icon(icon_class)
-    # icon_class.include?(" icon") ? icon_class : icon_class += " icon"
-    content_tag(:i, nil, class: icon_class)
+    tag.i class: icon_class
   end
 end

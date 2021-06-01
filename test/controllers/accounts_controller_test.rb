@@ -2,6 +2,7 @@
 
 require "test_helper"
 
+# Accounts Controller Test
 class AccountsControllerTest < ActionController::TestCase
   ################################################################ GET /accounts
   test "should get index" do
@@ -38,7 +39,7 @@ class AccountsControllerTest < ActionController::TestCase
                                          initial_balance: rand(-100..100),
                                          hidden:          rand(0..1) == 1 } }
       assert_redirected_to accounts_url
-      assert_equal  I18n.t("accounts.create.successfully_created"), flash[:notice]
+      assert_equal         I18n.t("accounts.create.successfully_created"), flash[:notice]
     end
   end
 
@@ -95,7 +96,7 @@ class AccountsControllerTest < ActionController::TestCase
     delete_unlink         accounts(:compte_commun)
     assert_equal          1, accounts(:compte_commun).reload.users.count
     assert_redirected_to  accounts_path
-    assert_equal      I18n.t("accounts.unlink.successfully_unlinked"), flash[:notice]
+    assert_equal          I18n.t("accounts.unlink.successfully_unlinked"), flash[:notice]
   end
 
   test "should not unlink personal account" do

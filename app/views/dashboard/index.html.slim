@@ -44,22 +44,18 @@
                   - if account.transactions.any?
                     dl.row.mb-0
                       dt.col-sm-4.nowrap = t('.current_balance')
-                      dd.col-sm-8 class=("text-danger" if sum_today(account) < 0) = t('.balance_date', \
-                                      balance: current_balance(account), \
-                                      date: current_date(account) )
-                      - if future_transactions?(account)
+                      dd.col-sm-8 class=("text-danger" if sum_today(@current_transactions, account) < 0)
+                        = t('.balance_date', balance: current_balance(@current_transactions, account), date: current_date(@current_transactions, account))
+                      - if future_transactions?(@transactions, account)
                         dt.col-sm-4.nowrap style=("color: gray;")
                           = t('.future_balance')
-                        dd.col-sm-8 class=("text-danger" if sum_tomorrow(account) < 0) style=("color: gray;")
-                          = t('.balance_date',  \
-                                balance: future_balance(account), \
-                                date: future_date(account) )
+                        dd.col-sm-8 class=("text-danger" if sum_tomorrow(@transactions, account) < 0) style=("color: gray;")
+                          = t('.balance_date',  balance: future_balance(@transactions, account), date: future_date(@transactions, account))
                   - else
                     dl.row.mb-0
                       dt.col-sm-4.nowrap = t('.current_balance')
-                      dd.col-sm-8 class=("text-danger" if account.initial_balance < 0) = t('.balance_date', \
-                                      balance: initial_balance(account), \
-                                      date: today )
+                      dd.col-sm-8 class=("text-danger" if account.initial_balance < 0)
+                        = t('.balance_date', balance: initial_balance(account), date: today )
         - else
           p.card-text = t('.no_transactions')
 
@@ -79,7 +75,7 @@
                       th colspan="4" = link_to(account.name, \
                                                   account_schedules_path(account))
                   tbody
-                  - shedules_for(account).each do |schedule|
+                  - shedules_for(@schedules, account).each do |schedule|
                     tr title="#{schedule.account.name}"
                       td = link_to icon("fas fa-magic"), \
                               insert_schedule_path(schedule), \

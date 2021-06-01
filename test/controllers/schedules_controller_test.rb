@@ -2,6 +2,7 @@
 
 require "test_helper"
 
+# Schedules Controller Test
 class SchedulesControllerTest < ActionController::TestCase
   ########################################## GET /accounts/:account_id/schedules
   test "should get index" do

@@ -16,6 +16,7 @@
 
 require "test_helper"
 
+# Account Model Test
 class AccountTest < ActiveSupport::TestCase
   test "should create account" do
     account = Account.new(name:            "Crazy Account",
@@ -29,8 +30,8 @@ class AccountTest < ActiveSupport::TestCase
                           initial_balance: "1 234,56",
                           hidden:          false)
 
-    assert account.valid?
-    assert_equal(account.initial_balance, 1234.56)
+    assert          account.valid?
+    assert_in_delta 1234.56, account.initial_balance
   end
 
   test "name and initial_balance must not be empty" do

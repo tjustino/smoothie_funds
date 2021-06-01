@@ -16,15 +16,13 @@
 
 # Account model
 class Account < ApplicationRecord
-  has_many :relations,    dependent:   :delete_all
-  has_many :users,        through:     :relations
+  has_many :relations,    dependent: :delete_all
+  has_many :users,        through:   :relations
 
-  has_many :categories,   dependent:   :restrict_with_error
-  has_many :transactions, dependent:   :restrict_with_error
-  has_many :schedules,    dependent:   :delete_all
-  has_one  :pending_user, foreign_key: "account_id",
-                          inverse_of:  :account,
-                          dependent:   :destroy
+  has_many :categories,   dependent: :restrict_with_error
+  has_many :transactions, dependent: :restrict_with_error
+  has_many :schedules,    dependent: :delete_all
+  has_one  :pending_user, dependent: :destroy, inverse_of: :account
 
   accepts_nested_attributes_for :pending_user, update_only: true
 

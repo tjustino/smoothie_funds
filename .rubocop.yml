@@ -21,15 +21,6 @@ Layout/IndentationConsistency:
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
-# Specific to my eccentric comments
-Layout/ExtraSpacing:
-  Exclude:
-    - Gemfile
-
-# Well, it's seem it's a rails project
-Rails:
-  Enabled: true
-
 # too much work for now
 Metrics/AbcSize:
   Enabled: false

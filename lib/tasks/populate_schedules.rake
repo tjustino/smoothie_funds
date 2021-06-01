@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 namespace :populate do
-  desc "Create #{MANY} schedules only for the first account not hidden"
+  desc "Create #{@many} schedules only for the first account not hidden"
   task schedules: :environment do
-    @account = User.where(name: NAME)
+    @account = User.where(name: @name)
                    .first
                    .accounts
                    .where(hidden: false)
                    .order_by_name
                    .first
-    MANY.times do
+    @many.times do
       Schedule.create(account:              @account,
                       next_time:            Time.zone.now + rand(1..60).days,
                       frequency:            rand(1..10),
