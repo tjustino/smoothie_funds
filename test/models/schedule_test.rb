@@ -20,8 +20,8 @@ require "test_helper"
 # Schedule Model Test
 class ScheduleTest < ActiveSupport::TestCase
   test "should create schedule" do
-    account   = @accounts.first
-    category  = account.categories.first
+    account  = @accounts.first
+    category = account.categories.first
 
     schedule = Schedule.new(account:              account,
                             next_time:            Time.zone.now + 5.days,
@@ -37,8 +37,8 @@ class ScheduleTest < ActiveSupport::TestCase
   end
 
   test "account_id, next_time, frequency and period must not be empty" do
-    account   = @accounts.first
-    category  = account.categories.first
+    account  = @accounts.first
+    category = account.categories.first
 
     schedule = Schedule.new(operation_attributes: { account:  account,
                                                     date:     Time.zone.now,
@@ -65,14 +65,13 @@ class ScheduleTest < ActiveSupport::TestCase
                             frequency: 13,
                             period:    "days")
 
-    assert schedule.invalid?
-
+    assert       schedule.invalid?
     assert_equal [I18n.t("activerecord.errors.messages.blank")], schedule.errors[:operation]
   end
 
   test "frequency must be numerical" do
-    account   = @accounts.first
-    category  = account.categories.first
+    account  = @accounts.first
+    category = account.categories.first
 
     schedule = Schedule.new(account:              account,
                             next_time:            Time.zone.now + 5.days,
@@ -84,7 +83,7 @@ class ScheduleTest < ActiveSupport::TestCase
                                                     comment:  nil,
                                                     checked:  false })
 
-    assert schedule.invalid?
+    assert       schedule.invalid?
     assert_equal [I18n.t("activerecord.errors.messages.not_a_number")], schedule.errors[:frequency]
   end
 end

@@ -13,13 +13,13 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
     }
   end
 
-  ####################################################################### DELETE
+  ############################################################################################################### DELETE
 
   # As a not logged user,
   # I want to delete data
   # so that I will be redirected to the login path and data will not be deleted
   test "DELETE data knowing all ids" do
-    user = User.find session[:user_id]
+    user     = User.find session[:user_id]
     accounts = user.accounts.active
 
     # sessions#destroy
@@ -68,7 +68,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
     # end
   end
 
-  ########################################################################## GET
+  ################################################################################################################## GET
 
   # As a not logged user,
   # I want to access pages without params
@@ -110,7 +110,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
   # I want to access pages with this params
   # so that I will be redirected to the login path, except for the new user path
   test "GET knowing all ids" do
-    user = User.find session[:user_id]
+    user     = User.find session[:user_id]
     accounts = user.accounts.active
 
     delete logout_url
@@ -168,7 +168,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
     end
   end
 
-  ################################################################## PATCH / PUT
+  ########################################################################################################## PATCH / PUT
 
   # As a not logged user,
   # I want to patch data
@@ -222,25 +222,25 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
     end
   end
 
-  ######################################################################### POST
+  ################################################################################################################# POST
 
   # As a not logged user,
   # I want to create an user and connect myself
   # so that I will be redirected to the dashboard url
   test "POST create and log user" do
-    email     = "john.doe@email.com"
-    password  = "unbreakablePassword"
+    email    = "john.doe@email.com"
+    password = "unbreakablePassword"
 
     # users#create
     assert_difference("User.count") do
-      post users_path, params: { user: {  email:                 email,
-                                          password:              password,
-                                          password_confirmation: password } }
+      post users_path, params: { user: { email:                 email,
+                                         password:              password,
+                                         password_confirmation: password } }
       assert_redirected_to login_url
     end
 
     # sessions#create
-    post login_path, params: { email: email, password: password }
+    post                 login_path, params: { email: email, password: password }
     assert_redirected_to dashboard_url
   end
 
@@ -309,7 +309,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
   # I want to post data via specific routes
   # so that I will be redirected to the login path and data will not be created
   test "POST specific routes" do
-    user = User.find session[:user_id]
+    user     = User.find session[:user_id]
     accounts = user.accounts.active
 
     delete logout_url

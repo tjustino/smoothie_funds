@@ -4,97 +4,97 @@ require "test_helper"
 
 # Categories Controller Test
 class CategoriesControllerTest < ActionController::TestCase
-  ######################################### GET /accounts/:account_id/categories
+  ################################################################################# GET /accounts/:account_id/categories
   test "should get index" do
     get_index       @some_account
     assert_response :success
   end
 
   test "should not get index - hacker way" do
-    get_index             @some_wrong_account
-    assert_redirected_to  dashboard_url
+    get_index            @some_wrong_account
+    assert_redirected_to dashboard_url
   end
 
   test "should not get index - unknow account" do
-    get_index             @unknow_account
-    assert_redirected_to  dashboard_url
+    get_index            @unknow_account
+    assert_redirected_to dashboard_url
   end
 
-  ##################################### GET /accounts/:account_id/categories/new
+  ############################################################################# GET /accounts/:account_id/categories/new
   test "should get new" do
     get_new         @some_account
     assert_response :success
   end
 
   test "should not get new - hacker way" do
-    get_new               @some_wrong_account
-    assert_redirected_to  dashboard_url
+    get_new              @some_wrong_account
+    assert_redirected_to dashboard_url
   end
 
   test "should not get new - unknow account" do
-    get_new               @unknow_account
-    assert_redirected_to  dashboard_url
+    get_new              @unknow_account
+    assert_redirected_to dashboard_url
   end
 
-  ##################################################### GET /categories/:id/edit
+  ############################################################################################# GET /categories/:id/edit
   test "should get edit" do
     get_edit        @some_category
     assert_response :success
   end
 
   test "should not get edit - hacker way" do
-    get_edit              @some_wrong_category
-    assert_redirected_to  dashboard_url
+    get_edit             @some_wrong_category
+    assert_redirected_to dashboard_url
   end
 
   test "should not get edit - unknow category" do
-    get_edit              @unknow_category
-    assert_redirected_to  dashboard_url
+    get_edit             @unknow_category
+    assert_redirected_to dashboard_url
   end
 
-  ######################################## POST /accounts/:account_id/categories
+  ################################################################################ POST /accounts/:account_id/categories
   test "should create category" do
     assert_difference("Category.count") do
-      post_create           @some_account
-      assert_redirected_to  account_categories_path @some_account
-      assert_equal I18n.t("categories.create.successfully_created"), flash[:notice]
+      post_create          @some_account
+      assert_redirected_to account_categories_path @some_account
+      assert_equal         I18n.t("categories.create.successfully_created"), flash[:notice]
     end
   end
 
   test "should not create category - hacker way" do
     assert_no_difference("Category.count") do
-      post_create           @some_wrong_account
-      assert_redirected_to  dashboard_url
+      post_create          @some_wrong_account
+      assert_redirected_to dashboard_url
     end
   end
 
   test "should not create category - unknow account" do
     assert_no_difference("Category.count") do
-      post_create           @unknow_account
-      assert_redirected_to  dashboard_url
+      post_create          @unknow_account
+      assert_redirected_to dashboard_url
     end
   end
 
-  #################################################### PATCH/PUT /categories/:id
+  ############################################################################################ PATCH/PUT /categories/:id
   test "should update category" do
-    patch_update          @some_category
-    assert_redirected_to  account_categories_path @some_account
-    assert_equal          I18n.t("categories.update.successfully_updated"), flash[:notice]
-    assert_not_equal      @previous_category_name, @some_category.reload.name
+    patch_update         @some_category
+    assert_redirected_to account_categories_path @some_account
+    assert_equal         I18n.t("categories.update.successfully_updated"), flash[:notice]
+    assert_not_equal     @previous_category_name, @some_category.reload.name
   end
 
   test "should not update category - hacker way" do
-    patch_update          @some_wrong_category
-    assert_redirected_to  dashboard_url
-    assert_equal @previous_category_name, @some_wrong_category.reload.name
+    patch_update         @some_wrong_category
+    assert_redirected_to dashboard_url
+    assert_equal         @previous_category_name, @some_wrong_category.reload.name
   end
 
-  ####################################################### DELETE /categories/:id
+  ############################################################################################### DELETE /categories/:id
   test "should not destroy category with transactions" do
     assert_no_difference "Category.count" do
-      delete_destroy        @some_category
-      assert_redirected_to  account_categories_path @some_account
-      assert_equal          I18n.t("categories.destroy.cant_destroy"), flash[:warning]
+      delete_destroy       @some_category
+      assert_redirected_to account_categories_path @some_account
+      assert_equal         I18n.t("categories.destroy.cant_destroy"), flash[:warning]
     end
   end
 
@@ -102,9 +102,9 @@ class CategoriesControllerTest < ActionController::TestCase
     @some_category.transactions.destroy_all
 
     assert_difference("Category.count", -1) do
-      delete_destroy        @some_category
-      assert_redirected_to  account_categories_path @some_account
-      assert_equal I18n.t("categories.destroy.successfully_destroyed"), flash[:notice]
+      delete_destroy       @some_category
+      assert_redirected_to account_categories_path @some_account
+      assert_equal         I18n.t("categories.destroy.successfully_destroyed"), flash[:notice]
     end
   end
 
@@ -112,8 +112,8 @@ class CategoriesControllerTest < ActionController::TestCase
     @some_wrong_category.transactions.destroy_all
 
     assert_no_difference "Category.count" do
-      delete_destroy        @some_wrong_category
-      assert_redirected_to  dashboard_url
+      delete_destroy       @some_wrong_category
+      assert_redirected_to dashboard_url
     end
   end
 
@@ -128,7 +128,7 @@ class CategoriesControllerTest < ActionController::TestCase
   # test "should not import categories from another account - unknow account" do
   # end
 
-  private ######################################################################
+  private ##############################################################################################################
 
     def get_index(account)
       get :index, params: { account_id: account }

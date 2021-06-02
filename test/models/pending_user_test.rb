@@ -37,18 +37,15 @@ class PendingUserTest < ActiveSupport::TestCase
   end
 
   test "email must be valid" do
-    pending_user1 = PendingUser.new(account: @some_account,
-                                    email:   "username@domain")
+    pending_user1 = PendingUser.new(account: @some_account, email: "username@domain")
     assert          pending_user1.invalid?
     assert_equal    [I18n.t("activerecord.errors.messages.invalid")], pending_user1.errors[:email]
 
-    pending_user2 = PendingUser.new(account: @some_account,
-                                    email:   "@domain.tld")
+    pending_user2 = PendingUser.new(account: @some_account, email: "@domain.tld")
     assert          pending_user2.invalid?
     assert_equal    [I18n.t("activerecord.errors.messages.invalid")], pending_user2.errors[:email]
 
-    pending_user3 = PendingUser.new(account: @some_account,
-                                    email:   "username#domain.tld")
+    pending_user3 = PendingUser.new(account: @some_account, email: "username#domain.tld")
     assert          pending_user3.invalid?
     assert_equal    [I18n.t("activerecord.errors.messages.invalid")], pending_user3.errors[:email]
   end

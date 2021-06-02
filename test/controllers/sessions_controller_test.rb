@@ -4,23 +4,23 @@ require "test_helper"
 
 # Sessions Controller Test
 class SessionsControllerTest < ActionController::TestCase
-  ################################################################### GET /login
+  ########################################################################################################### GET /login
   test "should be redirected to dashboard url" do
-    get                   :new
-    assert_redirected_to  dashboard_url
+    get                  :new
+    assert_redirected_to dashboard_url
   end
 
-  ################################################################## POST /login
+  ########################################################################################################## POST /login
   test "should fail relogin" do
-    post :create, params: { email: @user.email, password: "p@ssw0rd!" }
-    assert_redirected_to  dashboard_url
-    assert_not            flash[:notice]
+    post                 :create, params: { email: @user.email, password: "p@ssw0rd!" }
+    assert_redirected_to dashboard_url
+    assert_not           flash[:notice]
   end
 
-  ############################################################### DELETE /logout
+  ####################################################################################################### DELETE /logout
   test "should logout" do
-    delete                :destroy
-    assert_redirected_to  login_url
-    assert_equal          I18n.t("sessions.destroy.logged_out"), flash[:notice]
+    delete               :destroy
+    assert_redirected_to login_url
+    assert_equal         I18n.t("sessions.destroy.logged_out"), flash[:notice]
   end
 end

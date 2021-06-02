@@ -4,7 +4,7 @@ require "test_helper"
 
 # Dashboard Controller Test
 class DashboardControllerTest < ActionController::TestCase
-  ######################################################################## GET /
+  ################################################################################################################ GET /
   test "should get index" do
     get             :index
     assert_response :success

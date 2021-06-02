@@ -31,7 +31,7 @@ module ActiveSupport
       session.delete :user_id
     end
 
-    private
+    private ############################################################################################################
 
       def user_use_cases
         @user               = users(:thomas)

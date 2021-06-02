@@ -4,64 +4,62 @@ require "test_helper"
 
 # Searches Controller Test
 class SearchesControllerTest < ActionController::TestCase
-  ############################################################ GET /searches/:id
+  #################################################################################################### GET /searches/:id
   test "should get show" do
     get_show        some_search
     assert_response :success
   end
 
-  ############################################# GET /users/:user_id/searches/new
+  ##################################################################################### GET /users/:user_id/searches/new
   test "should get new" do
     get_new         @user
     assert_response :success
   end
 
   test "should not get new - hacker way" do
-    get_new               @wrong_user
-    assert_redirected_to  dashboard_url
+    get_new              @wrong_user
+    assert_redirected_to dashboard_url
   end
 
   test "should not get new - unknow user" do
-    get_new               @unknow_user
-    assert_redirected_to  dashboard_url
+    get_new              @unknow_user
+    assert_redirected_to dashboard_url
   end
 
-  ################################################ POST /users/:user_id/searches
+  ######################################################################################## POST /users/:user_id/searches
   test "should create search" do
-    assert_difference("Search.count") do
-      post_create           @user
-    end
+    assert_difference("Search.count") { post_create @user }
   end
 
   test "should not create more than 3 searches" do
     5.times { some_search }
-    post_create @user
+    post_create  @user
     assert_equal 3, @user.searches.count
   end
 
   test "should not create search - hacker way" do
     assert_no_difference("Search.count") do
-      post_create           @wrong_user
-      assert_redirected_to  dashboard_url
+      post_create          @wrong_user
+      assert_redirected_to dashboard_url
     end
   end
 
   test "should not create search - unknow user" do
     assert_no_difference("Search.count") do
-      post_create           @unknow_user
-      assert_redirected_to  dashboard_url
+      post_create          @unknow_user
+      assert_redirected_to dashboard_url
     end
   end
 
-  ######################################################### DELETE /searches/:id
+  ################################################################################################# DELETE /searches/:id
   test "should destroy search" do
     # first_search = some_search
     second_search = some_search
 
     assert_difference("Search.count", -1) do
-      delete_destroy        second_search
-      assert_redirected_to  new_user_search_url @user
-      assert_equal I18n.t("searches.destroy.successfully_destroyed"), flash[:notice]
+      delete_destroy       second_search
+      assert_redirected_to new_user_search_url @user
+      assert_equal         I18n.t("searches.destroy.successfully_destroyed"), flash[:notice]
     end
   end
 
@@ -70,8 +68,8 @@ class SearchesControllerTest < ActionController::TestCase
     second_wrong_search = some_wrong_search
 
     assert_no_difference "Search.count" do
-      delete_destroy        second_wrong_search
-      assert_redirected_to  dashboard_url
+      delete_destroy       second_wrong_search
+      assert_redirected_to dashboard_url
     end
   end
 
@@ -82,7 +80,7 @@ class SearchesControllerTest < ActionController::TestCase
   #   end
   # end
 
-  private ######################################################################
+  private ##############################################################################################################
 
     def some_search
       Search.create(user:       @user,
