@@ -9,12 +9,12 @@
 
     / share
     - unless account.pending_user.blank?
-      td data-title="#{share}" =  show_others_or_me(account).html_safe + \
+      td data-title="#{share}" =  show_others_or_me(@current_user, account).html_safe + \
                                   tag("br") + \
                                   t('.waiting_for') + \
                                   mail_to(account.pending_user.email)
     - else
-      td data-title="#{share}" = show_others_or_me(account).html_safe
+      td data-title="#{share}" = show_others_or_me(@current_user, account).html_safe
 
     / common
     td

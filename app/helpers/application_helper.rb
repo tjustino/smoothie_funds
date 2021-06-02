@@ -9,8 +9,8 @@ module ApplicationHelper
     end
   end
 
-  def name_or_email
-    @current_user.name? ? @current_user.name : @current_user.email
+  def name_or_email(current_user)
+    current_user.name? ? current_user.name : current_user.email
   end
 
   def shallow_args(parent, child)

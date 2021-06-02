@@ -2,15 +2,15 @@
 
 # Accounts Helper
 module AccountsHelper
-  def other_users(account)
-    account.users.where.not(id: @current_user)
+  def other_users(current_user, account)
+    account.users.where.not(id: current_user)
   end
 
-  def show_others_or_me(account)
+  def show_others_or_me(current_user, account)
     if account.users.count == 1
       t(".personal_account")
     else
-      others = other_users(account)
+      others = other_users(current_user, account)
 
       if others.count == 1
         email_or_name(others.take)

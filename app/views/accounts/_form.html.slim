@@ -29,7 +29,7 @@
         .mb-3.row
           = f.label :share, t('.share'), class: "col-sm-3 col-form-label"
           .col
-            - other_users(f.object).each do |other_user|
+            - other_users(@current_user, f.object).each do |other_user|
               = f.fields_for :users, other_user do |shared_user|
                 = shared_user.hidden_field :id
                 = shared_user.email_field :email, class: "form-control", \

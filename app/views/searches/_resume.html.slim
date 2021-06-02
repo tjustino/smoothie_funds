@@ -1,7 +1,7 @@
 dl.row
   / Accounts
   dt.col-md-2   = t('.accounts')
-  dd.col-md-10  = joined_accounts_names(search.accounts)
+  dd.col-md-10  = joined_accounts_names(@current_accounts, search.accounts)
 
   / Amounts
   dt.col-md-2 = t('.amount')
@@ -29,7 +29,7 @@ dl.row
 
   / Categories
   dt.col-md-2   = t('.categories')
-  dd.col-md-10  = joined_categories_names(search.accounts, search.categories)
+  dd.col-md-10  = joined_categories_names(@current_accounts, search.accounts, search.categories)
 
   / Comment
   dt.col-md-2 = t('.comment')

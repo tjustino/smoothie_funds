@@ -65,7 +65,7 @@ html
               ul.navbar-nav
                 li.nav-item.dropdown
                   a.nav-link.dropdown-toggle href="#" data-bs-toggle="dropdown" class=("active" if params[:controller] == "users")
-                    = icon_text "fas fa-user", name_or_email
+                    = icon_text "fas fa-user", name_or_email(@current_user)
                   .dropdown-menu
                     / Profil
                     = link_to ( icon_text "fas fa-sliders-h", t('.profile') ), \
