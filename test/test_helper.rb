@@ -48,18 +48,12 @@ module ActiveSupport
 
       def some_account
         @accounts     = @user.accounts.active
-        @some_account = @accounts.where(id: @user.schedules.select(:account_id))
-                                 .sample
+        @some_account = @accounts.where(id: @user.schedules.select(:account_id)).sample
       end
 
       def some_wrong_account
-        @wrong_accounts = @wrong_user.accounts
-                                     .active
-                                     .where
-                                     .not(id: accounts(:compte_commun))
-        @some_wrong_account = @wrong_accounts.where(
-          id: @wrong_user.schedules.select(:account_id)
-        ).sample
+        @wrong_accounts = @wrong_user.accounts.active.where.not(id: accounts(:compte_commun))
+        @some_wrong_account = @wrong_accounts.where(id: @wrong_user.schedules.select(:account_id)).sample
       end
 
       def category_use_cases
