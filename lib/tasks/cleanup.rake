@@ -29,7 +29,7 @@ task cleanup: :environment do
   Rake::Task["tmp:clear"].invoke
   puts "Cache, socket and screenshot files from tmp/ cleared 👍".green
 
-  Rake::Task["webpacker:clobber"].invoke
+  # Rake::Task["webpacker:clobber"].invoke
 
   system("git gc --auto")
   puts "git repository cleaned up 👍".green
