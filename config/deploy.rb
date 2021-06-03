@@ -9,18 +9,17 @@ set :repo_url,      "git@github.com:tjustino/smoothie_funds.git"
 set :deploy_to,     "/srv/http/#{fetch(:application)}"
 
 # files/dirs we want symlinking to shared
-set :linked_files,  fetch(:linked_files, []).push("config/database.yml",
-                                                  "config/secrets.yml")
+append :linked_files,  "config/database.yml", "config/secrets.yml"
 
-set :linked_dirs,   fetch(:linked_dirs, []).push("log",
-                                                 ".bundle",
-                                                 "tmp/pids",
-                                                 "tmp/cache",
-                                                 "tmp/sockets",
-                                                 "node_modules",
-                                                 "vendor/bundle",
-                                                 "public/packs",
-                                                 "public/system")
+append :linked_dirs, "log",
+                     ".bundle",
+                     "tmp/pids",
+                     "tmp/cache",
+                     "tmp/sockets",
+                     "node_modules",
+                     "vendor/bundle",
+                     "public/packs",
+                     "public/system"
 
 # setup rbenv
 set :rbenv_type,      :user
