@@ -10,7 +10,6 @@ require "capistrano/deploy"
 #   https://github.com/capistrano/rbenv
 #   https://github.com/capistrano/bundler
 #   https://github.com/capistrano/rails
-#   https://github.com/seuros/capistrano-puma
 require "capistrano/rbenv"
 require "capistrano/bundler"
 require "capistrano/rails/assets"
