@@ -17,9 +17,8 @@ append :linked_dirs, "log",
                      "tmp/cache",
                      "tmp/sockets",
                      "node_modules",
-                     "vendor/bundle",
-                     "public/packs",
-                     "public/system"
+                     "public/assets",
+                     "public/packs"
 
 # setup rbenv
 set :rbenv_type,      :user
@@ -30,4 +29,5 @@ set :rbenv_prefix,    "RBENV_ROOT=#{fetch(:rbenv_path)} " \
 set :rbenv_map_bins,  %w[rake gem bundle ruby rails puma pumactl]
 
 # how many old releases do we want to keep
-set :keep_releases, 5
+set :keep_releases, 3
+set :keep_assets,   3
