@@ -19,10 +19,6 @@
 $font-size-base: 0.9rem;
 
 @import "bootstrap";
-$fa-font-path: "fontawesome-free/webfonts";
-@import "fontawesome-free/scss/fontawesome";
-@import "fontawesome-free/scss/regular";
-@import "fontawesome-free/scss/solid";
 
 // sadely, tables have margin-[right|left]: -15px
 #content-table {
