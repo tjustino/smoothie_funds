@@ -1,4 +1,5 @@
 //= require rails-ujs
-//= require bootstrap.bundle.min
+//= require popper
+//= require bootstrap
 //= require chart.min
 //= require_tree .

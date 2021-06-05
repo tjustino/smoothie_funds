@@ -16,6 +16,8 @@ gem "rails",   "~> 6.1.0"       # Full-stack web framework
 gem "sass-rails"                # Sass adapter for the Rails asset pipeline
 gem "slim"                      # Template language
 gem "sprockets"                 # compile and serve web assets
+gem "bootstrap"                 # HTML, CSS, and JavaScript framework
+gem "font-awesome-sass"         # The iconic SVG, font, and CSS toolkit
 
 group :development, :test do
   gem "byebug"                  # Call 'byebug' anywhere in the code to stop it

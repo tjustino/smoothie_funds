@@ -19,6 +19,8 @@
 $font-size-base: 0.9rem;
 
 @import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
 // sadely, tables have margin-[right|left]: -15px
 #content-table {
