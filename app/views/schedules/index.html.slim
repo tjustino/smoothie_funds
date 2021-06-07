@@ -50,7 +50,7 @@
   .d-flex.justify-content-center
     #loading.spinner-border role="status" style="display:none;"
 
-    - if @nb_schedules >= @limit
+    - if @nb_schedules > @limit
       = button_to t('.more_schedules'), \
                   account_schedules_path(@current_account), \
                   { method: :get, \

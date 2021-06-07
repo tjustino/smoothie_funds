@@ -51,7 +51,7 @@
   .d-flex.justify-content-center
     #loading.spinner-border role="status" style="display:none;"
 
-    - if @nb_categories >= @limit
+    - if @nb_categories > @limit
       = button_to t('.more_categories'), \
                   account_categories_path(@current_account), \
                   { method: :get, \

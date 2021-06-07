@@ -51,7 +51,7 @@
   .d-flex.justify-content-center
     #loading.spinner-border role="status" style="display:none;"
 
-    - if @nb_transactions >= @limit
+    - if @nb_transactions > @limit
       = button_to t('.more_transactions'), @search, { method: :get, \
                                                       class:  "btn btn-primary", \
                                                       id:     "more_items" }

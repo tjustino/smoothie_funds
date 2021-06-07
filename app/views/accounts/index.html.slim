@@ -67,7 +67,7 @@
   .d-flex.justify-content-center
     #loading.spinner-border role="status" style="display:none;"
 
-    - if @nb_accounts >= @limit
+    - if @nb_accounts > @limit
       = button_to t('.more_accounts'), accounts_path, \
                                       { method: :get, \
                                         class:  "btn btn-primary", \
