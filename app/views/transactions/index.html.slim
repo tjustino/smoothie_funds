@@ -13,7 +13,7 @@
     = render partial: "sum_checked", locals: { sum_checked: @sum_checked }
 
   / Download
-  .col-md-auto
+  .col-md-auto.d-none.d-sm-block
     h2 = link_to (icon "fas fa-download"), \
                  account_transactions_path(@current_account, format: :csv), \
                  title: t(".export_transactions"), \

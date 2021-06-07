@@ -12,7 +12,7 @@
         .badge.rounded-pill.bg-secondary#total = @nb_schedules
 
   / Download
-  .col-md-auto
+  .col-md-auto.d-none.d-sm-block
     h2 = link_to (icon "fas fa-download"), \
                  account_schedules_path(@current_account, format: :csv), \
                  title: t(".export_schedules"), \
