@@ -10,14 +10,14 @@ ruby    "3.0.1"
 
 gem "bcrypt"                    # Use ActiveModel has_secure_password
 gem "bootsnap", require: false  # Reduces boot times through caching
+gem "bootstrap"                 # HTML, CSS, and JavaScript framework
+gem "font-awesome-sass"         # The iconic SVG, font, and CSS toolkit
 gem "pg"                        # Use postgresql as the db for Active Record
 gem "puma"                      # App web server
 gem "rails",   "~> 6.1.0"       # Full-stack web framework
 gem "sass-rails"                # Sass adapter for the Rails asset pipeline
 gem "slim"                      # Template language
 gem "sprockets"                 # compile and serve web assets
-gem "bootstrap"                 # HTML, CSS, and JavaScript framework
-gem "font-awesome-sass"         # The iconic SVG, font, and CSS toolkit
 
 group :development, :test do
   gem "byebug"                  # Call 'byebug' anywhere in the code to stop it
