@@ -9,15 +9,11 @@
           .mb-3.row
             = label_tag :email, t('.email'), class: "col-sm-4 col-form-label"
             .col-sm-8
-              = email_field_tag :email, params[:email], class: "form-control", \
-                                                        placeholder: t('.email'), \
-                                                        autofocus: true
+              = email_field_tag :email, params[:email], class: "form-control", placeholder: t('.email'), autofocus: true
           .mb-3.row
             = label_tag :password, t('.password'), class: "col-sm-4 col-form-label"
             .col-sm-8
-              = password_field_tag :password, params[:password], \
-                                              class: "form-control", \
-                                              placeholder: t('.password')
+              = password_field_tag :password, params[:password], class: "form-control", placeholder: t('.password')
         .card-footer
           .row.justify-content-end
             .col-auto
