@@ -11,82 +11,83 @@ html
     meta name="description" content="Gérez vos comptes en toute simplicité !"
 
   body
-    .container
-      / Static navbar
-      nav.navbar.navbar-expand-lg.navbar-light.bg-light.rounded.mb-3.shadow-sm style="background-color: #e3f2fd;"
-        .container-fluid
-          = link_to dashboard_path, class: "navbar-brand"
-            = image_tag "_icon.svg", height: "24", style: "vertical-align: sub;"
-            span = " Smoothie Funds"
-          - unless params[:controller] == "users" and params[:action] == "new"
-            button.navbar-toggler type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-label="Toggle navigation"
-              span.navbar-toggler-icon
+    / Static navbar
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light.rounded.mb-3.shadow-sm style="background-color: #e3f2fd;"
+      .container
+        = link_to dashboard_path, class: "navbar-brand"
+          = image_tag "_icon.svg", height: "24", style: "vertical-align: sub;"
+          span = " Smoothie Funds"
+        - unless params[:controller] == "users" and params[:action] == "new"
+          button.navbar-toggler type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-label="Toggle navigation"
+            span.navbar-toggler-icon
 
-          .collapse.navbar-collapse
-            - if @current_user
-              /menu
-              ul.navbar-nav.me-auto
-                / dropdown transactions
-                - if Category.exists?(account: @current_accounts)
-                  li.nav-item.dropdown
-                    a.nav-link.dropdown-toggle href="#" data-bs-toggle="dropdown" class=("active" if params[:controller] == "transactions")
-                      = icon_text "far fa-credit-card", t('.transactions').html_safe
-                    .dropdown-menu
-                      - @accounts_with_categories.each do |account|
-                        = link_to account.name, account_transactions_path(account), class: "dropdown-item"
-                      .dropdown-divider
-                      = link_to ( icon_text "fas fa-search", t('.search') ), \
-                                new_user_search_path(@current_user), \
-                                class: "dropdown-item"
-                      = link_to ( icon_text "fas fa-chart-area", t('.analytics') ), \
-                                user_analytics_path(@current_user), \
-                                class: "dropdown-item"
-
-                  / dropdown schedules
-                  li.nav-item.dropdown
-                    a.nav-link.dropdown-toggle href="#" data-bs-toggle="dropdown" class=("active" if params[:controller] == "schedules")
-                      = icon_text "far fa-calendar-alt", t('.schedules').html_safe
-                    .dropdown-menu
-                      - @accounts_with_categories.each do |account|
-                        = link_to account.name, account_schedules_path(account), class: "dropdown-item"
-
-                / dropdown categories
-                - if @current_accounts.any?
-                  li.nav-item.dropdown
-                    a.nav-link.dropdown-toggle href="#" data-bs-toggle="dropdown" class=("active" if params[:controller] == "categories")
-                      = icon_text "fas fa-tags", t('.categories').html_safe
-                    .dropdown-menu
-                      - @current_accounts.each do |account|
-                        = link_to account.name, account_categories_path(account), class: "dropdown-item"
-
-                / link accounts
-                = nav_link t('.accounts'), accounts_path, "fas fa-book"
-
-              ul.navbar-nav
+        .collapse.navbar-collapse
+          - if @current_user
+            /menu
+            ul.navbar-nav.me-auto
+              / dropdown transactions
+              - if Category.exists?(account: @current_accounts)
                 li.nav-item.dropdown
-                  a.nav-link.dropdown-toggle href="#" data-bs-toggle="dropdown" class=("active" if params[:controller] == "users")
-                    = icon_text "fas fa-user", name_or_email(@current_user)
+                  a.nav-link.dropdown-toggle href="#" data-bs-toggle="dropdown" class=("active" if params[:controller] == "transactions")
+                    = icon_text "far fa-credit-card", t('.transactions').html_safe
                   .dropdown-menu
-                    / Profil
-                    = link_to ( icon_text "fas fa-sliders-h", t('.profile') ), \
-                              edit_user_path(@current_user), \
-                              class: "dropdown-item"
+                    - @accounts_with_categories.each do |account|
+                      = link_to account.name, account_transactions_path(account), class: "dropdown-item"
                     .dropdown-divider
-                    / Logout
-                    = link_to ( icon_text "fas fa-sign-out-alt", t('.logout') ), \
-                              logout_path,  \
-                              method: :delete, \
-                              class: "dropdown-item", \
-                              id: "logout"
+                    = link_to ( icon_text "fas fa-search", t('.search') ), \
+                              new_user_search_path(@current_user), \
+                              class: "dropdown-item"
+                    = link_to ( icon_text "fas fa-chart-area", t('.analytics') ), \
+                              user_analytics_path(@current_user), \
+                              class: "dropdown-item"
 
-            - elsif params[:controller] != "users"
-              / New user
-              ul.navbar-nav.me-auto
-              ul.navbar-nav
-                li.nav-item
-                  = link_to (icon_text "fas fa-user-plus", t('.create_user')), \
-                            new_user_path, \
-                            class: "btn btn-outline-primary"
+                / dropdown schedules
+                li.nav-item.dropdown
+                  a.nav-link.dropdown-toggle href="#" data-bs-toggle="dropdown" class=("active" if params[:controller] == "schedules")
+                    = icon_text "far fa-calendar-alt", t('.schedules').html_safe
+                  .dropdown-menu
+                    - @accounts_with_categories.each do |account|
+                      = link_to account.name, account_schedules_path(account), class: "dropdown-item"
+
+              / dropdown categories
+              - if @current_accounts.any?
+                li.nav-item.dropdown
+                  a.nav-link.dropdown-toggle href="#" data-bs-toggle="dropdown" class=("active" if params[:controller] == "categories")
+                    = icon_text "fas fa-tags", t('.categories').html_safe
+                  .dropdown-menu
+                    - @current_accounts.each do |account|
+                      = link_to account.name, account_categories_path(account), class: "dropdown-item"
+
+              / link accounts
+              = nav_link t('.accounts'), accounts_path, "fas fa-book"
+
+            ul.navbar-nav
+              li.nav-item.dropdown
+                a.nav-link.dropdown-toggle href="#" data-bs-toggle="dropdown" class=("active" if params[:controller] == "users")
+                  = icon_text "fas fa-user", name_or_email(@current_user)
+                .dropdown-menu
+                  / Profil
+                  = link_to ( icon_text "fas fa-sliders-h", t('.profile') ), \
+                            edit_user_path(@current_user), \
+                            class: "dropdown-item"
+                  .dropdown-divider
+                  / Logout
+                  = link_to ( icon_text "fas fa-sign-out-alt", t('.logout') ), \
+                            logout_path,  \
+                            method: :delete, \
+                            class: "dropdown-item", \
+                            id: "logout"
+
+          - elsif params[:controller] != "users"
+            / New user
+            ul.navbar-nav.me-auto
+            ul.navbar-nav
+              li.nav-item
+                = link_to (icon_text "fas fa-user-plus", t('.create_user')), \
+                          new_user_path, \
+                          class: "btn btn-outline-primary"
+
+    .container
       / alerts
       .row.align-items-center
         .col
