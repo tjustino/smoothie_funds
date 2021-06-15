@@ -271,7 +271,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
           transaction: { category_id: account.categories.sample,
                          date:        Time.zone.now,
                          amount:      rand(-500.00..500.00),
-                         checked:     rand(0..1) == 1,
+                         checked:     true_or_false,
                          comment:     SecureRandom.hex }
         }
         assert_redirected_to login_url
@@ -287,7 +287,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
                         amount:      rand(-500.00..500.00),
                         category_id: account.categories.sample,
                         comment:     SecureRandom.hex,
-                        checked:     rand(0..1) == 1
+                        checked:     true_or_false
                       } }
         }
         assert_redirected_to login_url

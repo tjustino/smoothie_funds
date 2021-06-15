@@ -152,7 +152,7 @@ class TransactionsControllerTest < ActionController::TestCase
       { category_id: category,
         date:        Time.zone.now + rand(1..9).days,
         amount:      rand(-500.00..500.00),
-        checked:     rand(0..1) == 1,
+        checked:     true_or_false,
         comment:     SecureRandom.hex }
     end
 

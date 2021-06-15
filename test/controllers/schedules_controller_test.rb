@@ -148,7 +148,7 @@ class SchedulesControllerTest < ActionController::TestCase
         operation_attributes: { category_id: category,
                                 amount:      rand(-500.00..500.00),
                                 comment:     SecureRandom.hex,
-                                checked:     rand(0..1) == 1 } }
+                                checked:     true_or_false } }
     end
 
     def delete_destroy(schedule)

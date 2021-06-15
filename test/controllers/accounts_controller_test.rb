@@ -37,7 +37,7 @@ class AccountsControllerTest < ActionController::TestCase
     assert_difference "Account.count" do
       post :create, params: { account: { name:            SecureRandom.hex,
                                          initial_balance: rand(-100..100),
-                                         hidden:          rand(0..1) == 1 } }
+                                         hidden:          true_or_false } }
       assert_redirected_to accounts_url
       assert_equal         I18n.t("accounts.create.successfully_created"), flash[:notice]
     end
@@ -216,7 +216,7 @@ class AccountsControllerTest < ActionController::TestCase
       patch :update, params: { id:      account,
                                account: { name:            SecureRandom.hex,
                                           initial_balance: rand(-100..100),
-                                          hidden:          rand(0..1) == 1 } }
+                                          hidden:          true_or_false } }
     end
 
     def delete_destroy(account)

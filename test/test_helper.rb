@@ -31,6 +31,10 @@ module ActiveSupport
       session.delete :user_id
     end
 
+    def true_or_false
+      rand(0..1) == 1
+    end
+
     private ############################################################################################################
 
       def user_use_cases
