@@ -32,6 +32,7 @@ fr:
       edit:             "Éditer"
       destroy:          "Supprimer"
       are_you_sure:     "Etes-vous certain de vouloir supprimer le compte « %{account} » ?"
+      hidden_account:   "Compte masqué"
     form:
       name:             "Nom"
       initial_balance:  "Balance initiale"
@@ -103,8 +104,10 @@ fr:
       edit:             "Éditer"
       destroy:          "Supprimer"
       are_you_sure:     "Etes-vous certain de vouloir supprimer la catégorie « %{category} » ?"
+      hidden_category:  "Catégorie masquée"
     form:
       name:             "Nom"
+      hidden:           "Masquer cette catégorie"
       # back:             "Retour arrière"
     import_from:
       title:            "Importer depuis..."

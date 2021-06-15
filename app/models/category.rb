@@ -11,6 +11,7 @@
 #  updated_by :integer
 #  created_at :datetime
 #  updated_at :datetime
+#  hidden     :boolean          default(FALSE)
 #
 
 # Category model
@@ -19,6 +20,7 @@ class Category < ApplicationRecord
   has_many    :transactions, dependent: :restrict_with_error
 
   scope :order_by_name, -> { order(name: :asc) }
+  scope :active,        -> { where(hidden: false) }
 
   validates :account_id, presence: true
   validates :name,       presence: true, uniqueness: { scope: :account_id }

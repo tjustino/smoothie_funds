@@ -144,14 +144,16 @@ class CategoriesControllerTest < ActionController::TestCase
 
     def post_create(account)
       post :create, params: { account_id: account,
-                              category:   { name: SecureRandom.hex } }
+                              category:   { name:   SecureRandom.hex,
+                                            hidden: true_or_false } }
     end
 
     def patch_update(category)
       @previous_category_name = category.name
 
       patch :update, params: { id:       category,
-                               category: { name: SecureRandom.hex } }
+                               category: { name:   SecureRandom.hex,
+                                           hidden: true_or_false } }
     end
 
     def delete_destroy(category)

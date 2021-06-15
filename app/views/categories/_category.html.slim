@@ -1,21 +1,22 @@
 - categories.each do |category|
-  tr
+  tr style=("color: gray;" if category.hidden == true)
     / name
     td data-title="#{name}" = category.name
 
     / count
-    td data-title="#{use}" = t('.time', total: category.transactions.active.count)
+    td data-title="#{use}" = t(".time", total: category.transactions.active.count)
 
     / common
     td
       .row.justify-content-start.dotted-top
         .col-auto
-          = link_to (icon "fas fa-edit"), \
-                    edit_category_path(category), \
-                    title: t('.edit')
+          = link_to (icon "fas fa-edit"), edit_category_path(category), title: t(".edit")
         .col-auto
           = link_to (icon "far fa-trash-alt"), \
                     category_path(category), \
                     method: :delete, \
-                    data: {confirm: t('.are_you_sure', category: category.name)}, \
-                    title: t('.destroy')
+                    data: {confirm: t(".are_you_sure", category: category.name)}, \
+                    title: t(".destroy")
+        - if category.hidden == true
+          .col-auto
+            = tag.i class: "far fa-eye-slash", title: t(".hidden_category")

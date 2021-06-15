@@ -11,7 +11,7 @@
     - unless account.pending_user.blank?
       td data-title="#{share}" =  show_others_or_me(@current_user, account).html_safe + \
                                   tag("br") + \
-                                  t('.waiting_for') + \
+                                  t(".waiting_for") + \
                                   mail_to(account.pending_user.email)
     - else
       td data-title="#{share}" = show_others_or_me(@current_user, account).html_safe
@@ -20,12 +20,13 @@
     td
       .row.justify-content-start.dotted-top
         .col-auto
-          = link_to (icon "fas fa-edit"), \
-                    edit_account_path(account), \
-                    title: t('.edit')
+          = link_to (icon "fas fa-edit"), edit_account_path(account), title: t(".edit")
         .col-auto
           = link_to (icon "far fa-trash-alt"), \
                     account_path(account), \
                     method: :delete, \
-                    data: {confirm: t('.are_you_sure', account: account.name)}, \
-                    title: t('.destroy')
+                    data: {confirm: t(".are_you_sure", account: account.name)}, \
+                    title: t(".destroy")
+        - if account.hidden == true
+          .col-auto
+            = tag.i class: "far fa-eye-slash", title: t(".hidden_account")

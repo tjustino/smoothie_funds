@@ -20,7 +20,7 @@ class CategoriesController < ApplicationController
       format.html
       format.js.erb
       format.csv do
-        attributes_to_extract = %w[id account_id name]
+        attributes_to_extract = %w[id account_id name hidden]
         send_data current_categories.to_csv(attributes_to_extract),
                   filename: "categories_#{timestamp_for_export}.csv",
                   type:     "text/csv"
@@ -70,7 +70,8 @@ class CategoriesController < ApplicationController
       next if current_categories.exists?(name: other_category.name)
 
       @category = current_categories.build
-      @category.name = other_category.name
+      @category.name   = other_category.name
+      @category.hidden = other_category.hidden
       save_category(nil)
     end
 
@@ -107,7 +108,7 @@ class CategoriesController < ApplicationController
 
     def category_params
       category_params = params[:category]
-      category_params ? category_params.permit(:name) : {}
+      category_params ? category_params.permit(:name, :hidden) : {}
     end
 
     def save_category(notice)

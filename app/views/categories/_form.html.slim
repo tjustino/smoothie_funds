@@ -11,6 +11,13 @@
                        autofocus: true
         - @category.errors.full_messages_for(:name).each do |message|
           .invalid-feedback = message
+    .mb-3.row
+      .col-sm-4
+      .col
+        .form-check
+          = f.label :hidden, class: "form-check-label" do
+            = f.check_box :hidden, class: "form-check-input"
+            = t('.hidden')
 
   .card-footer
     .row.justify-content-end

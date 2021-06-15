@@ -11,6 +11,7 @@
 #  updated_by :integer
 #  created_at :datetime
 #  updated_at :datetime
+#  hidden     :boolean          default(FALSE)
 #
 
 require "test_helper"
@@ -19,7 +20,8 @@ require "test_helper"
 class CategoryTest < ActiveSupport::TestCase
   test "should create category" do
     category = Category.new(account: @accounts.first,
-                            name:    "My Category")
+                            name:    "My Category",
+                            hidden:  true_or_false)
     assert category.valid?
   end
 
@@ -31,9 +33,9 @@ class CategoryTest < ActiveSupport::TestCase
   end
 
   test "name/account_id must be unique" do
-    category1 = Category.create(name: "toto", account: @accounts.first)
+    category1 = Category.create(name: "toto", account: @accounts.first, hidden: true_or_false)
     category2 = category1.dup
-    category3 = Category.create(name: category1.name, account: @accounts.last)
+    category3 = Category.create(name: category1.name, account: @accounts.last, hidden: category1.hidden)
 
     assert       category1.valid?
     assert       category2.invalid?

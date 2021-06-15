@@ -8,30 +8,29 @@
     hr
 
     .mb-3.row
-      = f.label :frequency, t('.frequency'), class: "col-sm-4 col-form-label"
+      = f.label :frequency, t(".frequency"), class: "col-sm-4 col-form-label"
       .col
         .input-group
-          span.input-group-text = t('.all_the')
-          = f.number_field :frequency, \
-                           class: "form-control", \
-                           placeholder: t('.frequency')
+          span.input-group-text = t(".all_the")
+          = f.number_field :frequency, class: "form-control", placeholder: t(".frequency")
           - @schedule.errors.full_messages_for(:frequency).each do |message|
             .invalid-feedback = message
       .col
-        = f.select :period, [ [t('.days'), :days], [t('.weeks'), :weeks], \
-                              [t('.months'), :months], [t('.years'), :years]], \
-                            {}, { class: "form-select" }
+        = f.select :period,
+                    [[t(".days"), :days], [t(".weeks"), :weeks], [t(".months"), :months], [t(".years"), :years]],
+                    {},
+                    { class: "form-select" }
         - @schedule.errors.full_messages_for(:period).each do |message|
           .invalid-feedback = message
 
     .mb-3.row
-      = f.label :next_time, t('.next_time'), class: "col-sm-4 col-form-label"
+      = f.label :next_time, t(".next_time"), class: "col-sm-4 col-form-label"
       .col
         .input-group
           = f.date_field :next_time, \
                          class: "form-control", \
-                         placeholder: t('.next_time'), \
-              value: @schedule.next_time.nil? ? Date.today : @schedule.next_time
+                         placeholder: t(".next_time"), \
+                         value: @schedule.next_time.nil? ? Date.today : @schedule.next_time
           span.input-group-text = icon "far fa-calendar-alt"
           - @schedule.errors.full_messages_for(:next_time).each do |message|
             .invalid-feedback = message

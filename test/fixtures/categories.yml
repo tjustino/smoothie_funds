@@ -9,6 +9,7 @@
 #  updated_by :integer
 #  created_at :datetime
 #  updated_at :datetime
+#  hidden     :boolean          default(FALSE)
 #
 
 ##########
@@ -16,59 +17,68 @@
 ##########
 ## courant_thomas
 pret:
-  name: Prêt
   account: courant_thomas
+  name: Prêt
+  hidden: false
   created_by: thomas.id
   updated_by: thomas.id
 
 coiffeur_courant_thomas:
-  name: Coiffeur
   account: courant_thomas
+  name: Coiffeur
+  hidden: true
   created_by: thomas.id
   updated_by: thomas.id
 
 vetements_courant_thomas:
-  name: Vêtements
   account: courant_thomas
+  name: Vêtements
+  hidden: false
   created_by: thomas.id
   updated_by: thomas.id
 
 cantine:
-  name: Cantine
   account: courant_thomas
+  name: Cantine
+  hidden: false
   created_by: thomas.id
   updated_by: thomas.id
 
 essence_courant_thomas:
-  name: Essence
   account: courant_thomas
+  name: Essence
+  hidden: false
   created_by: thomas.id
   updated_by: thomas.id
 
 ## livret_a
 prime_livret_a:
-  name: Prime
   account: livret_a
+  name: Prime
+  hidden: false
   created_by: thomas.id
   updated_by: thomas.id
 
 epargne_livret_a:
-  name: Epargne
   account: livret_a
+  name: Epargne
+  hidden: false
   created_by: thomas.id
   updated_by: thomas.id
 
 ## ldd_thomas
 epargne_ldd_thomas:
-  name: Epargne
   account: ldd_thomas
+  name: Epargne
+  hidden: false
   created_by: thomas.id
   updated_by: thomas.id
 
 ## hidden_thomas
 foo_hidden_thomas:
-  name: bar
   account: hidden_thomas
+  name: bar
+  hidden: true
   created_by: thomas.id
   updated_by: thomas.id
 
@@ -77,33 +87,38 @@ foo_hidden_thomas:
 ##########
 ## courant_emilie
 vetements_courant_emilie:
-  name: Vêtements
   account: courant_emilie
+  name: Vêtements
+  hidden: false
   created_by: emilie.id
   updated_by: emilie.id
 
 coiffeur_courant_emilie:
-  name: Coiffeur
   account: courant_emilie
+  name: Coiffeur
+  hidden: false
   created_by: emilie.id
   updated_by: emilie.id
 
 assurance:
-  name: Assurance
   account: courant_emilie
+  name: Assurance
+  hidden: true
   created_by: emilie.id
   updated_by: emilie.id
 
 essence_courant_emilie:
-  name: Essence
   account: courant_emilie
+  name: Essence
+  hidden: false
   created_by: emilie.id
   updated_by: emilie.id
 
 ## ldd_emilie
 epargne_ldd_emilie:
-  name: Epargne
   account: ldd_emilie
+  name: Epargne
+  hidden: false
   created_by: emilie.id
   updated_by: emilie.id
 
@@ -112,43 +127,50 @@ epargne_ldd_emilie:
 ###################
 ## compte_commun
 courses:
-  name: Courses
   account: compte_commun
+  name: Courses
+  hidden: false
   created_by: thomas.id
   updated_by: emilie.id
 
 garderie:
-  name: Garderie
   account: compte_commun
+  name: Garderie
+  hidden: false
   created_by: thomas.id
   updated_by: thomas.id
 
 internet:
-  name: Internet
   account: compte_commun
+  name: Internet
+  hidden: false
   created_by: emilie.id
   updated_by: emilie.id
 
 electricite:
-  name: Electricité
   account: compte_commun
+  name: Electricité
+  hidden: false
   created_by: thomas.id
   updated_by: thomas.id
 
 virement:
-  name: Virement
   account: compte_commun
+  name: Virement
+  hidden: false
   created_by: thomas.id
   updated_by: thomas.id
 
 cinema:
-  name: Cinéma
   account: compte_commun
+  name: Cinéma
+  hidden: true
   created_by: thomas.id
   updated_by: emilie.id
 
 eau:
-  name: Eau
   account: compte_commun
+  name: Eau
+  hidden: false
   created_by: thomas.id
   updated_by: thomas.id
