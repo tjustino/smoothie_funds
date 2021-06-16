@@ -61,8 +61,8 @@ module ActiveSupport
       end
 
       def category_use_cases
-        @some_category        = @some_account.categories.sample
-        @some_wrong_category  = @some_wrong_account.categories.sample
+        @some_category        = @some_account.categories.active.sample
+        @some_wrong_category  = @some_wrong_account.categories.active.sample
         @unknow_category      = Category.maximum(:id).to_i + 1
       end
 
@@ -73,8 +73,8 @@ module ActiveSupport
       end
 
       def transaction_use_cases
-        @some_transaction       = @some_account.transactions.sample
-        @some_wrong_transaction = @some_wrong_account.transactions.sample
+        @some_transaction       = @some_account.transactions.active.sample
+        @some_wrong_transaction = @some_wrong_account.transactions.active.sample
         @unknow_transaction     = Transaction.maximum(:id).to_i + 1
       end
 
