@@ -17,13 +17,8 @@
 
 # Schedule model
 class Schedule < ApplicationRecord
-  # BUG : Edit 1 schedule, remove amoutn an confirm -> Error
-  # transaction was deleted (why?) but not the schedule. Must delete schedule:
-  #   Schedule.delete 688540077
   has_one :operation, class_name: "Transaction", dependent: :destroy, inverse_of: :schedule
-
-  accepts_nested_attributes_for :operation, allow_destroy: true
-
+  accepts_nested_attributes_for :operation, update_only: true, allow_destroy: true
   belongs_to :account
 
   scope :order_by_next_time_and_id, -> { order(next_time: :asc, id: :asc) }
