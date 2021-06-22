@@ -20,6 +20,9 @@ Layout/IndentationConsistency:
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
+Minitest/MultipleAssertions:
+  Max: 15
+
 # too much work for now
 Metrics/AbcSize:
   Enabled: false
