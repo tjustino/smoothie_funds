@@ -233,6 +233,8 @@ GEM
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
     temple (0.8.2)
+    terser (1.1.5)
+      execjs (>= 0.3.0, < 3)
     thor (1.1.0)
     tilt (2.0.10)
     tzinfo (2.0.4)
@@ -284,6 +286,7 @@ DEPENDENCIES
   slim
   spring
   sprockets
+  terser
   web-console
   webdrivers
 
