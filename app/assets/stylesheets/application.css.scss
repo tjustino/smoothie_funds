@@ -24,6 +24,18 @@ $light: #F2F2F2;
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+// noUiSlider
+@import "nouislider.min";
+
+.noUi-connect {
+  background: $primary;
+}
+
+// search colors
+select.form-control[multiple] option:checked {
+  background: $primary linear-gradient(0deg, $primary 0%, $primary 100%);
+}
+
 // dashboard
 .list-special .list-group-item:first-child {
   border-top-right-radius: 0px;
