@@ -16,18 +16,18 @@
 
     / Amount
     .mb-3.row
-      = f.label :amount, t('.amount'), class: "col-md-4 col-form-label"
-      .col-md-8
-        / min
-        .input-group.mb-2
-          span class="input-group-text" = t('.min')
-          = f.text_field :min, class: "form-control", placeholder: t('.amount')
-          span class="input-group-text" = t('number.currency.format.unit')
-        / max
-        .input-group
-          span class="input-group-text" = t('.max')
-          = f.text_field :max, class: "form-control lol", placeholder: t('.amount')
-          span class="input-group-text" = t('number.currency.format.unit')
+      = f.label :amount, t('.amount'), class: "col-md-4 my-auto col-form-label"
+      .col-md-7.mx-auto.mt-5
+        #amount-slider*{\
+          'data-min-amount' => @amount_min,
+          'data-max-amount' => @amount_max,
+          'data-suffix-amount' => t('number.currency.format.unit'),
+          'data-decimals-amount' => t('number.currency.format.precision'),
+          'data-mark-amount' => t('number.currency.format.separator'),
+          'data-thousand-amount' => t('number.currency.format.delimiter')\
+        }
+        = f.hidden_field :min, id: "min-amount", value: @amount_min
+        = f.hidden_field :max, id: "max-amount", value: @amount_max
 
     / Date
     .mb-3.row
@@ -49,15 +49,16 @@
       = f.label :categories, t('.categories'), class: "col-md-4 col-form-label"
       .col-md-8
         - @current_accounts.each do |account|
-         - if account.categories.exists?
-          .text-muted = account.name
-          = f.select  :categories, \
-        options_from_collection_for_select( account.categories.order_by_name, \
-                                    :id, \
-                                    :name, \
-                                    account.categories.ids), \
-                                  { include_hidden: false }, \
-                                  { multiple: true, class: "form-control mb-2" }
+          - if account.categories.exists?
+            div id="categories_for_#{account.id}"
+              .text-muted = account.name
+              = f.select :categories,
+                        options_from_collection_for_select(account.categories.order_by_name,
+                                                          :id,
+                                                          :name,
+                                                          account.categories.ids),
+                        { include_hidden: false },
+                        { multiple: true, class: "form-control mb-2" }
 
     / Comment
     .mb-3.row

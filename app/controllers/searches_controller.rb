@@ -19,6 +19,8 @@ class SearchesController < ApplicationController
 
   # GET /users/:user_id/searches/new
   def new
+    @amount_max = @current_user.transactions.active.maximum(:amount)
+    @amount_min = @current_user.transactions.active.minimum(:amount)
     searches
     build_search
   end
