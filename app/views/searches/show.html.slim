@@ -6,20 +6,21 @@
 / Resume
 .row
   .col
-    .alert.alert-info.clearfix role="alert"
-      = render partial: "resume", locals: { search: @search }
+    .card
+      .card-body.text-white.bg-primary.bg-gradient
+        = render partial: "resume", locals: { search: @search }
 
 / Infos
 .row.justify-content-between.mb-2
   .col-auto
     / Trasnaction's sum
-    p.badge.bg-info
+    p.badge.bg-secondary
       = t('.sum')
       span = number_to_currency(@sum_transactions)
 
   .col-auto
     / Trasnaction's count
-    p.badge.bg-info
+    p.badge.bg-secondary
       = t('.count')
       span#total = @nb_transactions
 
