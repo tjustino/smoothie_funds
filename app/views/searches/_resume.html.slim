@@ -6,8 +6,7 @@ dl.row.mb-0
   / Amounts
   dt.col-md-2 = t('.amount')
   - if not search.min.blank? and not search.max.blank?
-    dd.col-md-10 = t('.between_amount', min: number_to_currency(search.min), \
-                                        max: number_to_currency(search.max) )
+    dd.col-md-10 = t('.between_amount', min: number_to_currency(search.min), max: number_to_currency(search.max))
   - elsif not search.min.blank? and search.max.blank?
     dd.col-md-10 = t('.more_than', min: number_to_currency(search.min))
   - elsif search.min.blank?      and not search.max.blank?
@@ -18,12 +17,11 @@ dl.row.mb-0
   / Date
   dt.col-md-2 = t('.date')
   - if not search.before.blank? and not search.after.blank?
-    dd.col-md-10 = t('.between_date', before: search.before, \
-                                      after: search.after )
+    dd.col-md-10 = t('.between_date', before: l(search.before), after: l(search.after))
   - elsif not search.before.blank? and search.after.blank?
-    dd.col-md-10 = t('.before', before: search.before)
+    dd.col-md-10 = t('.before', before: l(search.before))
   - elsif search.before.blank? and not search.after.blank?
-    dd.col-md-10 = t('.after', after: search.after)
+    dd.col-md-10 = t('.after', after: l(search.after))
   - else
     dd.col-md-10 = t('.no_restriction')
 
