@@ -17,30 +17,20 @@
     / Amount
     .mb-3.row
       = f.label :amount, t('.amount'), class: "col-md-4 my-auto col-form-label"
-      .col-md-7.mx-auto.mt-5
-        #amount-slider*{\
-          'data-min-amount' => @amount_min,
-          'data-max-amount' => @amount_max,
-          'data-suffix-amount' => t('number.currency.format.unit'),
-          'data-decimals-amount' => t('number.currency.format.precision'),
-          'data-mark-amount' => t('number.currency.format.separator'),
-          'data-thousand-amount' => t('number.currency.format.delimiter')\
-        }
-        = f.hidden_field :min, id: "min-amount", value: @amount_min
-        = f.hidden_field :max, id: "max-amount", value: @amount_max
+      .col-md-8
+        .input-group
+          = f.text_field :min, class: "form-control", placeholder: t('.amount')
+          span.input-group-text = icon("fas fa-arrows-alt-h")
+          = f.text_field :max, class: "form-control", placeholder: t('.amount')
+          span.input-group-text = t('number.currency.format.unit')
 
     / Date
     .mb-3.row
       = f.label :date, t('.date'), class: "col-md-4 col-form-label"
       .col-md-8
-        / after
-        .input-group.mb-2
-          span class="input-group-text" = t('.after')
-          = f.date_field :after, class: "form-control", placeholder: t('.date')
-          span class="input-group-text" = icon "far fa-calendar-alt"
-        / before
         .input-group
-          span class="input-group-text" = t('.before')
+          = f.date_field :after, class: "form-control", placeholder: t('.date')
+          span.input-group-text = icon("fas fa-arrows-alt-h")
           = f.date_field :before, class: "form-control", placeholder: t('.date')
           span class="input-group-text" = icon "far fa-calendar-alt"
 
