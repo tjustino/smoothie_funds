@@ -1,5 +1,5 @@
 - accounts.each do |account|
-  tr style=("color: gray;" if account.hidden == true)
+  tr class=("text-muted" if account.hidden == true)
     / name
     td data-title="#{name}" = account.name
 
@@ -20,13 +20,14 @@
     td
       .row.justify-content-start.dotted-top
         .col-auto
-          = link_to (icon "fas fa-edit"), edit_account_path(account), title: t(".edit")
+          = link_to (icon "fas fa-edit"), edit_account_path(account), title: t(".edit"), class: "link-info"
         .col-auto
-          = link_to (icon "far fa-trash-alt"), \
-                    account_path(account), \
-                    method: :delete, \
-                    data: {confirm: t(".are_you_sure", account: account.name)}, \
-                    title: t(".destroy")
+          = link_to (icon "far fa-trash-alt"),
+                    account_path(account),
+                    method: :delete,
+                    data: {confirm: t(".are_you_sure", account: account.name)},
+                    title: t(".destroy"),
+                    class: "link-danger"
         - if account.hidden == true
           .col-auto
-            = tag.i class: "far fa-eye-slash", title: t(".hidden_account")
+            = tag.i class: "far fa-eye-slash text-muted", title: t(".hidden_account")

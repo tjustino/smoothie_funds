@@ -1,14 +1,14 @@
 - transactions.each do |transaction|
-  tr class=("text-danger" if transaction.balance < 0) style=("color: gray;" if transaction.date > Date.today)
+  tr class=decoration_according_to_(transaction)
 
     / Check
-    td data-title="#{checked}" = link_to \
-                                 transaction.checked ? icon("far fa-check-square") : icon("far fa-square"), \
-                                 easycheck_transaction_path(transaction), \
-                                 method: :post, \
-                                 remote: true, \
-                                 title: t('.check_transaction'), \
-                                 id: "check_#{transaction.id}"
+    td data-title="#{checked}" = link_to transaction.checked ? icon("far fa-check-square") : icon("far fa-square"),
+                                         easycheck_transaction_path(transaction),
+                                         method: :post,
+                                         remote: true,
+                                         title: t('.check_transaction'),
+                                         id: "check_#{transaction.id}",
+                                         class: "link-success"
 
     / Date
     td data-title="#{date}" = l(transaction.date)
@@ -34,12 +34,11 @@
     td
       .row.justify-content-start.dotted-top
         .col-auto
-          = link_to (icon "fas fa-edit"), \
-                    edit_transaction_path(transaction), \
-                    title: t('.edit')
+          = link_to (icon "fas fa-edit"), edit_transaction_path(transaction), title: t('.edit'), class: "link-info"
         .col-auto
-          = link_to (icon "far fa-trash-alt"), \
-                    transaction_path(transaction), \
-                    method: :delete, \
-                    data: { confirm: t('.are_you_sure') }, \
-                    title: t('.destroy')
+          = link_to (icon "far fa-trash-alt"),
+                    transaction_path(transaction),
+                    method: :delete,
+                    data: { confirm: t('.are_you_sure') },
+                    title: t('.destroy'),
+                    class: "link-danger"

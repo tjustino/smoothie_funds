@@ -32,8 +32,8 @@
 .row.justify-content-between
   / transaction summary
   .col-md-6
-    .card.shadow.border-primary.mb-3
-      .card-header.text-white.bg-primary
+    .card.shadow.mb-3
+      .card-header.text-white.bg-info
         h4 = t('.transaction_summary')
       .card-body
         - if @transactions.any?
@@ -47,9 +47,9 @@
                       dd.col-sm-8 class=("text-danger" if sum_today(@current_transactions, account) < 0)
                         = t('.balance_date', balance: current_balance(@current_transactions, account), date: current_date(@current_transactions, account))
                       - if future_transactions?(@transactions, account)
-                        dt.col-sm-4.nowrap style=("color: gray;")
+                        dt.col-sm-4.nowrap.text-muted
                           = t('.future_balance')
-                        dd.col-sm-8 class=("text-danger" if sum_tomorrow(@transactions, account) < 0) style=("color: gray;")
+                        dd.col-sm-8 class=(sum_tomorrow(@transactions, account) < 0 ? "text-danger" : "text-muted")
                           = t('.balance_date',  balance: future_balance(@transactions, account), date: future_date(@transactions, account))
                   - else
                     dl.row.mb-0
@@ -61,8 +61,8 @@
 
   / upcoming terms
   .col-md-6
-    .card.shadow.border-primary.mb-3
-      .card-header.text-white.bg-primary
+    .card.shadow.mb-3
+      .card-header.text-white.bg-info
         h3 = t('.upcoming_terms')
       .card-body
         - if @schedules.any?
@@ -72,15 +72,15 @@
                 table.table.table-striped.table-hover
                   thead
                     tr
-                      th colspan="4" = link_to(account.name, \
-                                                  account_schedules_path(account))
+                      th colspan="4" = link_to account.name, account_schedules_path(account), class: "link-dark"
                   tbody
                   - shedules_for(@schedules, account).each do |schedule|
                     tr title="#{schedule.operation.comment}"
                       td = link_to icon("fas fa-magic"),
                                    insert_schedule_path(schedule),
                                    method: :insert,
-                                   title: t('.insert_schedule')
+                                   title: t('.insert_schedule'),
+                                   class: "link-success"
                       td = l(schedule.next_time, format: :short)
                       td = schedule.operation.category.name
                       td.nowrap = number_to_currency(schedule.operation.amount)

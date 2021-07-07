@@ -1,5 +1,5 @@
 - categories.each do |category|
-  tr style=("color: gray;" if category.hidden == true)
+  tr class=("text-muted" if category.hidden == true)
     / name
     td data-title="#{name}" = category.name
 
@@ -10,13 +10,14 @@
     td
       .row.justify-content-start.dotted-top
         .col-auto
-          = link_to (icon "fas fa-edit"), edit_category_path(category), title: t(".edit")
+          = link_to icon("fas fa-edit"), edit_category_path(category), title: t(".edit"), class: "link-info"
         .col-auto
-          = link_to (icon "far fa-trash-alt"), \
-                    category_path(category), \
-                    method: :delete, \
-                    data: {confirm: t(".are_you_sure", category: category.name)}, \
-                    title: t(".destroy")
+          = link_to icon("far fa-trash-alt"),
+                    category_path(category),
+                    method: :delete,
+                    data: {confirm: t(".are_you_sure", category: category.name)},
+                    title: t(".destroy"),
+                    class: "link-danger"
         - if category.hidden == true
           .col-auto
-            = tag.i class: "far fa-eye-slash", title: t(".hidden_category")
+            = tag.i class: "far fa-eye-slash text-muted", title: t(".hidden_category")

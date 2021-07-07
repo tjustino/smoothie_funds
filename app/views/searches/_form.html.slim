@@ -6,13 +6,10 @@
     .mb-3.row
       = f.label :accounts, t('.accounts'), class: "col-md-4 col-form-label"
       .col-md-8
-        = f.select  :accounts, \
-                options_from_collection_for_select( @accounts_with_categories, \
-                                                    :id, \
-                                                    :name, \
-                                              @accounts_with_categories.ids), \
-                { include_hidden: false },
-                { multiple: true, class: "form-control" }
+        = f.select :accounts,
+                   options_from_collection_for_select(@accounts_with_categories, :id, :name, @accounts_with_categories.ids),
+                   { include_hidden: false },
+                   { multiple: true, class: "form-control" }
 
     / Amount
     .mb-3.row

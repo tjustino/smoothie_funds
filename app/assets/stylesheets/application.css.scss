@@ -15,10 +15,19 @@
  */
 
 $font-size-base: 0.9rem;
-// https://color.adobe.com/fr/create/image
-$primary: #BF2C62;
-$secondary: #D97197;
-$light: #F2F2F2;
+
+// http://colormind.io/bootstrap/
+$light:     #F1F0EE; // Light shades
+$secondary: #A899A3; // Light accent
+// $dark:      #B77388; // Dark accent
+$dark:      #2C2439; // Dark shades 
+
+$primary:   #b53467;
+$info:      #2c2439;
+$success:   #6c8a57;
+$warning:   #e97a1f;
+$danger:    #f44336;
+
 
 @import "bootstrap";
 @import "font-awesome-sprockets";
