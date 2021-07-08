@@ -3,10 +3,10 @@
 # Transactions Helper
 module TransactionsHelper
   def decoration_according_to_(transaction)
-    if (transaction.date > Date.today) && (transaction.balance < 0)
-      "text-danger"
-    elsif (transaction.date > Date.today) && (transaction.balance >= 0)
+    if (transaction.date > Time.zone.today) && (transaction.balance >= 0)
       "text-muted"
+    elsif transaction.balance.negative?
+      "text-danger"
     end
   end
 end
