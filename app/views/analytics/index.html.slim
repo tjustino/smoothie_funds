@@ -8,7 +8,7 @@
     - @accounts_with_categories.each_with_index do |account, index|
       .accordion-item
         h2.accordion-header id="heading#{index}"
-          button.accordion-button class=("collapsed" unless index == 0) type="button" data-bs-toggle="collapse" data-bs-target="#collapse#{index}" aria-expanded="true" aria-controls="collapse#{index}"
+          button.accordion-button.text-white.bg-info class=("collapsed" unless index == 0) type="button" data-bs-toggle="collapse" data-bs-target="#collapse#{index}" aria-expanded="true" aria-controls="collapse#{index}"
             = account.name
         .accordion-collapse.collapse id="collapse#{index}" class=("show" if index == 0) aria-labelledby="heading#{index}" data-bs-parent="#accordion"
           .accordion-body
@@ -16,18 +16,61 @@
             canvas id="lineChart#{index}"
             javascript:
               var ctx=document.getElementById("lineChart#{index}").getContext("2d");
+              var yAxeFormat = wNumb({
+                mark: "#{t('number.currency.format.separator')}",
+                thousand: "#{t('number.currency.format.delimiter')}",
+                suffix: "#{t('number.currency.format.unit')}"
+              });
+              var tooltipFormat = wNumb({
+                decimals: "#{t('number.currency.format.precision')}",
+                mark: "#{t('number.currency.format.separator')}",
+                thousand: "#{t('number.currency.format.delimiter')}",
+                suffix: "#{t('number.currency.format.unit')}"
+              });
               var options= { responsive: true, maintainAspectRatio: false };
               new Chart(ctx, {
                 type: "line",
                 data: {
                   labels: #{ raw dates_before_past_time(account, @transactions) },
-                  datasets: [ {
-                    label: "#{ t('.balance') }",
+                  datasets: [{
+                    label: "#{t('.balance')}",
                     fill: true,
                     backgroundColor: "rgba(75,192,192,0.4)",
                     borderColor: "rgba(75,192,192,1)",
-                    data: #{ raw past_data(account, @transactions) }}]},
-                options: { scales: { yAxes: [ { ticks: { beginAtZero:true }}]}}
+                    data: #{raw past_data(account, @transactions)}
+                  }]
+                },
+                options: {
+                  plugins: {
+                    legend: {
+                      position: 'bottom'
+                    },
+                    tooltip: {
+                      callbacks: {
+                        label: function(context) {
+                          var label = context.dataset.label || '';
+                          if (label) {
+                            label += ': ';
+                          }
+                          if (context.parsed.y !== null) {
+                            label += tooltipFormat.to(context.parsed.y);
+                          }
+                          return label;
+                        }
+                      }
+                    }
+                  },
+                  scales: {
+                    y: {
+                      beginAtZero: true,
+                      ticks: {
+                        callback: function(value, index, values) {
+                          return yAxeFormat.to(value);
+                        }
+                      }
+                    }
+                  }
+                }
               });
 
 / h3 Répartition des frais
