@@ -3,7 +3,7 @@
 # Analytics Helper
 module AnalyticsHelper
   def dates_before_past_time(account, transactions)
-    transactions_from_past_time_to_now(account, transactions).keys.map { |date| l(date) }
+    transactions_from_past_time_to_now(account, transactions).keys.map { |date| l(date).as_json }.join(",")
   end
 
   def past_data(account, transactions)
@@ -15,7 +15,7 @@ module AnalyticsHelper
         data[index] = data[index - 1] + amount
       end
     end
-    data.map(&:to_f)
+    data.map(&:to_f).join(",")
   end
 
   def balance_before_past_time(account, transactions)
