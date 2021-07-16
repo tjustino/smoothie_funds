@@ -92,7 +92,8 @@ class ApplicationController < ActionController::Base
     def granted_urls_not_logged_user?
       controller_action?("users", "new")      ||
         controller_action?("users", "create") ||
-        controller_name == "sessions"
+        controller_name == "sessions"         ||
+        controller_name == "rights"
     end
 
     def granted_urls_logged_user?
@@ -102,6 +103,7 @@ class ApplicationController < ActionController::Base
         controller_action?("accounts",  "new")       ||
         controller_action?("accounts",  "sharing")   ||
         controller_action?("accounts",  "unsharing") ||
+        controller_name == "rights"                  ||
         good_account_id?                             ||
         good_user_id?                                ||
         good_id?

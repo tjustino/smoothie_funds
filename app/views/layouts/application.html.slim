@@ -10,7 +10,7 @@ html
     meta name="author" content="Thomas JUSTINO"
     meta name="description" content="Gérez vos comptes en toute simplicité !"
 
-  body
+  body.d-flex.flex-column.min-vh-100
     / Static navbar
     nav.navbar.navbar-expand-lg.navbar-light.bg-light.rounded.mb-3.shadow-sm style="background-color: #e3f2fd;"
       .container
@@ -107,12 +107,20 @@ html
       / content
       = yield
 
-      / debugger
-      - if Rails.env.development?
-        .position-fixed.bottom-0.end-0.p-3
-          #debugToast.toast data-bs-autohide="false"
-            .toast-header
-              strong.me-auto = icon_text("fas fa-bug", "Debug Toaster")
-              button.btn-close type="button" data-bs-dismiss="toast" aria-label="Close"
-            .toast-body
-              = debug(params)
+    / footer
+    footer.mt-auto.bg-light
+      .container
+        .d-flex.justify-content-between
+          .p-2 = link_to t(".terms_of_use"),  terms_path,   class: "link-secondary"
+          .p-2 = link_to t(".cookie_policy"), cookie_path, class: "link-secondary"
+          .p-2 = link_to t(".personal_data"), gdpr_path,    class: "link-secondary"
+
+    / debugger
+    - if Rails.env.development?
+      .position-fixed.bottom-0.end-0.p-3
+        #debugToast.toast data-bs-autohide="false"
+          .toast-header
+            strong.me-auto = icon_text("fas fa-bug", "Debug Toaster")
+            button.btn-close type="button" data-bs-dismiss="toast" aria-label="Close"
+          .toast-body
+            = debug(params)

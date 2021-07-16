@@ -29,9 +29,15 @@ Rails.application.routes.draw do
   # +-----------+--------------------------------------+--------------------+
 
   controller :sessions do
-    get     "login"   => :new
-    post    "login"   => :create
-    delete  "logout"  => :destroy
+    get    "login"  => :new
+    post   "login"  => :create
+    delete "logout" => :destroy
+  end
+
+  controller :rights do
+    get "terms"  => :terms
+    get "cookie" => :cookie
+    get "gdpr"   => :gdpr
   end
 
   shallow do
@@ -55,11 +61,10 @@ Rails.application.routes.draw do
     end
   end
 
-  delete "accounts/:id/unlink(.:format)", to: "accounts#unlink", as: "unlink"
-  delete "accounts/:id/unpend(.:format)", to: "accounts#unpend", as: "unpend"
-  post   "accounts/:id/sharing(.:format)", to: "accounts#sharing", as: "sharing"
-  delete "accounts/:id/unsharing(.:format)", to: "accounts#unsharing",
-                                             as: "unsharing"
+  delete "accounts/:id/unlink(.:format)",    to: "accounts#unlink",    as: "unlink"
+  delete "accounts/:id/unpend(.:format)",    to: "accounts#unpend",    as: "unpend"
+  post   "accounts/:id/sharing(.:format)",   to: "accounts#sharing",   as: "sharing"
+  delete "accounts/:id/unsharing(.:format)", to: "accounts#unsharing", as: "unsharing"
 
   root "dashboard#index", as: "dashboard"
 end

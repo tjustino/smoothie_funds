@@ -190,6 +190,70 @@ fr:
       search:       "Rechercher"
       analytics:    "Analyser"
       create_user:  "Créer un nouvel utilisateur"
+      terms_of_use: "Mentions légales"
+      cookie_policy: "Cookie"
+      personal_data: "Données personnelles"
+
+  rights:
+    # views
+    cookie:
+      title: "Politique relative au cookie"
+      speech: |-
+        Ce site web utilise un unique cookie nécessaire au bon fonctionnement du service.<br>
+        En plaçant ce cookie fonctionnel, nous vous facilitons la navigation : ainsi, vous n’avez pas besoin de ressaisir vos identifiants à chaque page visitée.<br>
+        Conformément à la loi, nous pouvons placer ce cookie sans votre consentement.<br>
+        Pour les plus curieux, son petit nom est <i>_smoothiefunds_session</i>.<br>
+        <br>
+        <figcaption class="blockquote-footer">Et oui, tout ça veut bien dire qu'on ne vous piste à aucun moment !</figcaption>
+    gdpr:
+      title: "Protection de vos données à caractère personnel"
+      speech: |-
+        <dl>
+        <dt>Finalité du traitement auquel les données sont destinées</dt>
+        <dd>Création d'un compte utilisateur permettant d'accéder à un service de gestion de comptabilité personnelle.</dd>
+        <dt>Données Traitées</dt>
+        <dd>
+        Toute utilisateur souhaitant utiliser le service doit obligatoirement communiquer une adresse mail valide qui servira d'identifiant à la connexion de la plateforme.<br>
+        Le cas échéant, cette adresse mail pourra être utilisée pour communiquer avec l'utilisateur à des seuls fins de support (ex : renouvellement de mot de passe).<br>
+        Une fois connecté, l'utilisateur a la possibilité de renseigner un nom permettant l'identification rapide du compte utilisé.<br>
+        La gestion d'une comptabilité personnelle nécessite pour l'utilisateur de renseigner les données suivantes :
+        <ul>
+        <li>Comptes : nom, balance initiale, adresse mail du(des) compte(s) avec le(s)quel(s) ledit compte est partagé</li>
+        <li>Catégories : nom</li>
+        <li>Échéanciers : montant, date, catégorie associée, commentaire éventuel, marqueur de rapprochement avec des données bancaires, fréquence de l'échéancier, date de la prochaine échéance</li>
+        <li>Transactions : montant, date, catégorie associée, commentaire éventuel, marqueur de rapprochement avec des données bancaires</li>
+        </ul>
+        </dd>
+        <dt>Base juridique du traitement de données</dt>
+        <dd>En vous inscrivant sur la plateforme, vous consentez au traitement de vos données à caractère personnel pour la finalité mentionnée supra.</dd>
+        <dt>Destinataires des données</dt>
+        <dd>Toutes les données sont conservées sous la responsabilité du gestionnaire du site qui en garantit l'intégrité.<br>Cette règle ne s'applique pas aux fichiers téléchargés à travers la fonctionnalité d'export des données.</dd>
+        <dt>Durée de conservation des données</dt>
+        <dd>Vos données sont conservées 12 mois après votre dernière connexion. A l’issue de ce délai, vous serez prévenu et, sans reconnexion de votre part, vos données seront détruites selon un procédé sécurisé.<br>À noter que cette suppression ne s'applique pas aux données relatives aux comptes partagés.</dd>
+        <dt>Transfert de données hors UE</dt>
+        <dd>Aucune donnée n'est transférée en dehors de l'Union Européenne.</dd>
+        <dt>Sécurité</dt>
+        <dd>Les moyens techniques mis en œuvre respectent les meilleures pratiques de sécurité en vigueur.<br>Seules les personnes habilitées peuvent avoir accès à vos données.</dd>
+        <dt>Droits d'opposition, d'interrogation, d'accès et de rectification</dt>
+        <dd>Conformément au cadre juridique sur la protection des données en vigueur, vous bénéficiez d’un droit d’accès, rectification, effacement, opposition et limitation du traitement vous concernant.<br>Le délégué à la protection des données (DPD) est votre interlocuteur pour toute demande d’exercice de vos droits sur ce traitement.</dd>
+        <dt>Coordonnées du délégué à la protection des données :</dt>
+        <dd>dpd<i class="fas fa-at"></i>smoothiefunds⸳com</dd>
+        <dt>Réclamation auprès de la Cnil :</dt>
+        <dd>Vous pouvez solliciter la CNIL <a href="https://www.cnil.fr/fr/plaintes" target="_blank">directement depuis leur site Internet</a> ou à l'adresse suivante : 3 place de Fontenoy TSA 80715 75334 Paris Cedex 07</dd>
+        </dl>
+        <br>
+        <figcaption class="blockquote-footer">Oui c'est barbant mais il y a eu tellement d'abus que tout ça est devenu nécessaire</figcaption>
+    terms:
+      title: "Mentions légales"
+      speech: |-
+        <h2><i class="fas fa-server"></i> Hébergeur</h2>
+        <dl>
+        <dt>Raison sociale :</dt><dd>OVH SAS</dd>
+        <dt>Adresse :</dt><dd>2 rue Kellermann 59100 Roubaix (France)</dd>
+        <dt>Téléphone :</dt><dd>+33 9 72 10 10 07</dd>
+        </dl>
+        <br>
+        <figcaption class="blockquote-footer">Ils peuvent prendre feu de temps en temps mais honnêtement ils sont bons</figcaption>
 
   sessions:
     # controllers
