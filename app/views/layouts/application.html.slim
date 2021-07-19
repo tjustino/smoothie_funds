@@ -1,5 +1,5 @@
 doctype html
-html
+html lang="#{I18n.locale}"
   head
     title Smoothie Funds#{" - DEV" if Rails.env.development?}
     = render partial: "layouts/favicon"
