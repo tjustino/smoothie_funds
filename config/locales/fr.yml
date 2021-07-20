@@ -181,6 +181,7 @@ fr:
   layouts:
     # views
     application:
+      site_descritpion: "Gérez vos comptes en toute simplicité !"
       transactions: 'Transactions <b class="caret"></b>'
       schedules:    'Échéanciers <b class="caret"></b>'
       categories:   'Catégories <b class="caret"></b>'
@@ -202,9 +203,7 @@ fr:
         Ce site web utilise un unique cookie nécessaire au bon fonctionnement du service.<br>
         En plaçant ce cookie fonctionnel, nous vous facilitons la navigation : ainsi, vous n’avez pas besoin de ressaisir vos identifiants à chaque page visitée.<br>
         Conformément à la loi, nous pouvons placer ce cookie sans votre consentement.<br>
-        Pour les plus curieux, son petit nom est <i>_smoothiefunds_session</i>.<br>
-        <br>
-        <figcaption class="blockquote-footer">Et oui, tout ça veut bien dire qu'on ne vous piste à aucun moment !</figcaption>
+        Pour les plus curieux, son petit nom est <i>_smoothiefunds_session</i>.
     gdpr:
       title: "Protection de vos données à caractère personnel"
       speech: |-
@@ -241,8 +240,6 @@ fr:
         <dt>Réclamation auprès de la Cnil :</dt>
         <dd>Vous pouvez solliciter la CNIL <a href="https://www.cnil.fr/fr/plaintes" target="_blank">directement depuis leur site Internet</a> ou à l'adresse suivante : 3 place de Fontenoy TSA 80715 75334 Paris Cedex 07</dd>
         </dl>
-        <br>
-        <figcaption class="blockquote-footer">Oui c'est barbant mais il y a eu tellement d'abus que tout ça est devenu nécessaire</figcaption>
     terms:
       title: "Mentions légales"
       speech: |-
@@ -252,8 +249,6 @@ fr:
         <dt>Adresse :</dt><dd>2 rue Kellermann 59100 Roubaix (France)</dd>
         <dt>Téléphone :</dt><dd>+33 9 72 10 10 07</dd>
         </dl>
-        <br>
-        <figcaption class="blockquote-footer">Ils peuvent prendre feu de temps en temps mais honnêtement ils sont bons</figcaption>
 
   sessions:
     # controllers

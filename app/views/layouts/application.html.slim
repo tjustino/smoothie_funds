@@ -8,14 +8,14 @@ html lang="#{I18n.locale}"
     = csrf_meta_tags
     meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
     meta name="author" content="Thomas JUSTINO"
-    meta name="description" content="Gérez vos comptes en toute simplicité !"
+    meta name="description" content="#{t('.site_descritpion')}"
 
   body.d-flex.flex-column.min-vh-100
     / Static navbar
     nav.navbar.navbar-expand-lg.navbar-light.bg-light.rounded.mb-3.shadow-sm style="background-color: #e3f2fd;"
       .container
         = link_to dashboard_path, class: "navbar-brand"
-          = image_tag "_icon.svg", height: "24", style: "vertical-align: sub;"
+          = image_tag "_icon.svg", height: "24", alt: "🥤", style: "vertical-align: sub;"
           span = " Smoothie Funds"
         - unless params[:controller] == "users" and params[:action] == "new"
           button.navbar-toggler type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-label="Toggle navigation"
@@ -110,10 +110,10 @@ html lang="#{I18n.locale}"
     / footer
     footer.mt-auto.bg-light
       .container
-        .d-flex.justify-content-between
-          .p-2 = link_to t(".terms_of_use"),  terms_path,   class: "link-secondary"
-          .p-2 = link_to t(".cookie_policy"), cookie_path, class: "link-secondary"
-          .p-2 = link_to t(".personal_data"), gdpr_path,    class: "link-secondary"
+        .d-flex.justify-content-evenly.align-items-center
+          .p-2.text-center = link_to t(".terms_of_use"),  terms_path,   class: "link-secondary"
+          .p-2.text-center = link_to t(".cookie_policy"), cookie_path, class: "link-secondary"
+          .p-2.text-center = link_to t(".personal_data"), gdpr_path,    class: "link-secondary"
 
     / debugger
     - if Rails.env.development?
