@@ -40,6 +40,11 @@
         - @user.errors.full_messages_for(:password_confirmation).each do |msg|
           .invalid-feedback = msg
 
+    .mb-3.row
+      .col-sm-3.col-form-label
+      .col
+        .form-text = t(".speech_gdpr", link: gdpr_path).html_safe
+
   .card-footer
     .row.justify-content-end
       .col-auto

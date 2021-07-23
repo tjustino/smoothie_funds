@@ -44,7 +44,6 @@ fr:
       shared_email:     "Courriel"
       help_share:       "Une fois établi, le partage du compte reste actif même si vous mettez à jour votre courriel"
       hidden:           "Masquer ce compte"
-      # back:             "Retour arrière"
     pending_user:
       pending_user:     "Partage en attente"
       no_longer_propose: "Ne plus proposer"
@@ -108,7 +107,6 @@ fr:
     form:
       name:             "Nom"
       hidden:           "Masquer cette catégorie"
-      # back:             "Retour arrière"
     import_from:
       title:            "Importer depuis..."
       import_from:      "Importer les catégories depuis :"
@@ -283,7 +281,6 @@ fr:
       amount:           "Montant"
       checked:          "Rapprochée"
       comment:          "Commentaire"
-      # back:             "Retour arrière"
     sum_checked:
       sum_checked:      "Somme des montants rappochés : "
     transaction:
@@ -349,7 +346,6 @@ fr:
       weeks:              "semaines"
       months:             "mois"
       years:              "ans"
-      # back:               "Retour arrière"
     operation_form:
       debit:            "Débit"
       credit:           "Crédit"
@@ -417,7 +413,9 @@ fr:
       name:                   "Nom"
       password:               "Mot de passe"
       password_confirmation:  "Confirmation"
-      # back:                   "Retour arrière"
+      speech_gdpr: |-
+        En créant votre compte, ce site <a href="%{link}" target="_blank">collectera et traitera vos données personnelles</a>.<br>
+        Mais pas de panique, nous respectons nos utilisateurs !
     edit:
       edit_user:  "Édition de l'utilisateur courant"
       title_bug:  "Support"
