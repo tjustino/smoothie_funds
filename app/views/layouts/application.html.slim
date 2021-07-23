@@ -78,14 +78,17 @@ html lang="#{I18n.locale}"
                             class: "dropdown-item", \
                             id: "logout"
 
-          - elsif params[:controller] != "users"
+          - elsif params[:controller] != "users" || (params[:controller] == "users" && params[:action] == "new")
             / New user
             ul.navbar-nav.me-auto
             ul.navbar-nav
               li.nav-item
-                = link_to (icon_text "fas fa-user-plus", t('.create_user')), \
-                          new_user_path, \
-                          class: "btn btn-outline-primary"
+                .btn-group role="group"
+                  = link_to "Connexion", login_path, class: "btn #{outline_or_not}-primary"
+                  .or
+                  = link_to (icon_text "fas fa-user-plus", t('.create_user')),
+                            new_user_path,
+                            class: "btn #{inverse_of_outline_or_not}-primary"
 
     .container
       / alerts

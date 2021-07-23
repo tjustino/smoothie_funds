@@ -24,4 +24,12 @@ module ApplicationHelper
   def icon(icon_class)
     tag.i class: icon_class
   end
+
+  def outline_or_not
+    params[:controller] == "users" ? "btn-outline" : "btn"
+  end
+
+  def inverse_of_outline_or_not
+    params[:controller] == "users" ? "btn" : "btn-outline"
+  end
 end
