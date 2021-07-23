@@ -120,7 +120,7 @@ html lang="#{I18n.locale}"
 
     / debugger
     - if Rails.env.development?
-      .position-fixed.bottom-0.end-0.p-3
+      .position-fixed.bottom-0.end-0.p-3.d-none.d-md-block
         #debugToast.toast data-bs-autohide="false"
           .toast-header
             strong.me-auto = icon_text("fas fa-bug", "Debug Toaster")
