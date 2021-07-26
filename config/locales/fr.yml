@@ -414,8 +414,8 @@ fr:
       password:               "Mot de passe"
       password_confirmation:  "Confirmation"
       speech_gdpr: |-
-        En créant votre compte, ce site <a href="%{link}" target="_blank">collectera et traitera vos données personnelles</a>.<br>
-        Mais pas de panique, nous respectons nos utilisateurs !
+        En créant votre compte, ce site <a href="%{link}" target="_blank">collectera et traitera certaines de vos données personnelles</a>.<br>
+        Nous prenons au sérieux le respect de nos utilisateurs.
     edit:
       edit_user:  "Édition de l'utilisateur courant"
       title_bug:  "Support"
