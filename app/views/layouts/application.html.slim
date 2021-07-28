@@ -114,9 +114,9 @@ html lang="#{I18n.locale}"
     footer.mt-auto.bg-light
       .container
         .d-flex.justify-content-evenly.align-items-center
-          .p-2.text-center = link_to t(".terms_of_use"),  terms_path,   class: "link-secondary"
-          .p-2.text-center = link_to t(".cookie_policy"), cookie_path, class: "link-secondary"
-          .p-2.text-center = link_to t(".personal_data"), gdpr_path,    class: "link-secondary"
+          .p-2.text-center = link_to t(".terms_of_use"),  terms_path,  class: "link-dark"
+          .p-2.text-center = link_to t(".cookie_policy"), cookie_path, class: "link-dark"
+          .p-2.text-center = link_to t(".personal_data"), gdpr_path,   class: "link-dark"
 
     / debugger
     - if Rails.env.development?
