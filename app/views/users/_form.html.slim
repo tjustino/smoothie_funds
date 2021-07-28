@@ -5,10 +5,8 @@
     .mb-3.row
       = f.label :email, t('.email'), class: "col-sm-3 col-form-label"
       .col
-        = f.email_field :email, \
-                        class: "form-control", \
-                        placeholder: t('.email'), \
-                        autofocus: true
+        = f.email_field :email, class: "form-control", placeholder: t('.email'), autofocus: true
+        .form-text = t('.speech_mail')
         - @user.errors.full_messages_for(:email).each do |message|
           .invalid-feedback = message
 
@@ -17,33 +15,29 @@
         = f.label :name, t('.name'), class: "col-sm-3 col-form-label"
         .col
           = f.text_field :name, class: "form-control", placeholder: t('.name')
+          .form-text = t('.speech_name')
           - @user.errors.full_messages_for(:name).each do |message|
             .invalid-feedback = message
 
     .mb-3.row
       = f.label :password, t('.password'), class: "col-sm-3 col-form-label"
       .col
-        = f.password_field :password, \
-                           class: "form-control", \
-                           placeholder: t('.password')
+        = f.password_field :password, class: "form-control", placeholder: t('.password')
         - @user.errors.full_messages_for(:password).each do |message|
           .invalid-feedback = message
 
     .mb-3.row
-      = f.label :password_confirmation, \
-                t('.password_confirmation'), \
-                class: "col-sm-3 col-form-label"
+      = f.label :password_confirmation, t('.password_confirmation'), class: "col-sm-3 col-form-label"
       .col
-        = f.password_field :password_confirmation, \
-                           class: "form-control", \
-                           placeholder: t('.password_confirmation')
+        = f.password_field :password_confirmation, class: "form-control", placeholder: t('.password_confirmation')
         - @user.errors.full_messages_for(:password_confirmation).each do |msg|
           .invalid-feedback = msg
 
-    .mb-3.row
-      .col-sm-3.col-form-label
-      .col
-        .form-text = t(".speech_gdpr", link: gdpr_path).html_safe
+    - if params[:controller] == "users" && params[:action] == "new"
+      .mb-3.row
+        .col-sm-3.col-form-label
+        .col
+          .form-text = t(".speech_gdpr", link: gdpr_path).html_safe
 
   .card-footer
     .row.justify-content-end
