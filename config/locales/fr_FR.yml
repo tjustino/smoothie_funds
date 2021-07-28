@@ -1,9 +1,9 @@
 # https://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/fr.yml
-fr:
-################################################################################
+fr_FR:
+########################################################################################################################
 # Action View
-# https://github.com/rails/rails/blob/master/actionview/lib/action_view/locale/en.yml
-################################################################################
+# https://github.com/rails/rails/blob/main/actionview/lib/action_view/locale/en.yml
+########################################################################################################################
   accounts:
     # controllers
     create:
@@ -514,10 +514,10 @@ fr:
       update: "Mettre à jour %{model}"
       submit: "Sauvegarder %{model}"
 
-################################################################################
+########################################################################################################################
 # Active Model
-# https://github.com/rails/rails/blob/master/activemodel/lib/active_model/locale/en.yml
-################################################################################
+# https://github.com/rails/rails/blob/main/activemodel/lib/active_model/locale/en.yml
+########################################################################################################################
   errors:
     format: "%{message}"
     template:
@@ -525,10 +525,10 @@ fr:
         one: "1 erreur a été détectée :"
         other: "%{count} erreurs ont été détectées :"
 
-################################################################################
+########################################################################################################################
 # Active Record
-# https://github.com/rails/rails/blob/master/activerecord/lib/active_record/locale/en.yml
-################################################################################
+# https://github.com/rails/rails/blob/main/activerecord/lib/active_record/locale/en.yml
+########################################################################################################################
   activerecord:
     errors:
       messages:
@@ -581,10 +581,10 @@ fr:
         password: "Mot de passe"
         password_confirmation:  "Confirmation"
 
-################################################################################
+########################################################################################################################
 # Active Support
-# https://github.com/rails/rails/blob/master/activesupport/lib/active_support/locale/en.yml
-################################################################################
+# https://github.com/rails/rails/blob/main/activesupport/lib/active_support/locale/en.yml
+########################################################################################################################
   date:
     formats:
       default:  "%d/%m/%Y"
