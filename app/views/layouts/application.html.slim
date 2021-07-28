@@ -9,6 +9,12 @@ html lang="#{I18n.locale.to_s.gsub('_','-')}"
     meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
     meta name="author" content="Thomas JUSTINO"
     meta name="description" content="#{t('.site_descritpion')}"
+    meta property="og:title" content="SmoothieFunds"
+    meta property="og:description" content="#{t('.site_descritpion')}"
+    meta property="og:locale" content="#{I18n.locale.to_s}"
+    meta property="og:type" content="website"
+    meta property="og:url" content="#{dashboard_url}"
+    meta property="og:image" content="#{asset_url('_icon.svg')}"
 
   body.d-flex.flex-column.min-vh-100
     / Static navbar
