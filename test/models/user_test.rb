@@ -60,12 +60,12 @@ class UserTest < ActiveSupport::TestCase
     assert_equal [I18n.t("activerecord.errors.messages.invalid")], user3.errors[:email]
   end
 
-  test "the password must be at least 6 characters long" do
+  test "the password must be at least 8 characters long" do
     user = User.new(email:                 users(:thomas).email,
                     name:                  "Too Short",
                     password:              "short",
                     password_confirmation: "short")
     assert       user.invalid?
-    assert_equal [I18n.t("activerecord.errors.messages.too_short", count: 6)], user.errors[:password]
+    assert_equal [I18n.t("activerecord.errors.messages.too_short", count: 8)], user.errors[:password]
   end
 end
