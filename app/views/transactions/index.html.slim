@@ -7,23 +7,23 @@
   / Title
   .col
     h2
-      = t('.listing_transactions', current_account: @current_account.name)
+      = t(".listing_transactions", current_account: @current_account.name)
       sup
         .badge.rounded-pill.bg-secondary#total = @nb_transactions
     = render partial: "sum_checked", locals: { sum_checked: @sum_checked }
 
   / Download
   .col-md-auto.d-none.d-sm-block
-    h2 = link_to (icon "fas fa-download"), \
-                 account_transactions_path(@current_account, format: :csv), \
-                 title: t(".export_transactions"), \
+    h2 = link_to icon("fas fa-download"),
+                 account_transactions_path(@current_account, format: :csv),
+                 title: t(".export_transactions"),
                  class: "btn btn-light"
 
   / New transaction
   .col-md-auto
-    h2 = link_to (icon_text "fas fa-plus-circle", t('.new_transaction')), \
-                                          new_account_transaction_path, \
-                                          class: "btn btn-primary"
+    h2 = link_to icon_text("fas fa-plus-circle", t(".new_transaction")),
+                 new_account_transaction_path,
+                 class: "btn btn-primary"
 
 / Table
 .row#content-table
@@ -31,23 +31,23 @@
     thead
       tr
         th
-        th = t('.date')
-        th = t('.category')
-        th.text-end = t('.debit')
-        th.text-end = t('.credit')
-        th.text-end = t('.balance')
-        th = t('.comment')
+        th = t(".date")
+        th = t(".category")
+        th.text-end = t(".debit")
+        th.text-end = t(".credit")
+        th.text-end = t(".balance")
+        th = t(".comment")
         th
 
     tbody#listing
-      = render partial: "transaction", locals: {  transactions: @transactions, \
-                                                  checked:      t('.checked'), \
-                                                  date:         t('.date'), \
-                                                  category:     t('.category'),\
-                                                  debit:        t('.debit'), \
-                                                  credit:       t('.credit'), \
-                                                  balance:      t('.balance'), \
-                                                  comment:      t('.comment') }
+      = render partial: "transaction", locals: { transactions: @transactions,
+                                                 checked:      t(".checked"),
+                                                 date:         t(".date"),
+                                                 category:     t(".category"),
+                                                 debit:        t(".debit"),
+                                                 credit:       t(".credit"),
+                                                 balance:      t(".balance"),
+                                                 comment:      t(".comment") }
 
 / More transactions
 .row.mb-3
@@ -55,8 +55,8 @@
     #loading.spinner-border role="status" style="display:none;"
 
     - if @nb_transactions > @limit
-      = button_to t('.more_transactions'), \
-                  account_transactions_path(@current_account), \
-                  { method: :get, \
-                    class:  "btn btn-primary", \
+      = button_to t(".more_transactions"),
+                  account_transactions_path(@current_account),
+                  { method: :get,
+                    class:  "btn btn-primary",
                     id:     "more_items" }

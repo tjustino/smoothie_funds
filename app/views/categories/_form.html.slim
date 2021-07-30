@@ -3,12 +3,9 @@
 
   .card-body
     .mb-3.row
-      = f.label :name, t('.name'), class: "col-sm-4 col-form-label"
+      = f.label :name, t(".name"), class: "col-sm-4 col-form-label"
       .col
-        = f.text_field :name, \
-                       class: "form-control", \
-                       placeholder: t('.name'), \
-                       autofocus: true
+        = f.text_field :name, class: "form-control", placeholder: t(".name"), autofocus: true
         - @category.errors.full_messages_for(:name).each do |message|
           .invalid-feedback = message
     .mb-3.row
@@ -17,7 +14,7 @@
         .form-check
           = f.label :hidden, class: "form-check-label" do
             = f.check_box :hidden, class: "form-check-input"
-            = t('.hidden')
+            = t(".hidden")
 
   .card-footer
     .row.justify-content-end

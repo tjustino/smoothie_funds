@@ -1,7 +1,7 @@
 / Header
 .row.align-items-center.justify-content-between.mb-3
   .col
-    h2 = t('.result')
+    h2 = t(".result")
 
 / Resume
 .row
@@ -15,13 +15,13 @@
   .col-auto
     / Trasnaction's sum
     p.badge.bg-secondary
-      = t('.sum')
+      = t(".sum")
       span = number_to_currency(@sum_transactions)
 
   .col-auto
     / Trasnaction's count
     p.badge.bg-secondary
-      = t('.count')
+      = t(".count")
       span#total = @nb_transactions
 
 / Table
@@ -30,22 +30,22 @@
     thead
       tr
         th
-        th = t('.account')
-        th = t('.date')
-        th = t('.category')
-        th.text-end = t('.debit')
-        th.text-end = t('.credit')
-        th = t('.comment')
+        th = t(".account")
+        th = t(".date")
+        th = t(".category")
+        th.text-end = t(".debit")
+        th.text-end = t(".credit")
+        th = t(".comment")
         th
 
     tbody#listing
-      = render partial: "transaction", locals: {  transactions: @transactions,
-                                                  account:      t('.account'),
-                                                  date:         t('.date'),
-                                                  category:     t('.category'),
-                                                  debit:        t('.debit'),
-                                                  credit:       t('.credit'),
-                                                  comment:      t('.comment') }
+      = render partial: "transaction", locals: { transactions: @transactions,
+                                                 account:      t(".account"),
+                                                 date:         t(".date"),
+                                                 category:     t(".category"),
+                                                 debit:        t(".debit"),
+                                                 credit:       t(".credit"),
+                                                 comment:      t(".comment") }
 
 / More transactions
 .row.mb-3
@@ -53,6 +53,4 @@
     #loading.spinner-border role="status" style="display:none;"
 
     - if @nb_transactions > @limit
-      = button_to t('.more_transactions'), @search, { method: :get, \
-                                                      class:  "btn btn-primary", \
-                                                      id:     "more_items" }
+      = button_to t(".more_transactions"), @search, { method: :get, class:  "btn btn-primary", id: "more_items" }

@@ -1,52 +1,52 @@
 dl.row.mb-0
   / Accounts
-  dt.col-md-2   = t('.accounts')
+  dt.col-md-2   = t(".accounts")
   dd.col-md-10  = joined_accounts_names(@current_accounts, search.accounts)
 
   / Amounts
-  dt.col-md-2 = t('.amount')
+  dt.col-md-2 = t(".amount")
   - if not search.min.blank? and not search.max.blank?
-    dd.col-md-10 = t('.between_amount', min: number_to_currency(search.min), max: number_to_currency(search.max))
+    dd.col-md-10 = t(".between_amount", min: number_to_currency(search.min), max: number_to_currency(search.max))
   - elsif not search.min.blank? and search.max.blank?
-    dd.col-md-10 = t('.more_than', min: number_to_currency(search.min))
+    dd.col-md-10 = t(".more_than", min: number_to_currency(search.min))
   - elsif search.min.blank?      and not search.max.blank?
-    dd.col-md-10 = t('.less_than', max: number_to_currency(search.max))
+    dd.col-md-10 = t(".less_than", max: number_to_currency(search.max))
   - else
-    dd.col-md-10 = t('.no_restriction')
+    dd.col-md-10 = t(".no_restriction")
 
   / Date
-  dt.col-md-2 = t('.date')
+  dt.col-md-2 = t(".date")
   - if not search.before.blank? and not search.after.blank?
-    dd.col-md-10 = t('.between_date', before: l(search.before), after: l(search.after))
+    dd.col-md-10 = t(".between_date", before: l(search.before), after: l(search.after))
   - elsif not search.before.blank? and search.after.blank?
-    dd.col-md-10 = t('.before', before: l(search.before))
+    dd.col-md-10 = t(".before", before: l(search.before))
   - elsif search.before.blank? and not search.after.blank?
-    dd.col-md-10 = t('.after', after: l(search.after))
+    dd.col-md-10 = t(".after", after: l(search.after))
   - else
-    dd.col-md-10 = t('.no_restriction')
+    dd.col-md-10 = t(".no_restriction")
 
   / Categories
-  dt.col-md-2   = t('.categories')
+  dt.col-md-2   = t(".categories")
   dd.col-md-10  = joined_categories_names(@current_accounts, search.accounts, search.categories)
 
   / Comment
-  dt.col-md-2 = t('.comment')
+  dt.col-md-2 = t(".comment")
   - if search.operator == "like" and search.comment.present?
-    dd.col-md-10 = t('.like', comment: search.comment)
+    dd.col-md-10 = t(".like", comment: search.comment)
   - elsif search.operator == "like" and search.comment.blank?
-    dd.col-md-10 = t('.without_comment')
+    dd.col-md-10 = t(".without_comment")
   - elsif search.operator == "not_like" and search.comment.present?
-    dd.col-md-10 = t('.not_like', comment: search.comment)
+    dd.col-md-10 = t(".not_like", comment: search.comment)
   - elsif search.operator == "not_like"  and search.comment.blank?
-    dd.col-md-10 = t('.with_comment')
+    dd.col-md-10 = t(".with_comment")
   - else
-    dd.col-md-10 = t('.no_restriction')
+    dd.col-md-10 = t(".no_restriction")
 
   / Checked
-  dt.col-md-2 = t('.checked')
+  dt.col-md-2 = t(".checked")
   - if search.checked == "yep"
-    dd.col-md-10 = t('.yep')
+    dd.col-md-10 = t(".yep")
   - elsif search.checked == "nop"
-    dd.col-md-10 = t('.nop')
+    dd.col-md-10 = t(".nop")
   - else
-    dd.col-md-10 = t('.checked_or_not')
+    dd.col-md-10 = t(".checked_or_not")

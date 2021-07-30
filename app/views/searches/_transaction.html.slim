@@ -6,7 +6,7 @@
                  easycheck_transaction_path(transaction),
                  method: :post,
                  remote: true,
-                 title: t('.check_transaction'),
+                 title: t(".check_transaction"),
                  id: "check_#{transaction.id}",
                  class: "link-success"
 
@@ -25,7 +25,7 @@
 
     / Credit
     td.nowrap style="text-align: right;" data-title="#{credit}" = \
-              number_to_currency(transaction.amount) if transaction.amount >= 0
+                number_to_currency(transaction.amount) if transaction.amount >= 0
 
     / Comment
     td data-title="#{comment}" = truncate(transaction.comment, length: 30)
@@ -36,12 +36,12 @@
         .col-auto
           = link_to icon("fas fa-edit"),
                     edit_transaction_path(transaction, search_id: params[:id]),
-                      title: t('.edit'),
-                      class: "link-info"
+                    title: t(".edit"),
+                    class: "link-info"
         .col-auto
           = link_to icon("far fa-trash-alt"),
                     transaction_path(transaction),
                     method: :delete,
-                    data: { confirm: t('.are_you_sure') },
-                    title: t('.destroy'),
+                    data: { confirm: t(".are_you_sure") },
+                    title: t(".destroy"),
                     class: "link-danger"

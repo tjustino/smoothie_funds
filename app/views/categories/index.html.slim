@@ -7,44 +7,44 @@
   / Title
   .col
     h2
-      = t('.listing_categories', current_account: @current_account.name)
+      = t(".listing_categories", current_account: @current_account.name)
       sup
         .badge.rounded-pill.bg-secondary#total = @nb_categories
 
   / Download
   .col-md-auto.d-none.d-sm-block
-    h2 = link_to (icon "fas fa-download"), \
-                 account_categories_path(@current_account, format: :csv), \
-                 title: t(".export_categories"), \
+    h2 = link_to icon("fas fa-download"),
+                 account_categories_path(@current_account, format: :csv),
+                 title: t(".export_categories"),
                  class: "btn btn-light"
 
   / Import categories from
   - if @current_accounts.count > 1
     = render "import_from"
     .col-md-auto
-      h2 = button_tag (icon_text "fas fa-exchange-alt", t('.import_from')), \
-                      class: "btn btn-outline-primary", \
+      h2 = button_tag icon_text("fas fa-exchange-alt", t(".import_from")),
+                      class: "btn btn-outline-primary",
                       data: { bs_toggle: "modal", bs_target: "#importFrom" }
 
   / New category
   .col-md-auto
-    h2 = link_to (icon_text "fas fa-plus-circle", t('.new_category')), \
-                                          new_account_category_path, \
-                                          class: "btn btn-primary"
+    h2 = link_to icon_text("fas fa-plus-circle", t(".new_category")),
+                 new_account_category_path,
+                 class: "btn btn-primary"
 
 / Table
 .row#content-table
     table.table.table-striped#magic-table
       thead
         tr
-          th = t('.name')
-          th = t('.use')
+          th = t(".name")
+          th = t(".use")
           th
 
       tbody#listing
         = render partial: "category", locals: { categories: @categories,
-                                                name:       t('.name'),
-                                                use:        t('.use')    }
+                                                name:       t(".name"),
+                                                use:        t(".use")    }
 
 / More categories
 .row.mb-3
@@ -52,8 +52,8 @@
     #loading.spinner-border role="status" style="display:none;"
 
     - if @nb_categories > @limit
-      = button_to t('.more_categories'), \
-                  account_categories_path(@current_account), \
-                  { method: :get, \
-                    class:  "btn btn-primary", \
+      = button_to t(".more_categories"),
+                  account_categories_path(@current_account),
+                  { method: :get,
+                    class:  "btn btn-primary",
                     id:     "more_items" }

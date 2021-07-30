@@ -6,7 +6,7 @@
                                          easycheck_transaction_path(transaction),
                                          method: :post,
                                          remote: true,
-                                         title: t('.check_transaction'),
+                                         title: t(".check_transaction"),
                                          id: "check_#{transaction.id}",
                                          class: "link-success"
 
@@ -34,11 +34,11 @@
     td
       .row.justify-content-start.dotted-top
         .col-auto
-          = link_to (icon "fas fa-edit"), edit_transaction_path(transaction), title: t('.edit'), class: "link-info"
+          = link_to icon("fas fa-edit"), edit_transaction_path(transaction), title: t(".edit"), class: "link-info"
         .col-auto
-          = link_to (icon "far fa-trash-alt"),
+          = link_to icon("far fa-trash-alt"),
                     transaction_path(transaction),
                     method: :delete,
-                    data: { confirm: t('.are_you_sure') },
-                    title: t('.destroy'),
+                    data: { confirm: t(".are_you_sure") },
+                    title: t(".destroy"),
                     class: "link-danger"

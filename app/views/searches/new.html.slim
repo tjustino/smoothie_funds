@@ -1,7 +1,7 @@
 .row.justify-content-center
   .col-md-6
     .card.shadow.mb-3
-      = render partial: "form", locals: { title: t('.create_search') }
+      = render partial: "form", locals: { title: t(".create_search") }
 
 - if @searches.any?
 
@@ -20,11 +20,11 @@
             .card-footer
               .row.justify-content-between
                 .col-auto
-                   = link_to icon_text("far fa-arrow-alt-circle-right", t('.show_result')), search, class: "link-info"
+                   = link_to icon_text("far fa-arrow-alt-circle-right", t(".show_result")), search, class: "link-info"
                 .col-auto
-                  = link_to icon_text("far fa-trash-alt", t('.destroy')),
+                  = link_to icon_text("far fa-trash-alt", t(".destroy")),
                             search,
                             method: :delete,
-                            data: { confirm: t('.are_you_sure') },
-                            title: t('.destroy'),
+                            data: { confirm: t(".are_you_sure") },
+                            title: t(".destroy"),
                             class: "link-warning"

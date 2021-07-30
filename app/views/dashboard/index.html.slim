@@ -5,28 +5,26 @@
 / Header
 .row.mb-3
   .col
-    h1 = t('.dashboard')
+    h1 = t(".dashboard")
 
 / Accept sharing
 - @pendings.each do | pending |
   .row
     .col
       .alert.alert-info.clearfix role="alert"
-        h5 = t('.join_shared_account', \
-              account: pending.account.name, \
-              users: show_other_users(pending.account)).html_safe
+        h5 = t(".join_shared_account", account: pending.account.name, users: show_other_users(pending.account)).html_safe
         hr
         .row.justify-content-start
           .col-auto
-            = link_to (icon_text "far fa-thumbs-up", t('.accept')), \
-                    sharing_path(pending.account), \
-                    method: :post, \
-                    class: "btn btn-success"
+            = link_to icon_text("far fa-thumbs-up", t(".accept")),
+                      sharing_path(pending.account),
+                      method: :post,
+                      class: "btn btn-success"
           .col-auto
-            = link_to (icon_text "far fa-times-circle", t('.reject')), \
-                    unsharing_path(pending.account), \
-                    method: :delete, \
-                    class: "btn btn-danger"
+            = link_to icon_text("far fa-times-circle", t(".reject")),
+                      unsharing_path(pending.account),
+                      method: :delete,
+                      class: "btn btn-danger"
 
 / Dashboard
 .row.justify-content-between
@@ -34,7 +32,7 @@
   .col-md-6
     .card.shadow.mb-3
       .card-header.text-white.bg-info
-        h4 = t('.transaction_summary')
+        h4 = t(".transaction_summary")
       .card-body
         - if @transactions.any?
           .list-group
@@ -43,27 +41,27 @@
                   h5 = account.name
                   - if account.transactions.any?
                     dl.row.mb-0
-                      dt.col-sm-4.nowrap = t('.current_balance')
+                      dt.col-sm-4.nowrap = t(".current_balance")
                       dd.col-sm-8 class=("text-danger" if sum_today(@current_transactions, account) < 0)
-                        = t('.balance_date', balance: current_balance(@current_transactions, account), date: current_date(@current_transactions, account))
+                        = t(".balance_date", balance: current_balance(@current_transactions, account), date: current_date(@current_transactions, account))
                       - if future_transactions?(@transactions, account)
                         dt.col-sm-4.nowrap.text-muted
-                          = t('.future_balance')
+                          = t(".future_balance")
                         dd.col-sm-8 class=(sum_tomorrow(@transactions, account) < 0 ? "text-danger" : "text-muted")
-                          = t('.balance_date',  balance: future_balance(@transactions, account), date: future_date(@transactions, account))
+                          = t(".balance_date",  balance: future_balance(@transactions, account), date: future_date(@transactions, account))
                   - else
                     dl.row.mb-0
-                      dt.col-sm-4.nowrap = t('.current_balance')
+                      dt.col-sm-4.nowrap = t(".current_balance")
                       dd.col-sm-8 class=("text-danger" if account.initial_balance < 0)
-                        = t('.balance_date', balance: initial_balance(account), date: today )
+                        = t(".balance_date", balance: initial_balance(account), date: today )
         - else
-          p.card-text = t('.no_transactions')
+          p.card-text = t(".no_transactions")
 
   / upcoming terms
   .col-md-6
     .card.shadow.mb-3
       .card-header.text-white.bg-info
-        h3 = t('.upcoming_terms')
+        h3 = t(".upcoming_terms")
       .card-body
         - if @schedules.any?
           - @current_accounts.each do |account|
@@ -79,10 +77,10 @@
                       td = link_to icon("fas fa-magic"),
                                    insert_schedule_path(schedule),
                                    method: :insert,
-                                   title: t('.insert_schedule'),
+                                   title: t(".insert_schedule"),
                                    class: "link-success"
                       td = l(schedule.next_time, format: :short)
                       td = schedule.operation.category.name
                       td.nowrap = number_to_currency(schedule.operation.amount)
         - else
-          p.card-text = t('.no_terms')
+          p.card-text = t(".no_terms")

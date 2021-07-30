@@ -7,22 +7,20 @@
   / Title
   .col
     h2
-      = t('.listing_schedules', current_account: @current_account.name)
+      = t(".listing_schedules", current_account: @current_account.name)
       sup
         .badge.rounded-pill.bg-secondary#total = @nb_schedules
 
   / Download
   .col-md-auto.d-none.d-sm-block
-    h2 = link_to (icon "fas fa-download"), \
-                 account_schedules_path(@current_account, format: :csv), \
-                 title: t(".export_schedules"), \
+    h2 = link_to icon("fas fa-download"),
+                 account_schedules_path(@current_account, format: :csv),
+                 title: t(".export_schedules"),
                  class: "btn btn-light"
 
   / New schedule
   .col-md-auto
-    h2 = link_to (icon_text "fas fa-plus-circle", t('.new_schedule')), \
-                                          new_account_schedule_path, \
-                                          class: "btn btn-primary"
+    h2 = link_to icon_text("fas fa-plus-circle", t(".new_schedule")), new_account_schedule_path, class: "btn btn-primary"
 
 / Table
 .row#content-table
@@ -30,20 +28,20 @@
     thead
       tr
         th
-        th = t('.next_time')
-        th = t('.frequency')
-        th = t('.category')
-        th.text-end = t('.amount')
-        th = t('.comment')
+        th = t(".next_time")
+        th = t(".frequency")
+        th = t(".category")
+        th.text-end = t(".amount")
+        th = t(".comment")
         th
 
     tbody#listing
-      = render partial: "schedule", locals: { schedules:  @schedules,
-                                              next_time:  t('.next_time'),
-                                              frequency:  t('.frequency'),
-                                              category:   t('.category'),
-                                              amount:     t('.amount'),
-                                              comment:    t('.comment') }
+      = render partial: "schedule", locals: { schedules: @schedules,
+                                              next_time: t(".next_time"),
+                                              frequency: t(".frequency"),
+                                              category:  t(".category"),
+                                              amount:    t(".amount"),
+                                              comment:   t(".comment") }
 
 / More schedules
 .row.mb-3
@@ -51,8 +49,8 @@
     #loading.spinner-border role="status" style="display:none;"
 
     - if @nb_schedules > @limit
-      = button_to t('.more_schedules'), \
-                  account_schedules_path(@current_account), \
-                  { method: :get, \
-                    class:  "btn btn-primary", \
+      = button_to t(".more_schedules"),
+                  account_schedules_path(@current_account),
+                  { method: :get,
+                    class:  "btn btn-primary",
                     id:     "more_items" }

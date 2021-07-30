@@ -1,21 +1,21 @@
 .modal.fade#importFrom tabindex="-1" role="dialog" aria-labelledby="importFrom"
   .modal-dialog role="document"
-    .modal-content = form_for(  [@current_user, @current_account], \
-                                method: :import_from, \
-                                url: :import_from_account_categories ) do |f|
+    .modal-content = form_for([@current_user, @current_account],
+                              method: :import_from,
+                              url: :import_from_account_categories) do |f|
       .modal-header
-        h4.modal-title = t('.title')
+        h4.modal-title = t(".title")
         button.btn-close type="button" data-bs-dismiss="modal" aria-hidden="true"
       .modal-body
-        p = t('.speech').html_safe
+        p = t(".speech").html_safe
         .mb-3
-          = f.label :import_from, t('.import_from'), class: "form-control-label"
-          = f.collection_select :categories, \
-                                @other_accounts, \
-                                :id, \
-                                :name, \
-                                {}, \
-                                {class: "form-select"}
+          = f.label :import_from, t(".import_from"), class: "form-control-label"
+          = f.collection_select :categories,
+                                @other_accounts,
+                                :id,
+                                :name,
+                                {},
+                                { class: "form-select" }
 
       .modal-footer
         = f.submit class: "btn btn-primary"

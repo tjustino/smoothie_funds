@@ -3,23 +3,18 @@
 
   .card-body
     .mb-3.row
-      = f.label :name, t('.name'), class: "col-sm-3 col-form-label"
+      = f.label :name, t(".name"), class: "col-sm-3 col-form-label"
       .col
-        = f.text_field :name, \
-                       class: "form-control", \
-                       placeholder: t('.name'), \
-                       autofocus: true
+        = f.text_field :name, class: "form-control", placeholder: t(".name"), autofocus: true
         - @account.errors.full_messages_for(:name).each do |message|
           .invalid-feedback = message
 
     .mb-3.row
-      = f.label :initial_balance, t('.initial_balance'), class: "col-sm-3 col-form-label"
+      = f.label :initial_balance, t(".initial_balance"), class: "col-sm-3 col-form-label"
       .col
         .input-group
-          = f.telephone_field :initial_balance, \
-                              class: "form-control", \
-                              placeholder: t('.initial_balance')
-          span.input-group-text = t('number.currency.format.unit')
+          = f.telephone_field :initial_balance, class: "form-control", placeholder: t(".initial_balance")
+          span.input-group-text = t("number.currency.format.unit")
           - @account.errors.full_messages_for(:initial_balance).each do |msg|
             .invalid-feedback = msg
 
@@ -27,35 +22,31 @@
       / shared with
       - unless f.object.users.count == 1
         .mb-3.row
-          = f.label :share, t('.share'), class: "col-sm-3 col-form-label"
+          = f.label :share, t(".share"), class: "col-sm-3 col-form-label"
           .col
             - other_users(@current_user, f.object).each do |other_user|
               = f.fields_for :users, other_user do |shared_user|
                 = shared_user.hidden_field :id
-                = shared_user.email_field :email, class: "form-control", \
-                                                  readonly: "readonly"
+                = shared_user.email_field :email, class: "form-control", readonly: "readonly"
           .col-auto
-            = link_to (icon_text "fas fa-unlink", t('.unlink')), \
-                      unlink_path(f.object), \
-                      method: :delete, \
-                      data: { confirm: t('.are_you_sure_unlink') }, \
+            = link_to icon_text("fas fa-unlink", t(".unlink")),
+                      unlink_path(f.object),
+                      method: :delete,
+                      data: { confirm: t(".are_you_sure_unlink") },
                       class: "btn btn-danger"
 
       / pending user
       - unless f.object.pending_user.blank?
         = f.fields_for :pending_user do |pending_user|
-          = render 'pending_user', f: pending_user
+          = render "pending_user", f: pending_user
 
       / new share
       - else
         .mb-3.row
-          = f.label :share, t('.propose_sharing'), \
-                    class: "col-sm-3 col-form-label"
+          = f.label :share, t(".propose_sharing"), class: "col-sm-3 col-form-label"
           .col
-            = email_field_tag :new_share, nil, \
-                              class: "form-control", \
-                              placeholder: t('.shared_email')
-            small.form-text.text-muted = t('.explanation')
+            = email_field_tag :new_share, nil, class: "form-control", placeholder: t(".shared_email")
+            small.form-text.text-muted = t(".explanation")
 
     .mb-3.row
       .col-sm-3
@@ -63,7 +54,7 @@
         .form-check
           = f.label :hidden, class: "form-check-label" do
             = f.check_box :hidden, class: "form-check-input"
-            = t('.hidden')
+            = t(".hidden")
 
   .card-footer
     .row.justify-content-end

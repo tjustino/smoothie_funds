@@ -4,7 +4,7 @@
   .card-body
     / Accounts
     .mb-3.row
-      = f.label :accounts, t('.accounts'), class: "col-md-4 col-form-label"
+      = f.label :accounts, t(".accounts"), class: "col-md-4 col-form-label"
       .col-md-8
         = f.select :accounts,
                    options_from_collection_for_select(@accounts_with_categories, :id, :name, @accounts_with_categories.ids),
@@ -13,27 +13,27 @@
 
     / Amount
     .mb-3.row
-      = f.label :amount, t('.amount'), class: "col-md-4 my-auto col-form-label"
+      = f.label :amount, t(".amount"), class: "col-md-4 my-auto col-form-label"
       .col-md-8
         .input-group
-          = f.text_field :min, class: "form-control", placeholder: t('.amount')
+          = f.text_field :min, class: "form-control", placeholder: t(".amount")
           span.input-group-text = icon("fas fa-arrows-alt-h")
-          = f.text_field :max, class: "form-control", placeholder: t('.amount')
-          span.input-group-text = t('number.currency.format.unit')
+          = f.text_field :max, class: "form-control", placeholder: t(".amount")
+          span.input-group-text = t("number.currency.format.unit")
 
     / Date
     .mb-3.row
-      = f.label :date, t('.date'), class: "col-md-4 col-form-label"
+      = f.label :date, t(".date"), class: "col-md-4 col-form-label"
       .col-md-8
         .input-group
-          = f.date_field :after, class: "form-control", placeholder: t('.date')
+          = f.date_field :after, class: "form-control", placeholder: t(".date")
           span.input-group-text = icon("fas fa-arrows-alt-h")
-          = f.date_field :before, class: "form-control", placeholder: t('.date')
+          = f.date_field :before, class: "form-control", placeholder: t(".date")
           span class="input-group-text" = icon "far fa-calendar-alt"
 
     / Categories
     .mb-3.row
-      = f.label :categories, t('.categories'), class: "col-md-4 col-form-label"
+      = f.label :categories, t(".categories"), class: "col-md-4 col-form-label"
       .col-md-8
         - @current_accounts.each do |account|
           - if account.categories.exists?
@@ -49,18 +49,18 @@
 
     / Comment
     .mb-3.row
-      = f.label :comment, t('.comment'), class: "col-md-4 col-form-label"
+      = f.label :comment, t(".comment"), class: "col-md-4 col-form-label"
       .col-md-3
-        = f.select  :operator, \
-                    options_for_select( Search.operators.keys.map { |key| \
-                                        [t(".#{key}"), key] } ), {}, \
-                                        { class: "form-select" }
+        = f.select :operator,
+                   options_for_select(Search.operators.keys.map { |key| [t(".#{key}"), key] } ),
+                   {},
+                   { class: "form-select" }
       .col-md-5
-        = f.text_field :comment, class: "form-control", placeholder: t('.comment')
+        = f.text_field :comment, class: "form-control", placeholder: t(".comment")
 
     / Checked
     .mb-3.row
-      = f.label :checked, t('.checked'), class: "col-md-4 col-form-label"
+      = f.label :checked, t(".checked"), class: "col-md-4 col-form-label"
       .col-md-8
         - Search.checkeds.each do |key, value|
           .form-check
@@ -72,4 +72,4 @@
   .card-footer
     .row.justify-content-end
       .col-auto
-        = f.submit t('.search'), class: "btn btn-primary"
+        = f.submit t(".search"), class: "btn btn-primary"

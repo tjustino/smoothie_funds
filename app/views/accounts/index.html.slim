@@ -7,22 +7,20 @@
   / Title
   .col
     h2
-      = t('.listing_accounts')
+      = t(".listing_accounts")
       sup
         .badge.rounded-pill.bg-secondary#total = @nb_accounts
 
   / Download
   .col-md-auto.d-none.d-sm-block
-    h2 = link_to (icon "fas fa-download"), \
-                 accounts_path(format: :csv), \
-                 title: t(".export_accounts"), \
+    h2 = link_to icon("fas fa-download"),
+                 accounts_path(format: :csv),
+                 title: t(".export_accounts"),
                  class: "btn btn-light"
 
   / New account
   .col-md-auto
-    h2 = link_to (icon_text "fas fa-plus-circle", t('.new_account')), \
-                                         new_account_path, \
-                                         class: "btn btn-primary"
+    h2 = link_to icon_text("fas fa-plus-circle", t(".new_account")),  new_account_path,  class: "btn btn-primary"
 
 / Accept sharing
 - unless @pendings.nil?
@@ -30,37 +28,37 @@
     .row
       .col
         .alert.alert-info.clearfix role="alert"
-          h5 = t('.join_shared_account', \
-                account: pending.account.name, \
-                users: show_other_users(pending.account)).html_safe
+          h5 = t(".join_shared_account",
+                 account: pending.account.name,
+                 users: show_other_users(pending.account)).html_safe
           hr
           .row.justify-content-start
             .col-auto
-              = link_to (icon_text "far fa-thumbs-up", t('.accept')), \
-                      sharing_path(pending.account), \
-                      method: :post, \
-                      class: "btn btn-success"
+              = link_to icon_text("far fa-thumbs-up", t(".accept")),
+                        sharing_path(pending.account),
+                        method: :post,
+                        class: "btn btn-success"
             .col-auto
-              = link_to (icon_text "far fa-times-circle", t('.reject')), \
-                      unsharing_path(pending.account), \
-                      method: :delete, \
-                      class: "btn btn-danger"
+              = link_to icon_text("far fa-times-circle", t(".reject")),
+                        unsharing_path(pending.account),
+                        method: :delete,
+                        class: "btn btn-danger"
 
 / Table
 .row#content-table
   table.table.table-striped#magic-table
     thead
       tr
-        th = t('.name')
-        th = t('.initial_balance')
-        th = t('.share')
+        th = t(".name")
+        th = t(".initial_balance")
+        th = t(".share")
         th
 
     tbody#listing
-      = render partial: "account", locals: {  accounts: @accounts,
-                                              name:     t('.name'),
-                                              init_bal: t('.initial_balance'),
-                                              share:    t('.share') }
+      = render partial: "account", locals: { accounts: @accounts,
+                                             name:     t(".name"),
+                                             init_bal: t(".initial_balance"),
+                                             share:    t(".share") }
 
 / More accounts
 .row.mb-3
@@ -68,7 +66,8 @@
     #loading.spinner-border role="status" style="display:none;"
 
     - if @nb_accounts > @limit
-      = button_to t('.more_accounts'), accounts_path, \
-                                      { method: :get, \
-                                        class:  "btn btn-primary", \
-                                        id:     "more_items" }
+      = button_to t(".more_accounts"),
+                  accounts_path,
+                  { method: :get,
+                    class:  "btn btn-primary",
+                    id:     "more_items" }

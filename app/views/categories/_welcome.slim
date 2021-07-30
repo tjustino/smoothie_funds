@@ -2,10 +2,10 @@
   .modal-dialog role="document"
     .modal-content
       .modal-header
-        h4.modal-title = t('.welcome')
+        h4.modal-title = t(".welcome")
         button.btn-close type="button" data-bs-dismiss="modal" aria-hidden="true"
-      .modal-body = t('.content', new_icon: icon("fas fa-plus-circle"), \
-                                  transactions_icon: icon("far fa-credit-card"), \
+      .modal-body = t(".content", new_icon: icon("fas fa-plus-circle"),
+                                  transactions_icon: icon("far fa-credit-card"),
                                   schedules_icon: icon("far fa-calendar-alt")).html_safe
       .modal-footer
-        button.btn.btn-success type="button" data-bs-dismiss="modal" = t('.close')
+        button.btn.btn-success type="button" data-bs-dismiss="modal" = t(".close")

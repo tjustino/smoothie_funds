@@ -4,8 +4,7 @@
     td data-title="#{name}" = account.name
 
     / initial balance
-    td.nowrap data-title="#{init_bal}" = \
-                                  number_to_currency(account.initial_balance)
+    td.nowrap data-title="#{init_bal}" = number_to_currency(account.initial_balance)
 
     / share
     - unless account.pending_user.blank?
@@ -20,9 +19,9 @@
     td
       .row.justify-content-start.dotted-top
         .col-auto
-          = link_to (icon "fas fa-edit"), edit_account_path(account), title: t(".edit"), class: "link-info"
+          = link_to icon("fas fa-edit"), edit_account_path(account), title: t(".edit"), class: "link-info"
         .col-auto
-          = link_to (icon "far fa-trash-alt"),
+          = link_to icon("far fa-trash-alt"),
                     account_path(account),
                     method: :delete,
                     data: {confirm: t(".are_you_sure", account: account.name)},

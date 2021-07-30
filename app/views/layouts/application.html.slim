@@ -35,22 +35,22 @@ html lang="#{I18n.locale.to_s.gsub('_','-')}"
               - if Category.exists?(account: @current_accounts)
                 li.nav-item.dropdown
                   a.nav-link.dropdown-toggle href="#" data-bs-toggle="dropdown" class=("active" if params[:controller] == "transactions")
-                    = icon_text "far fa-credit-card", t('.transactions').html_safe
+                    = icon_text "far fa-credit-card", t(".transactions").html_safe
                   .dropdown-menu
                     - @accounts_with_categories.each do |account|
                       = link_to account.name, account_transactions_path(account), class: "dropdown-item"
                     .dropdown-divider
-                    = link_to ( icon_text "fas fa-search", t('.search') ), \
-                              new_user_search_path(@current_user), \
+                    = link_to icon_text("fas fa-search", t(".search")),
+                              new_user_search_path(@current_user),
                               class: "dropdown-item"
-                    = link_to ( icon_text "fas fa-chart-area", t('.analytics') ), \
-                              user_analytics_path(@current_user), \
+                    = link_to icon_text("fas fa-chart-area", t(".analytics")),
+                              user_analytics_path(@current_user),
                               class: "dropdown-item"
 
                 / dropdown schedules
                 li.nav-item.dropdown
                   a.nav-link.dropdown-toggle href="#" data-bs-toggle="dropdown" class=("active" if params[:controller] == "schedules")
-                    = icon_text "far fa-calendar-alt", t('.schedules').html_safe
+                    = icon_text "far fa-calendar-alt", t(".schedules").html_safe
                   .dropdown-menu
                     - @accounts_with_categories.each do |account|
                       = link_to account.name, account_schedules_path(account), class: "dropdown-item"
@@ -59,13 +59,13 @@ html lang="#{I18n.locale.to_s.gsub('_','-')}"
               - if @current_accounts.any?
                 li.nav-item.dropdown
                   a.nav-link.dropdown-toggle href="#" data-bs-toggle="dropdown" class=("active" if params[:controller] == "categories")
-                    = icon_text "fas fa-tags", t('.categories').html_safe
+                    = icon_text "fas fa-tags", t(".categories").html_safe
                   .dropdown-menu
                     - @current_accounts.each do |account|
                       = link_to account.name, account_categories_path(account), class: "dropdown-item"
 
               / link accounts
-              = nav_link t('.accounts'), accounts_path, "fas fa-book"
+              = nav_link t(".accounts"), accounts_path, "fas fa-book"
 
             ul.navbar-nav
               li.nav-item.dropdown
@@ -73,15 +73,15 @@ html lang="#{I18n.locale.to_s.gsub('_','-')}"
                   = icon_text "fas fa-user", name_or_email(@current_user)
                 .dropdown-menu
                   / Profil
-                  = link_to ( icon_text "fas fa-sliders-h", t('.profile') ), \
-                            edit_user_path(@current_user), \
+                  = link_to icon_text("fas fa-sliders-h", t(".profile")),
+                            edit_user_path(@current_user),
                             class: "dropdown-item"
                   .dropdown-divider
                   / Logout
-                  = link_to ( icon_text "fas fa-sign-out-alt", t('.logout') ), \
-                            logout_path,  \
-                            method: :delete, \
-                            class: "dropdown-item", \
+                  = link_to icon_text("fas fa-sign-out-alt", t(".logout")),
+                            logout_path,
+                            method: :delete,
+                            class: "dropdown-item",
                             id: "logout"
 
           - elsif params[:controller] != "users" || (params[:controller] == "users" && params[:action] == "new")
@@ -92,7 +92,7 @@ html lang="#{I18n.locale.to_s.gsub('_','-')}"
                 .btn-group role="group"
                   = link_to "Connexion", login_path, class: "btn #{outline_or_not}-primary"
                   .or
-                  = link_to (icon_text "fas fa-user-plus", t('.create_user')),
+                  = link_to icon_text("fas fa-user-plus", t(".create_user")),
                             new_user_path,
                             class: "btn #{inverse_of_outline_or_not}-primary"
 
