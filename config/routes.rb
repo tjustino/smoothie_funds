@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   end
 
   shallow do
-    resources :users, except: %i[index show destroy] do
+    resources :users, except: %i[index show] do
       resources :searches, except: %i[index edit update]
       resources :analytics, only: [:index]
     end

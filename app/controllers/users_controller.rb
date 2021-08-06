@@ -20,6 +20,7 @@ class UsersController < ApplicationController
   # GET /users/:id/edit
   def edit
     user
+    count_deletion_impact
   end
 
   # POST /users
@@ -35,10 +36,16 @@ class UsersController < ApplicationController
     save_updated_user t(".successfully_updated")
   end
 
-  # TODO: how to delete an account?
   # DELETE /users/:id
-  # def destroy
-  # end
+  def destroy
+    if delete_all_data && @current_user.destroy
+      session[:user_id] = nil
+      redirect_to login_url, notice: t(".successfully_destroyed")
+    else
+      flash[:warning] = t(".cant_destroy")
+      redirect_to accounts_url
+    end
+  end
 
   private ######################################################################
 
@@ -66,5 +73,38 @@ class UsersController < ApplicationController
 
     def save_updated_user(notice)
       @user.save ? redirect_to(edit_user_url, notice: notice) : render("edit")
+    end
+
+    def count_deletion_impact
+      set_targeted_accounts
+      @nof_accounts     = @targeted_accounts.length
+      @nof_categories   = Category.where(account_id: @targeted_accounts).count
+      @nof_schedules    = Schedule.where(account_id: @targeted_accounts).count
+      @nof_searches     = @user.searches.count
+      @nof_transactions = Transaction.active.where(account_id: @targeted_accounts).count
+    end
+
+    def set_targeted_accounts
+      @targeted_accounts = Relation.not_shared_accounts(@current_user.accounts)
+    end
+
+    def delete_all_data
+      set_targeted_accounts
+      # consider erasing (following this order):
+      #   - searches
+      #   - schedules
+      #   - transactions
+      #   - categories
+      #   - pending_users
+      #   - relations
+      #   - accounts
+      #   - user
+      @user.searches.delete_all
+      Schedule.where(account_id: @targeted_accounts).delete_all
+      Transaction.active.where(account_id: @targeted_accounts).delete_all
+      Category.where(account_id: @targeted_accounts).delete_all
+      PendingUser.where(account_id: @targeted_accounts).delete_all
+      Relation.where(account_id: @targeted_accounts).delete_all
+      @targeted_accounts.delete_all
     end
 end

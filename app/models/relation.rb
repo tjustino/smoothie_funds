@@ -15,6 +15,13 @@ class Relation < ApplicationRecord
   belongs_to :account
   belongs_to :user
 
+  scope :shared_accounts, ->(accounts) {
+    select(:account_id).where(account_id: accounts).group(:account_id).having("COUNT(user_id) > 1")
+  }
+  scope :not_shared_accounts, ->(accounts) {
+    select(:account_id).where(account_id: accounts).group(:account_id).having("COUNT(user_id) = 1")
+  }
+
   validates :account_id, presence: true, uniqueness: { scope: :user_id }
   validates :user_id,    presence: true, uniqueness: { scope: :account_id }
 end

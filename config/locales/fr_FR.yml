@@ -407,6 +407,9 @@ fr_FR:
       successfully_created: "L'utilisateur a bien été créé. Vous pouvez vous connecter !"
     update:
       successfully_updated: "L'utilisateur a bien été mis à jour"
+    destroy:
+      successfully_destroyed: "Le compte utilisateur ainsi que toutes ses données ont bien été supprimés"
+      cant_destroy:           "Le compte utilisateur ainsi que toutes ses données n'ont pas pu être supprimés"
     # views
     form:
       email:                  "Courriel"
@@ -420,13 +423,23 @@ fr_FR:
         Nous prenons au sérieux le respect de nos utilisateurs.
     edit:
       edit_user:  "Édition de l'utilisateur courant"
-      title_bug:  "Support"
-      speech_bug: |-
-        Vous avez trouvé un bug et vous souhaitez le signaler ?<br />
-        Une idée de nouvelle fonctionnalité incroyable ?<br />
-        Vous pouvez utiliser ce
-        <a href="https://github.com/tjustino/smoothie_funds/issues" target="_blank">lien</a>
-        (en anglais ou français uniquement, merci !)
+      title_support: "Support"
+      speech_support: |-
+        Vous avez trouvé un bug ou vous avez une simple question ?<br>
+        Vous pouvez utiliser ce <a href="https://github.com/tjustino/smoothie_funds/issues" target="_blank">lien</a>
+        ou envoyer <a href="mailto:support@smoothiefunds.com">un mail au support</a>.
+      title_delete_account: "Supprimer mon compte"
+      speech_delete_account: |-
+        Vous vous apprêtez à supprimer définitivement toutes vos données à l'exception de celles relatives aux comptes partagés.
+      are_you_sure: "Êtes-vous sûr de vouloir faire ça ?"
+      speech_explain_delete_account: |-
+        Vous vous apprêtez à supprimer un certain nombre de données en plus de votre compte utilisateur :
+      accounts:     "Comptes"
+      categories:   "Catégories"
+      schedules:    "Échéanciers"
+      searches:     "Recherches"
+      transactions: "Transactions"
+      close:        "Fermer cette fenêtre"
     new:
       create_user:  "Créer un nouvel utilisateur"
 

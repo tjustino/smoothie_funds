@@ -3,8 +3,52 @@
     .card.shadow.mb-3
       = render partial: "form", locals: { title: t(".edit_user") }
 
-.row.justify-content-md-center
+.row.mb-3
   .col
-    .alert.alert-info role="alert"
-      h2.alert-heading = t(".title_bug")
-      p = t(".speech_bug").html_safe
+    .accordion.shadow#accordion
+      .accordion-item
+        h2.accordion-header#headingSupport
+          button.accordion-button.text-white.bg-info type="button" data-bs-toggle="collapse" data-bs-target="#collapseSupport" aria-expanded="true" aria-controls="collapseSupport"
+            = t(".title_support")
+        #collapseSupport.accordion-collapse.collapse.show aria-labelledby="headingSupport" data-bs-parent="#accordion"
+          .accordion-body
+            p = t(".speech_support").html_safe
+      .accordion-item
+        h2.accordion-header#headingDeleteAccount
+          button.accordion-button.collapsed.text-white.bg-info type="button" data-bs-toggle="collapse" data-bs-target="#collapseDeleteAccount" aria-expanded="false" aria-controls="collapseDeleteAccount"
+            = t(".title_delete_account")
+        #collapseDeleteAccount.accordion-collapse.collapse aria-labelledby="headingDeleteAccount" data-bs-parent="#accordion"
+          .accordion-body
+            / p.text-danger = t(".danger_delete_account").html_safe
+            p = t(".speech_delete_account")
+            p.text-center = link_to t(".title_delete_account"), nil, class: "btn btn-danger text-white", data: { bs_toggle: "modal", bs_target: "#deleteAccountModal" }
+
+/ modal of the death ☠️
+.modal#deleteAccountModal tabindex="-1" role="dialog" aria-labelledby="deleteAccountModal"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        h4.modal-title = t(".are_you_sure")
+        button.btn-close type="button" data-bs-dismiss="modal" aria-hidden="true"
+      .modal-body
+        p = t(".speech_explain_delete_account")
+        .row.justify-content-start.mb-3
+          .col-auto
+            ul.list-group.list-group-flush
+              li.list-group-item.d-flex.justify-content-between
+                span.me-5 = icon_text("fas fa-book", t(".accounts"))
+                span = @nof_accounts
+              li.list-group-item.d-flex.justify-content-between
+                span.me-5 = icon_text("fas fa-tags", t(".categories"))
+                span = @nof_categories
+              li.list-group-item.d-flex.justify-content-between
+                span.me-5 = icon_text("far fa-calendar-alt", t(".schedules"))
+                span = @nof_schedules
+              li.list-group-item.d-flex.justify-content-between
+                span.me-5 = icon_text("fas fa-search", t(".searches"))
+                span = @nof_searches
+              li.list-group-item.d-flex.justify-content-between
+                span.me-5 = icon_text("far fa-credit-card", t(".transactions"))
+                span = @nof_transactions
+      .modal-footer
+        button.btn.btn-dark type="button" data-bs-dismiss="modal" = t(".close")
