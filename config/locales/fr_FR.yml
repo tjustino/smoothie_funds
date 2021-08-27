@@ -434,6 +434,8 @@ fr_FR:
       are_you_sure: "Êtes-vous sûr de vouloir faire ça ?"
       speech_explain_delete_account: |-
         Vous vous apprêtez à supprimer un certain nombre de données en plus de votre compte utilisateur :
+      speech_irreversible_delete_account: |-
+        Cette action étant irréversible, nous procédons à une dernière vérification avant de supprimer votre compte :
       accounts:     "Comptes"
       categories:   "Catégories"
       schedules:    "Échéanciers"

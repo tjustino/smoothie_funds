@@ -50,5 +50,10 @@
               li.list-group-item.d-flex.justify-content-between
                 span.me-5 = icon_text("far fa-credit-card", t(".transactions"))
                 span = @nof_transactions
+        p.text-danger = t(".speech_irreversible_delete_account")
+        = form_tag "/", method: :get
+          .mb-3
+            label.form-label Mot de passe
+            = password_field_tag "secret", nil, class: "form-control"
       .modal-footer
         button.btn.btn-dark type="button" data-bs-dismiss="modal" = t(".close")
