@@ -50,10 +50,14 @@
               li.list-group-item.d-flex.justify-content-between
                 span.me-5 = icon_text("far fa-credit-card", t(".transactions"))
                 span = @nof_transactions
-        p.text-danger = t(".speech_irreversible_delete_account")
-        = form_tag "/", method: :get
+        = form_tag user_path, method: :delete
           .mb-3
-            label.form-label Mot de passe
-            = password_field_tag "secret", nil, class: "form-control"
-      .modal-footer
-        button.btn.btn-dark type="button" data-bs-dismiss="modal" = t(".close")
+            .form-check.form-switch
+              input.form-check-input type="checkbox" id="irreversibleChoice"
+              label.form-check-label.text-danger for="irreversibleChoice" = t(".speech_irreversible_choice")
+          .modal-footer
+            button.btn.btn-dark type="button" data-bs-dismiss="modal" = t(".close")
+            = button_tag type: "submit", class: "btn btn-danger text-white position-relative", id: "irreversibleButton", disabled: true do
+              = t(".title_delete_account")
+              span#irreversibleSpinner.badge.position-absolute.top-50.start-50.translate-middle.visually-hidden
+                .spinner-border.spinner-border-sm

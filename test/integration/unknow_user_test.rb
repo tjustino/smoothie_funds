@@ -8,9 +8,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
 
   setup do
     # to get session[:user_id]
-    post login_url, params: {
-      email: users(:thomas).email, password: "p@ssw0rd!"
-    }
+    post login_url, params: { email: users(:thomas).email, password: "p@ssw0rd!" }
   end
 
   ############################################################################################################### DELETE
@@ -19,14 +17,13 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
   # I want to delete data
   # so that I will be redirected to the login path and data will not be deleted
   test "DELETE data knowing all ids" do
-    user     = User.find session[:user_id]
-    accounts = user.accounts.active
+    user = User.find session[:user_id]
 
     # sessions#destroy
-    delete logout_path
+    delete logout_url
     assert_redirected_to login_url
 
-    accounts.each do |account|
+    user.accounts.active.each do |account|
       # categories#destroy
       assert_no_difference "Category.count" do
         account.categories.each do |category|
@@ -58,14 +55,16 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
       end
     end
 
-    # TODO: how to delete an account?
-    # users#destroy
-    # assert_no_difference "User.count" do
-    #   User.all.each do |user|
-    #     delete user_path user
-    #     assert_redirected_to login_url
-    #   end
-    # end
+    # # users#destroy
+    User.all.each do |current_user|
+      assert_no_difference(
+        ["User.count", "Search.count", "Schedule.count", "Transaction.count", "Category.count", "PendingUser.count",
+         "Relation.count", "Account.count"]
+      ) do
+        delete               user_path(current_user)
+        assert_redirected_to login_url
+      end
+    end
   end
 
   ################################################################################################################## GET
@@ -110,12 +109,11 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
   # I want to access pages with this params
   # so that I will be redirected to the login path, except for the new user path
   test "GET knowing all ids" do
-    user     = User.find session[:user_id]
-    accounts = user.accounts.active
+    user = User.find session[:user_id]
 
     delete logout_url
 
-    accounts.each do |account|
+    user.accounts.active.each do |account|
       # categories#index
       get account_categories_path account
       assert_redirected_to login_url
@@ -175,11 +173,10 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
   # so that I will be redirected to the login path and data will not be updated
   test "PATCH data knowing all ids" do
     user = User.find session[:user_id]
-    accounts = user.accounts.active
 
     delete logout_url
 
-    accounts.each do |account|
+    user.accounts.active.each do |account|
       # categories#update
       account.categories.each do |category|
         assert_no_difference "category.name.sum" do
@@ -249,12 +246,11 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
   # so that I will be redirected to the login path and data will not be created
   test "POST knowing all ids" do
     user     = User.find session[:user_id]
-    accounts = user.accounts.active
     periods  = %w[days weeks months years]
 
     delete logout_url
 
-    accounts.each do |account|
+    user.accounts.active.each do |account|
       # categories#create
       assert_no_difference "Category.count" do
         post account_categories_path account, params: {
@@ -309,12 +305,11 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
   # I want to post data via specific routes
   # so that I will be redirected to the login path and data will not be created
   test "POST specific routes" do
-    user     = User.find session[:user_id]
-    accounts = user.accounts.active
+    user = User.find session[:user_id]
 
     delete logout_url
 
-    accounts.each do |account|
+    user.accounts.active.each do |account|
       # categories#import_from
       assert_no_difference "Category.count" do
         post import_from_account_categories_path user, account

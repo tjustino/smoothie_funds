@@ -55,9 +55,31 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   #################################################################################################### DELETE /users/:id
-  # TODO: how to delete an account?
-  # test "should destroy user" do
-  # end
+  test "should destroy user" do
+    accounts = @user.accounts
+    assert_difference("User.count", -1) do
+      delete_destroy       @user
+      assert_redirected_to login_url
+      assert_equal         I18n.t("users.destroy.successfully_destroyed"), flash[:notice]
+      assert_empty         @user.searches
+      assert_empty         @user.schedules
+      assert_empty         @user.transactions
+      assert_empty         @user.categories
+      assert_empty         PendingUser.where(account_id: accounts)
+      assert_empty         @user.relations
+      assert_empty         @user.accounts
+    end
+  end
+
+  test "should not destroy user - hacker way" do
+    assert_no_difference(
+      ["User.count", "Search.count", "Schedule.count", "Transaction.count", "Category.count", "PendingUser.count",
+       "Relation.count", "Account.count"]
+    ) do
+      delete_destroy       @wrong_user
+      assert_redirected_to dashboard_url
+    end
+  end
 
   private ##############################################################################################################
 
@@ -72,5 +94,9 @@ class UsersControllerTest < ActionController::TestCase
                                         name:                  SecureRandom.hex,
                                         password:              "p@ssw0rd!",
                                         password_confirmation: "p@ssw0rd!" } }
+    end
+
+    def delete_destroy(user)
+      delete :destroy, params: { id: user }
     end
 end

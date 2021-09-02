@@ -2,10 +2,7 @@
 
 # Users Controller
 class UsersController < ApplicationController
-  skip_before_action  :set_current_user,
-                      :set_current_accounts,
-                      :set_accounts_with_categories,
-                      only: %i[new create]
+  skip_before_action :set_current_user, :set_current_accounts, :set_accounts_with_categories, only: %i[new create]
 
   # GET /users/new
   def new
@@ -38,6 +35,7 @@ class UsersController < ApplicationController
 
   # DELETE /users/:id
   def destroy
+    user
     if delete_all_data && @current_user.destroy
       session[:user_id] = nil
       redirect_to login_url, notice: t(".successfully_destroyed")
@@ -105,6 +103,6 @@ class UsersController < ApplicationController
       Category.where(account_id: @targeted_accounts).delete_all
       PendingUser.where(account_id: @targeted_accounts).delete_all
       Relation.where(account_id: @targeted_accounts).delete_all
-      @targeted_accounts.delete_all
+      Account.where(id: @targeted_accounts).delete_all
     end
 end
