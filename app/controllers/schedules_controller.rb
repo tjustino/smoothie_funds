@@ -2,6 +2,7 @@
 
 # Schedules Controller
 class SchedulesController < ApplicationController
+  include DashboardData
   before_action :set_current_account
 
   # GET /accounts/:account_id/schedules
@@ -98,11 +99,17 @@ class SchedulesController < ApplicationController
     begin
       if current_controller == "schedules"
         load_limit
-        redirect_to account_schedules_url(
-          @current_account, limit: (params[:index].to_f / @limit).ceil
-        ), notice: t(".successfully_inserted")
+        redirect_to account_schedules_url(@current_account, limit: (params[:index].to_f / @limit).ceil),
+                    notice: t(".successfully_inserted")
       else
-        redirect_to dashboard_url, notice: t(".successfully_inserted")
+        respond_to do |format|
+          format.html { redirect_to dashboard_url, notice: t(".successfully_inserted") }
+          format.js do
+            load_transactions
+            load_current_transactions
+            load_schedules
+          end
+        end
       end
     rescue StandardError
       redirect_to dashboard_url, notice: t(".successfully_inserted")

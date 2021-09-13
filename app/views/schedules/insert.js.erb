@@ -1,0 +1,5 @@
+<% upcoming_terms = escape_javascript(render partial: "dashboard/upcoming_terms") %>
+<% transactions_summary = escape_javascript(render partial: "dashboard/transactions_summary") %>
+
+document.getElementById("upcoming-terms").innerHTML = "<%= upcoming_terms %>"
+document.getElementById("transactions-summary").innerHTML = "<%= transactions_summary %>"

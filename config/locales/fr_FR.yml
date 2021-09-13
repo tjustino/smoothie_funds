@@ -168,13 +168,15 @@ fr_FR:
       reject:               "Refuser"
       accept:               "Accepter"
       transaction_summary:  "Synthèse des transactions"
-      current_balance:      "Balance actuelle :"
-      future_balance:       "Balance à terme :"
       upcoming_terms:       "Échéances des 30 prochains jours"
-      insert_schedule:      "Insérer la prochaine échéance dans les transactions"
+    transactions_summary:
       balance_date:         "%{balance} au %{date}"
-      no_terms:             "Aucune échéance"
+      future_balance:       "Balance à terme :"
+      current_balance:      "Balance actuelle :"
       no_transactions:      "Aucune transaction"
+    upcoming_terms:
+      insert_schedule:      "Insérer la prochaine échéance dans les transactions"
+      no_terms:             "Aucune échéance"
 
   layouts:
     # views
