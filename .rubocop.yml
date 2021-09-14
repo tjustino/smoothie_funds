@@ -17,6 +17,9 @@ Layout/HashAlignment:
 Layout/IndentationConsistency:
   EnforcedStyle: indented_internal_methods
 
+Style/Lambda:
+  EnforcedStyle: literal
+
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
