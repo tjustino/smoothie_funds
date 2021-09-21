@@ -10,7 +10,6 @@ ruby    "3.0.2"
 
 gem "bcrypt"                    # Use ActiveModel has_secure_password
 gem "bootsnap", require: false  # Reduces boot times through caching
-gem "bootstrap"                 # HTML, CSS, and JavaScript framework
 gem "font-awesome-sass"         # The iconic SVG, font, and CSS toolkit
 gem "pg"                        # Use postgresql as the db for Active Record
 gem "puma"                      # App web server
