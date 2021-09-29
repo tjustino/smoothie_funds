@@ -1,7 +1,7 @@
 //= require rails-ujs
 //= require bootstrap.bundle
-//= require wNumb.min
-//= require chart.min
+//= require wNumb
+//= require chart
 //= require_tree .
 
 function once_ready(callback) {
