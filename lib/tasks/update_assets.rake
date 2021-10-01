@@ -3,13 +3,15 @@
 require "fileutils"
 require "json"
 require "open-uri"
+require "pathname"
+require "rubygems/package"
 require "stringio"
-require "zip"
+require "zlib"
 
 def get_last_version_of(opt)
   info_uri = URI.parse("https://api.github.com/repos/#{opt[:github_user]}/#{opt[:github_repo]}/releases/latest")
-  last_version_uri = JSON.parse(info_uri.open.read)["zipball_url"]
-  zip_file = StringIO.new(URI.parse(last_version_uri).open.read)
+  last_version_uri = JSON.parse(info_uri.open.read)["tarball_url"]
+  tgz_file = URI.parse(last_version_uri).open
 
   if opt[:scss_folder]
     local_scss_folder = Rails.root.join("vendor", "assets", "stylesheets", opt[:github_repo])
@@ -17,24 +19,21 @@ def get_last_version_of(opt)
     Dir.mkdir(local_scss_folder)
   end
 
-  zip_stream = Zip::InputStream.new(zip_file)
-  while (entry = zip_stream.get_next_entry)
-    current_path = Pathname.new(entry.name).each_filename.to_a.drop(1)
+  tar_extract = Gem::Package::TarReader.new(Zlib::GzipReader.new(tgz_file))
+  tar_extract.rewind # The extract has to be rewinded after every iteration
+  tar_extract.each do |entry|
+    current_path = Pathname.new(entry.full_name).each_filename.to_a.drop(1)
     # deal with js file
-    if opt[:js_file] && entry.name.end_with?(opt[:js_file])
+    if opt[:js_file] && current_path.last.eql?(opt[:js_file])
       local_js_file = Rails.root.join("vendor", "assets", "javascripts", opt[:js_file])
-      FileUtils.remove_file(local_js_file) if File.exist?(local_js_file)
-      entry.extract(local_js_file)
+      File.write(local_js_file, entry.read.encode("UTF-8", replace: "?"))
     # deal with scss folder
     elsif opt[:scss_folder] && current_path.first == opt[:scss_folder]
       scss_path = Rails.root.join("vendor", "assets", "stylesheets", opt[:github_repo], current_path.drop(1).join("/"))
-      if entry.name_is_directory?
-        FileUtils.mkdir_p(scss_path)
-      else
-        entry.extract(scss_path)
-      end
+      entry.directory? ? FileUtils.mkdir_p(scss_path) : File.write(scss_path, entry.read)
     end
   end
+  tar_extract.close
 end
 
 namespace :update_assets do
@@ -57,10 +56,9 @@ namespace :update_assets do
   task chartjs: :environment do
     # get_last_version_of(github_user: "chartjs", github_repo: "Chart.js", js_file: "chart.js")
     # KO → need the zlib gem and deal with browser_download_url
-    local_js_file = Rails.root.join("vendor", "assets", "javascripts", "chart.js")
-    File.open(local_js_file, "w") do |file|
-      file.write URI.parse("https://cdn.jsdelivr.net/npm/chart.js@latest/dist/chart.js").open.read
-    end
+    opt = { js_file: "chart.js" }
+    local_js_file = Rails.root.join("vendor", "assets", "javascripts", opt[:js_file])
+    File.write(local_js_file, URI.parse("https://cdn.jsdelivr.net/npm/chart.js@latest/dist/chart.js").open.read)
   end
 
   desc "Update wNumb file"
