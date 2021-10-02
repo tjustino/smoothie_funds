@@ -10,7 +10,13 @@ require "zlib"
 
 def get_last_version_of(opt)
   info_uri = URI.parse("https://api.github.com/repos/#{opt[:github_user]}/#{opt[:github_repo]}/releases/latest")
-  last_version_uri = JSON.parse(info_uri.open.read)["tarball_url"]
+
+  last_version_uri = if opt.include?(:download_url)
+                       JSON.parse(info_uri.open.read)["assets"].first[opt[:download_url]]
+                     else
+                       JSON.parse(info_uri.open.read)["tarball_url"]
+                     end
+
   tgz_file = URI.parse(last_version_uri).open
 
   if opt[:scss_folder]
@@ -54,11 +60,10 @@ namespace :update_assets do
 
   desc "Update Chart.js file"
   task chartjs: :environment do
-    # get_last_version_of(github_user: "chartjs", github_repo: "Chart.js", js_file: "chart.js")
-    # KO → need the zlib gem and deal with browser_download_url
-    opt = { js_file: "chart.js" }
-    local_js_file = Rails.root.join("vendor", "assets", "javascripts", opt[:js_file])
-    File.write(local_js_file, URI.parse("https://cdn.jsdelivr.net/npm/chart.js@latest/dist/chart.js").open.read)
+    get_last_version_of(github_user:  "chartjs",
+                        github_repo:  "Chart.js",
+                        download_url: "browser_download_url",
+                        js_file:      "chart.js")
   end
 
   desc "Update wNumb file"
