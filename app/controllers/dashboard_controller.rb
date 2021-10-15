@@ -12,7 +12,7 @@ class DashboardController < ApplicationController
     load_pendings
   end
 
-  private
+  private ##############################################################################################################
 
     def load_pendings
       @pendings = PendingUser.where(email: @current_user.email)
