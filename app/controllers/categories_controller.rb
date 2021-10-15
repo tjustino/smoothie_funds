@@ -8,17 +8,14 @@ class CategoriesController < ApplicationController
   def index
     load_limit
 
-    if params[:offset]
-      categories(params[:offset].to_i.abs, @limit)
-    else
-      categories(nil, @limit)
-      load_other_accounts
-      @all_user_categories = Category.where(account: @current_accounts)
-    end
-
     respond_to do |format|
-      format.html
-      format.js.erb
+      format.html do
+        @nb_categories = current_categories.count
+        categories(limit: @limit)
+        load_other_accounts
+        @all_user_categories = Category.where(account: @current_accounts)
+      end
+      format.js { categories(offset: params[:offset].to_i.abs, limit: @limit) }
       format.csv do
         attributes_to_extract = %w[id account_id name hidden]
         send_data current_categories.to_csv(attributes_to_extract),
@@ -79,13 +76,10 @@ class CategoriesController < ApplicationController
                 notice: t(".successfully_imported")
   end
 
-  private ######################################################################
+  private ##############################################################################################################
 
-    def categories(offset = nil, limit = nil)
-      @nb_categories = current_categories.count
-      @categories ||= current_categories.offset(offset)
-                                        .limit(limit)
-                                        .order_by_name
+    def categories(options = {})
+      @categories ||= current_categories.offset(options[:offset]).limit(options[:limit]).order_by_name
     end
 
     def load_other_accounts
@@ -97,8 +91,7 @@ class CategoriesController < ApplicationController
     end
 
     def other_categories
-      @other_categories ||=
-        @current_accounts.find(params[:account][:categories]).categories
+      @other_categories ||= @current_accounts.find(params[:account][:categories]).categories
     end
 
     def build_category

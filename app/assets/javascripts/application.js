@@ -15,6 +15,31 @@ function once_ready(callback) {
   });
 }
 
+function getId(element) {
+  return document.getElementById(element);
+}
+
+function countRowsTable(table) {
+  if (getId(table) !== null ) {
+    return getId(table).rows.length;
+  }
+}
+
+function addToTable(elements) {
+  if (getId("listing") !== null && getId("offset") !== null && getId("total") !== null && getId("more-items") !== null) {
+    getId("listing").insertAdjacentHTML("beforeend", elements);
+
+    var tableLenght = countRowsTable("listing");
+    getId("offset").value = tableLenght;
+
+    if (tableLenght >= getId("total").textContent) {
+      getId("more-items").remove();
+    }
+  } else {
+    console.log("😵");
+  }
+}
+
 function hexToRGB(hex, alpha) {
   var r = parseInt(hex.slice(1, 3), 16);
   var g = parseInt(hex.slice(3, 5), 16);

@@ -1,6 +1,4 @@
-<% trs = escape_javascript(render partial: "category",
-                                  locals:  { categories: @categories,
-                                             name:       t(".name"),
-                                             use:        t(".use") }) %>
+<% rows = escape_javascript(render partial: "category",
+                                   locals: { categories: @categories, name: t(".name"), use: t(".use") }) %>
 
-document.getElementById('listing').insertAdjacentHTML('beforeend','<%= trs %>');
+addToTable("<%= rows %>");

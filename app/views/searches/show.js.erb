@@ -1,10 +1,10 @@
-<% trs = escape_javascript(render partial: "transaction",
-                                  locals:  { transactions: @transactions,
-                                             account:      t(".account"),
-                                             date:         t(".date"),
-                                             category:     t(".category"),
-                                             debit:        t(".debit"),
-                                             credit:       t(".credit"),
-                                             comment:      t(".comment") }) %>
+<% rows = escape_javascript(render partial: "transaction",
+                                   locals:  { transactions: @transactions,
+                                              account:      t(".account"),
+                                              date:         t(".date"),
+                                              category:     t(".category"),
+                                              debit:        t(".debit"),
+                                              credit:       t(".credit"),
+                                              comment:      t(".comment") }) %>
 
-document.getElementById('listing').insertAdjacentHTML('beforeend','<%= trs %>');
+addToTable("<%= rows %>");

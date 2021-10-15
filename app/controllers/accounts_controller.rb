@@ -6,16 +6,13 @@ class AccountsController < ApplicationController
   def index
     load_limit
 
-    if params[:offset]
-      accounts(params[:offset].to_i.abs, @limit)
-    else
-      accounts(nil, @limit)
-      load_pendings
-    end
-
     respond_to do |format|
-      format.html
-      format.js.erb
+      format.html do
+        @nb_accounts = current_accounts.count
+        accounts(limit: @limit)
+        load_pendings
+      end
+      format.js { accounts(offset: params[:offset].to_i.abs, limit: @limit) }
       format.csv do
         attributes_to_extract = %w[id name initial_balance hidden]
         send_data current_accounts.to_csv(attributes_to_extract),
@@ -75,8 +72,7 @@ class AccountsController < ApplicationController
     account
     if @account.pending_user.destroy
       # sending email
-      redirect_to accounts_url,
-                  notice: t(".successfully_unpend", account: @account.name)
+      redirect_to accounts_url, notice: t(".successfully_unpend", account: @account.name)
     else
       flash[:warning] = t(".cant_unpend", account: @account.name)
       redirect_to accounts_url
@@ -93,11 +89,10 @@ class AccountsController < ApplicationController
     share_or_not false, ".successfully_unsharing", ".cant_unsharing"
   end
 
-  private ######################################################################
+  private ##############################################################################################################
 
-    def accounts(offset = nil, limit = nil)
-      @nb_accounts = current_accounts.count
-      @accounts ||= current_accounts.offset(offset).limit(limit).order_by_name
+    def accounts(options = {})
+      @accounts ||= current_accounts.offset(options[:offset]).limit(options[:limit]).order_by_name
     end
 
     def account
@@ -144,8 +139,7 @@ class AccountsController < ApplicationController
     def share_or_not(sharing, notice, warning)
       @account = Account.find_by(id: params[:id])
       if @account.present?
-        pending = PendingUser.where(email: @current_user.email)
-                             .where(account: @account)
+        pending = PendingUser.where(email: @current_user.email, account: @account)
         if pending.any?
           pending.destroy_all
           @account.users << @current_user if sharing

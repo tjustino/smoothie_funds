@@ -4,16 +4,17 @@
 class SearchesController < ApplicationController
   # GET /searches/:id
   def show
-    load_limit
     search
+    load_limit
 
-    if params[:offset]
-      load_transactions(params[:offset].to_i.abs, @limit)
-    else
-      load_transactions
-      @nb_transactions  = @transactions.count
-      @sum_transactions = @transactions.sum(:amount)
-      @transactions     = @transactions.limit(@limit)
+    respond_to do |format|
+      format.html do
+        load_transactions
+        @nb_transactions  = @transactions.count
+        @sum_transactions = @transactions.sum(:amount)
+        @transactions     = @transactions.limit(@limit)
+      end
+      format.js { load_transactions(offset: params[:offset].to_i.abs, limit: @limit) }
     end
   end
 
@@ -41,7 +42,7 @@ class SearchesController < ApplicationController
     end
   end
 
-  private ######################################################################
+  private ##############################################################################################################
 
     def searches
       @searches ||= current_searches.order(id: :desc)
@@ -77,23 +78,17 @@ class SearchesController < ApplicationController
       @current_user.searches
     end
 
-    def load_transactions(offset = nil, limit = nil)
+    def load_transactions(options = {})
       @transactions = Transaction.all
                                  .active
-                                 .search_accounts(
-                                   sanitize_accounts(@search.accounts)
-                                 )
+                                 .search_accounts(sanitize_accounts(@search.accounts))
                                  .search_amount(@search.min, @search.max)
                                  .search_date(@search.before, @search.after)
-                                 .search_categories(
-                                   sanitize_categories(@search.categories)
-                                 )
-                                 .search_comment(
-                                   @search.operator, @search.comment
-                                 )
+                                 .search_categories(sanitize_categories(@search.categories))
+                                 .search_comment(@search.operator, @search.comment)
                                  .search_checked(@search.checked)
-                                 .offset(offset)
-                                 .limit(limit)
+                                 .offset(options[:offset])
+                                 .limit(options[:limit])
                                  .order_by_date_and_id_desc
     end
 

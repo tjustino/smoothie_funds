@@ -61,13 +61,9 @@
                                              share:    t(".share") }
 
 / More accounts
-.row.mb-3
-  .d-flex.justify-content-center
-    #loading.spinner-border role="status" style="display:none;"
-
-    - if @nb_accounts > @limit
-      = button_to t(".more_accounts"),
-                  accounts_path,
-                  { method: :get,
-                    class:  "btn btn-primary",
-                    id:     "more_items" }
+- if @nb_accounts > @limit
+  #more-items.row.mb-3
+    .d-flex.justify-content-center
+      = form_tag(accounts_path, id: "more_items_form", method: :get, remote: true) do
+        = hidden_field_tag "offset", @limit, autocomplete: "off"
+        = submit_tag t(".more_accounts"), class: "btn btn-primary"

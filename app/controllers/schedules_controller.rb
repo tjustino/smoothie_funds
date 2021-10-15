@@ -9,17 +9,13 @@ class SchedulesController < ApplicationController
   def index
     load_limit
 
-    if params[:offset]
-      schedules(params[:offset].to_i.abs, @limit)
-    else
-      @limit = params[:limit].to_i * @limit if params[:limit].present?
-      schedules(nil, @limit)
-      @all_user_schedules = Schedule.where(account: @current_accounts)
-    end
-
     respond_to do |format|
-      format.html
-      format.js.erb
+      format.html do
+        @nb_schedules = current_schedules.count
+        schedules(limit: @limit)
+        @all_user_schedules = Schedule.where(account: @current_accounts)
+      end
+      format.js { schedules(offset: params[:offset].to_i.abs, limit: @limit) }
       format.csv do
         attributes_to_extract = %w[id account_id next_time frequency period]
         send_data current_schedules.to_csv(attributes_to_extract),
@@ -116,13 +112,10 @@ class SchedulesController < ApplicationController
     end
   end
 
-  private ######################################################################
+  private ##############################################################################################################
 
-    def schedules(offset = nil, limit = nil)
-      @nb_schedules = current_schedules.count
-      @schedules ||= current_schedules.offset(offset)
-                                      .limit(limit)
-                                      .order_by_next_time_and_id
+    def schedules(options = {})
+      @schedules ||= current_schedules.offset(options[:offset]).limit(options[:limit]).order_by_next_time_and_id
     end
 
     def schedule

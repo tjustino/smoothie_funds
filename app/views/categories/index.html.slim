@@ -47,13 +47,9 @@
                                                 use:        t(".use")    }
 
 / More categories
-.row.mb-3
-  .d-flex.justify-content-center
-    #loading.spinner-border role="status" style="display:none;"
-
-    - if @nb_categories > @limit
-      = button_to t(".more_categories"),
-                  account_categories_path(@current_account),
-                  { method: :get,
-                    class:  "btn btn-primary",
-                    id:     "more_items" }
+- if @nb_categories > @limit
+  #more-items.row.mb-3
+    .d-flex.justify-content-center
+      = form_tag(account_categories_path(@current_account), id: "more_items_form", method: :get, remote: true) do
+        = hidden_field_tag "offset", @limit, autocomplete: "off"
+        = submit_tag t(".more_categories"), class: "btn btn-primary"

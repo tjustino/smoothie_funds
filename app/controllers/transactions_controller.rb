@@ -8,19 +8,16 @@ class TransactionsController < ApplicationController
   def index
     load_limit
 
-    if params[:offset]
-      transactions(params[:offset].to_i.abs, @limit)
-    else
-      transactions(0, @limit)
-      @all_user_transactions = Transaction.where(account: @current_accounts)
-    end
-
     respond_to do |format|
-      format.html
-      format.js.erb
+      format.html do
+        @all_user_transactions = Transaction.where(account: @current_accounts)
+        @nb_transactions = current_transactions.size
+        @sum_checked     = @current_account.initial_balance + current_transactions.checked.sum(:amount)
+        transactions(limit: @limit)
+      end
+      format.js { transactions(offset: params[:offset].to_i.abs, limit: @limit) }
       format.csv do
-        attributes_to_extract = %w[id account_id category_id
-                                   date amount checked comment]
+        attributes_to_extract = %w[id account_id category_id date amount checked comment]
         send_data current_transactions.to_csv(attributes_to_extract),
                   filename: "transactions_#{timestamp_for_export}.csv",
                   type:     "text/csv"
@@ -115,20 +112,13 @@ class TransactionsController < ApplicationController
     end
   end
 
-  private ######################################################################
+  private ##############################################################################################################
 
-    def transactions(offset = 0, limit = nil)
-      my_transactions   = current_transactions.order_by_date_and_id_desc
-      @nb_transactions  = my_transactions.count
-
-      if offset.zero?
-        @initial_balance = @current_account.initial_balance
-        @sum_checked     = @initial_balance + my_transactions.checked
-                                                             .sum(:amount)
-      end
-
-      @transactions = my_transactions.with_balances_for(@current_account)
-                                     .to_a[offset, limit]
+    def transactions(options = {})
+      @transactions = current_transactions.with_balances_for(@current_account)
+                                          .offset(options[:offset])
+                                          .limit(options[:limit])
+                                          .order_by_date_and_id_desc
     end
 
     def transaction
@@ -143,11 +133,7 @@ class TransactionsController < ApplicationController
     def transaction_params
       transaction_params = params[:transaction]
       if transaction_params
-        transaction_params.permit(:category_id,
-                                  :date,
-                                  :amount,
-                                  :checked,
-                                  :comment)
+        transaction_params.permit(:category_id, :date, :amount, :checked, :comment)
       else
         {}
       end
@@ -156,12 +142,7 @@ class TransactionsController < ApplicationController
     def save_transaction(notice)
       return unless @transaction.save
 
-      @transaction.amount = if params[:sign] == "credit"
-                              @transaction.amount.abs
-                            else
-                              -1 * @transaction.amount.abs
-                            end
-
+      @transaction.amount = params[:sign] == "credit" ? @transaction.amount.abs : (-1 * @transaction.amount.abs)
       userstamp(@transaction)
 
       if flash[:search_id].nil?

@@ -44,13 +44,9 @@
                                               comment:   t(".comment") }
 
 / More schedules
-.row.mb-3
-  .d-flex.justify-content-center
-    #loading.spinner-border role="status" style="display:none;"
-
-    - if @nb_schedules > @limit
-      = button_to t(".more_schedules"),
-                  account_schedules_path(@current_account),
-                  { method: :get,
-                    class:  "btn btn-primary",
-                    id:     "more_items" }
+- if @nb_schedules > @limit
+  #more-items.row.mb-3
+    .d-flex.justify-content-center
+      = form_tag(account_schedules_path(@current_account), id: "more_items_form", method: :get, remote: true) do
+        = hidden_field_tag "offset", @limit, autocomplete: "off"
+        = submit_tag t(".more_schedules"), class: "btn btn-primary"

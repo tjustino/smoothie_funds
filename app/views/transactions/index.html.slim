@@ -50,13 +50,9 @@
                                                  comment:      t(".comment") }
 
 / More transactions
-.row.mb-3
-  .d-flex.justify-content-center
-    #loading.spinner-border role="status" style="display:none;"
-
-    - if @nb_transactions > @limit
-      = button_to t(".more_transactions"),
-                  account_transactions_path(@current_account),
-                  { method: :get,
-                    class:  "btn btn-primary",
-                    id:     "more_items" }
+- if @nb_transactions > @limit
+  #more-items.row.mb-3
+    .d-flex.justify-content-center
+      = form_tag(account_transactions_path(@current_account), id: "more_items_form", method: :get, remote: true) do
+        = hidden_field_tag "offset", @limit, autocomplete: "off"
+        = submit_tag t(".more_transactions"), class: "btn btn-primary"

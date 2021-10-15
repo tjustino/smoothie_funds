@@ -26,10 +26,10 @@ class ApplicationController < ActionController::Base
                 :set_accounts_with_categories,
                 :authorize
 
-  private ######################################################################
+  private ##############################################################################################################
 
     def load_limit
-      @limit = 20
+      @limit = params[:limit].nil? ? 20 : params[:limit].to_i.abs
     end
 
     def timestamp_for_export
