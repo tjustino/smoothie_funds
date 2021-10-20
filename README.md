@@ -1,28 +1,50 @@
-Smoothie Funds
-===============
+# Smoothie Funds
 Smoothie Funds allows you to manage your money with ease.
-You can get more complicated, but it's useless!
 
-How To
--------
+## Usual commands
 Start PostgreSQL server (on Archlinux):
-> sudo systemctl start postgresql
+```sh
+sudo systemctl start postgresql
+```
 
 Load fixture in dev environnement:
-> bin/rails db:drop ; bin/rails db:create ; bin/rails db:migrate ; bin/rails db:fixtures:load FIXTURES=users,accounts,categories,transactions,schedules,pending_users
+```sh
+bin/rails db:drop ; bin/rails db:create ; bin/rails db:migrate ; bin/rails db:fixtures:load FIXTURES=users,accounts,categories,transactions,schedules,pending_users
+```
 
 Restore data from production to dev environnement:
-> dropdb smoothiefunds_development
-> bundle exec bin/rails db:create RAILS_ENV=development
-> bundle exec bin/rails db:migrate RAILS_ENV=development
-> pg_restore --no-acl --no-owner --data-only --dbname=smoothiefunds_development db.dump
+```sh
+dropdb smoothiefunds_development
+bundle exec bin/rails db:create RAILS_ENV=development
+bundle exec bin/rails db:migrate RAILS_ENV=development
+pg_restore --no-acl --no-owner --data-only --dbname=smoothiefunds_development db.dump
+```
 
 Miscellaneous:
-> bundle exec annotate
+```sh
+bundle exec annotate
+```
 
----
-Remember
----------
+Audit query
+```sql
+SELECT
+  users.email,
+  TO_CHAR(users.created_at, 'DD/MM/YYYY') AS user_creation,
+  accounts.name AS account_name,
+  accounts.hidden,
+  COUNT(transactions.id) AS nb_transactions,
+  TO_CHAR(MAX(transactions.updated_at), 'DD/MM/YYYY') AS last_transaction
+FROM users
+  LEFT JOIN relations ON users.id = relations.user_id
+  LEFT JOIN accounts ON relations.account_id = accounts.id
+  LEFT JOIN transactions ON relations.account_id = transactions.account_id
+WHERE
+  transactions.schedule_id IS NULL
+GROUP BY users.email, users.created_at, accounts.name, accounts.hidden
+ORDER BY users.email, accounts.name;
+```
+
+## Remember
 What to test:
 > **Controllers Tests:**
 > - was the web request successful?
@@ -55,26 +77,6 @@ Words of wisdom:
 > only the */products/1* part, and that’s all you need when doing links or
 > pointing forms, like *link_to "My lovely product", product_path(product)*.
 
-Testing like the TSA
-https://signalvnoise.com/posts/3159-testing-like-the-tsa
+[Testing like the TSA](https://signalvnoise.com/posts/3159-testing-like-the-tsa) :
 > Don’t aim for 100% coverage.
 > Code-to-test ratios above 1:2 is a smell, above 1:3 is a stink.
-
-
-Audit query
-
-    SELECT
-      users.email,
-      TO_CHAR(users.created_at, 'DD/MM/YYYY') AS user_creation,
-      accounts.name AS account_name,
-      accounts.hidden,
-      COUNT(transactions.id) AS nb_transactions,
-      TO_CHAR(MAX(transactions.updated_at), 'DD/MM/YYYY') AS last_transaction
-    FROM users
-      LEFT JOIN relations ON users.id = relations.user_id
-      LEFT JOIN accounts ON relations.account_id = accounts.id
-      LEFT JOIN transactions ON relations.account_id = transactions.account_id
-    WHERE
-      transactions.schedule_id IS NULL
-    GROUP BY users.email, users.created_at, accounts.name, accounts.hidden
-    ORDER BY users.email, accounts.name;
