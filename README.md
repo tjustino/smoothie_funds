@@ -25,7 +25,7 @@ Miscellaneous:
 bundle exec annotate
 ```
 
-Audit query
+Audit query:
 ```sql
 SELECT
   users.email,
