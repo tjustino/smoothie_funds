@@ -1,3 +1,7 @@
+= breadcrumb t(".schedules"),
+             link_to(@current_account.name, account_schedules_path(@current_account)),
+             t(".edit_schedule")
+
 .row.justify-content-center
   .col-md-auto
     .card.shadow.mb-3

@@ -71,6 +71,7 @@ fr_FR:
         %{categories_icon} Catégories</button>, cliquez dessus pour continuer !
       close:            "Ok j'ai compris !"
     edit:
+      accounts:         "Comptes"
       edit_account:     "Éditer le compte"
     index:
       listing_accounts: "Mes comptes "
@@ -86,6 +87,7 @@ fr_FR:
       more_accounts:    "↓ Afficher plus de comptes ↓"
       personal_account: "Compte personnel"
     new:
+      accounts:         "Comptes"
       create_account:   "Créer un compte"
 
   categories:
@@ -139,6 +141,7 @@ fr_FR:
         <button class="btn btn-light" disabled>%{schedules_icon} Échéanciers</button>.
       close:            "Ok j'ai compris !"
     edit:
+      categories:       "Catégories"
       edit_category:    "Éditer la catégorie"
     index:
       listing_categories: "Catégories du %{current_account} "
@@ -150,7 +153,8 @@ fr_FR:
       use:              "Utilisation"
       more_categories:  "↓ Afficher plus de catégories ↓"
     new:
-      create_category:  "Créer la catégorie"
+      categories:       "Catégories"
+      create_category:  "Créer une catégorie"
 
   dashboard:
     welcome:
@@ -311,6 +315,7 @@ fr_FR:
         (dernière ligne du relevé bancaire). C'est une bonne pratique !
       close:            "Ok j'ai compris !"
     edit:
+      transactions:       "Transactions"
       edit_transaction: "Éditer la transaction"
     index:
       listing_transactions: "Liste des transactions du %{current_account} "
@@ -326,6 +331,7 @@ fr_FR:
       comment:            "Commentaire"
       more_transactions:  "↓ Afficher plus de transactions ↓"
     new:
+      transactions:       "Transactions"
       create_transaction: "Créer la transaction"
 
   schedules:
@@ -388,6 +394,7 @@ fr_FR:
         récurrentes, l'écran d'accueil affiche les échéances des 30 prochains jours.
       close:            "Ok j'ai compris !"
     edit:
+      schedules:          "Échéanciers"
       edit_schedule:      "Éditer l'échéancier"
     index:
       listing_schedules:  "Liste des échéanciers du %{current_account} "
@@ -401,6 +408,7 @@ fr_FR:
       comment:            "Commentaire"
       more_schedules:     "↓ Afficher plus d'échéanciers ↓"
     new:
+      schedules:          "Échéanciers"
       create_schedule:    "Créer l'échéancier"
 
   users:

@@ -32,4 +32,16 @@ module ApplicationHelper
   def inverse_of_outline_or_not
     params[:controller] == "users" ? "btn" : "btn-outline"
   end
+
+  def breadcrumb(*items)
+    content_tag :nav, aria_label: "breadcrumb" do
+      content_tag :ol, class: "breadcrumb" do
+        concat(content_tag(:li, link_to(icon("fas fa-home"), dashboard_path), class: "breadcrumb-item"))
+        items.each_with_index do |item, index|
+          bs_class = index + 1 == items.size ? "breadcrumb-item active" : "breadcrumb-item"
+          concat(content_tag(:li, item, class: bs_class))
+        end
+      end
+    end
+  end
 end
