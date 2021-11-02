@@ -84,9 +84,7 @@ class SchedulesController < ApplicationController
     userstamp(transaction)
     transaction.created_by = @current_user.id
 
-    @schedule.next_time = @schedule.next_time.advance(
-      @schedule.period.to_sym => @schedule.frequency
-    )
+    @schedule.next_time = @schedule.next_time.advance(@schedule.period.to_sym => @schedule.frequency)
     userstamp(@schedule)
 
     transaction.save
@@ -94,9 +92,7 @@ class SchedulesController < ApplicationController
 
     begin
       if current_controller == "schedules"
-        load_limit
-        redirect_to account_schedules_url(@current_account, limit: (params[:index].to_f / @limit).ceil),
-                    notice: t(".successfully_inserted")
+        redirect_to account_schedules_url(@current_account), notice: t(".successfully_inserted")
       else
         respond_to do |format|
           format.html { redirect_to dashboard_url, notice: t(".successfully_inserted") }
@@ -134,10 +130,7 @@ class SchedulesController < ApplicationController
                                :next_time,
                                :frequency,
                                :period,
-                               operation_attributes: %i[amount
-                                                        category_id
-                                                        comment
-                                                        checked])
+                               operation_attributes: %i[amount category_id comment checked])
       else
         {}
       end
