@@ -20,8 +20,8 @@ gem "sprockets"                 # compile and serve web assets
 gem "terser"                    # Ruby wrapper for Terser JavaScript compressor
 
 group :development, :test do
-  gem "byebug"                  # Call 'byebug' anywhere in the code to stop it
   gem "capybara"                # Integration testing tool
+  gem "debug"                   # Start debugger with binding.break
   gem "selenium-webdriver"      # Tool for writing automated tests of websites
   gem "webdrivers"              # Easy installation and use of chromedriver
 end
@@ -29,6 +29,7 @@ end
 group :development do
   gem "annotate"                # Annotates ActiveRecord Model, route & fixture
   gem "listen"                  # Listen to file modif and notifies you
+  gem "rack-mini-profiler"      # Add speed badges
   gem "rubocop"                 # Automatic Ruby code style checking tool
   gem "rubocop-md"              # Run Rubocop against your Markdown files
   gem "rubocop-minitest"        # Extension focused on Minitest best practices
