@@ -14,8 +14,8 @@
  *= require_self
  */
 
+// Bootstrap
 $font-size-base: 0.9rem;
-
 $primary:   #911e93;
 $secondary: #AB1A67;
 $light:     #F1F0EE;
@@ -24,11 +24,15 @@ $info:      #4989C9;
 $success:   #7EC9A8;
 $warning:   #e97a1f;
 $danger:    #f44336;
-
 @import "bootstrap/bootstrap";
-@import "font-awesome-sprockets";
-@import "font-awesome";
 
+// Font Awesome
+$fa-font-path: "font-awesome";
+@import "font-awesome/fontawesome";
+@import "font-awesome/regular";
+@import "font-awesome/solid";
+
+// Smoothie Funds
 // search colors
 select.form-control[multiple] option:checked {
   background: $primary linear-gradient(0deg, $primary 0%, $primary 100%);
