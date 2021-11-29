@@ -1,0 +1,100 @@
+// Bootstrap
+$font-size-base: 0.9rem;
+$primary:   #911e93;
+$secondary: #AB1A67;
+$light:     #F1F0EE;
+$dark:      #4F5155;
+$info:      #4989C9;
+$success:   #7EC9A8;
+$warning:   #e97a1f;
+$danger:    #f44336;
+@import "bootstrap/scss/bootstrap";
+
+// Font Awesome
+$fa-font-path: "@fortawesome/fontawesome-free/webfonts";
+@import "@fortawesome/fontawesome-free/scss/fontawesome";
+@import "@fortawesome/fontawesome-free/scss/regular";
+@import "@fortawesome/fontawesome-free/scss/solid";
+
+// Smoothie Funds
+// search colors
+select.form-control[multiple] option:checked {
+  background: $primary linear-gradient(0deg, $primary 0%, $primary 100%);
+}
+
+// dashboard
+.list-special .list-group-item:first-child {
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  border-top: 0px;
+}
+
+.list-special .list-group-item:last-child {
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-bottom: 0px;
+}
+
+.list-special .list-group-item {
+  border-right: 0px;
+  border-left: 0px;
+}
+
+// sadely, tables have margin-[right|left]: -15px
+#content-table {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+// magic transformation for tables
+@media (max-width: 768px) {
+  #magic-table td::before { content: attr(data-title); }
+  #magic-table table,
+  #magic-table thead,
+  #magic-table tbody,
+  #magic-table th,
+  #magic-table td,
+  #magic-table tr { display: block; }
+
+  #magic-table thead tr {
+    display:none;
+  }
+
+  #magic-table td::before {
+    position: absolute;
+    left: 5px;
+    width: 35%;
+    padding-right: 15px;
+    height: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+  }
+
+  // hide row if there is no data to display
+  #magic-table td:empty {
+    display: none;
+  }
+
+  #magic-table td {
+    position: relative;
+    border: 0px solid transparent;
+    padding-left: 35% !important;
+    white-space: normal;
+  }
+
+  #magic-table .dotted-top {
+    border-top: 1px dotted gray;
+    margin-right: 0;
+    padding-top: 0.5em;
+  }
+
+  #magic-table #listing > tr > td {
+    text-align: unset !important;
+  }
+}
+
+// never cut off certain spaces
+.nowrap {
+  white-space: nowrap;
+}

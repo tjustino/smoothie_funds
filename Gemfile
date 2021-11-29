@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source  "https://rubygems.org"
-ruby    "3.0.2"
+ruby    "3.0.3"
 
 ## from http://bundler.io/gemfile.html
 # ~> 2.0.3 is identical to >= 2.0.3 and < 2.1
@@ -13,18 +13,20 @@ gem "bootsnap", require: false # Reduces boot times through caching; required in
 gem "pg"                       # Use postgresql as the db for Active Record
 gem "puma"                     # App web server
 gem "rails", "~> 6.1.0"        # Full-stack web framework
-gem "sass-rails"               # Sass adapter for the Rails asset pipeline
 gem "slim"                     # Template language
-gem "sprockets"                # compile and serve web assets
-gem "terser"                   # Ruby wrapper for Terser JavaScript compressor
 
 group :development, :test do
   gem "debug"                  # Start debugger with binding.break
 end
 
 group :development do
+  gem "cssbundling-rails"      # Bundle and process CSS
+  gem "foreman"                # Process manager for applications with multiple components
+  gem "jsbundling-rails"       # JavaScript Bundling for Rails
   gem "listen"                 # Listen to file modif and notifies you
   gem "rack-mini-profiler"     # Add speed badges
+  gem "sprockets"              # compile and serve web assets
+  gem "terser"                 # Ruby wrapper for Terser JavaScript compressor
   gem "web-console"            # Access an IRB console on exception pages
 
   # Rubocop
