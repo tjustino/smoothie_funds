@@ -25,8 +25,6 @@ group :development do
   gem "jsbundling-rails"       # JavaScript Bundling for Rails
   gem "listen"                 # Listen to file modif and notifies you
   gem "rack-mini-profiler"     # Add speed badges
-  gem "sprockets"              # compile and serve web assets
-  gem "terser"                 # Ruby wrapper for Terser JavaScript compressor
   gem "web-console"            # Access an IRB console on exception pages
 
   # Rubocop
