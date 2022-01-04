@@ -90,7 +90,7 @@ class TransactionsControllerTest < ActionController::TestCase
   test "should destroy transaction" do
     assert_difference("Transaction.count", -1) do
       delete_destroy       @some_transaction
-      assert_redirected_to request.env["HTTP_REFERER"]
+      assert_redirected_to account_transactions_path(@some_account)
       assert_equal         I18n.t("transactions.destroy.successfully_destroyed"), flash[:notice]
     end
   end
@@ -106,7 +106,7 @@ class TransactionsControllerTest < ActionController::TestCase
   # TODO: fix
   test "should easycheck transaction" do
     post_easycheck       @some_transaction
-    assert_redirected_to request.env["HTTP_REFERER"]
+    assert_redirected_to account_transactions_path(@some_account)
     assert_equal         I18n.t("transactions.easycheck.successfully_checked"), flash[:notice]
     assert_not_equal     @previous_status, @some_transaction.reload.checked
   end

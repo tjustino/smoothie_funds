@@ -12,8 +12,9 @@ gem "bcrypt"                   # Use ActiveModel has_secure_password
 gem "bootsnap", require: false # Reduces boot times through caching; required in config/boot.rb
 gem "pg"                       # Use postgresql as the db for Active Record
 gem "puma"                     # App web server
-gem "rails", "~> 6.1.0"        # Full-stack web framework
+gem "rails", "~> 7.0.0"        # Full-stack web framework
 gem "slim"                     # Template language
+gem "sprockets-rails"          # The original asset pipeline for Rails
 
 group :development, :test do
   gem "debug"                  # Start debugger with binding.break
