@@ -22,6 +22,6 @@ class Relation < ApplicationRecord
     select(:account_id).where(account_id: accounts).group(:account_id).having("COUNT(user_id) = 1")
   }
 
-  validates :account_id, presence: true, uniqueness: { scope: :user_id }
-  validates :user_id,    presence: true, uniqueness: { scope: :account_id }
+  validates :account_id, uniqueness: { scope: :user_id }
+  validates :user_id,    uniqueness: { scope: :account_id }
 end

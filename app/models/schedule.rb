@@ -23,7 +23,6 @@ class Schedule < ApplicationRecord
 
   scope :order_by_next_time_and_id, -> { order(next_time: :asc, id: :asc) }
 
-  validates :account_id, presence:     true
   validates :next_time,  presence:     true
   validates :frequency,  presence:     true
   validates :period,     presence:     true

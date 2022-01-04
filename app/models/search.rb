@@ -29,7 +29,6 @@ class Search < ApplicationRecord
   enum operator: { comment_or_not: 0, like: 1, not_like: 2 }
   enum checked:  { checked_or_not: 0, yep: 1, nop: 2 }
 
-  validates :user_id,  presence: true
   validates :accounts, presence: true
   validates :min,      numericality: true, allow_nil: true
   validates :max,      numericality: true, allow_nil: true

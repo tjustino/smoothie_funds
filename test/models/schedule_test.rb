@@ -49,7 +49,7 @@ class ScheduleTest < ActiveSupport::TestCase
 
     assert schedule.invalid?
 
-    assert_equal [I18n.t("activerecord.errors.messages.blank")], schedule.errors[:account_id]
+    assert_equal [I18n.t("activerecord.errors.models.schedule.attributes.account.required")], schedule.errors[:account]
     assert_equal [I18n.t("activerecord.errors.messages.blank")], schedule.errors[:next_time]
     assert_equal [I18n.t("activerecord.errors.messages.blank")], schedule.errors[:period]
 

@@ -22,6 +22,5 @@ class Category < ApplicationRecord
   scope :order_by_name, -> { order(name: :asc) }
   scope :active,        -> { where(hidden: false) }
 
-  validates :account_id, presence: true
-  validates :name,       presence: true, uniqueness: { scope: :account_id }
+  validates :name, presence: true, uniqueness: { scope: :account_id }
 end

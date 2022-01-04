@@ -28,8 +28,8 @@ class CategoryTest < ActiveSupport::TestCase
   test "name and account_id must not be empty" do
     category = Category.new
     assert       category.invalid?
+    assert_equal [I18n.t("activerecord.errors.models.category.attributes.account.required")], category.errors[:account]
     assert_equal [I18n.t("activerecord.errors.messages.blank")], category.errors[:name]
-    assert_equal [I18n.t("activerecord.errors.messages.blank")], category.errors[:account_id]
   end
 
   test "name/account_id must be unique" do

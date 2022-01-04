@@ -20,9 +20,9 @@
 
 # Transaction model
 class Transaction < ApplicationRecord
-  belongs_to  :account
-  belongs_to  :category
-  belongs_to  :schedule
+  belongs_to :account
+  belongs_to :category
+  belongs_to :schedule, optional: true
 
   scope :order_by_date_and_id,      -> { order(date: :asc,  id: :asc) }
   scope :order_by_date_and_id_desc, -> { order(date: :desc, id: :desc) }
@@ -31,10 +31,8 @@ class Transaction < ApplicationRecord
 
   before_validation :format_amount
 
-  validates :account_id,  presence: true
-  validates :category_id, presence: true
-  validates :date,        presence: true, format: { with: /(19|20)\d{2}/i }
-  validates :amount,      presence: true, numericality: true
+  validates :date,   presence: true, format: { with: /(19|20)\d{2}/i }
+  validates :amount, presence: true, numericality: true
 
   private ######################################################################
 

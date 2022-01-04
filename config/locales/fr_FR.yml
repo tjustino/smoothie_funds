@@ -565,6 +565,35 @@ fr_FR:
         restrict_dependent_destroy:
           has_one:  "Impossible de supprimer car il existe une %{record}."
           has_many: "Impossible de supprimer car il existe des %{record}."
+      models:
+        category:
+          attributes:
+            account:
+              required: "est obligatoire"
+        pending_user:
+          attributes:
+            account:
+              required: "est obligatoire"
+        relation:
+          attributes:
+            account:
+              required: "est obligatoire"
+            user:
+              required: "est obligatoire"
+        transaction:
+          attributes:
+            account:
+              required: "est obligatoire"
+            category:
+              required: "est obligatoire"
+        schedule:
+          attributes:
+            account:
+              required: "est obligatoire"
+        search:
+          attributes:
+            user:
+              required: "est obligatoire"
 
     models:
       account:      "le compte"

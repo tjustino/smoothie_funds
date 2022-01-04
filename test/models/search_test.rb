@@ -40,7 +40,7 @@ class SearchTest < ActiveSupport::TestCase
   test "user_id and accounts must not be empty" do
     search = Search.new
     assert       search.invalid?
-    assert_equal [I18n.t("activerecord.errors.messages.blank")], search.errors[:user_id]
+    assert_equal [I18n.t("activerecord.errors.models.search.attributes.user.required")], search.errors[:user]
     assert_equal [I18n.t("activerecord.errors.messages.blank")], search.errors[:accounts]
   end
 

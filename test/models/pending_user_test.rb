@@ -31,9 +31,10 @@ class PendingUserTest < ActiveSupport::TestCase
   test "email and account_id must be present" do
     pending_user = PendingUser.new
     assert        pending_user.invalid?
+    assert_equal  [I18n.t("activerecord.errors.models.pending_user.attributes.account.required")],
+                  pending_user.errors[:account]
     assert_equal  [I18n.t("activerecord.errors.messages.blank"), I18n.t("activerecord.errors.messages.invalid")],
                   pending_user.errors[:email]
-    assert_equal  [I18n.t("activerecord.errors.messages.blank")], pending_user.errors[:account_id]
   end
 
   test "email must be valid" do
