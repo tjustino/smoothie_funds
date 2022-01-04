@@ -90,8 +90,7 @@ class TransactionsController < ApplicationController
 
     respond_to do |format|
       if @transaction.save
-        @sum_checked =  @current_account.initial_balance +
-                        current_transactions.checked.sum(:amount)
+        @sum_checked = @current_account.initial_balance + current_transactions.checked.sum(:amount)
         # TODO: if activerecord send an error, redirect_to :back is broken
         format.html do
           case controller_name
