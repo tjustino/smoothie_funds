@@ -24,7 +24,7 @@ class ScheduleTest < ActiveSupport::TestCase
     category = account.categories.first
 
     schedule = Schedule.new(account:              account,
-                            next_time:            Time.zone.now + 5.days,
+                            next_time:            5.days.from_now,
                             frequency:            13,
                             period:               "days",
                             operation_attributes: { account:  account,
@@ -61,7 +61,7 @@ class ScheduleTest < ActiveSupport::TestCase
     account = @accounts.first
 
     schedule = Schedule.new(account:   account,
-                            next_time: Time.zone.now + 5.days,
+                            next_time: 5.days.from_now,
                             frequency: 13,
                             period:    "days")
 
@@ -74,7 +74,7 @@ class ScheduleTest < ActiveSupport::TestCase
     category = account.categories.first
 
     schedule = Schedule.new(account:              account,
-                            next_time:            Time.zone.now + 5.days,
+                            next_time:            5.days.from_now,
                             frequency:            "forty two",
                             period:               "days",
                             operation_attributes: { account:  account,
