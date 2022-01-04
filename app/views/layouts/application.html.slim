@@ -132,4 +132,4 @@ html lang="#{I18n.locale.to_s.gsub('_','-')}"
             strong.me-auto = icon_text("fas fa-bug", "Debug Toaster")
             button.btn-close type="button" data-bs-dismiss="toast" aria-label="Close"
           .toast-body
-            = debug(params)
+            = debug(request.parameters)
