@@ -14,6 +14,9 @@ AllCops:
 Layout/HashAlignment:
   EnforcedColonStyle: table
 
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never
+
 Layout/IndentationConsistency:
   EnforcedStyle: indented_internal_methods
 
