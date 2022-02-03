@@ -14,5 +14,6 @@
   "scripts": {
     "build:css": "sass --style=compressed --no-source-map --load-path=node_modules ./app/assets/stylesheets/application.scss ./app/assets/builds/application.css",
     "build": "esbuild ./app/javascript/application.js --bundle --minify --outdir=./app/assets/builds"
-  }
+  },
+  "version": "0.0.0"
 }
