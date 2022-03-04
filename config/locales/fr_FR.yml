@@ -319,7 +319,7 @@ fr_FR:
       edit_transaction: "Éditer la transaction"
     index:
       listing_transactions: "Liste des transactions du %{current_account} "
-      count:              "Nombre de transations : "
+      count:              "Nombre de transactions : "
       export_transactions: "Exporter mes transactions"
       new_transaction:    "Nouvelle transaction"
       checked:            "Rapproché"
