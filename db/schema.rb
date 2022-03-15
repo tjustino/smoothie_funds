@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_14_103839) do
-
+ActiveRecord::Schema[7.0].define(version: 2021_06_14_103839) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,8 +19,8 @@ ActiveRecord::Schema.define(version: 2021_06_14_103839) do
     t.decimal "initial_balance", precision: 8, scale: 2, null: false
     t.integer "created_by"
     t.integer "updated_by"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.boolean "hidden", default: false
   end
 
@@ -30,8 +29,8 @@ ActiveRecord::Schema.define(version: 2021_06_14_103839) do
     t.string "name", null: false
     t.integer "created_by"
     t.integer "updated_by"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.boolean "hidden", default: false
     t.index ["account_id", "name"], name: "index_categories_on_account_id_and_name", unique: true
     t.index ["account_id"], name: "index_categories_on_account_id"
@@ -40,16 +39,16 @@ ActiveRecord::Schema.define(version: 2021_06_14_103839) do
   create_table "pending_users", id: :serial, force: :cascade do |t|
     t.integer "account_id", null: false
     t.string "email", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["account_id"], name: "index_pending_users_on_account_id", unique: true
   end
 
   create_table "relations", id: false, force: :cascade do |t|
     t.integer "account_id", null: false
     t.integer "user_id", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["account_id", "user_id"], name: "index_relations_on_account_id_and_user_id", unique: true
     t.index ["account_id"], name: "index_relations_on_account_id"
     t.index ["user_id"], name: "index_relations_on_user_id"
@@ -62,8 +61,8 @@ ActiveRecord::Schema.define(version: 2021_06_14_103839) do
     t.string "period", null: false
     t.integer "created_by"
     t.integer "updated_by"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["account_id"], name: "index_schedules_on_account_id"
   end
 
@@ -78,8 +77,8 @@ ActiveRecord::Schema.define(version: 2021_06_14_103839) do
     t.integer "operator"
     t.string "comment"
     t.integer "checked"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["user_id"], name: "index_searches_on_user_id"
   end
 
@@ -92,8 +91,8 @@ ActiveRecord::Schema.define(version: 2021_06_14_103839) do
     t.text "comment"
     t.integer "created_by"
     t.integer "updated_by"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.integer "schedule_id"
     t.index ["account_id"], name: "index_transactions_on_account_id"
     t.index ["category_id"], name: "index_transactions_on_category_id"
@@ -104,8 +103,8 @@ ActiveRecord::Schema.define(version: 2021_06_14_103839) do
     t.string "email", null: false
     t.string "name"
     t.string "password_digest"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
