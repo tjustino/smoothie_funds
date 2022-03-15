@@ -26,6 +26,9 @@ Style/Lambda:
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
+Minitest/AssertPredicate:
+  Enabled: false
+
 Minitest/MultipleAssertions:
   Max: 15
 
