@@ -517,7 +517,7 @@ fr_FR:
     show:
       result:             "Résultat de recherche"
       sum:                "Somme des montants : "
-      count:              "Nombre de transations : "
+      count:              "Nombre de transactions : "
       account:            "Compte"
       date:               "Date"
       category:           "Catégorie"
