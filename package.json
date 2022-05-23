@@ -2,13 +2,13 @@
   "name": "app",
   "private": "true",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.0.0",
+    "@fortawesome/fontawesome-free": "^6.1.0",
     "@popperjs/core": "^2.11.0",
     "@rails/ujs": "^7.0.0",
-    "bootstrap": "5.1.1",
+    "bootstrap": "5.2.0-beta1",
     "chart.js": "^3.7.0",
-    "esbuild": "^0.14.10",
-    "sass": "^1.49.0",
+    "esbuild": "^0.14.0",
+    "sass": "^1.51.0",
     "wnumb": "^1.2.0"
   },
   "scripts": {
