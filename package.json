@@ -6,9 +6,9 @@
     "@popperjs/core": "^2.11.0",
     "@rails/ujs": "^7.0.0",
     "bootstrap": "5.2.0-beta1",
-    "chart.js": "^3.7.0",
+    "chart.js": "^3.8.0",
     "esbuild": "^0.14.0",
-    "sass": "^1.51.0",
+    "sass": "^1.52.0",
     "wnumb": "^1.2.0"
   },
   "scripts": {
