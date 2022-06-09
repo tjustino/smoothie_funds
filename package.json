@@ -8,11 +8,9 @@
     "bootstrap": "5.2.0-beta1",
     "chart.js": "^3.8.0",
     "esbuild": "^0.14.0",
-    "sass": "^1.52.0",
     "wnumb": "^1.2.0"
   },
   "scripts": {
-    "build:css": "sass --style=compressed --no-source-map --load-path=node_modules ./app/assets/stylesheets/application.scss ./app/assets/builds/application.css",
     "build": "esbuild ./app/javascript/application.js --bundle --minify --outdir=./app/assets/builds"
   }
 }

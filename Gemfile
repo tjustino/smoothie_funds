@@ -10,7 +10,7 @@ ruby    "3.1.2"
 
 gem "bcrypt"                   # Use ActiveModel has_secure_password
 gem "bootsnap", require: false # Reduces boot times through caching; required in config/boot.rb
-gem "cssbundling-rails"        # Bundle and process CSS
+gem "dartsass-rails"           # Integrate Dart Sass with the asset pipeline in Rails
 gem "jsbundling-rails"         # JavaScript Bundling for Rails
 gem "pg"                       # Use postgresql as the db for Active Record
 gem "puma"                     # App web server
