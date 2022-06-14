@@ -3,12 +3,12 @@
     "short_name": "SmooFu",
     "icons": [
         {
-            "src": "<%= asset_path('android-chrome-192x192.png') %>",
+            "src": "<%= url('/android-chrome-192x192.png') %>",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "<%= asset_path('android-chrome-512x512.png') %>",
+            "src": "<%= url('/android-chrome-512x512.png') %>",
             "sizes": "512x512",
             "type": "image/png"
         }
