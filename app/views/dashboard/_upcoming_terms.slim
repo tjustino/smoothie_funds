@@ -9,7 +9,7 @@
           tbody
           - shedules_for(@schedules, account).each do |schedule|
             tr title="#{schedule.operation.comment}"
-              td = link_to icon("fas fa-magic"),
+              td = link_to icon("fa-solid fa-wand-magic"),
                            insert_schedule_path(schedule),
                            method: :post,
                            title:  t("dashboard.upcoming_terms.insert_schedule"),

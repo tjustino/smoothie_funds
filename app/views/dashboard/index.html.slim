@@ -16,12 +16,12 @@
         hr
         .row.justify-content-start
           .col-auto
-            = link_to icon_text("far fa-thumbs-up", t(".accept")),
+            = link_to icon_text("fa-regular fa-thumbs-up", t(".accept")),
                       sharing_path(pending.account),
                       method: :post,
                       class: "btn btn-success"
           .col-auto
-            = link_to icon_text("far fa-times-circle", t(".reject")),
+            = link_to icon_text("fa-regular fa-circle-xmark", t(".reject")),
                       unsharing_path(pending.account),
                       method: :delete,
                       class: "btn btn-danger"

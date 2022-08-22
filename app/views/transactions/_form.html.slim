@@ -25,7 +25,7 @@
                          class: "form-control",
                          placeholder: t(".date"),
                          value: @transaction.date.nil? ? Date.today : @transaction.date
-          span.input-group-text = icon "far fa-calendar-alt"
+          span.input-group-text = icon "fa-regular fa-calendar-days"
           - @transaction.errors.full_messages_for(:date).each do |message|
             .invalid-feedback = message
 

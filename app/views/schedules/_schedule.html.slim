@@ -1,7 +1,7 @@
 - schedules.each_with_index do |schedule, index|
   tr
     / magic wand
-    td = link_to icon("fas fa-magic"),
+    td = link_to icon("fa-solid fa-wand-magic"),
                  insert_schedule_path(schedule),
                  method: :post,
                  title:  t(".insert_schedule"),
@@ -28,7 +28,7 @@
     td
       .row.justify-content-start.dotted-top
         .col-auto
-          = link_to icon("fas fa-edit"), edit_schedule_path(schedule), title: t(".edit"), class: "link-info"
+          = link_to icon("fa-solid fa-pen-to-square"), edit_schedule_path(schedule), title: t(".edit"), class: "link-info"
         .col-auto
           = link_to icon("far fa-trash-alt"),
                     schedule_path(schedule),

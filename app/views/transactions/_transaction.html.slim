@@ -2,7 +2,7 @@
   tr class=decoration_according_to_(transaction)
 
     / Check
-    td data-title="#{checked}" = link_to transaction.checked ? icon("far fa-check-square") : icon("far fa-square"),
+    td data-title="#{checked}" = link_to transaction.checked ? icon("fa-regular fa-square-check") : icon("fa-regular fa-square"),
                                          easycheck_transaction_path(transaction),
                                          method: :post,
                                          remote: true,
@@ -34,9 +34,9 @@
     td
       .row.justify-content-start.dotted-top
         .col-auto
-          = link_to icon("fas fa-edit"), edit_transaction_path(transaction), title: t(".edit"), class: "link-info"
+          = link_to icon("fa-solid fa-pen-to-square"), edit_transaction_path(transaction), title: t(".edit"), class: "link-info"
         .col-auto
-          = link_to icon("far fa-trash-alt"),
+          = link_to icon("fa-regular fa-trash-can"),
                     transaction_path(transaction),
                     method: :delete,
                     data: { confirm: t(".are_you_sure") },

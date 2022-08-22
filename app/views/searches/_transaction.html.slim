@@ -2,7 +2,7 @@
   tr class=("text-muted" if transaction.date > Date.today)
 
     / Check
-    td = link_to transaction.checked ? icon("far fa-check-square") : icon("far fa-square"),
+    td = link_to transaction.checked ? icon("fa-regular fa-square-check") : icon("fa-regular fa-square"),
                  easycheck_transaction_path(transaction),
                  method: :post,
                  remote: true,
@@ -34,12 +34,12 @@
     td
       .row.justify-content-start.dotted-top
         .col-auto
-          = link_to icon("fas fa-edit"),
+          = link_to icon("fa-solid fa-pen-to-square"),
                     edit_transaction_path(transaction, search_id: params[:id]),
                     title: t(".edit"),
                     class: "link-info"
         .col-auto
-          = link_to icon("far fa-trash-alt"),
+          = link_to icon("fa-regular fa-trash-can"),
                     transaction_path(transaction),
                     method: :delete,
                     data: { confirm: t(".are_you_sure") },

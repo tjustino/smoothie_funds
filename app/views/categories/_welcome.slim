@@ -1,11 +1,12 @@
-.modal#welcomeModal tabindex="-1" role="dialog" aria-labelledby="welcomeModal"
-  .modal-dialog role="document"
-    .modal-content
-      .modal-header
-        h4.modal-title = t(".welcome")
-        button.btn-close type="button" data-bs-dismiss="modal" aria-hidden="true"
-      .modal-body = t(".content", new_icon: icon("fas fa-plus-circle"),
-                                  transactions_icon: icon("far fa-credit-card"),
-                                  schedules_icon: icon("far fa-calendar-alt")).html_safe
-      .modal-footer
-        button.btn.btn-success type="button" data-bs-dismiss="modal" = t(".close")
+.modal.is-active#welcomeModal
+  .modal-background
+  .modal-card
+    header.modal-card-head
+      p.modal-card-title.is-size-6-mobile = t(".welcome")
+      button.delete onclick="hideModal('welcomeModal')"
+    section.modal-card-body
+      .content = t(".content", new_icon: icon("fa-solid fa-circle-plus"),
+                               transactions_icon: icon("fa-regular fa-credit-card"),
+                               schedules_icon: icon("fa-regular fa-calendar-days")).html_safe
+    footer.modal-card-foot
+      button.button.is-success onclick="hideModal('welcomeModal')" = t(".close")

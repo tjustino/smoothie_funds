@@ -20,9 +20,9 @@
             .card-footer
               .row.justify-content-between
                 .col-auto
-                   = link_to icon_text("far fa-arrow-alt-circle-right", t(".show_result")), search, class: "link-info"
+                   = link_to icon_text("fa-regular fa-circle-right", t(".show_result")), search, class: "link-info"
                 .col-auto
-                  = link_to icon_text("far fa-trash-alt", t(".destroy")),
+                  = link_to icon_text("fa-regular fa-trash-can", t(".destroy")),
                             search,
                             method: :delete,
                             data: { confirm: t(".are_you_sure") },

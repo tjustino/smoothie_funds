@@ -10,9 +10,9 @@
     td
       .row.justify-content-start.dotted-top
         .col-auto
-          = link_to icon("fas fa-edit"), edit_category_path(category), title: t(".edit"), class: "link-info"
+          = link_to icon("fa-solid fa-pen-to-square"), edit_category_path(category), title: t(".edit"), class: "link-info"
         .col-auto
-          = link_to icon("far fa-trash-alt"),
+          = link_to icon("fa-regular fa-trash-can"),
                     category_path(category),
                     method: :delete,
                     data: {confirm: t(".are_you_sure", category: category.name)},
@@ -20,4 +20,4 @@
                     class: "link-danger"
         - if category.hidden == true
           .col-auto
-            = tag.i class: "far fa-eye-slash text-muted", title: t(".hidden_category")
+            = tag.i class: "fa-regular fa-eye-slash text-muted", title: t(".hidden_category")

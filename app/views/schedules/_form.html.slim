@@ -31,7 +31,7 @@
                          class: "form-control", \
                          placeholder: t(".next_time"), \
                          value: @schedule.next_time.nil? ? Date.today : @schedule.next_time
-          span.input-group-text = icon "far fa-calendar-alt"
+          span.input-group-text = icon "fa-regular fa-calendar-days"
           - @schedule.errors.full_messages_for(:next_time).each do |message|
             .invalid-feedback = message
 

@@ -4,8 +4,8 @@
       .modal-header
         h4.modal-title = t(".welcome")
         button.btn-close type="button" data-bs-dismiss="modal" aria-hidden="true"
-      .modal-body = t(".content", new_icon: icon("fas fa-plus-circle"), \
-                                  square_icon: icon("far fa-square"), \
-                                  check_square_icon: icon("far fa-check-square")).html_safe
+      .modal-body = t(".content", new_icon: icon("fa-solid fa-circle-plus"), \
+                                  square_icon: icon("fa-regular fa-square"), \
+                                  check_square_icon: icon("fa-regular fa-square-check")).html_safe
       .modal-footer
         button.btn.btn-success type="button" data-bs-dismiss="modal" = t(".close")
