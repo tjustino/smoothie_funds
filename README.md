@@ -1,6 +1,7 @@
 # Smoothie Funds
 Smoothie Funds allows you to manage your money with ease.
 
+
 ## Usual commands
 Start PostgreSQL server (on Archlinux):
 ```sh
@@ -25,7 +26,16 @@ Miscellaneous:
 bundle exec annotate
 ```
 
-Audit query:
+
+## Listing Existing Routes
+http://localhost:3000/rails/info/routes
+or
+```sh
+bin/rails routes --expanded
+```
+
+
+## Audit query
 ```sql
 SELECT
   users.email,
