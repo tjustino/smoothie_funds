@@ -10,7 +10,7 @@ class TransactionsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        @all_user_transactions = Transaction.where(account: @current_accounts)
+        @all_user_transactions = Transaction.active.where(account: @current_accounts)
         @nb_transactions = current_transactions.size
         @sum_checked     = @current_account.initial_balance + current_transactions.checked.sum(:amount)
         transactions(limit: @limit)
