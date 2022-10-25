@@ -16,10 +16,6 @@ class ApplicationController < ActionController::Base
   # | set_current_account |       |   1   |   1   |       |   1   |          |
   # +---------------------+-------+-------+-------+-------+-------+----------+
 
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :exception
-
   # respect this order for the authorize method that call @current_user
   before_action :set_current_user,
                 :set_current_accounts,
