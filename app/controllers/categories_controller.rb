@@ -91,7 +91,7 @@ class CategoriesController < ApplicationController
     end
 
     def other_categories
-      @other_categories ||= @current_accounts.find(params[:account][:categories]).categories
+      @other_categories ||= @current_accounts.find(params[:categories]).categories
     end
 
     def build_category
