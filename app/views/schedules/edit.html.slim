@@ -1,8 +1,6 @@
-= breadcrumb t(".schedules"),
-             link_to(@current_account.name, account_schedules_path(@current_account)),
-             t(".edit_schedule")
+= breadcrumb link_to(@current_account.name, account_schedules_path(@current_account)),
+             link_to(t(".edit_schedule"), edit_schedule_path(@schedule))
 
-.row.justify-content-center
-  .col-md-auto
-    .card.shadow.mb-3
+.columns.is-centered
+  .column.is-narrow
       = render partial: "form", locals: { title: t(".edit_schedule") }

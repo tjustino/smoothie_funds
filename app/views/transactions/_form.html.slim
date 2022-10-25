@@ -1,62 +1,50 @@
-= form_for(shallow_args(@current_account, @transaction)) do |f|
-  h1.card-header = title
+= form_with(model: shallow_args(@current_account, @transaction), class: "box") do |form|
+  .content.has-text-centered
+    = icon_text("fa-regular fa-calendar-days", title)
+    hr
 
-  .card-body
-    .mb-3.row
-      = f.label :amount, t(".amount"), class: "col-sm-4 col-form-label"
-      .col
-        = select_tag :sign,
-                     options_for_select([[t(".debit"), "debit"], [t(".credit"), "credit"]], @sign), \
-                     { class: "form-select" }
-        - @transaction.errors.full_messages_for(:sign).each do |message|
-          .invalid-feedback = message
-      .col
-        .input-group
-          = f.telephone_field :amount, class: "form-control", placeholder: t(".amount"), autofocus: true
-          span.input-group-text = t("number.currency.format.unit")
-          - @transaction.errors.full_messages_for(:amount).each do |message|
-            .invalid-feedback = message
+  / amount
+  .field
+    = form.label :amount, t(".amount"), class: "label"
+    .field.has-addons
+      .control
+        .select
+          = select_tag :sign, options_for_select([[t(".debit"), "debit"], [t(".credit"), "credit"]], @sign)
+      .control.is-expanded.has-icons-right
+        = form.number_field :amount, class: input_class_for(@transaction, :amount), placeholder: t(".amount"), autofocus: true, step: 0.01
+        span.icon.is-right = t("number.currency.format.unit")
+        - @transaction.errors.full_messages_for(:amount).each do |message|
+          p.help.is-danger = message
 
-    .mb-3.row
-      = f.label :date, t(".date"), class: "col-sm-4 col-form-label"
-      .col
-        .input-group
-          = f.date_field :date,
-                         class: "form-control",
-                         placeholder: t(".date"),
-                         value: @transaction.date.nil? ? Date.today : @transaction.date
-          span.input-group-text = icon "fa-regular fa-calendar-days"
-          - @transaction.errors.full_messages_for(:date).each do |message|
-            .invalid-feedback = message
+  / date
+  .field
+    = form.label :date, t(".date"), class: "label"
+    .control.has-icons-left
+      = form.date_field :date, class: input_class_for(@transaction, :date), placeholder: t(".date"), value: @transaction.date.nil? ? Date.today : @transaction.date
+      span.icon.is-left = icon("fa-regular fa-calendar-check")
+      - @transaction.errors.full_messages_for(:date).each do |message|
+        p.help.is-danger = message
 
-    .mb-3.row
-      = f.label :category_id, t(".category"), class: "col-sm-4 col-form-label"
-      .col
-        = f.select :category_id,
-                   @current_account.categories.active.order(:name).collect { |category| [category.name, category.id] },
-                   {},
-                   { class: "form-select" }
-        - @transaction.errors.full_messages_for(:category_id).each do |message|
-          .invalid-feedback = message
+  / category
+  .field
+    = form.label :category_id, t(".category"), class: "label"
+    .control.is-expanded.has-icons-left
+      .select.is-fullwidth
+        = form.select :category_id, @current_account.categories.active.order(:name).collect { |category| [category.name, category.id] }
+      span.icon.is-left = icon("fa-solid fa-tags")
 
-    .mb-3.row
-      = f.label :comment, t(".comment"), class: "col-sm-4 col-form-label"
-      .col
-        = f.text_area :comment, class: "form-control", placeholder: t(".comment"), rows: 3
-        - @transaction.errors.full_messages_for(:comment).each do |message|
-          .invalid-feedback = message
+  / comment
+  .field
+    = form.label :comment, t(".comment"), class: "label"
+    .control
+      = form.text_area :comment, class: "textarea", placeholder: t(".comment"), rows: 3
 
-    .mb-3.row
-      .col-sm-4
-      .col
-        .form-check
-          = f.label :checked, class: "form-check-label" do
-            = f.check_box :checked, class: "form-check-input"
-            = t(".checked")
-          - @transaction.errors.full_messages_for(:checked).each do |message|
-            .invalid-feedback = message
+  / checked
+  .field
+    = form.label :checked, t(".checked"), class: "checkbox" do
+      = form.check_box :checked
+      = " " + t(".checked")
 
-  .card-footer
-    .row.justify-content-end
-      .col-auto
-        = f.submit class: "btn btn-primary"
+  / submit button
+  .mt-5
+    = form.submit class: "button is-success is-fullwidth"

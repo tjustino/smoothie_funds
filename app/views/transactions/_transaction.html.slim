@@ -1,7 +1,7 @@
 - transactions.each do |transaction|
   tr class=decoration_according_to_(transaction)
 
-    / Check
+    / check
     td data-title="#{checked}" = link_to transaction.checked ? icon("fa-regular fa-square-check") : icon("fa-regular fa-square"),
                                          easycheck_transaction_path(transaction),
                                          method: :post,
@@ -10,35 +10,36 @@
                                          id: "check_#{transaction.id}",
                                          class: "link-success"
 
-    / Date
+    / date
     td data-title="#{date}" = l(transaction.date)
 
-    / Category
+    / category
     td data-title="#{category}" = transaction.category.name
 
-    / Debit
-    td.nowrap style="text-align: right;" data-title="#{debit}" = \
+    / debit
+    td.nowrap.has-text-right data-title="#{debit}" = \
       number_to_currency(transaction.amount) if transaction.amount < 0
 
-    / Credit
-    td.nowrap style="text-align: right;" data-title="#{credit}" = \
+    / credit
+    td.nowrap.has-text-right data-title="#{credit}" = \
       number_to_currency(transaction.amount) if transaction.amount >= 0
 
-    / Balance
-    td.nowrap style="text-align: right;" data-title="#{balance}" = number_to_currency(transaction.balance)
+    / balance
+    td.nowrap.has-text-right data-title="#{balance}" = number_to_currency(transaction.balance)
 
-    / Comment
+    / comment
     td data-title="#{comment}" = truncate(transaction.comment, length: 30)
 
     / common
     td
-      .row.justify-content-start.dotted-top
-        .col-auto
-          = link_to icon("fa-solid fa-pen-to-square"), edit_transaction_path(transaction), title: t(".edit"), class: "link-info"
-        .col-auto
-          = link_to icon("fa-regular fa-trash-can"),
-                    transaction_path(transaction),
-                    method: :delete,
-                    data: { confirm: t(".are_you_sure") },
-                    title: t(".destroy"),
-                    class: "link-danger"
+      .level.is-mobile
+        .level-left
+          .level-item.has-text-centered
+            = link_to icon("fa-solid fa-pen-to-square"), edit_transaction_path(transaction), title: t(".edit"), class: "has-text-info"
+          .level-item.has-text-centered
+            = link_to icon("fa-regular fa-trash-can"),
+                      transaction_path(transaction),
+                      method: :delete,
+                      data: { confirm: t(".are_you_sure") },
+                      title: t(".destroy"),
+                      class: "has-text-danger"

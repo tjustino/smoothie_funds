@@ -1,2 +1,8 @@
-h1 = t(".title")
-div = t(".speech").html_safe
+nav.breadcrumb.has-succeeds-separator aria-label="breadcrumbs"
+  ul
+    li = link_to icon("fa-solid fa-house"), dashboard_path
+    li.is-active = link_to t(".title"), gdpr_path
+
+.column.is-10.is-offset-1
+  .content
+    p = t(".speech").html_safe

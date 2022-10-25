@@ -1,22 +1,21 @@
 - if @schedules.any?
   - @current_accounts.each do |account|
     - if @schedules.where(account_id: account.id).any?
-      .row.ms-2.me-2.mb-3
-        table.table.table-striped.table-hover
+      .panel-block
+        table.table.is-fullwidth.is-narrow.is-striped
           thead
             tr
-              th colspan="4" = link_to account.name, account_schedules_path(account), class: "link-dark"
+              th colspan="4" = link_to account.name, account_schedules_path(account)
           tbody
-          - shedules_for(@schedules, account).each do |schedule|
-            tr title="#{schedule.operation.comment}"
-              td = link_to icon("fa-solid fa-wand-magic"),
-                           insert_schedule_path(schedule),
-                           method: :post,
-                           title:  t("dashboard.upcoming_terms.insert_schedule"),
-                           class:  "link-success",
-                           remote: true
-              td = l(schedule.next_time, format: :short)
-              td = schedule.operation.category.name
-              td.nowrap = number_to_currency(schedule.operation.amount)
+            - shedules_for(@schedules, account).each do |schedule|
+              tr title="#{schedule.operation.comment}"
+                td.is-narrow = link_to icon("fa-solid fa-wand-magic"),
+                            insert_schedule_path(schedule),
+                            method: :post,
+                            title:  t("dashboard.upcoming_terms.insert_schedule"),
+                            remote: true
+                td.is-narrow = l(schedule.next_time, format: :short)
+                td = schedule.operation.category.name
+                td.nowrap = number_to_currency(schedule.operation.amount)
 - else
-  p.card-text = t("dashboard.upcoming_terms.no_terms")
+  p = t("dashboard.upcoming_terms.no_terms")

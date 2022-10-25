@@ -1,8 +1,11 @@
-= breadcrumb t(".transactions"),
-             link_to(@current_account.name, account_transactions_path(@current_account)),
-             t(".edit_transaction")
+- if params[:search_id]
+  = breadcrumb link_to(t(".search"), new_user_search_path(@current_user)),
+               link_to(t(".current_search_number"), search_path(params[:search_id])),
+               link_to(t(".edit_transaction"), edit_transaction_path(@transaction))
+- else
+  = breadcrumb link_to(@current_account.name, account_transactions_path(@current_account)),
+               link_to(t(".edit_transaction"), edit_transaction_path(@transaction))
 
-.row.justify-content-center
-  .col-md-auto
-    .card.shadow.mb-3
+.columns.is-centered
+  .column.is-narrow
       = render partial: "form", locals: { title: t(".edit_transaction") }

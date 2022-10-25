@@ -1,5 +1,5 @@
 - categories.each do |category|
-  tr class=("text-muted" if category.hidden == true)
+  tr class=("has-text-grey-light" if category.hidden == true)
     / name
     td data-title="#{name}" = category.name
 
@@ -8,16 +8,17 @@
 
     / common
     td
-      .row.justify-content-start.dotted-top
-        .col-auto
-          = link_to icon("fa-solid fa-pen-to-square"), edit_category_path(category), title: t(".edit"), class: "link-info"
-        .col-auto
-          = link_to icon("fa-regular fa-trash-can"),
-                    category_path(category),
-                    method: :delete,
-                    data: {confirm: t(".are_you_sure", category: category.name)},
-                    title: t(".destroy"),
-                    class: "link-danger"
-        - if category.hidden == true
-          .col-auto
-            = tag.i class: "fa-regular fa-eye-slash text-muted", title: t(".hidden_category")
+      .level.is-mobile
+        .level-left
+          .level-item.has-text-centered
+            = link_to icon("fa-solid fa-pen-to-square"), edit_category_path(category), title: t(".edit"), class: "has-text-info"
+          .level-item.has-text-centered
+            = link_to icon("fa-regular fa-trash-can"),
+                      category_path(category),
+                      method: :delete,
+                      data: {confirm: t(".are_you_sure", category: category.name)},
+                      title: t(".destroy"),
+                      class: "has-text-danger"
+          - if category.hidden == true
+            .level-item.has-text-centered
+              = tag.span(class: "icon") { tag.i class: "fa-regular fa-eye-slash", title: t(".hidden_category") }

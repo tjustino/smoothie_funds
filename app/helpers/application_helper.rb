@@ -2,13 +2,6 @@
 
 # Application Helper
 module ApplicationHelper
-  def nav_link(name, url, icon)
-    class_name = current_page?(url) ? "active" : nil
-    tag.li class: [class_name, "nav-item"].join(" ") do
-      link_to icon_text(icon, name), url, class: "nav-link"
-    end
-  end
-
   def name_or_email(current_user)
     current_user.name? ? current_user.name : current_user.email
   end
@@ -18,28 +11,45 @@ module ApplicationHelper
   end
 
   def icon_text(icon_class, text)
-    safe_join [icon(icon_class), " ", text]
+    tag.span(class: "icon-text") do
+      tag.div(class: "nowrap") do
+        icon(icon_class) + tag.span(text)
+      end
+    end
+  end
+
+  def icon_text_light(icon_class, text)
+    tag.span do
+      icon(icon_class) + tag.span(text)
+    end
+  end
+
+  def text_icon(text, icon_class)
+    tag.span(class: "icon-text") do
+      tag.div(class: "nowrap") do
+        tag.span(text) + icon(icon_class)
+      end
+    end
   end
 
   def icon(icon_class)
-    tag.i class: icon_class
+    tag.span(tag.i(class: icon_class), class: "icon")
   end
 
-  def outline_or_not
-    params[:controller] == "users" ? "btn-outline" : "btn"
-  end
-
-  def inverse_of_outline_or_not
-    params[:controller] == "users" ? "btn" : "btn-outline"
+  def input_class_for(user, symbol)
+    user.errors.full_messages_for(symbol).any? ? "input is-danger" : "input"
   end
 
   def breadcrumb(*items)
-    content_tag :nav, aria_label: "breadcrumb" do
-      content_tag :ol, class: "breadcrumb" do
-        concat(content_tag(:li, link_to(icon("fas fa-home"), dashboard_path), class: "breadcrumb-item"))
+    tag.nav class: "breadcrumb", aria: { label: "breadcrumbs" } do
+      tag.ul do
+        concat tag.li(link_to(icon("fas fa-home"), dashboard_path))
         items.each_with_index do |item, index|
-          bs_class = index + 1 == items.size ? "breadcrumb-item active" : "breadcrumb-item"
-          concat(content_tag(:li, item, class: bs_class))
+          if index + 1 == items.size
+            concat tag.li(item, class: "is-active")
+          else
+            concat tag.li(item)
+          end
         end
       end
     end

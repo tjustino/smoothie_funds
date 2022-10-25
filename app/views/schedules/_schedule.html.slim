@@ -26,13 +26,14 @@
 
     / common
     td
-      .row.justify-content-start.dotted-top
-        .col-auto
-          = link_to icon("fa-solid fa-pen-to-square"), edit_schedule_path(schedule), title: t(".edit"), class: "link-info"
-        .col-auto
-          = link_to icon("far fa-trash-alt"),
-                    schedule_path(schedule),
-                    method: :delete,
-                    data: { confirm: t(".are_you_sure") },
-                    title: t(".destroy"),
-                    class: "link-danger"
+      .level.is-mobile
+        .level-left
+          .level-item.has-text-centered
+            = link_to icon("fa-solid fa-pen-to-square"), edit_schedule_path(schedule), title: t(".edit"), class: "has-text-info"
+          .level-item.has-text-centered
+            = link_to icon("fa-regular fa-trash-can"),
+                      schedule_path(schedule),
+                      method: :delete,
+                      data: { confirm: t(".are_you_sure") },
+                      title: t(".destroy"),
+                      class: "has-text-danger"

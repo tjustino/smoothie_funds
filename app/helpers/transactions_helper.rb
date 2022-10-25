@@ -4,9 +4,9 @@
 module TransactionsHelper
   def decoration_according_to_(transaction)
     if (transaction.date > Time.zone.today) && (transaction.balance >= 0)
-      "text-muted"
+      "has-text-grey-light"
     elsif transaction.balance.negative?
-      "text-danger"
+      "has-text-danger"
     end
   end
 end

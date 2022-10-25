@@ -1,69 +1,46 @@
-/ Welcome
+/ welcome
 - unless @current_accounts.any?
   = render "welcome"
 
-/ Header
-.row.align-items-center.justify-content-between.mb-3
-  / Title
-  .col
-    h2
-      = t(".listing_accounts")
-      sup
-        .badge.rounded-pill.bg-secondary#total = @nb_accounts
+/ header
+.level
+  .level-left
+    / Title
+    .level-item
+      h2.title
+        = t(".listing_accounts")
+        sup title="#{t('.count')}"
+          .tag.is-primary.is-rounded#total = @nb_accounts
 
-  / Download
-  .col-md-auto.d-none.d-sm-block
-    h2 = link_to icon("fas fa-download"),
-                 accounts_path(format: :csv),
-                 title: t(".export_accounts"),
-                 class: "btn btn-light"
+  .level-right
+    / download
+    .level-item.is-hidden-touch
+      = link_to icon("fa-solid fa-download"), accounts_path(format: :csv), title: t(".export_accounts"), class: "button is-link is-light"
+    / new account
+    .level-item
+      = link_to icon_text("fa-solid fa-circle-plus", t(".new_account")),  new_account_path,  class: "button is-primary"
 
-  / New account
-  .col-md-auto
-    h2 = link_to icon_text("fas fa-plus-circle", t(".new_account")),  new_account_path,  class: "btn btn-primary"
+/ sharing
+= render partial: "sharing"
 
-/ Accept sharing
-- unless @pendings.nil?
-  - @pendings.each do | pending |
-    .row
-      .col
-        .alert.alert-info.clearfix role="alert"
-          h5 = t(".join_shared_account",
-                 account: pending.account.name,
-                 users: show_other_users(pending.account)).html_safe
-          hr
-          .row.justify-content-start
-            .col-auto
-              = link_to icon_text("far fa-thumbs-up", t(".accept")),
-                        sharing_path(pending.account),
-                        method: :post,
-                        class: "btn btn-success"
-            .col-auto
-              = link_to icon_text("far fa-times-circle", t(".reject")),
-                        unsharing_path(pending.account),
-                        method: :delete,
-                        class: "btn btn-danger"
+/ table
+table.table.is-fullwidth.is-striped#magic-table
+  thead
+    tr
+      th = t(".name")
+      th = t(".initial_balance")
+      th = t(".share")
+      th
+  tbody#listing
+    = render partial: "account", locals: { accounts: @accounts,
+                                           name:     t(".name"),
+                                           init_bal: t(".initial_balance"),
+                                           share:    t(".share") }
 
-/ Table
-.row#content-table
-  table.table.table-striped#magic-table
-    thead
-      tr
-        th = t(".name")
-        th = t(".initial_balance")
-        th = t(".share")
-        th
-
-    tbody#listing
-      = render partial: "account", locals: { accounts: @accounts,
-                                             name:     t(".name"),
-                                             init_bal: t(".initial_balance"),
-                                             share:    t(".share") }
-
-/ More accounts
+/ more accounts
 - if @nb_accounts > @limit
-  #more-items.row.mb-3
-    .d-flex.justify-content-center
-      = form_tag(accounts_path, id: "more_items_form", method: :get, remote: true) do
+  #more-items.columns.is-mobile.is-centered
+    .column.is-narrow
+      = form_with(url: accounts_path, id: "more_items_form", method: :get, local: false) do
         = hidden_field_tag "offset", @limit, autocomplete: "off"
-        = submit_tag t(".more_accounts"), class: "btn btn-primary"
+        = submit_tag t(".more_accounts"), class: "button is-primary"

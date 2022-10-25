@@ -1,62 +1,72 @@
-= form_for @account do |f|
-  h1.card-header = title
+= form_with(model: @account, class: "box") do |form|
+  .content.has-text-centered
+    = icon_text("fa-solid fa-book", title)
+    hr
 
-  .card-body
-    .mb-3.row
-      = f.label :name, t(".name"), class: "col-sm-3 col-form-label"
-      .col
-        = f.text_field :name, class: "form-control", placeholder: t(".name"), autofocus: true
-        - @account.errors.full_messages_for(:name).each do |message|
-          .invalid-feedback = message
+  / name
+  .field
+    = form.label :name, t(".name"), class: "label"
+    .control.has-icons-left
+      = form.text_field :name, class: input_class_for(@account, :name), placeholder: t(".name")
+      span.icon.is-left = icon("fa-solid fa-quote-left")
+      - @account.errors.full_messages_for(:name).each do |message|
+        p.help.is-danger = message
 
-    .mb-3.row
-      = f.label :initial_balance, t(".initial_balance"), class: "col-sm-3 col-form-label"
-      .col
-        .input-group
-          = f.telephone_field :initial_balance, class: "form-control", placeholder: t(".initial_balance")
-          span.input-group-text = t("number.currency.format.unit")
-          - @account.errors.full_messages_for(:initial_balance).each do |msg|
-            .invalid-feedback = msg
+  / initial balance
+  .field
+    = form.label :initial_balance, t(".initial_balance"), class: "label"
+    .control.has-icons-left
+      = form.number_field :initial_balance, class: input_class_for(@account, :initial_balance), placeholder: t(".initial_balance"), step: 0.01
+      span.icon.is-left = icon("fa-solid fa-euro-sign")
+      - @account.errors.full_messages_for(:initial_balance).each do |message|
+        p.help.is-danger = message
 
-    - unless params[:action] == "new" or params[:action] == "create"
-      / shared with
-      - unless f.object.users.count == 1
-        .mb-3.row
-          = f.label :share, t(".share"), class: "col-sm-3 col-form-label"
-          .col
-            - other_users(@current_user, f.object).each do |other_user|
-              = f.fields_for :users, other_user do |shared_user|
+  / share
+  - unless params[:action] == "new" or params[:action] == "create"
+    / shared with
+    - unless form.object.users.count == 1
+      .field
+        = form.label :share, t(".share"), class: "label"
+        - other_users(@current_user, form.object).each do |other_user|
+          .field
+            .control.is-expanded
+              = form.fields_for :users, other_user do |shared_user|
                 = shared_user.hidden_field :id
-                = shared_user.email_field :email, class: "form-control", readonly: "readonly"
-          .col-auto
-            = link_to icon_text("fas fa-unlink", t(".unlink")),
-                      unlink_path(f.object),
+                = shared_user.email_field :email, class: "input", disabled: true
+        .field
+          .control
+            = link_to icon_text("fa-solid fa-link-slash", t(".unlink")),
+                      unlink_path(form.object),
                       method: :delete,
                       data: { confirm: t(".are_you_sure_unlink") },
-                      class: "btn btn-danger"
+                      class: "button is-danger is-fullwidth"
 
-      / pending user
-      - unless f.object.pending_user.blank?
-        = f.fields_for :pending_user do |pending_user|
-          = render "pending_user", f: pending_user
+    / pending user
+    - if form.object.pending_user.blank?
+      / propose a new sharing
+      .field
+        = label_tag :share, t(".propose_sharing"), class: "label"
+        .control.has-icons-left
+          = email_field_tag :new_share, nil, class: "input", placeholder: t(".shared_email")
+          span.icon.is-left = icon("fa-solid fa-envelope")
+        p.help = t(".explanation")
+    - else
+      / show me the pending user and propose to unlink him
+      = form.fields_for :pending_user do |pending_user_fields|
+        .field
+          = pending_user_fields.label :pending_user, t(".pending_user"), class: "label"
+          .field.has-addons
+            .control
+              = pending_user_fields.email_field :email, class: "input", disabled: true
+            .control
+              = link_to icon_text("fa-solid fa-arrow-rotate-left", t(".no_longer_propose")), unpend_path, method: :delete, class: "button is-warning"
 
-      / new share
-      - else
-        .mb-3.row
-          = f.label :share, t(".propose_sharing"), class: "col-sm-3 col-form-label"
-          .col
-            = email_field_tag :new_share, nil, class: "form-control", placeholder: t(".shared_email")
-            small.form-text.text-muted = t(".explanation")
+  / hidden
+  .field
+    = form.label :hidden, t(".hidden"), class: "checkbox" do
+      = form.check_box :hidden
+      = " " + t(".hidden")
 
-    .mb-3.row
-      .col-sm-3
-      .col
-        .form-check
-          = f.label :hidden, class: "form-check-label" do
-            = f.check_box :hidden, class: "form-check-input"
-            = t(".hidden")
-
-  .card-footer
-    .row.justify-content-end
-      .col-auto
-        = f.submit class: "btn btn-primary"
+  / submit button
+  .mt-5
+    = form.submit class: "button is-success is-fullwidth"

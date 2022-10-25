@@ -1,21 +1,19 @@
-.modal.fade#importFrom tabindex="-1" role="dialog" aria-labelledby="importFrom"
-  .modal-dialog role="document"
-    .modal-content = form_for([@current_user, @current_account],
-                              method: :import_from,
-                              url: :import_from_account_categories) do |f|
-      .modal-header
-        h4.modal-title = t(".title")
-        button.btn-close type="button" data-bs-dismiss="modal" aria-hidden="true"
-      .modal-body
-        p = t(".speech").html_safe
-        .mb-3
-          = f.label :import_from, t(".import_from"), class: "form-control-label"
-          = f.collection_select :categories,
-                                @other_accounts,
-                                :id,
-                                :name,
-                                {},
-                                { class: "form-select" }
-
-      .modal-footer
-        = f.submit class: "btn btn-primary"
+.modal#importFrom
+  .modal-background
+  = form_with(url: :import_from_account_categories, method: :import_from) do |form|
+    .modal-card
+      header.modal-card-head
+        p.modal-card-title.is-size-6-mobile = t(".title")
+        button.delete onclick="hideModal('importFrom')"
+      section.modal-card-body
+        .field
+          p.help = t(".speech").html_safe
+          = form.label t(".import_from"), class: "label"
+          .control.has-icons-left
+            .select
+              = form.collection_select :categories, @other_accounts, :id, :name
+            .= icon("fa-solid fa-book")
+    footer.modal-card-foot
+      .field
+        .control
+          = form.submit class: "button is-primary"

@@ -2,10 +2,13 @@ doctype html
 html lang="#{I18n.locale.to_s.gsub('_','-')}"
   head
     title Smoothie Funds#{" - DEV" if Rails.env.development?}
+    = csrf_meta_tags
+    = csp_meta_tag
+
     = render partial: "layouts/favicon"
     = stylesheet_link_tag "application", media: "all"
     = javascript_include_tag "application", defer: true
-    = csrf_meta_tags
+
     meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
     meta name="author" content="Thomas JUSTINO"
     meta name="description" content="#{t('.site_descritpion')}"
@@ -16,120 +19,107 @@ html lang="#{I18n.locale.to_s.gsub('_','-')}"
     meta property="og:url" content="#{dashboard_url}"
     meta property="og:image" content="#{asset_url('_icon.svg')}"
 
-  body.d-flex.flex-column.min-vh-100
-    / Static navbar
-    nav.navbar.navbar-expand-lg.navbar-light.bg-light.rounded.mb-3.shadow-sm style="background-color: #e3f2fd;"
-      .container
-        = link_to dashboard_path, class: "navbar-brand"
-          = image_tag "_icon.svg", height: "24", alt: "🥤", style: "vertical-align: sub;"
-          span = " Smoothie Funds"
-        - unless params[:controller] == "users" and params[:action] == "new"
-          button.navbar-toggler type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-label="Toggle navigation"
-            span.navbar-toggler-icon
-
-        .collapse.navbar-collapse
-          - if @current_user
-            /menu
-            ul.navbar-nav.me-auto
-              / dropdown transactions
+  body
+    - if @current_user
+      / Static navbar
+      nav.navbar.is-transparent role="navigation" aria-label="main navigation"
+        .container
+          / brand
+          .navbar-brand
+            = link_to dashboard_path, class: "navbar-item" do
+              = image_tag "_icon.svg", alt: "🥤"
+            / burger menu
+            a.navbar-burger role="button" aria-label="menu" aria-expanded="false" data-target="navMenu"
+              span aria-hidden="true"
+              span aria-hidden="true"
+              span aria-hidden="true"
+          / navigation
+          .navbar-menu#navMenu
+            / left part
+            .navbar-start
               - if Category.exists?(account: @current_accounts)
-                li.nav-item.dropdown
-                  a.nav-link.dropdown-toggle href="#" data-bs-toggle="dropdown" class=("active" if params[:controller] == "transactions")
-                    = icon_text "far fa-credit-card", t(".transactions").html_safe
-                  .dropdown-menu
+                / transactions
+                .navbar-item.has-dropdown.is-hoverable
+                  a.navbar-link = icon_text("fa-regular fa-credit-card", t(".transactions"))
+                  .navbar-dropdown
                     - @accounts_with_categories.each do |account|
-                      = link_to account.name, account_transactions_path(account), class: "dropdown-item"
-                    .dropdown-divider
-                    = link_to icon_text("fas fa-search", t(".search")),
-                              new_user_search_path(@current_user),
-                              class: "dropdown-item"
-                    = link_to icon_text("fas fa-chart-area", t(".analytics")),
-                              user_analytics_path(@current_user),
-                              class: "dropdown-item"
-
-                / dropdown schedules
-                li.nav-item.dropdown
-                  a.nav-link.dropdown-toggle href="#" data-bs-toggle="dropdown" class=("active" if params[:controller] == "schedules")
-                    = icon_text "far fa-calendar-alt", t(".schedules").html_safe
-                  .dropdown-menu
+                      = link_to account.name, account_transactions_path(account), class: "navbar-item"
+                    hr.navbar-divider
+                    = link_to icon_text_light("fa-solid fa-magnifying-glass", t(".search")), new_user_search_path(@current_user), class: "navbar-item icon-text"
+                    = link_to icon_text_light("fa-solid fa-chart-area", t(".analytics")), user_analytics_path(@current_user), class: "navbar-item icon-text"
+                / schedules
+                .navbar-item.has-dropdown.is-hoverable
+                  a.navbar-link = icon_text("fa-regular fa-calendar-days", t(".schedules"))
+                  .navbar-dropdown
                     - @accounts_with_categories.each do |account|
-                      = link_to account.name, account_schedules_path(account), class: "dropdown-item"
-
-              / dropdown categories
+                      = link_to account.name, account_schedules_path(account), class: "navbar-item"
+              / categories
               - if @current_accounts.any?
-                li.nav-item.dropdown
-                  a.nav-link.dropdown-toggle href="#" data-bs-toggle="dropdown" class=("active" if params[:controller] == "categories")
-                    = icon_text "fas fa-tags", t(".categories").html_safe
-                  .dropdown-menu
+                .navbar-item.has-dropdown.is-hoverable
+                  a.navbar-link = icon_text("fa-solid fa-tags", t(".categories"))
+                  .navbar-dropdown
                     - @current_accounts.each do |account|
-                      = link_to account.name, account_categories_path(account), class: "dropdown-item"
-
-              / link accounts
-              = nav_link t(".accounts"), accounts_path, "fas fa-book"
-
-            ul.navbar-nav
-              li.nav-item.dropdown
-                a.nav-link.dropdown-toggle href="#" data-bs-toggle="dropdown" class=("active" if params[:controller] == "users")
-                  = icon_text "fas fa-user", name_or_email(@current_user)
-                .dropdown-menu
+                      = link_to account.name, account_categories_path(account), class: "navbar-item"
+              / accounts
+              = link_to icon_text("fa-solid fa-book", t(".accounts")), accounts_path, class: "navbar-item"
+            / right part
+            .navbar-end
+              / user account
+              .navbar-item.has-dropdown.is-hoverable
+                a.navbar-link = icon_text "fa-solid fa-user", name_or_email(@current_user)
+                .navbar-dropdown
                   / Profil
-                  = link_to icon_text("fas fa-sliders-h", t(".profile")),
-                            edit_user_path(@current_user),
-                            class: "dropdown-item"
-                  .dropdown-divider
+                  = link_to icon_text_light("fa-solid fa-sliders", t(".profile")), edit_user_path(@current_user), class: "navbar-item icon-text"
+                  = mail_to "support@smoothiefunds.com", icon_text_light("fa-solid fa-headset", t(".support")), class: "navbar-item icon-text"
+                  hr.navbar-divider
                   / Logout
-                  = link_to icon_text("fas fa-sign-out-alt", t(".logout")),
-                            logout_path,
-                            method: :delete,
-                            class: "dropdown-item",
-                            id: "logout"
+                  = link_to icon_text_light("fa-solid fa-power-off", t(".logout")), logout_path, method: :delete, id: "logout", class: "navbar-item icon-text"
 
-          - elsif params[:controller] != "users" || (params[:controller] == "users" && params[:action] == "new")
-            / New user
-            ul.navbar-nav.me-auto
-            ul.navbar-nav
-              li.nav-item
-                .btn-group role="group"
-                  = link_to "Connexion", login_path, class: "btn #{outline_or_not}-primary"
-                  .or
-                  = link_to icon_text("fas fa-user-plus", t(".create_user")),
-                            new_user_path,
-                            class: "btn #{inverse_of_outline_or_not}-primary"
+    / flash
+    - if flash[:alert]
+      section#alertMessage.section.pt-5.pb-0
+        .container
+          .notification.is-danger.is-light
+            button.delete aria-label="#{t(".aria_close")}" onclick="removeById('alertMessage')"
+            = flash[:alert]
+    - elsif flash[:warning]
+      section#warningMessage.section.pt-5.pb-0
+        .container
+          .notification.is-warning.is-light
+            button.delete aria-label="#{t(".aria_close")}" onclick="removeById('warningMessage')"
+            = flash[:warning]
+    - elsif flash[:notice]
+      section#noticeMessage.section.pt-5.pb-0
+        .container
+          .notification.is-success.is-light
+            button.delete aria-label="#{t(".aria_close")}" onclick="removeById('noticeMessage')"
+            = flash[:notice]
 
-    .container
-      / alerts
-      .row.align-items-center
-        .col
-          - if flash[:alert]
-            .alert.alert-danger.alert-dismissible.fade.show role="alert"
-              = flash[:alert]
-              button.btn-close type="button" data-bs-dismiss="alert" aria-hidden="true"
-          - elsif flash[:warning]
-            .alert.alert-warning.alert-dismissible.fade.show role="alert"
-              = flash[:warning]
-              button.btn-close type="button" data-bs-dismiss="alert" aria-hidden="true"
-          - elsif flash[:notice]
-            .alert.alert-success.alert-dismissible.fade.show role="alert"
-              = flash[:notice]
-              button.btn-close type="button" data-bs-dismiss="alert" aria-hidden="true"
-
-      / content
-      = yield
+    / content
+    #wrapper
+      noscript
+        .message.is-danger
+          .message-body = t(".alert_no_js")
+      section.section.pt-5
+        .container
+          = yield
 
     / footer
-    footer.mt-auto.bg-light
+    footer.footer.sticky
       .container
-        .d-flex.justify-content-evenly.align-items-center
-          .p-2.text-center = link_to t(".terms_of_use"),  terms_path,  class: "link-dark"
-          .p-2.text-center = link_to t(".cookie_policy"), cookie_path, class: "link-dark"
-          .p-2.text-center = link_to t(".personal_data"), gdpr_path,   class: "link-dark"
+        .columns.is-centered
+          .column.mb-0.is-2.content.is-small.has-text-centered = link_to t(".terms_of_use"),  terms_path
+          .column.mb-0.is-2.content.is-small.has-text-centered = link_to t(".cookie_policy"), cookie_path
+          .column.mb-0.is-2.content.is-small.has-text-centered = link_to t(".personal_data"), gdpr_path
 
     / debugger
     - if Rails.env.development?
-      .position-fixed.bottom-0.end-0.p-3.d-none.d-md-block
-        #debugToast.toast data-bs-autohide="false"
-          .toast-header
-            strong.me-auto = icon_text("fas fa-bug", "Debug Toaster")
-            button.btn-close type="button" data-bs-dismiss="toast" aria-label="Close"
-          .toast-body
-            = debug(request.parameters)
+      / = console
+      #debugBox.columns style="position:fixed;bottom:0;right:0;"
+        .column.is-narrow.mr-1.mb-1.is-hidden-mobile
+          section.message.is-warning.is-small.is-narrow
+            .message-header
+              p Debug
+              button.delete aria-label="#{t(".aria_close")}" onclick="removeById('debugBox')"
+            .message-body
+              = debug(request.parameters)

@@ -1,22 +1,23 @@
-= form_for(shallow_args(@current_account, @category)) do |f|
-  h1.card-header = title
+= form_with(model: shallow_args(@current_account, @category), class: "box") do |form|
+  .content.has-text-centered
+    = icon_text("fa-solid fa-tags", title)
+    hr
 
-  .card-body
-    .mb-3.row
-      = f.label :name, t(".name"), class: "col-sm-4 col-form-label"
-      .col
-        = f.text_field :name, class: "form-control", placeholder: t(".name"), autofocus: true
-        - @category.errors.full_messages_for(:name).each do |message|
-          .invalid-feedback = message
-    .mb-3.row
-      .col-sm-4
-      .col
-        .form-check
-          = f.label :hidden, class: "form-check-label" do
-            = f.check_box :hidden, class: "form-check-input"
-            = t(".hidden")
+  / name
+  .field
+    = form.label :name, t(".name"), class: "label"
+    .control.has-icons-left
+      = form.text_field :name, class: input_class_for(@category, :name), placeholder: t(".name")
+      span.icon.is-left = icon("fa-solid fa-quote-left")
+      - @category.errors.full_messages_for(:name).each do |message|
+        p.help.is-danger = message
 
-  .card-footer
-    .row.justify-content-end
-      .col-auto
-        = f.submit class: "btn btn-primary"
+  / hidden
+  .field
+    = form.label :hidden, t(".hidden"), class: "checkbox" do
+      = form.check_box :hidden
+      = " " + t(".hidden")
+
+  / submit button
+  .mt-5
+    = form.submit class: "button is-success is-fullwidth"

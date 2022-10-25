@@ -1,58 +1,61 @@
-/ Welcome
+/ welcome
 - unless @all_user_transactions.any?
   = render "welcome"
 
-/ Header
-.row.align-items-center.justify-content-between.mb-3
-  / Title
-  .col
-    h2
-      = t(".listing_transactions", current_account: @current_account.name)
-      sup
-        .badge.rounded-pill.bg-secondary#total = @nb_transactions
-    = render partial: "sum_checked", locals: { sum_checked: @sum_checked }
 
-  / Download
-  .col-md-auto.d-none.d-sm-block
-    h2 = link_to icon("fa-solid fa-download"),
-                 account_transactions_path(@current_account, format: :csv),
-                 title: t(".export_transactions"),
-                 class: "btn btn-light"
+/ header
+.level
+  .level-left
+    / title
+    .level-item
+      div
+        h2.title
+          = t(".listing_transactions", current_account: @current_account.name)
+          sup title="#{t('.count')}"
+            .tag.is-primary.is-rounded#total = @nb_transactions
+        / sum checked
+        .heading
+          = render partial: "sum_checked", locals: { sum_checked: @sum_checked }
 
-  / New transaction
-  .col-md-auto
-    h2 = link_to icon_text("fa-solid fa-circle-plus", t(".new_transaction")),
-                 new_account_transaction_path,
-                 class: "btn btn-primary"
+  .level-right
+    / download
+    .level-item.is-hidden-touch
+      = link_to icon("fa-solid fa-download"),
+                account_transactions_path(@current_account, format: :csv),
+                title: t(".export_transactions"),
+                class: "button is-link is-light"
 
-/ Table
-.row#content-table
-  table.table.table-striped#magic-table
-    thead
-      tr
-        th
-        th = t(".date")
-        th = t(".category")
-        th.text-end = t(".debit")
-        th.text-end = t(".credit")
-        th.text-end = t(".balance")
-        th = t(".comment")
-        th
+    / new transaction
+    .level-item
+      = link_to icon_text("fa-solid fa-circle-plus", t(".new_transaction")), new_account_transaction_path, class: "button is-primary"
 
-    tbody#listing
-      = render partial: "transaction", locals: { transactions: @transactions,
-                                                 checked:      t(".checked"),
-                                                 date:         t(".date"),
-                                                 category:     t(".category"),
-                                                 debit:        t(".debit"),
-                                                 credit:       t(".credit"),
-                                                 balance:      t(".balance"),
-                                                 comment:      t(".comment") }
+/ table
+table.table.is-fullwidth.is-striped#magic-table
+  thead
+    tr
+      th
+      th = t(".date")
+      th = t(".category")
+      th.has-text-right = t(".debit")
+      th.has-text-right = t(".credit")
+      th.has-text-right = t(".balance")
+      th = t(".comment")
+      th
 
-/ More transactions
+  tbody#listing
+    = render partial: "transaction", locals: { transactions: @transactions,
+                                               checked:      t(".checked"),
+                                               date:         t(".date"),
+                                               category:     t(".category"),
+                                               debit:        t(".debit"),
+                                               credit:       t(".credit"),
+                                               balance:      t(".balance"),
+                                               comment:      t(".comment") }
+
+/ more transactions
 - if @nb_transactions > @limit
-  #more-items.row.mb-3
-    .d-flex.justify-content-center
-      = form_tag(account_transactions_path(@current_account), id: "more_items_form", method: :get, remote: true) do
+  #more-items.columns.is-mobile.is-centered
+    .column.is-narrow
+      = form_with(url: account_transactions_path(@current_account), id: "more_items_form", method: :get, local: false) do
         = hidden_field_tag "offset", @limit, autocomplete: "off"
-        = submit_tag t(".more_transactions"), class: "btn btn-primary"
+        = submit_tag t(".more_transactions"), class: "button is-primary"

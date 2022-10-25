@@ -1,32 +1,17 @@
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-
-async function enableOrDisableIrreversibleButton() {
-  let irreversibleChoice = document.getElementById("irreversibleChoice");
-  let irreversibleButton = document.getElementById("irreversibleButton");
-  let irreversibleSpinner = document.getElementById("irreversibleSpinner");
-
-  if (irreversibleChoice.checked) {
-    irreversibleSpinner.classList.remove("visually-hidden");
-    await sleep(2000);
-    if (irreversibleChoice.checked) {
-      irreversibleSpinner.classList.add("visually-hidden");
-      irreversibleButton.disabled = false;
+window.enableOrDisable = function() {
+  if (document.getElementById("irreversibleCheckbox") !== null && document.getElementById("irreversibleButton") !== null) {
+    let irreversibleCheckbox = document.getElementById("irreversibleCheckbox");
+    let irreversibleButton = document.getElementById("irreversibleButton");
+  
+    if (irreversibleCheckbox.checked) {
+      irreversibleButton.classList.add("is-loading")
+      setTimeout(function() {
+        irreversibleButton.classList.remove("is-loading");
+        irreversibleButton.disabled = false;
+      }, 2000)
+    } else {
+      irreversibleButton.classList.remove("is-loading");
+      irreversibleButton.disabled = true;
     }
-  } else {
-    if (!irreversibleSpinner.classList.contains("visually-hidden")) {
-      irreversibleSpinner.classList.add("visually-hidden");
-    }
-    irreversibleButton.disabled = true;
-  }
-}
-
-// once_ready(function(){
-if (document.getElementById("irreversibleChoice") !== null ) {
-  document.getElementById("irreversibleChoice").onclick = function(event){
-    enableOrDisableIrreversibleButton();
   };
-};
-// });
+}

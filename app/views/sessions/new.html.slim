@@ -1,48 +1,54 @@
-.row.justify-content-center
-  / .col-8.d-none.d-md-block
-  /   #carouselFeatues.carousel.slide data-bs-ride="carousel"
-  /     .carousel-indicators
-  /       button.active type="button" data-bs-target="#carouselFeatues" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1"
-  /       button type="button" data-bs-target="#carouselFeatues" data-bs-slide-to="1" aria-label="Slide 2"
-  /       button type="button" data-bs-target="#carouselFeatues" data-bs-slide-to="2" aria-label="Slide 3"
-  /     .carousel-inner
-  /       .carousel-item.active
-  /         img.d-block src="https://bulma.io/images/placeholders/256x256.png"  width="800" height="300"
-  /         .carousel-caption.d-none.d-md-block
-  /           h5 First slide label
-  /           p Some representative placeholder content for the first slide.
-  /       .carousel-item
-  /         img.d-block src="https://bulma.io/images/placeholders/256x256.png" width="800" height="400"
-  /         .carousel-caption.d-none.d-md-block
-  /           h5 Second slide label
-  /           p Some representative placeholder content for the second slide.
-  /       .carousel-item
-  /         img.d-block src="https://bulma.io/images/placeholders/256x256.png" width="800" height="400"
-  /         .carousel-caption.d-none.d-md-block
-  /           h5 Third slide label
-  /           p Some representative placeholder content for the third slide.
-  /     button.carousel-control-prev type="button" data-bs-target="#carouselFeatues" data-bs-slide="prev"
-  /       span.carousel-control-prev-icon aria-hidden="true"
-  /       span.visually-hidden Previous
-  /     button.carousel-control-next type="button" data-bs-target="#carouselFeatues" data-bs-slide="next"
-  /       span.carousel-control-next-icon aria-hidden="true"
-  /       span.visually-hidden Next
-  .col-auto
-    .card.shadow
-      = form_tag("login") do
+.columns.is-centered
+  .column.is-narrow
+    = form_with(url: login_path, class: "box") do |form|
+      .field.has-text-centered
+        = image_tag "_icon.svg"
+      .tabs.is-fullwidth
+        ul
+          li.is-active = link_to icon_text("fa-solid fa-right-to-bracket", t(".login")), login_path
+          li = link_to icon_text("fa-solid fa-user-plus", t(".create_user")), new_user_path
+      / email
+      .field
+        = label_tag :email, t(".email"), class: "label"
+        .control.has-icons-left
+          = form.email_field :email, class: "input", placeholder: t(".email"), autofocus: true
+          span.icon.is-left = icon("fa-solid fa-envelope")
+      / password
+      .field
+        = label_tag :password, t(".password"), class: "label"
+        .control.has-icons-left
+          = form.password_field :password, class: "input", placeholder: t(".password")
+          span.icon.is-left = icon("fa-solid fa-lock")
+      / login button
+      .mt-5
+        = form.submit t(".login"), class: "button is-success is-fullwidth"
 
-        h1.card-header = t(".login")
-
-        .card-body
-          .mb-3.row
-            = label_tag :email, t(".email"), class: "col-sm-4 col-form-label"
-            .col-sm-8
-              = email_field_tag :email, params[:email], class: "form-control", placeholder: t(".email"), autofocus: true
-          .mb-3.row
-            = label_tag :password, t(".password"), class: "col-sm-4 col-form-label"
-            .col-sm-8
-              = password_field_tag :password, params[:password], class: "form-control", placeholder: t(".password")
-        .card-footer
-          .row.justify-content-end
-            .col-auto
-              = submit_tag t(".login"), class: "btn btn-primary"
+/ .tile.is-ancestor
+/   .tile.is-vertical.is-8
+/     .tile
+/       .tile.is-parent.is-vertical
+/         article.tile.is-child.notification.is-primary
+/           p.title Vertical...
+/           p.subtitle Top tile
+/         article.tile.is-child.notification.is-warning
+/           p.title ...tiles
+/           p.subtitle Bottom tile
+/       .tile.is-parent
+/         article.tile.is-child.notification.is-info
+/           p.title Middle tile
+/           p.subtitle With an image
+/           figure.image.is-4by3
+/             img src="https://bulma.io/images/placeholders/640x480.png"
+/     .tile.is-parent
+/       article.tile.is-child.notification.is-danger
+/         p.title Wide tile
+/         p.subtitle Aligned with the right tile
+/         .content
+/           /! Content
+/   .tile.is-parent
+/     article.tile.is-child.notification.is-success
+/       .content
+/         p.title Tall tile
+/         p.subtitle With even more content
+/         .content
+/           /! Content

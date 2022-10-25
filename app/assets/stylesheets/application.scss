@@ -1,14 +1,29 @@
-// Bootstrap
-$font-size-base: 0.9rem;
+// @charset "utf-8";
+
+// Bulma
+// https://bulma.io/documentation/customize/variables/
 $primary:   #911e93;
-$secondary: #AB1A67;
 $light:     #F1F0EE;
 $dark:      #4F5155;
 $info:      #4989C9;
-$success:   #7EC9A8;
-$warning:   #e97a1f;
-$danger:    #f44336;
-@import "bootstrap/scss/bootstrap";
+// $success:   #7EC9A8;
+$warning:   #E97A1F;
+// $danger:    #F44336;
+$body-background-color: #FAFAFA;
+$footer-background-color: #F5F5F5;
+$footer-padding: 1rem 1rem 1rem;
+@import "bulma/bulma";
+
+// footer at the bottom
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+#wrapper {
+  flex: 1 0 0;
+}
 
 // Font Awesome
 $fa-font-path: "@fortawesome/fontawesome-free/webfonts";
@@ -38,12 +53,6 @@ select.form-control[multiple] option:checked {
 .list-special .list-group-item {
   border-right: 0px;
   border-left: 0px;
-}
-
-// sadely, tables have margin-[right|left]: -15px
-#content-table {
-  margin-right: 0;
-  margin-left: 0;
 }
 
 // magic transformation for tables

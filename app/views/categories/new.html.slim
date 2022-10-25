@@ -1,8 +1,6 @@
-= breadcrumb t(".categories"),
-             link_to(@current_account.name, account_categories_path(@current_account)),
-             t(".create_category")
+= breadcrumb link_to(@current_account.name, account_categories_path(@current_account)),
+              link_to(t(".create_category"), new_account_category_path)
 
-.row.justify-content-center
-  .col-md-auto
-    .card.shadow.mb-3
+.columns.is-centered
+  .column.is-narrow
       = render partial: "form", locals: { title: t(".create_category") }

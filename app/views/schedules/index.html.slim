@@ -1,52 +1,53 @@
-/ Welcome
+/ welcome
 - unless @all_user_schedules.any?
   = render "welcome"
 
-/ Header
-.row.align-items-center.justify-content-between.mb-3
-  / Title
-  .col
-    h2
-      = t(".listing_schedules", current_account: @current_account.name)
-      sup
-        .badge.rounded-pill.bg-secondary#total = @nb_schedules
+/ header
+.level
+  .level-left
+    / title
+    .level-item
+      h2.title
+        = t(".listing_schedules", current_account: @current_account.name)
+        sup title="#{t('.count')}"
+          .tag.is-primary.is-rounded#total = @nb_schedules
 
-  / Download
-  .col-md-auto.d-none.d-sm-block
-    h2 = link_to icon("fa-solid fa-download"),
-                 account_schedules_path(@current_account, format: :csv),
-                 title: t(".export_schedules"),
-                 class: "btn btn-light"
+  .level-right
+    / download
+    .level-item.is-hidden-touch
+      = link_to icon("fa-solid fa-download"),
+                account_schedules_path(@current_account, format: :csv),
+                title: t(".export_schedules"),
+                class: "button is-link is-light"
 
-  / New schedule
-  .col-md-auto
-    h2 = link_to icon_text("fa-solid fa-circle-plus", t(".new_schedule")), new_account_schedule_path, class: "btn btn-primary"
+    / new schedule
+    .level-item
+      = link_to icon_text("fa-solid fa-circle-plus", t(".new_schedule")), new_account_schedule_path, class: "button is-primary"
 
-/ Table
-.row#content-table
-  table.table.table-striped#magic-table
-    thead
-      tr
-        th
-        th = t(".next_time")
-        th = t(".frequency")
-        th = t(".category")
-        th.text-end = t(".amount")
-        th = t(".comment")
-        th
+/ table
+table.table.is-fullwidth.is-striped#magic-table
+  thead
+    tr
+      th
+      th = t(".next_time")
+      th = t(".frequency")
+      th = t(".category")
+      th.text-end = t(".amount")
+      th = t(".comment")
+      th
 
-    tbody#listing
-      = render partial: "schedule", locals: { schedules: @schedules,
-                                              next_time: t(".next_time"),
-                                              frequency: t(".frequency"),
-                                              category:  t(".category"),
-                                              amount:    t(".amount"),
-                                              comment:   t(".comment") }
+  tbody#listing
+    = render partial: "schedule", locals: { schedules: @schedules,
+                                            next_time: t(".next_time"),
+                                            frequency: t(".frequency"),
+                                            category:  t(".category"),
+                                            amount:    t(".amount"),
+                                            comment:   t(".comment") }
 
-/ More schedules
+/ more schedules
 - if @nb_schedules > @limit
-  #more-items.row.mb-3
-    .d-flex.justify-content-center
-      = form_tag(account_schedules_path(@current_account), id: "more_items_form", method: :get, remote: true) do
+  #more-items.columns.is-mobile.is-centered
+    .column.is-narrow
+      = form_with(url: account_schedules_path(@current_account), id: "more_items_form", method: :get, local: false) do
         = hidden_field_tag "offset", @limit, autocomplete: "off"
-        = submit_tag t(".more_schedules"), class: "btn btn-primary"
+        = submit_tag t(".more_schedules"), class: "button is-primary"

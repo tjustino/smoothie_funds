@@ -1,56 +1,54 @@
-/ Header
-.row.align-items-center.justify-content-between.mb-3
-  .col
-    h2 = t(".result")
+/ header
+h2.title.mb-0 = t(".result")
 
-/ Resume
-.row
-  .col
-    .card
-      .card-body.text-white.bg-info.bg-gradient
-        = render partial: "resume", locals: { search: @search }
+/ resume
+.column
+  .card
+    .card-content = render partial: "resume", locals: { search: @search }
 
 / Infos
-.row.justify-content-between.mb-2
-  .col-auto
-    / Trasnaction's sum
-    p.badge.bg-secondary
+.columns.is-gapless
+  / transaction's sum
+  .column.is-narrow
+    p.tag.is-primary
       = t(".sum")
       span = number_to_currency(@sum_transactions)
 
-  .col-auto
-    / Trasnaction's count
-    p.badge.bg-secondary
+  / spacing
+  .column
+
+  / transaction's count
+  .column.is-narrow
+    p.tag.is-primary
       = t(".count")
       span#total = @nb_transactions
 
-/ Table
-.row#content-table
-  table.table.table-striped#magic-table
-    thead
-      tr
-        th
-        th = t(".account")
-        th = t(".date")
-        th = t(".category")
-        th.text-end = t(".debit")
-        th.text-end = t(".credit")
-        th = t(".comment")
-        th
+/ table
+table.table.is-fullwidth.is-striped#magic-table
+  thead
+    tr
+      th
+      th = t(".account")
+      th = t(".date")
+      th = t(".category")
+      th.has-text-right = t(".debit")
+      th.has-text-right = t(".credit")
+      th = t(".comment")
+      th
 
-    tbody#listing
-      = render partial: "transaction", locals: { transactions: @transactions,
-                                                 account:      t(".account"),
-                                                 date:         t(".date"),
-                                                 category:     t(".category"),
-                                                 debit:        t(".debit"),
-                                                 credit:       t(".credit"),
-                                                 comment:      t(".comment") }
+  tbody#listing
+    = render partial: "transaction", locals: { transactions: @transactions,
+                                               account:      t(".account"),
+                                               date:         t(".date"),
+                                               category:     t(".category"),
+                                               debit:        t(".debit"),
+                                               credit:       t(".credit"),
+                                               comment:      t(".comment") }
 
 / More transactions
 - if @nb_transactions > @limit
-  #more-items.row.mb-3
-    .d-flex.justify-content-center
-      = form_tag(search_path, id: "more_items_form", method: :get, remote: true) do
+  #more-items.columns.is-mobile.is-centered
+    .column.is-narrow
+      = form_with(url: search_path, id: "more_items_form", method: :get, local: false) do
         = hidden_field_tag "offset", @limit, autocomplete: "off"
-        = submit_tag t(".more_transactions"), class: "btn btn-primary"
+        = submit_tag t(".more_transactions"), class: "button is-primary"

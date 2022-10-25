@@ -1,52 +1,59 @@
-dl.row.mb-0
-  / Accounts
-  dt.col-md-2   = t(".accounts")
-  dd.col-md-10  = joined_accounts_names(@current_accounts, search.accounts)
+table.table.is-fullwidth
+  tbody
+    / accounts
+    tr.is-size-7
+      th.is-narrow = t(".accounts")
+      td = joined_accounts_names(@current_accounts, search.accounts)
 
-  / Amounts
-  dt.col-md-2 = t(".amount")
-  - if not search.min.blank? and not search.max.blank?
-    dd.col-md-10 = t(".between_amount", min: number_to_currency(search.min), max: number_to_currency(search.max))
-  - elsif not search.min.blank? and search.max.blank?
-    dd.col-md-10 = t(".more_than", min: number_to_currency(search.min))
-  - elsif search.min.blank?      and not search.max.blank?
-    dd.col-md-10 = t(".less_than", max: number_to_currency(search.max))
-  - else
-    dd.col-md-10 = t(".no_restriction")
+    / amounts
+    tr.is-size-7
+      th.is-narrow = t(".amount")
+      - if not search.min.blank? and not search.max.blank?
+        td = t(".between_amount", min: number_to_currency(search.min), max: number_to_currency(search.max))
+      - elsif not search.min.blank? and search.max.blank?
+        td = t(".more_than", min: number_to_currency(search.min))
+      - elsif search.min.blank?      and not search.max.blank?
+        dtd = t(".less_than", max: number_to_currency(search.max))
+      - else
+        td = t(".no_restriction")
 
-  / Date
-  dt.col-md-2 = t(".date")
-  - if not search.before.blank? and not search.after.blank?
-    dd.col-md-10 = t(".between_date", before: l(search.before), after: l(search.after))
-  - elsif not search.before.blank? and search.after.blank?
-    dd.col-md-10 = t(".before", before: l(search.before))
-  - elsif search.before.blank? and not search.after.blank?
-    dd.col-md-10 = t(".after", after: l(search.after))
-  - else
-    dd.col-md-10 = t(".no_restriction")
+    / date
+    tr.is-size-7
+      th.is-narrow = t(".date")
+      - if not search.before.blank? and not search.after.blank?
+        td = t(".between_date", before: l(search.before), after: l(search.after))
+      - elsif not search.before.blank? and search.after.blank?
+        td = t(".before", before: l(search.before))
+      - elsif search.before.blank? and not search.after.blank?
+        td = t(".after", after: l(search.after))
+      - else
+        td = t(".no_restriction")
 
-  / Categories
-  dt.col-md-2   = t(".categories")
-  dd.col-md-10  = joined_categories_names(@current_accounts, search.accounts, search.categories)
+    / categories
+    tr.is-size-7
+      th.is-narrow = t(".categories")
+      td = joined_categories_names(@current_accounts, search.accounts, search.categories)
 
-  / Comment
-  dt.col-md-2 = t(".comment")
-  - if search.operator == "like" and search.comment.present?
-    dd.col-md-10 = t(".like", comment: search.comment)
-  - elsif search.operator == "like" and search.comment.blank?
-    dd.col-md-10 = t(".without_comment")
-  - elsif search.operator == "not_like" and search.comment.present?
-    dd.col-md-10 = t(".not_like", comment: search.comment)
-  - elsif search.operator == "not_like"  and search.comment.blank?
-    dd.col-md-10 = t(".with_comment")
-  - else
-    dd.col-md-10 = t(".no_restriction")
+    / comment
+    tr.is-size-7
+      th.is-narrow = t(".comment")
+      - if search.operator == "like" and search.comment.present?
+        td = t(".like", comment: search.comment)
+      - elsif search.operator == "like" and search.comment.blank?
+        td = t(".without_comment")
+      - elsif search.operator == "not_like" and search.comment.present?
+        td = t(".not_like", comment: search.comment)
+      - elsif search.operator == "not_like"  and search.comment.blank?
+        td = t(".with_comment")
+      - else
+        td = t(".no_restriction")
 
-  / Checked
-  dt.col-md-2 = t(".checked")
-  - if search.checked == "yep"
-    dd.col-md-10 = t(".yep")
-  - elsif search.checked == "nop"
-    dd.col-md-10 = t(".nop")
-  - else
-    dd.col-md-10 = t(".checked_or_not")
+    / checked
+    tr.is-size-7
+      th.is-narrow = t(".checked")
+      - if search.checked == "yep"
+        td = t(".yep")
+      - elsif search.checked == "nop"
+        td = t(".nop")
+      - else
+        td = t(".checked_or_not")

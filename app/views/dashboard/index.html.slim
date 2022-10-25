@@ -1,45 +1,21 @@
-/ Welcome
+/ welcome
 - unless @current_accounts.any?
   = render "welcome"
 
-/ Header
-.row.mb-3
-  .col
-    h1 = t(".dashboard")
+/ sharing
+= render partial: "accounts/sharing"
 
-/ Accept sharing
-- @pendings.each do | pending |
-  .row
-    .col
-      .alert.alert-info.clearfix role="alert"
-        h5 = t(".join_shared_account", account: pending.account.name, users: show_other_users(pending.account)).html_safe
-        hr
-        .row.justify-content-start
-          .col-auto
-            = link_to icon_text("fa-regular fa-thumbs-up", t(".accept")),
-                      sharing_path(pending.account),
-                      method: :post,
-                      class: "btn btn-success"
-          .col-auto
-            = link_to icon_text("fa-regular fa-circle-xmark", t(".reject")),
-                      unsharing_path(pending.account),
-                      method: :delete,
-                      class: "btn btn-danger"
-
-/ Dashboard
-.row.justify-content-between
-  / transactions summary
-  .col-md-6
-    .card.shadow.mb-3
-      .card-header.text-white.bg-info
-        h4 = t(".transaction_summary")
-      #transactions-summary.card-body
+.columns
+  / dashboard
+  .column
+    article.panel.is-info
+      .panel-heading = t(".transaction_summary")
+      #transactions-summary
         = render partial: "transactions_summary"
 
   / upcoming terms
-  .col-md-6
-    .card.shadow.mb-3
-      .card-header.text-white.bg-info
-        h3 = t(".upcoming_terms")
-      #upcoming-terms.card-body
+  .column
+    article.panel.is-info
+      .panel-heading = t(".upcoming_terms")
+      #upcoming-terms
         = render partial: "upcoming_terms"

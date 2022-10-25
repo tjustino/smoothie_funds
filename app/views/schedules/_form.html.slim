@@ -1,41 +1,41 @@
-= form_for(shallow_args(@current_account, @schedule)) do |f|
-  h1.card-header = title
-
-  .card-body
-    = f.fields_for :operation do |operation_fields|
-      = render "operation_form", f: operation_fields
-
+= form_with(model: shallow_args(@current_account, @schedule), class: "box") do |form|
+  .content.has-text-centered
+    = icon_text("fa-regular fa-calendar-days", title)
     hr
 
-    .mb-3.row
-      = f.label :frequency, t(".frequency"), class: "col-sm-4 col-form-label"
-      .col
-        .input-group
-          span.input-group-text = t(".all_the")
-          = f.number_field :frequency, class: "form-control", placeholder: t(".frequency")
-          - @schedule.errors.full_messages_for(:frequency).each do |message|
-            .invalid-feedback = message
-      .col
-        = f.select :period,
-                    [[t(".days"), :days], [t(".weeks"), :weeks], [t(".months"), :months], [t(".years"), :years]],
-                    {},
-                    { class: "form-select" }
-        - @schedule.errors.full_messages_for(:period).each do |message|
-          .invalid-feedback = message
+  = form.fields_for :operation do |operation_fields|
+    = render "operation_form", form: operation_fields
 
-    .mb-3.row
-      = f.label :next_time, t(".next_time"), class: "col-sm-4 col-form-label"
-      .col
-        .input-group
-          = f.date_field :next_time, \
-                         class: "form-control", \
-                         placeholder: t(".next_time"), \
-                         value: @schedule.next_time.nil? ? Date.today : @schedule.next_time
-          span.input-group-text = icon "fa-regular fa-calendar-days"
-          - @schedule.errors.full_messages_for(:next_time).each do |message|
-            .invalid-feedback = message
+  hr
 
-  .card-footer
-    .row.justify-content-end
-      .col-auto
-        = f.submit class: "btn btn-primary"
+  / frequency
+  .field
+    = form.label :frequency, t(".frequency"), class: "label"
+    .field.has-addons
+      .control
+        .button.is-static = t(".all_the")
+      .control
+        = form.number_field :frequency, class: input_class_for(@schedule, :frequency), placeholder: t(".frequency")
+        - @schedule.errors.full_messages_for(:frequency).each do |message|
+          p.help.is-danger = message
+      .control
+        span.select
+          = form.select :period, [[t(".days"), :days], [t(".weeks"), :weeks], [t(".months"), :months], [t(".years"), :years]], {}
+          - @schedule.errors.full_messages_for(:period).each do |message|
+            p.help.is-danger = message
+
+  / next time
+  .field
+    = form.label :next_time, t(".next_time"), class: "label"
+    .control.has-icons-left
+      = form.date_field :next_time,
+                        class: input_class_for(@schedule, :next_time), \
+                        placeholder: t(".next_time"), \
+                        value: @schedule.next_time.nil? ? Date.today : @schedule.next_time
+      span.icon.is-left = icon("fa-regular fa-calendar-days")
+      - @schedule.errors.full_messages_for(:next_time).each do |message|
+        p.help.is-danger = message
+
+  / submit button
+  .mt-5
+    = form.submit class: "button is-success is-fullwidth"

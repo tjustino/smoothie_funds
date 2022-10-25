@@ -1,7 +1,6 @@
 = breadcrumb link_to(t(".accounts"), accounts_path),
-             t(".edit_account")
+             link_to(t(".edit_account"), edit_account_path(@account))
 
-.row.justify-content-center
-  .col-md-auto
-    .card.shadow.mb-3
-      = render partial: "form", locals: { title: t(".edit_account") }
+.columns.is-centered
+  .column.is-narrow
+    = render partial: "form", locals: { title: t(".edit_account") }

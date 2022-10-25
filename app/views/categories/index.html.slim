@@ -1,55 +1,52 @@
-/ Welcome
+/ welcome
 - unless @all_user_categories.any?
   = render "welcome"
 
-/ Header
-.row.align-items-center.justify-content-between.mb-3
-  / Title
-  .col
-    h2
-      = t(".listing_categories", current_account: @current_account.name)
-      sup
-        .badge.rounded-pill.bg-secondary#total = @nb_categories
+/ header
+.level
+  .level-left
+    / title
+    .level-item
+      h2.title
+        = t(".listing_categories", current_account: @current_account.name)
+        sup title="#{t('.count')}"
+          .tag.is-primary.is-rounded#total = @nb_categories
 
-  / Download
-  .col-md-auto.d-none.d-sm-block
-    h2 = link_to icon("fa-solid fa-download"),
-                 account_categories_path(@current_account, format: :csv),
-                 title: t(".export_categories"),
-                 class: "btn btn-light"
+  .level-right
+    / download
+    .level-item.is-hidden-touch
+      = link_to icon("fa-solid fa-download"),
+                account_categories_path(@current_account, format: :csv),
+                title: t(".export_categories"),
+                class: "button is-link is-light"
 
-  / Import categories from
-  - if @current_accounts.count > 1
-    = render "import_from"
-    .col-md-auto
-      h2 = button_tag icon_text("fa-solid fa-right-left", t(".import_from")),
-                      class: "btn btn-outline-primary",
-                      data: { bs_toggle: "modal", bs_target: "#importFrom" }
+    / import categories from
+    - if @current_accounts.count > 1
+      = render "import_from"
+      .level-item
+        = button_tag icon_text("fa-solid fa-right-left", t(".import_from")),
+                     class: "button is-link is-light is-outlined",
+                     onclick: "showModal('importFrom')"
 
-  / New category
-  .col-md-auto
-    h2 = link_to icon_text("fa-solid fa-circle-plus", t(".new_category")),
-                 new_account_category_path,
-                 class: "btn btn-primary"
+    / new category
+    .level-item
+      = link_to icon_text("fa-solid fa-circle-plus", t(".new_category")), new_account_category_path, class: "button is-primary"
 
-/ Table
-.row#content-table
-    table.table.table-striped#magic-table
-      thead
-        tr
-          th = t(".name")
-          th = t(".use")
-          th
+/ table
+table.table.is-fullwidth.is-striped#magic-table
+  thead
+    tr
+      th = t(".name")
+      th = t(".use")
+      th
 
-      tbody#listing
-        = render partial: "category", locals: { categories: @categories,
-                                                name:       t(".name"),
-                                                use:        t(".use")    }
+  tbody#listing
+    = render partial: "category", locals: { categories: @categories, name: t(".name"), use: t(".use") }
 
-/ More categories
+/ more categories
 - if @nb_categories > @limit
-  #more-items.row.mb-3
-    .d-flex.justify-content-center
-      = form_tag(account_categories_path(@current_account), id: "more_items_form", method: :get, remote: true) do
+  #more-items.columns.is-mobile.is-centered
+    .column.is-narrow
+      = form_with(url: account_categories_path(@current_account), id: "more_items_form", method: :get, local: false) do
         = hidden_field_tag "offset", @limit, autocomplete: "off"
-        = submit_tag t(".more_categories"), class: "btn btn-primary"
+        = submit_tag t(".more_categories"), class: "button is-primary"

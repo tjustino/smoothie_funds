@@ -1,30 +1,20 @@
-.row.justify-content-center
-  .col-md-6
-    .card.shadow.mb-3
-      = render partial: "form", locals: { title: t(".create_search") }
+.columns.is-centered
+  .column.is-narrow
+    = render partial: "form", locals: { title: t(".create_search") }
 
 - if @searches.any?
-
   hr
 
-  .row.mb-3
-    .accordion#accordion
-      - @searches.each_with_index do |search, index|
-        .accordion-item
-          h2.accordion-header id="heading#{index}"
-            button.accordion-button.text-white.bg-info class=("collapsed" unless index == 0) type="button" data-bs-toggle="collapse" data-bs-target="#collapse#{index}" aria-expanded="true" aria-controls="collapse#{index}"
-              = witch_search(search, index)
-        .accordion-collapse.collapse id="collapse#{index}" class=("show" if index == 0) aria-labelledby="heading#{index}" data-bs-parent="#accordion"
-          .accordion-body
-            = render partial: "resume", locals: { search: search }
-            .card-footer
-              .row.justify-content-between
-                .col-auto
-                   = link_to icon_text("fa-regular fa-circle-right", t(".show_result")), search, class: "link-info"
-                .col-auto
-                  = link_to icon_text("fa-regular fa-trash-can", t(".destroy")),
-                            search,
-                            method: :delete,
-                            data: { confirm: t(".are_you_sure") },
-                            title: t(".destroy"),
-                            class: "link-warning"
+  .columns
+    - @searches.each_with_index do |search, index|
+      - if index < 3
+        .column
+          .card
+            header.card-header
+              .card-header-title = witch_search(search, index)
+              button.card-header-icon onclick="toggleAccordion(this)" = icon("fa-solid fa-chevron-up")
+            .card-content.is-hidden
+              = render partial: "resume", locals: { search: search }
+            footer.card-footer
+              = link_to icon_text("fa-regular fa-circle-right", t(".show_result")), search, class: "card-footer-item"
+              = link_to icon_text("fa-regular fa-trash-can", t(".destroy")), search, method: :delete, data: { confirm: t(".are_you_sure") }, title: t(".destroy"), class: "card-footer-item"

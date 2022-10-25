@@ -1,24 +1,20 @@
-/ Header
-.row.mb-3
-  .col
-    h2 = t(".analytics")
-
-.row.mb-3
-  .accordion#accordion
+/ tabs
+.tabs.is-centered.is-toggle.is-toggle-rounded
+  ul
     - @accounts_with_categories.each_with_index do |account, index|
-      .accordion-item.line-chart data-index="#{index}"
-        h2.accordion-header id="heading#{index}"
-          button.accordion-button.text-white.bg-info class=("collapsed" unless index == 0) type="button" data-bs-toggle="collapse" data-bs-target="#collapse#{index}" aria-expanded="true" aria-controls="collapse#{index}"
-            = account.name
-        .accordion-collapse.collapse id="collapse#{index}" class=("show" if index == 0) aria-labelledby="heading#{index}" data-bs-parent="#accordion"
-          .accordion-body
-            h4 = t(".tendency")
-            canvas id="lineChart#{index}" *{\
-              'data-label' => t(".balance"),
-              'data-suffix' => t("number.currency.format.unit"),
-              'data-decimals' => t("number.currency.format.precision"),
-              'data-mark' => t("number.currency.format.separator"),
-              'data-thousand' => t("number.currency.format.delimiter")\
-            }
-            = hidden_field_tag "labels#{index}", dates_before_past_time(account, @transactions)
-            = hidden_field_tag "data#{index}",   past_data(account, @transactions)
+      / tabs
+      li class="#{'is-active' if (params[:account].nil? && index == 0) or (params[:account].to_i == account.id)}"
+        = link_to user_analytics_path(@current_user, account: account)
+          span id="account#{index}" = account.name
+
+/ chart
+h2.subtitle = t(".tendency")
+canvas id="lineChart" *{\
+  'data-label' => t(".balance"),
+  'data-suffix' => t("number.currency.format.unit"),
+  'data-decimals' => t("number.currency.format.precision"),
+  'data-mark' => t("number.currency.format.separator"),
+  'data-thousand' => t("number.currency.format.delimiter")\
+}
+= hidden_field_tag "labels", @labels.map! { |label| l(label) }.join(";")
+= hidden_field_tag "data",   @data.join(";")

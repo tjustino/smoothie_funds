@@ -13,75 +13,71 @@ function hexToRGB(hex, alpha) {
   }
 }
 
-if (document.querySelectorAll(".accordion-item.line-chart") !== null ) {
-  var successColor = getComputedStyle(document.querySelector(":root")).getPropertyValue("--bs-success").replace(" ", "");
-  var lineCharts = document.querySelectorAll(".accordion-item.line-chart");
+if (document.getElementById("lineChart") !== null ) {
+  var positiveColour = "#7EC9A8";
+  var negativeColour = "#F44336";
+  var lineChart = document.getElementById("lineChart");
 
-  for (var index = 0; index < lineCharts.length; index++) {
-    var lineChart = document.getElementById("lineChart" + index)
+  var yAxeFormat = wNumb({
+    mark: lineChart.dataset.mark,
+    thousand: lineChart.dataset.thousand,
+    suffix: lineChart.dataset.suffix
+  });
 
-    var yAxeFormat = wNumb({
-      mark: lineChart.dataset.mark,
-      thousand: lineChart.dataset.thousand,
-      suffix: lineChart.dataset.suffix
-    });
+  var tooltipFormat = wNumb({
+    decimals: lineChart.dataset.decimals,
+    mark: lineChart.dataset.mark,
+    thousand: lineChart.dataset.thousand,
+    suffix: lineChart.dataset.suffix
+  });
 
-    var tooltipFormat = wNumb({
-      decimals: lineChart.dataset.decimals,
-      mark: lineChart.dataset.mark,
-      thousand: lineChart.dataset.thousand,
-      suffix: lineChart.dataset.suffix
-    });
-
-    // const below_zero = (ctx, value) => ctx.p1.parsed.y < 0 ? value : undefined;
-
-    new Chart(lineChart, {
-      type: "line",
-      data: {
-        labels: document.getElementById("labels" + index).value.split(","),
-        datasets: [{
-          label: lineChart.dataset.label,
-          data: document.getElementById("data" + index).value.split(","),
-          fill: true,
-          backgroundColor: hexToRGB(successColor, 0.4),
-          borderColor: hexToRGB(successColor),
-          // segment: {
-          //   borderColor: lineChart => below_zero(lineChart, '#f44336'),
-          //   backgroundColor: lineChart => below_zero(lineChart, '#f44336')
-          // }
-        }]
-      },
-      options: {
-        plugins: {
-          legend: {
-            position: 'bottom'
-          },
-          tooltip: {
-            callbacks: {
-              label: function(context) {
-                var label = context.dataset.label || '';
-                if (label) {
-                  label += ': ';
-                }
-                if (context.parsed.y !== null) {
-                  label += tooltipFormat.to(context.parsed.y);
-                }
-                return label;
-              }
+  new Chart(lineChart, {
+    type: "line",
+    data: {
+      labels: document.getElementById("labels").value.split(";"),
+      datasets: [{
+        label: lineChart.dataset.label,
+        data: document.getElementById("data").value.split(";"),
+        fill: {
+          target: "origin",
+          above: hexToRGB(positiveColour, 0.5),
+          below: hexToRGB(negativeColour, 0.5)
+        },
+        // borderColor: hexToRGB("#4F5155", 0.5),
+        tension: 0.2
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            callback: function(value, index, values) {
+              return yAxeFormat.to(value);
             }
           }
+        }
+      },
+      plugins: {
+        legend: {
+          display: false
         },
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: {
-              callback: function(value, index, values) {
-                return yAxeFormat.to(value);
+        tooltip: {
+          displayColors: false,
+          callbacks: {
+            label: function(context) {
+              var label = context.dataset.label || '';
+              if (label) {
+                label += ': ';
               }
+              if (context.parsed.y !== null) {
+                label += tooltipFormat.to(context.parsed.y);
+              }
+              return label;
             }
           }
         }
       }
-    });
-  }
+    }
+  });
 };

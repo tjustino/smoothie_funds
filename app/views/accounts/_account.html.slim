@@ -1,5 +1,5 @@
 - accounts.each do |account|
-  tr class=("text-muted" if account.hidden == true)
+  tr class=("has-text-grey-light" if account.hidden == true)
     / name
     td data-title="#{name}" = account.name
 
@@ -17,16 +17,17 @@
 
     / common
     td
-      .row.justify-content-start.dotted-top
-        .col-auto
-          = link_to icon("fas fa-edit"), edit_account_path(account), title: t(".edit"), class: "link-info"
-        .col-auto
-          = link_to icon("far fa-trash-alt"),
-                    account_path(account),
-                    method: :delete,
-                    data: {confirm: t(".are_you_sure", account: account.name)},
-                    title: t(".destroy"),
-                    class: "link-danger"
-        - if account.hidden == true
-          .col-auto
-            = tag.i class: "far fa-eye-slash text-muted", title: t(".hidden_account")
+      .level.is-mobile
+        .level-left
+          .level-item.has-text-centered
+            = link_to icon("fa-solid fa-pen-to-square"), edit_account_path(account), title: t(".edit"), class: "has-text-info"
+          .level-item.has-text-centered
+            = link_to icon("fa-regular fa-trash-can"),
+                      account_path(account),
+                      method: :delete,
+                      data: {confirm: t(".are_you_sure", account: account.name)},
+                      title: t(".destroy"),
+                      class: "has-text-danger"
+          - if account.hidden == true
+            .level-item.has-text-centered
+              = tag.span(class: "icon") { tag.i class: "fa-regular fa-eye-slash", title: t(".hidden_account") }
