@@ -19,9 +19,6 @@ fr_FR:
     unpend:
       successfully_unpend:    "Le compte « %{account} » n'est plus proposé au partage"
       cant_unpend:            "Impossible de ne plus proposer le partage du compte « %{account} »"
-    sharing:
-      successfully_sharing:   "Vous partagez maintenant le compte « %{account} »"
-      cant_sharing:           "Impossible de partager le compte « %{account} »"
     unsharing:
       successfully_unsharing: "Le compte « %{account} » n'est plus proposé au partage"
       cant_unsharing:         "Impossible de refuser le partage du compte « %{account} »"
@@ -31,20 +28,19 @@ fr_FR:
       waiting_for:      "En attente de "
       edit:             "Éditer"
       destroy:          "Supprimer"
-      are_you_sure:     "Etes-vous certain de vouloir supprimer le compte « %{account} » ?"
+      are_you_sure:     "Êtes-vous certain de vouloir supprimer le compte « %{account} » ?"
       hidden_account:   "Compte masqué"
     form:
       name:             "Nom"
       initial_balance:  "Balance initiale"
       share:            "Partagé avec"
-      unlink:           "Se délier"
+      unlink:           "Me délier"
       are_you_sure_unlink: "Êtes-vous certain de ne plus vouloir accéder à ce compte ?\nNotez bien que ce compte continuera d'exister pour les personnes avec qui il est actuellement partagé !"
       propose_sharing:  "Partager avec"
       explanation:      "Vous pouvez proposer de partager ce compte avec une autre personne"
       shared_email:     "Courriel"
       help_share:       "Une fois établi, le partage du compte reste actif même si vous mettez à jour votre courriel"
       hidden:           "Masquer ce compte"
-    pending_user:
       pending_user:     "Partage en attente"
       no_longer_propose: "Ne plus proposer"
     welcome:
@@ -75,12 +71,9 @@ fr_FR:
       edit_account:     "Éditer le compte"
     index:
       listing_accounts: "Mes comptes "
+      count:            "Nombre de comptes"
       export_accounts:  "Exporter mes comptes"
       new_account:      "Nouveau compte"
-      join_shared_account: "Voulez-vous partager le compte « %{account} » avec %{users} ?"
-      and:              " et "
-      reject:           "Refuser"
-      accept:           "Accepter"
       name:             "Nom"
       initial_balance:  "Balance initiale"
       share:            "Partagé avec"
@@ -89,6 +82,13 @@ fr_FR:
     new:
       accounts:         "Comptes"
       create_account:   "Créer un compte"
+    sharing:
+      join_shared_account:  "Voulez-vous partager le compte « %{account} » avec %{users} ?"
+      and:                  " et "
+      reject:               "Refuser"
+      accept:               "Accepter"
+      successfully_sharing: "Vous partagez maintenant le compte « %{account} »"
+      cant_sharing:         "Impossible de partager le compte « %{account} »"
 
   categories:
     # controllers
@@ -104,7 +104,7 @@ fr_FR:
       time:             "%{total} fois"
       edit:             "Éditer"
       destroy:          "Supprimer"
-      are_you_sure:     "Etes-vous certain de vouloir supprimer la catégorie « %{category} » ?"
+      are_you_sure:     "Êtes-vous certain de vouloir supprimer la catégorie « %{category} » ?"
       hidden_category:  "Catégorie masquée"
     form:
       name:             "Nom"
@@ -145,7 +145,7 @@ fr_FR:
       edit_category:    "Éditer la catégorie"
     index:
       listing_categories: "Catégories du %{current_account} "
-      # count:            "Nombre de catégories : "
+      count:            "Nombre de catégories"
       export_categories: "Exporter mes catégories"
       new_category:     "Nouvelle catégorie"
       import_from:      "Importer depuis..."
@@ -186,11 +186,12 @@ fr_FR:
     # views
     application:
       site_descritpion: "Gérez vos comptes en toute simplicité !"
-      transactions: 'Transactions <b class="caret"></b>'
-      schedules:    'Échéanciers <b class="caret"></b>'
-      categories:   'Catégories <b class="caret"></b>'
+      transactions: "Transactions"
+      schedules:    "Échéanciers"
+      categories:   "Catégories"
       accounts:     "Comptes"
       profile:      "Profil"
+      support:      "Contacter le support"
       logout:       "Déconnexion"
       search:       "Rechercher"
       analytics:    "Analyser"
@@ -198,6 +199,8 @@ fr_FR:
       terms_of_use: "Mentions légales"
       cookie_policy: "Cookie"
       personal_data: "Données personnelles"
+      aria_close:    "Fermer"
+      alert_no_js:   "Activez le JavaScript pour tirer pleinement parti de SmoothieFunds !"
 
   rights:
     # views
@@ -206,8 +209,7 @@ fr_FR:
       speech: |-
         Ce site web utilise un unique cookie nécessaire au bon fonctionnement du service.<br>
         En plaçant ce cookie fonctionnel, nous vous facilitons la navigation : ainsi, vous n’avez pas besoin de ressaisir vos identifiants à chaque page visitée.<br>
-        Conformément à la loi, nous pouvons placer ce cookie sans votre consentement.<br>
-        Pour les plus curieux, son petit nom est <i>_smoothiefunds_session</i>.
+        Conformément à la loi, nous pouvons placer ce cookie sans votre consentement.
     gdpr:
       title: "Protection de vos données à caractère personnel"
       speech: |-
@@ -240,14 +242,14 @@ fr_FR:
         <dt>Droits d'opposition, d'interrogation, d'accès et de rectification</dt>
         <dd>Conformément au cadre juridique sur la protection des données en vigueur, vous bénéficiez d’un droit d’accès, rectification, effacement, opposition et limitation du traitement vous concernant.<br>Le délégué à la protection des données (DPD) est votre interlocuteur pour toute demande d’exercice de vos droits sur ce traitement.</dd>
         <dt>Coordonnées du délégué à la protection des données :</dt>
-        <dd>dpd<i class="fas fa-at"></i>smoothiefunds⸳com</dd>
+        <dd>dpd<i class="fa-solid fa-at"></i>smoothiefunds⸳com</dd>
         <dt>Réclamation auprès de la Cnil :</dt>
         <dd>Vous pouvez solliciter la CNIL <a href="https://www.cnil.fr/fr/plaintes" target="_blank">directement depuis leur site Internet</a> ou à l'adresse suivante : 3 place de Fontenoy TSA 80715 75334 Paris Cedex 07</dd>
         </dl>
     terms:
       title: "Mentions légales"
       speech: |-
-        <h2><i class="fas fa-server"></i> Hébergeur</h2>
+        <h2><i class="fa-solid fa-server"></i> Hébergeur</h2>
         <dl>
         <dt>Raison sociale :</dt><dd>OVH SAS</dd>
         <dt>Adresse :</dt><dd>2 rue Kellermann 59100 Roubaix (France)</dd>
@@ -265,6 +267,7 @@ fr_FR:
       email:        "Courriel"
       password:     "Mot de passe"
       login:        "Connexion"
+      create_user:  "Nouveau"
 
   transactions:
     # controllers
@@ -293,7 +296,7 @@ fr_FR:
       check_transaction:  "Rapprocher la transaction"
       edit:               "Éditer"
       destroy:            "Supprimer"
-      are_you_sure:       "Etes-vous certain de vouloir supprimer la transaction ?"
+      are_you_sure:       "Êtes-vous certain de vouloir supprimer la transaction ?"
     welcome:
       welcome:          "La création de transaction"
       content:              |-
@@ -315,11 +318,13 @@ fr_FR:
         (dernière ligne du relevé bancaire). C'est une bonne pratique !
       close:            "Ok j'ai compris !"
     edit:
-      transactions:       "Transactions"
-      edit_transaction: "Éditer la transaction"
+      transactions:          "Transactions"
+      edit_transaction:      "Éditer la transaction"
+      search:                "Rechercher"
+      current_search_number: "Recherche courante"
     index:
-      listing_transactions: "Liste des transactions du %{current_account} "
-      count:              "Nombre de transactions : "
+      listing_transactions: "Liste des transactions du %{current_account}"
+      count:              "Nombre de transactions"
       export_transactions: "Exporter mes transactions"
       new_transaction:    "Nouvelle transaction"
       checked:            "Rapproché"
@@ -372,7 +377,7 @@ fr_FR:
       years:              "ans"
       edit:               "Éditer"
       destroy:            "Supprimer"
-      are_you_sure:       "Etes-vous certain de vouloir supprimer cet échéancier ?"
+      are_you_sure:       "Êtes-vous certain de vouloir supprimer cet échéancier ?"
     welcome:
       welcome:          "La création d'échéancier"
       content:              |-
@@ -398,7 +403,7 @@ fr_FR:
       edit_schedule:      "Éditer l'échéancier"
     index:
       listing_schedules:  "Liste des échéanciers du %{current_account} "
-      count:              "Nombre d'échéanciers : "
+      count:              "Nombre d'échéanciers"
       export_schedules:   "Exporter mes échéanciers"
       new_schedule:       "Nouvel échéancier"
       next_time:          "Prochaine échéance"
@@ -423,28 +428,24 @@ fr_FR:
     # views
     form:
       email:                  "Courriel"
-      speech_mail:            "Utilisé uniquement pour la connexion et le support"
+      speech_mail:            "Nous nous engageons à n'utiliser cette donnée que pour votre connexion et dans le cadre du support."
       name:                   "Nom"
       speech_name:            "Permet de personaliser le nom du menu"
       password:               "Mot de passe"
-      password_confirmation:  "Confirmation"
+      password_confirmation:  "Confirmation du mot de passe"
       speech_gdpr: |-
         En créant votre compte, ce site <a href="%{link}" target="_blank">collectera et traitera certaines de vos données personnelles</a>.<br>
         Nous prenons au sérieux le respect de nos utilisateurs.
     edit:
       edit_user:  "Édition de l'utilisateur courant"
-      title_support: "Support"
-      speech_support: |-
-        Vous avez trouvé un bug ou vous avez une simple question ?<br>
-        Vous pouvez utiliser ce <a href="https://github.com/tjustino/smoothie_funds/issues" target="_blank">lien</a>
-        ou envoyer <a href="mailto:support@smoothiefunds.com">un mail au support</a>.
-      title_delete_account: "Supprimer mon compte"
+      title_delete_account:  "Supprimer mon compte"
+      launch_delete_account: "Lancer la procédure..."
       speech_delete_account: |-
-        Vous vous apprêtez à supprimer définitivement toutes vos données à l'exception de celles relatives aux comptes partagés.
+        Vous avez la possibilité de supprimer définitivement toutes vos données à l'exception de celles relatives aux comptes partagés.
       are_you_sure: "Êtes-vous sûr de vouloir faire ça ?"
       speech_explain_delete_account: |-
         Vous vous apprêtez à supprimer un certain nombre de données en plus de votre compte utilisateur :
-      speech_irreversible_choice: Je comprends que cette action est irréversible
+      speech_irreversible_choice: "Je comprends que cette action est irréversible"
       accounts:     "Comptes"
       categories:   "Catégories"
       schedules:    "Échéanciers"
@@ -452,7 +453,8 @@ fr_FR:
       transactions: "Transactions"
       close:        "Fermer cette fenêtre"
     new:
-      create_user:  "Créer un nouvel utilisateur"
+      login:        "Connexion"
+      create_user:  "Nouveau"
 
   searches:
     # controllers
@@ -504,7 +506,7 @@ fr_FR:
       check_transaction:  "Rapprocher la transaction"
       edit:               "Éditer"
       destroy:            "Supprimer"
-      are_you_sure:       "Etes-vous certain de vouloir supprimer la transaction ?"
+      are_you_sure:       "Êtes-vous certain de vouloir supprimer la transaction ?"
     new:
       create_search:          "Nouvelle recherche"
       date_search:            "Recherche du %{date}"
@@ -513,7 +515,7 @@ fr_FR:
       antepenultimate_search: "Antépénultième recherche"
       show_result:            "Voir le résultat"
       destroy:                "Supprimer"
-      are_you_sure:           "Etes-vous certain de vouloir supprimer cette recherche ?"
+      are_you_sure:           "Êtes-vous certain de vouloir supprimer cette recherche ?"
     show:
       result:             "Résultat de recherche"
       sum:                "Somme des montants : "
@@ -528,7 +530,6 @@ fr_FR:
 
   analytics:
     index:
-      analytics:  "Analyse"
       tendency:   "Tendance des 3 derniers mois"
       balance:    "Balance"
 
@@ -557,7 +558,7 @@ fr_FR:
     errors:
       messages:
         blank:        "ne peut pas être vide"
-        taken:        "a déjà été pris"
+        taken:        "ce compte existe déjà"
         confirmation: "ne correspond pas au mot de passe"
         not_a_number: "doit être une valeur numérique"
         too_short:    "doit comporter au minimum %{count} caractères"
