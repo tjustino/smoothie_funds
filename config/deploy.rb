@@ -2,6 +2,7 @@
 
 set :application, "smoothiefunds"
 set :repo_url,    "git@github.com:tjustino/smoothie_funds.git"
+set :branch,      "main"
 set :deploy_to,   "/srv/http/#{fetch(:application)}"
 
 # files/dirs we want symlinking to shared
