@@ -10,30 +10,21 @@ class AnalyticsController < ApplicationController
                 @current_user.accounts.where(id: params[:account].to_i).first
               end
 
-    transactions_from_past_time_to_now = Transaction.active
-                                                    .where(account_id: account.id)
-                                                    .where("date >= ?", past_time)
-                                                    .where("date <= ?", Time.zone.now.midnight)
-                                                    .group(:date)
-                                                    .order(date: :asc) # must be before sum
-                                                    .sum(:amount)
+    transactions_with_balances         = Transaction.active.with_balances_for(account).where(account_id: account)
+    transactions_from_past_time_to_now = Transaction.select("twb.date", "twb.balance")
+                                                    .from(transactions_with_balances, :twb)
+                                                    .where("twb.date": past_time..Time.zone.today)
 
     @labels = []
-    transactions_from_past_time_to_now.each_key { |key| @labels << key }
+    transactions_from_past_time_to_now.each { |transaction| @labels << transaction.date }
 
-    @data = transactions_from_past_time_to_now.values.map(&:to_f)
-    @data.each_with_index do |amount, index|
-      @data[index] = if index.zero?
-                       Account.find(account.id).initial_balance + amount
-                     else
-                       @data[index - 1] + amount
-                     end
-    end
+    @data = []
+    transactions_from_past_time_to_now.each { |transaction| @data << transaction.balance.to_f }
   end
 
   private ##############################################################################################################
 
     def past_time
-      -3.months.from_now.midnight
+      Time.zone.today - 3.months
     end
 end
