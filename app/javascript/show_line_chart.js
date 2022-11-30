@@ -43,7 +43,7 @@ if (document.getElementById("lineChart") !== null ) {
           above: hexToRGB(positiveColour, 0.5),
           below: hexToRGB(negativeColour, 0.5)
         },
-        // borderColor: hexToRGB("#4F5155", 0.5),
+        borderColor: hexToRGB("#D7D7D7"),
         tension: 0.2
       }]
     },
