@@ -36,4 +36,4 @@ namespace :yarn do
     end
   end
 end
-after 'bundler:install', 'yarn:install'
+after "bundler:install", "yarn:install"
