@@ -10,18 +10,14 @@ h2.title.mb-0 = t(".result")
 .columns.is-gapless
   / transaction's sum
   .column.is-narrow
-    p.tag.is-primary
-      = t(".sum")
-      span = number_to_currency(@sum_transactions)
+    p.tag.is-primary = t(".sum") + number_to_currency(@sum_transactions)
 
   / spacing
   .column
 
   / transaction's count
   .column.is-narrow
-    p.tag.is-primary
-      = t(".count")
-      span#total = @nb_transactions
+    p.tag.is-primary = t(".count") + @nb_transactions.to_s
 
 / table
 table.table.is-fullwidth.is-striped#magic-table
