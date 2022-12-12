@@ -17,7 +17,9 @@ h2.title.mb-0 = t(".result")
 
   / transaction's count
   .column.is-narrow
-    p.tag.is-primary = t(".count") + @nb_transactions.to_s
+    p.tag.is-primary
+      = t(".count")
+      span#total = @nb_transactions.to_s
 
 / table
 table.table.is-fullwidth.is-striped#magic-table
