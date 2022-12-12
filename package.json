@@ -6,7 +6,7 @@
     "@rails/ujs": "^7.0.0",
     "bulma": "^0.9.4",
     "chart.js": "^4.0.0",
-    "esbuild": "^0.15.0",
+    "esbuild": "^0.16.0",
     "wnumb": "^1.2.0"
   },
   "scripts": {
