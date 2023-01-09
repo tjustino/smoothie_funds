@@ -141,7 +141,7 @@ class TransactionsController < ApplicationController
     def save_transaction(notice)
       return unless @transaction.save
 
-      @transaction.amount = params[:sign] == "credit" ? @transaction.amount.abs : (-1 * @transaction.amount.abs)
+      @transaction.amount = params[:sign] == "credit" ? @transaction.amount.abs : (@transaction.amount.abs * -1)
       userstamp(@transaction)
 
       if flash[:search_id].nil?

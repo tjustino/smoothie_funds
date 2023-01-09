@@ -142,7 +142,7 @@ class SchedulesController < ApplicationController
       if params[:sign] == "credit"
         @schedule.operation.amount = @schedule.operation.amount.abs if @schedule.operation.amount.present?
       elsif @schedule.operation.amount.present?
-        @schedule.operation.amount = -1 * @schedule.operation.amount.abs
+        @schedule.operation.amount = @schedule.operation.amount.abs * -1
         @schedule.operation.save
       end
 
