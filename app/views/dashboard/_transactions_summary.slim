@@ -4,7 +4,8 @@
       table.table.is-fullwidth.is-narrow
         thead
           tr
-            th colspan="2" = account.name
+            th = account.name
+            th.has-text-grey-light = t("dashboard.transactions_summary.sum_checked", sum_checked: sum_checked(account))
         tbody
           - if account.transactions.any?
             tr

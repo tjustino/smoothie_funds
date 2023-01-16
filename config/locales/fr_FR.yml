@@ -175,6 +175,7 @@ fr_FR:
       upcoming_terms:       "Échéances des 30 prochains jours"
     transactions_summary:
       balance_date:         "%{balance} au %{date}"
+      sum_checked:          "%{sum_checked} rapprochés"
       future_balance:       "Balance à terme :"
       current_balance:      "Balance actuelle :"
       no_transactions:      "Aucune transaction"

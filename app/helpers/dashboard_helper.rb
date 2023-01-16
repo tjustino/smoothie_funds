@@ -10,6 +10,10 @@ module DashboardHelper
     number_to_currency(sum_today(current_transactions, account))
   end
 
+  def sum_checked(account)
+    number_to_currency(account.initial_balance + account.transactions.active.checked.sum(:amount))
+  end
+
   def initial_balance(account)
     number_to_currency(account.initial_balance)
   end
