@@ -21,6 +21,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
 
     # sessions#destroy
     delete logout_url
+
     assert_redirected_to login_url
 
     user.accounts.active.each do |account|
@@ -28,6 +29,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
       assert_no_difference "Category.count" do
         account.categories.each do |category|
           delete category_path category
+
           assert_redirected_to login_url
         end
       end
@@ -36,6 +38,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
       assert_no_difference "Transaction.count" do
         account.transactions.each do |transaction|
           delete transaction_path transaction
+
           assert_redirected_to login_url
         end
       end
@@ -44,6 +47,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
       assert_no_difference "Schedule.count" do
         account.schedules.each do |schedule|
           delete schedule_path schedule
+
           assert_redirected_to login_url
         end
       end
@@ -51,6 +55,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
       # accounts#destroy
       assert_no_difference "Account.count" do
         delete account_path account
+
         assert_redirected_to login_url
       end
     end
@@ -61,7 +66,8 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
         ["User.count", "Search.count", "Schedule.count", "Transaction.count", "Category.count", "PendingUser.count",
          "Relation.count", "Account.count"]
       ) do
-        delete               user_path(current_user)
+        delete user_path(current_user)
+
         assert_redirected_to login_url
       end
     end
@@ -77,10 +83,12 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
 
     # sessions#new
     get login_path
+
     assert_response :success
 
     # dashboard#index
     get dashboard_path
+
     assert_redirected_to login_url
   end
 
@@ -94,14 +102,17 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
 
     # accounts#index
     get accounts_path
+
     assert_redirected_to login_url
 
     # accounts#new
     get new_account_path
+
     assert_redirected_to login_url
 
     # users#edit
     get edit_user_path user
+
     assert_redirected_to login_url
   end
 
@@ -116,52 +127,63 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
     user.accounts.active.each do |account|
       # categories#index
       get account_categories_path account
+
       assert_redirected_to login_url
 
       # categories#new
       get new_account_category_path account
+
       assert_redirected_to login_url
 
       # categories#edit
       account.categories.each do |category|
         get edit_category_path category
+
         assert_redirected_to login_url
       end
 
       # transactions#index
       get account_transactions_path account
+
       assert_redirected_to login_url
 
       # transactions#new
       get new_account_transaction_path account
+
       assert_redirected_to login_url
 
       # transactions#edit
       account.transactions.each do |transaction|
         get edit_transaction_path transaction
+
         assert_redirected_to login_url
       end
 
       # schedules#index
       get account_schedules_path account
+
       assert_redirected_to login_url
 
       # schedules#new
       get new_account_schedule_path account
+
       assert_redirected_to login_url
 
       # schedules#edit
       account.schedules.each do |schedule|
         get edit_schedule_path schedule
+
         assert_redirected_to login_url
       end
 
       # accounts#edit
       get edit_account_path account
+
       assert_redirected_to login_url
 
       # users#new
       get new_user_path user, account
+
       assert_response :success
     end
   end
@@ -181,6 +203,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
       account.categories.each do |category|
         assert_no_difference "category.name.sum" do
           patch category_path category, params: { name: SecureRandom.hex }
+
           assert_redirected_to login_url
         end
       end
@@ -188,9 +211,8 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
       # transactions#update
       account.transactions.each do |transaction|
         assert_no_difference "transaction.amount" do
-          patch transaction_path transaction, params: {
-            amount: transaction.amount + 1
-          }
+          patch transaction_path transaction, params: { amount: transaction.amount + 1 }
+
           assert_redirected_to login_url
         end
       end
@@ -198,9 +220,8 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
       # schedules#update
       account.schedules.each do |schedule|
         assert_no_difference "schedule.frequency" do
-          patch schedule_path schedule, params: {
-            frequency: schedule.frequency + 1
-          }
+          patch schedule_path schedule, params: { frequency: schedule.frequency + 1 }
+
           assert_redirected_to login_url
         end
       end
@@ -208,6 +229,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
       # accounts#update
       assert_no_difference "account.name.sum" do
         patch account_path account, params: { name: SecureRandom.hex }
+
         assert_redirected_to login_url
       end
     end
@@ -215,6 +237,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
     # users#update
     assert_no_difference "user.email.sum" do
       patch user_path user, params: { email: "wrong@email.com" }
+
       assert_redirected_to login_url
     end
   end
@@ -233,11 +256,13 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
       post users_path, params: { user: { email:                 email,
                                          password:              password,
                                          password_confirmation: password } }
+
       assert_redirected_to login_url
     end
 
     # sessions#create
-    post                 login_path, params: { email: email, password: password }
+    post login_path, params: { email: email, password: password }
+
     assert_redirected_to dashboard_url
   end
 
@@ -253,11 +278,8 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
     user.accounts.active.each do |account|
       # categories#create
       assert_no_difference "Category.count" do
-        post account_categories_path account, params: {
-          category: {
-            name: SecureRandom.hex
-          }
-        }
+        post account_categories_path account, params: { category: { name: SecureRandom.hex } }
+
         assert_redirected_to login_url
       end
 
@@ -270,6 +292,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
                          checked:     true_or_false,
                          comment:     SecureRandom.hex }
         }
+
         assert_redirected_to login_url
       end
 
@@ -286,6 +309,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
                         checked:     true_or_false
                       } }
         }
+
         assert_redirected_to login_url
       end
     end
@@ -297,6 +321,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
                    initial_balance: rand(-100..100),
                    idden:           false }
       }
+
       assert_redirected_to login_url
     end
   end
@@ -313,6 +338,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
       # categories#import_from
       assert_no_difference "Category.count" do
         post import_from_account_categories_path user, account
+
         assert_redirected_to login_url
       end
 
@@ -327,6 +353,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
       assert_no_difference "Transaction.count" do
         account.schedules.each do |schedule|
           post insert_schedule_path schedule
+
           assert_redirected_to login_url
         end
       end

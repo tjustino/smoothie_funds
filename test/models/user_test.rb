@@ -21,11 +21,13 @@ class UserTest < ActiveSupport::TestCase
                     name:                  "John Doe",
                     password:              "password",
                     password_confirmation: "password")
+
     assert user.valid?
   end
 
   test "email and name must not be empty" do
     user = User.new
+
     assert       user.invalid?
     assert_equal [I18n.t("activerecord.errors.messages.blank"), I18n.t("activerecord.errors.messages.invalid")],
                  user.errors[:email]
@@ -36,6 +38,7 @@ class UserTest < ActiveSupport::TestCase
                     name:                  "Super Name",
                     password:              "yopmail",
                     password_confirmation: "yopmail")
+
     assert       user.invalid?
     assert_equal [I18n.t("activerecord.errors.messages.taken")], user.errors[:email]
   end
@@ -44,18 +47,21 @@ class UserTest < ActiveSupport::TestCase
     user1 = User.new(email:                 "username@domain",
                      password:              "p@ssw0rd!",
                      password_confirmation: "p@ssw0rd!")
+
     assert       user1.invalid?
     assert_equal [I18n.t("activerecord.errors.messages.invalid")], user1.errors[:email]
 
     user2 = User.new(email:                 "@domain.tld",
                      password:              "p@ssw0rd!",
                      password_confirmation: "p@ssw0rd!")
+
     assert       user2.invalid?
     assert_equal [I18n.t("activerecord.errors.messages.invalid")], user2.errors[:email]
 
     user3 = User.new(email:                 "username#domain.tld",
                      password:              "p@ssw0rd!",
                      password_confirmation: "p@ssw0rd!")
+
     assert       user3.invalid?
     assert_equal [I18n.t("activerecord.errors.messages.invalid")], user3.errors[:email]
   end
@@ -65,6 +71,7 @@ class UserTest < ActiveSupport::TestCase
                     name:                  "Too Short",
                     password:              "short",
                     password_confirmation: "short")
+
     assert       user.invalid?
     assert_equal [I18n.t("activerecord.errors.messages.too_short", count: 8)], user.errors[:password]
   end
