@@ -4,11 +4,7 @@
 module SearchesHelper
   def joined_accounts_names(current_accounts, accounts)
     accounts_names = []
-
-    current_accounts.where(id: accounts.map(&:to_i)).each do |account|
-      accounts_names.push account.name
-    end
-
+    current_accounts.where(id: accounts.map(&:to_i)).each { |account| accounts_names.push account.name }
     accounts_names.join(", ")
   end
 
