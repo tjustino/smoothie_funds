@@ -3,31 +3,55 @@
 require "test_helper"
 
 # Rights Controller Test
-class RightsControllerTest < ActionController::TestCase
+class RightsControllerTest < ActionDispatch::IntegrationTest
   ########################################################################################################### GET /terms
-  test "should get terms for everyone" do
-    get             :terms
+  test "should get terms as logged user" do
+    login_as :thomas
+    get      "/terms"
+
     assert_response :success
+    assert_equal    session[:user_id], users(:thomas).id
+  end
+
+  test "should get terms as not logged user" do
     logout
-    get             :terms
+    get "/terms"
+
     assert_response :success
+    assert_nil      session[:user_id]
   end
 
   ########################################################################################################## GET /cookie
-  test "should get cookie for everyone" do
-    get             :cookie
+  test "should get cookie as logged user" do
+    login_as :thomas
+    get      "/cookie"
+
     assert_response :success
+    assert_equal    session[:user_id], users(:thomas).id
+  end
+
+  test "should get cookie as not logged user" do
     logout
-    get             :cookie
+    get "/cookie"
+
     assert_response :success
+    assert_nil      session[:user_id]
   end
 
   ############################################################################################################ GET /gdpr
-  test "should get gdpr for everyone" do
-    get             :gdpr
+  test "should get gdpr as logged user" do
+    login_as :thomas
+    get      "/gdpr"
+
     assert_response :success
+    assert_equal    session[:user_id], users(:thomas).id
+  end
+
+  test "should get gdpr as not logged user" do
     logout
-    get             :gdpr
+    get "/gdpr"
+
     assert_response :success
+    assert_nil      session[:user_id]
   end
 end

@@ -3,12 +3,14 @@
 require "test_helper"
 
 # Dashboard Controller Test
-class DashboardControllerTest < ActionController::TestCase
+class DashboardControllerTest < ActionDispatch::IntegrationTest
+  setup { login_as :thomas }
+
   ################################################################################################################ GET /
   test "should get index" do
-    get             :index
+    get "/"
+
     assert_response :success
-    assert_select   "title", "Smoothie Funds"
-    assert_select   "#logout", I18n.t("layouts.application.logout")
+    assert_equal    session[:user_id], users(:thomas).id
   end
 end

@@ -1,85 +1,76 @@
 # frozen_string_literal: true
 
 ENV["RAILS_ENV"] ||= "test"
-require File.expand_path("../config/environment", __dir__)
+require_relative "../config/environment"
 require "rails/test_help"
 
 module ActiveSupport
   # TestCase superclass
   class TestCase
+    # Run tests in parallel with specified workers
+    parallelize(workers: :number_of_processors)
+
     # Setup all fixtures in test/fixtures/*.yml for tests in alphabetical order
-    fixtures :users,
-             :accounts,
-             :categories,
-             :transactions,
-             :schedules,
-             :pending_users # , :searches
+    fixtures :all
 
     # Add more helper methods to be used by all tests here...
-    def setup
-      session[:user_id] = users(:thomas).id if defined? session
-
-      user_use_cases
-      account_use_cases
-      category_use_cases
-      schedule_use_cases
-      transaction_use_cases
-      search_use_cases
+    def login_as(name)
+      post "/login", params: { email: users(name).email, password: "p@ssw0rd!" }
     end
 
     def logout
-      session.delete :user_id
+      delete "/logout"
     end
 
     def true_or_false
       rand(0..1) == 1
     end
 
-    private ############################################################################################################
+    def some_account_for(user)
+      # let's chosse active account, with schedules and don't forget to avoid joint accounts
+      account_with_schedules = users(user).schedules.select(:account_id)
+      users(user).accounts.active.where(id: account_with_schedules).where.not(id: joint_acounts).sample
+    end
 
-      def user_use_cases
-        @user               = users(:thomas)
-        @wrong_user         = users(:emilie)
-        @some_pending_user  = PendingUser.all.sample
-        @unknow_user        = User.maximum(:id).to_i + 1
-      end
+    def some_accounts_for(user)
+      right_accounts_ids = users(user).accounts.active.where(id: users(user).schedules.select(:account_id)).ids
+      max_number_of_accounts = right_accounts_ids.size
+      random_number_of_accounts = rand(1..max_number_of_accounts)
+      right_accounts_ids.sample(random_number_of_accounts)
+    end
 
-      def account_use_cases
-        some_account
-        some_wrong_account
-        @unknow_account = Account.maximum(:id).to_i + 1
-      end
+    def some_categories_for(accounts)
+      categories_ids = Category.where(account_id: accounts).ids
+      max_number_of_categories = categories_ids.size
+      random_number_of_categories = rand(1..max_number_of_categories)
+      categories_ids.sample(random_number_of_categories)
+    end
 
-      def some_account
-        @accounts     = @user.accounts.active
-        @some_account = @accounts.where(id: @user.schedules.select(:account_id)).sample
-      end
+    def some_transaction_for(user)
+      # let's choose transaction that is ot part of a schedule and don't forget to avoid joint accounts
+      users(user).transactions.where(schedule_id: nil).where.not(account: joint_acounts).sample
+    end
 
-      def some_wrong_account
-        @wrong_accounts = @wrong_user.accounts.active.where.not(id: accounts(:compte_commun))
-        @some_wrong_account = @wrong_accounts.where(id: @wrong_user.schedules.select(:account_id)).sample
-      end
+    def some_category_for(account)
+      # let's choose a not hideen category
+      account.categories.where(hidden: false).sample
+    end
 
-      def category_use_cases
-        @some_category        = @some_account.categories.active.sample
-        @some_wrong_category  = @some_wrong_account.categories.active.sample
-        @unknow_category      = Category.maximum(:id).to_i + 1
-      end
+    def some_schedule_for(user)
+      # let's choose a schedule that is ot part of a joint accounts
+      Schedule.where(account_id: users(user).accounts).where.not(account_id: joint_acounts).sample
+    end
 
-      def schedule_use_cases
-        @some_schedule        = @some_account.schedules.sample
-        @some_wrong_schedule  = @some_wrong_account.schedules.sample
-        @unknow_schedule      = Schedule.maximum(:id).to_i + 1
-      end
+    def joint_acounts
+      Relation.select(:account_id).group(:account_id).having("COUNT(account_id) > 1")
+    end
 
-      def transaction_use_cases
-        @some_transaction       = @some_account.transactions.active.sample
-        @some_wrong_transaction = @some_wrong_account.transactions.active.sample
-        @unknow_transaction     = Transaction.maximum(:id).to_i + 1
-      end
+    def random_account
+      Account.where(id: Category.select(:account_id)).sample
+    end
 
-      def search_use_cases
-        @unknow_search = Search.maximum(:id).to_i + 1
-      end
+    def another(random_account)
+      Account.where.not(id: random_account.id).sample
+    end
   end
 end

@@ -3,137 +3,126 @@
 require "test_helper"
 
 # Searches Controller Test
-class SearchesControllerTest < ActionController::TestCase
+class SearchesControllerTest < ActionDispatch::IntegrationTest
+  setup { login_as :thomas }
+
   #################################################################################################### GET /searches/:id
   test "should get show" do
-    get_show        some_search
+    get "/searches/#{some_search_for(:thomas).id}"
+
     assert_response :success
   end
 
   ##################################################################################### GET /users/:user_id/searches/new
   test "should get new" do
-    get_new         @user
+    get_new :thomas
+
     assert_response :success
   end
 
   test "should not get new - hacker way" do
-    get_new              @wrong_user
+    get_new :emilie
+
     assert_redirected_to dashboard_url
   end
 
   test "should not get new - unknow user" do
-    get_new              @unknow_user
+    get "/users/#{User.maximum(:id) + 1}/searches/new"
+
     assert_redirected_to dashboard_url
   end
 
   ######################################################################################## POST /users/:user_id/searches
   test "should create search" do
-    assert_difference("Search.count") { post_create @user }
+    assert_difference("Search.count") { post_create :thomas }
   end
 
   test "should not create more than 3 searches" do
-    5.times { some_search }
-    post_create  @user
-    assert_equal 3, @user.searches.count
+    5.times { some_search_for(:thomas) }
+    post_create :thomas
+
+    assert_equal 3, users(:thomas).searches.count
   end
 
   test "should not create search - hacker way" do
     assert_no_difference("Search.count") do
-      post_create          @wrong_user
+      post_create :emilie
+
       assert_redirected_to dashboard_url
     end
   end
 
   test "should not create search - unknow user" do
     assert_no_difference("Search.count") do
-      post_create          @unknow_user
+      post "/users/#{User.maximum(:id) + 1}/searches",
+           params: { search: { accounts:   Account.first,
+                               min:        rand(-500.00..0.00),
+                               max:        rand(0.00..500.00),
+                               before:     random_period_for(:before),
+                               after:      random_period_for(:after),
+                               categories: some_categories_for(Account.first),
+                               operator:   %i[comment_or_not like not_like].sample,
+                               comment:    ("a".."z").to_a.sample,
+                               checked:    %i[checked_or_not yep nop].sample } }
+
       assert_redirected_to dashboard_url
     end
   end
 
   ################################################################################################# DELETE /searches/:id
   test "should destroy search" do
-    # first_search = some_search
-    second_search = some_search
+    user = :thomas
+    some_search = some_search_for(user)
 
     assert_difference("Search.count", -1) do
-      delete_destroy       second_search
-      assert_redirected_to new_user_search_url @user
+      delete_destroy some_search
+
+      assert_redirected_to new_user_search_url(users(user))
       assert_equal         I18n.t("searches.destroy.successfully_destroyed"), flash[:notice]
     end
   end
 
   test "should not destroy search - hacker way" do
-    # first_wrong_search  = some_wrong_search
-    second_wrong_search = some_wrong_search
+    some_wrong_search = some_search_for(:emilie)
 
     assert_no_difference "Search.count" do
-      delete_destroy       second_wrong_search
+      delete_destroy some_wrong_search
+
       assert_redirected_to dashboard_url
     end
   end
 
-  # TODO: how to delete an account?
-  # test "should destroy search with user" do
-  #   assert_no_difference "Search.count" do
-  #     delete_destroy        @some_category
-  #   end
-  # end
-
   private ##############################################################################################################
 
-    def some_search
-      Search.create(user:       @user,
-                    accounts:   id_of(@some_account),
+    def some_search_for(user)
+      accounts = some_accounts_for(user)
+      Search.create(user:       users(user),
+                    accounts:   accounts,
                     min:        -500,
                     max:        500,
                     before:     3.months.since,
                     after:      3.months.ago,
-                    categories: id_of(@some_category),
+                    categories: some_categories_for(accounts),
                     operator:   1,
                     comment:    "a",
                     checked:    0)
     end
 
-    def some_wrong_search
-      Search.create(user:       @wrong_user,
-                    accounts:   id_of(@some_wrong_account),
-                    min:        -500,
-                    max:        500,
-                    before:     3.months.since,
-                    after:      3.months.ago,
-                    categories: id_of(@some_wrong_category),
-                    operator:   1,
-                    comment:    "b",
-                    checked:    0)
-    end
-
-    def get_show(search)
-      get :show, params: { id: search }
-    end
-
     def get_new(user)
-      get :new, params: { user_id: user }
+      get "/users/#{users(user).id}/searches/new"
     end
 
     def post_create(user)
-      post :create, params: { user_id: user, search: search_hash }
-    end
-
-    def search_hash
-      { accounts:   id_of(@some_account),
-        min:        rand(-500.00..0.00),
-        max:        rand(0.00..500.00),
-        before:     random_period_for(:before),
-        after:      random_period_for(:after),
-        categories: id_of(@some_category),
-        operator:   %i[comment_or_not like not_like].sample,
-        comment:    ("a".."z").to_a.sample,
-        checked:    %i[checked_or_not yep nop].sample }
-    end
-
-    def id_of(object)
-      [object.id.to_s]
+      accounts = some_accounts_for(user)
+      post "/users/#{users(user).id}/searches", params: { search: { accounts:   accounts,
+                                                                    min:        rand(-500.00..0.00),
+                                                                    max:        rand(0.00..500.00),
+                                                                    before:     random_period_for(:before),
+                                                                    after:      random_period_for(:after),
+                                                                    categories: some_categories_for(accounts),
+                                                                    operator:   %i[comment_or_not like not_like].sample,
+                                                                    comment:    ("a".."z").to_a.sample,
+                                                                    checked:    %i[checked_or_not yep nop].sample } }
     end
 
     def random_period_for(period)
@@ -146,6 +135,6 @@ class SearchesControllerTest < ActionController::TestCase
     end
 
     def delete_destroy(search)
-      delete :destroy, params: { id: search }
+      delete "/searches/#{search.id}"
     end
 end
