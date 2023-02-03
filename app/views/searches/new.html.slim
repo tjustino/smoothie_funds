@@ -2,7 +2,7 @@
   .column.is-narrow
     = render partial: "form", locals: { title: t(".create_search") }
 
-- if @searches.any?
+- if @searches.present?
   hr
 
   .columns
