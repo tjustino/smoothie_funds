@@ -32,6 +32,11 @@ Minitest/AssertPredicate:
 Minitest/MultipleAssertions:
   Max: 15
 
+# intentionally excluded
+Rails/ActionControllerFlashBeforeRender:
+  Exclude:
+    - app/controllers/transactions_controller.rb
+
 # too much work for now
 Metrics/AbcSize:
   Enabled: false
