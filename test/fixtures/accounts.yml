@@ -92,7 +92,7 @@ courant_benoit:
   hidden: false
   users: benoit
 
-compte_commun_jackpot:
+compte_commun_benoit_vanessa:
   name: Compte Commun Jackpot
   initial_balance: 100_000
   created_by: benoit.id
