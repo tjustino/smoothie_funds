@@ -57,27 +57,20 @@ class TransactionsController < ApplicationController
   # DELETE /transactions/:id
   def destroy
     transaction
-    if @transaction.destroy
-      # redirect_to :back, notice: t(".successfully_destroyed")
-      case controller_name
-      when "transactions"
-        redirect_back(
-          fallback_location: account_transactions_path(@current_account),
-          notice:            t(".successfully_destroyed")
-        )
-      when "searches"
-        redirect_back fallback_location: new_user_search_path(@current_user),
-                      notice:            t(".successfully_destroyed")
+    case controller_name
+    when "transactions"
+      account = @transaction.account
+      if @transaction.destroy
+        redirect_to account_transactions_path(account), notice: t(".successfully_destroyed")
+      else
+        redirect_to account_transactions_path(account), warning: t(".cant_destroy")
       end
-    else
-      flash[:warning] = t(".cant_destroy")
-      case controller_name
-      when "transactions"
-        redirect_back(
-          fallback_location: account_transactions_path(@current_account)
-        )
-      when "searches"
-        redirect_back fallback_location: new_user_search_path(@current_user)
+    when "searches"
+      # TODO: definitely not the right paths
+      if @transaction.destroy
+        redirect_to search_path(@current_user), notice: t(".successfully_destroyed")
+      else
+        redirect_to new_user_search_path(@current_user), warning: t(".cant_destroy")
       end
     end
   end
@@ -85,25 +78,20 @@ class TransactionsController < ApplicationController
   # POST /transactions/:id/easycheck
   def easycheck
     transaction
+    account = @transaction.account
     @transaction.toggle :checked
     @transaction.updated_by = @current_user.id
 
     respond_to do |format|
       if @transaction.save
         @sum_checked = @current_account.initial_balance + current_transactions.checked.sum(:amount)
-        # TODO: if activerecord send an error, redirect_to :back is broken
         format.html do
           case controller_name
           when "transactions"
-            redirect_back(
-              fallback_location: account_transactions_path(@current_account),
-              notice:            t(".successfully_checked")
-            )
+            redirect_to account_transactions_path(account), notice: t(".successfully_checked")
           when "searches"
-            redirect_back(
-              fallback_location: new_user_search_path(@current_user),
-              notice:            t(".successfully_checked")
-            )
+            # TODO: definitely not the right paths
+            redirect_to new_user_search_path(@current_user), notice: t(".successfully_checked")
           end
         end
         format.js
