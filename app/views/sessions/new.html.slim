@@ -1,6 +1,6 @@
 .columns.is-centered
   .column.is-narrow
-    = form_with(url: login_path, class: "box") do |form|
+    = form_with(url: login_path, id: "login", class: "box") do |form|
       .field.has-text-centered
         = image_tag "_icon.svg"
       .tabs.is-fullwidth
