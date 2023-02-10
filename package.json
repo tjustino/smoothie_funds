@@ -11,5 +11,5 @@
   "scripts": {
     "build": "esbuild ./app/javascript/application.js --bundle --minify --outdir=./app/assets/builds"
   },
-  "packageManager": "yarn@3.3.1"
+  "packageManager": "yarn@3.4.1"
 }
