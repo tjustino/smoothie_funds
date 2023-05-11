@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source  "https://rubygems.org"
-ruby    "3.2.1"
+ruby    "3.2.2"
 
 ## from http://bundler.io/gemfile.html
 # ~> 2.0.3 is identical to >= 2.0.3 and < 2.1
@@ -16,7 +16,7 @@ gem "pg"                       # Use postgresql as the db for Active Record
 gem "puma"                     # App web server
 gem "rails", "~> 7.0.0"        # Full-stack web framework
 gem "slim"                     # Template language
-gem "sprockets-rails" # The original asset pipeline for Rails
+gem "sprockets-rails"          # The original asset pipeline for Rails
 
 group :development, :test do
   gem "debug"                  # Start debugger with binding.break
