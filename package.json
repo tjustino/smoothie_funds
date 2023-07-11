@@ -1,5 +1,6 @@
 {
   "name": "smoothie_funds",
+  "packageManager": "yarn@1.22.19",
   "dependencies": {
     "@fortawesome/fontawesome-free": "latest",
     "@rails/ujs": "latest",
