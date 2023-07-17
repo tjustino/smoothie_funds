@@ -18,44 +18,41 @@
 #
 
 # enum operator:  [ :comment_or_not, :like,  :not_like ]
-#                   0                 1       2
 # enum checked:   [ :checked_or_not, :yep,   :nop      ]
-
-# http://www.yamllint.com/
-# TODO : can't create search fixtures based on accounts and categories....
+#                   0                 1       2
 
 # thomas_first_search:
 #   user: thomas
-#   accounts: <%= [ActiveRecord::FixtureSet.identify(:courant_thomas).to_s].to_yaml %>
-#   min: 5
+#   accounts: courant_thomas
+#   min: 
 #   max: 
 #   before: 
 #   after: 
-#   categories: <%= "---\n- '" + ActiveRecord::FixtureSet.identify(:essence_courant_thomas).to_s + "'\n" %>
+#   categories: coiffeur_courant_thomas, vetements_courant_thomas, essence_courant_thomas
 #   operator: 0
 #   comment: 
 #   checked: 0
 
 # thomas_second_search:
 #   user: thomas
-#   accounts: <%= "---\n- '" + ActiveRecord::FixtureSet.identify(:compte_commun).to_s + "'\n" %>
-#   min: 
+#   accounts: livret_a
+#   min: 10
 #   max: 
 #   before: 
 #   after: <%= 1.year.ago %>
-#   categories: <%= "---\n- '" + ActiveRecord::FixtureSet.identify(:internet).to_s + "'\n" %>
+#   categories: epargne_livret_a
 #   operator: 0
 #   comment: 
-#   checked: 2
+#   checked: 1
 
 # emilie_first_search:
 #   user: emilie
-#   accounts: <%= "---\n- '" + ActiveRecord::FixtureSet.identify(:courant_emilie).to_s + "'\n" %>
-#   min: -500
-#   max: 500
+#   accounts: courant_emilie
+#   min: -100
+#   max: 100
 #   before: <%= 3.month.since %>
 #   after: <%= 3.month.ago %>
-#   categories: <%= "---\n- '" + ActiveRecord::FixtureSet.identify(:vetements_courant_emilie).to_s + "'\n" %>
+#   categories: vetements_courant_emilie, coiffeur_courant_emilie
 #   operator: 1
-#   comment: a
-#   checked: 0
+#   comment: Sweety
+#   checked: 2
