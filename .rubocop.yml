@@ -37,6 +37,12 @@ Rails/ActionControllerFlashBeforeRender:
   Exclude:
     - app/controllers/transactions_controller.rb
 
+Rails/ThreeStateBooleanColumn:                               # waiting https://github.com/rubocop/rubocop-rails/pull/985
+  Exclude:
+    - db/migrate/20140415142843_create_transactions.rb
+    - db/migrate/20141010125321_add_hidden_to_accounts.rb
+    - db/migrate/20210614103839_add_hidden_to_category.rb
+
 # too much work for now
 Metrics/AbcSize:
   Enabled: false

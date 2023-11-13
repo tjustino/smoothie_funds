@@ -8,7 +8,7 @@ class ApplicationRecord < ActiveRecord::Base
     CSV.generate(headers: true, col_sep: ";", force_quotes: true) do |csv|
       csv << attributes
 
-      all.find_each do |account|
+      find_each do |account|
         csv << attributes.map { |attr| account.send(attr) }
       end
     end
