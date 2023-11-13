@@ -15,7 +15,7 @@ gem "jsbundling-rails"         # JavaScript Bundling for Rails
 gem "pg"                       # Use postgresql as the db for Active Record
 gem "propshaft"                # Deliver assets for Rails
 gem "puma"                     # App web server
-gem "rails", "~> 7.0.0"        # Full-stack web framework
+gem "rails", "~> 7.1.0"        # Full-stack web framework
 gem "slim"                     # Template language
 
 group :development, :test do
