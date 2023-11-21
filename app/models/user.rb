@@ -27,5 +27,7 @@ class User < ApplicationRecord
   }
   validates :password, length: { minimum: 8 }, if: :password
 
+  normalizes :email, with: ->(email) { email.strip.downcase }
+
   has_secure_password
 end

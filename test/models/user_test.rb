@@ -25,6 +25,15 @@ class UserTest < ActiveSupport::TestCase
     assert user.valid?
   end
 
+  test "should normalize user email" do
+    user = User.new(email:                 " John.DoE@EMAIL.CoM\n",
+                    name:                  "John Doe",
+                    password:              "password",
+                    password_confirmation: "password")
+
+    assert_equal "john.doe@email.com", user.email
+  end
+
   test "email and name must not be empty" do
     user = User.new
 
