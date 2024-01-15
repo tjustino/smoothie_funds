@@ -43,19 +43,19 @@ Rails.application.routes.draw do
   shallow do
     resources :users, except: %i[index show] do
       resources :searches, except: %i[index edit update]
-      resources :analytics, only: [:index]
+      resources :analytics, only: [ :index ]
     end
   end
 
   shallow do
-    resources :accounts, except: [:show] do
-      resources :categories, except: [:show] do
+    resources :accounts, except: [ :show ] do
+      resources :categories, except: [ :show ] do
         post "import_from", on: :collection
       end
-      resources :transactions, except: [:show] do
+      resources :transactions, except: [ :show ] do
         post "easycheck", on: :member
       end
-      resources :schedules, except: [:show] do
+      resources :schedules, except: [ :show ] do
         post "insert", on: :member
       end
     end

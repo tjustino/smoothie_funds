@@ -7,7 +7,7 @@ module ApplicationHelper
   end
 
   def shallow_args(parent, child)
-    action_name == "new" || action_name == "create" ? [parent, child] : child
+    action_name == "new" || action_name == "create" ? [ parent, child ] : child
   end
 
   def icon_text(icon_class, text)

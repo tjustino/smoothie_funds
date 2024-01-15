@@ -102,7 +102,7 @@ class SchedulesControllerTest < ActionDispatch::IntegrationTest
 
   ################################################################################################ DELETE /schedules/:id
   test "should destroy schedule" do
-    assert_difference ["Schedule.count", "Transaction.count"], -1 do
+    assert_difference [ "Schedule.count", "Transaction.count" ], -1 do
       schedule = some_schedule_for(:thomas)
       schedule_account = schedule.account
       delete_destroy schedule
@@ -113,7 +113,7 @@ class SchedulesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should not destroy schedule - hacker way" do
-    assert_no_difference ["Schedule.count", "Transaction.count"] do
+    assert_no_difference [ "Schedule.count", "Transaction.count" ] do
       delete_destroy some_schedule_for(:emilie)
 
       assert_redirected_to dashboard_url

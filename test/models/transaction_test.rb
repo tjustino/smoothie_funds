@@ -39,13 +39,13 @@ class TransactionTest < ActiveSupport::TestCase
     transaction = Transaction.new
 
     assert       transaction.invalid?
-    assert_equal [I18n.t("activerecord.errors.models.transaction.attributes.account.required")],
+    assert_equal [ I18n.t("activerecord.errors.models.transaction.attributes.account.required") ],
                  transaction.errors[:account]
-    assert_equal [I18n.t("activerecord.errors.models.transaction.attributes.category.required")],
+    assert_equal [ I18n.t("activerecord.errors.models.transaction.attributes.category.required") ],
                  transaction.errors[:category]
-    assert_equal [I18n.t("activerecord.errors.messages.blank"), I18n.t("activerecord.errors.messages.invalid")],
+    assert_equal [ I18n.t("activerecord.errors.messages.blank"), I18n.t("activerecord.errors.messages.invalid") ],
                  transaction.errors[:date]
-    assert_equal [I18n.t("activerecord.errors.messages.blank"), I18n.t("activerecord.errors.messages.not_a_number")],
+    assert_equal [ I18n.t("activerecord.errors.messages.blank"), I18n.t("activerecord.errors.messages.not_a_number") ],
                  transaction.errors[:amount]
   end
 
@@ -61,6 +61,6 @@ class TransactionTest < ActiveSupport::TestCase
                                   comment:  "Super comment !!!")
 
     assert       transaction.invalid?
-    assert_equal [I18n.t("activerecord.errors.messages.not_a_number")], transaction.errors[:amount]
+    assert_equal [ I18n.t("activerecord.errors.messages.not_a_number") ], transaction.errors[:amount]
   end
 end

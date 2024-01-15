@@ -6,6 +6,9 @@ require:
   - rubocop-rails
   - rubocop-rake
 
+inherit_gem:
+  rubocop-rails-omakase: rubocop.yml
+
 # pending Cops
 AllCops:
   NewCops: enable

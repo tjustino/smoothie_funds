@@ -6,9 +6,9 @@ class AnalyticsController < ApplicationController
   def index
     account = if params[:account].nil?
                 @accounts_with_categories.first
-              else
-                @current_user.accounts.where(id: params[:account].to_i).first
-              end
+    else
+      @current_user.accounts.where(id: params[:account].to_i).first
+    end
 
     transactions_with_balances         = Transaction.active.with_balances_for(account).where(account_id: account)
     transactions_from_past_time_to_now = Transaction.select("twb.date", "twb.balance")

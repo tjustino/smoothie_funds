@@ -83,8 +83,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test "should not destroy user - hacker way" do
     assert_no_difference(
-      ["User.count", "Search.count", "Schedule.count", "Transaction.count", "Category.count", "PendingUser.count",
-       "Relation.count", "Account.count"]
+      [ "User.count", "Search.count", "Schedule.count", "Transaction.count", "Category.count", "PendingUser.count",
+        "Relation.count", "Account.count" ]
     ) do
       delete_destroy users(:emilie)
 

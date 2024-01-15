@@ -110,7 +110,7 @@ class AccountsController < ApplicationController
         account_params.permit(:name,
                               :initial_balance,
                               :hidden,
-                              pending_user_attributes: [:email])
+                              pending_user_attributes: [ :email ])
       else
         {}
       end

@@ -63,8 +63,8 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
     # # users#destroy
     User.find_each do |current_user|
       assert_no_difference(
-        ["User.count", "Search.count", "Schedule.count", "Transaction.count", "Category.count", "PendingUser.count",
-         "Relation.count", "Account.count"]
+        [ "User.count", "Search.count", "Schedule.count", "Transaction.count", "Category.count", "PendingUser.count",
+          "Relation.count", "Account.count" ]
       ) do
         delete user_path(current_user)
 

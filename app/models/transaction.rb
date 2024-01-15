@@ -62,11 +62,11 @@ class Transaction < ApplicationRecord
 
       def search_amount(min, max)
         if min.present? && max.present?
-          where(["amount > ? and amount < ?", min, max])
+          where([ "amount > ? and amount < ?", min, max ])
         elsif min.present? && max.blank?
-          where(["amount > ?", min])
+          where([ "amount > ?", min ])
         elsif min.blank? && max.present?
-          where(["amount < ?", max])
+          where([ "amount < ?", max ])
         else
           where("1=1")
         end
@@ -74,11 +74,11 @@ class Transaction < ApplicationRecord
 
       def search_date(before, after)
         if before.present? && after.present?
-          where(["date < ? and date > ?", before, after])
+          where([ "date < ? and date > ?", before, after ])
         elsif before.present? && after.blank?
-          where(["date < ?", before])
+          where([ "date < ?", before ])
         elsif before.blank? && after.present?
-          where(["date > ?", after])
+          where([ "date > ?", after ])
         else
           where("1=1")
         end
