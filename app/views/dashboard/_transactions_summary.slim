@@ -23,4 +23,4 @@
               td class=("has-text-danger" if account.initial_balance < 0)
                 = t("dashboard.transactions_summary.balance_date", balance: initial_balance(account), date: today)
 - else
-  p = t("dashboard.transactions_summary.no_transactions")
+  p.has-text-centered = t("dashboard.transactions_summary.no_transactions")
