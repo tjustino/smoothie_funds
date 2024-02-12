@@ -22,11 +22,11 @@
 
     / import categories from
     - if @current_accounts.count > 1
-      = render "import_from"
-      .level-item
+      .level-item data-controller="layout"
+        = render "import_from"
         = button_tag icon_text("fa-solid fa-right-left", t(".import_from")),
-                     class: "button is-link is-light is-outlined",
-                     onclick: "showModal('importFrom')"
+                    class: "button is-link is-light is-outlined",
+                    data: { action: "layout#showModal" }
 
     / new category
     .level-item

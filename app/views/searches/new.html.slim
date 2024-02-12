@@ -9,12 +9,12 @@
     - @searches.each_with_index do |search, index|
       - if index < 3
         .column
-          .card
+          .card data-controller="search"
             header.card-header
               .card-header-title = witch_search(search, index)
-              button.card-header-icon onclick="toggleAccordion(this)" = icon("fa-solid fa-chevron-up")
-            .card-content.is-hidden
+              button.card-header-icon data-action="search#toggleDetailHistory" = icon("fa-solid fa-chevron-up")
+            .card-content.is-hidden data-search-target="searchDetail"
               = render partial: "resume", locals: { search: search }
             footer.card-footer
               = link_to icon_text("fa-regular fa-circle-right", t(".show_result")), search, class: "card-footer-item"
-              = link_to icon_text("fa-regular fa-trash-can", t(".destroy")), search, method: :delete, data: { confirm: t(".are_you_sure") }, title: t(".destroy"), class: "card-footer-item"
+              = link_to icon_text("fa-regular fa-trash-can", t(".destroy")), search, data: { turbo_method: :delete, turbo_confirm: t(".are_you_sure") }, title: t(".destroy"), class: "card-footer-item"

@@ -15,8 +15,7 @@
           .level-item.has-text-centered
             = link_to icon("fa-regular fa-trash-can"),
                       category_path(category),
-                      method: :delete,
-                      data: {confirm: t(".are_you_sure", category: category.name)},
+                      data: {  turbo_method: :delete, turbo_confirm: t(".are_you_sure", category: category.name) },
                       title: t(".destroy"),
                       class: "has-text-danger"
           - if category.hidden == true

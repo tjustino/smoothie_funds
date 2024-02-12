@@ -10,13 +10,15 @@ ruby    "3.3.0"
 
 gem "bcrypt"                   # Use ActiveModel has_secure_password
 gem "bootsnap", require: false # Reduces boot times through caching; required in config/boot.rb
+gem "importmap-rails"          # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "dartsass-rails"           # Integrate Dart Sass with the asset pipeline in Rails
-gem "jsbundling-rails"         # JavaScript Bundling for Rails
 gem "pg"                       # Use postgresql as the db for Active Record
 gem "propshaft"                # Deliver assets for Rails
 gem "puma"                     # App web server
 gem "rails", "~> 7.1.0"        # Full-stack web framework
 gem "slim"                     # Template language
+gem "stimulus-rails"           # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
+gem "turbo-rails"              # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 
 group :development, :test do
   gem "debug"                  # Start debugger with binding.break
@@ -25,8 +27,8 @@ end
 group :development do
   gem "foreman"                # Process manager for applications with multiple components
   gem "listen"                 # Listen to file modif and notifies you
-  gem "rack-mini-profiler"     # Add speed badges
-  gem "web-console"            # Access an IRB console on exception pages
+  # gem "rack-mini-profiler"     # Add speed badges
+  # gem "web-console"            # Access an IRB console on exception pages
 
   # Rubocop
   gem "rubocop"                # Automatic Ruby code style checking tool

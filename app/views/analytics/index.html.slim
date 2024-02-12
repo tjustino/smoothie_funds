@@ -9,12 +9,13 @@
 
 / chart
 h2.subtitle = t(".tendency")
-canvas id="lineChart" *{\
+canvas *{\
   'data-label' => t(".balance"),
   'data-suffix' => t("number.currency.format.unit"),
   'data-decimals' => t("number.currency.format.precision"),
   'data-mark' => t("number.currency.format.separator"),
-  'data-thousand' => t("number.currency.format.delimiter")\
+  'data-thousand' => t("number.currency.format.delimiter"),
+  'data-controller' => "analytic"\
 }
-= hidden_field_tag "labels", @labels.map! { |label| l(label) }.join(";")
-= hidden_field_tag "data",   @data.join(";")
+  = hidden_field_tag "labels", @labels.map! { |label| l(label) }.join(";"), data: { analytic_target: "labels" }
+  = hidden_field_tag "data",   @data.join(";"),                             data: { analytic_target: "data" }

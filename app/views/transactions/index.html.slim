@@ -53,7 +53,7 @@ table.table.is-fullwidth.is-striped#magic-table
 
 / more transactions
 - if @nb_transactions > @limit
-  #more-items.columns.is-mobile.is-centered
+  #more-items.columns.is-mobile.is-centered data-controller="ajax"
     .column.is-narrow
       = form_with(url: account_transactions_path(@current_account), id: "more_items_form", method: :get, local: false) do
         = hidden_field_tag "offset", @limit, autocomplete: "off"

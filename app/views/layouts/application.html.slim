@@ -6,8 +6,8 @@ html lang="#{I18n.locale.to_s.gsub('_','-')}"
     = csp_meta_tag
 
     = render partial: "layouts/favicon"
-    = stylesheet_link_tag "application", media: "all"
-    = javascript_include_tag "application", defer: true
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_importmap_tags
 
     meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
     meta name="author" content="Thomas JUSTINO"
@@ -22,19 +22,19 @@ html lang="#{I18n.locale.to_s.gsub('_','-')}"
   body
     - if @current_user
       / Static navbar
-      nav.navbar.is-transparent role="navigation" aria-label="main navigation"
+      nav.navbar.is-transparent role="navigation" aria-label="main navigation" data-controller="layout"
         .container
           / brand
           .navbar-brand
             = link_to dashboard_path, class: "navbar-item" do
               = image_tag "_icon.svg", alt: "🥤"
             / burger menu
-            a.navbar-burger role="button" aria-label="menu" aria-expanded="false" data-target="navMenu"
+            a.navbar-burger role="button" aria-label="menu" aria-expanded="false" data-layout-target="navBarBurger" data-action="layout#toggleMenu"
               span aria-hidden="true"
               span aria-hidden="true"
               span aria-hidden="true"
           / navigation
-          .navbar-menu#navMenu
+          .navbar-menu data-layout-target="navBarMenu"
             / left part
             .navbar-start
               - if Category.exists?(account: @current_accounts)
@@ -73,26 +73,26 @@ html lang="#{I18n.locale.to_s.gsub('_','-')}"
                   = mail_to "support@smoothiefunds.com", icon_text_light("fa-solid fa-headset", t(".support")), class: "navbar-item icon-text"
                   hr.navbar-divider
                   / Logout
-                  = link_to icon_text_light("fa-solid fa-power-off", t(".logout")), logout_path, method: :delete, id: "logout", class: "navbar-item icon-text"
+                  = link_to icon_text_light("fa-solid fa-power-off", t(".logout")), logout_path, data: { turbo_method: :delete }, id: "logout", class: "navbar-item icon-text"
 
     / flash
     - if flash[:alert]
-      section#alertMessage.section.pt-5.pb-0
+      section.section.pt-5.pb-0 data-controller="layout"
         .container
           .notification.is-danger.is-light
-            button.delete aria-label="#{t(".aria_close")}" onclick="removeById('alertMessage')"
+            button.delete aria-label="#{t(".aria_close")}" data-action="layout#removeMessageBox"
             = flash[:alert]
     - elsif flash[:warning]
-      section#warningMessage.section.pt-5.pb-0
+      section.section.pt-5.pb-0 data-controller="layout"
         .container
           .notification.is-warning.is-light
-            button.delete aria-label="#{t(".aria_close")}" onclick="removeById('warningMessage')"
+            button.delete aria-label="#{t(".aria_close")}" data-action="layout#removeMessageBox"
             = flash[:warning]
     - elsif flash[:notice]
-      section#noticeMessage.section.pt-5.pb-0
+      section.section.pt-5.pb-0 data-controller="layout"
         .container
           .notification.is-success.is-light
-            button.delete aria-label="#{t(".aria_close")}" onclick="removeById('noticeMessage')"
+            button.delete aria-label="#{t(".aria_close")}" data-action="layout#removeMessageBox"
             = flash[:notice]
 
     / content
@@ -117,9 +117,9 @@ html lang="#{I18n.locale.to_s.gsub('_','-')}"
       / = console
       #debugBox.columns style="position:fixed;bottom:0;right:0;"
         .column.is-narrow.mr-1.mb-1.is-hidden-mobile
-          section.message.is-warning.is-small.is-narrow
+          section.message.is-warning.is-small.is-narrow data-controller="layout"
             .message-header
               p Debug
-              button.delete aria-label="#{t(".aria_close")}" onclick="removeById('debugBox')"
+              button.delete aria-label="#{t(".aria_close")}" data-action="layout#removeMessageBox"
             .message-body
               = debug(request.parameters)

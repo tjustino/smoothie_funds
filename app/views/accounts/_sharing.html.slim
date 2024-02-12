@@ -8,4 +8,4 @@
           .column.is-narrow
             = link_to icon_text("fa-regular fa-thumbs-up", t(".accept")), sharing_path(pending.account), method: :post, class: "button is-success"
           .column.is-narrow
-            = link_to icon_text("fa-regular fa-circle-xmark", t(".reject")), unsharing_path(pending.account), method: :delete, class: "button is-danger"
+            = link_to icon_text("fa-regular fa-circle-xmark", t(".reject")), unsharing_path(pending.account), data: { turbo_method: :delete }, class: "button is-danger"

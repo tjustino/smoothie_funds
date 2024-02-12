@@ -1,4 +1,4 @@
-= form_with(model: shallow_args(@current_user, @search), class: "box") do |form|
+= form_with(model: shallow_args(@current_user, @search), class: "box", data: { controller: "search" }) do |form|
   .content.has-text-centered
     = icon_text("fa-solid fa-magnifying-glass", title)
     hr
@@ -11,7 +11,7 @@
         = form.select :accounts,
                       options_from_collection_for_select(@accounts_with_categories, :id, :name, @accounts_with_categories.ids),
                       { include_hidden: false },
-                      { multiple: true, size: 3 }
+                      { multiple: true, size: 3, data: { action: "search#toggleCategoriesLists", search_target: "accounts" } }
 
   / accounts
   .field
@@ -59,9 +59,12 @@
     .field.has-addons
       .control
         span.select
-          = form.select :operator, options_for_select(Search.operators.keys.map { |key| [t(".#{key}"), key] } )
+          = form.select :operator,
+                        options_for_select(Search.operators.keys.map { |key| [t(".#{key}"), key] } ),
+                        {},
+                        data: { action: "search#toggleCommentField", search_target: "commentScope" }
       .control.is-expanded
-        = form.text_field :comment, class: "input", placeholder: t(".comment")
+        = form.text_field :comment, class: "input", placeholder: t(".comment"), data: { search_target: "commentField" }
 
   / checked
   .field

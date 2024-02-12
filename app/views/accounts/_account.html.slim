@@ -24,8 +24,7 @@
           .level-item.has-text-centered
             = link_to icon("fa-regular fa-trash-can"),
                       account_path(account),
-                      method: :delete,
-                      data: {confirm: t(".are_you_sure", account: account.name)},
+                      data: { turbo_method: :delete, turbo_confirm: t(".are_you_sure", account: account.name) },
                       title: t(".destroy"),
                       class: "has-text-danger"
           - if account.hidden == true

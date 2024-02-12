@@ -37,8 +37,7 @@
           .control
             = link_to icon_text("fa-solid fa-link-slash", t(".unlink")),
                       unlink_path(form.object),
-                      method: :delete,
-                      data: { confirm: t(".are_you_sure_unlink") },
+                      data: { turbo_method: :delete, turbo_confirm: t(".are_you_sure_unlink") },
                       class: "button is-danger is-fullwidth"
 
     / pending user
@@ -59,7 +58,7 @@
             .control
               = pending_user_fields.email_field :email, class: "input", disabled: true
             .control
-              = link_to icon_text("fa-solid fa-arrow-rotate-left", t(".no_longer_propose")), unpend_path, method: :delete, class: "button is-warning"
+              = link_to icon_text("fa-solid fa-arrow-rotate-left", t(".no_longer_propose")), unpend_path, data: { turbo_method: :delete }, class: "button is-warning"
 
   / hidden
   .field

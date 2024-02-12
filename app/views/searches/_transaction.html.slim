@@ -40,7 +40,6 @@
           .level-item.has-text-centered
             = link_to icon("fa-regular fa-trash-can"),
                       transaction_path(transaction),
-                      method: :delete,
-                      data: { confirm: t(".are_you_sure") },
+                      data: { turbo_method: :delete, turbo_confirm: t(".are_you_sure") },
                       title: t(".destroy"),
                       class: "has-text-danger"
