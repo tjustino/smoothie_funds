@@ -1,7 +1,7 @@
 @charset "utf-8";
 
-// Bulma
-// https://bulma.io/documentation/customize/variables/
+// Bulma - 0.9.4 - git checkout 3e00a8e6d0d0e566d507328f0185ef84854effba
+// https://github.com/jgthms/bulma/releases/latest
 $primary:   #911e93;
 $light:     #F1F0EE;
 $dark:      #4F5155;
@@ -25,11 +25,12 @@ body {
   flex: 1 0 0;
 }
 
-// Font Awesome
+// Font Awesome - 6.5.1 - git checkout deeea78c52bfe00b6e251ffddccf5570d5fdb05e
+// https://github.com/FortAwesome/Font-Awesome/releases/latest
 $fa-font-path: ".";
-@import "@fortawesome/fontawesome-free/scss/fontawesome";
-@import "@fortawesome/fontawesome-free/scss/regular";
-@import "@fortawesome/fontawesome-free/scss/solid";
+@import "fontawesome/scss/fontawesome";
+@import "fontawesome/scss/regular";
+@import "fontawesome/scss/solid";
 
 // Smoothie Funds
 // search colors
