@@ -20,7 +20,7 @@ end
 
 desc "Cleanup your environment"
 task cleanup: :environment do
-  Rake::Task["assets:clean"].invoke
+  Rake::Task["assets:clobber"].invoke
   puts "Old compiled assets removed 👍".green
 
   Rake::Task["log:clear"].invoke
