@@ -13,6 +13,7 @@ fr_FR:
     destroy:
       successfully_destroyed: "Le compte a bien été supprimé"
       cant_destroy:           "Le compte ne peut pas être supprimé car des catégories et/ou transactions y sont liées"
+      count:                  "Nombre de comptes"
     unlink:
       successfully_unlinked:  "Vous n'êtes plus lié au compte"
       cant_unlink:            "Vous ne pouvez pas être dissocié à ce compte"
@@ -99,6 +100,7 @@ fr_FR:
     destroy:
       successfully_destroyed: "La catégorie a bien été supprimée"
       cant_destroy:           "La catégorie ne peut pas être supprimée car des transactions y sont liées"
+      count:                  "Nombre de catégories"
     # views
     category:
       time:             "%{total} fois"
@@ -189,7 +191,6 @@ fr_FR:
       site_descritpion: "Gérez vos comptes en toute simplicité !"
       transactions: "Transactions"
       schedules:    "Échéanciers"
-      categories:   "Catégories"
       accounts:     "Comptes"
       profile:      "Profil"
       support:      "Contacter le support"
@@ -202,6 +203,10 @@ fr_FR:
       personal_data: "Données personnelles"
       aria_close:    "Fermer"
       alert_no_js:   "Activez le JavaScript pour tirer pleinement parti de SmoothieFunds !"
+    categories_menu:
+      categories:   "Catégories"
+    flash:
+      aria_close:    "Fermer"
 
   rights:
     # views
@@ -279,9 +284,12 @@ fr_FR:
     destroy:
       successfully_destroyed: "La transaction a bien été supprimée"
       cant_destroy:           "La transaction n'a pas pu être supprimée"
+      count:                  "Nombre de transactions"
     easycheck:
       successfully_checked:   "La transaction a bien été rapprochée"
     # views
+    easycheck:
+      check_transaction:  "Rapprocher la transaction"
     form:
       debit:            "Débit"
       credit:           "Crédit"
@@ -294,7 +302,6 @@ fr_FR:
     sum_checked:
       sum_checked:      "Somme des montants rappochés : "
     transaction:
-      check_transaction:  "Rapprocher la transaction"
       edit:               "Éditer"
       destroy:            "Supprimer"
       are_you_sure:       "Êtes-vous certain de vouloir supprimer la transaction ?"
@@ -349,8 +356,7 @@ fr_FR:
     destroy:
       successfully_destroyed: "L'échéancier a bien été supprimé"
       cant_destroy:           "L'échéancier n'a pas pu être supprimé"
-    insert:
-      successfully_inserted:  "La transaction a bien été insérée, l'échéancier a été mis à jour"
+      count:                  "Nombre de d'échéanciers"
     # views
     form:
       next_time:          "Prochaine échéance"
@@ -402,7 +408,7 @@ fr_FR:
     edit:
       schedules:          "Échéanciers"
       edit_schedule:      "Éditer l'échéancier"
-    index:
+    index: &index_schedules
       listing_schedules:  "Liste des échéanciers du %{current_account} "
       count:              "Nombre d'échéanciers"
       export_schedules:   "Exporter mes échéanciers"
@@ -413,6 +419,9 @@ fr_FR:
       amount:             "Montant"
       comment:            "Commentaire"
       more_schedules:     "↓ Afficher plus d'échéanciers ↓"
+    insert:
+      <<: *index_schedules
+      successfully_inserted:  "La transaction a bien été insérée, l'échéancier a été mis à jour"
     new:
       schedules:          "Échéanciers"
       create_schedule:    "Créer l'échéancier"
@@ -519,8 +528,8 @@ fr_FR:
       are_you_sure:           "Êtes-vous certain de vouloir supprimer cette recherche ?"
     show:
       result:             "Résultat de recherche"
-      sum:                "Somme des montants : "
-      count:              "Nombre de transactions : "
+      sum:                "Somme des montants :"
+      count:              "Nombre de transactions :"
       account:            "Compte"
       date:               "Date"
       category:           "Catégorie"

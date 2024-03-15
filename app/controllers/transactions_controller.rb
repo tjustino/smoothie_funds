@@ -2,6 +2,7 @@
 
 # Transactions Controller
 class TransactionsController < ApplicationController
+  include SearchedTransactions
   before_action :set_current_account
 
   # GET /accounts/:account_id/transactions
@@ -15,7 +16,11 @@ class TransactionsController < ApplicationController
         @sum_checked     = @current_account.initial_balance + current_transactions.checked.sum(:amount)
         transactions(limit: @limit)
       end
-      format.js { transactions(offset: params[:offset].to_i.abs, limit: @limit) }
+      format.turbo_stream do
+        @nb_transactions = current_transactions.size
+        @nb_items = params[:offset].to_i.abs + @limit
+        transactions(offset: params[:offset].to_i.abs, limit: @limit)
+      end
       format.csv do
         attributes_to_extract = %w[id account_id category_id date amount checked comment]
         send_data current_transactions.to_csv(attributes_to_extract),
@@ -43,7 +48,11 @@ class TransactionsController < ApplicationController
   # POST /accounts/:account_id/transactions
   def create
     build_transaction
-    save_transaction(t(".successfully_created")) || render("new")
+    if save_transaction
+      redirect_to account_transactions_url(@current_account), notice: t(".successfully_created")
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   # PATCH/PUT /transactions/:id
@@ -51,26 +60,64 @@ class TransactionsController < ApplicationController
     # TODO: credit transaction + error screen = debit transaction
     transaction
     build_transaction
-    save_transaction(t(".successfully_updated")) || render("edit")
+    if save_transaction
+      if flash[:search_id].nil?
+        redirect_to account_transactions_url(@current_account), notice: t(".successfully_updated"), status: :see_other
+      else
+        redirect_to search_url(flash[:search_id]), notice: t(".successfully_created")
+      end
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   # DELETE /transactions/:id
   def destroy
     transaction
-    case controller_name
-    when "transactions"
+    if params[:search_id].nil?
+      # from transactions controller
       account = @transaction.account
       if @transaction.destroy
-        redirect_to account_transactions_path(account), notice: t(".successfully_destroyed")
+        respond_to do |format|
+          format.html { redirect_to account_transactions_path(account), notice: t(".successfully_destroyed") }
+          format.turbo_stream do
+            @successful_destroy = true
+            @nb_transactions = current_transactions.size
+            flash.now[:notice] = t(".successfully_destroyed")
+          end
+        end
       else
-        redirect_to account_transactions_path(account), warning: t(".cant_destroy")
+        respond_to do |format|
+          format.html { redirect_to account_transactions_path(account), warning: t(".cant_destroy") }
+          format.turbo_stream do
+            @successful_destroy = false
+            flash.now[:warning] = t(".cant_destroy")
+          end
+        end
       end
-    when "searches"
+    else
+      # from searches controller
       # TODO: definitely not the right paths
       if @transaction.destroy
-        redirect_to search_path(@current_user), notice: t(".successfully_destroyed")
+        respond_to do |format|
+          format.html { redirect_to search_path(@current_user), notice: t(".successfully_destroyed") }
+          format.turbo_stream do
+            @successful_destroy = true
+            @search = @current_user.searches.find(params[:search_id])
+            load_transactions
+            @nb_transactions = @transactions.count
+            @sum_transactions = @transactions.sum(:amount)
+            flash.now[:notice] = t(".successfully_destroyed")
+          end
+        end
       else
-        redirect_to new_user_search_path(@current_user), warning: t(".cant_destroy")
+        respond_to do |format|
+          format.html { redirect_to search_path(@current_user), warning: t(".cant_destroy") }
+          format.turbo_stream do
+            @successful_destroy = false
+            flash.now[:warning] = t(".cant_destroy")
+          end
+        end
       end
     end
   end
@@ -86,15 +133,9 @@ class TransactionsController < ApplicationController
       if @transaction.save
         @sum_checked = @current_account.initial_balance + current_transactions.checked.sum(:amount)
         format.html do
-          case controller_name
-          when "transactions"
-            redirect_to account_transactions_path(account), notice: t(".successfully_checked")
-          when "searches"
-            # TODO: definitely not the right paths
-            redirect_to new_user_search_path(@current_user), notice: t(".successfully_checked")
-          end
+          redirect_to(account_transactions_path(account), notice: t(".successfully_checked"))
         end
-        format.js
+        format.turbo_stream
       end
     end
   end
@@ -126,17 +167,11 @@ class TransactionsController < ApplicationController
       end
     end
 
-    def save_transaction(notice)
+    def save_transaction
       return unless @transaction.save
 
       @transaction.amount = params[:sign] == "credit" ? @transaction.amount.abs : (@transaction.amount.abs * -1)
       userstamp(@transaction)
-
-      if flash[:search_id].nil?
-        redirect_to account_transactions_url(@current_account), notice: notice
-      else
-        redirect_to search_url(flash[:search_id]), notice: notice
-      end
     end
 
     def current_transactions

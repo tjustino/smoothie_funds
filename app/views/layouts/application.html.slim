@@ -55,11 +55,7 @@ html lang="#{I18n.locale.to_s.gsub('_','-')}"
                       = link_to account.name, account_schedules_path(account), class: "navbar-item"
               / categories
               - if @current_accounts.any?
-                .navbar-item.has-dropdown.is-hoverable
-                  a.navbar-link = icon_text("fa-solid fa-tags", t(".categories"))
-                  .navbar-dropdown
-                    - @current_accounts.each do |account|
-                      = link_to account.name, account_categories_path(account), class: "navbar-item"
+                = render partial: "layouts/categories_menu"
               / accounts
               = link_to icon_text("fa-solid fa-book", t(".accounts")), accounts_path, class: "navbar-item"
             / right part
@@ -76,24 +72,7 @@ html lang="#{I18n.locale.to_s.gsub('_','-')}"
                   = link_to icon_text_light("fa-solid fa-power-off", t(".logout")), logout_path, data: { turbo_method: :delete }, id: "logout", class: "navbar-item icon-text"
 
     / flash
-    - if flash[:alert]
-      section.section.pt-5.pb-0 data-controller="layout"
-        .container
-          .notification.is-danger.is-light
-            button.delete aria-label="#{t(".aria_close")}" data-action="layout#removeMessageBox"
-            = flash[:alert]
-    - elsif flash[:warning]
-      section.section.pt-5.pb-0 data-controller="layout"
-        .container
-          .notification.is-warning.is-light
-            button.delete aria-label="#{t(".aria_close")}" data-action="layout#removeMessageBox"
-            = flash[:warning]
-    - elsif flash[:notice]
-      section.section.pt-5.pb-0 data-controller="layout"
-        .container
-          .notification.is-success.is-light
-            button.delete aria-label="#{t(".aria_close")}" data-action="layout#removeMessageBox"
-            = flash[:notice]
+    = render partial: "layouts/flash"
 
     / content
     #wrapper

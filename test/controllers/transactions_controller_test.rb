@@ -106,8 +106,8 @@ class TransactionsControllerTest < ActionDispatch::IntegrationTest
       transaction_to_be_deleted = some_transaction_for(:thomas)
       delete_destroy transaction_to_be_deleted
 
-      assert_redirected_to account_transactions_path(transaction_to_be_deleted.account)
-      assert_equal         I18n.t("transactions.destroy.successfully_destroyed"), flash[:notice]
+      assert_turbo_stream action: "remove", target: transaction_to_be_deleted
+      assert_equal        I18n.t("transactions.destroy.successfully_destroyed"), flash[:notice]
     end
   end
 
@@ -124,9 +124,8 @@ class TransactionsControllerTest < ActionDispatch::IntegrationTest
     transaction_to_be_checked = some_transaction_for(:thomas)
     post_easycheck transaction_to_be_checked
 
-    assert_redirected_to account_transactions_path(transaction_to_be_checked.account)
-    assert_equal         I18n.t("transactions.easycheck.successfully_checked"), flash[:notice]
-    assert_not_equal     @previous_transaction_status, transaction_to_be_checked.reload.checked
+    assert_turbo_stream action: "replace", target: "easycheck_#{transaction_to_be_checked.id}"
+    assert_not_equal    @previous_transaction_status, transaction_to_be_checked.reload.checked
   end
 
   test "should not easycheck transaction - hacker way" do
@@ -169,11 +168,11 @@ class TransactionsControllerTest < ActionDispatch::IntegrationTest
     end
 
     def delete_destroy(transaction)
-      delete "/transactions/#{transaction.id}"
+      delete "/transactions/#{transaction.id}", as: :turbo_stream
     end
 
     def post_easycheck(transaction)
       @previous_transaction_status = transaction.checked
-      post "/transactions/#{transaction.id}/easycheck"
+      post "/transactions/#{transaction.id}/easycheck", as: :turbo_stream
     end
 end

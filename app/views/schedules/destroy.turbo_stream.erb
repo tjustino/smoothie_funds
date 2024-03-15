@@ -1,0 +1,10 @@
+<% if @successful_destroy %>
+  <%# remove item in table %>
+  <%= turbo_stream.remove @schedule %>
+
+  <%# update total number of items %>
+  <%= turbo_stream.replace "total", partial: "layouts/tag", locals: { title: t(".count"), number_of: @nb_schedules } %>
+<% end %>
+
+<%# show flash message %>
+<%= turbo_stream.replace "flash", partial: "layouts/flash" %>

@@ -1,26 +1,27 @@
-- if @transactions.any?
-  - @current_accounts.each do |account|
-    a.panel-block href="#{account_transactions_path(account)}"
-      table.table.is-fullwidth.is-narrow
-        thead
-          tr
-            th = account.name
-            th.has-text-grey-light = t("dashboard.transactions_summary.sum_checked", sum_checked: sum_checked(account))
-        tbody
-          - if account.transactions.any?
+#transactions-summary
+  - if @transactions.any?
+    - @current_accounts.each do |account|
+      a.panel-block href="#{account_transactions_path(account)}"
+        table.table.is-fullwidth.is-narrow
+          thead
             tr
-              td.nowrap style="vertical-align:middle" = t("dashboard.transactions_summary.current_balance")
-              td class=("has-text-danger" if sum_today(@current_transactions, account) < 0)
-                = t("dashboard.transactions_summary.balance_date", balance: current_balance(@current_transactions, account), date: current_date(@current_transactions, account))
-            - if future_transactions?(@transactions, account)
+              th = account.name
+              th.has-text-grey-light = t("dashboard.transactions_summary.sum_checked", sum_checked: sum_checked(account))
+          tbody
+            - if account.transactions.any?
               tr
-                td.nowrap.has-text-grey-light style="vertical-align:middle" = t("dashboard.transactions_summary.future_balance")
-                td class=(sum_tomorrow(@transactions, account) < 0 ? "has-text-danger" : "has-text-grey-light")
-                  = t("dashboard.transactions_summary.balance_date",  balance: future_balance(@transactions, account), date: future_date(@transactions, account))
-          - else
-            tr
-              td.nowrap style="vertical-align:middle" = t("dashboard.transactions_summary.current_balance")
-              td class=("has-text-danger" if account.initial_balance < 0)
-                = t("dashboard.transactions_summary.balance_date", balance: initial_balance(account), date: today)
-- else
-  p.has-text-centered = t("dashboard.transactions_summary.no_transactions")
+                td.nowrap style="vertical-align:middle" = t("dashboard.transactions_summary.current_balance")
+                td class=("has-text-danger" if sum_today(@current_transactions, account) < 0)
+                  = t("dashboard.transactions_summary.balance_date", balance: current_balance(@current_transactions, account), date: current_date(@current_transactions, account))
+              - if future_transactions?(@transactions, account)
+                tr
+                  td.nowrap.has-text-grey-light style="vertical-align:middle" = t("dashboard.transactions_summary.future_balance")
+                  td class=(sum_tomorrow(@transactions, account) < 0 ? "has-text-danger" : "has-text-grey-light")
+                    = t("dashboard.transactions_summary.balance_date",  balance: future_balance(@transactions, account), date: future_date(@transactions, account))
+            - else
+              tr
+                td.nowrap style="vertical-align:middle" = t("dashboard.transactions_summary.current_balance")
+                td class=("has-text-danger" if account.initial_balance < 0)
+                  = t("dashboard.transactions_summary.balance_date", balance: initial_balance(account), date: today)
+  - else
+    p.has-text-centered = t("dashboard.transactions_summary.no_transactions")

@@ -10,16 +10,18 @@ h2.title.mb-0 = t(".result")
 .columns.is-gapless
   / transaction's sum
   .column.is-narrow
-    p.tag.is-primary = t(".sum") + number_to_currency(@sum_transactions)
+    p.tags.has-addon
+      .tag = t(".sum")
+      = render partial: "searches/sums", locals: { id_name: "amount", number: number_to_currency(@sum_transactions) }
 
   / spacing
   .column
 
   / transaction's count
   .column.is-narrow
-    p.tag.is-primary
-      = t(".count")
-      span#total = @nb_transactions.to_s
+    p.tags.has-addon
+      .tag = t(".count")
+      = render partial: "searches/sums", locals: { id_name: "no", number: @nb_transactions }
 
 / table
 table.table.is-fullwidth.is-striped#magic-table
@@ -45,8 +47,4 @@ table.table.is-fullwidth.is-striped#magic-table
 
 / More transactions
 - if @nb_transactions > @limit
-  #more-items.columns.is-mobile.is-centered
-    .column.is-narrow
-      = form_with(url: search_path, id: "more_items_form", method: :get, local: false) do
-        = hidden_field_tag "offset", @limit, autocomplete: "off"
-        = submit_tag t(".more_transactions"), class: "button is-primary"
+  = turbo_frame_tag "items", src: search_path(offset: @limit, format: :turbo_stream), loading: "lazy"

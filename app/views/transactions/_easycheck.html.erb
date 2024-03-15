@@ -1,0 +1,6 @@
+<%= link_to transaction.checked ? icon("fa-regular fa-square-check") : icon("fa-regular fa-square"),
+            easycheck_transaction_path(transaction, search_id: params[:id]),
+            data: { turbo_method: :post },
+            title: t(".check_transaction"),
+            id: "easycheck_#{transaction.id}",
+            class: "link-success" %>

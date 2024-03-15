@@ -10,12 +10,10 @@
   .column
     article.panel.is-info
       .panel-heading = t(".transaction_summary")
-      #transactions-summary
-        = render partial: "transactions_summary"
+      = render partial: "transactions_summary"
 
   / upcoming terms
   .column
     article.panel.is-info
       .panel-heading = t(".upcoming_terms")
-      #upcoming-terms
-        = render partial: "upcoming_terms"
+      = render partial: "upcoming_terms"

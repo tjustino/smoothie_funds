@@ -15,7 +15,11 @@ class CategoriesController < ApplicationController
         load_other_accounts
         @all_user_categories = Category.where(account: @current_accounts)
       end
-      format.js { categories(offset: params[:offset].to_i.abs, limit: @limit) }
+      format.turbo_stream do
+        @nb_categories = current_categories.count
+        @nb_items = params[:offset].to_i.abs + @limit
+        categories(offset: params[:offset].to_i.abs, limit: @limit)
+      end
       format.csv do
         attributes_to_extract = %w[id account_id name hidden]
         send_data current_categories.to_csv(attributes_to_extract),
@@ -38,25 +42,44 @@ class CategoriesController < ApplicationController
   # POST /accounts/:account_id/categories
   def create
     build_category
-    save_category(t(".successfully_created")) || render("new")
+    if save_category
+      redirect_to account_categories_url(@current_account), notice: t(".successfully_created")
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   # PATCH/PUT /categories/:id
   def update
     category
     build_category
-    save_category(t(".successfully_updated")) || render("edit")
+    if save_category
+      redirect_to account_categories_url(@current_account), notice: t(".successfully_updated"), status: :see_other
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   # DELETE /categories/:id
   def destroy
     category
     if @category.destroy
-      redirect_to account_categories_url(@current_account),
-                  notice: t(".successfully_destroyed")
+      respond_to do |format|
+        format.html { redirect_to account_categories_url(@current_account), notice: t(".successfully_destroyed") }
+        format.turbo_stream do
+          @successful_destroy = true
+          @nb_categories = current_categories.count
+          flash.now[:notice] = t(".successfully_destroyed")
+        end
+      end
     else
-      flash[:warning] = t(".cant_destroy")
-      redirect_to account_categories_url(@current_account)
+      respond_to do |format|
+        format.html { redirect_to account_categories_url(@current_account), warning: t(".cant_destroy") }
+        format.turbo_stream do
+          @successful_destroy = false
+          flash.now[:warning] = t(".cant_destroy")
+        end
+      end
     end
   end
 
@@ -69,11 +92,10 @@ class CategoriesController < ApplicationController
       @category = current_categories.build
       @category.name   = other_category.name
       @category.hidden = other_category.hidden
-      save_category(nil)
+      save_category
     end
 
-    redirect_to account_categories_url(@current_account),
-                notice: t(".successfully_imported")
+    redirect_to account_categories_url(@current_account), notice: t(".successfully_imported")
   end
 
   private ##############################################################################################################
@@ -104,13 +126,10 @@ class CategoriesController < ApplicationController
       category_params ? category_params.permit(:name, :hidden) : {}
     end
 
-    def save_category(notice)
+    def save_category
       return unless @category.save
 
       userstamp(@category)
-      return unless notice
-
-      redirect_to(account_categories_url(@current_account), notice: notice)
     end
 
     def current_categories

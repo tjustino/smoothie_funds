@@ -111,8 +111,8 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference "Category.count" do
       delete_destroy :coiffeur_courant_thomas
 
-      assert_redirected_to account_categories_path(accounts(:courant_thomas))
-      assert_equal         I18n.t("categories.destroy.cant_destroy"), flash[:warning]
+      assert_no_turbo_stream action: "remove", target: categories(:coiffeur_courant_thomas)
+      assert_equal           I18n.t("categories.destroy.cant_destroy"), flash[:warning]
     end
   end
 
@@ -122,8 +122,8 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     assert_difference("Category.count", -1) do
       delete_destroy :coiffeur_courant_thomas
 
-      assert_redirected_to account_categories_path(accounts(:courant_thomas))
-      assert_equal         I18n.t("categories.destroy.successfully_destroyed"), flash[:notice]
+      assert_turbo_stream action: "remove", target: categories(:coiffeur_courant_thomas)
+      assert_equal        I18n.t("categories.destroy.successfully_destroyed"), flash[:notice]
     end
   end
 
@@ -177,7 +177,7 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     end
 
     def delete_destroy(category)
-      delete "/categories/#{categories(category).id}"
+      delete "/categories/#{categories(category).id}", as: :turbo_stream
     end
 
     def post_import_from(first_account, second_account)

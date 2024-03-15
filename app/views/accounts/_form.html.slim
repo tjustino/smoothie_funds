@@ -1,4 +1,4 @@
-= form_with(model: @account, class: "box") do |form|
+= form_with(model: @account, class: "box", data: { turbo: false }) do |form|
   .content.has-text-centered
     = icon_text("fa-solid fa-book", title)
     hr

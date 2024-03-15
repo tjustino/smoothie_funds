@@ -1,14 +1,8 @@
 - transactions.each do |transaction|
-  tr class=("has-text-grey-light" if transaction.date > Time.zone.today)
+  tr class=("has-text-grey-light" if transaction.date > Time.zone.today) id="#{dom_id(transaction)}"
 
     / check
-    td = link_to transaction.checked ? icon("fa-regular fa-square-check") : icon("fa-regular fa-square"),
-                 easycheck_transaction_path(transaction),
-                 method: :post,
-                 remote: true,
-                 title: t(".check_transaction"),
-                 id: "check_#{transaction.id}",
-                 class: "link-success"
+    td = render partial: "transactions/easycheck", locals: { transaction: transaction }
 
     / account
     td data-title="#{account}" = truncate(transaction.account.name, length: 20)
@@ -39,7 +33,7 @@
                       class: "has-text-info"
           .level-item.has-text-centered
             = link_to icon("fa-regular fa-trash-can"),
-                      transaction_path(transaction),
+                      transaction_path(transaction, search_id: params[:id]),
                       data: { turbo_method: :delete, turbo_confirm: t(".are_you_sure") },
                       title: t(".destroy"),
                       class: "has-text-danger"

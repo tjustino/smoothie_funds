@@ -15,7 +15,11 @@ class SchedulesController < ApplicationController
         schedules(limit: @limit)
         @all_user_schedules = Schedule.where(account: @current_accounts)
       end
-      format.js { schedules(offset: params[:offset].to_i.abs, limit: @limit) }
+      format.turbo_stream do
+        @nb_schedules = current_schedules.count
+        @nb_items = params[:offset].to_i.abs + @limit
+        schedules(offset: params[:offset].to_i.abs, limit: @limit)
+      end
       format.csv do
         attributes_to_extract = %w[id account_id next_time frequency period]
         send_data current_schedules.to_csv(attributes_to_extract),
@@ -48,7 +52,11 @@ class SchedulesController < ApplicationController
     @schedule.account = @current_account
     @schedule.operation.account = @current_account
 
-    save_schedule(t(".successfully_created")) || render("new")
+    if save_schedule
+      redirect_to account_schedules_url(@current_account), notice: t(".successfully_created")
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   # PATCH/PUT /schedules/:id
@@ -60,18 +68,33 @@ class SchedulesController < ApplicationController
     @schedule.account = @current_account
     @schedule.operation.account = @current_account
 
-    save_schedule(t(".successfully_updated")) || render("edit")
+    if save_schedule
+      redirect_to account_schedules_url(@current_account), notice: t(".successfully_updated"), status: :see_other
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   # DELETE /schedules/:id
   def destroy
     schedule
     if @schedule.destroy
-      redirect_to account_schedules_url(@current_account),
-                  notice: t(".successfully_destroyed")
+      respond_to do |format|
+        format.html { redirect_to account_schedules_url(@current_account), notice: t(".successfully_destroyed") }
+        format.turbo_stream do
+          @successful_destroy = true
+          @nb_schedules = current_schedules.count
+          flash.now[:notice] = t(".successfully_destroyed")
+        end
+      end
     else
-      flash[:warning] = t(".cant_destroy")
-      redirect_to account_schedules_url(@current_account)
+      respond_to do |format|
+        format.html { redirect_to account_schedules_url(@current_account), warning: t(".cant_destroy") }
+        format.turbo_stream do
+          @successful_destroy = false
+          flash.now[:warning] = t(".cant_destroy")
+        end
+      end
     end
   end
 
@@ -91,16 +114,13 @@ class SchedulesController < ApplicationController
     @schedule.save
 
     begin
-      if current_controller == "schedules"
-        redirect_to account_schedules_url(@current_account), notice: t(".successfully_inserted")
-      else
-        respond_to do |format|
-          format.html { redirect_to dashboard_url, notice: t(".successfully_inserted") }
-          format.js do
-            load_transactions
-            load_current_transactions
-            load_schedules
-          end
+      respond_to do |format|
+        format.html { redirect_to dashboard_url, notice: t(".successfully_inserted"), status: :see_other }
+        format.turbo_stream do
+          load_transactions
+          load_current_transactions
+          load_schedules
+          flash[:notice] = t(".successfully_inserted") unless params[:origin] == "dashboard"
         end
       end
     rescue StandardError
@@ -136,7 +156,7 @@ class SchedulesController < ApplicationController
       end
     end
 
-    def save_schedule(notice)
+    def save_schedule
       return unless @schedule.save
 
       if params[:sign] == "credit"
@@ -147,16 +167,9 @@ class SchedulesController < ApplicationController
       end
 
       userstamp(@schedule)
-      return unless notice
-
-      redirect_to(account_schedules_url(@current_account), notice: notice)
     end
 
     def current_schedules
       @current_account.schedules
-    end
-
-    def current_controller
-      Rails.application.routes.recognize_path(request.referer)[:controller]
     end
 end

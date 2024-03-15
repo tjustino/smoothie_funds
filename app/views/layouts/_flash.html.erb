@@ -1,0 +1,30 @@
+<div id="flash">
+  <% if flash[:alert] %>
+    <section class="section pt-5 pb-0" data-controller="layout">
+      <div class="container">
+        <div class="notification is-danger is-light">
+          <button aria-label="<%= t(".aria_close") %>" class="delete" data-action="layout#removeMessageBox"></button>
+          <%= flash[:alert] %>
+        </div>
+      </div>
+    </section>
+  <% elsif flash[:warning] %>
+    <section class="section pt-5 pb-0" data-controller="layout">
+      <div class="container">
+        <div class="notification is-warning is-light">
+          <button aria-label="<%= t(".aria_close") %>" class="delete" data-action="layout#removeMessageBox"></button>
+          <%= flash[:warning] %>
+        </div>
+      </div>
+    </section>
+  <% elsif flash[:notice] %>
+    <section class="section pt-5 pb-0" data-controller="layout">
+      <div class="container">
+        <div class="notification is-success is-light">
+          <button aria-label="<%= t(".aria_close") %>" class="delete" data-action="layout#removeMessageBox"></button>
+          <%= flash[:notice] %>
+        </div>
+      </div>
+    </section>
+  <% end %>
+</div>

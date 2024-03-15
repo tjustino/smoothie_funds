@@ -72,8 +72,8 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference "Account.count" do
       delete_destroy :courant_thomas
 
-      assert_redirected_to accounts_path
-      assert_equal         I18n.t("accounts.destroy.cant_destroy"), flash[:warning]
+      assert_no_turbo_stream action: "remove", target: accounts(:courant_thomas)
+      assert_equal           I18n.t("accounts.destroy.cant_destroy"), flash[:warning]
     end
   end
 
@@ -85,8 +85,8 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
     assert_difference("Account.count", -1) do
       delete_destroy :courant_thomas
 
-      assert_redirected_to accounts_path
-      assert_equal         I18n.t("accounts.destroy.successfully_destroyed"), flash[:notice]
+      assert_turbo_stream action: "remove", target: accounts(:courant_thomas)
+      assert_equal        I18n.t("accounts.destroy.successfully_destroyed"), flash[:notice]
     end
   end
 
@@ -244,7 +244,7 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
     end
 
     def delete_destroy(account)
-      delete "/accounts/#{accounts(account).id}"
+      delete "/accounts/#{accounts(account).id}", as: :turbo_stream
     end
 
     def delete_unlink(account)

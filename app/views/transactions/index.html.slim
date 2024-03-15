@@ -10,8 +10,7 @@
       div
         h2.title
           = t(".listing_transactions", current_account: @current_account.name)
-          sup title="#{t('.count')}"
-            .tag.is-primary.is-rounded#total = @nb_transactions
+          = render partial: "layouts/tag", locals: { title: t('.count'), number_of: @nb_transactions }
         / sum checked
         .heading
           = render partial: "sum_checked", locals: { sum_checked: @sum_checked }
@@ -53,8 +52,4 @@ table.table.is-fullwidth.is-striped#magic-table
 
 / more transactions
 - if @nb_transactions > @limit
-  #more-items.columns.is-mobile.is-centered data-controller="ajax"
-    .column.is-narrow
-      = form_with(url: account_transactions_path(@current_account), id: "more_items_form", method: :get, local: false) do
-        = hidden_field_tag "offset", @limit, autocomplete: "off"
-        = submit_tag t(".more_transactions"), class: "button is-primary"
+  = turbo_frame_tag "items", src: account_transactions_path(@current_account, offset: @limit, format: :turbo_stream), loading: "lazy"

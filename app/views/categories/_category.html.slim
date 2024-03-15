@@ -1,5 +1,5 @@
 - categories.each do |category|
-  tr class=("has-text-grey-light" if category.hidden == true)
+  tr class=("has-text-grey-light" if category.hidden == true) id="#{dom_id(category)}"
     / name
     td data-title="#{name}" = category.name
 

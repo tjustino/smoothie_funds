@@ -1,0 +1,8 @@
+<div class="navbar-item has-dropdown is-hoverable">
+  <a class="navbar-link"><%= icon_text("fa-solid fa-tags", t(".categories")) %></a>
+  <div class="navbar-dropdown">
+    <% @current_accounts.each do |account| %>
+      <%= link_to account.name, account_categories_path(account), class: "navbar-item", id: dom_id(account, :menu) %>
+    <% end %>
+  </div>
+</div>

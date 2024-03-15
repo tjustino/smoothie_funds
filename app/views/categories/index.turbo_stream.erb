@@ -1,0 +1,9 @@
+<%= turbo_stream.append "listing", partial: "category", locals: { categories: @categories, name: t(".name"), use: t(".use") } %>
+
+<% if @nb_categories > @nb_items %>
+  <%= turbo_stream.replace "items" do %>
+    <%= turbo_frame_tag "items", src: account_categories_path(@current_account, offset: @nb_items, format: :turbo_stream), loading: "lazy" %>
+  <% end %>
+<% else %>
+  <%= turbo_stream.remove "items" %>
+<% end %>

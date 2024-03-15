@@ -1,21 +1,21 @@
-- if @schedules.any?
-  - @current_accounts.each do |account|
-    - if @schedules.where(account_id: account.id).any?
-      .panel-block
-        table.table.is-fullwidth.is-narrow.is-striped
-          thead
-            tr
-              th colspan="4" = link_to account.name, account_schedules_path(account)
-          tbody
-            - shedules_for(@schedules, account).each do |schedule|
-              tr title="#{schedule.operation.comment}"
-                td.is-narrow = link_to icon("fa-solid fa-wand-magic"),
-                            insert_schedule_path(schedule),
-                            method: :post,
-                            title:  t("dashboard.upcoming_terms.insert_schedule"),
-                            remote: true
-                td.is-narrow = l(schedule.next_time, format: :short)
-                td = schedule.operation.category.name
-                td.nowrap = number_to_currency(schedule.operation.amount)
-- else
-  p.has-text-centered = t("dashboard.upcoming_terms.no_terms")
+#upcoming-terms
+  - if @schedules.any?
+    - @current_accounts.each do |account|
+      - if @schedules.where(account_id: account.id).any?
+        .panel-block
+          table.table.is-fullwidth.is-narrow.is-striped
+            thead
+              tr
+                th colspan="4" = link_to account.name, account_schedules_path(account)
+            tbody
+              - shedules_for(@schedules, account).each do |schedule|
+                tr title="#{schedule.operation.comment}"
+                  td.is-narrow = link_to icon("fa-solid fa-wand-magic"),
+                                         insert_schedule_path(schedule, origin: "dashboard"),
+                                         data: { turbo_method: :post },
+                                         title:  t("dashboard.upcoming_terms.insert_schedule")
+                  td.is-narrow = l(schedule.next_time, format: :short)
+                  td = schedule.operation.category.name
+                  td.nowrap = number_to_currency(schedule.operation.amount)
+  - else
+    p.has-text-centered = t("dashboard.upcoming_terms.no_terms")

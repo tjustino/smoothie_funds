@@ -1,5 +1,5 @@
 - accounts.each do |account|
-  tr class=("has-text-grey-light" if account.hidden == true)
+  tr class=("has-text-grey-light" if account.hidden == true) id="#{dom_id(account)}"
     / name
     td data-title="#{name}" = account.name
 

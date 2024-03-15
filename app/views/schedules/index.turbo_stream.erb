@@ -1,0 +1,14 @@
+<%= turbo_stream.append "listing", partial: "schedule", locals:  { schedules: @schedules,
+                                                                   next_time: t(".next_time"),
+                                                                   frequency: t(".frequency"),
+                                                                   category:  t(".category"),
+                                                                   amount:    t(".amount"),
+                                                                   comment:   t(".comment") } %>
+
+<% if @nb_schedules > @nb_items %>
+  <%= turbo_stream.replace "items" do %>
+    <%= turbo_frame_tag "items", src: account_schedules_path(@current_account, offset: @nb_items, format: :turbo_stream), loading: "lazy" %>
+  <% end %>
+<% else %>
+  <%= turbo_stream.remove "items" %>
+<% end %>

@@ -1,0 +1,11 @@
+<% if @successful_destroy %>
+  <%# remove item in table and menu %>
+  <%= turbo_stream.remove @account %>
+  <%= turbo_stream.remove "menu_account_#{@account.id}" %>
+
+  <%# update total number of items %>
+  <%= turbo_stream.replace "total", partial: "layouts/tag", locals: { title: t(".count"), number_of: @nb_accounts } %>
+<% end %>
+
+<%# show flash message %>
+<%= turbo_stream.replace "flash", partial: "layouts/flash" %>

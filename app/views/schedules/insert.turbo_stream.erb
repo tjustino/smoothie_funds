@@ -1,0 +1,12 @@
+<% if params[:origin] == "dashboard" %>
+  <%= turbo_stream.replace "upcoming-terms", partial: "dashboard/upcoming_terms" %>
+  <%= turbo_stream.replace "transactions-summary", partial: "dashboard/transactions_summary" %>
+<% else %>
+  <%= turbo_stream.update "listing", partial: "schedule", locals: { schedules: @schedules,
+                                                                    next_time: t(".next_time"),
+                                                                    frequency: t(".frequency"),
+                                                                    category:  t(".category"),
+                                                                    amount:    t(".amount"),
+                                                                    comment:   t(".comment") } %>
+  <%= turbo_stream.replace "flash", partial: "layouts/flash" %>
+<% end %>

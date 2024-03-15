@@ -1,0 +1,15 @@
+<%= turbo_stream.append "listing", partial: "transaction", locals:  { transactions: @transactions,
+                                                                      account:      t(".account"),
+                                                                      date:         t(".date"),
+                                                                      category:     t(".category"),
+                                                                      debit:        t(".debit"),
+                                                                      credit:       t(".credit"),
+                                                                      comment:      t(".comment") } %>
+
+<% if @nb_transactions > @nb_items %>
+  <%= turbo_stream.replace "items" do %>
+    <%= turbo_frame_tag "items", src: search_path(offset: @nb_items, format: :turbo_stream), loading: "lazy" %>
+  <% end %>
+<% else %>
+  <%= turbo_stream.remove "items" %>
+<% end %>

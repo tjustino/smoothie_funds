@@ -104,11 +104,10 @@ class SchedulesControllerTest < ActionDispatch::IntegrationTest
   test "should destroy schedule" do
     assert_difference [ "Schedule.count", "Transaction.count" ], -1 do
       schedule = some_schedule_for(:thomas)
-      schedule_account = schedule.account
       delete_destroy schedule
 
-      assert_redirected_to account_schedules_path(schedule_account)
-      assert_equal         I18n.t("schedules.destroy.successfully_destroyed"), flash[:notice]
+      assert_turbo_stream action: "remove", target: schedule
+      assert_equal        I18n.t("schedules.destroy.successfully_destroyed"), flash[:notice]
     end
   end
 
@@ -125,9 +124,9 @@ class SchedulesControllerTest < ActionDispatch::IntegrationTest
     schedule = some_schedule_for(:thomas)
     post_insert schedule
 
-    assert_redirected_to dashboard_url
-    assert_equal         I18n.t("schedules.insert.successfully_inserted"), flash[:notice]
-    assert_not_equal     @previous_next_time, schedule.reload.next_time
+    assert_turbo_stream action: "update", target: "listing"
+    assert_equal        I18n.t("schedules.insert.successfully_inserted"), flash[:notice]
+    assert_not_equal    @previous_next_time, schedule.reload.next_time
   end
 
   test "should not insert transaction via schedule - hacker way" do
@@ -172,11 +171,11 @@ class SchedulesControllerTest < ActionDispatch::IntegrationTest
     end
 
     def delete_destroy(schedule)
-      delete "/schedules/#{schedule.id}"
+      delete "/schedules/#{schedule.id}", as: :turbo_stream
     end
 
     def post_insert(schedule)
       @previous_next_time = schedule.next_time
-      post "/schedules/#{schedule.id}/insert"
+      post "/schedules/#{schedule.id}/insert", as: :turbo_stream
     end
 end

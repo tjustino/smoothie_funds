@@ -1,0 +1,2 @@
+<%= turbo_stream.replace "sum_checked", partial: "sum_checked", locals:  { sum_checked: @sum_checked } %>
+<%= turbo_stream.replace "easycheck_#{@transaction.id}", partial: "easycheck", locals:  { transaction: @transaction } %>

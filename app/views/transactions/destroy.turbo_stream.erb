@@ -1,0 +1,16 @@
+<% if @successful_destroy %>
+  <%# remove item in table %>
+  <%= turbo_stream.remove @transaction %>
+
+  <% if params[:search_id].nil? %>
+    <%# update total number of items %>
+    <%= turbo_stream.replace "total", partial: "layouts/tag", locals: { title: t(".count"), number_of: @nb_transactions } %>
+  <% else %>
+    <%# update amount and number of items %>
+    <%= turbo_stream.replace "amount", partial: "searches/sums", locals: { id_name: "amount", number: number_to_currency(@sum_transactions) } %>
+    <%= turbo_stream.replace "no", partial: "searches/sums", locals: { id_name: "no", number: @nb_transactions } %>
+  <% end %>
+<% end %>
+
+<%# show flash message %>
+<%= turbo_stream.replace "flash", partial: "layouts/flash" %>

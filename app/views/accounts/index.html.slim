@@ -9,8 +9,7 @@
     .level-item
       h2.title
         = t(".listing_accounts")
-        sup title="#{t('.count')}"
-          .tag.is-primary.is-rounded#total = @nb_accounts
+        = render partial: "layouts/tag", locals: { title: t('.count'), number_of: @nb_accounts }
 
   .level-right
     / download
@@ -39,8 +38,4 @@ table.table.is-fullwidth.is-striped#magic-table
 
 / more accounts
 - if @nb_accounts > @limit
-  #more-items.columns.is-mobile.is-centered
-    .column.is-narrow
-      = form_with(url: accounts_path, id: "more_items_form", method: :get, local: false) do
-        = hidden_field_tag "offset", @limit, autocomplete: "off"
-        = submit_tag t(".more_accounts"), class: "button is-primary"
+  = turbo_frame_tag "items", src: accounts_path(offset: @limit, format: :turbo_stream), loading: "lazy"

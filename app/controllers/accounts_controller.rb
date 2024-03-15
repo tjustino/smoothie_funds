@@ -12,7 +12,11 @@ class AccountsController < ApplicationController
         accounts(limit: @limit)
         load_pendings
       end
-      format.js { accounts(offset: params[:offset].to_i.abs, limit: @limit) }
+      format.turbo_stream do
+        @nb_accounts = current_accounts.count
+        @nb_items = params[:offset].to_i.abs + @limit
+        accounts(offset: params[:offset].to_i.abs, limit: @limit)
+      end
       format.csv do
         attributes_to_extract = %w[id name initial_balance hidden]
         send_data current_accounts.to_csv(attributes_to_extract),
@@ -35,24 +39,44 @@ class AccountsController < ApplicationController
   # POST /accounts
   def create
     build_account
-    save_account(t(".successfully_created")) || render("new")
+    if save_account
+      redirect_to accounts_url, notice: t(".successfully_created")
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   # PATCH/PUT /accounts/:id
   def update
     account
     build_account
-    save_account(t(".successfully_updated")) || render("edit")
+    if save_account
+      redirect_to accounts_url, notice: t(".successfully_updated"), status: :see_other
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   # DELETE /accounts/:id
   def destroy
     account
     if @account.destroy
-      redirect_to accounts_url, notice: t(".successfully_destroyed")
+      respond_to do |format|
+        format.html { redirect_to accounts_url, notice: t(".successfully_destroyed") }
+        format.turbo_stream do
+          @successful_destroy = true
+          @nb_accounts = current_accounts.count
+          flash.now[:notice] = t(".successfully_destroyed")
+        end
+      end
     else
-      flash[:warning] = t(".cant_destroy")
-      redirect_to accounts_url
+      respond_to do |format|
+        format.html { redirect_to accounts_url, warning: t(".cant_destroy") }
+        format.turbo_stream do
+          @successful_destroy = false
+          flash.now[:warning] = t(".cant_destroy")
+        end
+      end
     end
   end
 
@@ -116,7 +140,7 @@ class AccountsController < ApplicationController
       end
     end
 
-    def save_account(notice)
+    def save_account
       return unless @account.save
 
       if params[:new_share]
@@ -125,7 +149,6 @@ class AccountsController < ApplicationController
       end
       @account.users << @current_user if params[:action] == "create"
       userstamp(@account)
-      redirect_to accounts_url, notice: notice
     end
 
     def current_accounts
