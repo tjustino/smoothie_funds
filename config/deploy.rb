@@ -21,19 +21,3 @@ set :rbenv_map_bins, %w[rake gem bundle ruby rails puma pumactl]
 # how many old releases do we want to keep
 set :keep_releases, 3
 set :keep_assets,   3
-
-# rails 7 no longer depends on yarn
-# https://github.com/rails/rails/pull/43641
-# https://github.com/capistrano/rails/issues/259
-namespace :yarn do
-  task :install do
-    on release_roles(fetch(:assets_roles)) do
-      within release_path do
-        with rails_env: fetch(:rails_env) do
-          execute :rake, "yarn:install"
-        end
-      end
-    end
-  end
-end
-after "bundler:install", "yarn:install"
