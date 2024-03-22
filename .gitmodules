@@ -1,6 +1,0 @@
-[submodule "vendor/assets/stylesheets/bulma"]
-	path = app/assets/stylesheets/bulma
-	url = git@github.com:jgthms/bulma.git
-[submodule "app/assets/stylesheets/fontawesome"]
-	path = app/assets/stylesheets/fontawesome
-	url = git@github.com:FortAwesome/Font-Awesome.git
