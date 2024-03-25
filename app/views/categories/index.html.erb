@@ -1,0 +1,66 @@
+<%# welcome %>
+<% unless @all_user_categories.any? %>
+  <%= render "welcome" %>
+<% end %>
+
+<%# header %>
+<div class="level">
+  <%# title %>
+  <div class="level-left">
+    <div class="level-item">
+      <h2 class="title">
+        <%= t(".listing_categories", current_account: @current_account.name) %>
+        <%= render partial: "layouts/tag", locals: { title: t('.count'), number_of: @nb_categories } %>
+      </h2>
+    </div>
+  </div>
+  
+  <%# download %>
+  <div class="level-right">
+    <div class="level-item is-hidden-touch">
+      <%= link_to icon("fa-solid fa-download"),
+                  account_categories_path(@current_account, format: :csv),
+                  title: t(".export_categories"),
+                  class: "button is-link is-light" %>
+    </div>
+
+    <%# import categories from %>
+    <% if @current_accounts.count > 1 %>
+      <div class="level-item" data-controller="layout">
+        <%= render "import_from" %>
+        <%= button_tag icon_text("fa-solid fa-right-left", t(".import_from")),
+                       class: "button is-link is-light is-outlined",
+                       data: { action: "layout#showModal" } %>
+
+      </div>
+    <% end %>
+
+    <%# new category %>
+    <div class="level-item">
+      <%= link_to icon_text("fa-solid fa-circle-plus", t(".new_category")), new_account_category_path, class: "button is-primary" %>
+    </div>
+  </div>
+</div>
+
+<%# table %>
+<table class="table is-fullwidth is-striped" id="magic-table">
+  <thead>
+    <tr>
+      <th>
+        <%= t(".name") %>
+      </th>
+      <th>
+        <%= t(".use") %>
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="listing">
+    <%= render partial: "category", locals: { categories: @categories, name: t(".name"), use: t(".use") } %>
+  </tbody>
+</table>
+
+<%# more categories %>
+<% if @nb_categories > @limit %>
+  <%= turbo_frame_tag "items", src: account_categories_path(@current_account, offset: @limit, format: :turbo_stream), loading: "lazy" %>
+<% end %>

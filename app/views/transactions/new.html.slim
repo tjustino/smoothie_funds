@@ -1,6 +1,0 @@
-= breadcrumb link_to(@current_account.name, account_transactions_path(@current_account)),
-             link_to(t(".create_transaction"), new_account_transaction_path)
-
-.columns.is-centered
-  .column.is-narrow
-      = render partial: "form", locals: { title: t(".create_transaction") }

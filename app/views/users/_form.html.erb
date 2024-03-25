@@ -1,0 +1,106 @@
+<%= form_with(model: @user, class: "box") do |form| %>
+  <% if @current_user %>
+    <div class="content has-text-centered">
+      <%= icon_text("fa-solid fa-user-plus", title) %>
+      <hr />
+    </div>
+  <% else %>
+    <div class="content has-text-centered">
+      <%= image_tag "_icon.svg" %>
+    </div>
+    <div class="tabs is-fullwidth">
+      <ul>
+        <li>
+          <%= link_to icon_text("fa-solid fa-right-to-bracket", login), login_path %>
+        </li>
+        <li class="is-active">
+          <%= link_to icon_text("fa-solid fa-user-plus", create_user), new_user_path %>
+        </li>
+      </ul>
+    </div>
+  <% end %>
+
+  <%# email %>
+  <div class="field">
+    <%= form.label :email, t(".email"), class: "label" %>
+    <div class="control has-icons-left">
+      <%= form.email_field :email, class: input_class_for(@user, :email), placeholder: t(".email"), autofocus: true %>
+      <span class="icon is-left">
+        <%= icon("fa-solid fa-envelope") %>
+      </span>
+    </div>
+    <p class="help">
+      <%= t(".speech_mail") %>
+    </p>
+    <% @user.errors.full_messages_for(:email).each do |message| %>
+      <p class="help is-danger">
+        <%= message %>
+      </p>
+    <% end %>
+  </div>
+
+  <%# name %>
+  <% if params[:action] == "edit" or params[:action] == "update" %>
+    <div class="field">
+      <%= form.label :name, t(".name"), class: "label" %>
+      <div class="control has-icons-left">
+        <%= form.text_field :name, class: input_class_for(@user, :name), placeholder: t(".name"), autofocus: true %>
+        <span class="icon is-left">
+          <%= icon("fa-solid fa-envelope") %>
+        </span>
+      </div>
+      <p class="help">
+        <%= t(".speech_name") %>
+      </p>
+      <% @user.errors.full_messages_for(:name).each do |message| %>
+        <p class="help is-danger">
+          <%= message %>
+        </p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%# password %>
+  <div class="field">
+    <%= form.label :password, t(".password"), class: "label" %>
+    <div class="control has-icons-left">
+      <%= form.password_field :password, class: input_class_for(@user, :password), placeholder: t(".password") %>
+      <span class="icon is-left">
+        <%= icon("fa-solid fa-lock") %>
+      </span>
+      <% @user.errors.full_messages_for(:password).each do |message| %>
+        <p class="help is-danger">
+          <%= message %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+
+  <%# password confirmation %>
+  <div class="field">
+    <%= form.label :password_confirmation, t(".password_confirmation"), class: "label" %>
+    <div class="control has-icons-left">
+      <%= form.password_field :password_confirmation, class: input_class_for(@user, :password_confirmation), placeholder: t(".password_confirmation") %>
+      <span class="icon is-left">
+        <%= icon("fa-solid fa-lock") %>
+      </span>
+      <% @user.errors.full_messages_for(:password_confirmation).each do |message| %>
+        <p class="help is-danger">
+          <%= message %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+
+  <%# GDPR %>
+  <div class="field">
+    <p class="help">
+      <%= t(".speech_gdpr", link: gdpr_path).html_safe %>
+    </p>
+  </div>
+
+  <%# login/update button %>
+  <div class="mt-5">
+    <%= form.submit class: "button is-success is-fullwidth" %>
+  </div>
+<% end %>

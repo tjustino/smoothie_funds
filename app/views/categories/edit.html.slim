@@ -1,6 +1,0 @@
-= breadcrumb link_to(@current_account.name, account_categories_path(@current_account)),
-             link_to(t(".edit_category"), edit_category_path(@category))
-
-.columns.is-centered
-  .column.is-narrow
-      = render partial: "form", locals: { title: t(".edit_category") }

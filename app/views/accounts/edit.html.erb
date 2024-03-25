@@ -1,0 +1,7 @@
+<%= breadcrumb link_to(t(".accounts"), accounts_path),
+               link_to(t(".edit_account"), edit_account_path(@account)) %>
+<div class="columns is-centered">
+  <div class="column is-narrow">
+    <%= render partial: "form", locals: { title: t(".edit_account") } %>
+  </div>
+</div>

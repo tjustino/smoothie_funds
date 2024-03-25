@@ -1,0 +1,106 @@
+<div class="columns is-centered">
+  <div class="column is-narrow">
+    <%= render partial: "form", locals: { title: t(".edit_user") } %>
+  </div>
+</div>
+<div class="columns is-centered" data-controller="layout user">
+  <div class="column is-5">
+    <div class="box">
+      <div class="content has-text-centered has-text-danger">
+        <%= icon_text("fa-solid fa-bomb", t(".title_delete_account")) %>
+      </div>
+      <hr />
+      <div class="content has-text-justified">
+        <p>
+          <%= t(".speech_delete_account") %>
+        </p>
+      </div>
+      <div class="content has-text-centered">
+        <%= button_tag t(".launch_delete_account"), class: "button is-warning", data: { action: "layout#showModal" } %>
+      </div>
+    </div>
+  </div>
+  <%# modal of the death ☠️ %>
+  <div class="modal" data-action="keydown.esc@window->layout#hideModal" data-layout-target="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title is-size-6-mobile">
+          <%= t(".are_you_sure") %>
+        </p>
+        <a class="delete" data-action="layout#hideModal"></a>
+      </header>
+      <section class="modal-card-body">
+        <div class="content">
+          <p>
+            <%= t(".speech_explain_delete_account") %>
+          </p>
+          <table class="table">
+            <tbody>
+              <tr>
+                <th>
+                  <%= icon_text("fa-solid fa-book", t(".accounts")) %>
+                </th>
+                <th>
+                  <%= @nof_accounts %>
+                </th>
+              </tr>
+              <tr>
+                <th>
+                  <%= icon_text("fa-solid fa-tags", t(".categories")) %>
+                </th>
+                <th>
+                  <%= @nof_categories %>
+                </th>
+              </tr>
+              <tr>
+                <th>
+                  <%= icon_text("fa-regular fa-calendar-days", t(".schedules")) %>
+                </th>
+                <th>
+                  <%= @nof_schedules %>
+                </th>
+              </tr>
+              <tr>
+                <th>
+                  <%= icon_text("fa-solid fa-magnifying-glass", t(".searches")) %>
+                </th>
+                <th>
+                  <%= @nof_searches %>
+                </th>
+              </tr>
+              <tr>
+                <th>
+                  <%= icon_text("fa-regular fa-credit-card", t(".transactions")) %>
+                </th>
+                <th>
+                  <%= @nof_transactions %>
+                </th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="field">
+          <div class="control">
+            <label class="checkbox">
+              <input data-action="user#toggleDeleteButton" data-user-target="checkboxOfTheDeath" type="checkbox" />
+              <%= " " + t(".speech_irreversible_choice") %>
+            </label>
+          </div>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-success is-responsive" data-action="layout#hideModal">
+          <%= t(".close") %>
+        </button>
+        <%= button_to t(".title_delete_account"),
+                      user_path,
+                      method: :delete,
+                      class: "button is-danger is-responsive",
+                      disabled: true,
+                      form_class: nil,
+                      data: { user_target: "buttonOfTheDeath" } %>
+      </footer>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="columns is-centered">
+  <div class="column is-narrow">
+    <%= form_with(url: login_path, id: "login", class: "box") do |form| %>
+      <div class="field has-text-centered">
+        <%= image_tag "_icon.svg" %>
+      </div>
+      <div class="tabs is-fullwidth">
+        <ul>
+          <li class="is-active">
+            <%= link_to icon_text("fa-solid fa-right-to-bracket", t(".login")), login_path %>
+          </li>
+          <li>
+            <%= link_to icon_text("fa-solid fa-user-plus", t(".create_user")), new_user_path %>
+          </li>
+        </ul>
+      </div>
+
+      <%# email %>
+      <div class="field">
+        <%= label_tag :email, t(".email"), class: "label" %>
+        <div class="control has-icons-left">
+          <%= form.email_field :email, class: "input", placeholder: t(".email"), autofocus: true %>
+          <span class="icon is-left">
+            <%= icon("fa-solid fa-envelope") %>
+          </span>
+        </div>
+      </div>
+
+      <%# password %>
+      <div class="field">
+        <%= label_tag :password, t(".password"), class: "label" %>
+        <div class="control has-icons-left">
+          <%= form.password_field :password, class: "input", placeholder: t(".password") %>
+          <span class="icon is-left">
+            <%= icon("fa-solid fa-lock") %>
+          </span>
+        </div>
+      </div>
+
+      <%# login button %>
+      <div class="mt-5">
+        <%= form.submit t(".login"), class: "button is-success is-fullwidth" %>
+      </div>
+    <% end %>
+  </div>
+</div>

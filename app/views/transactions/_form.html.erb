@@ -1,0 +1,79 @@
+<%= form_with(model: shallow_args(@current_account, @transaction), class: "box", data: { turbo: false }) do |form| %>
+  <div class="content has-text-centered">
+    <%= icon_text("fa-regular fa-calendar-days", title) %>
+    <hr />
+  </div>
+
+  <%# amount %>
+  <div class="field">
+    <%= form.label :amount, t(".amount"), class: "label" %>
+    <div class="field has-addons">
+      <div class="control">
+        <div class="select">
+          <%= select_tag :sign, options_for_select([[t(".debit"), "debit"], [t(".credit"), "credit"]], @sign) %>
+        </div>
+      </div>
+      <div class="control is-expanded has-icons-right">
+        <%= form.number_field :amount, class: input_class_for(@transaction, :amount), placeholder: t(".amount"), autofocus: true, step: 0.01 %>
+        <span class="icon is-right">
+          <%= t("number.currency.format.unit") %>
+        </span>
+        <% @transaction.errors.full_messages_for(:amount).each do |message| %>
+          <p class="help is-danger">
+            <%= message %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <%# date %>
+  <div class="field">
+    <%= form.label :date, t(".date"), class: "label" %>
+    <div class="control has-icons-left">
+      <%= form.date_field :date, class: input_class_for(@transaction, :date), placeholder: t(".date"), value: @transaction.date.nil? ? Date.today : @transaction.date %>
+      <span class="icon is-left">
+        <%= icon("fa-regular fa-calendar-check") %>
+      </span>
+      <% @transaction.errors.full_messages_for(:date).each do |message| %>
+        <p class="help is-danger">
+          <%= message %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+
+  <%# category %>
+  <div class="field">
+    <%= form.label :category_id, t(".category"), class: "label" %>
+    <div class="control is-expanded has-icons-left">
+      <div class="select is-fullwidth">
+        <%= form.select :category_id, @current_account.categories.active.order(:name).collect { |category| [category.name, category.id] } %>
+      </div>
+      <span class="icon is-left">
+        <%= icon("fa-solid fa-tags") %>
+      </span>
+    </div>
+  </div>
+
+  <%# comment %>
+  <div class="field">
+    <%= form.label :comment, t(".comment"), class: "label" %>
+    <div class="control">
+      <%= form.text_area :comment, class: "textarea", placeholder: t(".comment"), rows: 3 %>
+    </div>
+  </div>
+
+  <%# checked %>
+  <div class="field">
+    <%= form.label :checked, t(".checked"), class: "checkbox" do %>
+      <%= form.check_box :checked %>
+      <%= " " + t(".checked") %>
+    <% end %>
+  </div>
+
+  <%# submit button %>
+  <div class="mt-5">
+    <%= form.submit class: "button is-success is-fullwidth" %>
+  </div>
+<% end %>

@@ -1,0 +1,23 @@
+<div class="modal is-active" data-action="keydown.esc@window->layout#hideModal" data-controller="layout" data-layout-target="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title is-size-6-mobile">
+        <%= t(".welcome") %>
+      </p>
+      <button class="delete" data-action="layout#hideModal"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="content">
+        <%= t(".content", new_icon: icon("fa-solid fa-circle-plus"),
+                          square_icon: icon("fa-regular fa-square"),
+                          check_square_icon: icon("fa-regular fa-square-check")).html_safe %>
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-success" data-action="layout#hideModal">
+        <%= t(".close") %>
+      </button>
+    </footer>
+  </div>
+</div>

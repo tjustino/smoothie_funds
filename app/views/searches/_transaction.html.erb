@@ -1,0 +1,60 @@
+<% transactions.each do |transaction| %>
+  <tr class="<% 'has-text-grey-light' if transaction.date > Time.zone.today %>" id="<%= dom_id(transaction) %>">
+
+    <%# easycheck %>
+    <td>
+      <%= render partial: "transactions/easycheck", locals: { transaction: transaction } %>
+    </td>
+
+    <%# account %>
+    <td data-title="<%= account %>">
+      <%= truncate(transaction.account.name, length: 20) %>
+    </td>
+
+    <%# date %>
+    <td data-title="<%= date %>">
+      <%= l(transaction.date) %>
+    </td>
+
+    <%# category %>
+    <td data-title="<%= category %>">
+      <%= transaction.category.name %>
+    </td>
+
+    <%# debit %>
+    <td class="nowrap has-text-right" data-title="<%= debit %>">
+      <%= number_to_currency(transaction.amount) if transaction.amount < 0 %>
+    </td>
+
+    <%# credit %>
+    <td class="nowrap has-text-right" data-title="<%= credit %>">
+      <%= number_to_currency(transaction.amount) if transaction.amount >= 0 %>
+    </td>
+
+    <%# comment %>
+    <td data-title="<%= comment %>">
+      <%= truncate(transaction.comment, length: 30) %>
+    </td>
+
+    <%# common %>
+    <td>
+      <div class="level is-mobile">
+        <div class="level-left">
+          <div class="level-item has-text-centered">
+            <%= link_to icon("fa-solid fa-pen-to-square"),
+                        edit_transaction_path(transaction, search_id: params[:id]),
+                        title: t(".edit"),
+                        class: "has-text-info" %>
+          </div>
+          <div class="level-item has-text-centered">
+            <%= link_to icon("fa-regular fa-trash-can"),
+                        transaction_path(transaction, search_id: params[:id]),
+                        data: { turbo_method: :delete, turbo_confirm: t(".are_you_sure") },
+                        title: t(".destroy"),
+                        class: "has-text-danger" %>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+<% end %>

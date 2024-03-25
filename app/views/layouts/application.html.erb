@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="<%= I18n.locale.to_s.gsub('_','-') %>">
+  <head>
+    <title>Smoothie Funds<%= " - DEV" if Rails.env.development? %></title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= render partial: "layouts/favicon" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
+    <meta content="Thomas JUSTINO" name="author" />
+    <meta content="<%= t('.site_descritpion') %>" name="description" />
+    <meta content="SmoothieFunds" property="og:title" />
+    <meta content="<%= t('.site_descritpion') %>" property="og:description" />
+    <meta content="<%= I18n.locale.to_s %>" property="og:locale" />
+    <meta content="website" property="og:type" />
+    <meta content="<%= dashboard_url %>" property="og:url" />
+    <meta content="<%= asset_url('_icon.svg') %>" property="og:image" />
+  </head>
+
+  <body>
+    <% if @current_user %>
+      <%# Static navbar %>
+      <nav aria-label="main navigation" class="navbar is-transparent" data-controller="layout" role="navigation">
+        <div class="container">
+          <%# brand %>
+          <div class="navbar-brand">
+            <%= link_to dashboard_path, class: "navbar-item" do %>
+              <%= image_tag "_icon.svg", alt: "🥤" %>
+            <% end %>
+            <%# burger menu %>
+            <a aria-expanded="false" aria-label="menu" class="navbar-burger" data-action="layout#toggleMenu" data-layout-target="navBarBurger" role="button">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+            </a>
+          </div>
+          <%# navigation %>
+          <div class="navbar-menu" data-layout-target="navBarMenu">
+            <%# left part %>
+            <div class="navbar-start">
+              <% if Category.exists?(account: @current_accounts) %>
+                <%# transactions %>
+                <div class="navbar-item has-dropdown is-hoverable">
+                  <a class="navbar-link">
+                    <%= icon_text("fa-regular fa-credit-card", t(".transactions")) %>
+                  </a>
+                  <div class="navbar-dropdown">
+                    <% @accounts_with_categories.each do |account| %>
+                      <%= link_to account.name, account_transactions_path(account), class: "navbar-item" %>
+                    <% end %>
+                    <hr class="navbar-divider" />
+                    <%= link_to icon_text_light("fa-solid fa-magnifying-glass", t(".search")), new_user_search_path(@current_user), class: "navbar-item icon-text" %>
+                    <%= link_to icon_text_light("fa-solid fa-chart-area", t(".analytics")), user_analytics_path(@current_user), class: "navbar-item icon-text" %>
+                  </div>
+                </div>
+                <%# schedules %>
+                <div class="navbar-item has-dropdown is-hoverable">
+                  <a class="navbar-link">
+                    <%= icon_text("fa-regular fa-calendar-days", t(".schedules")) %>
+                  </a>
+                  <div class="navbar-dropdown">
+                    <% @accounts_with_categories.each do |account| %>
+                      <%= link_to account.name, account_schedules_path(account), class: "navbar-item" %>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+              <%# categories %>
+              <% if @current_accounts.any? %>
+                <%= render partial: "layouts/categories_menu" %>
+              <% end %>
+              <%# accounts %>
+              <%= link_to icon_text("fa-solid fa-book", t(".accounts")), accounts_path, class: "navbar-item" %>
+            </div>
+
+            <%# right part %>
+            <div class="navbar-end">
+              <%# user account %>
+              <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">
+                  <%= icon_text "fa-solid fa-user", name_or_email(@current_user) %>
+                </a>
+                <div class="navbar-dropdown">
+                  <%# profil %>
+                  <%= link_to icon_text_light("fa-solid fa-sliders", t(".profile")), edit_user_path(@current_user), class: "navbar-item icon-text" %>
+                  <%= mail_to "support@smoothiefunds.com", icon_text_light("fa-solid fa-headset", t(".support")), class: "navbar-item icon-text" %>
+                  <hr class="navbar-divider" />
+                  <%# logout %>
+                  <%= link_to icon_text_light("fa-solid fa-power-off", t(".logout")), logout_path, data: { turbo_method: :delete }, id: "logout", class: "navbar-item icon-text" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    <% end %>
+
+    <%# flash %>
+    <%= render partial: "layouts/flash" %>
+
+    <%# content %>
+    <div id="wrapper">
+      <noscript>
+        <div class="message is-danger">
+          <div class="message-body">
+            <%= t(".alert_no_js") %>
+          </div>
+        </div>
+      </noscript>
+      <section class="section pt-5">
+        <div class="container">
+          <%= yield %>
+        </div>
+      </section>
+    </div>
+
+    <%# footer %>
+    <footer class="footer sticky">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column mb-0 is-2 content is-small has-text-centered">
+            <%= link_to t(".terms_of_use"),  terms_path %>
+          </div>
+          <div class="column mb-0 is-2 content is-small has-text-centered">
+            <%= link_to t(".cookie_policy"), cookie_path %>
+          </div>
+          <div class="column mb-0 is-2 content is-small has-text-centered">
+            <%= link_to t(".personal_data"), gdpr_path %>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <%# debugger %>
+    <% if Rails.env.development? %>
+      <div class="columns" id="debugBox" style="position:fixed;bottom:0;right:0;">
+        <div class="column is-narrow mr-1 mb-1 is-hidden-mobile">
+          <section class="message is-warning is-small is-narrow" data-controller="layout">
+            <div class="message-header">
+              <p>Debug</p>
+              <button aria-label="<%= t(".aria_close") %>" class="delete" data-action="layout#removeMessageBox"></button>
+            </div>
+            <div class="message-body">
+              <%= debug(request.parameters) %>
+            </div>
+          </section>
+        </div>
+      </div>
+    <% end %>
+  </body>
+</html>

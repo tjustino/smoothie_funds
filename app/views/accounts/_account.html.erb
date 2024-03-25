@@ -1,0 +1,47 @@
+<% accounts.each do |account| %>
+  <tr class="<% 'has-text-grey-light' if account.hidden == true %>" id="<%= dom_id(account) %>">
+    <%# name %>
+    <td data-title="<%= name %>">
+      <%= account.name %>
+    </td>
+
+    <%# initial balance %>
+    <td class="nowrap" data-title="<%= init_bal %>">
+      <%= number_to_currency(account.initial_balance) %>
+    </td>
+
+    <%# share %>
+    <% unless account.pending_user.blank? %>
+      <td data-title="<%= share %>">
+        <%= show_others_or_me(@current_user, account).html_safe + tag("br") + t(".waiting_for") + mail_to(account.pending_user.email) %>
+      </td>
+    <% else %>
+      <td data-title="<%= share %>">
+        <%= show_others_or_me(@current_user, account).html_safe %>
+      </td>
+    <% end %>
+
+    <%# common %>
+    <td>
+      <div class="level is-mobile">
+        <div class="level-left">
+          <div class="level-item has-text-centered">
+            <%= link_to icon("fa-solid fa-pen-to-square"), edit_account_path(account), title: t(".edit"), class: "has-text-info" %>
+          </div>
+          <div class="level-item has-text-centered">
+            <%= link_to icon("fa-regular fa-trash-can"),
+                        account_path(account),
+                        data: { turbo_method: :delete, turbo_confirm: t(".are_you_sure", account: account.name) },
+                        title: t(".destroy"),
+                        class: "has-text-danger" %>
+          </div>
+          <% if account.hidden == true %>
+            <div class="level-item has-text-centered">
+              <%= tag.span(class: "icon") { tag.i class: "fa-regular fa-eye-slash", title: t(".hidden_account") } %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </td>
+  </tr>
+<% end %>

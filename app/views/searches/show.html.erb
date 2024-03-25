@@ -1,0 +1,82 @@
+<%# header %>
+<h2 class="title mb-0">
+  <%= t(".result") %>
+</h2>
+
+<%# resume %>
+<div class="column">
+  <div class="card">
+    <div class="card-content">
+      <%= render partial: "resume", locals: { search: @search } %>
+    </div>
+  </div>
+</div>
+
+<%# infos %>
+<div class="columns is-gapless">
+  <%# transaction's sum %>
+  <div class="column is-narrow">
+    <div class="tags has-addon">
+      <div class="tag">
+        <%= t(".sum") %>
+      </div>
+      <%= render partial: "searches/sums", locals: { id_name: "amount", number: number_to_currency(@sum_transactions) } %>
+    </div>
+  </div>
+
+  <%# spacing %>
+  <div class="column">
+  </div>
+
+  <%# transaction's count %>
+  <div class="column is-narrow">
+    <div class="tags has-addon">
+      <div class="tag">
+        <%= t(".count") %>
+      </div>
+      <%= render partial: "searches/sums", locals: { id_name: "no", number: @nb_transactions } %>
+    </div>
+  </div>
+</div>
+
+<%# table %>
+<table class="table is-fullwidth is-striped" id="magic-table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>
+        <%= t(".account") %>
+      </th>
+      <th>
+        <%= t(".date") %>
+      </th>
+      <th>
+        <%= t(".category") %>
+      </th>
+      <th class="has-text-right">
+        <%= t(".debit") %>
+      </th>
+      <th class="has-text-right">
+        <%= t(".credit") %>
+      </th>
+      <th>
+        <%= t(".comment") %>
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="listing">
+    <%= render partial: "transaction", locals: { transactions: @transactions,
+                                                 account:      t(".account"),
+                                                 date:         t(".date"),
+                                                 category:     t(".category"),
+                                                 debit:        t(".debit"),
+                                                 credit:       t(".credit"),
+                                                 comment:      t(".comment") } %>
+  </tbody>
+</table>
+
+<%# more transactions %>
+<% if @nb_transactions > @limit %>
+  <%= turbo_frame_tag "items", src: search_path(offset: @limit, format: :turbo_stream), loading: "lazy" %>
+<% end %>

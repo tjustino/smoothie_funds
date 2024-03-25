@@ -1,0 +1,36 @@
+<% categories.each do |category| %>
+  <tr class="<% 'has-text-grey-light' if category.hidden == true %>" id="<%= dom_id(category) %>">
+    <%# name %>
+    <td data-title="<%= name %>">
+      <%= category.name %>
+    </td>
+
+    <%# count %>
+    <td data-title="<%= use %>">
+      <%= t(".time", total: category.transactions.active.count) %>
+    </td>
+
+    <%# common %>
+    <td>
+      <div class="level is-mobile">
+        <div class="level-left">
+          <div class="level-item has-text-centered">
+            <%= link_to icon("fa-solid fa-pen-to-square"), edit_category_path(category), title: t(".edit"), class: "has-text-info" %>
+          </div>
+          <div class="level-item has-text-centered">
+            <%= link_to icon("fa-regular fa-trash-can"),
+                        category_path(category),
+                        data: {  turbo_method: :delete, turbo_confirm: t(".are_you_sure", category: category.name) },
+                        title: t(".destroy"),
+                        class: "has-text-danger" %>
+          </div>
+          <% if category.hidden == true %>
+            <div class="level-item has-text-centered">
+              <%= tag.span(class: "icon") { tag.i class: "fa-regular fa-eye-slash", title: t(".hidden_category") } %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </td>
+  </tr>
+<% end %>

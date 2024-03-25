@@ -1,0 +1,59 @@
+<%# welcome %>
+<% unless @current_accounts.any? %>
+  <%= render "welcome" %>
+<% end %>
+
+<%# header %>
+<div class="level">
+  <div class="level-left">
+    <%# title %>
+    <div class="level-item">
+      <h2 class="title">
+        <%= t(".listing_accounts") %>
+        <%= render partial: "layouts/tag", locals: { title: t('.count'), number_of: @nb_accounts } %>
+      </h2>
+    </div>
+  </div>
+  <div class="level-right">
+    <%# download %>
+    <div class="level-item is-hidden-touch">
+      <%= link_to icon("fa-solid fa-download"), accounts_path(format: :csv), title: t(".export_accounts"), class: "button is-link is-light" %>
+    </div>
+    <%# new account %>
+    <div class="level-item">
+      <%= link_to icon_text("fa-solid fa-circle-plus", t(".new_account")),  new_account_path,  class: "button is-primary" %>
+    </div>
+  </div>
+</div>
+
+<%# sharing %>
+<%= render partial: "sharing" %>
+
+<%# table %>
+<table class="table is-fullwidth is-striped" id="magic-table">
+  <thead>
+    <tr>
+      <th>
+        <%= t(".name") %>
+      </th>
+      <th>
+        <%= t(".initial_balance") %>
+      </th>
+      <th>
+        <%= t(".share") %>
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="listing">
+    <%= render partial: "account", locals: { accounts: @accounts,
+                                             name:     t(".name"),
+                                             init_bal: t(".initial_balance"),
+                                             share:    t(".share") } %>
+  </tbody>
+</table>
+
+<%# more accounts %>
+<% if @nb_accounts > @limit %>
+  <%= turbo_frame_tag "items", src: accounts_path(offset: @limit, format: :turbo_stream), loading: "lazy" %>
+<% end %>

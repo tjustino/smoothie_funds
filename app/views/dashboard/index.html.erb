@@ -1,0 +1,30 @@
+<%# welcome %>
+<% unless @current_accounts.any? %>
+  <%= render "welcome" %>
+<% end %>
+
+<%# sharing %>
+<%= render partial: "accounts/sharing" %>
+
+
+<div class="columns">
+  <%# dashboard %>
+  <div class="column">
+    <article class="panel is-info">
+      <div class="panel-heading">
+        <%= t(".transaction_summary") %>
+      </div>
+      <%= render partial: "transactions_summary" %>
+    </article>
+  </div>
+
+  <%# upcoming terms %>
+  <div class="column">
+    <article class="panel is-info">
+      <div class="panel-heading">
+        <%= t(".upcoming_terms") %>
+      </div>
+      <%= render partial: "upcoming_terms" %>
+    </article>
+  </div>
+</div>

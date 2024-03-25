@@ -1,0 +1,37 @@
+<div class="columns is-centered">
+  <div class="column is-narrow">
+    <%= render partial: "form", locals: { title: t(".create_search") } %>
+  </div>
+</div>
+
+<% if @searches.present? %>
+  <hr />
+  <div class="columns">
+    <% @searches.each_with_index do |search, index| %>
+      <% if index < 3 %>
+        <div class="column">
+          <div class="card" data-controller="search">
+            <header class="card-header">
+              <div class="card-header-title">
+                <%= witch_search(search, index) %>
+              </div>
+              <button class="card-header-icon" data-action="search#toggleDetailHistory">
+                <%= icon("fa-solid fa-chevron-up") %>
+              </button></header>
+            <div class="card-content is-hidden" data-search-target="searchDetail">
+              <%= render partial: "resume", locals: { search: search } %>
+            </div>
+            <footer class="card-footer">
+              <%= link_to icon_text("fa-regular fa-circle-right", t(".show_result")), search, class: "card-footer-item" %>
+              <%= link_to icon_text("fa-regular fa-trash-can", t(".destroy")), 
+                          search,
+                          data: { turbo_method: :delete, turbo_confirm: t(".are_you_sure") },
+                          title: t(".destroy"),
+                          class: "card-footer-item" %>
+            </footer>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

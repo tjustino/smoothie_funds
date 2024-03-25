@@ -16,7 +16,6 @@ gem "pg"                       # Use postgresql as the db for Active Record
 gem "propshaft"                # Deliver assets for Rails
 gem "puma"                     # App web server
 gem "rails", "~> 7.1.0"        # Full-stack web framework
-gem "slim"                     # Template language
 gem "stimulus-rails"           # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "turbo-rails"              # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 

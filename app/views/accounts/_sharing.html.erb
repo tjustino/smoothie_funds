@@ -1,0 +1,25 @@
+<% unless @pendings.nil? %>
+  <% @pendings.each do | pending | %>
+    <div class="message is-info">
+      <div class="message-body">
+        <div class="columns is-vcentered">
+          <div class="column">
+            <%= t(".join_shared_account", account: pending.account.name, users: show_other_users(pending.account)).html_safe %>
+          </div>
+          <div class="column is-narrow">
+            <%= link_to icon_text("fa-regular fa-thumbs-up", t(".accept")),
+                        sharing_path(pending.account),
+                        method: :post,
+                        class: "button is-success" %>
+          </div>
+          <div class="column is-narrow">
+            <%= link_to icon_text("fa-regular fa-circle-xmark", t(".reject")),
+                        unsharing_path(pending.account),
+                        data: { turbo_method: :delete },
+                        class: "button is-danger" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

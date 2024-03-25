@@ -1,0 +1,69 @@
+<%# welcome %>
+<% unless @all_user_schedules.any? %>
+  <%= render "welcome" %>
+<% end %>
+
+<%# header %>
+<div class="level">
+  <%# title %>
+  <div class="level-left">
+    <div class="level-item">
+      <h2 class="title">
+        <%= t(".listing_schedules", current_account: @current_account.name) %>
+        <%= render partial: "layouts/tag", locals: { title: t('.count'), number_of: @nb_schedules } %>
+      </h2>
+    </div>
+  </div>
+
+  <div class="level-right">
+    <%# download %>
+    <div class="level-item is-hidden-touch">
+      <%= link_to icon("fa-solid fa-download"),
+                  account_schedules_path(@current_account, format: :csv),
+                  title: t(".export_schedules"),
+                  class: "button is-link is-light" %>
+    </div>
+    <%# new schedule %>
+    <div class="level-item">
+      <%= link_to icon_text("fa-solid fa-circle-plus", t(".new_schedule")), new_account_schedule_path, class: "button is-primary" %>
+    </div>
+  </div>
+</div>
+
+<%# table %>
+<table class="table is-fullwidth is-striped" id="magic-table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>
+        <%= t(".next_time") %>
+      </th>
+      <th>
+        <%= t(".frequency") %>
+      </th>
+      <th>
+        <%= t(".category") %>
+      </th>
+      <th class="text-end">
+        <%= t(".amount") %>
+      </th>
+      <th>
+        <%= t(".comment") %>
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="listing">
+    <%= render partial: "schedule", locals: { schedules: @schedules,
+                                              next_time: t(".next_time"),
+                                              frequency: t(".frequency"),
+                                              category:  t(".category"),
+                                              amount:    t(".amount"),
+                                              comment:   t(".comment") } %>
+  </tbody>
+</table>
+
+<%# more schedules %>
+<% if @nb_schedules > @limit %>
+  <%= turbo_frame_tag "items", src: account_schedules_path(@current_account, offset: @limit, format: :turbo_stream), loading: "lazy" %>
+<% end %>

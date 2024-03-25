@@ -1,0 +1,123 @@
+<%= form_with(model: shallow_args(@current_user, @search), class: "box", data: { turbo: false, controller: "search" }) do |form| %>
+  <div class="content has-text-centered">
+    <%= icon_text("fa-solid fa-magnifying-glass", title) %>
+    <hr />
+  </div>
+
+  <%# accounts %>
+  <div class="field">
+    <%= form.label :accounts, t(".accounts"), class: "label" %>
+    <div class="control">
+      <div class="select is-multiple is-fullwidth">
+        <%= form.select :accounts,
+                        options_from_collection_for_select(@accounts_with_categories, :id, :name, @accounts_with_categories.ids),
+                        { include_hidden: false },
+                        { multiple: true, size: 3, data: { action: "search#toggleCategoriesLists", search_target: "accounts" } } %>
+      </div>
+    </div>
+  </div>
+
+  <%# amount %>
+  <div class="field">
+    <%= form.label :amount, t(".amount"), class: "label" %>
+    <div class="field has-addons">
+      <div class="control is-expanded">
+        <%= form.text_field :min, class: "input", placeholder: t(".amount") %>
+      </div>
+      <div class="control">
+        <div class="button is-static">
+          <%= icon("fa-solid fa-left-right") %>
+        </div>
+      </div>
+      <div class="control is-expanded">
+        <%= form.text_field :max, class: "input", placeholder: t(".amount") %>
+      </div>
+      <div class="control">
+        <div class="button is-static">
+          <%= t("number.currency.format.unit") %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%# date %>
+  <div class="field">
+    <%= form.label :date, t(".date"), class: "label" %>
+    <div class="field has-addons">
+      <div class="control is-expanded">
+        <%= form.date_field :after, class: "input", placeholder: t(".date") %>
+      </div>
+      <div class="control">
+        <div class="button is-static">
+          <%= icon("fa-solid fa-left-right") %>
+        </div>
+      </div>
+      <div class="control is-expanded">
+        <%= form.date_field :before, class: "input", placeholder: t(".date") %>
+      </div>
+      <div class="control">
+        <div class="button is-static">
+          <%= icon "fa-regular fa-calendar-days" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%# categories %>
+  <div class="field">
+    <%= form.label :categories, t(".categories"), class: "label" %>
+    <% @current_accounts.each do |account| %>
+      <% if account.categories.exists? %>
+        <div id="categories_for_<%= account.id %>">
+          <p class="help">
+            <%= account.name %>
+          </p>
+          <div class="control">
+            <div class="select is-multiple is-fullwidth">
+              <%= form.select :categories,
+                              options_from_collection_for_select(account.categories.order_by_name, :id, :name, account.categories.ids),
+                              { include_hidden: false },
+                              { multiple: true, size: 3 } %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%# comment %>
+  <div class="field">
+    <%= form.label :comment, t(".comment"), class: "label" %>
+    <div class="field has-addons">
+      <div class="control">
+        <span class="select">
+          <%= form.select :operator,
+                          options_for_select(Search.operators.keys.map { |key| [t(".#{key}"), key] } ),
+                          {},
+                          data: { action: "search#toggleCommentField", search_target: "commentScope" } %>
+        </span>
+      </div>
+      <div class="control is-expanded">
+        <%= form.text_field :comment, class: "input", placeholder: t(".comment"), data: { search_target: "commentField" } %>
+      </div>
+    </div>
+  </div>
+
+  <%# checked %>
+  <div class="field">
+    <%= form.label :checked, t(".checked"), class: "label" %>
+    <div class="control">
+      <% Search.checkeds.each do |key, value| %>
+        <label class="radio">
+          <%= form.radio_button :checked, key, checked: (value == 0 ? true : false) %>
+          <%= " " + t(".#{key}") %>
+        </label>
+      <% end %>
+    </div>
+  </div>
+  
+  <%# search button %>
+  <div class="mt-5">
+    <%= form.submit  t(".search"), class: "button is-success is-fullwidth" %>
+  </div>
+<% end %>
