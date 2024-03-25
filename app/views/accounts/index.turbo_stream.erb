@@ -2,7 +2,6 @@
                                                                  name:     t(".name"),
                                                                  init_bal: t(".initial_balance"),
                                                                  share:    t(".share") } %>
-
 <% if @nb_accounts > @nb_items %>
   <%= turbo_stream.replace "items" do %>
     <%= turbo_frame_tag "items", src: accounts_path(offset: @nb_items, format: :turbo_stream), loading: "lazy" %>

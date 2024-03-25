@@ -6,7 +6,6 @@
                                                                      credit:       t(".credit"),
                                                                      balance:      t(".balance"),
                                                                      comment:      t(".comment") } %>
-
 <% if @nb_transactions > @nb_items %>
   <%= turbo_stream.replace "items" do %>
     <%= turbo_frame_tag "items", src: account_transactions_path(@current_account, offset: @nb_items, format: :turbo_stream), loading: "lazy" %>
