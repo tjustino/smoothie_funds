@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="<%= I18n.locale.to_s.gsub('_','-') %>">
   <head>
+    <meta charset="utf-8" />
     <title>Smoothie Funds<%= " - DEV" if Rails.env.development? %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
