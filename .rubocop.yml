@@ -1,6 +1,6 @@
 # https://rubocop.readthedocs.io/en/stable/
 require:
-  - rubocop-md
+  - rubocop-capybara
   - rubocop-minitest
   - rubocop-performance
   - rubocop-rails
