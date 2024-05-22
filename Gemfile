@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source  "https://rubygems.org"
-ruby    "3.3.0"
+ruby    "3.3.1"
 
 ## from http://bundler.io/gemfile.html
 # ~> 2.0.3 is identical to >= 2.0.3 and < 2.1
@@ -18,12 +18,14 @@ gem "puma"                     # App web server
 gem "rails", "~> 7.1.0"        # Full-stack web framework
 gem "stimulus-rails"           # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "turbo-rails"              # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
+gem "tzinfo-data", platforms: %i[windows jruby] # Windows does not include zoneinfo files
 
 group :development, :test do
-  gem "debug"                  # Start debugger with binding.break
+  gem "debug", platforms: %i[mri windows] # Start debugger with binding.break
 end
 
 group :development do
+  gem "brakeman"               # Security vulnerability scanner for Ruby on Rails
   gem "foreman"                # Process manager for applications with multiple components
   gem "listen"                 # Listen to file modif and notifies you
   # gem "rack-mini-profiler"     # Add speed badges
@@ -31,7 +33,7 @@ group :development do
 
   # Rubocop
   gem "rubocop"                # Automatic Ruby code style checking tool
-  gem "rubocop-md"             # Run Rubocop against your Markdown files
+  gem "rubocop-capybara"       # Code style checking for Capybara test files
   gem "rubocop-minitest"       # Extension focused on Minitest best practices
   gem "rubocop-performance"    # Check for performance optimizations
   gem "rubocop-rails"          # Automatic Rails code style checking tool
@@ -48,5 +50,4 @@ end
 group :test do
   gem "capybara"               # Integration testing tool
   gem "selenium-webdriver"     # Tool for writing automated tests of websites
-  gem "webdrivers"             # Easy installation and use of chromedriver
 end
