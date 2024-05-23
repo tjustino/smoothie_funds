@@ -45,7 +45,7 @@ class SearchTest < ActiveSupport::TestCase
 
     assert       search.invalid?
     assert_equal [ I18n.t("activerecord.errors.models.search.attributes.user.required") ], search.errors[:user]
-    assert_equal [ I18n.t("activerecord.errors.messages.blank") ], search.errors[:accounts]
+    assert_equal [ I18n.t("errors.messages.blank") ], search.errors[:accounts]
   end
 
   test "min and max must be numerical" do
@@ -63,7 +63,7 @@ class SearchTest < ActiveSupport::TestCase
                         checked:    0)
 
     assert       search.invalid?
-    assert_equal [ I18n.t("activerecord.errors.messages.not_a_number") ], search.errors[:min]
-    assert_equal [ I18n.t("activerecord.errors.messages.not_a_number") ], search.errors[:max]
+    assert_equal [ I18n.t("errors.messages.not_a_number") ], search.errors[:min]
+    assert_equal [ I18n.t("errors.messages.not_a_number") ], search.errors[:max]
   end
 end

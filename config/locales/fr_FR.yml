@@ -555,6 +555,13 @@ fr_FR:
 ########################################################################################################################
   errors:
     format: "%{message}"
+    messages:
+      blank:        "ne peut pas être vide"
+      inclusion:    "doit être compris entre le 01/01/2000 et le 31/12/2099"
+      confirmation: "ne correspond pas au mot de passe"
+      not_a_number: "doit être une valeur numérique"
+      too_short:    "doit comporter au minimum %{count} caractères"
+      invalid:      "n'est pas valide"
     template:
       header:
         one: "1 erreur a été détectée :"
@@ -567,12 +574,7 @@ fr_FR:
   activerecord:
     errors:
       messages:
-        blank:        "ne peut pas être vide"
         taken:        "ce compte existe déjà"
-        confirmation: "ne correspond pas au mot de passe"
-        not_a_number: "doit être une valeur numérique"
-        too_short:    "doit comporter au minimum %{count} caractères"
-        invalid:      "n'est pas valide"
         restrict_dependent_destroy:
           has_one:  "Impossible de supprimer car il existe une %{record}."
           has_many: "Impossible de supprimer car il existe des %{record}."

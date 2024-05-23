@@ -34,7 +34,7 @@ class PendingUserTest < ActiveSupport::TestCase
     assert        pending_user.invalid?
     assert_equal  [ I18n.t("activerecord.errors.models.pending_user.attributes.account.required") ],
                   pending_user.errors[:account]
-    assert_equal  [ I18n.t("activerecord.errors.messages.blank"), I18n.t("activerecord.errors.messages.invalid") ],
+    assert_equal  [ I18n.t("errors.messages.blank"), I18n.t("errors.messages.invalid") ],
                   pending_user.errors[:email]
   end
 
@@ -42,16 +42,16 @@ class PendingUserTest < ActiveSupport::TestCase
     pending_user1 = PendingUser.new(account: random_account, email: "username@domain")
 
     assert          pending_user1.invalid?
-    assert_equal    [ I18n.t("activerecord.errors.messages.invalid") ], pending_user1.errors[:email]
+    assert_equal    [ I18n.t("errors.messages.invalid") ], pending_user1.errors[:email]
 
     pending_user2 = PendingUser.new(account: random_account, email: "@domain.tld")
 
     assert          pending_user2.invalid?
-    assert_equal    [ I18n.t("activerecord.errors.messages.invalid") ], pending_user2.errors[:email]
+    assert_equal    [ I18n.t("errors.messages.invalid") ], pending_user2.errors[:email]
 
     pending_user3 = PendingUser.new(account: random_account, email: "username#domain.tld")
 
     assert          pending_user3.invalid?
-    assert_equal    [ I18n.t("activerecord.errors.messages.invalid") ], pending_user3.errors[:email]
+    assert_equal    [ I18n.t("errors.messages.invalid") ], pending_user3.errors[:email]
   end
 end

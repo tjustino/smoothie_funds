@@ -31,7 +31,7 @@ class CategoryTest < ActiveSupport::TestCase
 
     assert       category.invalid?
     assert_equal [ I18n.t("activerecord.errors.models.category.attributes.account.required") ], category.errors[:account]
-    assert_equal [ I18n.t("activerecord.errors.messages.blank") ], category.errors[:name]
+    assert_equal [ I18n.t("errors.messages.blank") ], category.errors[:name]
   end
 
   test "name/account_id must be unique" do
