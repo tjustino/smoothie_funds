@@ -146,8 +146,7 @@ class SchedulesController < ApplicationController
     def schedule_params
       schedule_params = params[:schedule]
       if schedule_params
-        schedule_params.permit(:account_id,
-                               :next_time,
+        schedule_params.permit(:next_time,
                                :frequency,
                                :period,
                                operation_attributes: %i[amount category_id comment checked])
