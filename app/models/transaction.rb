@@ -92,13 +92,13 @@ class Transaction < ApplicationRecord
         case operator
         when "like"
           if comment.present?
-            where("UPPER(comment) LIKE UPPER('%#{comment}%')")
+            where(["UPPER(transactions.comment) LIKE ?", "%#{comment.upcase}%"])
           else
             where(comment: nil)
           end
         when "not_like"
           if comment.present?
-            where("UPPER(comment) NOT LIKE UPPER('%#{comment}%')")
+            where(["UPPER(transactions.comment) NOT LIKE ?", "%#{comment.upcase}%"])
           else
             where.not(comment: nil)
           end
