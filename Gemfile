@@ -26,6 +26,7 @@ end
 
 group :development do
   gem "brakeman"               # Security vulnerability scanner for Ruby on Rails
+  gem "bundler-audit"          # Provides patch-level verification for Bundled apps
   gem "foreman"                # Process manager for applications with multiple components
   gem "listen"                 # Listen to file modif and notifies you
   # gem "rack-mini-profiler"     # Add speed badges
