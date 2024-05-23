@@ -31,7 +31,7 @@ class Transaction < ApplicationRecord
 
   before_validation :format_amount
 
-  validates :date,   presence: true, format: { with: /(19|20)\d{2}/i }
+  validates :date,   presence: true, inclusion: { in: (Date.new(2000, 1, 1)..Date.new(2099, 12, 31)) }
   validates :amount, presence: true, numericality: true
 
   private ######################################################################
