@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "csv"
+require "write_xlsx"
 
 # Application Controller
 class ApplicationController < ActionController::Base

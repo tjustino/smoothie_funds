@@ -17,11 +17,12 @@ class AccountsController < ApplicationController
         @nb_items = params[:offset].to_i.abs + @limit
         accounts(offset: params[:offset].to_i.abs, limit: @limit)
       end
-      format.csv do
+      format.xlsx do
         attributes_to_extract = %w[id name initial_balance hidden]
-        send_data current_accounts.to_csv(attributes_to_extract),
-                  filename: "accounts_#{timestamp_for_export}.csv",
-                  type:     "text/csv"
+
+        send_data current_accounts.to_xlsx(attributes_to_extract, "accounts"),
+                  filename: "#{I18n.t("accounts.new.accounts")}_#{timestamp_for_export}.xlsx",
+                  type:     :xlsx
       end
     end
   end

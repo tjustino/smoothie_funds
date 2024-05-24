@@ -21,11 +21,11 @@ class TransactionsController < ApplicationController
         @nb_items = params[:offset].to_i.abs + @limit
         transactions(offset: params[:offset].to_i.abs, limit: @limit)
       end
-      format.csv do
+      format.xlsx do
         attributes_to_extract = %w[id account_id category_id date amount checked comment]
-        send_data current_transactions.to_csv(attributes_to_extract),
-                  filename: "transactions_#{timestamp_for_export}.csv",
-                  type:     "text/csv"
+        send_data current_transactions.to_xlsx(attributes_to_extract, "transactions"),
+                  filename: "#{I18n.t("transactions.new.transactions")}_#{timestamp_for_export}.xlsx",
+                  type:     :xlsx
       end
     end
   end

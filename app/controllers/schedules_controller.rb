@@ -20,11 +20,11 @@ class SchedulesController < ApplicationController
         @nb_items = params[:offset].to_i.abs + @limit
         schedules(offset: params[:offset].to_i.abs, limit: @limit)
       end
-      format.csv do
+      format.xlsx do
         attributes_to_extract = %w[id account_id next_time frequency period]
-        send_data current_schedules.to_csv(attributes_to_extract),
-                  filename: "schedules_#{timestamp_for_export}.csv",
-                  type:     "text/csv"
+        send_data current_schedules.to_xlsx(attributes_to_extract, "schedules"),
+                  filename: "#{I18n.t("schedules.new.schedules")}_#{timestamp_for_export}.xlsx",
+                  type:     :xlsx
       end
     end
   end

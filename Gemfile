@@ -19,6 +19,7 @@ gem "rails", "~> 7.1.0"        # Full-stack web framework
 gem "stimulus-rails"           # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "turbo-rails"              # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "tzinfo-data", platforms: %i[windows jruby] # Windows does not include zoneinfo files
+gem "write_xlsx"               # Create new file in the Excel 2007+ XLSX format
 
 group :development, :test do
   gem "debug", platforms: %i[mri windows] # Start debugger with binding.break

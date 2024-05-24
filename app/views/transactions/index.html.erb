@@ -21,7 +21,7 @@
   <div class="level-right">
     <div class="level-item is-hidden-touch">
       <%= link_to icon("fa-solid fa-download"),
-                  account_transactions_path(@current_account, format: :csv),
+                  account_transactions_path(@current_account, format: :xlsx),
                   title: t(".export_transactions"),
                   class: "button is-link is-light" %>
     </div>

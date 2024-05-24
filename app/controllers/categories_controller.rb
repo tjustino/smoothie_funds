@@ -20,11 +20,11 @@ class CategoriesController < ApplicationController
         @nb_items = params[:offset].to_i.abs + @limit
         categories(offset: params[:offset].to_i.abs, limit: @limit)
       end
-      format.csv do
+      format.xlsx do
         attributes_to_extract = %w[id account_id name hidden]
-        send_data current_categories.to_csv(attributes_to_extract),
-                  filename: "categories_#{timestamp_for_export}.csv",
-                  type:     "text/csv"
+        send_data current_categories.to_xlsx(attributes_to_extract, "categories"),
+                  filename: "#{I18n.t("categories.new.categories")}_#{timestamp_for_export}.xlsx",
+                  type:     :xlsx
       end
     end
   end
