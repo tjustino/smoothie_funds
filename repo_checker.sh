@@ -27,6 +27,6 @@ run() {
 run "bundle exec rubocop"
 run "bundle exec bundle-audit check --update"
 run "bundle exec brakeman -q --no-summary"
-run "./bin/rails test"
+run "bundle exec ./bin/rails test"
 
-announce "Signed off on $SHA in $SECONDS seconds" $GREEN
+announce "\n🎉 commit $SHA have done the job in $SECONDS seconds\n" $GREEN
