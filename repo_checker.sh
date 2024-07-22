@@ -28,6 +28,5 @@ run "bundle exec rubocop"
 run "bundle exec bundle-audit check --update"
 run "bundle exec brakeman -q --no-summary"
 run "./bin/rails test"
-# run "./bin/rails test:system"
 
 announce "Signed off on $SHA in $SECONDS seconds" $GREEN

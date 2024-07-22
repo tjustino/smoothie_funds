@@ -35,7 +35,6 @@ group :development do
 
   # Rubocop
   gem "rubocop"                # Automatic Ruby code style checking tool
-  gem "rubocop-capybara"       # Code style checking for Capybara test files
   gem "rubocop-minitest"       # Extension focused on Minitest best practices
   gem "rubocop-performance"    # Check for performance optimizations
   gem "rubocop-rails"          # Automatic Rails code style checking tool
@@ -47,9 +46,4 @@ group :development do
   gem "capistrano-bundler"     # Bundler specific tasks for Capistrano v3
   gem "capistrano-rails"       # Rails specific Capistrano tasks
   gem "capistrano-rbenv"       # Idiomatic rbenv support for Capistrano 3
-end
-
-group :test do
-  gem "capybara"               # Integration testing tool
-  gem "selenium-webdriver"     # Tool for writing automated tests of websites
 end
