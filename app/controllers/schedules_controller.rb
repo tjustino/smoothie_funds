@@ -120,7 +120,7 @@ class SchedulesController < ApplicationController
           load_transactions
           load_current_transactions
           load_schedules
-          flash[:notice] = t(".successfully_inserted") unless params[:origin] == "dashboard"
+          flash.now[:notice] = t(".successfully_inserted") unless params[:origin] == "dashboard"
         end
       end
     rescue StandardError
