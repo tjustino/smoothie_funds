@@ -26,8 +26,8 @@ class Search < ApplicationRecord
   serialize :accounts,   type: Array
   serialize :categories, type: Array
 
-  enum operator: { comment_or_not: 0, like: 1, not_like: 2 }
-  enum checked:  { checked_or_not: 0, yep: 1, nop: 2 }
+  enum :operator, [ :comment_or_not, :like, :not_like ]
+  enum :checked,  [ :checked_or_not, :yep,  :nop ]
 
   validates :accounts, presence: true
   validates :min,      numericality: true, allow_nil: true
