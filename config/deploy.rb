@@ -6,7 +6,8 @@ set :branch,      "main"
 set :deploy_to,   "/srv/http/#{fetch(:application)}"
 
 # files/dirs we want symlinking to shared
-append :linked_dirs, ".bundle", "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/assets"
+append :linked_files, "config/master.key"
+append :linked_dirs,  ".bundle", "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/assets"
 
 # setup rbenv
 set :rbenv_type,     :user
