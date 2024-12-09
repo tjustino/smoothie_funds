@@ -31,7 +31,7 @@ group :development do
   gem "foreman"                # Process manager for applications with multiple components
   gem "listen"                 # Listen to file modif and notifies you
   # gem "rack-mini-profiler"     # Add speed badges
-  # gem "web-console"            # Access an IRB console on exception pages
+  gem "web-console"            # Access an IRB console on exception pages
 
   # Rubocop
   gem "rubocop"                # Automatic Ruby code style checking tool
