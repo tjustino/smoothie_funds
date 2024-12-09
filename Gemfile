@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 source  "https://rubygems.org"
-ruby    "3.3.5"
 
 ## from http://bundler.io/gemfile.html
 # ~> 2.0.3 is identical to >= 2.0.3 and < 2.1
