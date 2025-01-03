@@ -31,6 +31,7 @@
 
 # Ignore master key for decrypting credentials and more
 /config/master.key
+/config/credentials/*.key
 
 # Ignore yarn and webpacker files
 /public/packs
