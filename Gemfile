@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-source  "https://rubygems.org"
+source "https://rubygems.org"
 
 ## from http://bundler.io/gemfile.html
 # ~> 2.0.3 is identical to >= 2.0.3 and < 2.1
@@ -29,6 +29,7 @@ group :development do
   gem "brakeman"               # Security vulnerability scanner for Ruby on Rails
   gem "bundler-audit"          # Provides patch-level verification for Bundled apps
   gem "foreman"                # Process manager for applications with multiple components
+  gem "kamal"                  # Deploy web apps in containers to servers running Docker with zero downtime
   gem "listen"                 # Listen to file modif and notifies you
   # gem "rack-mini-profiler"     # Add speed badges
   gem "web-console"            # Access an IRB console on exception pages
@@ -40,10 +41,4 @@ group :development do
   gem "rubocop-rails"          # Automatic Rails code style checking tool
   gem "rubocop-rake"           # RuboCop plugin for Rake
   gem "rubocop-rails-omakase"  # Omakase Ruby styling for Rails
-
-  # Capistrano
-  gem "capistrano"             # Execute commands in parallel on remote machine
-  gem "capistrano-bundler"     # Bundler specific tasks for Capistrano v3
-  gem "capistrano-rails"       # Rails specific Capistrano tasks
-  gem "capistrano-rbenv"       # Idiomatic rbenv support for Capistrano 3
 end
