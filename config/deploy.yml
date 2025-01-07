@@ -37,6 +37,7 @@ builder:
   arch: amd64
 
 # Inject ENV variables into containers (secrets come from .kamal/secrets).
+# Remember to run `kamal env push` after making changes!
 env:
   secret:
     - RAILS_MASTER_KEY
@@ -62,7 +63,7 @@ ssh:
 # hitting 404 on in-flight requests. Combines all files from new and old
 # version inside the asset_path.
 #
-# asset_path: /app/public/assets
+asset_path: /app/public/assets
 
 # Configure rolling deploys by setting a wait time between batches of restarts.
 #
