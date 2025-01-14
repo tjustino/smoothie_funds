@@ -23,8 +23,8 @@
 class Search < ApplicationRecord
   belongs_to :user
 
-  serialize :accounts,   type: Array
-  serialize :categories, type: Array
+  serialize :accounts,   coder: YAML, type: Array
+  serialize :categories, coder: YAML, type: Array
 
   enum :operator, [ :comment_or_not, :like, :not_like ]
   enum :checked,  [ :checked_or_not, :yep,  :nop ]
