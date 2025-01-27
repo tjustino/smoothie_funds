@@ -1,46 +1,8 @@
-# https://rubocop.readthedocs.io/en/stable/
-require:
-  - rubocop-minitest
-  - rubocop-performance
-  - rubocop-rails
-  - rubocop-rake
+# Omakase Ruby styling for Rails
+inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 
-inherit_gem:
-  rubocop-rails-omakase: rubocop.yml
-
-# pending Cops
-AllCops:
-  NewCops: enable
-
-# Preferences
-Layout/HashAlignment:
-  EnforcedColonStyle: table
-
-Style/HashSyntax:
-  EnforcedShorthandSyntax: never
-
-Layout/IndentationConsistency:
-  EnforcedStyle: indented_internal_methods
-
-Style/Lambda:
-  EnforcedStyle: literal
-
-Style/StringLiterals:
-  EnforcedStyle: double_quotes
-
-Minitest/AssertPredicate:
-  Enabled: false
-
-Minitest/MultipleAssertions:
-  Max: 15
-
-# intentionally excluded
-Rails/ActionControllerFlashBeforeRender:
-  Exclude:
-    - app/controllers/transactions_controller.rb
-
-Rails/ThreeStateBooleanColumn:                               # waiting https://github.com/rubocop/rubocop-rails/pull/985
-  Exclude:
-    - db/migrate/20140415142843_create_transactions.rb
-    - db/migrate/20141010125321_add_hidden_to_accounts.rb
-    - db/migrate/20210614103839_add_hidden_to_category.rb
+# Overwrite or add rules to create your own house style
+#
+# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
+# Layout/SpaceInsideArrayLiteralBrackets:
+#   Enabled: false

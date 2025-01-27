@@ -2,7 +2,7 @@
 
 # Implement an ActiveRecord model as an abstract class
 class ApplicationRecord < ActiveRecord::Base
-  self.abstract_class = true
+  primary_abstract_class
 
   def self.to_xlsx(attributes, object)
     headers = []
