@@ -41,6 +41,9 @@ builder:
 env:
   secret:
     - RAILS_MASTER_KEY
+    - DATABASE_NAME
+    - DATABASE_USERNAME
+    - DATABASE_PASSWORD
   #   clear:
   #     DB_HOST: 192.168.0.2
 

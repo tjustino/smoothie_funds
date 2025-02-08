@@ -68,7 +68,7 @@ test:
 #
 production:
   <<: *default
-  database: <%= Rails.application.credentials.database.production.name %>
-  username: <%= Rails.application.credentials.database.production.username %>
-  password: <%= Rails.application.credentials.database.production.password %>
+  database: <%= ENV["DATABASE_NAME"] %>
+  username: <%= ENV["DATABASE_USERNAME"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
 
