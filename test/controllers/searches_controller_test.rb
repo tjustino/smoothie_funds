@@ -61,7 +61,7 @@ class SearchesControllerTest < ActionDispatch::IntegrationTest
                                before:     random_period_for(:before),
                                after:      random_period_for(:after),
                                categories: some_categories_for(Account.first),
-                               operator:   %i[comment_or_not like not_like].sample,
+                               operator:   %i[comment_or_not like unlike].sample,
                                comment:    ("a".."z").to_a.sample,
                                checked:    %i[checked_or_not yep nop].sample } }
 
@@ -120,7 +120,7 @@ class SearchesControllerTest < ActionDispatch::IntegrationTest
                                                                     before:     random_period_for(:before),
                                                                     after:      random_period_for(:after),
                                                                     categories: some_categories_for(accounts),
-                                                                    operator:   %i[comment_or_not like not_like].sample,
+                                                                    operator:   %i[comment_or_not like unlike].sample,
                                                                     comment:    ("a".."z").to_a.sample,
                                                                     checked:    %i[checked_or_not yep nop].sample } }
     end

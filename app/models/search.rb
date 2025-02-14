@@ -26,7 +26,7 @@ class Search < ApplicationRecord
   serialize :accounts,   coder: YAML, type: Array
   serialize :categories, coder: YAML, type: Array
 
-  enum :operator, [ :comment_or_not, :like, :not_like ]
+  enum :operator, [ :comment_or_not, :like, :unlike ]
   enum :checked,  [ :checked_or_not, :yep,  :nop ]
 
   validates :accounts, presence: true

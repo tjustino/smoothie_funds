@@ -81,11 +81,11 @@
         <td>
           <%= t(".without_comment") %>
         </td>
-      <% elsif search.operator == "not_like" and search.comment.present? %>
+      <% elsif search.operator == "unlike" and search.comment.present? %>
         <td>
-          <%= t(".not_like", comment: search.comment) %>
+          <%= t(".unlike", comment: search.comment) %>
         </td>
-      <% elsif search.operator == "not_like" and search.comment.blank? %>
+      <% elsif search.operator == "unlike" and search.comment.blank? %>
         <td>
           <%= t(".with_comment") %>
         </td>

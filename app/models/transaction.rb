@@ -96,7 +96,7 @@ class Transaction < ApplicationRecord
           else
             where(comment: nil)
           end
-        when "not_like"
+        when "unlike"
           if comment.present?
             where([ "UPPER(transactions.comment) NOT LIKE ?", "%#{comment.upcase}%" ])
           else
