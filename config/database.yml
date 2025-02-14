@@ -68,7 +68,7 @@ test:
 #
 production:
   <<: *default
-  host: <%= ENV["DATABASE_HOST"] || "172.17.0.1" %>
+  host: <%= ENV["DATABASE_HOST"] || "kamal" %>
   database: <%= ENV["DATABASE_NAME"] %>
   username: <%= ENV["DATABASE_USERNAME"] %>
   password: <%= ENV["DATABASE_PASSWORD"] %>
