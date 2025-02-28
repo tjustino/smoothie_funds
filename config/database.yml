@@ -1,15 +1,19 @@
 # PostgreSQL. Versions 9.3 and up are supported.
 #
-default: &default
+default_pg: &default_pg
   adapter: postgresql
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
+default_sqlite: &default_sqlite
+  adapter: sqlite3
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
 
 development:
-  <<: *default
+  <<: *default_pg
   database: smoothiefunds_development
 
   # The specified database role being used to connect to PostgreSQL.
@@ -43,7 +47,7 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
+  <<: *default_pg
   database: smoothiefunds_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
@@ -67,20 +71,20 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
+  <<: *default_pg
   host: <%= ENV["DATABASE_HOST"] || "172.18.0.1" %>
   database: <%= ENV["DATABASE_NAME"] %>
   username: <%= ENV["DATABASE_USERNAME"] %>
   password: <%= ENV["DATABASE_PASSWORD"] %>
   cache:
-    <<: *default
+    <<: *default_sqlite
     database: storage/production_cache.sqlite3
     migrations_paths: db/cache_migrate
   queue:
-    <<: *default
+    <<: *default_sqlite
     database: storage/production_queue.sqlite3
     migrations_paths: db/queue_migrate
   cable:
-    <<: *default
+    <<: *default_sqlite
     database: storage/production_cable.sqlite3
     migrations_paths: db/cable_migrate
