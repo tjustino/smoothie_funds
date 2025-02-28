@@ -20,6 +20,7 @@ gem "rails", "~> 8.0.1"        # Full-stack web framework
 gem "solid_cache"              # A database backed ActiveSupport::Cache::Store
 gem "solid_queue"              # Database-backed Active Job backend
 gem "solid_cable"              # Database-backed Action Cable backend
+gem "sqlite3"                  # Use sqlite3 as the database for Active Record
 gem "stimulus-rails"           # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "thruster", require: false # Add HTTP asset caching/compression and X-Sendfile acceleration to Puma
 gem "turbo-rails"              # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
