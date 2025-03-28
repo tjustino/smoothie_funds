@@ -1,10 +1,5 @@
 # PostgreSQL + SQLite in production pending data migration
 #
-default_pg: &default_pg
-  adapter: postgresql
-  encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-
 default_sqlite: &default_sqlite
   adapter: sqlite3
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -15,12 +10,14 @@ development:
   database: storage/development.sqlite3
 
 test:
-  <<: *default_pg
+  <<: *default_sqlite
   database: storage/test.sqlite3
 
 production:
   primary:
-    <<: *default_pg
+    adapter: postgresql
+    encoding: unicode
+    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
     host: <%= ENV["DATABASE_HOST"] || "172.18.0.1" %>
     database: <%= ENV["DATABASE_NAME"] %>
     username: <%= ENV["DATABASE_USERNAME"] %>
