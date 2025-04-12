@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Implement an ActiveRecord model as an abstract class
 class ApplicationRecord < ActiveRecord::Base
   primary_abstract_class
