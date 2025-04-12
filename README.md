@@ -10,7 +10,7 @@ sudo systemctl start postgresql
 
 Load fixture in dev environnement:
 ```sh
-bin/rails db:drop ; bin/rails db:create ; bin/rails db:migrate ; bin/rails db:fixtures:load FIXTURES=users,accounts,categories,transactions,schedules,pending_users
+rm db/schema.rb ; bin/rails db:reset ; bin/rails db:migrate && bin/rails db:fixtures:load FIXTURES=users,accounts,categories,transactions,schedules,pending_users
 ```
 
 Restore data from production to dev environnement:
@@ -23,7 +23,7 @@ pg_restore --no-acl --no-owner --data-only --dbname=smoothiefunds_development db
 
 Miscellaneous:
 ```sh
-bundle exec annotate
+bundle exec annotaterb models
 ```
 
 

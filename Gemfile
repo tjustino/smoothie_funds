@@ -32,6 +32,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "annotaterb"             # Annotates Rails Models, routes, fixtures, and others based on the database schema
   gem "brakeman"               # Security vulnerability scanner for Ruby on Rails
   gem "bundler-audit"          # Provides patch-level verification for Bundled apps
   gem "foreman"                # Process manager for applications with multiple componento

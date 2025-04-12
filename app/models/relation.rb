@@ -1,13 +1,22 @@
-# frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: relations
 #
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #  account_id :integer          not null
 #  user_id    :integer          not null
-#  created_at :datetime
-#  updated_at :datetime
+#
+# Indexes
+#
+#  index_relations_on_account_id              (account_id)
+#  index_relations_on_account_id_and_user_id  (account_id,user_id) UNIQUE
+#  index_relations_on_user_id                 (user_id)
+#
+# Foreign Keys
+#
+#  account_id  (account_id => accounts.id)
+#  user_id     (user_id => users.id)
 #
 
 # Relation model

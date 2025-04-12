@@ -1,22 +1,28 @@
-# frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: searches
 #
 #  id         :integer          not null, primary key
-#  user_id    :integer          not null
 #  accounts   :text             not null
-#  min        :decimal(8, 2)
-#  max        :decimal(8, 2)
-#  before     :date
 #  after      :date
+#  before     :date
 #  categories :text
-#  operator   :integer
-#  comment    :string
 #  checked    :integer
+#  comment    :string
+#  max        :decimal(8, 2)
+#  min        :decimal(8, 2)
+#  operator   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  user_id    :integer          not null
+#
+# Indexes
+#
+#  index_searches_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  user_id  (user_id => users.id)
 #
 
 # Search model

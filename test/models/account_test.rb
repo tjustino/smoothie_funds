@@ -1,17 +1,25 @@
-# frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: accounts
 #
 #  id              :integer          not null, primary key
-#  name            :string           not null
-#  initial_balance :decimal(8, 2)    not null
 #  created_by      :integer
+#  hidden          :boolean          default(FALSE), not null
+#  initial_balance :decimal(8, 2)    not null
+#  name            :string           not null
 #  updated_by      :integer
-#  created_at      :datetime
-#  updated_at      :datetime
-#  hidden          :boolean          default(FALSE)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+# Indexes
+#
+#  index_accounts_on_created_by  (created_by)
+#  index_accounts_on_updated_by  (updated_by)
+#
+# Foreign Keys
+#
+#  created_by  (created_by => users.id)
+#  updated_by  (updated_by => users.id)
 #
 
 require "test_helper"

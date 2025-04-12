@@ -1,18 +1,28 @@
-# frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: schedules
 #
 #  id         :integer          not null, primary key
-#  account_id :integer          not null
-#  next_time  :date             not null
-#  frequency  :integer          not null
-#  period     :string           not null
 #  created_by :integer
+#  frequency  :integer          not null
+#  next_time  :date             not null
+#  period     :string           not null
 #  updated_by :integer
-#  created_at :datetime
-#  updated_at :datetime
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  account_id :integer          not null
+#
+# Indexes
+#
+#  index_schedules_on_account_id  (account_id)
+#  index_schedules_on_created_by  (created_by)
+#  index_schedules_on_updated_by  (updated_by)
+#
+# Foreign Keys
+#
+#  account_id  (account_id => accounts.id)
+#  created_by  (created_by => users.id)
+#  updated_by  (updated_by => users.id)
 #
 
 # Schedule model
