@@ -8,8 +8,8 @@
 #  initial_balance :decimal(8, 2)    not null
 #  name            :string           not null
 #  updated_by      :integer
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  created_at      :datetime
+#  updated_at      :datetime
 #
 # Indexes
 #

@@ -9,8 +9,8 @@
 #  created_by  :integer
 #  date        :date             not null
 #  updated_by  :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  created_at  :datetime
+#  updated_at  :datetime
 #  account_id  :integer          not null
 #  category_id :integer          not null
 #  schedule_id :integer

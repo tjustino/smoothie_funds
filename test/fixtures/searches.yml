@@ -12,8 +12,8 @@
 #  max        :decimal(8, 2)
 #  min        :decimal(8, 2)
 #  operator   :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  created_at :datetime
+#  updated_at :datetime
 #  user_id    :integer          not null
 #
 # Indexes
