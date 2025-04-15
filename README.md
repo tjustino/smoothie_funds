@@ -10,7 +10,7 @@ sudo systemctl start postgresql
 
 Load fixture in dev environnement:
 ```sh
-rm db/schema.rb ; bin/rails db:reset ; bin/rails db:migrate && bin/rails db:fixtures:load FIXTURES=users,accounts,categories,transactions,schedules,pending_users
+rm db/schema.rb ; bin/rails db:reset ; bin/rails db:migrate && bin/rails db:fixtures:load FIXTURES=users,accounts,categories,transactions,schedules,pending_users ; bundle exec annotaterb models
 ```
 
 Restore data from production to dev environnement:
