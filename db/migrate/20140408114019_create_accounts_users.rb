@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # One user can create multiple accounts
 # One account can belong to multiple users
 class CreateAccountsUsers < ActiveRecord::Migration[4.2]
