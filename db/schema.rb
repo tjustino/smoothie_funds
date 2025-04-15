@@ -10,11 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2023_11_13_124741) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_catalog.plpgsql"
-
-  create_table "accounts", id: :serial, force: :cascade do |t|
+ActiveRecord::Schema[8.0].define(version: 2025_04_13_180644) do
+  create_table "accounts", force: :cascade do |t|
     t.string "name", null: false
     t.decimal "initial_balance", precision: 8, scale: 2, null: false
     t.integer "created_by"
@@ -22,9 +19,11 @@ ActiveRecord::Schema[8.0].define(version: 2023_11_13_124741) do
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
     t.boolean "hidden", default: false, null: false
+    t.index ["created_by"], name: "index_accounts_on_created_by"
+    t.index ["updated_by"], name: "index_accounts_on_updated_by"
   end
 
-  create_table "categories", id: :serial, force: :cascade do |t|
+  create_table "categories", force: :cascade do |t|
     t.integer "account_id", null: false
     t.string "name", null: false
     t.integer "created_by"
@@ -34,13 +33,15 @@ ActiveRecord::Schema[8.0].define(version: 2023_11_13_124741) do
     t.boolean "hidden", default: false, null: false
     t.index ["account_id", "name"], name: "index_categories_on_account_id_and_name", unique: true
     t.index ["account_id"], name: "index_categories_on_account_id"
+    t.index ["created_by"], name: "index_categories_on_created_by"
+    t.index ["updated_by"], name: "index_categories_on_updated_by"
   end
 
-  create_table "pending_users", id: :serial, force: :cascade do |t|
+  create_table "pending_users", force: :cascade do |t|
     t.integer "account_id", null: false
     t.string "email", null: false
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["account_id"], name: "index_pending_users_on_account_id", unique: true
   end
 
@@ -54,7 +55,7 @@ ActiveRecord::Schema[8.0].define(version: 2023_11_13_124741) do
     t.index ["user_id"], name: "index_relations_on_user_id"
   end
 
-  create_table "schedules", id: :serial, force: :cascade do |t|
+  create_table "schedules", force: :cascade do |t|
     t.integer "account_id", null: false
     t.date "next_time", null: false
     t.integer "frequency", null: false
@@ -64,9 +65,11 @@ ActiveRecord::Schema[8.0].define(version: 2023_11_13_124741) do
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
     t.index ["account_id"], name: "index_schedules_on_account_id"
+    t.index ["created_by"], name: "index_schedules_on_created_by"
+    t.index ["updated_by"], name: "index_schedules_on_updated_by"
   end
 
-  create_table "searches", id: :serial, force: :cascade do |t|
+  create_table "searches", force: :cascade do |t|
     t.integer "user_id", null: false
     t.text "accounts", null: false
     t.decimal "min", precision: 8, scale: 2
@@ -77,12 +80,12 @@ ActiveRecord::Schema[8.0].define(version: 2023_11_13_124741) do
     t.integer "operator"
     t.string "comment"
     t.integer "checked"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["user_id"], name: "index_searches_on_user_id"
   end
 
-  create_table "transactions", id: :serial, force: :cascade do |t|
+  create_table "transactions", force: :cascade do |t|
     t.integer "account_id", null: false
     t.integer "category_id", null: false
     t.date "date", null: false
@@ -96,10 +99,12 @@ ActiveRecord::Schema[8.0].define(version: 2023_11_13_124741) do
     t.integer "schedule_id"
     t.index ["account_id"], name: "index_transactions_on_account_id"
     t.index ["category_id"], name: "index_transactions_on_category_id"
+    t.index ["created_by"], name: "index_transactions_on_created_by"
     t.index ["schedule_id"], name: "index_transactions_on_schedule_id"
+    t.index ["updated_by"], name: "index_transactions_on_updated_by"
   end
 
-  create_table "users", id: :serial, force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "name"
     t.string "password_digest"
@@ -107,4 +112,22 @@ ActiveRecord::Schema[8.0].define(version: 2023_11_13_124741) do
     t.datetime "updated_at", precision: nil
     t.index ["email"], name: "index_users_on_email", unique: true
   end
+
+  add_foreign_key "accounts", "users", column: "created_by"
+  add_foreign_key "accounts", "users", column: "updated_by"
+  add_foreign_key "categories", "accounts"
+  add_foreign_key "categories", "users", column: "created_by"
+  add_foreign_key "categories", "users", column: "updated_by"
+  add_foreign_key "pending_users", "accounts"
+  add_foreign_key "relations", "accounts"
+  add_foreign_key "relations", "users"
+  add_foreign_key "schedules", "accounts"
+  add_foreign_key "schedules", "users", column: "created_by"
+  add_foreign_key "schedules", "users", column: "updated_by"
+  add_foreign_key "searches", "users"
+  add_foreign_key "transactions", "accounts"
+  add_foreign_key "transactions", "categories"
+  add_foreign_key "transactions", "schedules"
+  add_foreign_key "transactions", "users", column: "created_by"
+  add_foreign_key "transactions", "users", column: "updated_by"
 end
