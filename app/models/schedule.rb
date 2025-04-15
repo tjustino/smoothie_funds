@@ -25,7 +25,6 @@
 #  updated_by  (updated_by => users.id)
 #
 
-# Schedule model
 class Schedule < ApplicationRecord
   has_one :operation, class_name: "Transaction", dependent: :destroy, inverse_of: :schedule
   accepts_nested_attributes_for :operation, update_only: true, allow_destroy: true

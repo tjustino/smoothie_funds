@@ -17,7 +17,6 @@
 #  account_id  (account_id => accounts.id)
 #
 
-# PendingUser model
 class PendingUser < ApplicationRecord
   belongs_to :account
 

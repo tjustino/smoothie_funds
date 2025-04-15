@@ -19,7 +19,6 @@
 #  user_id     (user_id => users.id)
 #
 
-# Relation model
 class Relation < ApplicationRecord
   belongs_to :account
   belongs_to :user

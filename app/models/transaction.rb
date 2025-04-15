@@ -32,7 +32,6 @@
 #  updated_by   (updated_by => users.id)
 #
 
-# Transaction model
 class Transaction < ApplicationRecord
   belongs_to :account
   belongs_to :category

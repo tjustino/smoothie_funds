@@ -14,7 +14,6 @@
 #  index_users_on_email  (email) UNIQUE
 #
 
-# User model
 class User < ApplicationRecord
   has_many :relations,    dependent: :delete_all
   has_many :accounts,     through:   :relations

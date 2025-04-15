@@ -25,7 +25,6 @@
 #  updated_by  (updated_by => users.id)
 #
 
-# Category model
 class Category < ApplicationRecord
   belongs_to  :account
   has_many    :transactions, dependent: :restrict_with_error

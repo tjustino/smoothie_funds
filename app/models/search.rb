@@ -25,7 +25,6 @@
 #  user_id  (user_id => users.id)
 #
 
-# Search model
 class Search < ApplicationRecord
   belongs_to :user
 
