@@ -32,45 +32,45 @@ schedule_compte_commun_electricite:
   next_time: <%= DateTime.now.at_beginning_of_month + 1.month %>
   frequency: 1
   period: months
-  created_by: emilie.id
-  updated_by: thomas.id
+  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
 
 schedule_compte_commun_eau:
   account: compte_commun
   next_time: <%= DateTime.now.at_beginning_of_month + 2.weeks %>
   frequency: 2
   period: weeks
-  created_by: thomas.id
-  updated_by: thomas.id
+  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
 
 schedule_compte_commun_virement:
   account: compte_commun
   next_time: <%= DateTime.now.at_beginning_of_month + 30.days %>
   frequency: 30
   period: days
-  created_by: thomas.id
-  updated_by: emilie.id
+  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
 
 schedule_courant_thomas_pret:
   account: courant_thomas
   next_time: <%= DateTime.now.at_beginning_of_month + 1.month %>
   frequency: 1
   period: months
-  created_by: thomas.id
-  updated_by: thomas.id
+  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
 
 schedule_courant_thomas_cantine:
   account: courant_thomas
   next_time: <%= DateTime.now.at_beginning_of_month + 3.weeks %>
   frequency: 3
   period: weeks
-  created_by: thomas.id
-  updated_by: thomas.id
+  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
 
 schedule_courant_emilie_assurance:
   account: courant_emilie
   next_time: <%= DateTime.now.at_beginning_of_month + 1.year %>
   frequency: 1
   period: years
-  created_by: emilie.id
-  updated_by: emilie.id
+  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>

@@ -25,87 +25,87 @@
 courant_thomas:
   name: Compte courant
   initial_balance: 30.11
-  created_by: thomas.id
-  updated_by: thomas.id
+  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
   hidden: false
   users: thomas
 
 livret_a:
   name: Livret A
   initial_balance: 10
-  created_by: thomas.id
-  updated_by: thomas.id
+  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
   hidden: false
   users: thomas
 
 ldd_thomas:
   name: Livret de Développement Durable
   initial_balance: 15
-  created_by: thomas.id
-  updated_by: thomas.id
+  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
   hidden: false
   users: thomas
 
 hidden_thomas:
   name: Livret has-been
   initial_balance: 100000
-  created_by: thomas.id
-  updated_by: thomas.id
+  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
   hidden: true
   users: thomas
 
 thomas_account_waiting_benoit:
   name: Alone waiting for b.
   initial_balance: 123
-  created_by: thomas.id
-  updated_by: thomas.id
+  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
   hidden: true
   users: thomas
 
 thomas_emilie_account_waiting_unknown_user:
   name: We are 2 waiting for a friend
   initial_balance: 321
-  created_by: thomas.id
-  updated_by: thomas.id
+  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
   hidden: true
   users: thomas, emilie
 
 courant_emilie:
   name: Compte courant
   initial_balance: 9.02
-  created_by: emilie.id
-  updated_by: emilie.id
+  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
   hidden: false
   users: emilie
 
 ldd_emilie:
   name: Livret de Développement Durable
   initial_balance: 15
-  created_by: emilie.id
-  updated_by: emilie.id
+  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
   hidden: false
   users: emilie
 
 compte_commun:
   name: Compte Commun
   initial_balance: 0
-  created_by: thomas.id
-  updated_by: emilie.id
+  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
   hidden: false
   users: thomas, emilie
 
 courant_benoit:
   name: Compte de benoit
   initial_balance: 1
-  created_by: benoit.id
-  updated_by: benoit.id
+  created_by: <%= ActiveRecord::FixtureSet.identify(:benoit) %>
+  updated_by: <%= ActiveRecord::FixtureSet.identify(:benoit) %>
   hidden: false
   users: benoit
 
 compte_commun_benoit_vanessa:
   name: Compte Commun Jackpot
   initial_balance: 100_000
-  created_by: benoit.id
-  updated_by: benoit.id
+  created_by: <%= ActiveRecord::FixtureSet.identify(:benoit) %>
+  updated_by: <%= ActiveRecord::FixtureSet.identify(:benoit) %>
   hidden: false
   users: benoit, vanessa
