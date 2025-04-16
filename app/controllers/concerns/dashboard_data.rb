@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # DashboardData for Dashboard and Schedules Controllers
 module DashboardData
   private

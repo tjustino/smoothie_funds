@@ -1,8 +1,5 @@
-# frozen_string_literal: true
-
 require "test_helper"
 
-# Rights Controller Test
 class RightsControllerTest < ActionDispatch::IntegrationTest
   ########################################################################################################### GET /terms
   test "should get terms as logged user" do

@@ -1,8 +1,5 @@
-# frozen_string_literal: true
-
 require "test_helper"
 
-# Unknow User Test
 class UnknowUserTest < ActionDispatch::IntegrationTest
   fixtures :users
 

@@ -1,6 +1,3 @@
-# frozen_string_literal: true
-
-# Searches Helper
 module SearchesHelper
   def joined_accounts_names(current_accounts, accounts)
     accounts_names = []

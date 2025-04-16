@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 desc "Cleanup all your repository"
 
 # Add some colors to String class

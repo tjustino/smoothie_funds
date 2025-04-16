@@ -1,8 +1,5 @@
-# frozen_string_literal: true
-
 require "test_helper"
 
-# Searches Controller Test
 class SearchesControllerTest < ActionDispatch::IntegrationTest
   setup { login_as :thomas }
 

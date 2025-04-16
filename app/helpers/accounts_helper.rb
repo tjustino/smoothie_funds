@@ -1,6 +1,3 @@
-# frozen_string_literal: true
-
-# Accounts Helper
 module AccountsHelper
   def other_users(current_user, account)
     account.users.where.not(id: current_user)

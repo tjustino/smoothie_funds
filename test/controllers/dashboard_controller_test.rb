@@ -1,8 +1,5 @@
-# frozen_string_literal: true
-
 require "test_helper"
 
-# Dashboard Controller Test
 class DashboardControllerTest < ActionDispatch::IntegrationTest
   setup { login_as :thomas }
 

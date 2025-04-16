@@ -16,7 +16,6 @@
 
 require "test_helper"
 
-# User Model Test
 class UserTest < ActiveSupport::TestCase
   test "should create user" do
     user = User.new(email:                 "random@email.com",

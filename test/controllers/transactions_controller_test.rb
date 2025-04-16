@@ -1,8 +1,5 @@
-# frozen_string_literal: true
-
 require "test_helper"
 
-# Transactions Controller Test
 class TransactionsControllerTest < ActionDispatch::IntegrationTest
   setup { login_as :thomas }
 

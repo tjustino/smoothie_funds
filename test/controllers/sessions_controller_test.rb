@@ -1,8 +1,5 @@
-# frozen_string_literal: true
-
 require "test_helper"
 
-# Sessions Controller Test
 class SessionsControllerTest < ActionDispatch::IntegrationTest
   ########################################################################################################### GET /login
   test "should redirect to dashboard url if user is already connected" do

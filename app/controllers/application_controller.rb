@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "write_xlsx"
 
 # Application Controller

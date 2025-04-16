@@ -1,6 +1,3 @@
-# frozen_string_literal: true
-
-# Rights Controller
 class RightsController < ApplicationController
   # GET /terms
   def terms; end

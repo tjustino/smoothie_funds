@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 namespace :populate do
   desc "Create #{@many} schedules only for the first account not hidden"
   task schedules: :environment do

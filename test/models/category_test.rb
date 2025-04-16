@@ -27,7 +27,6 @@
 
 require "test_helper"
 
-# Category Model Test
 class CategoryTest < ActiveSupport::TestCase
   test "should create category" do
     category = Category.new(account: random_account,

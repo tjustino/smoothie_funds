@@ -1,6 +1,3 @@
-# frozen_string_literal: true
-
-# Sessions Controller
 class SessionsController < ApplicationController
   skip_before_action  :set_current_user,
                       :set_current_accounts,

@@ -1,6 +1,3 @@
-# frozen_string_literal: true
-
-# Schedules Controller
 class SchedulesController < ApplicationController
   include DashboardData
   before_action :set_current_account

@@ -1,6 +1,3 @@
-# frozen_string_literal: true
-
-# Dashboard Helper
 module DashboardHelper
   def sum_today(current_transactions, account)
     current_transactions.where(account: account).sum(:amount) + account.initial_balance

@@ -1,6 +1,3 @@
-# frozen_string_literal: true
-
-# Transactions Controller
 class TransactionsController < ApplicationController
   include SearchedTransactions
   before_action :set_current_account

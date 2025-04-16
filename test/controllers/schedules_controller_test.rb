@@ -1,8 +1,5 @@
-# frozen_string_literal: true
-
 require "test_helper"
 
-# Schedules Controller Test
 class SchedulesControllerTest < ActionDispatch::IntegrationTest
   setup { login_as :thomas }
 

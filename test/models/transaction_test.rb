@@ -34,7 +34,6 @@
 
 require "test_helper"
 
-# Transaction Model Test
 class TransactionTest < ActiveSupport::TestCase
   test "should create transaction" do
     account = random_account

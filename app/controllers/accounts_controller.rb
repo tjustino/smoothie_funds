@@ -1,6 +1,3 @@
-# frozen_string_literal: true
-
-# Accounts Controller
 class AccountsController < ApplicationController
   # GET /accounts
   def index

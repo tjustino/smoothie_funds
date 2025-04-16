@@ -1,6 +1,3 @@
-# frozen_string_literal: true
-
-# Searches Controller
 class SearchesController < ApplicationController
   include SearchedTransactions
 

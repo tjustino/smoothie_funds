@@ -24,7 +24,6 @@
 
 require "test_helper"
 
-# Account Model Test
 class AccountTest < ActiveSupport::TestCase
   test "should create account" do
     account = Account.new(name:            "Crazy Account",

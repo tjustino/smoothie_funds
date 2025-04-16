@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 namespace :populate do
   @many = 100
   @name = "Thomas"

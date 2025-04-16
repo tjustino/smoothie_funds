@@ -27,7 +27,6 @@
 
 require "test_helper"
 
-# Search Model Test
 class SearchTest < ActiveSupport::TestCase
   test "should create search" do
     user = :thomas

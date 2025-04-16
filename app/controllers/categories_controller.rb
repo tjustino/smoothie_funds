@@ -1,6 +1,3 @@
-# frozen_string_literal: true
-
-# Categories Controller
 class CategoriesController < ApplicationController
   before_action :set_current_account
 

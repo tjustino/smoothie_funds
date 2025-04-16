@@ -1,6 +1,3 @@
-# frozen_string_literal: true
-
-# Application Helper
 module ApplicationHelper
   def name_or_email(current_user)
     current_user.name? ? current_user.name : current_user.email
