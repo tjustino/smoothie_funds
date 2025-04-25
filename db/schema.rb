@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_13_180644) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_24_114008) do
   create_table "accounts", force: :cascade do |t|
     t.string "name", null: false
     t.decimal "initial_balance", precision: 8, scale: 2, null: false
@@ -45,13 +45,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_13_180644) do
     t.index ["account_id"], name: "index_pending_users_on_account_id", unique: true
   end
 
-  create_table "relations", id: false, force: :cascade do |t|
-    t.integer "account_id", null: false
+  create_table "relations", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.datetime "created_at", precision: nil
-    t.datetime "updated_at", precision: nil
-    t.index ["account_id", "user_id"], name: "index_relations_on_account_id_and_user_id", unique: true
+    t.integer "account_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["account_id"], name: "index_relations_on_account_id"
+    t.index ["user_id", "account_id"], name: "index_relations_on_user_id_and_account_id", unique: true
     t.index ["user_id"], name: "index_relations_on_user_id"
   end
 
@@ -69,14 +69,22 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_13_180644) do
     t.index ["updated_by"], name: "index_schedules_on_updated_by"
   end
 
+  create_table "search_targets", force: :cascade do |t|
+    t.integer "search_id", null: false
+    t.string "target_type", null: false
+    t.integer "target_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["search_id"], name: "index_search_targets_on_search_id"
+    t.index ["target_type", "target_id"], name: "index_search_targets_on_target"
+  end
+
   create_table "searches", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.text "accounts", null: false
     t.decimal "min", precision: 8, scale: 2
     t.decimal "max", precision: 8, scale: 2
     t.date "before"
     t.date "after"
-    t.text "categories"
     t.integer "operator"
     t.string "comment"
     t.integer "checked"
@@ -124,6 +132,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_13_180644) do
   add_foreign_key "schedules", "accounts"
   add_foreign_key "schedules", "users", column: "created_by"
   add_foreign_key "schedules", "users", column: "updated_by"
+  add_foreign_key "search_targets", "searches", on_delete: :cascade
   add_foreign_key "searches", "users"
   add_foreign_key "transactions", "accounts"
   add_foreign_key "transactions", "categories"

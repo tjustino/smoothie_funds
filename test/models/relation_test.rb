@@ -19,17 +19,13 @@
 #  account_id  (account_id => accounts.id)
 #  user_id     (user_id => users.id)
 #
+require "test_helper"
 
-class Relation < ApplicationRecord
-  belongs_to :account
-  belongs_to :user
+class RelationTest < ActiveSupport::TestCase
+  test "should not allow duplicate user ↔ account relation" do
+    duplicated_relation = Relation.first.dup
 
-  scope :shared_accounts, ->(accounts) {
-    where(account_id: accounts).group(:account_id).having("COUNT(user_id) > 1")
-  }
-  scope :not_shared_accounts, ->(accounts) {
-    where(account_id: accounts).group(:account_id).having("COUNT(user_id) = 1")
-  }
-
-  validates :account_id, uniqueness: { scope: :user_id }
+    assert          duplicated_relation.invalid?
+    assert_includes duplicated_relation.errors[:account_id], I18n.t("activerecord.errors.messages.taken")
+  end
 end

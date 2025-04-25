@@ -58,4 +58,12 @@ class AccountTest < ActiveSupport::TestCase
     assert       account.invalid?
     assert_equal [ I18n.t("errors.messages.not_a_number") ], account.errors[:initial_balance]
   end
+
+  test "should destroy account if not shared" do
+    account = Account.create!(name:            "Crazy Account",
+                              initial_balance: 30.11,
+                              hidden:          false)
+
+    assert_difference("Account.count", -1) { account.destroy }
+  end
 end

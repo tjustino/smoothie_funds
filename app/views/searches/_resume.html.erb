@@ -6,7 +6,7 @@
         <%= t(".accounts") %>
       </th>
       <td>
-        <%= joined_accounts_names(@current_accounts, search.accounts) %>
+        <%= search.accounts.pluck(:name).join(", ") %>
       </td>
     </tr>
 
@@ -64,7 +64,7 @@
         <%= t(".categories") %>
       </th>
       <td>
-        <%= joined_categories_names(@current_accounts, search.accounts, search.categories) %>
+        <%= search.categories.pluck(:name).join(", ") %>
       </td>
     </tr>
 

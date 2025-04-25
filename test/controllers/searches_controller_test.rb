@@ -50,17 +50,22 @@ class SearchesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should not create search - unknow user" do
+    search_targets_attributes = []
+    account = Account.first
+    categories = some_categories_for(account)
+    search_targets_attributes << { target_type: "Account", target_id: account.id }
+    categories.each { |category_id| search_targets_attributes << { target_type: "Category", target_id: category_id } }
+
     assert_no_difference("Search.count") do
       post "/users/#{User.maximum(:id) + 1}/searches",
-           params: { search: { accounts:   Account.first,
-                               min:        rand(-500.00..0.00),
+           params: { search: { min:        rand(-500.00..0.00),
                                max:        rand(0.00..500.00),
                                before:     random_period_for(:before),
                                after:      random_period_for(:after),
-                               categories: some_categories_for(Account.first),
                                operator:   %i[comment_or_not like unlike].sample,
                                comment:    ("a".."z").to_a.sample,
-                               checked:    %i[checked_or_not yep nop].sample } }
+                               checked:    %i[checked_or_not yep nop].sample,
+                               search_targets_attributes: search_targets_attributes } }
 
       assert_redirected_to dashboard_url
     end
@@ -92,17 +97,21 @@ class SearchesControllerTest < ActionDispatch::IntegrationTest
   private ##############################################################################################################
 
     def some_search_for(user)
-      accounts = some_accounts_for(user)
-      Search.create(user:       users(user),
-                    accounts:   accounts,
-                    min:        -500,
-                    max:        500,
-                    before:     3.months.since,
-                    after:      3.months.ago,
-                    categories: some_categories_for(accounts),
-                    operator:   1,
-                    comment:    "a",
-                    checked:    0)
+      account_ids = some_accounts_for(user)
+      category_ids = some_categories_for(account_ids)
+      search_targets_attributes = []
+      account_ids.each { |account_id| search_targets_attributes << { target_type: "Account", target_id: account_id } }
+      category_ids.each { |category_id| search_targets_attributes << { target_type: "Category", target_id: category_id } }
+
+      Search.create(user:                      users(user),
+                    min:                       -500,
+                    max:                       500,
+                    before:                    3.months.since,
+                    after:                     3.months.ago,
+                    operator:                  1,
+                    comment:                   "a",
+                    checked:                   0,
+                    search_targets_attributes: search_targets_attributes)
     end
 
     def get_new(user)
@@ -110,16 +119,20 @@ class SearchesControllerTest < ActionDispatch::IntegrationTest
     end
 
     def post_create(user)
-      accounts = some_accounts_for(user)
-      post "/users/#{users(user).id}/searches", params: { search: { accounts:   accounts,
-                                                                    min:        rand(-500.00..0.00),
-                                                                    max:        rand(0.00..500.00),
-                                                                    before:     random_period_for(:before),
-                                                                    after:      random_period_for(:after),
-                                                                    categories: some_categories_for(accounts),
-                                                                    operator:   %i[comment_or_not like unlike].sample,
-                                                                    comment:    ("a".."z").to_a.sample,
-                                                                    checked:    %i[checked_or_not yep nop].sample } }
+      account_ids = some_accounts_for(user)
+      category_ids = some_categories_for(account_ids)
+      st_attributes = []
+      account_ids.each { |account_id| st_attributes << { target_type: "Account", target_id: account_id } }
+      category_ids.each { |category_id| st_attributes << { target_type: "Category", target_id: category_id } }
+
+      post "/users/#{users(user).id}/searches", params: { search: { min:      rand(-500.00..0.00),
+                                                                    max:      rand(0.00..500.00),
+                                                                    before:   random_period_for(:before),
+                                                                    after:    random_period_for(:after),
+                                                                    operator: %i[comment_or_not like unlike].sample,
+                                                                    comment:  ("a".."z").to_a.sample,
+                                                                    checked:  %i[checked_or_not yep nop].sample,
+                                                                    search_targets_attributes: st_attributes } }
     end
 
     def random_period_for(period)

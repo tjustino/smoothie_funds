@@ -29,6 +29,9 @@ class Category < ApplicationRecord
   belongs_to  :account
   has_many    :transactions, dependent: :restrict_with_error
 
+  has_many :search_targets, as: :target, dependent: :destroy
+  has_many :searches, through: :search_targets
+
   scope :order_by_name, -> { order(name: :asc) }
   scope :active,        -> { where(hidden: false) }
 

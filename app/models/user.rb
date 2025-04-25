@@ -15,13 +15,13 @@
 #
 
 class User < ApplicationRecord
-  has_many :relations,    dependent: :delete_all
+  has_many :relations,    dependent: :destroy
   has_many :accounts,     through:   :relations
 
   has_many :categories,   through:   :accounts
   has_many :schedules,    through:   :accounts
   has_many :transactions, through:   :accounts
-  has_many :searches,     dependent: :delete_all
+  has_many :searches,     dependent: :destroy
 
   validates :email, presence: true, uniqueness: true, format: {
     with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i

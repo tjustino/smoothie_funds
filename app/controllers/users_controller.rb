@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   # DELETE /users/:id
   def destroy
     user
-    if delete_all_data && @current_user.destroy
+    if destroy_all_data && @current_user.destroy
       session[:user_id] = nil
       redirect_to login_url, notice: t(".successfully_destroyed")
     else
@@ -80,10 +80,10 @@ class UsersController < ApplicationController
     end
 
     def set_targeted_accounts
-      @targeted_accounts = Relation.not_shared_accounts(@current_user.accounts)
+      @targeted_accounts = Relation.not_shared_accounts(@current_user.accounts).pluck(:account_id)
     end
 
-    def delete_all_data
+    def destroy_all_data
       set_targeted_accounts
       # consider erasing (following this order):
       #   - searches
@@ -94,12 +94,20 @@ class UsersController < ApplicationController
       #   - relations
       #   - accounts
       #   - user
-      @user.searches.delete_all
-      Schedule.where(account_id: @targeted_accounts).delete_all
-      Transaction.active.where(account_id: @targeted_accounts).delete_all
-      Category.where(account_id: @targeted_accounts).delete_all
-      PendingUser.where(account_id: @targeted_accounts).delete_all
-      Relation.where(account_id: @targeted_accounts).delete_all
-      Account.where(id: @targeted_accounts).delete_all
+      @user.searches.destroy_all
+      Schedule.where(account_id: @targeted_accounts).destroy_all
+      Transaction.active.where(account_id: @targeted_accounts).destroy_all
+      Category.where(account_id: @targeted_accounts).destroy_all
+      PendingUser.where(account_id: @targeted_accounts).destroy_all
+      Relation.where(account_id: @targeted_accounts).destroy_all
+      Account.where(id: @targeted_accounts).destroy_all
+      # delete last relations from shared accounts
+      Relation.where(user_id: @user).destroy_all
+
+      models = [ Account, Category, Schedule, Transaction ]
+      models.each do |model|
+        model.where(created_by: @user.id).update_all(created_by: nil)
+        model.where(updated_by: @user.id).update_all(updated_by: nil)
+      end
     end
 end

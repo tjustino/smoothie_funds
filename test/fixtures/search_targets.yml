@@ -1,0 +1,67 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# == Schema Information
+#
+# Table name: search_targets
+#
+#  id          :integer          not null, primary key
+#  target_type :string           not null
+#  created_at  :datetime
+#  updated_at  :datetime
+#  search_id   :integer          not null
+#  target_id   :integer          not null
+#
+# Indexes
+#
+#  index_search_targets_on_search_id  (search_id)
+#  index_search_targets_on_target     (target_type,target_id)
+#
+# Foreign Keys
+#
+#  search_id  (search_id => searches.id) ON DELETE => cascade
+#
+
+thomas_first_search_account_courant_thomas:
+  search: thomas_first_search
+  target: courant_thomas
+  target_type: Account
+
+thomas_first_search_category_coiffeur_courant_thomas:
+  search: thomas_first_search
+  target: coiffeur_courant_thomas
+  target_type: Category
+
+thomas_first_search_category_vetements_courant_thomas:
+  search: thomas_first_search
+  target: vetements_courant_thomas
+  target_type: Category
+
+thomas_first_search_category_essence_courant_thomas:
+  search: thomas_first_search
+  target: essence_courant_thomas
+  target_type: Category
+
+thomas_second_search_account_livret_a:
+  search: thomas_second_search
+  target: livret_a
+  target_type: Account
+
+thomas_second_search_category_epargne_livret_a:
+  search: thomas_second_search
+  target: epargne_livret_a
+  target_type: Category
+
+emilie_first_search_account_courant_emilie:
+  search: emilie_first_search
+  target: courant_emilie
+  target_type: Account
+
+emilie_first_search_category_vetements_courant_emilie:
+  search: emilie_first_search
+  target: vetements_courant_emilie
+  target_type: Category
+
+emilie_first_search_category_coiffeur_courant_emilie:
+  search: emilie_first_search
+  target: coiffeur_courant_emilie
+  target_type: Category

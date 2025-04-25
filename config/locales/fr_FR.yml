@@ -562,6 +562,7 @@ fr_FR:
       not_a_number: "doit être une valeur numérique"
       too_short:    "doit comporter au minimum %{count} caractères"
       invalid:      "n'est pas valide"
+      account_is_shared: "Ce compte est partagé et ne peut pas être supprimé"
     template:
       header:
         one: "1 erreur a été détectée :"
@@ -605,7 +606,16 @@ fr_FR:
               required: "est obligatoire"
         search:
           attributes:
+            base:
+              missing_account:  "La recherche doit inclure au moins un compte"
+              missing_category: "La recherche doit inclure au moins une catégorie"
             user:
+              required: "est obligatoire"
+        search_target:
+          attributes:
+            search:
+              required: "est obligatoire"
+            target:
               required: "est obligatoire"
 
     models:

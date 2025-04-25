@@ -3,10 +3,8 @@
 # Table name: searches
 #
 #  id         :integer          not null, primary key
-#  accounts   :text             not null
 #  after      :date
 #  before     :date
-#  categories :text
 #  checked    :integer
 #  comment    :string
 #  max        :decimal(8, 2)
@@ -27,51 +25,30 @@
 
 thomas_first_search:
   user: thomas
-  accounts: |
-    ---
-    - <%= ActiveRecord::FixtureSet.identify(:courant_thomas) %>
   min: 
   max: 
   before: 
   after: 
-  categories: |
-    ---
-    - <%= ActiveRecord::FixtureSet.identify(:coiffeur_courant_thomas) %>
-    - <%= ActiveRecord::FixtureSet.identify(:vetements_courant_thomas) %>
-    - <%= ActiveRecord::FixtureSet.identify(:essence_courant_thomas) %>
   operator: 0
   comment: 
   checked: 0
 
 thomas_second_search:
   user: thomas
-  accounts: |
-    ---
-    - <%= ActiveRecord::FixtureSet.identify(:livret_a) %>
   min: 10
   max: 
   before: 
   after: <%= 1.year.ago %>
-  categories: |
-    ---
-    - <%= ActiveRecord::FixtureSet.identify(:epargne_livret_a) %>
   operator: 0
   comment: 
   checked: 1
 
 emilie_first_search:
   user: emilie
-  accounts: |
-    ---
-    - <%= ActiveRecord::FixtureSet.identify(:courant_emilie) %>
   min: -100
   max: 100
   before: <%= 3.month.since %>
   after: <%= 3.month.ago %>
-  categories: |
-    ---
-    - <%= ActiveRecord::FixtureSet.identify(:vetements_courant_emilie) %>
-    - <%= ActiveRecord::FixtureSet.identify(:coiffeur_courant_emilie) %>
   operator: 1
   comment: Sweety
   checked: 2
