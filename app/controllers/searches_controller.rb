@@ -30,6 +30,7 @@ class SearchesController < ApplicationController
   # POST /users/:user_id/searches
   def create
     build_search
+    attach_targets
     save_search || render("new")
   end
 
@@ -62,21 +63,7 @@ class SearchesController < ApplicationController
     def search_params
       search_params = params[:search]
       if search_params
-        # search_params.permit(:min, :max, :before, :after, :operator, :comment, :checked)
-        search_params.permit(
-          :min, :max, :before, :after, :operator, :comment, :checked,
-          search_targets_attributes: [ :id, :target_type, :target_id, :_destroy ]
-        )
-
-        # search_targets_attributes = []
-        #
-        # params[:search][:accounts].each do |account_id|
-        #   search_targets_attributes << { target_type: "Account", target_id: account_id }
-        # end
-        #
-        # params[:search][:categories].each do |category_id|
-        #   search_targets_attributes << { target_type: "Category", target_id: category_id.to_i }
-        # end
+        search_params.permit(:min, :max, :before, :after, :operator, :comment, :checked)
       else
         {}
       end
@@ -91,5 +78,16 @@ class SearchesController < ApplicationController
 
     def current_searches
       @current_user.searches
+    end
+
+    def attach_targets
+      params[:search][:accounts].each do |account_id|
+        @search.search_targets.build(target: Account.find(account_id))
+      end
+
+      params[:search][:categories].each do |category_id|
+        category = Category.find(category_id)
+        @search.search_targets.build(target: category) if params[:search][:accounts].include?(category.account_id.to_s)
+      end
     end
 end
