@@ -1,5 +1,7 @@
 source "https://rubygems.org"
 
+ruby file: ".ruby-version"
+
 ## from http://bundler.io/gemfile.html
 # ~> 2.0.3 is identical to >= 2.0.3 and < 2.1
 # ~> 2.1 is identical to >= 2.1 and < 3.0
