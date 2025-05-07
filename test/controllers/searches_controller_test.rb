@@ -119,20 +119,16 @@ class SearchesControllerTest < ActionDispatch::IntegrationTest
     end
 
     def post_create(user)
-      account_ids = some_accounts_for(user)
-      category_ids = some_categories_for(account_ids)
-      st_attributes = []
-      account_ids.each { |account_id| st_attributes << { target_type: "Account", target_id: account_id } }
-      category_ids.each { |category_id| st_attributes << { target_type: "Category", target_id: category_id } }
-
-      post "/users/#{users(user).id}/searches", params: { search: { min:      rand(-500.00..0.00),
-                                                                    max:      rand(0.00..500.00),
-                                                                    before:   random_period_for(:before),
-                                                                    after:    random_period_for(:after),
-                                                                    operator: %i[comment_or_not like unlike].sample,
-                                                                    comment:  ("a".."z").to_a.sample,
-                                                                    checked:  %i[checked_or_not yep nop].sample,
-                                                                    search_targets_attributes: st_attributes } }
+      accounts = some_accounts_for(user)
+      post "/users/#{users(user).id}/searches", params: { search: { accounts:   accounts,
+                                                                    min:        rand(-500.00..0.00),
+                                                                    max:        rand(0.00..500.00),
+                                                                    before:     random_period_for(:before),
+                                                                    after:      random_period_for(:after),
+                                                                    categories: some_categories_for(accounts),
+                                                                    operator:   %i[comment_or_not like unlike].sample,
+                                                                    comment:    ("a".."z").to_a.sample,
+                                                                    checked:    %i[checked_or_not yep nop].sample } }
     end
 
     def random_period_for(period)
