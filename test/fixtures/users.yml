@@ -14,22 +14,24 @@
 #  index_users_on_email  (email) UNIQUE
 #
 
+<% password_digest = BCrypt::Password.create("p@ssw0rd!") %>
+
 thomas:
   email: thomas@email.com
   name: Thomas
-  password_digest: <%= BCrypt::Password.create('p@ssw0rd!') %>
+  password_digest: <%= password_digest %>
 
 emilie:
   email: emilie@email.com
   name: Emilie
-  password_digest: <%= BCrypt::Password.create('p@ssw0rd!') %>
+  password_digest: <%= password_digest %>
 
 benoit:
   email: benoit@email.com
   name: b.
-  password_digest: <%= BCrypt::Password.create('p@ssw0rd!') %>
+  password_digest: <%= password_digest %>
 
 vanessa:
   email: vanessa@email.com
   name: Vanessa
-  password_digest: <%= BCrypt::Password.create('p@ssw0rd!') %>
+  password_digest: <%= password_digest %>

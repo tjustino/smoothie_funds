@@ -25,6 +25,9 @@
 #  updated_by  (updated_by => users.id)
 #
 
+<% thomas_forced = ActiveRecord::FixtureSet.identify(:thomas) %>
+<% emilie_forced = ActiveRecord::FixtureSet.identify(:emilie) %>
+
 ##########
 # thomas #
 ##########
@@ -33,67 +36,67 @@ pret:
   account: courant_thomas
   name: Prêt
   hidden: false
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
 
 coiffeur_courant_thomas:
   account: courant_thomas
   name: Coiffeur
   hidden: true
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
 
 vetements_courant_thomas:
   account: courant_thomas
   name: Vêtements
   hidden: false
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
 
 cantine:
   account: courant_thomas
   name: Cantine
   hidden: false
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
 
 essence_courant_thomas:
   account: courant_thomas
   name: Essence
   hidden: false
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
 
 ## livret_a
 prime_livret_a:
   account: livret_a
   name: Prime
   hidden: false
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
 
 epargne_livret_a:
   account: livret_a
   name: Epargne
   hidden: false
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
 
 ## ldd_thomas
 epargne_ldd_thomas:
   account: ldd_thomas
   name: Epargne
   hidden: false
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
 
 ## hidden_thomas
 foo_hidden_thomas:
   account: hidden_thomas
   name: bar
   hidden: true
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
 
 ##########
 # emilie #
@@ -103,37 +106,37 @@ vetements_courant_emilie:
   account: courant_emilie
   name: Vêtements
   hidden: false
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  created_by: <%= emilie_forced %>
+  updated_by: <%= emilie_forced %>
 
 coiffeur_courant_emilie:
   account: courant_emilie
   name: Coiffeur
   hidden: false
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  created_by: <%= emilie_forced %>
+  updated_by: <%= emilie_forced %>
 
 assurance:
   account: courant_emilie
   name: Assurance
   hidden: true
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  created_by: <%= emilie_forced %>
+  updated_by: <%= emilie_forced %>
 
 essence_courant_emilie:
   account: courant_emilie
   name: Essence
   hidden: false
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  created_by: <%= emilie_forced %>
+  updated_by: <%= emilie_forced %>
 
 ## ldd_emilie
 epargne_ldd_emilie:
   account: ldd_emilie
   name: Epargne
   hidden: false
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  created_by: <%= emilie_forced %>
+  updated_by: <%= emilie_forced %>
 
 ###################
 # thomas & emilie #
@@ -143,47 +146,47 @@ courses:
   account: compte_commun
   name: Courses
   hidden: false
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  created_by: <%= thomas_forced %>
+  updated_by: <%= emilie_forced %>
 
 garderie:
   account: compte_commun
   name: Garderie
   hidden: false
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
 
 internet:
   account: compte_commun
   name: Internet
   hidden: false
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  created_by: <%= emilie_forced %>
+  updated_by: <%= emilie_forced %>
 
 electricite:
   account: compte_commun
   name: Electricité
   hidden: false
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
 
 virement:
   account: compte_commun
   name: Virement
   hidden: false
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
 
 cinema:
   account: compte_commun
   name: Cinéma
   hidden: true
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  created_by: <%= thomas_forced %>
+  updated_by: <%= emilie_forced %>
 
 eau:
   account: compte_commun
   name: Eau
   hidden: false
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>

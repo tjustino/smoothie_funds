@@ -25,22 +25,22 @@
 
 thomas_first_search:
   user: thomas
-  min: 
-  max: 
-  before: 
-  after: 
+  min:
+  max:
+  before:
+  after:
   operator: 0
-  comment: 
+  comment:
   checked: 0
 
 thomas_second_search:
   user: thomas
   min: 10
-  max: 
-  before: 
+  max:
+  before:
   after: <%= 1.year.ago %>
   operator: 0
-  comment: 
+  comment:
   checked: 1
 
 emilie_first_search:

@@ -32,6 +32,9 @@
 #  updated_by   (updated_by => users.id)
 #
 
+<% thomas_forced = ActiveRecord::FixtureSet.identify(:thomas) %>
+<% emilie_forced = ActiveRecord::FixtureSet.identify(:emilie) %>
+
 ###########################
 # thomas / courant_thomas #
 ###########################
@@ -42,9 +45,9 @@ pret_1:
   date: <%= 2.months.ago.at_beginning_of_month %>
   amount: -711
   checked: true
-  comment: 
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  comment:
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
   schedule_id:
 
 pret_2:
@@ -53,9 +56,9 @@ pret_2:
   date: <%= 1.month.ago.beginning_of_month %>
   amount: -711
   checked: true
-  comment: 
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  comment:
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
   schedule_id:
 
 pret_3:
@@ -64,9 +67,9 @@ pret_3:
   date: <%= DateTime.now.at_beginning_of_month %>
   amount: -711
   checked: false
-  comment: 
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  comment:
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
   schedule_id:
 
 pret_4:
@@ -76,8 +79,8 @@ pret_4:
   amount: -711
   checked: false
   comment: 
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
   schedule_id:
 
 ## coiffeur_courant_thomas
@@ -88,8 +91,8 @@ coiffeur_courant_thomas_1:
   amount: -19.90
   checked: true
   comment: CoupTif
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
   schedule_id:
 
 coiffeur_courant_thomas_2:
@@ -99,8 +102,8 @@ coiffeur_courant_thomas_2:
   amount: -19.90
   checked: false
   comment: TifTouf
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
   schedule_id:
 
 ## vetements_courant_thomas
@@ -111,8 +114,8 @@ vetements_courant_thomas_1:
   amount: -45.96
   checked: false
   comment: Somewhere
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
   schedule_id:
 
 ## cantine
@@ -122,9 +125,9 @@ cantine_1:
   date: <%= DateTime.now - 5.days %>
   amount: -50
   checked: false
-  comment: 
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  comment:
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
   schedule_id:
 
 ## essence_courant_thomas
@@ -135,8 +138,8 @@ essence_courant_thomas_1:
   amount: -36.43
   checked: true
   comment: Carrefour
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
   schedule_id:
 
 #####################
@@ -150,8 +153,8 @@ prime_livret_a_1:
   amount: 5000
   checked: true
   comment: Yeappy !!
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
   schedule_id:
 
 ## epargne_livret_a
@@ -161,9 +164,9 @@ epargne_livret_a_1:
   date: <%= DateTime.now - 50.days %>
   amount: 250
   checked: true
-  comment: 
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  comment:
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
   schedule_id:
 
 epargne_livret_a_2:
@@ -173,8 +176,8 @@ epargne_livret_a_2:
   amount: 45.99
   checked: false
   comment: Smoothie Funds
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
   schedule_id:
 
 #######################
@@ -188,8 +191,8 @@ epargne_ldd_thomas_1:
   amount: 5000
   checked: true
   comment: ê@ UTF-8 T€st ¤§
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
   schedule_id:
 
 ##########################
@@ -203,8 +206,8 @@ foo_hidden_thomas_1:
   amount: -1
   checked: true
   comment: ouch!
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
   schedule_id:
 
 ###########################
@@ -217,9 +220,9 @@ vetements_courant_emilie_1:
   date: <%= DateTime.now - 25.days %>
   amount: -89.99
   checked: true
-  comment: 
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  comment:
+  created_by: <%= emilie_forced %>
+  updated_by: <%= emilie_forced %>
   schedule_id:
 
 vetements_courant_emilie_2:
@@ -228,9 +231,9 @@ vetements_courant_emilie_2:
   date: <%= DateTime.now - 14.days %>
   amount: -23.57
   checked: false
-  comment: 
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  comment:
+  created_by: <%= emilie_forced %>
+  updated_by: <%= emilie_forced %>
   schedule_id:
 
 vetements_courant_emilie_3:
@@ -240,8 +243,8 @@ vetements_courant_emilie_3:
   amount: -57.68
   checked: false
   comment: So Sweety
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  created_by: <%= emilie_forced %>
+  updated_by: <%= emilie_forced %>
   schedule_id:
 
 ## coiffeur_courant_emilie
@@ -251,9 +254,9 @@ coiffeur_courant_emilie_1:
   date: <%= DateTime.now - 14.days %>
   amount: -50
   checked: true
-  comment: 
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  comment:
+  created_by: <%= emilie_forced %>
+  updated_by: <%= emilie_forced %>
   schedule_id:
 
 ## assurance
@@ -263,9 +266,9 @@ assurance_1:
   date: <%= 1.month.ago.beginning_of_month %>
   amount: -76.5
   checked: true
-  comment: 
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  comment:
+  created_by: <%= emilie_forced %>
+  updated_by: <%= emilie_forced %>
   schedule_id:
 
 assurance_2:
@@ -274,9 +277,9 @@ assurance_2:
   date: <%= DateTime.now.at_beginning_of_month + 1.month %>
   amount: -76.5
   checked: false
-  comment: 
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  comment:
+  created_by: <%= emilie_forced %>
+  updated_by: <%= emilie_forced %>
   schedule_id:
 
 ## essence_courant_emilie
@@ -287,8 +290,8 @@ essence_courant_emilie_1:
   amount: -76.34
   checked: true
   comment: this car...
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  created_by: <%= emilie_forced %>
+  updated_by: <%= emilie_forced %>
   schedule_id:
 
 #######################
@@ -301,9 +304,9 @@ epargne_ldd_emilie_1:
   date: <%= DateTime.now - 3.days %>
   amount: 456.78
   checked: false
-  comment: 
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  comment:
+  created_by: <%= emilie_forced %>
+  updated_by: <%= emilie_forced %>
   schedule_id:
 
 ###################################
@@ -317,8 +320,8 @@ courses_1:
   amount: -62.35
   checked: true
   comment: Auchan
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  created_by: <%= thomas_forced %>
+  updated_by: <%= emilie_forced %>
   schedule_id:
 
 courses_2:
@@ -328,8 +331,8 @@ courses_2:
   amount: -23.56
   checked: false
   comment: Carrefour
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= emilie_forced %>
+  updated_by: <%= thomas_forced %>
   schedule_id:
 
 courses_3:
@@ -339,8 +342,8 @@ courses_3:
   amount: -45
   checked: true
   comment: Auchan
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  created_by: <%= thomas_forced %>
+  updated_by: <%= emilie_forced %>
   schedule_id:
 
 courses_4:
@@ -350,8 +353,8 @@ courses_4:
   amount: -89.75
   checked: true
   comment:
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= emilie_forced %>
+  updated_by: <%= thomas_forced %>
   schedule_id:
 
 courses_5:
@@ -361,8 +364,8 @@ courses_5:
   amount: -34.04
   checked: false
   comment:
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= emilie_forced %>
+  updated_by: <%= thomas_forced %>
   schedule_id:
 
 courses_6:
@@ -372,8 +375,8 @@ courses_6:
   amount: -8.56
   checked: false
   comment: Carrefour
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= emilie_forced %>
+  updated_by: <%= thomas_forced %>
   schedule_id:
 
 ## garderie
@@ -383,9 +386,9 @@ garderie_1:
   date: <%= DateTime.now - 22.days %>
   amount: -39
   checked: true
-  comment: 
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  comment:
+  created_by: <%= emilie_forced %>
+  updated_by: <%= emilie_forced %>
   schedule_id:
 
 garderie_2:
@@ -394,9 +397,9 @@ garderie_2:
   date: <%= DateTime.now - 4.days %>
   amount: -79.89
   checked: false
-  comment: 
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  comment:
+  created_by: <%= emilie_forced %>
+  updated_by: <%= emilie_forced %>
   schedule_id:
 
 garderie_3:
@@ -405,9 +408,9 @@ garderie_3:
   date: <%= DateTime.now + 10.days %>
   amount: -104.12
   checked: false
-  comment: 
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  comment:
+  created_by: <%= emilie_forced %>
+  updated_by: <%= emilie_forced %>
   schedule_id:
 
 ## internet
@@ -417,9 +420,9 @@ internet_1:
   date: <%= DateTime.now.at_beginning_of_month %>
   amount: -29.99
   checked: true
-  comment: 
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  comment:
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
   schedule_id:
 
 internet_2:
@@ -428,9 +431,9 @@ internet_2:
   date: <%= DateTime.now.at_beginning_of_month + 1.month %>
   amount: -29.99
   checked: false
-  comment: 
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  comment:
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
   schedule_id:
 
 ## electricite
@@ -440,9 +443,9 @@ electricite_1:
   date: <%= DateTime.now - 33.days %>
   amount: -128.59
   checked: true
-  comment: 
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  comment:
+  created_by: <%= emilie_forced %>
+  updated_by: <%= thomas_forced %>
   schedule_id:
 
 electricite_2:
@@ -451,9 +454,9 @@ electricite_2:
   date: <%= DateTime.now + 23.days %>
   amount: -64.54
   checked: false
-  comment: 
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  comment:
+  created_by: <%= emilie_forced %>
+  updated_by: <%= thomas_forced %>
   schedule_id:
 
 ## virement
@@ -464,8 +467,8 @@ virement_1:
   amount: 500
   checked: true
   comment: Thomas
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= emilie_forced %>
+  updated_by: <%= thomas_forced %>
   schedule_id:
 
 virement_2:
@@ -475,8 +478,8 @@ virement_2:
   amount: 500
   checked: true
   comment: Emilie
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= emilie_forced %>
+  updated_by: <%= thomas_forced %>
   schedule_id:
 
 virement_3:
@@ -486,8 +489,8 @@ virement_3:
   amount: 500
   checked: false
   comment: Thomas
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= emilie_forced %>
+  updated_by: <%= thomas_forced %>
   schedule_id:
 
 virement_4:
@@ -497,8 +500,8 @@ virement_4:
   amount: 500
   checked: false
   comment: Emilie
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= emilie_forced %>
+  updated_by: <%= thomas_forced %>
   schedule_id:
 
 ## cinema
@@ -508,9 +511,9 @@ cinema_1:
   date: <%= DateTime.now - 24.days %>
   amount: -21
   checked: true
-  comment: 
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  comment:
+  created_by: <%= emilie_forced %>
+  updated_by: <%= emilie_forced %>
   schedule_id:
 
 ## eau
@@ -520,9 +523,9 @@ eau_1:
   date: <%= DateTime.now.at_beginning_of_month - 2.months  %>
   amount: -48.25
   checked: true
-  comment: 
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  comment:
+  created_by: <%= emilie_forced %>
+  updated_by: <%= emilie_forced %>
   schedule_id:
 
 eau_2:
@@ -531,9 +534,9 @@ eau_2:
   date: <%= DateTime.now.at_beginning_of_month - 1.month %>
   amount: -30.54
   checked: true
-  comment: 
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  comment:
+  created_by: <%= emilie_forced %>
+  updated_by: <%= emilie_forced %>
   schedule_id:
 
 eau_3:
@@ -542,9 +545,9 @@ eau_3:
   date: <%= DateTime.now.at_beginning_of_month %>
   amount: -22.12
   checked: true
-  comment: 
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  comment:
+  created_by: <%= emilie_forced %>
+  updated_by: <%= emilie_forced %>
   schedule_id:
 
 eau_4:
@@ -553,9 +556,9 @@ eau_4:
   date: <%= DateTime.now.at_beginning_of_month + 1.month %>
   amount: -45.45
   checked: false
-  comment: 
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  comment:
+  created_by: <%= emilie_forced %>
+  updated_by: <%= emilie_forced %>
   schedule_id:
 
 ###################################################################### schedules
@@ -566,8 +569,8 @@ transaction_schedule_compte_commun_electricite:
   amount: -68.35
   checked: false
   comment: EDF
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  created_by: <%= thomas_forced %>
+  updated_by: <%= emilie_forced %>
   schedule: schedule_compte_commun_electricite
 
 transaction_schedule_compte_commun_eau:
@@ -577,8 +580,8 @@ transaction_schedule_compte_commun_eau:
   amount: -25
   checked: false
   comment: SAUR
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
   schedule: schedule_compte_commun_eau
 
 transaction_schedule_compte_commun_virement:
@@ -587,9 +590,9 @@ transaction_schedule_compte_commun_virement:
   date: <%= DateTime.now.at_beginning_of_month + 30.days %>
   amount: 1200
   checked: false
-  comment: 
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  comment:
+  created_by: <%= emilie_forced %>
+  updated_by: <%= emilie_forced %>
   schedule: schedule_compte_commun_virement
 
 transaction_schedule_courant_thomas_pret:
@@ -598,9 +601,9 @@ transaction_schedule_courant_thomas_pret:
   date: <%= DateTime.now.at_beginning_of_month + 1.month %>
   amount: -711.48
   checked: false
-  comment: 
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  comment:
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
   schedule: schedule_courant_thomas_pret
 
 transaction_schedule_courant_thomas_cantine:
@@ -609,9 +612,9 @@ transaction_schedule_courant_thomas_cantine:
   date: <%= DateTime.now.at_beginning_of_month + 3.weeks %>
   amount: -50
   checked: false
-  comment: 
-  created_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:thomas) %>
+  comment:
+  created_by: <%= thomas_forced %>
+  updated_by: <%= thomas_forced %>
   schedule: schedule_courant_thomas_cantine
 
 transaction_schedule_courant_emilie_assurance:
@@ -621,6 +624,6 @@ transaction_schedule_courant_emilie_assurance:
   amount: -1230
   checked: false
   comment: Henner
-  created_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
-  updated_by: <%= ActiveRecord::FixtureSet.identify(:emilie) %>
+  created_by: <%= emilie_forced %>
+  updated_by: <%= emilie_forced %>
   schedule: schedule_courant_emilie_assurance
