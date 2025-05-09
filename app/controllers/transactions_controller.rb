@@ -61,7 +61,7 @@ class TransactionsController < ApplicationController
       if flash[:search_id].nil?
         redirect_to account_transactions_url(@current_account), notice: t(".successfully_updated"), status: :see_other
       else
-        redirect_to search_url(flash[:search_id]), notice: t(".successfully_created")
+        redirect_to search_url(flash[:search_id]), notice: t(".successfully_updated")
       end
     else
       render :edit, status: :unprocessable_entity
