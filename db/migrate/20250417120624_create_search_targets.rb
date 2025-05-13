@@ -13,8 +13,11 @@ class CreateSearchTargets < ActiveRecord::Migration[8.0]
 
       Search.find_each do |search|
         # ⚠️ the search[:column] syntax is deliberate, natural association would be problematic due to new associations
-        YAML.load(search[:accounts]).each { |acc| SearchTarget.create! search: search, target: Account.find(acc) }
-        YAML.load(search[:categories]).each { |cat| SearchTarget.create! search: search, target: Category.find(cat) }
+        accounts   = Account.where(id: YAML.load(search[:accounts]))
+        accounts.each { |account| SearchTarget.create! search: search, target: account }
+
+        categories = Category.where(id: YAML.load(search[:categories]), account_id: accounts.ids)
+        categories.each { |category| SearchTarget.create! search: search, target: category }
       end
     end
 
