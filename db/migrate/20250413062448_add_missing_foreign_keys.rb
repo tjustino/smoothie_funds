@@ -1,5 +1,16 @@
 class AddMissingForeignKeys < ActiveRecord::Migration[8.0]
   def change
+    # data migration
+    user_ids = User.ids
+    Account.where.not(created_by: user_ids).update_all(created_by: nil)
+    Account.where.not(updated_by: user_ids).update_all(updated_by: nil)
+    Category.where.not(created_by: user_ids).update_all(created_by: nil)
+    Category.where.not(updated_by: user_ids).update_all(updated_by: nil)
+    Schedule.where.not(created_by: user_ids).update_all(created_by: nil)
+    Schedule.where.not(updated_by: user_ids).update_all(updated_by: nil)
+    Transaction.where.not(created_by: user_ids).update_all(created_by: nil)
+    Transaction.where.not(updated_by: user_ids).update_all(updated_by: nil)
+
     # to accounts
     add_index       :accounts, :created_by
     add_index       :accounts, :updated_by
