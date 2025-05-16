@@ -9,7 +9,7 @@ class AddIdToRelations < ActiveRecord::Migration[8.0]
 
     execute <<-SQL.squish
       INSERT INTO relations_new (user_id, account_id, created_at, updated_at)
-      SELECT user_id, account_id, created_at, updated_at
+      SELECT user_id, account_id, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
       FROM relations;
     SQL
 
