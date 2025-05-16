@@ -25,8 +25,6 @@ proxy:
 registry:
   server: ghcr.io
   username: tjustino
-
-  # Always use an access token rather than real password when possible.
   password:
     - KAMAL_REGISTRY_PASSWORD
 
