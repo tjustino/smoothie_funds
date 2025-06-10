@@ -116,8 +116,12 @@ class SchedulesController < ApplicationController
         format.turbo_stream do
           load_transactions
           load_current_transactions
-          load_schedules
-          flash.now[:notice] = t(".successfully_inserted") unless params[:origin] == "dashboard"
+          if params[:origin] == "dashboard"
+            load_schedules
+          else
+            schedules
+            flash.now[:notice] = t(".successfully_inserted")
+          end
         end
       end
     rescue StandardError
