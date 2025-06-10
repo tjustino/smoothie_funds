@@ -28,6 +28,12 @@
     <div class="level-item">
       <%= link_to icon_text("fa-solid fa-circle-plus", t(".new_transaction")), new_account_transaction_path, class: "button is-primary" %>
     </div>
+    <div class="level-item is-hidden-desktop" data-controller="transactions">
+      <%= label_tag do %>
+        <%= checkbox_tag :hide_upcoming_transactions, data: { action: "transactions#toggleUpcoming" } %>
+        <%= t(".hide_upcoming_transactions") %>
+      <% end %>
+    </div>
   </div>
 </div>
 

@@ -335,6 +335,7 @@ fr_FR:
       count:              "Nombre de transactions"
       export_transactions: "Exporter mes transactions"
       new_transaction:    "Nouvelle transaction"
+      hide_upcoming_transactions: "Masquer les transactions à venir"
       checked:            "Rapproché"
       date:               "Date"
       category:           "Catégorie"
