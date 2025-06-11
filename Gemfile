@@ -12,7 +12,7 @@ gem "bootsnap", require: false # Reduces boot times through caching; required in
 gem "importmap-rails"          # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "dartsass-rails"           # Integrate Dart Sass with the asset pipeline in Rails
 gem "kamal", require: false    # Deploy web apps in containers to servers running Docker with zero downtime
-gem "sass-embedded", "< 1.77.7" # Dart Sass breaking change [https://github.com/jgthms/bulma/issues/3864]
+gem "sass-embedded"            # Dart Sass
 gem "pg"                       # Use postgresql as the db for Active Record
 gem "propshaft"                # Deliver assets for Rails
 gem "puma"                     # App web server

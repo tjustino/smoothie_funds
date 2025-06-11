@@ -1,18 +1,20 @@
 @charset "utf-8";
 
-// Bulma - 0.9.4
+$smoothie: #911e93;
+
+// Bulma
 // https://github.com/jgthms/bulma/releases/latest
-$primary:   #911e93;
-$light:     #F1F0EE;
-$dark:      #4F5155;
-$info:      #4989C9;
-// $success:   #7EC9A8;
-$warning:   #E97A1F;
-// $danger:    #F44336;
-$body-background-color: #FAFAFA;
-$footer-background-color: #F5F5F5;
-$footer-padding: 1rem 1rem 1rem;
-@import "bulma-0.9.4/bulma";
+@use "bulma-1.0.4/sass" with (
+  $primary: $smoothie,
+  $light:   #f1f0ee,
+  $dark:    #4f5155,
+  $info:    #4989c9,
+  $warning: #e97a1f,
+  $body-background-color: #fafafa,
+  $panel-heading-padding: 0.75em 1em,
+  $footer-padding: 1rem 1rem 1rem,
+  $footer-background-color: #f5f5f5
+);
 
 // footer at the bottom
 body {
@@ -35,7 +37,7 @@ $fa-font-path: ".";
 // Smoothie Funds
 // search colors
 select.form-control[multiple] option:checked {
-  background: $primary linear-gradient(0deg, $primary 0%, $primary 100%);
+  background: $smoothie linear-gradient(0deg, $smoothie 0%, $smoothie 100%);
 }
 
 // dashboard
