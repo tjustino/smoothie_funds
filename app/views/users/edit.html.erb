@@ -41,7 +41,7 @@
                 <th>
                   <%= icon_text("fa-solid fa-book", t(".accounts")) %>
                 </th>
-                <th>
+                <th class="has-text-right">
                   <%= @nof_accounts %>
                 </th>
               </tr>
@@ -49,7 +49,7 @@
                 <th>
                   <%= icon_text("fa-solid fa-tags", t(".categories")) %>
                 </th>
-                <th>
+                <th class="has-text-right">
                   <%= @nof_categories %>
                 </th>
               </tr>
@@ -57,7 +57,7 @@
                 <th>
                   <%= icon_text("fa-regular fa-calendar-days", t(".schedules")) %>
                 </th>
-                <th>
+                <th class="has-text-right">
                   <%= @nof_schedules %>
                 </th>
               </tr>
@@ -65,7 +65,7 @@
                 <th>
                   <%= icon_text("fa-solid fa-magnifying-glass", t(".searches")) %>
                 </th>
-                <th>
+                <th class="has-text-right">
                   <%= @nof_searches %>
                 </th>
               </tr>
@@ -73,7 +73,7 @@
                 <th>
                   <%= icon_text("fa-regular fa-credit-card", t(".transactions")) %>
                 </th>
-                <th>
+                <th class="has-text-right">
                   <%= @nof_transactions %>
                 </th>
               </tr>
@@ -90,16 +90,18 @@
         </div>
       </section>
       <footer class="modal-card-foot">
-        <button class="button is-success is-responsive" data-action="layout#hideModal">
-          <%= t(".close") %>
-        </button>
-        <%= button_to t(".title_delete_account"),
-                      user_path,
-                      method: :delete,
-                      class: "button is-danger is-responsive",
-                      disabled: true,
-                      form_class: nil,
-                      data: { user_target: "buttonOfTheDeath" } %>
+        <div class="buttons">
+          <button class="button is-success is-responsive" data-action="layout#hideModal">
+            <%= t(".close") %>
+          </button>
+          <%= button_to t(".title_delete_account"),
+                        user_path,
+                        method: :delete,
+                        class: "button is-danger is-responsive",
+                        disabled: true,
+                        form_class: nil,
+                        data: { user_target: "buttonOfTheDeath" } %>
+        </div>
       </footer>
     </div>
   </div>
