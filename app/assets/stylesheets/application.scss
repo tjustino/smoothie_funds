@@ -10,11 +10,19 @@ $smoothie: #911e93;
   $dark:    #4f5155,
   $info:    #4989c9,
   $warning: #e97a1f,
-  $body-background-color: #fafafa,
   $panel-heading-padding: 0.75em 1em,
-  $footer-padding: 1rem 1rem 1rem,
-  $footer-background-color: #f5f5f5
+  $footer-padding: 1rem 1rem 1rem
 );
+
+@media (prefers-color-scheme: light) {
+  .body {
+    background-color: #fafafa !important;
+  }
+
+  .footer {
+    background-color: #f5f5f5 !important;
+  }
+}
 
 // footer at the bottom
 body {
