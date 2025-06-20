@@ -10,6 +10,8 @@ $smoothie: #911e93;
   $dark:    #4f5155,
   $info:    #4989c9,
   $warning: #e97a1f,
+  $breadcrumb-item-active-color: #69748c,
+  $input-icon-focus-color: #4a4a4a,
   $panel-heading-padding: 0.75em 1em,
   $footer-padding: 1rem 1rem 1rem
 );
@@ -22,6 +24,12 @@ $smoothie: #911e93;
   .footer {
     background-color: #f5f5f5 !important;
   }
+}
+
+.debug_dump {
+  color: forestgreen !important;
+  font-weight: bold !important;
+  border-radius: 20px;
 }
 
 // footer at the bottom
