@@ -1,0 +1,17 @@
+<%# in any case, menu must be updated %>
+<%= turbo_stream.replace "categories-menu", partial: "layouts/categories_menu" %>
+
+<% if controller_name == "accounts" %>
+  <%= turbo_stream.remove("pending-#{@pending_id}") %>
+  <%= turbo_stream.append "listing",  partial: "account", locals: { accounts: @accounts,
+                                                                    name:     t(".name"),
+                                                                    init_bal: t(".initial_balance"),
+                                                                    share:    t(".share") } %>
+
+
+  <%# update total number of items %>
+  <%= turbo_stream.replace "total", partial: "layouts/tag", locals: { title: t(".count"), number_of: @nb_accounts } %>
+
+  <%# show flash message %>
+  <%= turbo_stream.replace "flash", partial: "layouts/flash" %>
+<% end %>

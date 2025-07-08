@@ -160,12 +160,21 @@ class AccountsController < ApplicationController
     def share_or_not(sharing, notice, warning)
       @account = Account.find_by(id: params[:id])
       if @account.present?
-        pending = PendingUser.where(email: @current_user.email, account: @account)
-        if pending.any?
-          pending.destroy_all
+        pending = PendingUser.where(email: @current_user.email, account: @account).first
+        if pending
+          @pending_id = pending.id
+          pending.destroy
           @account.users << @current_user if sharing
           # sending email
-          redirect_to accounts_url, notice: t(notice, account: @account.name)
+          respond_to do |format|
+            format.turbo_stream do
+              accounts(limit: @limit)
+              @nb_accounts = current_accounts.count
+              @current_accounts = @current_user.accounts.active.order_by_name
+              flash.now[:notice] = t(notice, account: @account.name)
+            end
+            format.html { redirect_to accounts_url, notice: t(notice, account: @account.name) }
+          end
         else
           flash[:warning] = t(warning, account: @account.name)
           redirect_to accounts_url

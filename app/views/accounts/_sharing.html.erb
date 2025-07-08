@@ -1,6 +1,6 @@
 <% unless @pendings.nil? %>
   <% @pendings.each do | pending | %>
-    <div class="message is-info">
+    <div id="pending-<%= pending.id %>" class="message is-info">
       <div class="message-body">
         <div class="columns is-vcentered">
           <div class="column">
@@ -9,7 +9,7 @@
           <div class="column is-narrow">
             <%= link_to icon_text("fa-regular fa-thumbs-up", t(".accept")),
                         sharing_path(pending.account),
-                        method: :post,
+                        data: { turbo_method: :post },
                         class: "button is-success" %>
           </div>
           <div class="column is-narrow">
