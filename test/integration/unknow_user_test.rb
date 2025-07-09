@@ -4,7 +4,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
   fixtures :users
 
   setup do
-    # to get session[:user_id]
+    # to get session_user_id
     post login_url, params: { email: users(:thomas).email, password: "p@ssw0rd!" }
   end
 
@@ -14,9 +14,8 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
   # I want to delete data
   # so that I will be redirected to the login path and data will not be deleted
   test "DELETE data knowing all ids" do
-    user = User.find session[:user_id]
+    user = User.find session_user_id
 
-    # sessions#destroy
     delete logout_url
 
     assert_redirected_to login_url
@@ -93,7 +92,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
   # I want to access pages with this params
   # so that I will be redirected to the login path
   test "GET knowing user id" do
-    user = User.find session[:user_id]
+    user = User.find session_user_id
 
     delete logout_url
 
@@ -117,7 +116,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
   # I want to access pages with this params
   # so that I will be redirected to the login path, except for the new user path
   test "GET knowing all ids" do
-    user = User.find session[:user_id]
+    user = User.find session_user_id
 
     delete logout_url
 
@@ -191,7 +190,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
   # I want to patch data
   # so that I will be redirected to the login path and data will not be updated
   test "PATCH data knowing all ids" do
-    user = User.find session[:user_id]
+    user = User.find session_user_id
 
     delete logout_url
 
@@ -248,6 +247,8 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
     email    = "john.doe@email.com"
     password = "unbreakablePassword"
 
+    delete logout_url
+
     # users#create
     assert_difference("User.count") do
       post users_path, params: { user: { email:                 email,
@@ -267,7 +268,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
   # I want to post data
   # so that I will be redirected to the login path and data will not be created
   test "POST knowing all ids" do
-    user     = User.find session[:user_id]
+    user     = User.find session_user_id
     periods  = %w[days weeks months years]
 
     delete logout_url
@@ -327,7 +328,7 @@ class UnknowUserTest < ActionDispatch::IntegrationTest
   # I want to post data via specific routes
   # so that I will be redirected to the login path and data will not be created
   test "POST specific routes" do
-    user = User.find session[:user_id]
+    user = User.find session_user_id
 
     delete logout_url
 

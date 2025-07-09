@@ -21,26 +21,25 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     get_edit :emilie
 
     assert_redirected_to dashboard_url
-    assert_equal         session[:user_id], users(:thomas).id
+    assert_equal         session_user_id, users(:thomas).id
   end
 
   test "should not get edit - unknow id" do
     get "/users/#{User.maximum(:id) + 1}/edit"
 
     assert_redirected_to dashboard_url
-    assert_equal         session[:user_id], users(:thomas).id
+    assert_equal         session_user_id, users(:thomas).id
   end
 
   ########################################################################################################## POST /users
-  test "should create user" do
+  test "should not create user as a logged user" do
     # you can create an other user as a logged user, why not...
-    assert_difference "User.count" do
+    assert_no_difference "User.count" do
       post "/users", params: { user: { email:                 "john.doe@email.com",
                                        password:              "unbreakablePassword",
                                        password_confirmation: "unbreakablePassword" } }
 
-      assert_redirected_to login_url
-      assert_equal         I18n.t("users.create.successfully_created"), flash[:notice]
+      assert_redirected_to dashboard_url
     end
   end
 

@@ -20,6 +20,10 @@ module ActiveSupport
       delete "/logout"
     end
 
+    def session_user_id
+      Session.first.user_id
+    end
+
     def true_or_false
       rand(0..1) == 1
     end

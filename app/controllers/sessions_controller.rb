@@ -1,20 +1,18 @@
 class SessionsController < ApplicationController
-  skip_before_action  :set_current_user,
-                      :set_current_accounts,
-                      :set_accounts_with_categories
+  allow_unauthenticated_access only: %i[ new create ]
+  rate_limit to: 5, within: 3.minutes, only: :create, with: -> { redirect_to login_url, alert: t(".try_later") }
 
   # GET /login
   def new
-    # authorize don't make the job
-    redirect_to dashboard_url if session[:user_id].present?
+    redirect_to dashboard_url if authenticated?
   end
 
   # POST /login
   def create
-    user = User.find_by(email: params[:email])
-    if user&.authenticate(params[:password])
-      session[:user_id] = user.id
-      redirect_to dashboard_url
+    if user = User.authenticate_by(params.permit(:email, :password))
+      start_new_session_for user
+      Current.session.user = user
+      redirect_to requested_url
     else
       redirect_to login_url, alert: t(".invalid_combination")
     end
@@ -22,7 +20,7 @@ class SessionsController < ApplicationController
 
   # DELETE /logout
   def destroy
-    session[:user_id] = nil
+    terminate_session
     redirect_to login_url, notice: t(".logged_out")
   end
 end

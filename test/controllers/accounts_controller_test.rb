@@ -159,6 +159,7 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
 
   ########################################################################################### POST /accounts/:id/sharing
   test "should share an account" do
+    logout
     login_as :benoit
 
     assert_not_nil accounts(:thomas_account_waiting_benoit).pending_user
@@ -193,6 +194,7 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
 
   ####################################################################################### DELETE /accounts/:id/unsharing
   test "should unshare an account" do
+    logout
     login_as :benoit
 
     assert_not_nil   accounts(:thomas_account_waiting_benoit).pending_user

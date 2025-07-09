@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
-  skip_before_action :set_current_user, :set_current_accounts, :set_accounts_with_categories, only: %i[new create]
+  allow_unauthenticated_access only: %i[ new create ]
+  # skip_before_action :set_current_user, :set_current_accounts, :set_accounts_with_categories, only: %i[new create]
 
   # GET /users/new
   def new
     # authorize don't make the job
-    if session[:user_id].present?
+    if authenticated?
       redirect_to dashboard_url
     else
       build_user
@@ -34,7 +35,7 @@ class UsersController < ApplicationController
   def destroy
     user
     if destroy_all_data && @current_user.destroy
-      session[:user_id] = nil
+      terminate_session
       redirect_to login_url, notice: t(".successfully_destroyed")
     else
       flash[:warning] = t(".cant_destroy")

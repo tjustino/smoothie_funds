@@ -1,4 +1,6 @@
 class RightsController < ApplicationController
+  allow_unauthenticated_access
+
   # GET /terms
   def terms; end
 

@@ -1,0 +1,43 @@
+<nav aria-label="breadcrumbs" class="breadcrumb has-succeeds-separator">
+  <ul>
+    <li>
+      <%= link_to icon("fa-solid fa-house"), dashboard_path %>
+    </li>
+    <li class="is-active">
+      <%= link_to t(".update_password"), edit_password_path(params[:token]) %>
+    </li>
+  </ul>
+</nav>
+
+<div class="columns is-centered">
+  <div class="column is-narrow">
+    <%= form_with url: password_path(params[:token]), method: :put, class: "box" do |form| %>
+      <%# password %>
+      <div class="field">
+        <%= form.label :password, t(".password"), class: "label" %>
+        <div class="control has-icons-left">
+          <%= form.password_field :password, class: "input", required: true, autocomplete: "new-password", placeholder: t(".password") %>
+          <span class="icon is-left">
+            <%= icon("fa-solid fa-envelope") %>
+          </span>
+        </div>
+      </div>
+
+      <%# password confirmation %>
+      <div class="field">
+        <%= form.label :password_confirmation, t(".password_confirmation"), class: "label" %>
+        <div class="control has-icons-left">
+          <%= form.password_field :password_confirmation, class: "input", required: true, autocomplete: "new-password", placeholder: t(".password_confirmation") %>
+          <span class="icon is-left">
+            <%= icon("fa-solid fa-envelope") %>
+          </span>
+        </div>
+      </div>
+
+      <%# save button %>
+      <div class="mt-5">
+        <%= form.submit t(".save"), class: "button is-primary is-fullwidth" %>
+      </div>
+    <% end %>
+  </div>
+</div>

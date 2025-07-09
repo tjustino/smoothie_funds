@@ -90,6 +90,10 @@ fr_FR:
       accept:               "Accepter"
       successfully_sharing: "Vous partagez maintenant le compte « %{account} »"
       cant_sharing:         "Impossible de partager le compte « %{account} »"
+      name:                 "Nom"
+      initial_balance:      "Balance initiale"
+      share:                "Partagé avec"
+      count:                "Nombre de comptes"
 
   categories:
     # controllers
@@ -207,6 +211,34 @@ fr_FR:
       categories:   "Catégories"
     flash:
       aria_close:    "Fermer"
+    mailer:
+      noreply_pitch: "Veuillez noter que ce mail vous a été envoyé par un automate, n'essayez pas d'y répondre."
+ 
+  passwords:
+    # common
+    invalid_link: "Le lien de réinitialisation du mot de passe n'est pas valide ou a expiré"
+    # controllers
+    create:
+      instructions_sent: "Instructions de réinitialisation du mot de passe envoyées"
+    update:
+      password_reset: "Le mot de passe a été réinitialisé"
+      passwords_mismatch: "Les mots de passe ne correspondent pas"
+    # views
+    edit:
+      update_password:       "Mettez à jour votre mot de passe"
+      password:              "Mot de passe"
+      password_confirmation: "Confirmation du mot de passe"
+      save:                  "Sauvegarder"
+    new:
+      email: "Courriel"
+      forgot_password: "Mot de passe oublié"
+      send_instructions: "Envoyer les instructions"
+
+  passwords_mailer:
+    reset:
+      reset_password: "Vous avez besoin de réinitialisez votre mot de passe ?"
+      pitch_html: "Vous pouvez réinitialiser votre mot de passe durant les 15 prochaines minutes depuis <a href=\"%{link}\">cette page</a>."
+      pitch_text: "Vous pouvez réinitialiser votre mot de passe durant les 15 prochaines minutes depuis cette page :\n%{link}"
 
   rights:
     # views
@@ -263,6 +295,8 @@ fr_FR:
         </dl>
 
   sessions:
+    # common
+    try_later: "Trop de tentatives, merci de réessayez plus tard."
     # controllers
     create:
       invalid_combination: "Mauvaise combinaison courriel/mot de passe"
@@ -273,6 +307,7 @@ fr_FR:
       email:        "Courriel"
       password:     "Mot de passe"
       login:        "Connexion"
+      forgot_password: "Mot de passe oublié ?"
       create_user:  "Nouveau"
 
   transactions:
@@ -593,6 +628,10 @@ fr_FR:
           attributes:
             account:
               required: "est obligatoire"
+            user:
+              required: "est obligatoire"
+        session:
+          attributes:
             user:
               required: "est obligatoire"
         transaction:

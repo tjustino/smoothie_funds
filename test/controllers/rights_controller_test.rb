@@ -7,7 +7,7 @@ class RightsControllerTest < ActionDispatch::IntegrationTest
     get      "/terms"
 
     assert_response :success
-    assert_equal    session[:user_id], users(:thomas).id
+    assert_equal    session_user_id, users(:thomas).id
   end
 
   test "should get terms as not logged user" do
@@ -15,7 +15,7 @@ class RightsControllerTest < ActionDispatch::IntegrationTest
     get "/terms"
 
     assert_response :success
-    assert_nil      session[:user_id]
+    assert_empty    Session.all
   end
 
   ########################################################################################################## GET /cookie
@@ -24,7 +24,7 @@ class RightsControllerTest < ActionDispatch::IntegrationTest
     get      "/cookie"
 
     assert_response :success
-    assert_equal    session[:user_id], users(:thomas).id
+    assert_equal    session_user_id, users(:thomas).id
   end
 
   test "should get cookie as not logged user" do
@@ -32,7 +32,7 @@ class RightsControllerTest < ActionDispatch::IntegrationTest
     get "/cookie"
 
     assert_response :success
-    assert_nil      session[:user_id]
+    assert_empty    Session.all
   end
 
   ############################################################################################################ GET /gdpr
@@ -41,7 +41,7 @@ class RightsControllerTest < ActionDispatch::IntegrationTest
     get      "/gdpr"
 
     assert_response :success
-    assert_equal    session[:user_id], users(:thomas).id
+    assert_equal    session_user_id, users(:thomas).id
   end
 
   test "should get gdpr as not logged user" do
@@ -49,6 +49,6 @@ class RightsControllerTest < ActionDispatch::IntegrationTest
     get "/gdpr"
 
     assert_response :success
-    assert_nil      session[:user_id]
+    assert_empty    Session.all
   end
 end

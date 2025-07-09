@@ -7,44 +7,18 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
-  # By default, there is 7 different paths and 7 actions in each controller:
-  # +-----------+------------------+-------------------+
-  # | HTTP Verb | Path             | Controller#Action |
-  # +-----------+------------------+-------------------+
-  # | GET       | /photos          | photos#index      |
-  # | POST      | /photos          | photos#create     |
-  # | GET       | /photos/new      | photos#new        |
-  # | GET       | /photos/:id/edit | photos#edit       |
-  # | GET       | /photos/:id      | photos#show       |
-  # | PATCH/PUT | /photos/:id      | photos#update     |
-  # | DELETE    | /photos/:id      | photos#destroy    |
-  # +-----------+------------------+-------------------+
-  #
-  # Resources should never be nested more than 1 level deep
-  # With the shallow method, all of the nested resources will be shallow like:
-  # +-----------+--------------------------------------+--------------------+
-  # | HTTP Verb | Path                                 | Controller#Action  |
-  # +-----------+--------------------------------------+--------------------+
-  # | GET       | /accounts/:account_id/categories     | categories#index   |
-  # | POST      | /accounts/:account_id/categories     | categories#create  |
-  # | GET       | /accounts/:account_id/categories/new | categories#new     |
-  # | GET       | /categories/:id/edit                 | categories#edit    |
-  # | GET       | /categories/:id                      | categories#show    |
-  # | PATCH/PUT | /categories/:id                      | categories#update  |
-  # | DELETE    | /categories/:id                      | categories#destroy |
-  # +-----------+--------------------------------------+--------------------+
+  controller :rights do
+    get "terms"  => :terms
+    get "cookie" => :cookie
+    get "gdpr"   => :gdpr
+  end
 
   controller :sessions do
     get    "login"  => :new
     post   "login"  => :create
     delete "logout" => :destroy
   end
-
-  controller :rights do
-    get "terms"  => :terms
-    get "cookie" => :cookie
-    get "gdpr"   => :gdpr
-  end
+  resources :passwords, param: :token, except: %i[ index show destroy ]
 
   shallow do
     resources :users, except: %i[index show] do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_24_114008) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_25_144023) do
   create_table "accounts", force: :cascade do |t|
     t.string "name", null: false
     t.decimal "initial_balance", precision: 8, scale: 2, null: false
@@ -93,6 +93,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_24_114008) do
     t.index ["user_id"], name: "index_searches_on_user_id"
   end
 
+  create_table "sessions", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "ip_address"
+    t.string "user_agent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sessions_on_user_id"
+  end
+
   create_table "transactions", force: :cascade do |t|
     t.integer "account_id", null: false
     t.integer "category_id", null: false
@@ -134,6 +143,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_24_114008) do
   add_foreign_key "schedules", "users", column: "updated_by"
   add_foreign_key "search_targets", "searches", on_delete: :cascade
   add_foreign_key "searches", "users"
+  add_foreign_key "sessions", "users"
   add_foreign_key "transactions", "accounts"
   add_foreign_key "transactions", "categories"
   add_foreign_key "transactions", "schedules"

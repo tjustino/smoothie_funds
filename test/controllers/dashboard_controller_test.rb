@@ -8,6 +8,6 @@ class DashboardControllerTest < ActionDispatch::IntegrationTest
     get "/"
 
     assert_response :success
-    assert_equal    session[:user_id], users(:thomas).id
+    assert_equal    session_user_id, users(:thomas).id
   end
 end

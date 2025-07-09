@@ -7,7 +7,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     get      "/login"
 
     assert_redirected_to dashboard_url
-    assert_equal         session[:user_id], users(:thomas).id
+    assert_equal         session_user_id, users(:thomas).id
   end
 
   ########################################################################################################## POST /login
@@ -15,7 +15,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     post "/login", params: { email: users(:thomas).email, password: "p@ssw0rd!" }
 
     assert_redirected_to dashboard_url
-    assert_equal         session[:user_id], users(:thomas).id
+    assert_equal         session_user_id, users(:thomas).id
   end
 
   test "should redirect to the login URL with wrong credentials" do
@@ -23,15 +23,16 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to login_url
     assert_equal         I18n.t("sessions.create.invalid_combination"), flash[:alert]
-    assert_nil           session[:user_id]
+    assert_empty         Session.all
   end
 
   ####################################################################################################### DELETE /logout
   test "should logout" do
-    delete "/logout"
+    login_as :thomas
+    delete   "/logout"
 
     assert_redirected_to login_url
     assert_equal         I18n.t("sessions.destroy.logged_out"), flash[:notice]
-    assert_nil           session[:user_id]
+    assert_empty         Session.all
   end
 end

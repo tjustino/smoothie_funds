@@ -3,11 +3,33 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <style>
-      /* Email styles need to be inline */
+      body {
+        display: inline-block;
+      }
+      footer {
+        color: lightgray;
+        margin-top: 2em;
+        border-top: solid thin;
+      }
     </style>
   </head>
 
   <body>
+    <header>
+      <table>
+        <tbody>
+          <tr>
+            <th><%= image_tag attachments["logo.svg"].url, alt: "logo", width: "48", height: "48" %></th>
+            <th><h1>Smoothie Funds</h1></th>
+          </tr>
+        </tbody>
+      </table>
+    </header>
+
     <%= yield %>
+
+    <footer>
+      <p><%= t(".noreply_pitch") %></p>
+    </footer>
   </body>
 </html>
