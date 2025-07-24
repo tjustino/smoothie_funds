@@ -16,6 +16,15 @@ $smoothie: #911e93;
   $footer-padding: 1rem 1rem 1rem
 );
 
+// Font Awesome
+// https://github.com/FortAwesome/Font-Awesome/releases/latest
+@use "fontawesome-7.0.0/scss/variables" with (
+  $font-path: "fontawesome-7.0.0/webfonts"
+);
+@use "fontawesome-7.0.0/scss/fontawesome";
+@use "fontawesome-7.0.0/scss/regular" as fa-regular;
+@use "fontawesome-7.0.0/scss/solid" as fa-solid;
+
 @media (prefers-color-scheme: light) {
   .body {
     background-color: #fafafa !important;
@@ -42,13 +51,6 @@ body {
 #wrapper {
   flex: 1 0 0;
 }
-
-// Font Awesome
-// https://github.com/FortAwesome/Font-Awesome/releases/latest
-$fa-font-path: "fontawesome-6.7.2/webfonts";
-@import "fontawesome-6.7.2/scss/fontawesome";
-@import "fontawesome-6.7.2/scss/regular";
-@import "fontawesome-6.7.2/scss/solid";
 
 // Smoothie Funds
 // search colors
