@@ -43,13 +43,13 @@
           <div class="level-item has-text-centered">
             <%= link_to icon("fa-solid fa-pen-to-square"), edit_transaction_path(transaction), title: t(".edit"), class: "has-text-info" %>
           </div>
-          <div class="level-item has-text-centered">
-            <%= link_to icon("fa-regular fa-trash-can"),
-                        transaction_path(transaction),
-                        data: { turbo_method: :delete, turbo_confirm: t(".are_you_sure") },
-                        title: t(".destroy"),
-                        class: "has-text-danger" %>
-          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <%= link_to icon("fa-regular fa-trash-can"),
+                      transaction_path(transaction),
+                      data: { turbo_method: :delete, turbo_confirm: t(".are_you_sure") },
+                      title: t(".destroy"),
+                      class: "has-text-danger" %>
         </div>
       </div>
     </td>
