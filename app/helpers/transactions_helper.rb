@@ -1,6 +1,6 @@
 module TransactionsHelper
   def is_upcomming?(transaction)
-    "class=upcoming-transaction" if (transaction.date > Time.zone.today)
+    "class=upcoming-transaction" if transaction.date > Time.zone.today
   end
 
   def decoration_according_to_(transaction)
