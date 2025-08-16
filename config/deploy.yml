@@ -2,7 +2,7 @@
 service: smoothiefunds
 
 # Name of the container image.
-image: tjustino/smoothiefunds
+image: tjustino252730/smoothiefunds
 
 # Deploy to these servers.
 servers:
@@ -23,8 +23,8 @@ proxy:
 
 # Credentials for your image host.
 registry:
-  server: ghcr.io
-  username: tjustino
+  server: docker.io
+  username: tjustino252730
   password:
     - KAMAL_REGISTRY_PASSWORD
 
