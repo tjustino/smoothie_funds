@@ -18,12 +18,12 @@ $smoothie: #911e93;
 
 // Font Awesome
 // https://github.com/FortAwesome/Font-Awesome/releases/latest
-@use "fontawesome-7.0.0/scss/variables" with (
-  $font-path: "fontawesome-7.0.0/webfonts"
+@use "fontawesome-7.1.0/scss/variables" with (
+  $font-path: "fontawesome-7.1.0/webfonts"
 );
-@use "fontawesome-7.0.0/scss/fontawesome";
-@use "fontawesome-7.0.0/scss/regular" as fa-regular;
-@use "fontawesome-7.0.0/scss/solid" as fa-solid;
+@use "fontawesome-7.1.0/scss/fontawesome";
+@use "fontawesome-7.1.0/scss/regular" as fa-regular;
+@use "fontawesome-7.1.0/scss/solid" as fa-solid;
 
 @media (prefers-color-scheme: light) {
   .body {
