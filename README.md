@@ -16,9 +16,9 @@ rm db/schema.rb ; bin/rails db:reset ; bin/rails db:migrate && bin/rails db:fixt
 Restore data from production to dev environnement:
 ```sh
 dropdb smoothiefunds_development
-bundle exec bin/rails db:create RAILS_ENV=development
-bundle exec bin/rails db:migrate RAILS_ENV=development
-pg_restore --no-acl --no-owner --data-only --dbname=smoothiefunds_development db.dump
+createdb smoothiefunds_development
+pg_restore --clean --if-exists --dbname=smoothiefunds_development db.dump
+pg_restore --clean --if-exists --no-owner --dbname=smoothiefunds_development db.dump
 ```
 
 Miscellaneous:
