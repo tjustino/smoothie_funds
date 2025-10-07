@@ -18,7 +18,7 @@ class ApplicationRecord < ActiveRecord::Base
 
       find_each do |object|
         data << attributes.map do |attribute|
-          object.send(attribute).is_a?(String) ? object.send(attribute).gsub("\n=", "\n =") : object.send(attribute)
+          object.send(attribute).is_a?(String) ? object.send(attribute).gsub("=", " =") : object.send(attribute)
         end
       end
 
