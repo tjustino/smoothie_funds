@@ -14,8 +14,10 @@ class ApplicationRecord < ActiveRecord::Base
       headers << { header: header_name }
     end
 
-    find_each do |account|
-      data << attributes.map { |attr| account.send(attr) }
+    find_each do |object|
+      data << attributes.map do |attribute|
+        object.send(attribute).is_a?(String) ? object.send(attribute).gsub("\n=", "\n =") : object.send(attribute)
+      end
     end
 
     io        = StringIO.new
