@@ -16,7 +16,7 @@ gem "sass-embedded"            # Dart Sass
 gem "pg"                       # Use postgresql as the db for Active Record
 gem "propshaft"                # Deliver assets for Rails
 gem "puma"                     # App web server
-gem "rails", "~> 8.0.1"        # Full-stack web framework
+gem "rails", "~> 8.1.0"        # Full-stack web framework
 gem "solid_cache"              # A database backed ActiveSupport::Cache::Store
 gem "solid_queue"              # Database-backed Active Job backend
 gem "solid_cable"              # Database-backed Action Cable backend
